@@ -1,0 +1,129 @@
+---
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+
+const timeline = [
+  { year: "2013", title: "Built first ventures and learned the hard way", body: "Daniel's perspective was formed inside startups, including founder-led work that culminated in exits and a practical understanding of what sustainable growth actually requires." },
+  { year: "2015-2018", title: "Moved into senior operating roles", body: "Leadership roles at Shoprocket and NAVA sharpened his focus on the connection between positioning, acquisition, product feedback loops, and retention." },
+  { year: "2016-Present", title: "Founded We Scale Startups", body: "Not as an agency identity for this site, but as a vehicle through which Daniel has advised founders and growth teams across multiple categories and stages." },
+  { year: "2019-Present", title: "Built a public body of work", body: "Mentoring, teaching, and speaking through Google Launchpad, Techstars, GrowthMentor, Cambridge, Imperial, General Assembly, and the UK Space Agency." }
+];
+const principles = [
+  "Start with the customer and the decision, not the channel.",
+  "Use data to reduce ambiguity, not to create theatre.",
+  "Tie growth work back to product and revenue quality.",
+  "Leave teams with better operating habits than they started with."
+];
+---
+
+<BaseLayout
+  description="About Daniel Johnson: founder, growth strategist, mentor, and speaker working with startups that need better commercial systems, not more noise."
+  title="About Daniel Johnson"
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-start">
+        <div class="reveal space-y-6">
+          <span class="eyebrow">About Daniel</span>
+          <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
+            A growth operator focused on clarity, systems, and commercial judgment.
+          </h1>
+          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
+            Daniel Johnson has spent more than a decade helping startups move from scattered activity to a more
+            durable way of growing. His work sits at the intersection of positioning, experimentation, team
+            decision-making, and the practical realities of building inside young companies.
+          </p>
+        </div>
+
+        <div class="reveal card p-6 md:p-8">
+          <div class="space-y-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Short bio</p>
+            <p class="text-base leading-7">
+              Founder of <a class="underline decoration-[color:var(--accent)]/40 underline-offset-4" href={siteConfig.companyUrl}>We Scale Startups</a>,
+              long-time mentor across Google, Techstars, and GrowthMentor, and a frequent speaker on startup growth, GTM, and innovation.
+            </p>
+            <div class="divider"></div>
+            <dl class="space-y-4 text-sm">
+              <div>
+                <dt class="font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]" style="font-size:0.7rem">Base</dt>
+                <dd class="mt-1">{siteConfig.location}</dd>
+              </div>
+              <div>
+                <dt class="font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]" style="font-size:0.7rem">Works with</dt>
+                <dd class="mt-1">AI, SaaS, fintech, mobile, Web3, and innovation-led teams</dd>
+              </div>
+              <div>
+                <dt class="font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]" style="font-size:0.7rem">Known for</dt>
+                <dd class="mt-1">Turning noisy growth work into an operating system people can run</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="Story" intro="Daniel's perspective comes from being close to the work: building ventures, running growth in-house, stepping into founder teams, and seeing where good products get stuck commercially." title="The through-line is practical growth, not performance theatre" />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          timeline.map((item) => (
+            <article class="reveal card p-6 md:p-7">
+              <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--accent)]">{item.year}</p>
+              <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
+              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader eyebrow="How Daniel Works" intro="The goal is never to look busy. The goal is to create better choices for the team, backed by evidence and translated into a rhythm that can scale." title="A few principles behind the work" />
+      <div class="mt-10 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+        <article class="reveal card p-6 md:p-8">
+          <p class="text-lg leading-8 text-white/80">
+            The teams Daniel works best with are not looking for marketing theatre. They want commercial clarity,
+            cleaner priorities, and an honest read on where growth is really breaking.
+          </p>
+        </article>
+        <ul class="grid gap-4">
+          {
+            principles.map((item, index) => (
+              <li class="reveal card flex gap-4 p-5 md:p-6">
+                <span class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">0{index + 1}</span>
+                <span class="text-base leading-7 text-white/80">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="shell">
+      <div class="reveal card px-6 py-8 md:px-10 md:py-10">
+        <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div class="space-y-4">
+            <span class="eyebrow">Next Step</span>
+            <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
+              Want the strategic version of Daniel's work, not just the biography?
+            </h2>
+            <p class="max-w-2xl text-base leading-7 text-[color:var(--muted)]">
+              The advisory page breaks down where Daniel plugs in, what engagements are designed to solve, and how the work is structured.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <a class="button-accent" href="/advisory">Explore Advisory</a>
+            <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

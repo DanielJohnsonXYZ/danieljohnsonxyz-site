@@ -1,0 +1,163 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeader from "../../components/SectionHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
+
+const articles = sortByFeaturedThenOrder(await getCollection("articles"));
+const archive = sortByFeaturedThenOrder(await getCollection("media"));
+const archivePanels = [
+  {
+    label: "Native essays",
+    detail: "Original pieces for Daniel's point of view, frameworks, and decision-making approach."
+  },
+  {
+    label: "Speaking and interviews",
+    detail: "Signals from panels, talks, and conversations that show how the ideas travel in public."
+  },
+  {
+    label: "Useful archive",
+    detail: "Selected external resources worth keeping accessible rather than burying in feeds."
+  },
+  {
+    label: "Low-noise curation",
+    detail: "The page is designed for signal, not volume, so every item earns its place."
+  }
+];
+const filterLabels = ["All", "Article", "Interview", "Profile", "Guide", "Course", "Speaking"];
+const archiveFilterScript = `const filterButtons = document.querySelectorAll('[data-filter]');
+const cards = document.querySelectorAll('.archive-card');
+
+filterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const filter = button.getAttribute('data-filter');
+
+    filterButtons.forEach((item) => item.classList.remove('chip-active'));
+    button.classList.add('chip-active');
+
+    cards.forEach((card) => {
+      const kind = card.getAttribute('data-kind');
+      card.style.display = filter === 'All' || kind === filter ? '' : 'none';
+    });
+  });
+});`;
+---
+
+<BaseLayout
+  description="Insights from Daniel Johnson: native essays plus a curated archive of interviews, guides, profiles, and other useful material from his wider footprint."
+  title="Insights | Daniel Johnson"
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div class="reveal max-w-4xl space-y-6">
+          <span class="eyebrow">Insights</span>
+          <h1 class="text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">
+            Essays from this site, plus a curated archive of Daniel's wider work.
+          </h1>
+          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
+            The aim here is not to flood the page with content. It is to collect the most useful signals: original
+            thinking, practical archive material, and the interviews or resources that best reflect Daniel's way of working.
+          </p>
+        </div>
+
+        <aside class="reveal card p-6 md:p-8">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Content Shape</p>
+          <h2 class="mt-3 text-2xl font-semibold tracking-[-0.04em]">A cleaner archive for people doing real work</h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            {
+              archivePanels.map((item) => (
+                <article class="card-muted p-4">
+                  <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">{item.label}</p>
+                  <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">{item.detail}</p>
+                </article>
+              ))
+            }
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0" id="essays">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Native Essays"
+        intro="Original writing published on this site. These pieces are written to make startup growth clearer, not more elaborate."
+        title="Current essays"
+      />
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          articles.map((article) => (
+            <article class="reveal card p-6 md:p-7">
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">Article</span>
+                <span class="chip">{formatDate(article.data.publishedAt)}</span>
+              </div>
+              <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
+                <a href={`/insights/${article.id}`}>{article.data.title}</a>
+              </h2>
+              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{article.data.excerpt}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {article.data.tags.map((tag) => <span class="chip">{tag}</span>)}
+              </div>
+              <div class="mt-6">
+                <a class="link-arrow" href={`/insights/${article.id}`}>
+                  Read essay
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-white/40" id="archive">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Curated Archive"
+        intro="Useful external material from Daniel's broader footprint. Everything below opens to the original source."
+        title="Profiles, interviews, guides, and archive material"
+      />
+
+      <div class="mt-8 flex flex-wrap gap-2" data-filters>
+        {
+          filterLabels.map((label, index) => (
+            <button
+              class:list={["chip cursor-pointer", index === 0 && "chip-active"]}
+              data-filter={label}
+              type="button"
+            >
+              {label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        {
+          archive.map((item) => (
+            <article class="reveal card archive-card p-6 md:p-7" data-kind={item.data.kind}>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">{item.data.kind}</span>
+                <span class="chip">{item.data.source}</span>
+                <span class="chip">{item.data.yearLabel}</span>
+              </div>
+              <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">{item.data.title}</h2>
+              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <div class="mt-6">
+                <a class="link-arrow" href={item.data.href} rel="noreferrer" target="_blank">
+                  Open source
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <script is:inline set:html={archiveFilterScript}></script>
+  </section>
+</BaseLayout>

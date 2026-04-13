@@ -1,43 +1,26 @@
-# Astro Starter Kit: Minimal
+# danieljohnson.xyz
 
-```sh
-npm create astro@latest -- --template minimal
+Personal brand relaunch for Daniel Johnson, built as a static Astro site with MDX content collections, a curated archive, and first-principles copy.
+
+## Commands
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Replace Before Launch
 
-## 🚀 Project Structure
+- `src/site.ts`
+  - `gtmId`
+- `public/images/daniel-headshot.png`
+  - Replace with Daniel's final approved headshot if needed
 
-Inside of your Astro project, you'll see the following folders and files:
+## Deployment Notes
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Build output is static in `dist/`
+- A sample host config is included at `ops/Caddyfile.example`
+- `danieljohnsonx.xyz` should 301 redirect to `danieljohnson.xyz`
+- Current booking CTA points to `https://calendly.com/wescalestartups`

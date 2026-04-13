@@ -1,0 +1,113 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+const journeyStages = [
+  { year: "2013", title: "Founder start", body: "Built and exited an eCommerce venture, which gave Daniel an operator's view of growth from day one." },
+  { year: "2016", title: "Advisory expands", body: "Started We Scale Startups and moved deeper into hands-on growth strategy across startup categories." },
+  { year: "2019", title: "Public footprint grows", body: "Mentoring and speaking work scaled through Google, Techstars, GrowthMentor, and university programmes." },
+  { year: "2024", title: "Interim leadership depth", body: "Stepped into Growth Director work while continuing advisory, mentoring, and thought-leadership activity." }
+];
+
+const journeyY = [74, 58, 42, 24];
+const journeyPoints = journeyStages.map((stage, index) => ({
+  ...stage, x: 8 + index * 28, y: journeyY[index]
+}));
+const journeyLine = journeyPoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+const journeyArea = `${journeyLine} L 92 92 L 8 92 Z`;
+
+const outcomeBars = [
+  { label: "Retention", value: 40, delta: "+40%", note: "Lift delivered at NAVA" },
+  { label: "CAC", value: 35, delta: "-35%", note: "Reduction for a crypto trading platform" },
+  { label: "LTV", value: 30, delta: "+30%", note: "Customer lifetime value gain at Shoprocket" },
+  { label: "Churn", value: 21, delta: "-21%", note: "Reduction through lifecycle work for eCommerce brands" }
+];
+const maxOutcome = Math.max(...outcomeBars.map((item) => item.value));
+---
+
+<section class="section-space pt-0">
+  <div class="shell">
+    <SectionHeader
+      eyebrow="Track Record"
+      intro="A few visuals make the progression easier to scan: how Daniel's scope widened over time, and the kinds of commercial lifts his work has already produced."
+      title="Progress you can read at a glance"
+    />
+
+    <div class="mt-10 grid gap-5 xl:grid-cols-[1.15fr_0.85fr]">
+      <article class="reveal card p-6 md:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p class="eyebrow">Career Progression</p>
+            <h3 class="mt-3 text-2xl font-bold tracking-[-0.04em]">From founder lessons to market-facing leadership</h3>
+          </div>
+          <span class="chip">2013-Present</span>
+        </div>
+
+        <div class="impact-journey-plot outline-grid mt-8">
+          <div class="impact-journey-axis">Scope of work widening</div>
+          <svg aria-hidden="true" class="impact-journey-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d={journeyArea} fill="rgba(124, 58, 237, 0.1)"></path>
+            <path d={journeyLine} fill="none" stroke="url(#journey-gradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+            <defs>
+              <linearGradient id="journey-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+                <stop offset="0%" stop-color="#7c3aed"></stop>
+                <stop offset="100%" stop-color="#2563eb"></stop>
+              </linearGradient>
+            </defs>
+            {
+              journeyPoints.map((point) => (
+                <>
+                  <circle cx={point.x} cy={point.y} fill="white" r="3.3" stroke="#7c3aed" stroke-width="1.2"></circle>
+                  <circle cx={point.x} cy={point.y} fill="#7c3aed" r="1.2"></circle>
+                </>
+              ))
+            }
+          </svg>
+        </div>
+
+        <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {
+            journeyStages.map((stage) => (
+              <article class="card-muted p-4">
+                <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">{stage.year}</p>
+                <h4 class="mt-3 text-lg font-semibold tracking-[-0.03em]">{stage.title}</h4>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{stage.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </article>
+
+      <article class="reveal card p-6 md:p-8">
+        <p class="eyebrow">Measured Outcomes</p>
+        <h3 class="mt-3 text-2xl font-bold tracking-[-0.04em]">Selected lifts across acquisition, retention, and revenue quality</h3>
+        <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">
+          These are not vanity numbers. They show the sort of operational improvements Daniel has helped teams create,
+          using evidence-led growth systems rather than one-off tactics.
+        </p>
+
+        <div class="mt-8 space-y-5">
+          {
+            outcomeBars.map((item) => (
+              <div class="space-y-3">
+                <div class="flex items-end justify-between gap-4">
+                  <div>
+                    <p class="text-base font-semibold tracking-[-0.02em]">{item.label}</p>
+                    <p class="text-sm text-[color:var(--muted)]">{item.note}</p>
+                  </div>
+                  <p class="text-xl font-bold tracking-[-0.04em]">{item.delta}</p>
+                </div>
+                <div aria-hidden="true" class="metric-rail">
+                  <div class="metric-fill" style={`width:${(item.value / maxOutcome) * 100}%`}></div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="mt-6 text-xs font-medium uppercase tracking-[0.12em] text-[color:var(--muted)]">
+          Backed by Daniel's supplied CV materials and mentoring profile
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
