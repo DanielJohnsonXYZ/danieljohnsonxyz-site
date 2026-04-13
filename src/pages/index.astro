@@ -1,0 +1,527 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout title="Daniel Johnson | Repeatable Growth Systems for Startups" description="I build repeatable growth systems for AI & SaaS startups. Used by 20+ companies with £15M+ in fundraising supported.">
+
+<!-- ===== NAV (light, sticky) ===== -->
+<nav class="site-nav-dock" slot="header" style="position:sticky;top:.75rem;z-index:50;margin:.75rem auto;max-width:78rem;padding:.5rem .75rem">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+    <a href="/" style="display:flex;align-items:center;gap:.75rem;text-decoration:none">
+      <span class="brand-mark">DJ</span>
+      <span style="display:flex;flex-direction:column">
+        <span style="font-size:.875rem;font-weight:600;letter-spacing:-.02em;color:var(--ink)">Daniel Johnson</span>
+        <span class="mono" style="font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)">We Scale Startups</span>
+      </span>
+    </a>
+    <div class="nav-links-desktop" style="display:none;gap:.25rem">
+      <a class="site-nav-link site-nav-link-active" href="/" style="padding:.5rem 1rem;font-size:.875rem;font-weight:500;border-radius:999px;color:#fff">Home</a>
+      <a class="site-nav-link" href="/about" style="padding:.5rem 1rem;font-size:.875rem;font-weight:500;border-radius:999px;color:var(--muted)">About</a>
+      <a class="site-nav-link" href="/advisory" style="padding:.5rem 1rem;font-size:.875rem;font-weight:500;border-radius:999px;color:var(--muted)">Advisory</a>
+      <a class="site-nav-link" href="/speaking" style="padding:.5rem 1rem;font-size:.875rem;font-weight:500;border-radius:999px;color:var(--muted)">Speaking</a>
+      <a class="site-nav-link" href="/insights" style="padding:.5rem 1rem;font-size:.875rem;font-weight:500;border-radius:999px;color:var(--muted)">Insights</a>
+    </div>
+    <a class="button-primary nav-cta-desktop" href="https://calendly.com/wescalestartups" target="_blank" rel="noopener" style="display:none;padding:.625rem 1.5rem;font-size:.875rem">Book a Call</a>
+    <a class="button-secondary nav-cta-mobile" href="https://calendly.com/wescalestartups" target="_blank" rel="noopener" style="padding:.5rem 1rem;font-size:.8rem">Book a Call</a>
+  </div>
+</nav>
+
+<!-- ===== HERO — LIGHT & FRIENDLY ===== -->
+<section class="hero-section" style="padding:4.5rem 0 3rem;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 80% 0,#7b2ff712,transparent 30rem),radial-gradient(circle at 10% 80%,#7aa5ff0a,transparent 20rem);pointer-events:none"></div>
+  <div class="shell" style="position:relative;z-index:1">
+    <div class="hero-grid">
+
+      <!-- Left: Copy -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:1.25rem">
+        <div class="eyebrow"><span></span>Growth strategist &bull; speaker &bull; founder</div>
+
+        <h1 style="display:flex;flex-direction:column;gap:.25rem">
+          <span style="font-size:clamp(2.5rem,5.5vw,4.25rem);font-weight:800;letter-spacing:-.06em;line-height:1;color:var(--ink)">I help startups build</span>
+          <span class="grad-text" style="font-size:clamp(2.5rem,5.5vw,4.25rem);font-weight:800;letter-spacing:-.06em;line-height:1">repeatable growth.</span>
+        </h1>
+
+        <p class="lede" style="max-width:34rem">If you have traction but growth still feels fragile, I can help. I work with founders and growth teams to turn early momentum into a system the team can actually run.</p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.25rem">
+          <a class="button-primary" href="https://calendly.com/wescalestartups" target="_blank" rel="noopener" style="padding:.875rem 2rem;font-size:1rem">Let's Talk</a>
+          <a class="button-secondary" href="/advisory">How I Work</a>
+        </div>
+
+        <!-- Trust bar logos -->
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;margin-top:.75rem;padding-top:1rem;border-top:1px solid var(--line)">
+          <img src="/images/logos/google.webp" alt="Google" style="height:1.25rem;filter:grayscale(1);opacity:.45" loading="lazy">
+          <img src="/images/logos/growthmentor.png" alt="GrowthMentor" style="height:1.25rem;filter:grayscale(1);opacity:.45" loading="lazy">
+          <img src="/images/logos/cambridge.webp" alt="Cambridge" style="height:1.25rem;filter:grayscale(1);opacity:.45" loading="lazy">
+          <img src="/images/logos/newsflare.webp" alt="Newsflare" style="height:1.25rem;filter:grayscale(1);opacity:.45" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Right: Photo card with mini stats -->
+      <div class="reveal">
+        <div class="hero-photo-card card">
+          <img src="/images/daniel-headshot.png" alt="Daniel Johnson" loading="eager" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top">
+          <div class="hero-mini-stats">
+            <div>
+              <p style="font-size:1.5rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">20+</p>
+              <p style="font-size:.72rem;color:var(--muted)">Startups advised</p>
+            </div>
+            <div>
+              <p style="font-size:1.5rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">479+</p>
+              <p style="font-size:.72rem;color:var(--muted)">Founder sessions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW I WORK — PIPELINE (light) ===== -->
+<section class="section-space">
+  <div class="shell">
+    <div class="reveal" style="text-align:center;max-width:40rem;margin:0 auto 3rem">
+      <div class="eyebrow" style="justify-content:center"><span></span>How I Work</div>
+      <h2 class="section-title" style="margin-top:1rem">A four-stage operating system,<br>not a bag of tactics.</h2>
+      <p class="lede" style="margin-top:1rem;margin-inline:auto">Every engagement follows the same disciplined loop. The system compounds because each cycle makes the next one sharper.</p>
+    </div>
+
+    <div class="reveal card" style="overflow:hidden">
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></div>
+          <div class="pipeline-num">01</div>
+          <h3 style="margin-top:.75rem;font-size:1.25rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">Diagnose</h3>
+          <p style="margin-top:.5rem;font-size:.9rem;line-height:1.6;color:var(--muted)">I audit your growth stack, data quality, and team capacity to find the real blockers&mdash;not the symptoms.</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></div>
+          <div class="pipeline-num">02</div>
+          <h3 style="margin-top:.75rem;font-size:1.25rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">Prioritise</h3>
+          <p style="margin-top:.5rem;font-size:.9rem;line-height:1.6;color:var(--muted)">We build a ranked experiment backlog scored on impact, confidence, and effort. No guessing.</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></div>
+          <div class="pipeline-num">03</div>
+          <h3 style="margin-top:.75rem;font-size:1.25rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">Execute</h3>
+          <p style="margin-top:.5rem;font-size:.9rem;line-height:1.6;color:var(--muted)">I work alongside your team to run experiments, build repeatable systems, and ship what matters.</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">04</div>
+          <h3 style="margin-top:.75rem;font-size:1.25rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">Compound</h3>
+          <p style="margin-top:.5rem;font-size:.9rem;line-height:1.6;color:var(--muted)">We review, learn, and feed wins back into the system so every cycle makes the next one faster.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROOF — DARK ===== -->
+<section class="s-dark section-space" style="position:relative;overflow:hidden">
+  <div class="grad-glow" style="position:absolute;width:30rem;height:30rem;background:#7b2ff7;top:-10rem;right:-5rem;opacity:.15;border-radius:50%;filter:blur(80px);pointer-events:none"></div>
+  <div class="shell" style="position:relative;z-index:1">
+
+    <div class="reveal" style="max-width:36rem;margin-bottom:3rem">
+      <div class="eyebrow s-dark-eyebrow"><span></span>Proof</div>
+      <h2 class="section-title" style="margin-top:1rem;color:#f5f5f5">Real numbers from real startups.</h2>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="reveal s-dark-card" style="overflow:hidden;margin-bottom:2.5rem;border-radius:var(--radius)">
+      <div class="stats-strip">
+        <div class="stat-cell">
+          <div class="stat-num grad-text">30K+</div>
+          <p style="margin-top:.5rem;font-size:.875rem;font-weight:600;color:#f5f5f5">App downloads</p>
+          <p style="margin-top:.25rem;font-size:.8rem;color:#9ca3af">8 months at NAVA</p>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num grad-text">+40%</div>
+          <p style="margin-top:.5rem;font-size:.875rem;font-weight:600;color:#f5f5f5">Retention lift</p>
+          <p style="margin-top:.25rem;font-size:.8rem;color:#9ca3af">NAVA growth system</p>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num grad-text">+30%</div>
+          <p style="margin-top:.5rem;font-size:.875rem;font-weight:600;color:#f5f5f5">Customer LTV</p>
+          <p style="margin-top:.25rem;font-size:.8rem;color:#9ca3af">Shoprocket positioning</p>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num grad-text">-35%</div>
+          <p style="margin-top:.5rem;font-size:.875rem;font-weight:600;color:#f5f5f5">CAC reduction</p>
+          <p style="margin-top:.25rem;font-size:.8rem;color:#9ca3af">Crypto trading platform</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two outcome blocks -->
+    <div class="proof-grid">
+      <div class="reveal s-dark-card" style="padding:2.5rem;border-radius:var(--radius)">
+        <p class="mono" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:var(--accent)">Managed budgets</p>
+        <div style="margin-top:1rem;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap">
+          <span class="grad-text" style="font-size:3rem;font-weight:800;letter-spacing:-.04em;line-height:1">&pound;6M+</span>
+          <span style="font-size:1rem;color:#9ca3af">in acquisition spend across SaaS, apps, and commerce brands</span>
+        </div>
+        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.75rem">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-bottom:.35rem;color:#f5f5f5"><span>Retention lift (NAVA)</span><span style="font-weight:600">+40%</span></div>
+            <div class="metric-rail" style="background:rgba(255,255,255,.06)"><div class="metric-fill" style="width:100%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-bottom:.35rem;color:#f5f5f5"><span>CAC reduction</span><span style="font-weight:600">-35%</span></div>
+            <div class="metric-rail" style="background:rgba(255,255,255,.06)"><div class="metric-fill" style="width:87%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-bottom:.35rem;color:#f5f5f5"><span>LTV gain (Shoprocket)</span><span style="font-weight:600">+30%</span></div>
+            <div class="metric-rail" style="background:rgba(255,255,255,.06)"><div class="metric-fill" style="width:75%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-bottom:.35rem;color:#f5f5f5"><span>Churn reduction</span><span style="font-weight:600">-21%</span></div>
+            <div class="metric-rail" style="background:rgba(255,255,255,.06)"><div class="metric-fill" style="width:52%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal s-dark-card" style="padding:2.5rem;border-radius:var(--radius)">
+        <p class="mono" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:var(--accent)">Mentoring &amp; speaking</p>
+        <div style="margin-top:1rem;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap">
+          <span class="grad-text" style="font-size:3rem;font-weight:800;letter-spacing:-.04em;line-height:1">479+</span>
+          <span style="font-size:1rem;color:#9ca3af">founder sessions across Google, Techstars, and GrowthMentor</span>
+        </div>
+        <div style="margin-top:2rem;display:grid;gap:1.25rem" class="proof-sub-grid">
+          <div>
+            <p class="grad-text" style="font-size:2rem;font-weight:700;letter-spacing:-.03em">4.97/5</p>
+            <p style="margin-top:.25rem;font-size:.875rem;color:#9ca3af">Average rating across all platforms</p>
+          </div>
+          <div>
+            <p class="grad-text" style="font-size:2rem;font-weight:700;letter-spacing:-.03em">&pound;15M+</p>
+            <p style="margin-top:.25rem;font-size:.875rem;color:#9ca3af">Fundraising supported (Seed to Series B)</p>
+          </div>
+          <div>
+            <p class="grad-text" style="font-size:2rem;font-weight:700;letter-spacing:-.03em">6+</p>
+            <p style="margin-top:.25rem;font-size:.875rem;color:#9ca3af">Institutions (Google, Cambridge, Imperial, Techstars, UK Space Agency, GrowthMentor)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS — LIGHT ===== -->
+<section class="section-space">
+  <div class="shell">
+    <div class="reveal" style="max-width:36rem;margin-bottom:3rem">
+      <div class="eyebrow"><span></span>What People Say</div>
+      <h2 class="section-title" style="margin-top:1rem">Helpful without theatre.</h2>
+    </div>
+
+    <div class="testi-grid">
+      <!-- Visible -->
+      <div class="reveal card" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <blockquote style="font-size:1.05rem;line-height:1.75;letter-spacing:-.02em;color:var(--ink)">&ldquo;I was able to increase my revenue by about 40%, and most of that improvement can be traced back to Daniel&rsquo;s call.&rdquo;</blockquote>
+        <footer><p style="font-weight:600;font-size:.875rem;color:var(--ink)">Christian A</p><p style="font-size:.8rem;color:var(--muted)">Co-founder and marketer</p></footer>
+      </div>
+      <div class="reveal card" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <blockquote style="font-size:1.05rem;line-height:1.75;letter-spacing:-.02em;color:var(--ink)">&ldquo;Daniel offered sharp, practical advice with a clear focus on messaging, positioning, and customer understanding.&rdquo;</blockquote>
+        <footer><p style="font-weight:600;font-size:.875rem;color:var(--ink)">Greg Weinstein</p><p style="font-size:.8rem;color:var(--muted)">Founder, Startup operator</p></footer>
+      </div>
+      <div class="reveal card" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <blockquote style="font-size:1.05rem;line-height:1.75;letter-spacing:-.02em;color:var(--ink)">&ldquo;I am very impressed by Daniel&rsquo;s detailed insight when working with startups through Google Launchpad.&rdquo;</blockquote>
+        <footer><p style="font-weight:600;font-size:.875rem;color:var(--ink)">James Lethem</p><p style="font-size:.8rem;color:var(--muted)">Programme collaborator, Google</p></footer>
+      </div>
+      <!-- Hidden -->
+      <div class="reveal card testi-hidden" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <blockquote style="font-size:1.05rem;line-height:1.75;letter-spacing:-.02em;color:var(--ink)">&ldquo;We really benefited a lot from the insights we got from our conversation. Keep it up.&rdquo;</blockquote>
+        <footer><p style="font-weight:600;font-size:.875rem;color:var(--ink)">Ari Bencuya</p><p style="font-size:.8rem;color:var(--muted)">3x founder, GrowthMentor</p></footer>
+      </div>
+      <div class="reveal card testi-hidden" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <blockquote style="font-size:1.05rem;line-height:1.75;letter-spacing:-.02em;color:var(--ink)">&ldquo;He helped me understand the nuances of building a landing page, and he&rsquo;s quick on his feet.&rdquo;</blockquote>
+        <footer><p style="font-weight:600;font-size:.875rem;color:var(--ink)">Hal Zeitlin</p><p style="font-size:.8rem;color:var(--muted)">Webflow agency owner</p></footer>
+      </div>
+      <div class="reveal card testi-hidden" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <blockquote style="font-size:1.05rem;line-height:1.75;letter-spacing:-.02em;color:var(--ink)">&ldquo;He&rsquo;s probably saved over a thousand wasted hours by sharing his knowledge with everyone on the platform.&rdquo;</blockquote>
+        <footer><p style="font-weight:600;font-size:.875rem;color:var(--ink)">Camiel Roex</p><p style="font-size:.8rem;color:var(--muted)">Head of Growth, Blueheart</p></footer>
+      </div>
+    </div>
+    <button class="expand-btn button-secondary" id="expand-testimonials" style="margin:2rem auto 0;display:flex;align-items:center;gap:.5rem">
+      See all testimonials <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ===== WHAT I'M KNOWN FOR — DARK ===== -->
+<section class="s-dark section-space" style="position:relative;overflow:hidden">
+  <div style="position:absolute;width:25rem;height:25rem;background:#7aa5ff;bottom:-8rem;left:-8rem;opacity:.12;border-radius:50%;filter:blur(80px);pointer-events:none"></div>
+  <div class="shell" style="position:relative;z-index:1">
+    <div class="reveal" style="text-align:center;max-width:40rem;margin:0 auto 3rem">
+      <div class="eyebrow s-dark-eyebrow" style="justify-content:center"><span></span>What I'm Known For</div>
+      <h2 class="section-title" style="margin-top:1rem;color:#f5f5f5">A calm, operator-level approach.</h2>
+    </div>
+
+    <div class="known-grid">
+      <div class="reveal s-dark-card" style="padding:2.5rem;border-radius:var(--radius);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-1rem;right:-1rem;width:8rem;height:8rem;border-radius:50%;background:radial-gradient(circle,#7b2ff715,transparent 70%)"></div>
+        <div style="width:3rem;height:3rem;border-radius:.75rem;background:#7b2ff720;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2ff7" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 style="font-size:1.5rem;font-weight:700;letter-spacing:-.04em;color:#f5f5f5">Growth is an operating system</h3>
+        <p style="margin-top:.75rem;font-size:1rem;line-height:1.75;color:#9ca3af">I help teams replace one-off campaigns with a system for prioritising, learning, and compounding what works.</p>
+      </div>
+      <div class="reveal s-dark-card" style="padding:2.5rem;border-radius:var(--radius);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-1rem;right:-1rem;width:8rem;height:8rem;border-radius:50%;background:radial-gradient(circle,#7aa5ff15,transparent 70%)"></div>
+        <div style="width:3rem;height:3rem;border-radius:.75rem;background:#7aa5ff20;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7aa5ff" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 style="font-size:1.5rem;font-weight:700;letter-spacing:-.04em;color:#f5f5f5">Evidence beats noise</h3>
+        <p style="margin-top:.75rem;font-size:1rem;line-height:1.75;color:#9ca3af">Customer research, instrumentation, and experiment design sit before channel scaling, not after it.</p>
+      </div>
+      <div class="reveal s-dark-card" style="padding:2.5rem;border-radius:var(--radius);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-1rem;right:-1rem;width:8rem;height:8rem;border-radius:50%;background:radial-gradient(circle,#7b2ff715,transparent 70%)"></div>
+        <div style="width:3rem;height:3rem;border-radius:.75rem;background:#7b2ff720;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2ff7" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3 style="font-size:1.5rem;font-weight:700;letter-spacing:-.04em;color:#f5f5f5">Clarity creates speed</h3>
+        <p style="margin-top:.75rem;font-size:1rem;line-height:1.75;color:#9ca3af">The real unlock is usually sharper positioning, cleaner decision-making, and a team that knows what to test next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BACKGROUND — LIGHT (timeline + headshot) ===== -->
+<section class="section-space">
+  <div class="shell">
+    <div class="exp-grid">
+      <!-- Left: Bio block -->
+      <div class="reveal">
+        <div class="eyebrow"><span></span>Background</div>
+        <h2 class="section-title" style="margin-top:1rem">Built from lived startup work, not theory.</h2>
+        <p class="lede" style="margin-top:1rem">I've built inside startups, led growth teams, launched products, and advised founders through the difficult handoff from traction to repeatability. My work spans SaaS, AI, fintech, Web3, and commerce.</p>
+
+        <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1.25rem">
+          <div style="display:flex;gap:1rem;align-items:baseline;padding-bottom:1.25rem;border-bottom:1px solid var(--line)">
+            <span class="mono" style="font-size:.72rem;letter-spacing:.14em;color:var(--accent);flex-shrink:0;margin-top:.15rem">2013</span>
+            <div><p style="font-weight:600;color:var(--ink)">Founded and exited an eCommerce venture</p><p style="font-size:.875rem;color:var(--muted)">Operator's view of growth from day one</p></div>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:baseline;padding-bottom:1.25rem;border-bottom:1px solid var(--line)">
+            <span class="mono" style="font-size:.72rem;letter-spacing:.14em;color:var(--accent);flex-shrink:0;margin-top:.15rem">2016</span>
+            <div><p style="font-weight:600;color:var(--ink)">Started We Scale Startups</p><p style="font-size:.875rem;color:var(--muted)">Hands-on growth advisory, 20+ startups</p></div>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:baseline;padding-bottom:1.25rem;border-bottom:1px solid var(--line)">
+            <span class="mono" style="font-size:.72rem;letter-spacing:.14em;color:var(--accent);flex-shrink:0;margin-top:.15rem">2019</span>
+            <div><p style="font-weight:600;color:var(--ink)">Speaking and mentoring at scale</p><p style="font-size:.875rem;color:var(--muted)">Google, Techstars, Cambridge, Imperial, UK Space Agency</p></div>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:baseline">
+            <span class="mono" style="font-size:.72rem;letter-spacing:.14em;color:var(--accent);flex-shrink:0;margin-top:.15rem">2024</span>
+            <div><p style="font-weight:600;color:var(--ink)">Interim Growth Director</p><p style="font-size:.875rem;color:var(--muted)">NAVA, Shoprocket, eQuoo, Ladder.io + continued advisory</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Headshot + quick facts -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:1.5rem">
+        <div class="card" style="padding:1.5rem;overflow:hidden">
+          <img src="/images/daniel-headshot.png" alt="Daniel Johnson" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:calc(var(--radius) - .5rem)" loading="lazy">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="card" style="padding:1.25rem;text-align:center">
+            <p style="font-size:1.5rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">London</p>
+            <p style="font-size:.8rem;color:var(--muted)">Based, global clients</p>
+          </div>
+          <div class="card" style="padding:1.25rem;text-align:center">
+            <p style="font-size:1.5rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)">Fractional</p>
+            <p style="font-size:.8rem;color:var(--muted)">Advisory, speaking</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SELECTED THINKING — DARK ===== -->
+<section class="s-dark section-space">
+  <div class="shell">
+    <div class="reveal" style="max-width:36rem;margin-bottom:3rem">
+      <div class="eyebrow s-dark-eyebrow"><span></span>Selected Thinking</div>
+      <h2 class="section-title" style="margin-top:1rem;color:#f5f5f5">Essays and ideas that travel.</h2>
+    </div>
+
+    <div class="think-grid">
+      <a href="/insights/when-growth-gets-noisy-build-an-operating-system" class="reveal s-dark-card" style="padding:2rem;display:block;border-radius:var(--radius);transition:border-color .2s">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <span class="chip" style="color:var(--accent);border-color:#7b2ff740">Essay</span>
+          <span class="chip" style="color:#9ca3af;border-color:#ffffff14">March 2026</span>
+        </div>
+        <h3 style="margin-top:1rem;font-size:1.35rem;font-weight:700;letter-spacing:-.03em;color:#f5f5f5">When growth gets noisy, build an operating system</h3>
+        <p style="margin-top:.5rem;font-size:.9rem;line-height:1.65;color:#9ca3af">The teams that scale well do not simply test more channels. They create a repeatable way to decide what to learn, what to measure, and what to do next.</p>
+      </a>
+      <a href="/insights/do-customer-research-before-you-buy-more-traffic" class="reveal s-dark-card" style="padding:2rem;display:block;border-radius:var(--radius);transition:border-color .2s">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <span class="chip" style="color:var(--accent);border-color:#7b2ff740">Essay</span>
+          <span class="chip" style="color:#9ca3af;border-color:#ffffff14">Feb 2026</span>
+        </div>
+        <h3 style="margin-top:1rem;font-size:1.35rem;font-weight:700;letter-spacing:-.03em;color:#f5f5f5">Do customer research before you buy more traffic</h3>
+        <p style="margin-top:.5rem;font-size:.9rem;line-height:1.65;color:#9ca3af">When CAC rises, most teams respond by pushing harder on channels. The better move is usually to sharpen who the offer is for.</p>
+      </a>
+      <div class="reveal s-dark-card" style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem;border-radius:var(--radius)">
+        <p class="mono" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:#9ca3af">Profiles</p>
+        <a href="https://app.growthmentor.com/mentors/daniel-johnson" target="_blank" rel="noreferrer" style="display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;border-radius:.75rem;background:rgba(255,255,255,.03);border:1px solid #ffffff0f;transition:background .18s;text-decoration:none">
+          <span style="font-size:.9rem;font-weight:600;color:#f5f5f5">GrowthMentor</span>
+          <span style="font-size:.75rem;margin-left:auto;color:#9ca3af">Open &rarr;</span>
+        </a>
+        <a href="https://www.linkedin.com/in/danieljohnsonxyz/" target="_blank" rel="noreferrer" style="display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;border-radius:.75rem;background:rgba(255,255,255,.03);border:1px solid #ffffff0f;transition:background .18s;text-decoration:none">
+          <span style="font-size:.9rem;font-weight:600;color:#f5f5f5">LinkedIn</span>
+          <span style="font-size:.75rem;margin-left:auto;color:#9ca3af">Open &rarr;</span>
+        </a>
+        <a href="https://www.wescalestartups.com" target="_blank" rel="noreferrer" style="display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;border-radius:.75rem;background:rgba(255,255,255,.03);border:1px solid #ffffff0f;transition:background .18s;text-decoration:none">
+          <span style="font-size:.9rem;font-weight:600;color:#f5f5f5">We Scale Startups</span>
+          <span style="font-size:.75rem;margin-left:auto;color:#9ca3af">Open &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA — GRADIENT/ACCENT ===== -->
+<section style="background:linear-gradient(135deg,#0f0a1e,#1a1030 40%,#0d1225);padding:5rem 0;position:relative;overflow:hidden">
+  <div style="position:absolute;width:40rem;height:40rem;background:#7b2ff7;top:-15rem;left:50%;transform:translateX(-50%);opacity:.2;border-radius:50%;filter:blur(80px);pointer-events:none"></div>
+  <div class="shell" style="position:relative;z-index:1;text-align:center;max-width:48rem">
+    <div class="reveal">
+      <div class="eyebrow s-dark-eyebrow" style="justify-content:center"><span></span>Ready?</div>
+      <h2 class="grad-text" style="margin-top:1.5rem;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.05em;line-height:1.05">Stop guessing.<br>Start compounding.</h2>
+      <p style="margin-top:1rem;font-size:1.1rem;line-height:1.75;color:#9ca3af;max-width:32rem;margin-inline:auto">If you have traction but growth still feels fragile, let's build the system that makes it durable.</p>
+      <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center">
+        <a class="button-primary" href="https://calendly.com/wescalestartups" target="_blank" rel="noopener" style="padding:1rem 2.5rem;font-size:1.05rem;background:linear-gradient(135deg,#7b2ff7,#6922d4);box-shadow:0 0 30px #7b2ff730">Enter the Growth System</a>
+        <a href="mailto:daniel@wescalestartups.com" style="display:inline-flex;align-items:center;justify-content:center;padding:1rem 2rem;font-size:.875rem;font-weight:600;border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:999px;transition:all .2s;text-decoration:none">Speaking &amp; media enquiries</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER — DARK ===== -->
+<footer slot="footer" class="s-dark" style="padding:3rem 0 2rem;border-top:1px solid #ffffff14">
+  <div class="shell">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem">
+          <span class="brand-mark" style="background:linear-gradient(135deg,#7b2ff7,#7aa5ff);color:#fff;border:none">DJ</span>
+          <span style="font-weight:600;color:#f5f5f5">Daniel Johnson</span>
+        </div>
+        <p style="font-size:.9rem;line-height:1.65;max-width:28rem;color:#9ca3af">I work with a limited number of companies at a time. If you need senior growth judgment without agency noise, let's talk.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+        <div>
+          <p class="mono" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;margin-bottom:1rem;color:#9ca3af">Navigation</p>
+          <ul style="display:flex;flex-direction:column;gap:.5rem;list-style:none">
+            <li><a href="/" style="font-size:.875rem;color:#9ca3af;text-decoration:none">Home</a></li>
+            <li><a href="/about" style="font-size:.875rem;color:#9ca3af;text-decoration:none">About</a></li>
+            <li><a href="/advisory" style="font-size:.875rem;color:#9ca3af;text-decoration:none">Advisory</a></li>
+            <li><a href="/speaking" style="font-size:.875rem;color:#9ca3af;text-decoration:none">Speaking</a></li>
+            <li><a href="/insights" style="font-size:.875rem;color:#9ca3af;text-decoration:none">Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mono" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;margin-bottom:1rem;color:#9ca3af">Connect</p>
+          <ul style="display:flex;flex-direction:column;gap:.5rem;font-size:.875rem;list-style:none">
+            <li style="color:#9ca3af">London, UK</li>
+            <li><a href="mailto:daniel@wescalestartups.com" style="color:#9ca3af;text-decoration:none">daniel@wescalestartups.com</a></li>
+            <li><a href="https://www.linkedin.com/in/danieljohnsonxyz/" target="_blank" style="color:#9ca3af;text-decoration:none">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grad-line" style="height:1px;background:linear-gradient(90deg,transparent,#7b2ff740 30%,#7aa5ff40 70%,transparent);margin-top:2.5rem;margin-bottom:1.5rem"></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem">
+      <p style="font-size:.8rem;color:#9ca3af">danieljohnson.xyz</p>
+    </div>
+  </div>
+</footer>
+
+</BaseLayout>
+
+<style>
+  /* ===== PAGE-SPECIFIC STYLES ===== */
+
+  /* Gradient text utility */
+  .grad-text { background: linear-gradient(135deg, #7b2ff7, #7aa5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* Dark section base */
+  .s-dark { background: #09090b; color: #f5f5f5; }
+  .s-dark-card { background: #13131a; border: 1px solid #ffffff0f; }
+  .s-dark-eyebrow { color: #9ca3af; }
+  .s-dark-eyebrow::before { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+  /* Nav responsive */
+  @media (min-width: 64rem) {
+    .nav-links-desktop { display: flex !important; }
+    .nav-cta-desktop { display: inline-flex !important; }
+    .nav-cta-mobile { display: none !important; }
+  }
+
+  /* Hero grid */
+  .hero-section { background: linear-gradient(180deg, #fafaf9, #f3f0eb); }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+  @media (min-width: 64rem) { .hero-grid { grid-template-columns: 1.2fr .8fr; } }
+  .hero-photo-card { overflow: hidden; }
+  .hero-mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
+  .hero-mini-stats > div { background: var(--surface-strong); padding: 1rem; text-align: center; }
+
+  /* Pipeline */
+  .pipeline { display: grid; gap: 0; position: relative; }
+  @media (min-width: 48rem) { .pipeline { grid-template-columns: repeat(4, 1fr); } }
+  .pipeline-step { padding: 2rem 1.5rem; position: relative; border-bottom: 1px solid var(--line); }
+  @media (min-width: 48rem) { .pipeline-step { border-bottom: none; border-right: 1px solid var(--line); } .pipeline-step:last-child { border-right: none; } }
+  .pipeline-num { font-size: 3rem; font-weight: 800; line-height: 1; background: linear-gradient(135deg, #7b2ff7, #7aa5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .pipeline-arrow { display: none; position: absolute; right: -.75rem; top: 50%; transform: translateY(-50%); z-index: 2; width: 1.5rem; height: 1.5rem; background: var(--surface-strong); border: 1px solid var(--line); border-radius: 50%; color: var(--accent); }
+  @media (min-width: 48rem) { .pipeline-arrow { display: flex; align-items: center; justify-content: center; } }
+  .pipeline-arrow svg { width: .75rem; height: .75rem; }
+
+  /* Stats strip */
+  .stats-strip { display: grid; gap: 1px; background: #ffffff14; }
+  @media (min-width: 48rem) { .stats-strip { grid-template-columns: repeat(4, 1fr); } }
+  .stat-cell { background: #13131a; padding: 1.75rem 1.5rem; text-align: center; }
+  .stat-num { font-size: 2.5rem; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+
+  /* Proof grid */
+  .proof-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 64rem) { .proof-grid { grid-template-columns: 1fr 1fr; } }
+  .proof-sub-grid { grid-template-columns: 1fr; }
+  @media (min-width: 30rem) { .proof-sub-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Testimonials grid */
+  .testi-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  @media (min-width: 48rem) { .testi-grid { grid-template-columns: repeat(3, 1fr); } }
+  .testi-hidden { display: none; }
+  .testi-hidden.show { display: flex; }
+
+  /* Known-for grid */
+  .known-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 48rem) { .known-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Experience grid */
+  .exp-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+  @media (min-width: 64rem) { .exp-grid { grid-template-columns: 1.1fr .9fr; } }
+
+  /* Thinking grid */
+  .think-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 48rem) { .think-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Footer grid */
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  @media (min-width: 48rem) { .footer-grid { grid-template-columns: 1.4fr 1fr; } }
+
+  /* Expand button */
+  .expand-btn.hidden { display: none !important; }
+</style>
+
+<script>
+  // Testimonial expand
+  const expandBtn = document.getElementById('expand-testimonials');
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => {
+      document.querySelectorAll('.testi-hidden').forEach(el => {
+        el.classList.add('show');
+        el.classList.add('is-visible');
+      });
+      expandBtn.classList.add('hidden');
+    });
+  }
+</script>
