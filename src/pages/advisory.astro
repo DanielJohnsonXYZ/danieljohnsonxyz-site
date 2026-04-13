@@ -1,0 +1,133 @@
+---
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+
+const offerCards = [
+  { name: "Fractional CMO", detail: "For startups that need senior commercial judgment, sharper positioning, and stronger GTM leadership without hiring a full-time exec yet." },
+  { name: "Growth advisory", detail: "For founders and lean teams that want a thought partner on growth priorities, experimentation, customer research, and decision-making." },
+  { name: "Focused strategic sprints", detail: "For teams that need help solving a specific problem quickly: funnel diagnosis, narrative refinement, channel prioritisation, or growth roadmap design." }
+];
+const process = [
+  { step: "01", title: "Diagnose the real bottleneck", body: "Look past surface channel symptoms and identify where the commercial system is breaking: narrative, measurement, activation, retention, or team clarity." },
+  { step: "02", title: "Set the decision architecture", body: "Clarify what matters now, what evidence is missing, and which experiments or initiatives deserve attention first." },
+  { step: "03", title: "Build execution rhythm", body: "Create the operating cadence, dashboard logic, and cross-functional rhythm that help internal teams execute without spinning." },
+  { step: "04", title: "Leave the system stronger", body: "The work should improve the business even after the engagement ends, with better priorities, better learning habits, and clearer hiring or handoff paths." }
+];
+const fit = [
+  "You have real demand or traction, but growth still feels reactive.",
+  "The founder is making too many commercial calls by instinct alone.",
+  "Channels are active, but the learning is not compounding.",
+  "The team needs stronger strategic guidance before the next stage of hiring."
+];
+const faq = [
+  { question: "Who is this best for?", answer: "Founder-led startups, Series A and B teams, and innovation programmes that need senior growth judgment rather than a menu of marketing services." },
+  { question: "What does Daniel actually do in the work?", answer: "He helps teams prioritise growth, sharpen positioning, build decision frameworks, improve experimentation quality, and align product, marketing, and revenue work." },
+  { question: "Is this an agency relationship?", answer: "No. This site is about Daniel's personal practice. He may reference We Scale Startups as part of his track record, but the advisory work here is positioned around direct senior input." },
+  { question: "How long do engagements usually last?", answer: "It depends on the problem. Some relationships are sprint-shaped, while others are ongoing fractional engagements designed to support a growth phase over time." }
+];
+---
+
+<BaseLayout description="Advisory with Daniel Johnson: fractional CMO support, growth strategy, and focused commercial systems work for startups that need clearer decisions and better growth rhythm." title="Advisory | Daniel Johnson">
+  <section class="section-space">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div class="reveal space-y-6">
+          <span class="eyebrow">Advisory</span>
+          <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
+            Senior growth support for teams that need better commercial decisions, not more noise.
+          </h1>
+          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
+            Daniel works best when the challenge is not a lack of effort. It is a lack of clarity about where
+            growth should come from next, what the team should learn first, and how to turn activity into a more
+            repeatable commercial system.
+          </p>
+        </div>
+        <div class="reveal card p-6 md:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Good fit signals</p>
+          <ul class="mt-6 space-y-4">
+            {
+              fit.map((item) => (
+                <li class="flex gap-4 border-b border-[color:var(--line)] pb-4 text-base leading-7 last:border-b-0 last:pb-0">
+                  <span class="mt-2 size-2 shrink-0 rounded-full bg-[color:var(--accent)]"></span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="How Daniel Plugs In" intro="The shape of the engagement depends on the stage and the decision load, but the work usually falls into one of three modes." title="Three ways the work is usually structured" />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          offerCards.map((item) => (
+            <article class="reveal card p-6 md:p-7">
+              <h2 class="text-2xl font-bold tracking-[-0.04em]">{item.name}</h2>
+              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader eyebrow="Process" intro="The emphasis is on judgment and system design, not on burying the team under frameworks. The best engagements create momentum because they simplify what should happen next." title="What the work is designed to leave behind" />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          process.map((item) => (
+            <article class="reveal card p-6 md:p-7">
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">{item.step}</p>
+              <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em] text-white/90">{item.title}</h2>
+              <p class="mt-4 text-base leading-7 text-white/55">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="shell">
+      <SectionHeader eyebrow="FAQ" intro="A few of the practical questions founders and teams usually ask before deciding whether the fit is right." title="Common questions" />
+      <div class="mt-10 grid gap-5">
+        {
+          faq.map((item) => (
+            <article class="reveal card p-6 md:p-7">
+              <h2 class="text-2xl font-bold tracking-[-0.04em]">{item.question}</h2>
+              <p class="mt-4 max-w-4xl text-base leading-7 text-[color:var(--muted)]">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card px-6 py-8 md:px-10 md:py-10">
+        <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div class="space-y-4">
+            <span class="eyebrow">Start Here</span>
+            <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
+              If this sounds like the stage you are in, the fastest next step is a conversation.
+            </h2>
+            <p class="max-w-2xl text-base leading-7 text-[color:var(--muted)]">
+              Daniel keeps capacity intentionally limited so the work stays close to the decisions that matter.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Call</a>
+            <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

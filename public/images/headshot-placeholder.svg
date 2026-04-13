@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 960" role="img" aria-labelledby="title desc">
+  <title id="title">Daniel Johnson headshot placeholder</title>
+  <desc id="desc">An abstract professional portrait placeholder with a neutral silhouette and soft editorial framing.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8f4ff"/>
+      <stop offset="52%" stop-color="#f5f1ec"/>
+      <stop offset="100%" stop-color="#ebe6df"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#7B2FF7" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#1d85ff" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+  <rect width="768" height="960" rx="56" fill="url(#bg)"/>
+  <circle cx="608" cy="172" r="128" fill="url(#glow)"/>
+  <circle cx="168" cy="764" r="142" fill="#ffffff" opacity="0.48"/>
+  <rect x="92" y="96" width="584" height="768" rx="40" fill="#ffffff" opacity="0.64"/>
+  <circle cx="384" cy="348" r="132" fill="#ddd6cc"/>
+  <path d="M218 784c22-134 102-202 166-202 72 0 147 73 168 202H218z" fill="#cfc7bd"/>
+  <path d="M314 292c15-33 44-56 70-56s55 23 70 56c-18 13-42 22-70 22s-52-9-70-22z" fill="#c1b7ac"/>
+  <path d="M256 132h256" stroke="#131118" stroke-linecap="round" stroke-opacity=".08" stroke-width="8"/>
+  <path d="M256 832h256" stroke="#131118" stroke-linecap="round" stroke-opacity=".08" stroke-width="8"/>
+</svg>

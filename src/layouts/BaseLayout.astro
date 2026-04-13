@@ -1,75 +1,117 @@
 ---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { buildPersonSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { siteConfig } from "../site";
+import "../styles/global.css";
+
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
+  path?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description = "I help ambitious startups build repeatable growth systems through sharp strategy, experimentation, and operator-level commercial judgment." } = Astro.props;
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  path = Astro.url.pathname,
+  ogImage = siteConfig.ogImage,
+  ogType = "website",
+  schema = []
+} = Astro.props;
+
+const canonical = absoluteUrl(path);
+const imageUrl = absoluteUrl(ogImage);
+const pageSchemas = Array.isArray(schema) ? schema : [schema];
+const allSchemas = [buildPersonSchema(), ...pageSchemas].filter(Boolean);
+const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
+const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${siteConfig.gtmId}');`;
+const revealScript = `const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealObserver = prefersReducedMotion
+  ? null
+  : new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver?.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+document.querySelectorAll('.reveal').forEach((element) => {
+  if (!revealObserver) {
+    element.classList.add('is-visible');
+    return;
+  }
+
+  revealObserver.observe(element);
+});`;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title}</title>
-  <meta name="description" content={description}>
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://danieljohnson.xyz/">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta property="og:site_name" content="Daniel Johnson">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={description}>
-  <meta property="og:url" content="https://danieljohnson.xyz/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@djohnsonxyz">
-  <meta name="twitter:creator" content="@djohnsonxyz">
-  <meta name="twitter:title" content={title}>
-  <meta name="twitter:description" content={description}>
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": "https://danieljohnson.xyz/#person",
-    "name": "Daniel Johnson",
-    "jobTitle": "Growth strategist, fractional CMO, and speaker",
-    "description": "Daniel Johnson is a growth strategist, speaker, and founder helping ambitious startups turn early traction into durable, repeatable growth systems.",
-    "url": "https://danieljohnson.xyz",
-    "image": "https://danieljohnson.xyz/images/daniel-headshot.png",
-    "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "United Kingdom" },
-    "worksFor": { "@type": "Organization", "name": "We Scale Startups", "url": "https://www.wescalestartups.com" },
-    "sameAs": [
-      "https://www.linkedin.com/in/danieljohnsonxyz/",
-      "https://app.growthmentor.com/mentors/daniel-johnson",
-      "https://www.wescalestartups.com"
-    ]
-  })} />
-</head>
-<body class="overflow-x-hidden">
-  <a class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-black focus:px-4 focus:py-2 focus:text-white" href="#main-content">Skip to content</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-  <slot name="header" />
-  <main class="site-main" id="main-content">
-    <slot />
-  </main>
-  <slot name="footer" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
 
-  <script>
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealObserver = prefersReducedMotion
-      ? null
-      : new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              revealObserver?.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.18 });
-    document.querySelectorAll('.reveal').forEach((element) => {
-      if (!revealObserver) { element.classList.add('is-visible'); return; }
-      revealObserver.observe(element);
-    });
-  </script>
-</body>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={siteConfig.twitterHandle} />
+    <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <script is:inline set:html={gtmScript}></script>
+
+    {
+      serializedSchemas.map((json) => (
+        <script is:inline type="application/ld+json" set:html={json} />
+      ))
+    }
+  </head>
+
+  <body class="overflow-x-hidden">
+    <a class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-black focus:px-4 focus:py-2 focus:text-white" href="#main-content">
+      Skip to content
+    </a>
+
+    <noscript>
+      <iframe
+        height="0"
+        src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.gtmId}`}
+        style="display:none;visibility:hidden"
+        width="0"
+      ></iframe>
+    </noscript>
+
+    <SiteHeader currentPath={Astro.url.pathname} />
+
+    <main class="site-main" id="main-content">
+      <slot />
+    </main>
+
+    <SiteFooter />
+
+    <script is:inline set:html={revealScript}></script>
+  </body>
 </html>

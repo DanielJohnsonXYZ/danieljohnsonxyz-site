@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Daniel Johnson Open Graph image</title>
+  <desc id="desc">Editorial social preview image for Daniel Johnson's personal brand site.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbfaf8"/>
+      <stop offset="100%" stop-color="#eeebe6"/>
+    </linearGradient>
+    <radialGradient id="accent" cx="82%" cy="18%" r="54%">
+      <stop offset="0%" stop-color="#7B2FF7" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#7B2FF7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="48" y="48" width="1104" height="534" rx="30" fill="#ffffff" opacity="0.72" stroke="rgba(19,17,24,0.08)"/>
+  <rect width="1200" height="630" fill="url(#accent)"/>
+  <g fill="none" opacity=".08" stroke="#131118">
+    <path d="M108 138h984"/>
+    <path d="M108 490h984"/>
+    <path d="M168 96v438"/>
+    <path d="M1032 96v438"/>
+  </g>
+  <text x="112" y="178" fill="#7B2FF7" font-family="IBM Plex Mono, monospace" font-size="22" letter-spacing="6">DANIEL JOHNSON</text>
+  <text x="112" y="282" fill="#131118" font-family="Manrope, Arial, sans-serif" font-size="74" font-weight="700">
+    <tspan x="112" dy="0">Growth systems for</tspan>
+    <tspan x="112" dy="86">ambitious startups.</tspan>
+  </text>
+  <text x="112" y="450" fill="#5d5966" font-family="Manrope, Arial, sans-serif" font-size="30">
+    Strategist • Speaker • Founder
+  </text>
+  <text x="112" y="502" fill="#5d5966" font-family="Manrope, Arial, sans-serif" font-size="30">
+    danieljohnson.xyz
+  </text>
+</svg>
