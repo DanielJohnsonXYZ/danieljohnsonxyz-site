@@ -459,22 +459,39 @@ a, button, summary {
 }
 
 .trust-strip {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 44rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(18px);
+}
+
+.trust-strip-label {
+  font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.trust-strip-logos {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.5rem;
-  max-width: 44rem;
-  margin-top: 0.75rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
+  gap: 1.1rem 1.45rem;
 }
 
 .trust-strip img {
-  max-width: 7.5rem;
-  height: 1.25rem;
+  max-width: 8.4rem;
+  height: 1.55rem;
   object-fit: contain;
   filter: grayscale(1) contrast(1.05);
-  opacity: 0.45;
+  opacity: 0.76;
   mix-blend-mode: multiply;
 }
 
@@ -484,6 +501,52 @@ a, button, summary {
   border-radius: var(--radius-lg);
   background: white;
   box-shadow: var(--shadow-lg);
+}
+
+.hero-authority-panel {
+  padding: 1.35rem;
+  background:
+    linear-gradient(135deg, rgba(124, 58, 237, 0.08), transparent 46%),
+    var(--surface);
+}
+
+.proof-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.proof-primary {
+  display: flex;
+  min-height: 24rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(124, 58, 237, 0.26), transparent 25rem),
+    rgba(255, 255, 255, 0.04);
+}
+
+.proof-secondary {
+  min-height: 10.5rem;
+}
+
+.testimonial-feature {
+  background:
+    linear-gradient(135deg, rgba(124, 58, 237, 0.16), rgba(255, 255, 255, 0.035) 42%),
+    rgba(255, 255, 255, 0.04);
+}
+
+.testimonial-compact {
+  min-height: 13rem;
+}
+
+.explore-card {
+  display: flex;
+  min-height: 17rem;
+  flex-direction: column;
+}
+
+.explore-card .link-arrow {
+  margin-top: auto;
 }
 
 .pipeline-card {
@@ -654,6 +717,12 @@ a, button, summary {
     grid-template-columns: 7rem 1fr;
     gap: 2rem;
     padding: 1.35rem 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .proof-grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
   }
 }
 

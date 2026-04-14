@@ -3,7 +3,7 @@ export const siteConfig = {
   firstName: "Daniel",
   title: "Daniel Johnson | Growth Systems for Ambitious Startups",
   description:
-    "I help ambitious startups turn early traction into durable, repeatable growth systems through sharper GTM judgment, experimentation, and commercial clarity.",
+    "I help post-traction seed to Series A startups turn fragile growth into durable, repeatable systems through sharper GTM judgment, experimentation, and commercial clarity.",
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",

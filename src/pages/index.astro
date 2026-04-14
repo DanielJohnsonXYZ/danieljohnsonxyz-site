@@ -2,43 +2,51 @@
 import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { formatDate, sortByFeaturedThenOrder } from "../lib/utils";
-import { principleCards, siteConfig, trustLogos } from "../site";
+import { sortByFeaturedThenOrder } from "../lib/utils";
+import { siteConfig, trustLogos } from "../site";
 
 const proof = sortByFeaturedThenOrder(await getCollection("proof")).slice(0, 4);
-const talks = sortByFeaturedThenOrder(await getCollection("talks")).slice(0, 4);
 const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials")).slice(0, 6);
-const visibleTestimonials = testimonials.slice(0, 3);
-const hiddenTestimonials = testimonials.slice(3);
-const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(0, 2);
-const media = sortByFeaturedThenOrder(await getCollection("media")).slice(0, 3);
+const [primaryProof, ...supportingProof] = proof;
+const featuredTestimonial = testimonials.find((item) => item.data.name === "Christian A") ?? testimonials[0];
+const supportingTestimonials = testimonials
+  .filter((item) => item.id !== featuredTestimonial.id)
+  .slice(0, 2);
+
+const fitChips = ["Seed to Series A", "Post-traction", "SaaS, AI, fintech, commerce", "Founder-led teams"];
+
+const heroStats = [
+  { value: "10+ yrs", label: "Growth operating work" },
+  { value: "2 exits", label: "Founder perspective" },
+  { value: "20+", label: "Startups advised" },
+  { value: "479+", label: "Founder sessions" }
+];
 
 const pipeline = [
   {
     step: "01",
     title: "Diagnose",
-    body: "I audit your growth stack, data quality, and team capacity to find the real blockers, not the symptoms."
+    body: "Find where growth is actually breaking: narrative, measurement, activation, retention, or team focus.",
+    example: "At NAVA, this meant looking past installs and into the retention system behind the first 30K+ downloads."
   },
   {
     step: "02",
     title: "Prioritise",
-    body: "We build a ranked experiment backlog scored on impact, confidence, and effort. No guessing."
+    body: "Turn founder instinct and dashboard noise into a ranked set of decisions the team can defend.",
+    example: "For paid acquisition work, this often means clarifying who the channel should serve before increasing spend."
   },
   {
     step: "03",
     title: "Execute",
-    body: "I work alongside your team to run experiments, build repeatable systems, and ship what matters."
+    body: "Work with the team to ship the experiments, positioning, funnels, and operating rhythms that matter now.",
+    example: "At Shoprocket, research-led positioning and digital execution supported a 30% lift in customer LTV."
   },
   {
     step: "04",
     title: "Compound",
-    body: "We review, learn, and feed wins back into the system so every cycle makes the next one faster."
+    body: "Feed the learning back into the system so growth becomes less dependent on a single founder or campaign.",
+    example: "Across 479+ mentor sessions, the useful handoff is usually a clearer cadence founders can keep running."
   }
-];
-
-const heroStats = [
-  { label: "Startups advised", value: "20+", detail: "SaaS, AI, fintech, Web3, commerce" },
-  { label: "Founder sessions", value: "479+", detail: "Google, Techstars, GrowthMentor" }
 ];
 
 const outcomeBars = [
@@ -48,136 +56,146 @@ const outcomeBars = [
   { label: "Churn reduction", value: "-21%", width: "52%", note: "Lifecycle work for eCommerce brands" }
 ];
 
-const speakingContexts = [
-  "Accelerator and founder cohorts that want useful growth frameworks, not generic motivation.",
-  "University and postgraduate audiences learning how product ambition turns into commercial traction.",
-  "Innovation teams and operator rooms where startup speed, market judgment, and experimentation all need to connect."
+const deeperLinks = [
+  {
+    eyebrow: "Advisory",
+    title: "How I work with teams",
+    body: "Where fractional CMO, growth advisory, and focused strategic sprint work fits best.",
+    href: "/advisory",
+    cta: "Explore advisory"
+  },
+  {
+    eyebrow: "Speaking",
+    title: "Thought leadership in the room",
+    body: "Talk themes, proof points, and selected rooms from Google Launchpad to Cambridge and Imperial.",
+    href: "/speaking",
+    cta: "See speaking topics"
+  },
+  {
+    eyebrow: "Insights",
+    title: "Selected thinking, not a blog",
+    body: "Native essays plus a curated archive of useful interviews, profiles, talks, and growth resources.",
+    href: "/insights",
+    cta: "Read selected thinking"
+  }
 ];
-
-const experience = [
-  { period: "2013", title: "Founded and exited an eCommerce venture", body: "An operator's view of growth from day one." },
-  { period: "2016", title: "Started We Scale Startups", body: "Hands-on growth advisory across SaaS, AI, fintech, Web3, and commerce." },
-  { period: "2019", title: "Speaking and mentoring at scale", body: "Google, Techstars, GrowthMentor, Cambridge, Imperial, and the UK Space Agency." },
-  { period: "2024", title: "Interim growth leadership", body: "Ladder.io Growth Director work alongside continued advisory, mentoring, and speaking." }
-];
-
-const testimonialExpandScript = `const expandBtn = document.getElementById("expand-testimonials");
-if (expandBtn) {
-  expandBtn.addEventListener("click", () => {
-    document.querySelectorAll("[data-hidden-testimonial]").forEach((item) => {
-      item.removeAttribute("hidden");
-      item.classList.add("is-visible");
-    });
-    expandBtn.setAttribute("hidden", "");
-  });
-}`;
 ---
 
 <BaseLayout
-  description="I build repeatable growth systems for AI and SaaS startups, combining growth strategy, experimentation, speaking, and operator-level commercial judgment."
-  title="Daniel Johnson | Repeatable Growth Systems for Startups"
+  description="I help post-traction seed to Series A startups turn fragile growth into a repeatable operating system across acquisition, activation, retention, and GTM decision-making."
+  title="Daniel Johnson | Growth Systems for Post-Traction Startups"
 >
   <section class="hero-section section-space">
     <div class="shell">
-      <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div class="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div class="reveal flex flex-col gap-6">
           <span class="eyebrow">Growth strategist &bull; speaker &bull; founder</span>
+
           <div class="space-y-5">
-            <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl lg:text-[6.25rem]">
-              I help startups build <span class="hero-accent">repeatable growth.</span>
+            <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl lg:text-[5.9rem]">
+              Traction is there. <span class="hero-accent">Growth still feels fragile.</span>
             </h1>
-            <p class="max-w-2xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
-              If you have traction but growth still feels fragile, I can help. I work with founders and growth teams
-              to turn early momentum into a system the team can actually run.
+            <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
+              I work with seed-to-Series A teams that have demand, but have not yet cracked repeatable acquisition,
+              activation, or retention. The job is to turn scattered channels and founder instinct into a growth
+              system the team can actually run.
             </p>
           </div>
 
-          <div class="flex flex-wrap gap-3">
-            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Let's Talk</a>
-            <a class="button-secondary" href="/advisory">How I Work</a>
-            <a class="button-secondary" href="/speaking">Speaking</a>
+          <div class="flex flex-wrap gap-2">
+            {fitChips.map((item) => <span class="chip">{item}</span>)}
           </div>
 
-          <div class="trust-strip">
-            {
-              trustLogos.slice(0, 5).map((item) => (
-                <img alt={item.alt} height="42" loading="lazy" src={item.src} width="160" />
-              ))
-            }
+          <div class="trust-strip" aria-label="Selected institutions and platforms from Daniel Johnson's public footprint">
+            <p class="trust-strip-label">Trusted in rooms with</p>
+            <div class="trust-strip-logos">
+              {
+                trustLogos.slice(0, 5).map((item) => (
+                  <img alt={item.alt} height="48" loading="eager" src={item.src} width="180" />
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a diagnosis call</a>
+            <a class="button-secondary" href="#proof">See proof</a>
           </div>
         </div>
 
         <div class="reveal">
-          <div class="hero-photo-card">
+          <article class="hero-photo-card">
             <img
               alt="Portrait of Daniel Johnson"
-              class="aspect-[3/4] w-full object-cover object-top"
+              class="aspect-[4/5] w-full object-cover object-top"
               height="960"
               loading="eager"
               src={siteConfig.headshot}
               width="768"
             />
-            <div class="grid gap-px bg-[color:var(--line)] sm:grid-cols-2">
-              {
-                heroStats.map((item) => (
-                  <div class="bg-white p-5 text-center">
-                    <p class="text-3xl font-extrabold tracking-[-0.06em] text-[color:var(--ink)]">{item.value}</p>
-                    <p class="mt-2 text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">{item.label}</p>
-                    <p class="mt-1 text-xs leading-5 text-[color:var(--muted)]">{item.detail}</p>
-                  </div>
-                ))
-              }
+            <div class="hero-authority-panel">
+              <p class="mono text-[0.68rem] uppercase tracking-[0.18em] text-[color:var(--accent)]">Best fit</p>
+              <h2 class="mt-2 text-2xl font-extrabold tracking-[-0.05em]">
+                Post-traction teams that need senior growth judgment before the next hiring layer.
+              </h2>
+              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
+                Useful when the product has demand, but the team cannot yet explain which growth bets should compound.
+              </p>
+              <div class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[color:var(--line)]">
+                {
+                  heroStats.map((item) => (
+                    <div class="bg-[color:var(--surface)] p-4">
+                      <p class="text-2xl font-extrabold tracking-[-0.07em]">{item.value}</p>
+                      <p class="mt-1 text-xs leading-5 text-[color:var(--muted)]">{item.label}</p>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-space pt-0">
+  <section class="dark-section section-space" id="proof">
     <div class="shell">
       <SectionHeader
-        eyebrow="How I Work"
-        intro="Every engagement follows the same disciplined loop. The system compounds because each cycle makes the next one sharper."
-        title="A four-stage operating system, not a bag of tactics."
+        eyebrow="Proof"
+        intro="A cold visitor should not have to infer the credibility. The numbers, rooms, and founder feedback sit together here."
+        title="Proof before process."
       />
 
-      <div class="pipeline-card reveal mt-10">
-        {
-          pipeline.map((item, index) => (
-            <article class="pipeline-step">
-              {index < pipeline.length - 1 && <span aria-hidden="true" class="pipeline-arrow">-></span>}
-              <p class="pipeline-num">{item.step}</p>
-              <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{item.body}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+      <div class="proof-grid mt-10">
+        <article class="reveal proof-primary card p-6 md:p-8">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Primary signal</p>
+          <p class="mt-5 text-6xl font-extrabold leading-none tracking-[-0.08em] text-white md:text-8xl">
+            {primaryProof.data.metric}
+          </p>
+          <h2 class="mt-6 text-3xl font-extrabold tracking-[-0.05em] text-white md:text-4xl">{primaryProof.data.title}</h2>
+          <p class="mt-4 max-w-2xl text-base leading-7 text-white/60">{primaryProof.data.summary}</p>
+        </article>
 
-  <section class="dark-section section-space">
-    <div class="shell">
-      <SectionHeader eyebrow="Proof" intro="A few real numbers from real startup work." title="Evidence that the work compounds." />
-
-      <div class="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] md:grid-cols-4">
-        {
-          proof.map((item) => (
-            <article class="reveal bg-white/[0.03] px-6 py-7">
-              <p class="stat-number text-white">{item.data.metric}</p>
-              <h2 class="mt-4 text-lg font-semibold tracking-[-0.03em] text-white/90">{item.data.title}</h2>
-              <p class="mt-3 text-sm leading-6 text-white/50">{item.data.summary}</p>
-            </article>
-          ))
-        }
+        <div class="grid gap-4">
+          {
+            supportingProof.map((item) => (
+              <article class="reveal proof-secondary card p-5">
+                <p class="text-4xl font-extrabold tracking-[-0.07em] text-white">{item.data.metric}</p>
+                <h3 class="mt-3 text-lg font-bold tracking-[-0.04em] text-white/90">{item.data.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-white/50">{item.data.summary}</p>
+              </article>
+            ))
+          }
+        </div>
       </div>
 
-      <div class="mt-8 grid gap-5 lg:grid-cols-2">
+      <div class="mt-8 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
         <article class="reveal card p-6 md:p-8">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Managed budgets</p>
-          <p class="mt-4 text-5xl font-extrabold tracking-[-0.07em] text-white">£6M+</p>
-          <p class="mt-3 text-base leading-7 text-white/55">In acquisition spend across SaaS, apps, and commerce brands.</p>
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Outcome pattern</p>
+          <p class="mt-4 text-4xl font-extrabold tracking-[-0.07em] text-white md:text-5xl">Better signal, less waste.</p>
+          <p class="mt-3 text-base leading-7 text-white/55">
+            The point is not more activity. It is sharper learning across the parts of growth that actually decide revenue quality.
+          </p>
           <div class="mt-8 space-y-5">
             {
               outcomeBars.map((item) => (
@@ -198,73 +216,30 @@ if (expandBtn) {
           </div>
         </article>
 
-        <article class="reveal card p-6 md:p-8">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Mentoring and speaking</p>
-          <p class="mt-4 text-5xl font-extrabold tracking-[-0.07em] text-white">479+</p>
-          <p class="mt-3 text-base leading-7 text-white/55">Founder sessions across Google, Techstars, and GrowthMentor.</p>
-          <div class="mt-8 grid gap-4 sm:grid-cols-3">
-            <div class="dark-mini-card"><p>4.97/5</p><span>Average rating</span></div>
-            <div class="dark-mini-card"><p>£15M+</p><span>Fundraising supported</span></div>
-            <div class="dark-mini-card"><p>6+</p><span>Institutions and programmes</span></div>
-          </div>
+        <article class="reveal testimonial-feature card p-6 md:p-8">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Founder feedback</p>
+          <blockquote class="mt-5">
+            <p class="text-3xl font-extrabold leading-[1.12] tracking-[-0.06em] text-white md:text-5xl">
+              "{featuredTestimonial.data.quote}"
+            </p>
+            <footer class="mt-6 border-t border-white/[0.08] pt-5 text-sm text-white/55">
+              <p class="font-semibold text-white">{featuredTestimonial.data.name}</p>
+              <p>{featuredTestimonial.data.role} &bull; {featuredTestimonial.data.organisation}</p>
+            </footer>
+          </blockquote>
         </article>
       </div>
-    </div>
-  </section>
 
-  <section class="section-space">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="What People Say"
-        intro="A representative mix of comments from founders, operators, and programme collaborators."
-        title="Helpful without theatre."
-      />
-
-      <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div class="mt-5 grid gap-5 md:grid-cols-2">
         {
-          visibleTestimonials.map((item) => (
-            <blockquote class="reveal card flex flex-col gap-6 p-6 md:p-7">
-              <p class="text-lg leading-8 tracking-[-0.02em]">"{item.data.quote}"</p>
-              <footer class="space-y-1 text-sm text-[color:var(--muted)]">
-                <p class="font-semibold text-[color:var(--ink)]">{item.data.name}</p>
+          supportingTestimonials.map((item) => (
+            <blockquote class="reveal testimonial-compact card p-6">
+              <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white/85">"{item.data.quote}"</p>
+              <footer class="mt-5 text-sm text-white/45">
+                <p class="font-semibold text-white/80">{item.data.name}</p>
                 <p>{item.data.role} &bull; {item.data.organisation}</p>
               </footer>
             </blockquote>
-          ))
-        }
-        {
-          hiddenTestimonials.map((item) => (
-            <blockquote class="reveal card flex flex-col gap-6 p-6 md:p-7" data-hidden-testimonial hidden>
-              <p class="text-lg leading-8 tracking-[-0.02em]">"{item.data.quote}"</p>
-              <footer class="space-y-1 text-sm text-[color:var(--muted)]">
-                <p class="font-semibold text-[color:var(--ink)]">{item.data.name}</p>
-                <p>{item.data.role} &bull; {item.data.organisation}</p>
-              </footer>
-            </blockquote>
-          ))
-        }
-      </div>
-
-      <button class="button-secondary mx-auto mt-8 flex" id="expand-testimonials" type="button">See all testimonials</button>
-    </div>
-  </section>
-
-  <section class="dark-section section-space">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="What I Am Known For"
-        intro="The thread through my work is not a preferred channel. It is the ability to help teams make sharper commercial decisions in a clearer order."
-        title="A calm, operator-level approach."
-      />
-
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        {
-          principleCards.map((card) => (
-            <article class="reveal card p-6 md:p-7">
-              <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Principle</p>
-              <h3 class="mt-4 text-2xl font-bold tracking-[-0.04em] text-white">{card.title}</h3>
-              <p class="mt-4 text-base leading-7 text-white/55">{card.body}</p>
-            </article>
           ))
         }
       </div>
@@ -273,124 +248,43 @@ if (expandBtn) {
 
   <section class="section-space">
     <div class="shell">
-      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-        <div class="reveal">
-          <span class="eyebrow">Background</span>
-          <h2 class="section-title mt-5">Built from lived startup work, not theory.</h2>
-          <p class="lede mt-5">
-            I have built inside startups, led growth teams, launched products, and advised founders through the
-            difficult handoff from traction to repeatability.
-          </p>
-
-          <div class="timeline-card mt-10">
-            {
-              experience.map((item) => (
-                <article class="timeline-row">
-                  <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">{item.period}</p>
-                  <div>
-                    <h3 class="text-lg font-bold tracking-[-0.03em]">{item.title}</h3>
-                    <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">{item.body}</p>
-                  </div>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-
-        <div class="reveal grid gap-5">
-          <div class="card p-4 md:p-5">
-            <img alt="Portrait of Daniel Johnson" class="aspect-[4/5] w-full rounded-xl object-cover object-top" src={siteConfig.headshot} />
-          </div>
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="card p-5 text-center"><p class="text-2xl font-bold tracking-[-0.05em]">London</p><p class="mt-2 text-sm text-[color:var(--muted)]">Based, global clients</p></div>
-            <div class="card p-5 text-center"><p class="text-2xl font-bold tracking-[-0.05em]">Fractional</p><p class="mt-2 text-sm text-[color:var(--muted)]">Advisory, speaking</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space bg-[color:var(--surface-dim)]">
-    <div class="shell">
       <SectionHeader
-        eyebrow="Speaking Footprint"
-        intro="I am often brought into rooms where the audience needs practical growth thinking without hype: founders, postgraduate operators, accelerator cohorts, and innovation teams."
-        title="Where the public work shows up most clearly"
+        eyebrow="How I Work"
+        intro="The framework is deliberately simple, but it gets tangible fast. Each stage is tied to the practical work of making growth less dependent on guesswork."
+        title="A four-stage operating system with real examples."
       />
 
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
-        <div class="reveal card p-6 md:p-8">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Speaking contexts</p>
-          <ul class="mt-6 space-y-4">
-            {
-              speakingContexts.map((item, index) => (
-                <li class="flex gap-4 border-b border-[color:var(--line)] pb-4 text-base leading-7 last:border-b-0 last:pb-0">
-                  <span class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">0{index + 1}</span>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="grid gap-5">
-          {
-            talks.map((talk) => (
-              <article class="reveal card p-5 md:p-6">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="chip">{talk.data.organiser}</span>
-                  <span class="chip">{talk.data.yearLabel}</span>
-                </div>
-                <h3 class="mt-4 text-xl font-bold tracking-[-0.04em]">{talk.data.title}</h3>
-                <p class="mt-2 text-sm font-medium">{talk.data.topic}</p>
-                <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{talk.data.summary}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="dark-section section-space">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Selected Thinking"
-        intro="The content hub is designed as a mix of native essays and curated material from my wider footprint. The goal is not volume; it is signal."
-        title="Essays and ideas that travel."
-      />
-
-      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      <div class="pipeline-card reveal mt-10">
         {
-          articles.map((article) => (
-            <article class="reveal card p-6 md:p-7">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="chip">Essay</span>
-                <span class="chip">{formatDate(article.data.publishedAt)}</span>
-              </div>
-              <h3 class="mt-5 text-2xl font-bold tracking-[-0.04em] text-white">
-                <a href={`/insights/${article.id}`}>{article.data.title}</a>
-              </h3>
-              <p class="mt-4 text-base leading-7 text-white/55">{article.data.description}</p>
-              <div class="mt-6">
-                <a class="link-arrow" href={`/insights/${article.id}`}>Read essay</a>
-              </div>
+          pipeline.map((item, index) => (
+            <article class="pipeline-step">
+              {index < pipeline.length - 1 && <span aria-hidden="true" class="pipeline-arrow">-&gt;</span>}
+              <p class="pipeline-num">{item.step}</p>
+              <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
+              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{item.body}</p>
+              <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm font-semibold leading-6 tracking-[-0.02em]">
+                {item.example}
+              </p>
             </article>
           ))
         }
-        <article class="reveal card p-6 md:p-7">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-white/50">Profiles</p>
-          <div class="mt-6 grid gap-3">
-            {
-              media.slice(0, 3).map((item) => (
-                <a class="profile-row" href={item.data.href} rel="noreferrer" target="_blank">
-                  <span>{item.data.source}</span>
-                  <span>Open -></span>
-                </a>
-              ))
-            }
-          </div>
-        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal grid gap-5 lg:grid-cols-3">
+        {
+          deeperLinks.map((item) => (
+            <article class="explore-card card p-6 md:p-7">
+              <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">{item.eyebrow}</p>
+              <h2 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">{item.title}</h2>
+              <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+              <a class="link-arrow mt-6" href={item.href}>{item.cta}</a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -398,20 +292,18 @@ if (expandBtn) {
   <section class="cta-gradient section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-8 text-center">
-        <span class="eyebrow justify-center text-white/60">Ready?</span>
+        <span class="eyebrow justify-center text-white/60">Next step</span>
         <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-7xl">
-          Stop guessing. <span class="hero-accent">Start compounding.</span>
+          Start with the bottleneck. <span class="hero-accent">Then build the system.</span>
         </h2>
         <p class="mx-auto max-w-2xl text-lg leading-8 text-white/60">
-          If you have traction but growth still feels fragile, let's build the system that makes it durable.
+          Book a diagnosis call if you have traction, but growth still depends too much on founder instinct, scattered channels, or unclear priorities.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Enter the Growth System</a>
+          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a diagnosis call</a>
           <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
         </div>
       </div>
     </div>
   </section>
-
-  <script is:inline set:html={testimonialExpandScript}></script>
 </BaseLayout>
