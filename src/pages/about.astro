@@ -3,77 +3,139 @@ import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../site";
 
-const timeline = [
-  { year: "2013", title: "Built first ventures and learned the hard way", body: "Daniel's perspective was formed inside startups, including founder-led work that culminated in exits and a practical understanding of what sustainable growth actually requires." },
-  { year: "2015-2018", title: "Moved into senior operating roles", body: "Leadership roles at Shoprocket and NAVA sharpened his focus on the connection between positioning, acquisition, product feedback loops, and retention." },
-  { year: "2016-Present", title: "Founded We Scale Startups", body: "Not as an agency identity for this site, but as a vehicle through which Daniel has advised founders and growth teams across multiple categories and stages." },
-  { year: "2019-Present", title: "Built a public body of work", body: "Mentoring, teaching, and speaking through Google Launchpad, Techstars, GrowthMentor, Cambridge, Imperial, General Assembly, and the UK Space Agency." }
+const proofStats = [
+  { value: "10+ yrs", label: "Growth and GTM operating work" },
+  { value: "2 exits", label: "Founder-side perspective" },
+  { value: "20+", label: "Startups advised" },
+  { value: "479+", label: "Founder mentor sessions" }
 ];
+
+const timeline = [
+  {
+    year: "2013",
+    title: "Built and exited early ventures",
+    body: "Daniel's founder perspective started with hands-on venture building, including ecommerce work that shaped how he thinks about demand, margins, and repeatability."
+  },
+  {
+    year: "2015-2018",
+    title: "Led growth inside Shoprocket and NAVA",
+    body: "Senior operating roles connected positioning, acquisition, retention, and revenue quality, including 30K+ NAVA downloads and a 30% LTV lift at Shoprocket."
+  },
+  {
+    year: "2016-Present",
+    title: "Built We Scale Startups as the advisory vehicle",
+    body: "WSS is the company behind Daniel's advisory, mentoring, content, and fractional work across SaaS, AI, fintech, commerce, and innovation-led teams."
+  },
+  {
+    year: "2019-Present",
+    title: "Turned the work into a public body of thinking",
+    body: "Mentoring, teaching, and speaking through Google Launchpad, Techstars, GrowthMentor, Cambridge, Imperial, General Assembly, and the UK Space Agency."
+  }
+];
+
 const principles = [
-  "Start with the customer and the decision, not the channel.",
-  "Use data to reduce ambiguity, not to create theatre.",
-  "Tie growth work back to product and revenue quality.",
-  "Leave teams with better operating habits than they started with."
+  {
+    title: "Find the real bottleneck",
+    body: "Before adding spend, clarify whether growth is breaking in positioning, activation, retention, measurement, or team decision-making."
+  },
+  {
+    title: "Turn evidence into choices",
+    body: "Good research and data should reduce ambiguity for the team, not create a bigger reporting ritual."
+  },
+  {
+    title: "Leave a system behind",
+    body: "The best engagement makes the team better after it ends: sharper priorities, clearer rhythm, and better hiring or handoff paths."
+  }
 ];
 ---
 
 <BaseLayout
-  description="About Daniel Johnson: founder, growth strategist, mentor, and speaker working with startups that need better commercial systems, not more noise."
-  title="About Daniel Johnson"
+  description="About Daniel Johnson: fractional CMO and growth advisor helping post-traction startups turn noisy growth work into a repeatable operating system."
+  title="About Daniel Johnson | Fractional CMO and Growth Advisor"
 >
   <section class="section-space">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-start">
         <div class="reveal space-y-6">
-          <span class="eyebrow">About Daniel</span>
+          <span class="service-label">About Daniel</span>
           <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
-            A growth operator focused on clarity, systems, and commercial judgment.
+            Turning noisy growth work into an operating system people can run.
           </h1>
-          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
-            Daniel Johnson has spent more than a decade helping startups move from scattered activity to a more
-            durable way of growing. His work sits at the intersection of positioning, experimentation, team
-            decision-making, and the practical realities of building inside young companies.
+          <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+            I am a fractional CMO and growth advisor for post-traction startups. The reason founders bring me in is
+            not to add more marketing activity; it is to improve the commercial judgment, evidence, and operating
+            rhythm behind the next stage of growth.
           </p>
         </div>
 
-        <div class="reveal card p-6 md:p-8">
-          <div class="space-y-5">
-            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Short bio</p>
-            <p class="text-base leading-7">
+        <aside class="reveal card overflow-hidden">
+          <img alt="Portrait of Daniel Johnson" class="aspect-[4/3] w-full object-cover object-top" height="720" src={siteConfig.headshot} width="960" />
+          <div class="p-6 md:p-8">
+            <p class="card-label">Why it matters</p>
+            <p class="mt-3 text-base leading-8">
               Founder of <a class="underline decoration-[color:var(--accent)]/40 underline-offset-4" href={siteConfig.companyUrl}>We Scale Startups</a>,
-              long-time mentor across Google, Techstars, and GrowthMentor, and a frequent speaker on startup growth, GTM, and innovation.
+              long-time mentor across Google, Techstars, and GrowthMentor, and a speaker on startup growth, GTM, and innovation.
             </p>
-            <div class="divider"></div>
-            <dl class="space-y-4 text-sm">
-              <div>
-                <dt class="font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]" style="font-size:0.7rem">Base</dt>
-                <dd class="mt-1">{siteConfig.location}</dd>
-              </div>
-              <div>
-                <dt class="font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]" style="font-size:0.7rem">Works with</dt>
-                <dd class="mt-1">AI, SaaS, fintech, mobile, Web3, and innovation-led teams</dd>
-              </div>
-              <div>
-                <dt class="font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]" style="font-size:0.7rem">Known for</dt>
-                <dd class="mt-1">Turning noisy growth work into an operating system people can run</dd>
-              </div>
-            </dl>
+            <div class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[color:var(--line)]">
+              {
+                proofStats.map((item) => (
+                  <div class="bg-[color:var(--surface)] p-4">
+                    <p class="text-2xl font-extrabold tracking-[-0.07em]">{item.value}</p>
+                    <p class="mt-1 text-xs leading-5 text-[color:var(--muted)]">{item.label}</p>
+                  </div>
+                ))
+              }
+            </div>
           </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Principles"
+        intro="The strongest advisory work is not a stack of frameworks. It is a tighter way for the team to decide what to learn, what to do next, and what to stop doing."
+        title="How the judgment shows up in the work."
+      />
+      <div class="mt-10 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <article class="reveal card p-6 md:p-8">
+          <p class="text-3xl font-extrabold leading-[1.12] tracking-[-0.06em] text-white md:text-5xl">
+            Better growth usually starts when a team stops confusing motion with learning.
+          </p>
+        </article>
+        <div class="grid gap-4">
+          {
+            principles.map((item, index) => (
+              <article class="reveal card p-5 md:p-6">
+                <p class="card-label text-white/45">0{index + 1}</p>
+                <h2 class="mt-3 text-xl font-bold tracking-[-0.04em] text-white">{item.title}</h2>
+                <p class="mt-3 text-sm leading-7 text-white/68">{item.body}</p>
+              </article>
+            ))
+          }
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-space pt-0">
+  <section class="section-space">
     <div class="shell">
-      <SectionHeader eyebrow="Story" intro="Daniel's perspective comes from being close to the work: building ventures, running growth in-house, stepping into founder teams, and seeing where good products get stuck commercially." title="The through-line is practical growth, not performance theatre" />
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <SectionHeader
+        eyebrow="Operating History"
+        intro="The through-line is practical growth: founder-side experience, in-house operating roles, advisory work, and public teaching."
+        title="Where the point of view comes from."
+      />
+      <div class="timeline-feature mt-10">
         {
           timeline.map((item) => (
-            <article class="reveal card p-6 md:p-7">
-              <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--accent)]">{item.year}</p>
-              <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+            <article class="timeline-feature-row reveal">
+              <p>{item.year}</p>
+              <div>
+                <h2>{item.title}</h2>
+                <span>{item.body}</span>
+              </div>
             </article>
           ))
         }
@@ -81,46 +143,22 @@ const principles = [
     </div>
   </section>
 
-  <section class="dark-section section-space">
-    <div class="shell">
-      <SectionHeader eyebrow="How Daniel Works" intro="The goal is never to look busy. The goal is to create better choices for the team, backed by evidence and translated into a rhythm that can scale." title="A few principles behind the work" />
-      <div class="mt-10 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-        <article class="reveal card p-6 md:p-8">
-          <p class="text-lg leading-8 text-white/80">
-            The teams Daniel works best with are not looking for marketing theatre. They want commercial clarity,
-            cleaner priorities, and an honest read on where growth is really breaking.
-          </p>
-        </article>
-        <ul class="grid gap-4">
-          {
-            principles.map((item, index) => (
-              <li class="reveal card flex gap-4 p-5 md:p-6">
-                <span class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">0{index + 1}</span>
-                <span class="text-base leading-7 text-white/80">{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space">
+  <section class="section-space pt-0">
     <div class="shell">
       <div class="reveal card px-6 py-8 md:px-10 md:py-10">
         <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div class="space-y-4">
             <span class="eyebrow">Next Step</span>
             <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
-              Want the strategic version of Daniel's work, not just the biography?
+              See how I advise teams.
             </h2>
-            <p class="max-w-2xl text-base leading-7 text-[color:var(--muted)]">
-              The advisory page breaks down where Daniel plugs in, what engagements are designed to solve, and how the work is structured.
+            <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
+              The advisory page breaks down engagement modes, first-two-week priorities, and the kinds of teams where the fit is strongest.
             </p>
           </div>
           <div class="flex flex-col gap-3">
             <a class="button-accent" href="/advisory">Explore Advisory</a>
-            <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+            <a class="button-secondary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
           </div>
         </div>
       </div>

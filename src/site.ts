@@ -1,13 +1,16 @@
 export const siteConfig = {
   name: "Daniel Johnson",
   firstName: "Daniel",
-  title: "Daniel Johnson | Growth Systems for Ambitious Startups",
+  title: "Daniel Johnson | Fractional CMO and Growth Advisor",
   description:
-    "I help post-traction seed to Series A startups turn fragile growth into durable, repeatable systems through sharper GTM judgment, experimentation, and commercial clarity.",
+    "Fractional CMO and growth advisor for post-traction seed to Series A startups that need a repeatable acquisition and GTM system.",
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
   bookingUrl: "https://calendly.com/wescalestartups",
+  bookingLabel: "Book a 30-minute Growth Diagnosis",
+  bookingNote: "We'll identify the bottleneck, the next priorities, and whether I can help.",
+  availability: "Currently considering one new advisory engagement for Q2 2026.",
   email: "daniel@wescalestartups.com",
   phone: "+44 7918 665435",
   location: "London, United Kingdom",

@@ -7,27 +7,34 @@ import { sortByFeaturedThenOrder } from "../lib/utils";
 import { siteConfig, trustLogos } from "../site";
 
 const talks = sortByFeaturedThenOrder(await getCollection("talks"));
+const selectedTalks = talks.slice(0, 3);
 const speakingHighlights = [
-  { metric: "479+", label: "Mentor sessions across founders, operators, and startup teams" },
-  { metric: "10+ years", label: "Of startup growth work informing the point of view on stage" },
-  { metric: "Google, Cambridge, Imperial", label: "Institutions and programmes already part of Daniel's footprint" },
-  { metric: "10+ countries", label: "Startup audiences reached through mentoring and teaching work" }
+  { metric: "479+", label: "Founder and operator mentoring sessions" },
+  { metric: "10+ years", label: "Startup growth experience behind the content" },
+  { metric: "Google, Cambridge, Imperial", label: "Institutional rooms and programmes" },
+  { metric: "10+ countries", label: "Startup audiences reached through teaching and mentoring" }
 ];
 const signatureSessions = [
-  { title: "How to build a repeatable growth system", body: "A practical session for founders and operators on turning fragmented marketing into a clearer operating model." },
-  { title: "Go-to-market judgment for early teams", body: "How to choose what to test, what to ignore, and how to connect message, channel, and customer learning." },
-  { title: "Turning innovation into commercial traction", body: "For technical and innovation-led audiences who need the bridge between invention, market clarity, and demand." },
-  { title: "What founders misunderstand about growth", body: "A candid talk on why teams often mistake activity for learning and how better decisions compound faster than louder tactics." }
+  {
+    title: "How to build a repeatable growth system",
+    outcome: "Founders leave with a practical model for turning fragmented marketing into a clearer operating rhythm.",
+    bestFor: "Founder cohorts, accelerators, and operator teams"
+  },
+  {
+    title: "Go-to-market judgment for early teams",
+    outcome: "Teams learn how to choose what to test, what to ignore, and how to connect message, channel, and customer learning.",
+    bestFor: "Seed-stage teams, innovation programmes, and product-led audiences"
+  },
+  {
+    title: "Turning innovation into commercial traction",
+    outcome: "Technical audiences get a usable bridge between invention, market clarity, and demand creation.",
+    bestFor: "Universities, R&D programmes, and innovation teams"
+  }
 ];
-const organiserReasons = [
-  "Daniel combines founder credibility with operator detail, which helps talks land with both executives and hands-on teams.",
-  "The material is practical enough to use immediately after the session, not just inspirational for the room.",
-  "His perspective is shaped by mentoring, speaking, and working inside startups across multiple stages and categories."
-];
-const themes = [
-  { title: "Growth systems for founders", body: "How to move from scattered marketing activity to a repeatable engine for acquisition, activation, and retention." },
-  { title: "Go-to-market judgment", body: "How early teams choose what to test, where to focus, and how to stop confusing motion with progress." },
-  { title: "Innovation that reaches the market", body: "How technical and innovation-led teams turn strong ideas into practical commercial traction." }
+const organiserTakeaways = [
+  "A practical growth framework the audience can use after the session.",
+  "Examples from founder, operator, and advisory work, not just theory.",
+  "A speaker who can flex between executive-level strategy and hands-on startup detail."
 ];
 const deliverables = [
   "Keynotes for founder and innovation audiences",
@@ -35,44 +42,55 @@ const deliverables = [
   "Training sessions for marketing and commercial teams",
   "Panels, fireside chats, and moderated conversations"
 ];
+const assets = [
+  { label: "Short bio", detail: "Use the speaking bio below for event pages and introductions." },
+  { label: "Headshot", detail: "Use the current site headshot as a placeholder until Daniel supplies final event photography." },
+  { label: "Talk topics", detail: "Use the three signature sessions as starting points, then tailor to the audience." }
+];
 const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
 ---
 
-<BaseLayout description="Speaking with Daniel Johnson: talks, workshops, and training on startup growth, GTM strategy, experimentation, and commercial clarity." schema={speakingSchema} title="Speaking | Daniel Johnson">
+<BaseLayout
+  description="Speaking with Daniel Johnson: talks, workshops, and training for founder, startup, and innovation audiences that need practical growth and GTM thinking."
+  schema={speakingSchema}
+  title="Speaking | Daniel Johnson"
+>
   <section class="section-space">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="reveal space-y-6">
-          <span class="eyebrow">Speaking</span>
+          <span class="service-label">Speaking / Workshops</span>
           <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
-            Talks and workshops for audiences that want startup growth explained with substance.
+            Practical startup growth talks for rooms that need clarity, not hype.
           </h1>
-          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
-            Daniel speaks to founders, operators, students, and innovation teams about growth systems, GTM
-            decision-making, experimentation, and the commercial work required to turn momentum into something more durable.
+          <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+            I speak to founders, operators, students, and innovation teams about growth systems, GTM judgment,
+            experimentation, and the commercial work required to turn momentum into repeatability.
           </p>
+          <ul class="scan-list max-w-3xl">
+            {organiserTakeaways.map((item) => <li>{item}</li>)}
+          </ul>
         </div>
-        <div class="grid gap-5">
+        <aside class="grid gap-5">
           <div class="reveal card overflow-hidden p-4">
             <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="960" loading="eager" src="/images/cambridge-judge-business-school.png" width="1200" />
           </div>
           <div class="reveal card p-6 md:p-8">
-            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Formats</p>
+            <p class="card-label">Formats</p>
             <ul class="mt-6 space-y-4">
               {
                 deliverables.map((item) => (
                   <li class="flex gap-4 border-b border-[color:var(--line)] pb-4 text-base leading-7 last:border-b-0 last:pb-0">
-                    <span class="mt-2 size-2 shrink-0 rounded-full bg-[color:var(--accent)]"></span>
+                    <span class="mt-2 size-2 shrink-0 rounded-full bg-[color:var(--line-strong)]"></span>
                     <span>{item}</span>
                   </li>
                 ))
               }
             </ul>
           </div>
-        </div>
+        </aside>
       </div>
 
-      <!-- Stats bar -->
       <div class="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         {
           speakingHighlights.map((item) => (
@@ -99,29 +117,26 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
 
   <section class="section-space pt-0">
     <div class="shell">
-      <SectionHeader eyebrow="Signature Sessions" intro="Daniel's thought leadership lands best when it is translated into sessions that match the room: useful, specific, and clear enough to shape what happens next." title="Talks that carry beyond the keynote" />
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
-        {
-          signatureSessions.map((item) => (
-            <article class="reveal card p-6 md:p-7">
-              <h2 class="text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader eyebrow="Themes" intro="Daniel's talks are designed to be useful in the room. The emphasis is always on clarity, practical frameworks, and examples that help people make better decisions afterwards." title="What Daniel usually speaks about" />
+      <SectionHeader
+        eyebrow="Signature Sessions"
+        intro="Each topic can become a keynote, workshop, training session, or founder-cohort format depending on the audience."
+        title="Talks designed around what the room should do next."
+      />
       <div class="mt-10 grid gap-5 md:grid-cols-3">
         {
-          themes.map((item) => (
-            <article class="reveal card p-6 md:p-7">
+          signatureSessions.map((item) => (
+            <article class="reveal advisory-mode-card card p-6 md:p-7">
               <h2 class="text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+              <dl class="mt-6 grid gap-5">
+                <div>
+                  <dt>Best for</dt>
+                  <dd>{item.bestFor}</dd>
+                </div>
+                <div>
+                  <dt>Audience leaves with</dt>
+                  <dd>{item.outcome}</dd>
+                </div>
+              </dl>
             </article>
           ))
         }
@@ -131,64 +146,78 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
 
   <section class="dark-section section-space">
     <div class="shell">
-      <SectionHeader eyebrow="Selected Rooms" intro="A sample of institutions, programmes, and events where Daniel has delivered mentoring, teaching, keynote, or workshop-led sessions." title="Recent speaking and teaching footprint" />
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
-        {
-          talks.map((talk) => (
-            <article class="reveal card p-6 md:p-7">
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">{talk.data.organiser}</span>
-                <span class="chip">{talk.data.yearLabel}</span>
-              </div>
-              <h2 class="mt-5 text-2xl font-bold tracking-[-0.04em] text-white/90">{talk.data.title}</h2>
-              <p class="mt-3 text-sm font-medium text-white/70">{talk.data.topic}</p>
-              <p class="mt-4 text-base leading-7 text-white/50">{talk.data.summary}</p>
-              <div class="mt-5 flex flex-wrap gap-3">
-                <span class="chip">{talk.data.location}</span>
-                {talk.data.url && <a class="link-arrow" href={talk.data.url} rel="noreferrer" target="_blank">View organiser</a>}
-              </div>
-            </article>
-          ))
-        }
+      <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label text-white/55">Event proof</p>
+          <blockquote class="mt-5">
+            <p class="text-3xl font-extrabold leading-[1.16] tracking-[-0.06em] text-white">
+              "I am very impressed by Daniel's detailed insight when working with startups through Google Launchpad."
+            </p>
+            <footer class="mt-6 border-t border-white/[0.08] pt-5 text-sm text-white/65">
+              <p class="font-semibold text-white">James Lethem</p>
+              <p>Programme collaborator &bull; Google Launchpad</p>
+            </footer>
+          </blockquote>
+        </article>
+        <div>
+          <SectionHeader
+            eyebrow="Selected Rooms"
+            intro="A tighter sample rather than a dense wall of cards. More examples can live in the full speaking archive later."
+            title="Recent speaking and teaching footprint."
+          />
+          <div class="mt-8 grid gap-5">
+            {
+              selectedTalks.map((talk) => (
+                <article class="reveal card p-6 md:p-7">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="chip">{talk.data.organiser}</span>
+                    <span class="chip">{talk.data.yearLabel}</span>
+                  </div>
+                  <h2 class="mt-5 text-2xl font-bold tracking-[-0.04em] text-white/90">{talk.data.title}</h2>
+                  <p class="mt-3 text-sm font-medium text-white/75">{talk.data.topic}</p>
+                  <p class="mt-4 text-base leading-7 text-white/64">{talk.data.summary}</p>
+                  <div class="mt-5 flex flex-wrap gap-3">
+                    <span class="chip">{talk.data.location}</span>
+                    {talk.data.url && <a class="link-arrow" href={talk.data.url} rel="noreferrer" target="_blank">View organiser</a>}
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section-space">
     <div class="shell">
-      <SectionHeader eyebrow="Why Organisers Bring Daniel In" intro="The value is not just the topic list. It is the combination of founder empathy, operator detail, and enough practical depth to make the thinking stick after the session ends." title="What makes the sessions land" />
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        {
-          organiserReasons.map((item, index) => (
-            <article class="reveal card p-6 md:p-7">
-              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">0{index + 1}</p>
-              <p class="mt-4 text-base leading-7">{item}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <div class="reveal card overflow-hidden px-6 py-8 md:px-10 md:py-10">
-        <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-          <div class="space-y-4">
-            <span class="eyebrow">Speaking Bio</span>
-            <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
-              Daniel Johnson is a growth strategist, founder, and speaker working at the intersection of startup growth, GTM judgment, and commercial systems.
-            </h2>
-            <p class="max-w-3xl text-base leading-7 text-[color:var(--muted)]">
-              He has spent more than a decade helping startups grow, has advised 20+ companies through founder and
-              fractional work, and has delivered mentoring and talks for Google Launchpad, Techstars, GrowthMentor,
-              Cambridge Judge Business School, Imperial College London, General Assembly, and the UK Space Agency.
-            </p>
-          </div>
-          <div class="flex flex-col gap-3">
-            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Enquire About Speaking</a>
-            <a class="button-secondary" href="/about">Read Bio</a>
-          </div>
+      <SectionHeader
+        eyebrow="Booker Assets"
+        intro="Practical details for organisers who already know the room and need to decide quickly whether there is a fit."
+        title="Useful materials for organisers."
+      />
+      <div class="mt-10 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label">Speaking bio</p>
+          <h2 class="mt-4 text-3xl font-bold tracking-[-0.05em] md:text-4xl">
+            Daniel Johnson is a fractional CMO, growth advisor, founder, and speaker working at the intersection of startup growth, GTM judgment, and commercial systems.
+          </h2>
+          <p class="mt-5 max-w-3xl text-base leading-8 text-[color:var(--muted)]">
+            He has spent more than a decade helping startups grow, has advised 20+ companies through founder and
+            fractional work, and has delivered mentoring and talks for Google Launchpad, Techstars, GrowthMentor,
+            Cambridge Judge Business School, Imperial College London, General Assembly, and the UK Space Agency.
+          </p>
+        </article>
+        <div class="grid gap-4">
+          {
+            assets.map((item) => (
+              <article class="reveal card p-5">
+                <p class="card-label">{item.label}</p>
+                <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.detail}</p>
+              </article>
+            ))
+          }
+          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Enquire About Speaking</a>
         </div>
       </div>
     </div>

@@ -9,15 +9,16 @@ import { navigation, siteConfig } from "../site";
         <div class="flex flex-col gap-6">
           <span class="eyebrow">Stay in Touch</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
-            Talks, operator thinking, and the work behind durable startup growth.
+            Fractional CMO support, growth advisory, and speaking for startup teams.
           </h2>
           <p class="max-w-2xl text-base leading-7 text-white/50">
             I work with a limited number of companies at a time and take selected speaking,
             workshop, and advisory conversations where the fit is strong.
           </p>
+          <p class="max-w-2xl text-sm font-semibold leading-6 text-white/75">{siteConfig.availability}</p>
           <div class="flex flex-wrap gap-3">
             <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
-              Book a Diagnosis Call
+              {siteConfig.bookingLabel}
             </a>
             <a class="button-secondary" href={`mailto:${siteConfig.email}`}>
               Email Daniel

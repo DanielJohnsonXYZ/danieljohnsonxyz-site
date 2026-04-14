@@ -8,7 +8,7 @@ export function buildPersonSchema() {
     "@type": "Person",
     "@id": `${siteConfig.siteUrl}/#person`,
     name: siteConfig.name,
-    jobTitle: "Growth strategist, fractional CMO, and speaker",
+    jobTitle: "Fractional CMO, growth advisor, founder, and speaker",
     description: siteConfig.description,
     url: siteConfig.siteUrl,
     image: absoluteUrl(siteConfig.headshot),

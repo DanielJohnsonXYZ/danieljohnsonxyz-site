@@ -22,6 +22,12 @@ const heroStats = [
   { value: "479+", label: "Founder sessions" }
 ];
 
+const bottlenecks = [
+  "Demand exists, but acquisition is inconsistent.",
+  "Channels are active, but learning is not compounding.",
+  "The founder is still making too many GTM decisions by instinct."
+];
+
 const pipeline = [
   {
     step: "01",
@@ -50,30 +56,49 @@ const pipeline = [
 ];
 
 const outcomeBars = [
-  { label: "Retention lift", value: "+40%", width: "100%", note: "NAVA growth system" },
-  { label: "CAC reduction", value: "-35%", width: "87%", note: "Crypto trading platform" },
-  { label: "LTV gain", value: "+30%", width: "75%", note: "Shoprocket positioning" },
-  { label: "Churn reduction", value: "-21%", width: "52%", note: "Lifecycle work for eCommerce brands" }
+  { label: "Retention lift", value: "+40%", note: "NAVA growth system" },
+  { label: "CAC reduction", value: "-35%", note: "Confidential crypto trading platform" },
+  { label: "LTV gain", value: "+30%", note: "Shoprocket positioning work" },
+  { label: "Churn reduction", value: "-21%", note: "Lifecycle work across ecommerce clients" }
+];
+
+const miniCases = [
+  {
+    company: "NAVA",
+    problem: "Mobile app traction needed stronger retention signals.",
+    outcome: "30K+ downloads in eight months and a 40%+ retention lift."
+  },
+  {
+    company: "Shoprocket",
+    problem: "Revenue growth needed better positioning and customer value quality.",
+    outcome: "30% lift in LTV while the business doubled revenue."
+  },
+  {
+    company: "GrowthMentor",
+    problem: "Founders needed practical bottleneck diagnosis, not broad marketing advice.",
+    outcome: "479+ founder sessions with a 4.97/5 average review score."
+  }
 ];
 
 const deeperLinks = [
   {
-    eyebrow: "Advisory",
-    title: "How I work with teams",
-    body: "Where fractional CMO, growth advisory, and focused strategic sprint work fits best.",
+    eyebrow: "Primary path",
+    title: "Advisory",
+    body: "Fractional CMO, growth advisory, and focused strategic sprints for post-traction teams.",
     href: "/advisory",
-    cta: "Explore advisory"
+    cta: "Explore advisory",
+    primary: true
   },
   {
-    eyebrow: "Speaking",
-    title: "Thought leadership in the room",
+    eyebrow: "Authority platform",
+    title: "Speaking",
     body: "Talk themes, proof points, and selected rooms from Google Launchpad to Cambridge and Imperial.",
     href: "/speaking",
     cta: "See speaking topics"
   },
   {
-    eyebrow: "Insights",
-    title: "Selected thinking, not a blog",
+    eyebrow: "Point of view",
+    title: "Insights",
     body: "Native essays plus a curated archive of useful interviews, profiles, talks, and growth resources.",
     href: "/insights",
     cta: "Read selected thinking"
@@ -82,28 +107,31 @@ const deeperLinks = [
 ---
 
 <BaseLayout
-  description="I help post-traction seed to Series A startups turn fragile growth into a repeatable operating system across acquisition, activation, retention, and GTM decision-making."
-  title="Daniel Johnson | Growth Systems for Post-Traction Startups"
+  description={siteConfig.description}
+  title="Daniel Johnson | Fractional CMO and Growth Advisor"
 >
   <section class="hero-section section-space">
     <div class="shell">
       <div class="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div class="reveal flex flex-col gap-6">
-          <span class="eyebrow">Growth strategist &bull; speaker &bull; founder</span>
+          <span class="service-label">Fractional CMO / Growth Advisor</span>
 
           <div class="space-y-5">
-            <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl lg:text-[5.9rem]">
-              Traction is there. <span class="hero-accent">Growth still feels fragile.</span>
+            <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl lg:text-[5.55rem]">
+              I help post-traction startups build a repeatable <span class="hero-accent">GTM system.</span>
             </h1>
-            <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
-              I work with seed-to-Series A teams that have demand, but have not yet cracked repeatable acquisition,
-              activation, or retention. The job is to turn scattered channels and founder instinct into a growth
-              system the team can actually run.
+            <p class="hero-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
+              For seed-to-Series A teams with demand, but no reliable acquisition rhythm yet. I turn scattered growth
+              activity into clearer priorities, stronger experiments, and a system the team can run.
             </p>
           </div>
 
+          <div class="hero-scan-list" aria-label="Best fit situations">
+            {bottlenecks.map((item) => <span>{item}</span>)}
+          </div>
+
           <div class="flex flex-wrap gap-2">
-            {fitChips.map((item) => <span class="chip">{item}</span>)}
+            {fitChips.map((item) => <span class="chip chip-quiet">{item}</span>)}
           </div>
 
           <div class="trust-strip" aria-label="Selected institutions and platforms from Daniel Johnson's public footprint">
@@ -117,14 +145,18 @@ const deeperLinks = [
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-3">
-            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a diagnosis call</a>
-            <a class="button-secondary" href="#proof">See proof</a>
+          <div class="cta-cluster">
+            <div class="flex flex-wrap gap-3">
+              <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+              <a class="button-secondary" href="#proof">See results and examples</a>
+            </div>
+            <p>{siteConfig.bookingNote}</p>
+            <p class="availability-line">{siteConfig.availability}</p>
           </div>
         </div>
 
         <div class="reveal">
-          <article class="hero-photo-card">
+          <article class="hero-photo-card hero-offer-card">
             <img
               alt="Portrait of Daniel Johnson"
               class="aspect-[4/5] w-full object-cover object-top"
@@ -134,13 +166,15 @@ const deeperLinks = [
               width="768"
             />
             <div class="hero-authority-panel">
-              <p class="mono text-[0.68rem] uppercase tracking-[0.18em] text-[color:var(--accent)]">Best fit</p>
+              <p class="card-label">Best fit</p>
               <h2 class="mt-2 text-2xl font-extrabold tracking-[-0.05em]">
-                Post-traction teams that need senior growth judgment before the next hiring layer.
+                Teams that have traction, but need senior GTM judgment before hiring the next full-time leader.
               </h2>
-              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
-                Useful when the product has demand, but the team cannot yet explain which growth bets should compound.
-              </p>
+              <ul class="mt-5 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
+                <li>Typically seed to Series A</li>
+                <li>Useful for acquisition, activation, positioning, and growth operating rhythm</li>
+                <li>WSS is context; this is Daniel's personal advisory practice</li>
+              </ul>
               <div class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[color:var(--line)]">
                 {
                   heroStats.map((item) => (
@@ -163,17 +197,17 @@ const deeperLinks = [
       <SectionHeader
         eyebrow="Proof"
         intro="A cold visitor should not have to infer the credibility. The numbers, rooms, and founder feedback sit together here."
-        title="Proof before process."
+        title="Results and examples."
       />
 
       <div class="proof-grid mt-10">
         <article class="reveal proof-primary card p-6 md:p-8">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Primary signal</p>
+          <p class="card-label text-white/55">Primary signal</p>
           <p class="mt-5 text-6xl font-extrabold leading-none tracking-[-0.08em] text-white md:text-8xl">
             {primaryProof.data.metric}
           </p>
           <h2 class="mt-6 text-3xl font-extrabold tracking-[-0.05em] text-white md:text-4xl">{primaryProof.data.title}</h2>
-          <p class="mt-4 max-w-2xl text-base leading-7 text-white/60">{primaryProof.data.summary}</p>
+          <p class="mt-4 max-w-2xl text-base leading-8 text-white/68">{primaryProof.data.summary}</p>
         </article>
 
         <div class="grid gap-4">
@@ -182,49 +216,57 @@ const deeperLinks = [
               <article class="reveal proof-secondary card p-5">
                 <p class="text-4xl font-extrabold tracking-[-0.07em] text-white">{item.data.metric}</p>
                 <h3 class="mt-3 text-lg font-bold tracking-[-0.04em] text-white/90">{item.data.title}</h3>
-                <p class="mt-2 text-sm leading-6 text-white/50">{item.data.summary}</p>
+                <p class="mt-2 text-sm leading-6 text-white/60">{item.data.summary}</p>
               </article>
             ))
           }
         </div>
       </div>
 
+      <div class="case-study-strip mt-8">
+        {
+          miniCases.map((item) => (
+            <article class="reveal case-study-card">
+              <p class="card-label text-white/45">{item.company}</p>
+              <h3>{item.problem}</h3>
+              <p>{item.outcome}</p>
+            </article>
+          ))
+        }
+      </div>
+
       <div class="mt-8 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
         <article class="reveal card p-6 md:p-8">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Outcome pattern</p>
+          <p class="card-label text-white/55">Outcome pattern</p>
           <p class="mt-4 text-4xl font-extrabold tracking-[-0.07em] text-white md:text-5xl">Better signal, less waste.</p>
-          <p class="mt-3 text-base leading-7 text-white/55">
+          <p class="mt-3 text-base leading-8 text-white/68">
             The point is not more activity. It is sharper learning across the parts of growth that actually decide revenue quality.
           </p>
-          <div class="mt-8 space-y-5">
+          <dl class="metric-list mt-8">
             {
               outcomeBars.map((item) => (
                 <div>
-                  <div class="mb-2 flex items-end justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold text-white/90">{item.label}</p>
-                      <p class="text-xs text-white/45">{item.note}</p>
-                    </div>
-                    <p class="text-lg font-bold text-white">{item.value}</p>
-                  </div>
-                  <div class="metric-rail metric-rail-dark">
-                    <div class="metric-fill" style={`width:${item.width}`}></div>
-                  </div>
+                  <dt>{item.label}</dt>
+                  <dd>
+                    <strong>{item.value}</strong>
+                    <span>{item.note}</span>
+                  </dd>
                 </div>
               ))
             }
-          </div>
+          </dl>
         </article>
 
         <article class="reveal testimonial-feature card p-6 md:p-8">
-          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Founder feedback</p>
+          <p class="card-label text-white/55">Founder feedback</p>
           <blockquote class="mt-5">
             <p class="text-3xl font-extrabold leading-[1.12] tracking-[-0.06em] text-white md:text-5xl">
               "{featuredTestimonial.data.quote}"
             </p>
-            <footer class="mt-6 border-t border-white/[0.08] pt-5 text-sm text-white/55">
+            <footer class="mt-6 border-t border-white/[0.08] pt-5 text-sm text-white/65">
               <p class="font-semibold text-white">{featuredTestimonial.data.name}</p>
               <p>{featuredTestimonial.data.role} &bull; {featuredTestimonial.data.organisation}</p>
+              <p class="mt-2 text-xs text-white/45">GrowthMentor founder session; company not public.</p>
             </footer>
           </blockquote>
         </article>
@@ -234,9 +276,9 @@ const deeperLinks = [
         {
           supportingTestimonials.map((item) => (
             <blockquote class="reveal testimonial-compact card p-6">
-              <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white/85">"{item.data.quote}"</p>
-              <footer class="mt-5 text-sm text-white/45">
-                <p class="font-semibold text-white/80">{item.data.name}</p>
+              <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white/88">"{item.data.quote}"</p>
+              <footer class="mt-5 text-sm text-white/55">
+                <p class="font-semibold text-white/85">{item.data.name}</p>
                 <p>{item.data.role} &bull; {item.data.organisation}</p>
               </footer>
             </blockquote>
@@ -249,8 +291,8 @@ const deeperLinks = [
   <section class="section-space">
     <div class="shell">
       <SectionHeader
-        eyebrow="How I Work"
-        intro="The framework is deliberately simple, but it gets tangible fast. Each stage is tied to the practical work of making growth less dependent on guesswork."
+        eyebrow="System"
+        intro="The Growth Operating System is deliberately simple, but it gets tangible fast. Each stage is tied to the practical work of making growth less dependent on guesswork."
         title="A four-stage operating system with real examples."
       />
 
@@ -274,13 +316,13 @@ const deeperLinks = [
 
   <section class="section-space pt-0">
     <div class="shell">
-      <div class="reveal grid gap-5 lg:grid-cols-3">
+      <div class="reveal grid gap-5 lg:grid-cols-[1.35fr_0.82fr_0.82fr]">
         {
           deeperLinks.map((item) => (
-            <article class="explore-card card p-6 md:p-7">
-              <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">{item.eyebrow}</p>
+            <article class:list={["explore-card card p-6 md:p-7", item.primary && "explore-card-primary"]}>
+              <p class="card-label">{item.eyebrow}</p>
               <h2 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">{item.title}</h2>
-              <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+              <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">{item.body}</p>
               <a class="link-arrow mt-6" href={item.href}>{item.cta}</a>
             </article>
           ))
@@ -296,13 +338,14 @@ const deeperLinks = [
         <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-7xl">
           Start with the bottleneck. <span class="hero-accent">Then build the system.</span>
         </h2>
-        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/60">
-          Book a diagnosis call if you have traction, but growth still depends too much on founder instinct, scattered channels, or unclear priorities.
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/68">
+          {siteConfig.bookingNote} Low-friction, practical, and useful even if the next step is not an engagement.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a diagnosis call</a>
+          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
           <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
         </div>
+        <p class="text-sm font-semibold text-white/60">{siteConfig.availability}</p>
       </div>
     </div>
   </section>
