@@ -16,9 +16,11 @@ export const siteConfig = {
   location: "London, United Kingdom",
   linkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
   growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
+  youtube: "https://www.youtube.com/@danieljohnson6000",
+  youtubeUploadsEmbed: "https://www.youtube-nocookie.com/embed/videoseries?list=UUkEPRVEnpDIdSk8o2vC3_WA",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
-  gtmId: "GTM-XXXXXXX",
+  gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.svg",
   headshot: "/images/daniel-headshot.png"

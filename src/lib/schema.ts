@@ -22,7 +22,7 @@ export function buildPersonSchema() {
       name: siteConfig.companyName,
       url: siteConfig.companyUrl
     },
-    sameAs: [siteConfig.linkedin, siteConfig.growthMentor, siteConfig.companyUrl]
+    sameAs: [siteConfig.linkedin, siteConfig.growthMentor, siteConfig.youtube, siteConfig.companyUrl]
   };
 }
 

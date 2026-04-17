@@ -12,6 +12,7 @@ const featuredTestimonial = testimonials.find((item) => item.data.name === "Chri
 const supportingTestimonials = testimonials
   .filter((item) => item.id !== featuredTestimonial.id)
   .slice(0, 2);
+const testimonialThemes = testimonials.slice(0, 4);
 
 const fitChips = ["Seed to Series B", "Post-traction", "SaaS, AI, fintech, commerce", "Founder-led teams"];
 
@@ -60,6 +61,31 @@ const outcomeBars = [
   { label: "CAC reduction", value: "-35%", note: "Confidential crypto trading platform" },
   { label: "LTV gain", value: "+30%", note: "Shoprocket positioning work" },
   { label: "Churn reduction", value: "-21%", note: "Lifecycle work across ecommerce clients" }
+];
+
+const primarySignalChecks = [
+  "Acquisition quality",
+  "Activation and retention",
+  "Creative signal",
+  "Learning cadence"
+];
+
+const growthCharts = [
+  {
+    id: "01",
+    title: "Acquisition quality",
+    subtitle: "Spend, channel fit, intent, and landing page match."
+  },
+  {
+    id: "02",
+    title: "Activation and retention",
+    subtitle: "The first moments that decide whether growth compounds."
+  },
+  {
+    id: "03",
+    title: "Creative signal",
+    subtitle: "Messaging, proof, offers, and examples tested before scaling."
+  }
 ];
 
 const miniCases = [
@@ -122,7 +148,7 @@ const leadMagnets = [
     type: "Video",
     title: "YouTube Field Notes",
     body: "Short explainers on GTM systems, creative testing, positioning, and founder-led growth.",
-    href: "https://www.youtube.com/@danieljohnson6000",
+    href: siteConfig.youtube,
     label: "Watch YouTube",
     external: true
   },
@@ -264,13 +290,27 @@ const deeperLinks = [
       />
 
       <div class="proof-grid mt-10">
-        <article class="reveal proof-primary card p-6 md:p-8">
-          <p class="card-label text-white/55">Primary signal</p>
-          <p class="mt-5 text-6xl font-extrabold leading-none tracking-[-0.08em] text-white md:text-8xl">
-            {primaryProof.data.metric}
-          </p>
-          <h2 class="mt-6 text-3xl font-extrabold tracking-[-0.05em] text-white md:text-4xl">{primaryProof.data.title}</h2>
-          <p class="mt-4 max-w-2xl text-base leading-8 text-white/68">{primaryProof.data.summary}</p>
+        <article class="reveal proof-primary proof-primary-filled card p-6 md:p-8">
+          <div class="proof-primary-grid">
+            <div>
+              <p class="card-label text-white/55">Primary signal</p>
+              <p class="mt-5 text-6xl font-extrabold leading-none tracking-[-0.08em] text-white md:text-8xl">
+                {primaryProof.data.metric}
+              </p>
+              <h2 class="mt-6 text-3xl font-extrabold tracking-[-0.05em] text-white md:text-4xl">{primaryProof.data.title}</h2>
+              <p class="mt-4 max-w-2xl text-base leading-8 text-white/68">{primaryProof.data.summary}</p>
+            </div>
+            <div class="mini-dashboard" aria-label="Primary growth signals tracked">
+              {
+                primarySignalChecks.map((item) => (
+                  <div>
+                    <span>{item}</span>
+                    <strong>Active</strong>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </article>
 
         <div class="grid gap-4">
@@ -293,6 +333,28 @@ const deeperLinks = [
               <p class="card-label text-white/45">{item.company}</p>
               <h3>{item.problem}</h3>
               <p>{item.outcome}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="growth-chart-grid reveal">
+        {
+          growthCharts.map((chart) => (
+            <article class="growth-chart" aria-label={chart.title}>
+              <div class="chart-copy">
+                <p class="chart-kicker">{chart.id}</p>
+                <h3>{chart.title}</h3>
+                <p>{chart.subtitle}</p>
+              </div>
+              <div class="chart-visual">
+                <svg viewBox="0 0 320 128" role="img" aria-label={`${chart.title} trend chart`}>
+                  <path class="chart-grid" d="M12 100H308M12 68H308M12 36H308"></path>
+                  <path class="chart-line-muted" d="M18 96C50 92 60 82 88 84C118 86 132 67 160 66C190 65 204 50 232 49C260 48 278 32 304 24"></path>
+                  <path class="chart-line" d="M18 108C49 100 62 94 86 93C114 92 130 75 157 70C184 65 200 51 226 47C256 42 276 27 304 17"></path>
+                  <circle cx="304" cy="17" r="6"></circle>
+                </svg>
+              </div>
             </article>
           ))
         }
@@ -347,6 +409,37 @@ const deeperLinks = [
             </blockquote>
           ))
         }
+      </div>
+
+      <div class="testimonial-wall reveal">
+        {
+          testimonialThemes.map((item) => {
+            const initials = item.data.name
+              .split(" ")
+              .map((part) => part[0])
+              .join("")
+              .slice(0, 2)
+              .toUpperCase();
+
+            return (
+              <article class="testimonial-card">
+                <span class="testimonial-avatar" aria-hidden="true">{initials}</span>
+                <p>"{item.data.quote}"</p>
+                <div class="testimonial-meta">
+                  <strong>{item.data.name}</strong>
+                  <span>{item.data.role} &bull; {item.data.organisation}</span>
+                </div>
+              </article>
+            );
+          })
+        }
+        <details class="testimonial-card testimonial-more">
+          <summary>View all testimonial themes</summary>
+          <p>
+            Founder feedback clusters around clearer prioritisation, sharper landing-page decisions, better customer language,
+            and a calmer operating rhythm.
+          </p>
+        </details>
       </div>
     </div>
   </section>

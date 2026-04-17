@@ -72,6 +72,23 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
           </ul>
         </div>
         <aside class="grid gap-5">
+          <article class="reveal video-panel">
+            <div class="video-frame">
+              <iframe
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+                src={siteConfig.youtubeUploadsEmbed}
+                title="Daniel Johnson YouTube videos"
+              ></iframe>
+            </div>
+            <div class="video-panel-copy">
+              <p class="card-label">YouTube field notes</p>
+              <h2>Short growth and GTM notes for founders.</h2>
+              <p>Use this as a quick read on Daniel's pace, language, and practical teaching style before booking a talk or workshop.</p>
+              <a class="link-arrow" href={siteConfig.youtube} rel="noreferrer" target="_blank">Watch more on YouTube</a>
+            </div>
+          </article>
           <div class="reveal card overflow-hidden p-4">
             <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="960" loading="eager" src="/images/cambridge-judge-business-school.png" width="1200" />
           </div>
