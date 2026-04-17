@@ -13,7 +13,7 @@ const supportingTestimonials = testimonials
   .filter((item) => item.id !== featuredTestimonial.id)
   .slice(0, 2);
 
-const fitChips = ["Seed to Series A", "Post-traction", "SaaS, AI, fintech, commerce", "Founder-led teams"];
+const fitChips = ["Seed to Series B", "Post-traction", "SaaS, AI, fintech, commerce", "Founder-led teams"];
 
 const heroStats = [
   { value: "10+ yrs", label: "Growth operating work" },
@@ -32,26 +32,26 @@ const pipeline = [
   {
     step: "01",
     title: "Diagnose",
-    body: "Find where growth is actually breaking: narrative, measurement, activation, retention, or team focus.",
-    example: "At NAVA, this meant looking past installs and into the retention system behind the first 30K+ downloads."
+    body: "Answer the four map questions: customer, problem, message, and journey.",
+    example: "Deliverables can include persona notes, JTBD, messaging map, and user journey map."
   },
   {
     step: "02",
     title: "Prioritise",
-    body: "Turn founder instinct and dashboard noise into a ranked set of decisions the team can defend.",
-    example: "For paid acquisition work, this often means clarifying who the channel should serve before increasing spend."
+    body: "Rank work by impact, confidence, and ease so the team knows what to do first.",
+    example: "The goal is fewer bets, better evidence, and less founder guesswork."
   },
   {
     step: "03",
-    title: "Execute",
-    body: "Work with the team to ship the experiments, positioning, funnels, and operating rhythms that matter now.",
-    example: "At Shoprocket, research-led positioning and digital execution supported a 30% lift in customer LTV."
+    title: "Create",
+    body: "Turn the priorities into landing pages, offers, creative tests, content, and sales enablement.",
+    example: "Creative becomes a way to learn, not just a way to look busy."
   },
   {
     step: "04",
     title: "Compound",
-    body: "Feed the learning back into the system so growth becomes less dependent on a single founder or campaign.",
-    example: "Across 479+ mentor sessions, the useful handoff is usually a clearer cadence founders can keep running."
+    body: "Build a cadence for learning, reporting, and deciding what to stop doing.",
+    example: "The system should outlive the advisory engagement."
   }
 ];
 
@@ -80,6 +80,61 @@ const miniCases = [
   }
 ];
 
+const signalCards = [
+  {
+    label: "Customer",
+    question: "Who exactly is this for?",
+    body: "Persona, JTBD, buying trigger, and the actual urgency behind the problem."
+  },
+  {
+    label: "Problem",
+    question: "What pain do we solve?",
+    body: "The cost of inaction, the before/after state, and why now matters."
+  },
+  {
+    label: "Message",
+    question: "How do we speak to them?",
+    body: "Messaging map, proof points, objections, and creative angles."
+  },
+  {
+    label: "Journey",
+    question: "How do they find and choose us?",
+    body: "User journey map, channel path, landing page, nurture, sales handoff."
+  }
+];
+
+const leadMagnets = [
+  {
+    type: "Scorecard",
+    title: "Growth Bottleneck Scorecard",
+    body: "Diagnose whether the issue is customer, message, channel, offer, or cadence.",
+    href: `mailto:${siteConfig.email}?subject=Growth%20Bottleneck%20Scorecard`,
+    label: "Request it"
+  },
+  {
+    type: "Worksheet",
+    title: "Messaging Map Template",
+    body: "Turn customer language into proof, objections, landing page copy, and creative hooks.",
+    href: `mailto:${siteConfig.email}?subject=Messaging%20Map%20Template`,
+    label: "Request it"
+  },
+  {
+    type: "Video",
+    title: "YouTube Field Notes",
+    body: "Short explainers on GTM systems, creative testing, positioning, and founder-led growth.",
+    href: "https://www.youtube.com/@danieljohnson6000",
+    label: "Watch YouTube",
+    external: true
+  },
+  {
+    type: "Newsletter",
+    title: "Growth Notes",
+    body: "A practical note on sharper growth decisions, customer insight, and better experiments.",
+    href: `mailto:${siteConfig.email}?subject=Subscribe%20me%20to%20Growth%20Notes`,
+    label: "Join the list"
+  }
+];
+
 const deeperLinks = [
   {
     eyebrow: "Primary path",
@@ -90,9 +145,16 @@ const deeperLinks = [
     primary: true
   },
   {
+    eyebrow: "Founder support",
+    title: "Mentoring",
+    body: "Focused sessions for founders who need sharper customer, GTM, and growth decisions.",
+    href: "/mentoring",
+    cta: "See mentoring"
+  },
+  {
     eyebrow: "Authority platform",
     title: "Speaking",
-    body: "Talk themes, proof points, and selected rooms from Google Launchpad to Cambridge and Imperial.",
+    body: "Talk themes, proof points, workshops, and media angles.",
     href: "/speaking",
     cta: "See speaking topics"
   },
@@ -121,8 +183,8 @@ const deeperLinks = [
               I help post-traction startups build a repeatable <span class="hero-accent">GTM system.</span>
             </h1>
             <p class="hero-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
-              For seed-to-Series A teams with demand, but no reliable acquisition rhythm yet. I turn scattered growth
-              activity into clearer priorities, stronger experiments, and a system the team can run.
+              For seed-to-Series B teams with demand, but no reliable acquisition rhythm yet. I turn scattered growth
+              activity into <span class="highlight-text">clearer priorities, sharper creative, and a system the team can run.</span>
             </p>
           </div>
 
@@ -134,7 +196,7 @@ const deeperLinks = [
             {fitChips.map((item) => <span class="chip chip-quiet">{item}</span>)}
           </div>
 
-          <div class="trust-strip" aria-label="Selected institutions and platforms from Daniel Johnson's public footprint">
+          <div class="trust-strip trust-strip-large" aria-label="Selected institutions and platforms from Daniel Johnson's public footprint">
             <p class="trust-strip-label">Trusted in rooms with</p>
             <div class="trust-strip-logos">
               {
@@ -148,7 +210,8 @@ const deeperLinks = [
           <div class="cta-cluster">
             <div class="flex flex-wrap gap-3">
               <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-              <a class="button-secondary" href="#proof">See results and examples</a>
+              <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
+              <a class="button-secondary" href="#lead-magnets">Get the scorecards</a>
             </div>
             <p>{siteConfig.bookingNote}</p>
             <p class="availability-line">{siteConfig.availability}</p>
@@ -159,7 +222,7 @@ const deeperLinks = [
           <article class="hero-photo-card hero-offer-card">
             <img
               alt="Portrait of Daniel Johnson"
-              class="aspect-[4/5] w-full object-cover object-top"
+              class="aspect-[4/5] w-full object-cover object-top hero-portrait"
               height="960"
               loading="eager"
               src={siteConfig.headshot}
@@ -171,7 +234,7 @@ const deeperLinks = [
                 Teams that have traction, but need senior GTM judgment before hiring the next full-time leader.
               </h2>
               <ul class="mt-5 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
-                <li>Typically seed to Series A</li>
+                <li>Typically seed to Series B</li>
                 <li>Useful for acquisition, activation, positioning, and growth operating rhythm</li>
                 <li>WSS is context; this is Daniel's personal advisory practice</li>
               </ul>
@@ -288,13 +351,25 @@ const deeperLinks = [
     </div>
   </section>
 
-  <section class="section-space">
+  <section class="section-space" id="signal-map">
     <div class="shell">
       <SectionHeader
-        eyebrow="System"
-        intro="The Growth Operating System is deliberately simple, but it gets tangible fast. Each stage is tied to the practical work of making growth less dependent on guesswork."
-        title="A four-stage operating system with real examples."
+        eyebrow="Unique method"
+        intro="A practical diagnostic for turning scattered growth activity into clearer customer, message, journey, and prioritisation decisions."
+        title="The Growth Signal Map."
       />
+
+      <div class="signal-map-grid reveal">
+        {
+          signalCards.map((item) => (
+            <article>
+              <span>{item.label}</span>
+              <h3>{item.question}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
 
       <div class="pipeline-card reveal mt-10">
         {
@@ -314,9 +389,34 @@ const deeperLinks = [
     </div>
   </section>
 
+  <section class="section-space pt-0" id="lead-magnets">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Resources"
+        intro="Use these prompts to find the bottleneck, sharpen the message, and turn customer insight into better experiments."
+        title="Lead magnets and creative signals."
+      />
+
+      <div class="lead-magnet-grid reveal">
+        {
+          leadMagnets.map((item) => (
+            <article class="lead-magnet-card">
+              <p class="resource-type">{item.type}</p>
+              <h3>{item.title}</h3>
+              <span class="resource-copy">{item.body}</span>
+              <a class="resource-link" href={item.href} rel={item.external ? "noreferrer" : undefined} target={item.external ? "_blank" : undefined}>
+                {item.label}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <section class="section-space pt-0">
     <div class="shell">
-      <div class="reveal grid gap-5 lg:grid-cols-[1.35fr_0.82fr_0.82fr]">
+      <div class="reveal explore-grid">
         {
           deeperLinks.map((item) => (
             <article class:list={["explore-card card p-6 md:p-7", item.primary && "explore-card-primary"]}>
@@ -343,7 +443,7 @@ const deeperLinks = [
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-          <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
+          <a class="button-secondary button-secondary-dark" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
         </div>
         <p class="text-sm font-semibold text-white/60">{siteConfig.availability}</p>
       </div>

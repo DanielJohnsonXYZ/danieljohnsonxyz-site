@@ -512,6 +512,12 @@ a, button, summary {
   color: #374151;
 }
 
+.highlight-text {
+  background: linear-gradient(180deg, transparent 58%, rgba(235, 247, 82, 0.42) 0);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .hero-scan-list {
   display: grid;
   gap: 0.7rem;
@@ -574,6 +580,24 @@ a, button, summary {
   filter: grayscale(1) contrast(1.05);
   opacity: 0.76;
   mix-blend-mode: multiply;
+}
+
+.trust-strip-large .trust-strip-logos {
+  gap: 1.15rem;
+}
+
+.trust-strip-large .trust-strip-logos img {
+  max-width: 10.625rem;
+  min-height: 1.875rem;
+  max-height: 2.625rem;
+  width: auto;
+  height: auto;
+  opacity: 0.9;
+  filter: grayscale(1) contrast(1.08);
+}
+
+.hero-portrait {
+  object-position: center 12%;
 }
 
 .hero-photo-card {
@@ -909,6 +933,103 @@ a, button, summary {
   text-align: right;
 }
 
+.signal-map-grid,
+.lead-magnet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.signal-map-grid article {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.signal-map-grid article:hover,
+.lead-magnet-card:hover {
+  transform: translateY(-3px);
+}
+
+.signal-map-grid span {
+  display: inline-flex;
+  margin-bottom: 0.8rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.signal-map-grid h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.35rem;
+  font-weight: 850;
+  letter-spacing: -0.05em;
+}
+
+.signal-map-grid p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.lead-magnet-card {
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--ink);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.lead-magnet-card p {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lead-magnet-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 850;
+  letter-spacing: -0.05em;
+}
+
+.lead-magnet-card span {
+  display: block;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.lead-magnet-card a {
+  display: inline-flex;
+  width: max-content;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
 .explore-card {
   display: flex;
   min-height: 17rem;
@@ -1042,8 +1163,8 @@ a, button, summary {
   position: absolute;
   top: -15rem;
   left: 50%;
-  width: 40rem;
-  height: 40rem;
+  width: min(40rem, calc(100vw - 2rem));
+  height: min(40rem, calc(100vw - 2rem));
   border-radius: 50%;
   content: "";
   transform: translateX(-50%);
@@ -1055,6 +1176,19 @@ a, button, summary {
 .cta-gradient .shell {
   position: relative;
   z-index: 1;
+}
+
+.cta-gradient .button-secondary,
+.button-secondary-dark {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.cta-gradient .button-secondary:hover,
+.button-secondary-dark:hover {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 @media (min-width: 48rem) {

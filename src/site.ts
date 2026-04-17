@@ -3,7 +3,7 @@ export const siteConfig = {
   firstName: "Daniel",
   title: "Daniel Johnson | Fractional CMO and Growth Advisor",
   description:
-    "Fractional CMO and growth advisor for post-traction seed to Series A startups that need a repeatable acquisition and GTM system.",
+    "Fractional CMO and growth advisor for post-traction seed to Series B startups that need a repeatable acquisition and GTM system.",
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
@@ -28,6 +28,7 @@ export const navigation = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/advisory", label: "Advisory" },
+  { href: "/mentoring", label: "Mentoring" },
   { href: "/speaking", label: "Speaking" },
   { href: "/insights", label: "Insights" }
 ] as const;

@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+
+const focusAreas = [
+  "Finding the real GTM bottleneck before adding more activity",
+  "Sharper customer, problem, message, and journey decisions",
+  "Prioritising experiments by impact, confidence, and ease",
+  "Turning founder instinct into a cadence the team can keep using"
+];
+
+const sessionShapes = [
+  {
+    title: "Founder session",
+    body: "A focused working session for a specific growth, positioning, acquisition, or funnel decision."
+  },
+  {
+    title: "Mentor sprint",
+    body: "A short sequence of sessions for founders who need accountability while they turn insight into experiments."
+  },
+  {
+    title: "Programme support",
+    body: "Mentoring for accelerator, university, or ecosystem programmes that want practical GTM guidance for cohorts."
+  }
+];
+---
+
+<BaseLayout
+  description="Mentoring sessions with Daniel Johnson for founders who need sharper GTM, customer, and growth decisions."
+  path="/mentoring"
+  title="Mentoring | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div class="reveal flex flex-col gap-6">
+          <span class="service-label">Mentoring</span>
+          <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl">
+            Focused founder support when the next growth decision matters.
+          </h1>
+          <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+            Practical sessions for founders who need a clearer read on the customer, message, funnel, or next experiment.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+            <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Mentoring%20enquiry`}>Ask about mentoring</a>
+          </div>
+        </div>
+
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label">Best fit</p>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-[-0.05em]">
+            Founders who want sharper judgment, not a generic marketing checklist.
+          </h2>
+          <ul class="mt-6 space-y-4">
+            {focusAreas.map((item) => <li class="flex gap-3 text-base leading-7 text-[color:var(--muted)]"><span class="text-[color:var(--accent)]">-&gt;</span>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="section-head">
+        <div class="section-head-grid">
+          <div class="space-y-5">
+            <span class="eyebrow">Session formats</span>
+            <h2 class="section-title">Use the lightest useful level of support.</h2>
+          </div>
+          <p class="lede">
+            The work is direct, practical, and tied to the decision in front of the founder.
+          </p>
+        </div>
+      </div>
+
+      <div class="signal-map-grid reveal">
+        {
+          sessionShapes.map((item) => (
+            <article>
+              <span>Mentoring</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-8 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-7xl">
+          Bring the messy decision. Leave with the next move.
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/68">
+          Useful for founders, accelerators, and teams that need practical GTM judgment in the room.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a mentoring session</a>
+          <a class="button-secondary button-secondary-dark" href={`mailto:${siteConfig.email}?subject=Mentoring%20enquiry`}>Ask about mentoring</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
