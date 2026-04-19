@@ -23,7 +23,7 @@ export const siteConfig = {
   gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.svg",
-  headshot: "/images/daniel-headshot.png"
+  headshot: "/images/daniel-headshot.webp"
 } as const;
 
 export const navigation = [
