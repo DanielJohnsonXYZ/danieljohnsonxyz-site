@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# Serve 404.html with a real 404 status for unmatched routes
+/*  /404.html  404

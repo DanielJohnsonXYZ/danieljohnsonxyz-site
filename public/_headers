@@ -1,0 +1,20 @@
+# Cloudflare Pages custom headers
+
+# Long cache for hashed static assets
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Long cache for images
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Long cache for OG assets
+/og/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Short cache for HTML (with revalidation) so deploys propagate quickly
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()

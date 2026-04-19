@@ -22,7 +22,7 @@ export const siteConfig = {
   companyName: "We Scale Startups",
   gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
-  ogImage: "/og/default.svg",
+  ogImage: "/og/default.png",
   headshot: "/images/daniel-headshot.webp"
 } as const;
 

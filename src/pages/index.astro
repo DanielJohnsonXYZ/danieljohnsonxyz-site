@@ -227,7 +227,7 @@ const deeperLinks = [
             <div class="trust-strip-logos">
               {
                 trustLogos.slice(0, 5).map((item) => (
-                  <img alt={item.alt} height="48" loading="eager" src={item.src} width="180" />
+                  <img alt={item.alt} decoding="async" height="48" loading="lazy" src={item.src} width="180" />
                 ))
               }
             </div>
@@ -249,6 +249,8 @@ const deeperLinks = [
             <img
               alt="Portrait of Daniel Johnson"
               class="aspect-[4/5] w-full object-cover object-top hero-portrait"
+              decoding="async"
+              fetchpriority="high"
               height="960"
               loading="eager"
               src={siteConfig.headshot}

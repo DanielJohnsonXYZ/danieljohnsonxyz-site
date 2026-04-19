@@ -12,17 +12,68 @@ export function buildPersonSchema() {
     description: siteConfig.description,
     url: siteConfig.siteUrl,
     image: absoluteUrl(siteConfig.headshot),
+    email: `mailto:${siteConfig.email}`,
+    telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
       addressLocality: "London",
       addressCountry: "United Kingdom"
     },
     worksFor: {
-      "@type": "Organization",
-      name: siteConfig.companyName,
-      url: siteConfig.companyUrl
+      "@id": `${siteConfig.siteUrl}/#organization`
     },
+    knowsAbout: [
+      "B2B SaaS growth",
+      "Fractional CMO",
+      "Go-to-market strategy",
+      "Startup advisory",
+      "Product-led growth",
+      "Customer research",
+      "Positioning",
+      "Founder-led growth"
+    ],
     sameAs: [siteConfig.linkedin, siteConfig.growthMentor, siteConfig.youtube, siteConfig.companyUrl]
+  };
+}
+
+export function buildOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteConfig.siteUrl}/#organization`,
+    name: siteConfig.companyName,
+    url: siteConfig.companyUrl,
+    founder: {
+      "@id": `${siteConfig.siteUrl}/#person`
+    }
+  };
+}
+
+export function buildWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.siteUrl}/#website`,
+    url: siteConfig.siteUrl,
+    name: siteConfig.name,
+    description: siteConfig.description,
+    publisher: {
+      "@id": `${siteConfig.siteUrl}/#person`
+    },
+    inLanguage: "en-GB"
+  };
+}
+
+export function buildBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url.startsWith("http") ? item.url : absoluteUrl(item.url)
+    }))
   };
 }
 

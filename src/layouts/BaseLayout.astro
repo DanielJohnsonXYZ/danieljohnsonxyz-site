@@ -1,7 +1,7 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import { buildPersonSchema } from "../lib/schema";
+import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { siteConfig } from "../site";
 import "../styles/global.css";
@@ -27,7 +27,12 @@ const {
 const canonical = absoluteUrl(path);
 const imageUrl = absoluteUrl(ogImage);
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
-const allSchemas = [buildPersonSchema(), ...pageSchemas].filter(Boolean);
+const allSchemas = [
+  buildPersonSchema(),
+  buildOrganizationSchema(),
+  buildWebSiteSchema(),
+  ...pageSchemas
+].filter(Boolean);
 const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
 const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -67,12 +72,22 @@ document.querySelectorAll('.reveal').forEach((element) => {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} — Insights`} href="/rss.xml" />
+
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content="en_GB" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={siteConfig.twitterHandle} />
