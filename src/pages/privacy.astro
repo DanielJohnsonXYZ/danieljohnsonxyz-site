@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+import { buildBreadcrumbSchema } from "../lib/schema";
+
+const title = "Privacy Policy | Daniel Johnson";
+const description =
+  "How danieljohnson.xyz collects, uses, and protects personal data. Cookies, analytics, and your rights under UK GDPR.";
+
+const lastUpdated = "20 April 2026";
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Privacy", url: "/privacy" }
+]);
+---
+
+<BaseLayout description={description} title={title} schema={breadcrumb}>
+  <section class="section-space">
+    <div class="shell">
+      <article class="reveal mx-auto max-w-3xl prose-custom">
+        <span class="eyebrow">Privacy</span>
+        <h1 class="mt-6 text-4xl font-extrabold tracking-[-0.05em] md:text-6xl">Privacy Policy</h1>
+        <p class="mt-3 text-sm text-[color:var(--muted)]">Last updated: {lastUpdated}</p>
+
+        <div class="mt-10 space-y-6 text-base leading-8 text-[color:var(--ink)]">
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Who this policy is from</h2>
+            <p>
+              This site (<strong>danieljohnson.xyz</strong>) is operated by Daniel Johnson, a sole trader based in {siteConfig.location}.
+              For questions about this policy or your data, email <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">What we collect</h2>
+            <p>
+              This site collects the minimum personal data needed to run it. Specifically:
+            </p>
+            <ul class="ml-6 list-disc space-y-2">
+              <li><strong>Analytics</strong> &ndash; anonymised page visit data via Google Tag Manager (Google Analytics 4, Hotjar, Microsoft Clarity). This includes approximate location, device type, browser, referring source, and interaction events. IP addresses are anonymised where supported.</li>
+              <li><strong>Email</strong> &ndash; if you email us or submit your email on a linked form, that address is stored to reply and (if you opt in) to send occasional notes via MailerLite.</li>
+              <li><strong>Booking calls</strong> &ndash; booking a call via Calendly is governed by Calendly's privacy policy in addition to this one.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Cookies</h2>
+            <p>
+              This site uses cookies and similar storage for analytics and session state. Essential cookies run by default.
+              Non-essential analytics cookies (GA4, Hotjar, Clarity) fire via Google Tag Manager. You can block all non-essential cookies in your browser settings,
+              or via browser-level tracking protection.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">How we use your data</h2>
+            <ul class="ml-6 list-disc space-y-2">
+              <li>To understand which pages and topics are useful, so the site improves over time.</li>
+              <li>To reply to emails and advisory enquiries.</li>
+              <li>To send, only with your explicit opt-in, occasional notes on growth systems and positioning.</li>
+            </ul>
+            <p>We do not sell personal data.</p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Legal basis (UK GDPR)</h2>
+            <ul class="ml-6 list-disc space-y-2">
+              <li><strong>Consent</strong> &ndash; for non-essential cookies and newsletter subscriptions.</li>
+              <li><strong>Legitimate interest</strong> &ndash; for replying to direct enquiries and maintaining the site.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Third parties with access to your data</h2>
+            <ul class="ml-6 list-disc space-y-2">
+              <li>Google (Analytics, Tag Manager)</li>
+              <li>Hotjar</li>
+              <li>Microsoft (Clarity)</li>
+              <li>MailerLite (only if you opt in to the newsletter)</li>
+              <li>Calendly (only if you book a call)</li>
+              <li>Cloudflare (DNS, caching, and bot protection)</li>
+            </ul>
+            <p>Each has its own privacy policy; we recommend reviewing them if you use the feature in question.</p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Your rights</h2>
+            <p>
+              Under UK GDPR you can ask us to access, correct, delete, or restrict use of your personal data. You can also withdraw consent for anything
+              you previously opted in to. Email <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> to do any of these.
+              You also have the right to complain to the ICO (<a class="underline" href="https://ico.org.uk" rel="noreferrer" target="_blank">ico.org.uk</a>).
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Retention</h2>
+            <p>
+              Enquiry emails are kept until no longer needed. Newsletter subscribers are kept until they unsubscribe. Analytics data is retained per the
+              third-party provider's defaults (GA4 defaults to 14 months).
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold tracking-[-0.03em]">Changes to this policy</h2>
+            <p>
+              If this policy is materially updated, the &ldquo;last updated&rdquo; date above will change. For substantive changes, we will note it on the homepage for a short period.
+            </p>
+          </section>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
