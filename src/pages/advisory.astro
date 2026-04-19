@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildFaqPageSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
 import { siteConfig } from "../site";
 
@@ -82,6 +83,8 @@ const faq = [
 
 <BaseLayout
   description="Advisory with Daniel Johnson: fractional CMO support, growth strategy, and focused commercial systems work for post-traction startups."
+  path="/advisory"
+  schema={buildFaqPageSchema(faq)}
   title="Advisory | Daniel Johnson"
 >
   <section class="section-space">
