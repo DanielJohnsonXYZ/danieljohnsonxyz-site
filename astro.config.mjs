@@ -6,6 +6,12 @@ export default defineConfig({
   site: "https://danieljohnson.xyz",
   trailingSlash: "never",
   integrations: [mdx()],
+  redirects: {
+    "/book-a-call": {
+      status: 302,
+      destination: "https://calendly.com/wescalestartups"
+    }
+  },
   vite: {
     plugins: [tailwindcss()]
   },

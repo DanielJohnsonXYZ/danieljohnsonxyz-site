@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const faq = [
+  {
+    question: "What is a fractional CMO?",
+    answer:
+      "A fractional CMO is a senior marketing leader who owns growth strategy 1–2 days a week. They build the system, hire and manage the team, and operate it until the company is ready for a full-time hire."
+  },
+  {
+    question: "When should an AI or B2B SaaS startup hire a fractional CMO?",
+    answer:
+      "The right window is after product-market fit is signalled — usually Seed to Series B — when there's clear demand but the acquisition engine is inconsistent and the founder is making too many GTM calls by instinct."
+  },
+  {
+    question: "Fractional CMO vs head of marketing vs agency — what's the difference?",
+    answer:
+      "An agency executes tactics. A head of marketing is full-time overhead you may not be ready for. A fractional CMO brings senior judgement and system design for 1–2 days a week while operating cost stays lean."
+  },
+  {
+    question: "What does \"AI-native\" fractional CMO mean?",
+    answer:
+      "AI-native means the GTM stack is rebuilt around generative and agentic workflows — ICP research, message testing, enrichment, content, experiment design — so execution speed is 5× faster than traditional consulting."
+  },
+  {
+    question: "How much does a fractional CMO cost?",
+    answer:
+      "Fractional CMO engagements typically range from $8K–$20K per month depending on scope and commitment. I work on a fixed monthly retainer with a 3-month minimum and a clear exit path."
+  },
+  {
+    question: "How long does a typical engagement last?",
+    answer:
+      "3–9 months. Long enough to diagnose, build, and hand off a running system — not so long that the business becomes dependent on me."
+  }
+];
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Fractional CMO", url: "/fractional-cmo" }
+  ]),
+  buildFaqPageSchema(faq)
+];
+---
+
+<BaseLayout
+  description="An AI-native fractional CMO embeds with post-PMF AI and B2B SaaS startups to build a repeatable GTM system. Here's what the role covers, when to hire, and how it works."
+  path="/fractional-cmo"
+  schema={schemas}
+  title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">The Fractional CMO Model</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+          The fractional CMO model for <span class="hero-accent">AI and B2B SaaS startups.</span>
+        </h1>
+        <p class="hero-subcopy text-xl leading-9 md:text-2xl">
+          A senior GTM operator, embedded 1–2 days a week, building a growth system your team can actually run. No deck.
+          No 12-week strategy phase. Senior judgement applied to AI-accelerated work.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a class="button-accent" href="/book-a-call">Book a free 30-min growth call →</a>
+          <a class="button-link" href="/advisory">See the service page →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="FAQ" intro="Short answers to the questions founders ask before a first call." title="Fractional CMO — common questions." />
+      <div class="mt-8 mx-auto max-w-3xl space-y-3">
+        {
+          faq.map((item) => (
+            <details class="card p-5">
+              <summary class="cursor-pointer text-lg font-bold tracking-[-0.03em]">{item.question}</summary>
+              <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-5xl">
+          Ready to see if the shape fits?
+        </h2>
+        <p class="text-lg leading-8 text-white/72">{siteConfig.availability}</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href="/book-a-call">Book a 30-min growth call →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

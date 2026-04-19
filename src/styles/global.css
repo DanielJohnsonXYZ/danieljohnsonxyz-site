@@ -1570,3 +1570,57 @@ summary::-webkit-details-marker {
     max-width: none;
   }
 }
+
+/* ─── Homepage additions (2026-04-20) ─── */
+.hero-proof-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-proof-bar > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-proof-bar strong {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.hero-proof-bar span {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  .hero-proof-bar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible {
+  border-bottom-color: var(--ink);
+  color: var(--ink);
+}
