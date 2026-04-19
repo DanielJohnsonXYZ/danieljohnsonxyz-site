@@ -56,12 +56,18 @@ stronger than they found it — not another agency retainer.
 ## Core pages
 
 - [Home](${siteConfig.siteUrl}/): positioning, principles, services overview
+- [Fractional CMO](${siteConfig.siteUrl}/fractional-cmo): the fractional CMO offer — scope, engagement model, FAQs
 - [About](${siteConfig.siteUrl}/about): background, working style, principles
-- [Advisory](${siteConfig.siteUrl}/advisory): fractional CMO and advisory engagements for post-traction startups
+- [Advisory](${siteConfig.siteUrl}/advisory): advisory days and short-engagement options
 - [Mentoring](${siteConfig.siteUrl}/mentoring): 1:1 mentoring for founders and heads of growth
 - [Case studies](${siteConfig.siteUrl}/case-studies): anonymised engagement write-ups showing bottleneck, approach, and outcome
 - [Speaking](${siteConfig.siteUrl}/speaking): talks, workshops, and programme sessions
+- [Topics & Talks](${siteConfig.siteUrl}/topics-and-talks): signature speaking topics and past talks
+- [Podcast appearances](${siteConfig.siteUrl}/podcast-appearances): interviews and conversations Daniel has been on
+- [Press & media](${siteConfig.siteUrl}/press-and-media): bios, headshot, and contact details for journalists and hosts
+- [Book Daniel to speak](${siteConfig.siteUrl}/book-daniel-to-speak): speaking enquiry page for events and programmes
 - [Writing](${siteConfig.siteUrl}/writing): essays on AI-native GTM, fractional leadership, and operating-system thinking
+- [Now](${siteConfig.siteUrl}/now): what Daniel is working on this month
 - [Contact](${siteConfig.siteUrl}/contact): booking, email, social
 
 ## Topics Daniel writes about

@@ -28,13 +28,34 @@ export const siteConfig = {
 
 export const navigation = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/advisory", label: "Advisory" },
+  { href: "/fractional-cmo", label: "Fractional CMO" },
+  { href: "/speaking", label: "Speaking" },
   { href: "/mentoring", label: "Mentoring" },
   { href: "/case-studies", label: "Case studies" },
-  { href: "/speaking", label: "Speaking" },
-  { href: "/writing", label: "Writing" }
+  { href: "/writing", label: "Writing" },
+  { href: "/about", label: "About" }
 ] as const;
+
+export const footerNavigation = {
+  workWithMe: [
+    { href: "/fractional-cmo", label: "Fractional CMO" },
+    { href: "/advisory", label: "Advisory days" },
+    { href: "/speaking", label: "Speaking" },
+    { href: "/mentoring", label: "Mentoring" },
+    { href: "/book-a-call", label: "Book a growth call" }
+  ],
+  more: [
+    { href: "/writing", label: "Writing" },
+    { href: "/case-studies", label: "Case studies" },
+    { href: "/topics-and-talks", label: "Topics & Talks" },
+    { href: "/podcast-appearances", label: "Podcast appearances" },
+    { href: "/press-and-media", label: "Press & media" },
+    { href: "/book-daniel-to-speak", label: "Book Daniel to speak" },
+    { href: "/about", label: "About" },
+    { href: "/now", label: "Now" },
+    { href: "/contact", label: "Contact" }
+  ]
+} as const;
 
 export const audienceBands = [
   "Founder-led startups finding their first repeatable growth motion",

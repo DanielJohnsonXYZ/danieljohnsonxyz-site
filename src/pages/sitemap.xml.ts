@@ -15,11 +15,17 @@ export const GET: APIRoute = async () => {
     "/",
     "/about",
     "/advisory",
+    "/fractional-cmo",
     "/mentoring",
     "/case-studies",
     "/speaking",
     "/writing",
     "/contact",
+    "/topics-and-talks",
+    "/podcast-appearances",
+    "/press-and-media",
+    "/book-daniel-to-speak",
+    "/now",
     "/privacy",
     "/terms"
   ];
