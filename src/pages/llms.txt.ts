@@ -17,7 +17,7 @@ export const GET: APIRoute = async () => {
   );
 
   const articleLines = articles
-    .map((a) => `- [${a.data.title}](${siteConfig.siteUrl}/insights/${a.id}): ${a.data.excerpt}`)
+    .map((a) => `- [${a.data.title}](${siteConfig.siteUrl}/writing/${a.id}): ${a.data.excerpt}`)
     .join("\n");
 
   const caseStudies = (await getCollection("caseStudies")).sort(
@@ -61,7 +61,7 @@ stronger than they found it — not another agency retainer.
 - [Mentoring](${siteConfig.siteUrl}/mentoring): 1:1 mentoring for founders and heads of growth
 - [Case studies](${siteConfig.siteUrl}/case-studies): anonymised engagement write-ups showing bottleneck, approach, and outcome
 - [Speaking](${siteConfig.siteUrl}/speaking): talks, workshops, and programme sessions
-- [Insights](${siteConfig.siteUrl}/insights): articles on GTM, fractional leadership, and operating-system thinking
+- [Writing](${siteConfig.siteUrl}/writing): essays on AI-native GTM, fractional leadership, and operating-system thinking
 - [Contact](${siteConfig.siteUrl}/contact): booking, email, social
 
 ## Topics Daniel writes about

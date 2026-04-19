@@ -13,20 +13,21 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
 ---
 
 <BaseLayout
-  description="Selected thinking from Daniel Johnson: native essays and curated resources for founders who need sharper startup growth and GTM decisions."
-  title="Insights | Daniel Johnson"
+  description="Essays by Daniel Johnson on AI-native GTM, growth systems, and why most startup growth advice is wrong — plus a curated archive of talks, profiles, and interviews."
+  path="/writing"
+  title="Writing | Daniel Johnson"
 >
   <section class="section-space">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div class="reveal max-w-4xl space-y-6">
-          <span class="service-label">Insights</span>
+          <span class="service-label">Writing</span>
           <h1 class="text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">
-            Thinking that shapes the advisory work.
+            Essays on AI-native GTM and growth systems.
           </h1>
           <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            A selective hub for founders and operators: native essays written by Daniel, plus a smaller archive of
-            profiles, interviews, talks, and resources that show how the point of view travels.
+            Native essays by Daniel on AI-native GTM, fractional leadership, and operating-system thinking — plus a smaller
+            curated archive of profiles, interviews, talks, and resources that show how the point of view travels.
           </p>
         </div>
 
@@ -60,7 +61,7 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
           <div>
             <p class="card-label">Flagship essay</p>
             <h2 class="mt-4 text-4xl font-extrabold tracking-[-0.06em] md:text-6xl">
-              <a href={`/insights/${flagshipArticle.id}`}>{flagshipArticle.data.title}</a>
+              <a href={`/writing/${flagshipArticle.id}`}>{flagshipArticle.data.title}</a>
             </h2>
             <p class="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">{flagshipArticle.data.description}</p>
           </div>
@@ -70,7 +71,7 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
               <span class="chip">{formatDate(flagshipArticle.data.publishedAt)}</span>
               {flagshipArticle.data.tags.map((tag) => <span class="chip">{tag}</span>)}
             </div>
-            <a class="link-arrow mt-6" href={`/insights/${flagshipArticle.id}`}>Read flagship essay</a>
+            <a class="link-arrow mt-6" href={`/writing/${flagshipArticle.id}`}>Read flagship essay</a>
           </div>
         </div>
       </article>
@@ -84,11 +85,11 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
                 <span class="chip">{formatDate(article.data.publishedAt)}</span>
               </div>
               <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
-                <a href={`/insights/${article.id}`}>{article.data.title}</a>
+                <a href={`/writing/${article.id}`}>{article.data.title}</a>
               </h2>
               <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
               <div class="mt-6">
-                <a class="link-arrow" href={`/insights/${article.id}`}>
+                <a class="link-arrow" href={`/writing/${article.id}`}>
                   Read essay
                 </a>
               </div>

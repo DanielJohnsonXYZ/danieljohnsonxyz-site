@@ -465,14 +465,14 @@ const faq = [
               </p>
               <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{article.data.title}</h3>
               <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{article.data.description}</p>
-              <a class="link-arrow mt-5" href={`/insights/${article.id}`}>Read essay →</a>
+              <a class="link-arrow mt-5" href={`/writing/${article.id}`}>Read essay →</a>
             </article>
           ))
         }
       </div>
 
       <div class="reveal mt-8 flex flex-wrap items-center gap-3">
-        <a class="button-accent" href="/insights">Read all writing →</a>
+        <a class="button-accent" href="/writing">Read all writing →</a>
         <a class="button-link" href={`mailto:${siteConfig.email}?subject=Subscribe%20me%20to%20Growth%20Notes`}>
           Subscribe — one short email a month →
         </a>

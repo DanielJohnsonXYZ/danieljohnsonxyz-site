@@ -33,7 +33,7 @@ export const navigation = [
   { href: "/mentoring", label: "Mentoring" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/speaking", label: "Speaking" },
-  { href: "/insights", label: "Insights" }
+  { href: "/writing", label: "Writing" }
 ] as const;
 
 export const audienceBands = [
