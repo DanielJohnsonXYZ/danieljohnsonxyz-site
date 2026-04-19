@@ -59,6 +59,47 @@ const proof = defineCollection({
   })
 });
 
+const caseStudies = defineCollection({
+  loader: glob({ base: "./src/content/case-studies", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    excerpt: z.string(),
+    publishedAt: z.date(),
+    updatedAt: z.date().optional(),
+    client: z.string(),
+    anonymised: z.boolean().default(false),
+    sector: z.string(),
+    stage: z.string(),
+    engagementMode: z.enum(["Fractional CMO", "Growth advisory", "Focused strategic sprint", "Mentoring"]),
+    timeframe: z.string(),
+    challenge: z.string(),
+    approach: z.string(),
+    outcome: z.string(),
+    metrics: z
+      .array(
+        z.object({
+          label: z.string(),
+          value: z.string(),
+          note: z.string().optional()
+        })
+      )
+      .default([]),
+    quote: z
+      .object({
+        text: z.string(),
+        attribution: z.string(),
+        role: z.string().optional()
+      })
+      .optional(),
+    tags: z.array(z.string()),
+    featured: z.boolean().default(false),
+    order: z.number().default(999),
+    heroAlt: z.string(),
+    ogImage: z.string().optional()
+  })
+});
+
 const testimonials = defineCollection({
   loader: glob({ base: "./src/content/testimonials", pattern: "**/*.json" }),
   schema: z.object({
@@ -77,5 +118,6 @@ export const collections = {
   media,
   talks,
   proof,
-  testimonials
+  testimonials,
+  caseStudies
 };

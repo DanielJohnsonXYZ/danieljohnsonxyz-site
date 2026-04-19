@@ -20,6 +20,14 @@ export const GET: APIRoute = async () => {
     .map((a) => `- [${a.data.title}](${siteConfig.siteUrl}/insights/${a.id}): ${a.data.excerpt}`)
     .join("\n");
 
+  const caseStudies = (await getCollection("caseStudies")).sort(
+    (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+  );
+
+  const caseStudyLines = caseStudies
+    .map((c) => `- [${c.data.title}](${siteConfig.siteUrl}/case-studies/${c.id}): ${c.data.excerpt}`)
+    .join("\n");
+
   const body = `# Daniel Johnson — Fractional CMO and Growth Advisor
 
 > Daniel Johnson is a London-based fractional CMO and growth advisor working with
@@ -51,6 +59,7 @@ stronger than they found it — not another agency retainer.
 - [About](${siteConfig.siteUrl}/about): background, working style, principles
 - [Advisory](${siteConfig.siteUrl}/advisory): fractional CMO and advisory engagements for post-traction startups
 - [Mentoring](${siteConfig.siteUrl}/mentoring): 1:1 mentoring for founders and heads of growth
+- [Case studies](${siteConfig.siteUrl}/case-studies): anonymised engagement write-ups showing bottleneck, approach, and outcome
 - [Speaking](${siteConfig.siteUrl}/speaking): talks, workshops, and programme sessions
 - [Insights](${siteConfig.siteUrl}/insights): articles on GTM, fractional leadership, and operating-system thinking
 - [Contact](${siteConfig.siteUrl}/contact): booking, email, social
@@ -69,6 +78,10 @@ stronger than they found it — not another agency retainer.
 ## Latest articles
 
 ${articleLines}
+
+## Case studies
+
+${caseStudyLines || "- (none published yet)"}
 
 ## How to cite this site
 

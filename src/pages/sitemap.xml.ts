@@ -10,11 +10,13 @@ function urlNode(path: string) {
 
 export const GET: APIRoute = async () => {
   const articles = await getCollection("articles");
+  const caseStudies = await getCollection("caseStudies");
   const staticPaths = [
     "/",
     "/about",
     "/advisory",
     "/mentoring",
+    "/case-studies",
     "/speaking",
     "/insights",
     "/contact",
@@ -26,6 +28,7 @@ export const GET: APIRoute = async () => {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticPaths.map((path) => urlNode(path)).join("")}
 ${articles.map((article) => urlNode(`/insights/${article.id}`)).join("")}
+${caseStudies.map((item) => urlNode(`/case-studies/${item.id}`)).join("")}
 </urlset>`;
 
   return new Response(xml, {
