@@ -5,7 +5,10 @@ import { absoluteUrl } from "../lib/utils";
 export const prerender = true;
 
 function urlNode(path: string) {
-  return `<url><loc>${absoluteUrl(path)}</loc></url>`;
+  // Ensure trailing slash to match Astro's trailingSlash: "always" config
+  // and avoid 308 redirect hops on every crawl hit.
+  const withSlash = path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
+  return `<url><loc>${absoluteUrl(withSlash)}</loc></url>`;
 }
 
 export const GET: APIRoute = async () => {

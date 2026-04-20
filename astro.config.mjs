@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 // Keeping them there means real HTTP status codes instead of meta-refresh stubs.
 export default defineConfig({
   site: "https://danieljohnson.xyz",
-  trailingSlash: "never",
+  trailingSlash: "always",
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()]
