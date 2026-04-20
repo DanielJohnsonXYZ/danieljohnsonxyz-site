@@ -94,6 +94,43 @@ export function buildArticleSchema(article: CollectionEntry<"articles">, pathnam
   };
 }
 
+export function buildCaseStudySchema(caseStudy: CollectionEntry<"caseStudies">, pathname: string) {
+  const canonical = absoluteUrl(pathname);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: caseStudy.data.title,
+    description: caseStudy.data.description,
+    datePublished: caseStudy.data.publishedAt.toISOString(),
+    dateModified: (caseStudy.data.updatedAt ?? caseStudy.data.publishedAt).toISOString(),
+    author: {
+      "@id": `${siteConfig.siteUrl}/#person`
+    },
+    publisher: {
+      "@id": `${siteConfig.siteUrl}/#organization`
+    },
+    mainEntityOfPage: canonical,
+    image: absoluteUrl(caseStudy.data.ogImage ?? siteConfig.ogImage),
+    about: caseStudy.data.sector,
+    keywords: caseStudy.data.tags.join(", ")
+  };
+}
+
+export function buildFaqPageSchema(items: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+}
+
 export function buildTalkSchema(talk: CollectionEntry<"talks">) {
   return {
     "@context": "https://schema.org",

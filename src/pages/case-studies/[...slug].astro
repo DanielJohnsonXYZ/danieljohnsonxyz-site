@@ -1,0 +1,138 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildCaseStudySchema } from "../../lib/schema";
+import { formatDate } from "../../lib/utils";
+import { siteConfig } from "../../site";
+
+export async function getStaticPaths() {
+  const caseStudies = await getCollection("caseStudies");
+  return caseStudies.map((item) => ({
+    params: { slug: item.id },
+    props: { caseStudy: item }
+  }));
+}
+
+const { caseStudy } = Astro.props;
+const { Content } = await render(caseStudy);
+const pathname = `/case-studies/${caseStudy.id}`;
+---
+
+<BaseLayout
+  description={caseStudy.data.description}
+  ogType="article"
+  path={pathname}
+  schema={buildCaseStudySchema(caseStudy, pathname)}
+  title={`${caseStudy.data.title} | Daniel Johnson`}
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="mx-auto grid max-w-6xl gap-10 xl:grid-cols-[1.1fr_0.9fr] xl:items-start">
+        <div class="reveal space-y-6">
+          <a class="link-arrow" href="/case-studies">Back to case studies</a>
+          <span class="eyebrow">Case study</span>
+          <h1 class="text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">{caseStudy.data.title}</h1>
+          <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">{caseStudy.data.description}</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">{caseStudy.data.engagementMode}</span>
+            <span class="chip">{caseStudy.data.sector}</span>
+            <span class="chip">{caseStudy.data.stage}</span>
+            {caseStudy.data.tags.map((tag) => <span class="chip">{tag}</span>)}
+          </div>
+        </div>
+
+        <aside class="reveal card p-6 md:p-8">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">Engagement</p>
+          <div class="mt-6 grid gap-4">
+            <article class="card-muted p-4">
+              <p class="mono text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">Client</p>
+              <p class="mt-2 text-base font-semibold tracking-[-0.03em] text-[color:var(--ink)]">
+                {caseStudy.data.client}{caseStudy.data.anonymised && " (anonymised)"}
+              </p>
+            </article>
+            <article class="card-muted p-4">
+              <p class="mono text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">Timeframe</p>
+              <p class="mt-2 text-base font-semibold tracking-[-0.03em] text-[color:var(--ink)]">{caseStudy.data.timeframe}</p>
+            </article>
+            <article class="card-muted p-4">
+              <p class="mono text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">Published</p>
+              <p class="mt-2 text-base font-semibold tracking-[-0.03em] text-[color:var(--ink)]">
+                {formatDate(caseStudy.data.publishedAt)}
+              </p>
+            </article>
+          </div>
+        </aside>
+      </div>
+
+      <div class="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
+        <article class="reveal card p-6 md:p-7">
+          <p class="card-label">Challenge</p>
+          <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{caseStudy.data.challenge}</p>
+        </article>
+        <article class="reveal card p-6 md:p-7">
+          <p class="card-label">Approach</p>
+          <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{caseStudy.data.approach}</p>
+        </article>
+        <article class="reveal card p-6 md:p-7">
+          <p class="card-label">Outcome</p>
+          <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{caseStudy.data.outcome}</p>
+        </article>
+      </div>
+
+      {caseStudy.data.metrics && caseStudy.data.metrics.length > 0 && (
+        <div class="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {caseStudy.data.metrics.map((metric) => (
+            <article class="reveal card p-5">
+              <p class="mono text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">{metric.label}</p>
+              <p class="mt-3 text-4xl font-extrabold tracking-[-0.07em] text-[color:var(--ink)]">{metric.value}</p>
+              {metric.note && <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">{metric.note}</p>}
+            </article>
+          ))}
+        </div>
+      )}
+
+      <div class="mx-auto max-w-4xl">
+        <article class="reveal prose-wrap mt-12 xl:mt-16">
+          <Content />
+        </article>
+      </div>
+
+      {caseStudy.data.quote && (
+        <div class="mx-auto mt-12 max-w-4xl">
+          <article class="reveal card p-6 md:p-8">
+            <blockquote>
+              <p class="text-2xl font-extrabold leading-[1.2] tracking-[-0.04em] text-[color:var(--ink)]">
+                "{caseStudy.data.quote.text}"
+              </p>
+              <footer class="mt-5 border-t border-[color:var(--line)] pt-5 text-sm text-[color:var(--muted)]">
+                <p class="font-semibold text-[color:var(--ink)]">{caseStudy.data.quote.attribution}</p>
+                {caseStudy.data.quote.role && <p>{caseStudy.data.quote.role}</p>}
+              </footer>
+            </blockquote>
+          </article>
+        </div>
+      )}
+
+      <div class="mx-auto mt-12 max-w-4xl">
+        <div class="reveal card px-6 py-8 md:px-10 md:py-10">
+          <div class="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+            <div class="space-y-3">
+              <span class="eyebrow">Start Here</span>
+              <h2 class="text-3xl font-bold tracking-[-0.04em] md:text-4xl">
+                Have a similar bottleneck?
+              </h2>
+              <p class="max-w-2xl text-base leading-7 text-[color:var(--muted)]">
+                Start with a 30-minute growth diagnosis. You will know whether the right next step is a sprint,
+                advisory rhythm, fractional support, or no engagement at all.
+              </p>
+            </div>
+            <div class="flex flex-col gap-3">
+              <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+              <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

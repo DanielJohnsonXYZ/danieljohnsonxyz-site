@@ -13,7 +13,7 @@ export const GET: APIRoute = async () => {
   );
 
   return rss({
-    title: `${siteConfig.name} — Insights`,
+    title: `${siteConfig.name} — Writing`,
     description:
       "Practical notes on growth systems, positioning, customer research, and go-to-market decisions for post-traction startups.",
     site: siteConfig.siteUrl,
@@ -21,7 +21,7 @@ export const GET: APIRoute = async () => {
       title: article.data.title,
       pubDate: article.data.publishedAt,
       description: article.data.description,
-      link: absoluteUrl(`/insights/${article.id}`),
+      link: absoluteUrl(`/writing/${article.id}`),
       categories: article.data.tags
     })),
     customData: `<language>en-gb</language>`,

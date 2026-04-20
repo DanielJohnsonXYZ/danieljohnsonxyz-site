@@ -2,244 +2,194 @@
 import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildFaqPageSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { siteConfig, trustLogos } from "../site";
+import { navigation, siteConfig, trustLogos } from "../site";
 
-const proof = sortByFeaturedThenOrder(await getCollection("proof")).slice(0, 4);
-const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials")).slice(0, 6);
-const [primaryProof, ...supportingProof] = proof;
-const featuredTestimonial = testimonials.find((item) => item.data.name === "Christian A") ?? testimonials[0];
-const supportingTestimonials = testimonials
-  .filter((item) => item.id !== featuredTestimonial.id)
-  .slice(0, 2);
-const testimonialThemes = testimonials.slice(0, 4);
+// Content data
+const articles = (await getCollection("articles"))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3);
+const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials"));
 
-const fitChips = ["Seed to Series B", "Post-traction", "SaaS, AI, fintech, commerce", "Founder-led teams"];
+// Pick three named, attributed quotes for the homepage
+const homepageTestimonials = [
+  testimonials.find((t) => t.data.name === "Christian A"),
+  testimonials.find((t) => t.data.name === "Hal Zeitlin"),
+  testimonials.find((t) => t.data.name === "James Lethem")
+].filter(Boolean) as typeof testimonials;
 
-const heroStats = [
-  { value: "10+ yrs", label: "Growth operating work" },
-  { value: "2 exits", label: "Founder perspective" },
-  { value: "20+", label: "Startups advised" },
-  { value: "479+", label: "Founder sessions" }
+// Hero
+const eyebrow = "AI-native fractional CMO · For post-PMF AI & B2B SaaS";
+const proofBar = [
+  { value: "£18M+", label: "client revenue" },
+  { value: "£6M+", label: "ad spend managed" },
+  { value: "20+", label: "AI & SaaS startups" },
+  { value: "479+ / 4.97", label: "mentoring sessions rated" }
 ];
 
-const bottlenecks = [
-  "Demand exists, but acquisition is inconsistent.",
-  "Channels are active, but learning is not compounding.",
-  "The founder is still making too many GTM decisions by instinct."
-];
+// Social proof strip
+const affiliationLogos = trustLogos.slice(0, 5);
 
-const pipeline = [
+// "What I do" three cards
+const serviceCards = [
   {
-    step: "01",
-    title: "Diagnose",
-    body: "Answer the four map questions: customer, problem, message, and journey.",
-    example: "Deliverables can include persona notes, JTBD, messaging map, and user journey map."
+    heading: "Fractional CMO",
+    primary: true,
+    strap: "Embedded GTM leadership for post-PMF AI & SaaS startups.",
+    body:
+      "1–2 days a week, running growth end-to-end. I own the strategy, hire the people, and operate the system until you're ready for a full-time leader.",
+    bestFor: "Seed to Series B teams without a senior growth leader — or between full-time hires.",
+    href: "/fractional-cmo",
+    cta: "See Fractional CMO details"
   },
   {
-    step: "02",
-    title: "Prioritise",
-    body: "Rank work by impact, confidence, and ease so the team knows what to do first.",
-    example: "The goal is fewer bets, better evidence, and less founder guesswork."
-  },
-  {
-    step: "03",
-    title: "Create",
-    body: "Turn the priorities into landing pages, offers, creative tests, content, and sales enablement.",
-    example: "Creative becomes a way to learn, not just a way to look busy."
-  },
-  {
-    step: "04",
-    title: "Compound",
-    body: "Build a cadence for learning, reporting, and deciding what to stop doing.",
-    example: "The system should outlive the advisory engagement."
-  }
-];
-
-const outcomeBars = [
-  { label: "Retention lift", value: "+40%", note: "NAVA growth system" },
-  { label: "CAC reduction", value: "-35%", note: "Confidential crypto trading platform" },
-  { label: "LTV gain", value: "+30%", note: "Shoprocket positioning work" },
-  { label: "Churn reduction", value: "-21%", note: "Lifecycle work across ecommerce clients" }
-];
-
-const primarySignalChecks = [
-  "Acquisition quality",
-  "Activation and retention",
-  "Creative signal",
-  "Learning cadence"
-];
-
-const growthCharts = [
-  {
-    id: "01",
-    title: "Acquisition quality",
-    subtitle: "Spend, channel fit, intent, and landing page match."
-  },
-  {
-    id: "02",
-    title: "Activation and retention",
-    subtitle: "The first moments that decide whether growth compounds."
-  },
-  {
-    id: "03",
-    title: "Creative signal",
-    subtitle: "Messaging, proof, offers, and examples tested before scaling."
-  }
-];
-
-const miniCases = [
-  {
-    company: "NAVA",
-    problem: "Mobile app traction needed stronger retention signals.",
-    outcome: "30K+ downloads in eight months and a 40%+ retention lift."
-  },
-  {
-    company: "Shoprocket",
-    problem: "Revenue growth needed better positioning and customer value quality.",
-    outcome: "30% lift in LTV while the business doubled revenue."
-  },
-  {
-    company: "GrowthMentor",
-    problem: "Founders needed practical bottleneck diagnosis, not broad marketing advice.",
-    outcome: "479+ founder sessions with a 4.97/5 average review score."
-  }
-];
-
-const signalCards = [
-  {
-    label: "Customer",
-    question: "Who exactly is this for?",
-    body: "Persona, JTBD, buying trigger, and the actual urgency behind the problem."
-  },
-  {
-    label: "Problem",
-    question: "What pain do we solve?",
-    body: "The cost of inaction, the before/after state, and why now matters."
-  },
-  {
-    label: "Message",
-    question: "How do we speak to them?",
-    body: "Messaging map, proof points, objections, and creative angles."
-  },
-  {
-    label: "Journey",
-    question: "How do they find and choose us?",
-    body: "User journey map, channel path, landing page, nurture, sales handoff."
-  }
-];
-
-const leadMagnets = [
-  {
-    type: "Scorecard",
-    title: "Growth Bottleneck Scorecard",
-    body: "Diagnose whether the issue is customer, message, channel, offer, or cadence.",
-    href: `mailto:${siteConfig.email}?subject=Growth%20Bottleneck%20Scorecard`,
-    label: "Request it"
-  },
-  {
-    type: "Worksheet",
-    title: "Messaging Map Template",
-    body: "Turn customer language into proof, objections, landing page copy, and creative hooks.",
-    href: `mailto:${siteConfig.email}?subject=Messaging%20Map%20Template`,
-    label: "Request it"
-  },
-  {
-    type: "Video",
-    title: "YouTube Field Notes",
-    body: "Short explainers on GTM systems, creative testing, positioning, and founder-led growth.",
-    href: siteConfig.youtube,
-    label: "Watch YouTube",
-    external: true
-  },
-  {
-    type: "Newsletter",
-    title: "Growth Notes",
-    body: "A practical note on sharper growth decisions, customer insight, and better experiments.",
-    href: `mailto:${siteConfig.email}?subject=Subscribe%20me%20to%20Growth%20Notes`,
-    label: "Join the list"
-  }
-];
-
-const deeperLinks = [
-  {
-    eyebrow: "Primary path",
-    title: "Advisory",
-    body: "Fractional CMO, growth advisory, and focused strategic sprints for post-traction teams.",
-    href: "/advisory",
-    cta: "Explore advisory",
-    primary: true
-  },
-  {
-    eyebrow: "Founder support",
-    title: "Mentoring",
-    body: "Focused sessions for founders who need sharper customer, GTM, and growth decisions.",
-    href: "/mentoring",
-    cta: "See mentoring"
-  },
-  {
-    eyebrow: "Authority platform",
-    title: "Speaking",
-    body: "Talk themes, proof points, workshops, and media angles.",
+    heading: "Speaking",
+    strap: "Keynotes and workshops on AI-native growth, GTM, and founder-led distribution.",
+    body:
+      "Real campaigns, not recycled conference material. I speak to founder audiences, accelerator cohorts, and corporate innovation teams.",
+    bestFor: "Conferences, accelerators, founder offsites, podcasts.",
     href: "/speaking",
-    cta: "See speaking topics"
+    cta: "See speaking"
   },
   {
-    eyebrow: "Point of view",
-    title: "Insights",
-    body: "Native essays plus a curated archive of useful interviews, profiles, talks, and growth resources.",
-    href: "/insights",
-    cta: "Read selected thinking"
+    heading: "Mentoring",
+    strap: "1:1 sessions for founders working through a specific growth question.",
+    body:
+      "30- or 60-minute working sessions. 479+ done, rated 4.97/5 on GrowthMentor. Good for founders who need a senior outside brain for an hour.",
+    bestFor: "Pre-seed to Series A founders with a specific question.",
+    href: "/mentoring",
+    cta: "Book a mentoring session"
+  }
+];
+
+// The method — six layers
+const methodLayers = [
+  {
+    title: "GTM systems",
+    body: "ICP, positioning, channel strategy, acquisition engine design."
+  },
+  {
+    title: "Product-led growth",
+    body: "Activation, retention, freemium and trial conversion."
+  },
+  {
+    title: "Experimentation frameworks",
+    body: "Prioritisation, test design, learning loops."
+  },
+  {
+    title: "AI-native workflows",
+    body: "Generative and agentic AI for research, messaging, content, enrichment."
+  },
+  {
+    title: "Founder-led distribution",
+    body: "LinkedIn systems, content-to-pipeline loops."
+  },
+  {
+    title: "Revenue operations",
+    body: "Channel and ICP alignment, pipeline design, reporting cadence."
+  }
+];
+
+// Proof — real outcomes (four cards)
+const outcomeCards = [
+  {
+    metric: "6×",
+    metricSuffix: "app downloads",
+    context: "Rebuilt the GTM and acquisition system for a B2B HealthTech startup.",
+    sector: "HealthTech · AI"
+  },
+  {
+    metric: "35%",
+    metricSuffix: "lower CAC",
+    context: "Redesigned acquisition segmentation and paid channel mix for a crypto trading platform.",
+    sector: "Fintech · Crypto"
+  },
+  {
+    metric: "500+",
+    metricSuffix: "qualified signups",
+    context: "Single campaign at 8.6% CTR for a US B2B fintech.",
+    sector: "Fintech · B2B SaaS"
+  },
+  {
+    metric: "21%",
+    metricSuffix: "less churn",
+    context: "Targeted lifecycle and retention programme for scaling eCommerce brands.",
+    sector: "eCommerce"
+  }
+];
+
+const lifetimeTotals = [
+  "£18M+ revenue generated",
+  "£6M+ ad spend managed",
+  "20+ startups scaled",
+  "£15M+ raised supported (Seed–Series B)"
+];
+
+// FAQ (kept short — full FAQ lives on /fractional-cmo)
+const faq = [
+  {
+    question: "Who do you work with?",
+    answer:
+      "Founders of post-PMF AI and B2B SaaS startups, typically Seed to Series B. US clients remotely from the UK, with occasional in-person days."
+  },
+  {
+    question: "How is a fractional CMO different from an agency?",
+    answer:
+      "An agency executes tactics. I own GTM strategy, build the system, and operate it 1–2 days a week until you're ready for a full-time hire."
+  },
+  {
+    question: "What does \"AI-native\" mean in practice?",
+    answer:
+      "Every engagement uses generative and agentic AI to accelerate ICP research, messaging tests, competitor teardowns, outbound sequences, and content — so you pay for senior judgement, not manual consulting deliverables."
+  },
+  {
+    question: "How soon can we start?",
+    answer:
+      "I'm considering one new fractional client per quarter. The first step is a free 30-minute growth call. I reply to every enquiry within 48 hours."
   }
 ];
 ---
 
 <BaseLayout
-  description={siteConfig.description}
-  title="Daniel Johnson | Fractional CMO and Growth Advisor"
+  description="Fractional CMO for post-PMF AI and B2B SaaS startups. I build repeatable GTM systems, not campaigns. £18M+ in client revenue. Book a free growth call."
+  path="/"
+  schema={buildFaqPageSchema(faq)}
+  title="AI-Native Fractional CMO for SaaS & AI Startups | Daniel Johnson"
 >
+  <!-- 1. Hero -->
   <section class="hero-section section-space">
     <div class="shell">
       <div class="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div class="reveal flex flex-col gap-6">
-          <span class="service-label">Fractional CMO / Growth Advisor</span>
+          <span class="service-label">{eyebrow}</span>
 
           <div class="space-y-5">
-            <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl lg:text-[5.55rem]">
-              I help post-traction startups build a repeatable <span class="hero-accent">GTM system.</span>
+            <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl lg:text-[5.2rem]">
+              Turn growth guesswork into a <span class="hero-accent">system your team can actually run.</span>
             </h1>
             <p class="hero-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
-              For seed-to-Series B teams with demand, but no reliable acquisition rhythm yet. I turn scattered growth
-              activity into <span class="highlight-text">clearer priorities, sharper creative, and a system the team can run.</span>
+              I'm Daniel Johnson — a <a class="highlight-text" href="/fractional-cmo">fractional CMO</a> and GTM operator for AI and B2B SaaS founders.
+              I help post-PMF teams stop running four half-baked growth motions in parallel, and start running two that actually compound.
             </p>
           </div>
 
-          <div class="hero-scan-list" aria-label="Best fit situations">
-            {bottlenecks.map((item) => <span>{item}</span>)}
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            {fitChips.map((item) => <span class="chip chip-quiet">{item}</span>)}
-          </div>
-
-          <div class="trust-strip trust-strip-large" aria-label="Selected institutions and platforms from Daniel Johnson's public footprint">
-            <p class="trust-strip-label">Trusted in rooms with</p>
-            <div class="trust-strip-logos">
-              {
-                trustLogos.slice(0, 5).map((item) => (
-                  <img alt={item.alt} decoding="async" height="48" loading="lazy" src={item.src} width="180" />
-                ))
-              }
-            </div>
+          <div class="hero-proof-bar" aria-label="Daniel's track record at a glance">
+            {
+              proofBar.map((item) => (
+                <div>
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))
+            }
           </div>
 
           <div class="cta-cluster">
-            <div class="flex flex-wrap gap-3">
-              <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-              <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
-              <a class="button-secondary" href="#lead-magnets">Get the scorecards</a>
+            <div class="flex flex-wrap items-center gap-3">
+              <a class="button-accent" href="/book-a-call">Book a free 30-min growth call →</a>
+              <a class="button-link" href="/fractional-cmo">See how I work →</a>
             </div>
-            <p>{siteConfig.bookingNote}</p>
             <p class="availability-line">{siteConfig.availability}</p>
           </div>
         </div>
@@ -247,7 +197,7 @@ const deeperLinks = [
         <div class="reveal">
           <article class="hero-photo-card hero-offer-card">
             <img
-              alt="Portrait of Daniel Johnson"
+              alt="Daniel Johnson — fractional CMO for AI and B2B SaaS startups"
               class="aspect-[4/5] w-full object-cover object-top hero-portrait"
               decoding="async"
               fetchpriority="high"
@@ -257,25 +207,15 @@ const deeperLinks = [
               width="768"
             />
             <div class="hero-authority-panel">
-              <p class="card-label">Best fit</p>
+              <p class="card-label">Taking on new clients</p>
               <h2 class="mt-2 text-2xl font-extrabold tracking-[-0.05em]">
-                Teams that have traction, but need senior GTM judgment before hiring the next full-time leader.
+                1 new fractional CMO engagement opening for Q3 2026.
               </h2>
               <ul class="mt-5 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
-                <li>Typically seed to Series B</li>
-                <li>Useful for acquisition, activation, positioning, and growth operating rhythm</li>
-                <li>WSS is context; this is Daniel's personal advisory practice</li>
+                <li>Embedded 1–2 days a week</li>
+                <li>Seed to Series B AI / B2B SaaS</li>
+                <li>Starts with a free 30-minute growth call</li>
               </ul>
-              <div class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[color:var(--line)]">
-                {
-                  heroStats.map((item) => (
-                    <div class="bg-[color:var(--surface)] p-4">
-                      <p class="text-2xl font-extrabold tracking-[-0.07em]">{item.value}</p>
-                      <p class="mt-1 text-xs leading-5 text-[color:var(--muted)]">{item.label}</p>
-                    </div>
-                  ))
-                }
-              </div>
             </div>
           </article>
         </div>
@@ -283,264 +223,283 @@ const deeperLinks = [
     </div>
   </section>
 
-  <section class="dark-section section-space" id="proof">
+  <!-- 2. Social proof strip -->
+  <section class="section-space pt-0">
     <div class="shell">
-      <SectionHeader
-        eyebrow="Proof"
-        intro="A cold visitor should not have to infer the credibility. The numbers, rooms, and founder feedback sit together here."
-        title="Results and examples."
-      />
-
-      <div class="proof-grid mt-10">
-        <article class="reveal proof-primary proof-primary-filled card p-6 md:p-8">
-          <div class="proof-primary-grid">
-            <div>
-              <p class="card-label text-white/55">Primary signal</p>
-              <p class="mt-5 text-6xl font-extrabold leading-none tracking-[-0.08em] text-white md:text-8xl">
-                {primaryProof.data.metric}
-              </p>
-              <h2 class="mt-6 text-3xl font-extrabold tracking-[-0.05em] text-white md:text-4xl">{primaryProof.data.title}</h2>
-              <p class="mt-4 max-w-2xl text-base leading-8 text-white/68">{primaryProof.data.summary}</p>
-            </div>
-            <div class="mini-dashboard" aria-label="Primary growth signals tracked">
-              {
-                primarySignalChecks.map((item) => (
-                  <div>
-                    <span>{item}</span>
-                    <strong>Active</strong>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </article>
-
-        <div class="grid gap-4">
+      <div class="trust-strip trust-strip-large" aria-label="Selected affiliations and platforms from Daniel's public footprint">
+        <p class="trust-strip-label">Mentor / advisor affiliations</p>
+        <div class="trust-strip-logos">
           {
-            supportingProof.map((item) => (
-              <article class="reveal proof-secondary card p-5">
-                <p class="text-4xl font-extrabold tracking-[-0.07em] text-white">{item.data.metric}</p>
-                <h3 class="mt-3 text-lg font-bold tracking-[-0.04em] text-white/90">{item.data.title}</h3>
-                <p class="mt-2 text-sm leading-6 text-white/60">{item.data.summary}</p>
-              </article>
+            affiliationLogos.map((item) => (
+              <img alt={item.alt} decoding="async" height="48" loading="lazy" src={item.src} width="180" />
             ))
           }
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="case-study-strip mt-8">
+  <!-- 3. Problem statement -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-6xl">
+          You've built something people pay for. <span class="hero-accent">So why does growth still feel like guessing?</span>
+        </h2>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          You've got a product. You've got paying customers. You've got traction you can point to in a fundraising deck.
+        </p>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          What you don't have is a repeatable way to turn any of that into pipeline. You've tried paid. You've tried
+          content. You've tried hiring a generalist marketer. Something worked, most of it didn't, and you're not sure why.
+        </p>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          You don't need more tactics. You need someone senior who can walk in, see the whole system at once, and tell you
+          — with specifics — which two levers actually matter for your company right now.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. What I do -->
+  <section class="section-space pt-0" id="services">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="What I do"
+        intro="Three ways to work with me. Start wherever the shape fits."
+        title="What I actually do."
+      />
+
+      <div class="explore-grid mt-10">
         {
-          miniCases.map((item) => (
-            <article class="reveal case-study-card">
-              <p class="card-label text-white/45">{item.company}</p>
-              <h3>{item.problem}</h3>
-              <p>{item.outcome}</p>
+          serviceCards.map((card) => (
+            <article class:list={["explore-card card p-6 md:p-8", card.primary && "explore-card-primary"]}>
+              <p class="card-label">{card.primary ? "Primary path" : "Also offered"}</p>
+              <h3 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">{card.heading}</h3>
+              <p class="mt-2 text-base font-semibold leading-7 tracking-[-0.02em]">{card.strap}</p>
+              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{card.body}</p>
+              <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm leading-6 text-[color:var(--muted)]">
+                <strong class="font-semibold text-[color:var(--ink)]">Best for:</strong> {card.bestFor}
+              </p>
+              <a class="link-arrow mt-6" href={card.href}>{card.cta}</a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. The method -->
+  <section class="dark-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl text-center">
+        <span class="eyebrow justify-center text-white/60">The method</span>
+        <h2 class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-6xl">
+          I don't sell services. <span class="hero-accent">I build systems.</span>
+        </h2>
+      </div>
+
+      <div class="reveal mx-auto mt-10 max-w-3xl space-y-5 text-lg leading-8 text-white/72">
+        <p>Most growth consultants arrive, ship a deck, and disappear. That's not how I work.</p>
+        <p>
+          Every engagement builds the same thing — a growth system. Not a campaign. Not a funnel. A repeatable architecture
+          your team can run after I'm gone.
+        </p>
+        <p class="text-sm uppercase tracking-[0.16em] text-white/50">Six layers, tailored to where you are</p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          methodLayers.map((layer, index) => (
+            <article class="reveal card p-6">
+              <p class="card-label text-white/55">0{index + 1}</p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em] text-white">{layer.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-white/68">{layer.body}</p>
             </article>
           ))
         }
       </div>
 
-      <div class="growth-chart-grid reveal">
+      <div class="reveal mt-10 text-center">
+        <p class="text-base leading-8 text-white/68">
+          If "growth system" sounds vague, that's fine — I'll show you exactly what it looks like on a 30-minute call.
+        </p>
+        <div class="mt-6 flex justify-center">
+          <a class="button-accent" href="/book-a-call">Book a free 30-min growth call →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Why AI-native matters -->
+  <section class="section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-5xl space-y-6">
+        <span class="eyebrow">Category</span>
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
+          There's a gap between AI-curious and AI-native.
+          <span class="hero-accent">Most fractional CMOs are on the wrong side of it.</span>
+        </h2>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          AI-curious teams use ChatGPT to draft blog posts. AI-native teams rebuild their growth stack around generative
+          and agentic workflows — research, message testing, prospect enrichment, campaign iteration, content at scale —
+          and ship 5× faster because of it.
+        </p>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          I work on the <a class="highlight-text" href="/fractional-cmo">AI-native side</a>. Every engagement I run uses AI
+          to cut the execution time on the work that used to eat weeks: ICP research, positioning tests, competitor
+          teardowns, outbound sequences, SEO-brief generation, experiment design.
+        </p>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          That means you're not paying a fractional CMO for slow, manual consulting deliverables. You're paying for senior
+          judgement applied to work that's already been accelerated by the tools.
+        </p>
+        <p>
+          <a class="link-arrow" href="/writing">Read: What AI-native GTM actually means →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Proof — real outcomes -->
+  <section class="dark-section section-space" id="proof">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Proof"
+        intro="The short list — full case studies live at We Scale Startups."
+        title="Real campaigns. Real numbers. Real attribution."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {
-          growthCharts.map((chart) => (
-            <article class="growth-chart" aria-label={chart.title}>
-              <div class="chart-copy">
-                <p class="chart-kicker">{chart.id}</p>
-                <h3>{chart.title}</h3>
-                <p>{chart.subtitle}</p>
-              </div>
-              <div class="chart-visual">
-                <svg viewBox="0 0 320 128" role="img" aria-label={`${chart.title} trend chart`}>
-                  <path class="chart-grid" d="M12 100H308M12 68H308M12 36H308"></path>
-                  <path class="chart-line-muted" d="M18 96C50 92 60 82 88 84C118 86 132 67 160 66C190 65 204 50 232 49C260 48 278 32 304 24"></path>
-                  <path class="chart-line" d="M18 108C49 100 62 94 86 93C114 92 130 75 157 70C184 65 200 51 226 47C256 42 276 27 304 17"></path>
-                  <circle cx="304" cy="17" r="6"></circle>
-                </svg>
-              </div>
+          outcomeCards.map((card) => (
+            <article class="reveal card p-6">
+              <p class="text-5xl font-extrabold tracking-[-0.07em] text-white">{card.metric}</p>
+              <p class="mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-white/65">{card.metricSuffix}</p>
+              <p class="mt-5 text-sm leading-7 text-white/70">{card.context}</p>
+              <p class="mt-5 border-t border-white/[0.08] pt-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/45">
+                {card.sector}
+              </p>
             </article>
           ))
         }
       </div>
 
-      <div class="mt-8 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label text-white/55">Outcome pattern</p>
-          <p class="mt-4 text-4xl font-extrabold tracking-[-0.07em] text-white md:text-5xl">Better signal, less waste.</p>
-          <p class="mt-3 text-base leading-8 text-white/68">
-            The point is not more activity. It is sharper learning across the parts of growth that actually decide revenue quality.
-          </p>
-          <dl class="metric-list mt-8">
-            {
-              outcomeBars.map((item) => (
-                <div>
-                  <dt>{item.label}</dt>
-                  <dd>
-                    <strong>{item.value}</strong>
-                    <span>{item.note}</span>
-                  </dd>
-                </div>
-              ))
-            }
-          </dl>
-        </article>
-
-        <article class="reveal testimonial-feature card p-6 md:p-8">
-          <p class="card-label text-white/55">Founder feedback</p>
-          <blockquote class="mt-5">
-            <p class="text-3xl font-extrabold leading-[1.12] tracking-[-0.06em] text-white md:text-5xl">
-              "{featuredTestimonial.data.quote}"
-            </p>
-            <footer class="mt-6 border-t border-white/[0.08] pt-5 text-sm text-white/65">
-              <p class="font-semibold text-white">{featuredTestimonial.data.name}</p>
-              <p>{featuredTestimonial.data.role} &bull; {featuredTestimonial.data.organisation}</p>
-              <p class="mt-2 text-xs text-white/45">GrowthMentor founder session; company not public.</p>
-            </footer>
-          </blockquote>
-        </article>
+      <div class="reveal mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm font-semibold uppercase tracking-[0.12em] text-white/60">
+        {lifetimeTotals.map((item) => <span>{item}</span>)}
       </div>
 
-      <div class="mt-5 grid gap-5 md:grid-cols-2">
+      <div class="reveal mt-6 text-center">
+        <a class="link-arrow" href="/case-studies">See full case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Testimonials -->
+  <section class="section-space">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Testimonials"
+        intro="Real quotes from founders I've mentored and worked with."
+        title="What founders say."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
         {
-          supportingTestimonials.map((item) => (
-            <blockquote class="reveal testimonial-compact card p-6">
-              <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white/88">"{item.data.quote}"</p>
-              <footer class="mt-5 text-sm text-white/55">
-                <p class="font-semibold text-white/85">{item.data.name}</p>
-                <p>{item.data.role} &bull; {item.data.organisation}</p>
+          homepageTestimonials.map((item) => (
+            <blockquote class="reveal card p-6 md:p-7">
+              <p class="text-lg font-semibold leading-8 tracking-[-0.03em]">
+                "{item.data.quote}"
+              </p>
+              <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
+                <p class="font-semibold">{item.data.name}</p>
+                <p class="text-[color:var(--muted)]">{item.data.role} &bull; {item.data.organisation}</p>
               </footer>
             </blockquote>
           ))
         }
       </div>
-
-      <div class="testimonial-wall reveal">
-        {
-          testimonialThemes.map((item) => {
-            const initials = item.data.name
-              .split(" ")
-              .map((part) => part[0])
-              .join("")
-              .slice(0, 2)
-              .toUpperCase();
-
-            return (
-              <article class="testimonial-card">
-                <span class="testimonial-avatar" aria-hidden="true">{initials}</span>
-                <p>"{item.data.quote}"</p>
-                <div class="testimonial-meta">
-                  <strong>{item.data.name}</strong>
-                  <span>{item.data.role} &bull; {item.data.organisation}</span>
-                </div>
-              </article>
-            );
-          })
-        }
-        <details class="testimonial-card testimonial-more">
-          <summary>View all testimonial themes</summary>
-          <p>
-            Founder feedback clusters around clearer prioritisation, sharper landing-page decisions, better customer language,
-            and a calmer operating rhythm.
-          </p>
-        </details>
-      </div>
     </div>
   </section>
 
-  <section class="section-space" id="signal-map">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Unique method"
-        intro="A practical diagnostic for turning scattered growth activity into clearer customer, message, journey, and prioritisation decisions."
-        title="The Growth Signal Map."
-      />
-
-      <div class="signal-map-grid reveal">
-        {
-          signalCards.map((item) => (
-            <article>
-              <span>{item.label}</span>
-              <h3>{item.question}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="pipeline-card reveal mt-10">
-        {
-          pipeline.map((item, index) => (
-            <article class="pipeline-step">
-              {index < pipeline.length - 1 && <span aria-hidden="true" class="pipeline-arrow">-&gt;</span>}
-              <p class="pipeline-num">{item.step}</p>
-              <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{item.body}</p>
-              <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm font-semibold leading-6 tracking-[-0.02em]">
-                {item.example}
-              </p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0" id="lead-magnets">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Resources"
-        intro="Use these prompts to find the bottleneck, sharpen the message, and turn customer insight into better experiments."
-        title="Lead magnets and creative signals."
-      />
-
-      <div class="lead-magnet-grid reveal">
-        {
-          leadMagnets.map((item) => (
-            <article class="lead-magnet-card">
-              <p class="resource-type">{item.type}</p>
-              <h3>{item.title}</h3>
-              <span class="resource-copy">{item.body}</span>
-              <a class="resource-link" href={item.href} rel={item.external ? "noreferrer" : undefined} target={item.external ? "_blank" : undefined}>
-                {item.label}
-              </a>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
+  <!-- 9. About preview -->
   <section class="section-space pt-0">
     <div class="shell">
-      <div class="reveal explore-grid">
-        {
-          deeperLinks.map((item) => (
-            <article class:list={["explore-card card p-6 md:p-7", item.primary && "explore-card-primary"]}>
-              <p class="card-label">{item.eyebrow}</p>
-              <h2 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">{item.title}</h2>
-              <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">{item.body}</p>
-              <a class="link-arrow mt-6" href={item.href}>{item.cta}</a>
-            </article>
-          ))
-        }
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="eyebrow">About</span>
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">About Daniel.</h2>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          I've spent 10+ years in growth — as a co-founder, an embedded operator, and a fractional CMO. I've worked with
+          20+ startups across AI, B2B SaaS, fintech, and eCommerce. I've co-founded two companies, one in mental health
+          tech (eQuoo) and one in eCommerce.
+        </p>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          I mentor founders through Google for Startups, Techstars, and GrowthMentor (479+ sessions, 4.97/5 rating). I've
+          lectured at Cambridge Judge Business School and Imperial College London, and delivered growth workshops at
+          Google Launchpad programmes across the UK, Europe, and Africa. I sit on the board of BASIC and live in the UK —
+          I work with US clients remotely, with occasional in-person days.
+        </p>
+        <p>
+          <a class="link-arrow" href="/about">Read more about Daniel →</a>
+        </p>
       </div>
     </div>
   </section>
 
+  <!-- 10. Writing -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Writing"
+        intro="Essays on AI-native GTM, growth systems, and why most startup growth advice is wrong."
+        title="Writing."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          articles.map((article) => (
+            <article class="reveal card p-6 md:p-7">
+              <p class="card-label">
+                {article.data.publishedAt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                {article.data.readingTime ? ` · ${article.data.readingTime}` : ""}
+              </p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{article.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{article.data.description}</p>
+              <a class="link-arrow mt-5" href={`/writing/${article.id}`}>Read essay →</a>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="reveal mt-8 flex flex-wrap items-center gap-3">
+        <a class="button-accent" href="/writing">Read all writing →</a>
+        <a class="button-link" href={`mailto:${siteConfig.email}?subject=Subscribe%20me%20to%20Growth%20Notes`}>
+          Subscribe — one short email a month →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Final CTA -->
   <section class="cta-gradient section-space">
     <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-8 text-center">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
         <span class="eyebrow justify-center text-white/60">Next step</span>
         <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-7xl">
-          Start with the bottleneck. <span class="hero-accent">Then build the system.</span>
+          Book a free 30-min growth call.
         </h2>
-        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/68">
-          {siteConfig.bookingNote} Low-friction, practical, and useful even if the next step is not an engagement.
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          We'll spend 30 minutes on your specific situation — no pitch, no deck, no trying-to-close. You'll leave with a
+          clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll
+          tell you what I'd do instead and point you to the right operator, agency, or mentor.
         </p>
+        <p class="text-sm font-semibold text-white/70">I reply to every enquiry within 48 hours.</p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-          <a class="button-secondary button-secondary-dark" href={`mailto:${siteConfig.email}?subject=Speaking%20and%20media%20enquiry`}>Speaking and media enquiries</a>
+          <a class="button-accent" href="/book-a-call">Book a 30-min call →</a>
         </div>
-        <p class="text-sm font-semibold text-white/60">{siteConfig.availability}</p>
+        <p class="text-sm text-white/60">
+          Prefer email first? <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </p>
       </div>
     </div>
   </section>

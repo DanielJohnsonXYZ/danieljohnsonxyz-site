@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { sortByFeaturedThenOrder } from "../lib/utils";
+import { siteConfig } from "../site";
+
+const media = sortByFeaturedThenOrder(await getCollection("media"));
+const interviews = media.filter((item) => item.data.kind === "Interview");
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Podcast Appearances", url: "/podcast-appearances" }
+]);
+---
+
+<BaseLayout
+  description="Selected podcast appearances and interviews with Daniel Johnson on AI-native growth, fractional leadership, and startup GTM."
+  path="/podcast-appearances"
+  schema={schema}
+  title="Podcast Appearances | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">Podcast Appearances</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+          Podcasts and interviews.
+        </h1>
+        <p class="hero-subcopy text-xl leading-9 md:text-2xl">
+          Selected conversations on AI-native growth, fractional CMO work, founder-led distribution, and how I think about
+          GTM for post-PMF startups.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation`}>Invite me on your show →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      {interviews.length > 0 ? (
+        <>
+          <SectionHeader eyebrow="Interviews" intro="A short, curated list." title="Selected appearances." />
+          <div class="mt-10 grid gap-5 md:grid-cols-2">
+            {
+              interviews.map((item) => (
+                <article class="reveal card p-6 md:p-7">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="chip">{item.data.source}</span>
+                    <span class="chip">{item.data.yearLabel}</span>
+                  </div>
+                  <h3 class="mt-4 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+                  <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+                  <a class="link-arrow mt-5" href={item.data.href} rel="noreferrer" target="_blank">Listen / watch →</a>
+                </article>
+              ))
+            }
+          </div>
+        </>
+      ) : (
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <p class="text-lg leading-8 text-[color:var(--muted)]">
+            Recent appearances coming soon. In the meantime, reach out at <a class="highlight-text" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> to invite me on your show.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card p-8 md:p-10 text-center space-y-4">
+        <span class="eyebrow justify-center">Pitch angle</span>
+        <h2 class="text-3xl font-extrabold tracking-[-0.05em] md:text-4xl">I'm good on:</h2>
+        <p class="mx-auto max-w-2xl text-base leading-8 text-[color:var(--muted)]">
+          AI-native GTM · the fractional CMO model · growth systems vs. tactics · founder-led distribution ·
+          experimentation frameworks · what actually works for post-PMF B2B SaaS and AI startups.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation`}>Email me →</a>
+          <a class="button-link" href="/press-and-media">See press & media assets →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

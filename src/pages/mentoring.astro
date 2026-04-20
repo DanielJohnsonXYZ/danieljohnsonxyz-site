@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildFaqPageSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
 const focusAreas = [
@@ -23,11 +25,47 @@ const sessionShapes = [
     body: "Mentoring for accelerator, university, or ecosystem programmes that want practical GTM guidance for cohorts."
   }
 ];
+
+const faq = [
+  {
+    question: "Who is mentoring a good fit for?",
+    answer: "Mentoring is best for early-stage founders, solo operators, and product leads who already have momentum but want a sharper read on customer, message, funnel, or the next experiment. It suits people who want senior GTM judgment in the room for a specific decision, rather than a long engagement."
+  },
+  {
+    question: "How is mentoring different from advisory or fractional CMO work?",
+    answer: "Mentoring is lighter-touch and session-led. The founder owns the decision; Daniel provides direct senior input, challenges assumptions, and helps reframe the problem. Advisory adds a repeating cadence across growth decisions. Fractional CMO is embedded leadership across GTM, positioning, reporting, and hiring. Mentoring is the lightest useful level of support."
+  },
+  {
+    question: "What happens in a typical mentoring session?",
+    answer: "The founder brings the real, messy decision — a positioning call, a funnel drop-off, a channel choice, a narrative problem. The session is a working conversation that ends with a clearer read on the customer, a sharper decision, and a concrete next move. It is practical, not theoretical."
+  },
+  {
+    question: "How long are sessions and how are they structured?",
+    answer: "Most founder sessions are 45-60 minutes. Mentor sprints run as a short sequence of 3-5 sessions over a few weeks for founders who want accountability while turning insight into experiments. Programme mentoring is scoped per cohort."
+  },
+  {
+    question: "Does mentoring work for accelerators and university programmes?",
+    answer: "Yes. Daniel mentors for accelerators, university entrepreneurship programmes, and ecosystem initiatives that want practical GTM guidance for founder cohorts. Engagements are scoped around cohort stage, format, and desired outcomes."
+  },
+  {
+    question: "How do I know if I need mentoring instead of advisory?",
+    answer: "Choose mentoring if you have a specific decision or bottleneck and want a sharp working session on it. Choose advisory if you want a repeating rhythm across multiple growth decisions. Choose fractional CMO support if you need senior marketing leadership embedded in the team. If it is unclear, the 30-minute diagnosis call is the right starting point."
+  },
+  {
+    question: "What does a mentoring engagement cost?",
+    answer: "Pricing depends on session count, cadence, and whether the engagement is with an individual founder, a company, or a programme. Daniel shares a direct quote after the initial diagnosis call once the scope and format are clear."
+  },
+  {
+    question: "How do I start?",
+    answer: "Book a 30-minute diagnosis call. We identify the current growth or decision bottleneck, discuss the context, and decide whether a single mentoring session, a mentor sprint, or a different engagement is the best next step. It is a diagnosis, not a pitch."
+  }
+];
 ---
 
 <BaseLayout
   description="Mentoring sessions with Daniel Johnson for founders who need sharper GTM, customer, and growth decisions."
   path="/mentoring"
+  schema={buildFaqPageSchema(faq)}
   title="Mentoring | Daniel Johnson"
 >
   <section class="hero-section section-space">
@@ -82,6 +120,26 @@ const sessionShapes = [
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="FAQ"
+        intro="A few practical questions founders and programme teams usually ask before booking a session."
+        title="Common questions."
+      />
+      <div class="faq-stack mt-10">
+        {
+          faq.map((item, index) => (
+            <details class="reveal faq-item card p-6 md:p-7" open={index === 0}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
           ))
         }
       </div>

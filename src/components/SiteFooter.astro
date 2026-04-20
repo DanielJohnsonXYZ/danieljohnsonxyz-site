@@ -1,24 +1,24 @@
 ---
-import { navigation, siteConfig } from "../site";
+import { footerNavigation, siteConfig } from "../site";
 ---
 
 <footer class="dark-section pb-10 pt-20">
   <div class="shell">
     <div class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 md:p-12">
-      <div class="grid gap-10 md:grid-cols-[1.4fr_0.9fr]">
+      <div class="grid gap-10 md:grid-cols-3">
         <div class="flex flex-col gap-6">
-          <span class="eyebrow">Stay in Touch</span>
+          <span class="eyebrow">Stay in touch</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
-            Fractional CMO support, growth advisory, and speaking for startup teams.
+            {siteConfig.name}
           </h2>
-          <p class="max-w-2xl text-base leading-7 text-white/50">
-            I work with a limited number of companies at a time and take selected speaking,
-            workshop, and advisory conversations where the fit is strong.
+          <p class="max-w-md text-base leading-7 text-white/50">
+            AI-native fractional CMO for post-PMF AI and B2B SaaS startups. I build repeatable
+            GTM systems, not campaigns.
           </p>
-          <p class="max-w-2xl text-sm font-semibold leading-6 text-white/75">{siteConfig.availability}</p>
+          <p class="max-w-md text-sm font-semibold leading-6 text-white/75">{siteConfig.availability}</p>
           <div class="flex flex-wrap gap-3">
-            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
-              {siteConfig.bookingLabel}
+            <a class="button-accent" href="/book-a-call">
+              Book a growth call
             </a>
             <a class="button-secondary" href={`mailto:${siteConfig.email}`}>
               Email Daniel
@@ -26,38 +26,50 @@ import { navigation, siteConfig } from "../site";
           </div>
         </div>
 
-        <div class="grid gap-8 sm:grid-cols-2">
-          <div class="space-y-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">Navigation</p>
-            <ul class="space-y-3">
-              {
-                navigation.map((item) => (
-                  <li>
-                    <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
-                      {item.label}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-          <div class="space-y-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">Connect</p>
-            <ul class="space-y-3 text-sm text-white/50">
-              <li>{siteConfig.location}</li>
-              <li><a class="hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
-              <li><a class="hover:text-white" href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn</a></li>
-              <li><a class="hover:text-white" href={siteConfig.youtube} rel="noreferrer" target="_blank">YouTube</a></li>
-              <li><a class="hover:text-white" href={siteConfig.companyUrl} rel="noreferrer" target="_blank">We Scale Startups</a></li>
-            </ul>
-          </div>
+        <div class="space-y-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">Work with me</p>
+          <ul class="space-y-3">
+            {
+              footerNavigation.workWithMe.map((item) => (
+                <li>
+                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">More</p>
+          <ul class="space-y-3">
+            {
+              footerNavigation.more.map((item) => (
+                <li>
+                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
 
+      <div class="mt-10 grid gap-4 border-t border-white/[0.06] pt-6 text-sm text-white/50 md:grid-cols-[1.2fr_0.8fr]">
+        <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <li>{siteConfig.location}</li>
+          <li><a class="hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+          <li><a class="hover:text-white" href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn</a></li>
+          <li><a class="hover:text-white" href={siteConfig.youtube} rel="noreferrer" target="_blank">YouTube</a></li>
+          <li><a class="hover:text-white" href={siteConfig.companyUrl} rel="noreferrer" target="_blank">We Scale Startups</a></li>
+        </ul>
+      </div>
+
       <div class="mt-8 border-t border-white/[0.06] pt-6 flex flex-col gap-3 text-sm text-white/30 md:flex-row md:items-center md:justify-between">
-        <p>Practical growth notes, speaking, mentoring, and advisory work for teams turning traction into a repeatable GTM system.</p>
+        <p>&copy; {new Date().getFullYear()} {siteConfig.name}. Practical growth thinking for AI-native founders.</p>
         <nav aria-label="Legal" class="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.12em]">
-          <a class="hover:text-white/80" href="/contact">Contact</a>
           <a class="hover:text-white/80" href="/privacy">Privacy</a>
           <a class="hover:text-white/80" href="/terms">Terms</a>
           <span class="font-semibold">{siteConfig.canonicalHost}</span>
