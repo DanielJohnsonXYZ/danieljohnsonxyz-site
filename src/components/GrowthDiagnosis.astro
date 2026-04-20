@@ -1,0 +1,328 @@
+---
+// Growth Diagnosis — 5-question interactive quiz.
+// Renders static markup + a small island of vanilla JS to score answers
+// client-side. No network calls, no storage, no analytics PII — only a
+// non-identifying data-cta attribute on the final CTA for GTM tracking.
+//
+// Scoring model: each question picks one of five "levers". The lever
+// with the highest count at the end is the diagnosed bottleneck.
+// Tie-breaker is the first lever hit (natural array order).
+//
+// The five levers match the brief:
+//   pipeline     — no repeatable pipeline
+//   conversion   — poor conversion / funnel leaks
+//   messaging    — weak messaging / positioning
+//   founder      — founder-bottlenecked sales
+//   spend        — inefficient spend / unclear attribution
+
+import { ctas } from "../site";
+
+type LeverKey = "pipeline" | "conversion" | "messaging" | "founder" | "spend";
+
+interface Question {
+  id: string;
+  prompt: string;
+  answers: { label: string; lever: LeverKey }[];
+}
+
+const questions: Question[] = [
+  {
+    id: "q1",
+    prompt: "Where does most of today's revenue actually come from?",
+    answers: [
+      { label: "Inbound or founder's network — one-off, hard to predict", lever: "founder" },
+      { label: "Paid channels, but payback is unclear", lever: "spend" },
+      { label: "A mix of channels, but nothing is repeatable yet", lever: "pipeline" },
+      { label: "One channel that worked, now flattening out", lever: "pipeline" }
+    ]
+  },
+  {
+    id: "q2",
+    prompt: "What happens when a prospect lands on your site or signs up?",
+    answers: [
+      { label: "Too many drop off before converting", lever: "conversion" },
+      { label: "They convert but churn quickly afterwards", lever: "conversion" },
+      { label: "They stall because the message doesn't match what they need", lever: "messaging" },
+      { label: "The funnel mostly works — we just don't have enough traffic in it", lever: "pipeline" }
+    ]
+  },
+  {
+    id: "q3",
+    prompt: "How clearly can the team describe who you're for, in one sentence?",
+    answers: [
+      { label: "Not clearly — the ICP is still loose", lever: "messaging" },
+      { label: "Clearly on a call, not on the website", lever: "messaging" },
+      { label: "Clearly, but the value prop doesn't land with that ICP", lever: "messaging" },
+      { label: "Pretty clearly, but we're targeting too many segments at once", lever: "messaging" }
+    ]
+  },
+  {
+    id: "q4",
+    prompt: "Who closes most deals?",
+    answers: [
+      { label: "The founder. Personally. On every call.", lever: "founder" },
+      { label: "The founder plus a junior rep — still founder-dependent", lever: "founder" },
+      { label: "A small sales team, but pipeline is thin", lever: "pipeline" },
+      { label: "Self-serve, but conversion to paid is weak", lever: "conversion" }
+    ]
+  },
+  {
+    id: "q5",
+    prompt: "Which of these feels most broken right now?",
+    answers: [
+      { label: "Ad spend going out, no clear picture of what's working", lever: "spend" },
+      { label: "Content and SEO running, no pipeline coming out of it", lever: "pipeline" },
+      { label: "Team is busy, but the growth number isn't moving", lever: "conversion" },
+      { label: "Everything depends on the founder's calendar", lever: "founder" }
+    ]
+  }
+];
+
+// Result copy — what the user gets back, tied to the diagnosed lever.
+const results: Record<LeverKey, { title: string; body: string; recommendation: string }> = {
+  pipeline: {
+    title: "Your bottleneck is pipeline.",
+    body:
+      "You have a product people buy, but no repeatable system creating qualified conversations each month. The growth number depends on what your team manually chases.",
+    recommendation:
+      "Build a pipeline engine — ICP + offer + two or three channels instrumented end-to-end. Prioritise the one channel with the best attach rate to your ICP, systemise it, then layer the next."
+  },
+  conversion: {
+    title: "Your bottleneck is conversion.",
+    body:
+      "Traffic is arriving, demos are being booked, trials are starting — but the funnel is leaking between steps. The acquisition cost looks fine until you trace revenue backwards.",
+    recommendation:
+      "Instrument each funnel step, isolate the two worst-performing transitions, and design a focused experiment programme against them. Messaging and onboarding usually move the needle first."
+  },
+  messaging: {
+    title: "Your bottleneck is messaging.",
+    body:
+      "The product is real, the market exists, but the website and sales calls aren't telling the same story. Founders who close well on calls often have a site that doesn't.",
+    recommendation:
+      "Rerun the ICP and positioning work — one sentence on who it's for, one sentence on the category, one sentence on what replaces. Then rewrite the homepage, demo deck, and top-of-funnel ads to match."
+  },
+  founder: {
+    title: "Your bottleneck is founder-led sales.",
+    body:
+      "Revenue grows in proportion to the founder's calendar. It's working — which is why it's dangerous. The second you're not in every conversation, close rates fall off a cliff.",
+    recommendation:
+      "Document the founder's sales motion, then systemise it. SDR or AE handoff, a repeatable demo structure, a CRM cadence that doesn't require the founder to be the closer. Start with what converts, not what's new."
+  },
+  spend: {
+    title: "Your bottleneck is spend efficiency.",
+    body:
+      "Paid channels are running, dashboards are green, but nobody on the team can tell you CAC payback by segment. You're either over-spending on the wrong ICP or under-investing in the one that works.",
+    recommendation:
+      "Rebuild attribution from first principles — channel, ICP, cohort, payback. Cut the bottom half of spend, reinvest in the top-performing slice, and only scale once payback is predictable."
+  }
+};
+
+const questionsJson = JSON.stringify(questions);
+const resultsJson = JSON.stringify(results);
+---
+
+<section
+  aria-label="Interactive growth diagnosis"
+  class="growth-diagnosis reveal mt-10"
+  data-questions={questionsJson}
+  data-results={resultsJson}
+  data-cta-href={ctas.primary.href}
+  data-cta-label={ctas.primary.label}
+>
+  <div class="card p-6 md:p-10">
+    <!-- Progress bar -->
+    <div class="gd-progress" aria-hidden="true">
+      <div class="gd-progress-bar" data-gd-progress></div>
+    </div>
+    <p class="gd-step-label" data-gd-step-label>Question 1 of {questions.length}</p>
+
+    <!-- Question screens — rendered once, shown one at a time via [hidden] -->
+    {
+      questions.map((q, index) => (
+        <fieldset class="gd-step" data-gd-step={index.toString()} hidden={index !== 0}>
+          <legend class="mt-4 text-2xl font-extrabold leading-snug tracking-[-0.04em] md:text-3xl">
+            {q.prompt}
+          </legend>
+          <div class="mt-6 space-y-3">
+            {q.answers.map((a, ai) => (
+              <label class="gd-answer">
+                <input
+                  type="radio"
+                  name={q.id}
+                  value={a.lever}
+                  data-gd-answer
+                  data-step-index={index.toString()}
+                  data-answer-index={ai.toString()}
+                />
+                <span>{a.label}</span>
+              </label>
+            ))}
+          </div>
+
+          <div class="gd-controls mt-8">
+            <button
+              type="button"
+              class="button-secondary"
+              data-gd-back
+              disabled={index === 0}
+              aria-label="Previous question"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              class="button-accent"
+              data-gd-next
+              data-is-last={(index === questions.length - 1).toString()}
+            >
+              {index === questions.length - 1 ? "See my diagnosis →" : "Next →"}
+            </button>
+          </div>
+        </fieldset>
+      ))
+    }
+
+    <!-- Result screen -->
+    <div class="gd-result" data-gd-result hidden>
+      <p class="card-label text-[color:var(--accent)]">Your diagnosis</p>
+      <h3 class="mt-3 text-3xl font-extrabold tracking-[-0.05em] md:text-4xl" data-gd-result-title>
+        Diagnosis
+      </h3>
+      <p class="mt-4 text-base leading-8 text-[color:var(--muted)]" data-gd-result-body></p>
+      <div class="mt-6 border-t border-[color:var(--line)] pt-6">
+        <p class="card-label">What I'd do next</p>
+        <p class="mt-3 text-base leading-8" data-gd-result-reco></p>
+      </div>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a class="button-accent" href={ctas.primary.href} data-cta="diagnosis-primary" data-gd-cta>
+          {ctas.primary.label} →
+        </a>
+        <button type="button" class="button-link" data-gd-restart>
+          Retake the diagnosis
+        </button>
+      </div>
+      <p class="mt-4 text-xs text-[color:var(--muted)]">
+        No data stored. Your answers never leave your browser.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector(".growth-diagnosis");
+    if (!root) return;
+
+    const questions = JSON.parse(root.dataset.questions || "[]");
+    const results = JSON.parse(root.dataset.results || "{}");
+    const total = questions.length;
+
+    const steps = Array.from(root.querySelectorAll("[data-gd-step]"));
+    const resultEl = root.querySelector("[data-gd-result]");
+    const progressBar = root.querySelector("[data-gd-progress]");
+    const stepLabel = root.querySelector("[data-gd-step-label]");
+    const answers = new Array(total).fill(null);
+    let current = 0;
+
+    function render() {
+      steps.forEach((s, i) => {
+        s.hidden = i !== current;
+      });
+      resultEl.hidden = true;
+      const pct = Math.round(((current + 1) / total) * 100);
+      if (progressBar) progressBar.style.width = pct + "%";
+      if (stepLabel) stepLabel.textContent = "Question " + (current + 1) + " of " + total;
+      // Focus the legend of the current step for screen readers.
+      const legend = steps[current] && steps[current].querySelector("legend");
+      if (legend) legend.setAttribute("tabindex", "-1");
+    }
+
+    function selectedLever(stepIndex) {
+      const step = steps[stepIndex];
+      if (!step) return null;
+      const checked = step.querySelector('input[type="radio"]:checked');
+      return checked ? checked.value : null;
+    }
+
+    function showResult() {
+      // Tally levers.
+      const counts = {};
+      for (const lever of answers) {
+        if (!lever) continue;
+        counts[lever] = (counts[lever] || 0) + 1;
+      }
+      // Natural-order tie break: walk questions in order, return first lever
+      // that reached the max count.
+      let maxCount = 0;
+      Object.values(counts).forEach((c) => {
+        if (c > maxCount) maxCount = c;
+      });
+      let winner = null;
+      for (const lever of answers) {
+        if (lever && counts[lever] === maxCount) {
+          winner = lever;
+          break;
+        }
+      }
+      if (!winner) winner = "pipeline";
+
+      const out = results[winner];
+      const titleEl = root.querySelector("[data-gd-result-title]");
+      const bodyEl = root.querySelector("[data-gd-result-body]");
+      const recoEl = root.querySelector("[data-gd-result-reco]");
+      if (titleEl) titleEl.textContent = out.title;
+      if (bodyEl) bodyEl.textContent = out.body;
+      if (recoEl) recoEl.textContent = out.recommendation;
+
+      // Append lever to CTA analytics attribute so GTM can read which branch
+      // the user saw when they clicked through.
+      const cta = root.querySelector("[data-gd-cta]");
+      if (cta) cta.setAttribute("data-cta", "diagnosis-primary-" + winner);
+
+      steps.forEach((s) => (s.hidden = true));
+      resultEl.hidden = false;
+      if (progressBar) progressBar.style.width = "100%";
+      if (stepLabel) stepLabel.textContent = "Your diagnosis";
+      resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    root.addEventListener("click", function (e) {
+      const target = e.target.closest("button");
+      if (!target) return;
+
+      if (target.hasAttribute("data-gd-next")) {
+        const lever = selectedLever(current);
+        if (!lever) {
+          // Nudge — shake the current step.
+          const step = steps[current];
+          step.classList.remove("gd-step-nudge");
+          // Force reflow to restart animation.
+          void step.offsetWidth;
+          step.classList.add("gd-step-nudge");
+          return;
+        }
+        answers[current] = lever;
+        if (target.dataset.isLast === "true") {
+          showResult();
+        } else if (current < total - 1) {
+          current += 1;
+          render();
+        }
+      } else if (target.hasAttribute("data-gd-back")) {
+        if (current > 0) {
+          current -= 1;
+          render();
+        }
+      } else if (target.hasAttribute("data-gd-restart")) {
+        current = 0;
+        for (let i = 0; i < answers.length; i += 1) answers[i] = null;
+        root.querySelectorAll('input[type="radio"]').forEach((el) => {
+          el.checked = false;
+        });
+        render();
+      }
+    });
+
+    render();
+  })();
+</script>
