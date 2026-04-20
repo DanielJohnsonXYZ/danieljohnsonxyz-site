@@ -1624,3 +1624,231 @@ summary::-webkit-details-marker {
   border-bottom-color: var(--ink);
   color: var(--ink);
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   Overhaul additions (2026-04-21)
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Announcement banner — feature-flagged, lives above the sticky header */
+.announcement-bar {
+  background: linear-gradient(90deg, var(--ink) 0%, #1f2a39 100%);
+  color: #fff;
+}
+
+.announcement-bar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+
+.announcement-bar-cta:hover,
+.announcement-bar-cta:focus-visible {
+  opacity: 0.85;
+}
+
+/* Text-only trust badge — used alongside logo images */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-dim, rgba(0, 0, 0, 0.03));
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Fit row — check / cross list items */
+.fit-row {
+  position: relative;
+  padding-left: 1.9rem;
+}
+
+.fit-row::before {
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.fit-row-yes::before {
+  content: "✓";
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+
+.fit-row-no::before {
+  content: "×";
+  background: rgba(200, 60, 60, 0.12);
+  color: #b44;
+}
+
+/* Card with accent border — used for "Working with me" callout */
+.card-accent-border {
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Lead testimonial — larger, pulled forward */
+.testimonial-lead {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 6%, var(--surface, #fff)) 0%,
+    var(--surface, #fff) 100%
+  );
+}
+
+.testimonial-lead::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.5rem;
+  left: 1.5rem;
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 45%, transparent);
+  pointer-events: none;
+}
+
+/* Inverted link-style button for dark sections */
+.button-link-invert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms ease, opacity 150ms ease;
+}
+
+.button-link-invert:hover,
+.button-link-invert:focus-visible {
+  border-bottom-color: #fff;
+  opacity: 0.9;
+}
+
+/* ── Growth Diagnosis quiz ───────────────────────────────────────────── */
+
+.growth-diagnosis {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.growth-diagnosis .gd-progress {
+  height: 4px;
+  width: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  overflow: hidden;
+}
+
+.growth-diagnosis .gd-progress-bar {
+  height: 100%;
+  width: 20%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width 280ms ease;
+}
+
+.gd-step-label {
+  margin-top: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.gd-step {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.gd-step legend {
+  padding: 0;
+}
+
+.gd-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.gd-answer:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.gd-answer input[type="radio"] {
+  margin-top: 0.35rem;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+.gd-answer:has(input[type="radio"]:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.gd-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gd-controls button[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@keyframes gd-nudge {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.gd-step-nudge {
+  animation: gd-nudge 320ms ease;
+}
+
+.gd-result {
+  animation: gd-result-in 320ms ease both;
+}
+
+@keyframes gd-result-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
