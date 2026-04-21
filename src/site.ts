@@ -57,7 +57,7 @@ export const announcement = {
 export const ctas = {
   primary: {
     label: "Book a 30-min Growth Audit",
-    href: "/book-a-call/",
+    href: siteConfig.bookingUrl,
     hint: "Free · 30 minutes · No pitch"
   },
   diagnosis: {
@@ -72,12 +72,12 @@ export const ctas = {
   },
   revenueReview: {
     label: "Free Revenue Growth Review",
-    href: "/book-a-call/",
+    href: siteConfig.bookingUrl,
     hint: "30 minutes with Daniel"
   },
   gtmAudit: {
     label: "Diagnose Your GTM Issues",
-    href: "/book-a-call/",
+    href: siteConfig.bookingUrl,
     hint: "30-min working session"
   }
 } as const;
@@ -95,7 +95,7 @@ export const footerNavigation = {
     { href: "/fractional-cmo/", label: "Fractional CMO" },
     { href: "/advisory/", label: "Advisory days" },
     { href: "/mentoring/", label: "Mentoring" },
-    { href: "/book-a-call/", label: "Book a Growth Audit" }
+    { href: siteConfig.bookingUrl, label: "Book a Growth Audit" }
   ],
   // Speaking sub-links consolidated under a single parent section.
   speaking: [
