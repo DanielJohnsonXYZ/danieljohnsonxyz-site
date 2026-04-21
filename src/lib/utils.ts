@@ -1,17 +1,17 @@
 import { siteConfig } from "../site";
 
 export function absoluteUrl(path = "/") {
-  const url = new URL(path, siteConfig.siteUrl).toString();
+  const url = new URL(path, siteConfig.siteUrl);
 
-  if (new URL(url).pathname !== "/" && url.endsWith("/")) {
-    return url.slice(0, -1);
+  if (url.origin === siteConfig.siteUrl && url.pathname !== "/" && !url.pathname.endsWith("/") && !/\.[^/]+$/.test(url.pathname)) {
+    url.pathname = `${url.pathname}/`;
   }
 
-  return url;
+  return url.toString();
 }
 
 export function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en-GB", {
+  return new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric"

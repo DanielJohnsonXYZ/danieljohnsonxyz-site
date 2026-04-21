@@ -60,7 +60,7 @@ export function buildWebSiteSchema() {
     publisher: {
       "@id": `${siteConfig.siteUrl}/#person`
     },
-    inLanguage: "en-GB"
+    inLanguage: "en-US"
   };
 }
 

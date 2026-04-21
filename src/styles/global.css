@@ -323,8 +323,8 @@ a, button, summary {
 
 /* ─── Reveal animation ─── */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
 }
 
 .reveal.is-visible {

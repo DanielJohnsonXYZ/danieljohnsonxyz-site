@@ -5,8 +5,12 @@
 /insights                 /writing                 301
 /insights/:slug           /writing/:slug           301
 
+# Canonical host consolidation
+https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
+
 # Booking shortlink → Calendly
 /book-a-call              https://calendly.com/wescalestartups  302
+/book-a-call/             https://calendly.com/wescalestartups  302
 
 # Serve 404.html with a real 404 status for unmatched routes
 /*  /404.html  404

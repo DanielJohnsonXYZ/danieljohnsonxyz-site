@@ -24,8 +24,8 @@ export const siteConfig = {
 
   email: "daniel@wescalestartups.com",
   phone: "+44 7918 665435",
-  location: "UK-based, currently in Asia. Serving clients globally.",
-  locationShort: "UK-based · currently in Asia",
+  location: "UK-based, currently in Asia. Serving US, UK, Europe, and APAC clients with US-friendly overlap.",
+  locationShort: "UK-based · US-friendly overlap",
   linkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
   growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
