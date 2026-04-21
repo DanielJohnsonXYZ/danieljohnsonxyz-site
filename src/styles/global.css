@@ -281,12 +281,17 @@ a, button, summary {
 
 .link-arrow {
   @apply inline-flex items-center gap-2 text-sm font-semibold;
-  color: var(--accent);
+  color: #5b21b6;
 }
 
 .link-arrow:hover,
 .link-arrow:focus-visible {
   gap: 0.65rem;
+}
+
+.dark-section .link-arrow,
+.cta-gradient .link-arrow {
+  color: #ddd6fe;
 }
 
 .link-arrow::after {
