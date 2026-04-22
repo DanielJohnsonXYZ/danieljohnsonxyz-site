@@ -60,6 +60,23 @@ document.querySelectorAll('.reveal').forEach((element) => {
   }
 
   revealObserver.observe(element);
+});
+
+document.addEventListener('click', (event) => {
+  const target = event.target;
+  const link = target instanceof Element ? target.closest('a') : null;
+  if (!link) return;
+
+  const label = link.dataset.cta || link.dataset.download || link.textContent?.trim();
+  if (!label) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: link.dataset.download ? 'resource_download_click' : 'cta_click',
+    cta_label: label,
+    cta_href: link.href,
+    page_path: window.location.pathname
+  });
 });`;
 ---
 

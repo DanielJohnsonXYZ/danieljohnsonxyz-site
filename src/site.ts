@@ -29,6 +29,10 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
   growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
+  mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
+  malt: "https://www.malt.uk/profile/danieljohnsonxyz",
+  pangea: "https://pangea.app/profile/daniel-johnson",
+  instagram: "https://www.instagram.com/danieljohnsonxyz/",
   youtube: "https://www.youtube.com/@danieljohnson6000",
   youtubeUploadsEmbed: "https://www.youtube-nocookie.com/embed/videoseries?list=UUkEPRVEnpDIdSk8o2vC3_WA",
   companyUrl: "https://www.wescalestartups.com",
@@ -36,7 +40,17 @@ export const siteConfig = {
   gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.png",
-  headshot: "/images/daniel-headshot.webp"
+  headshot: "/images/daniel-headshot.webp",
+  sameAs: [
+    "https://www.linkedin.com/in/danieljohnsonxyz/",
+    "https://app.growthmentor.com/mentors/daniel-johnson",
+    "https://mentorcruise.com/mentor/danieljohnson/",
+    "https://www.malt.uk/profile/danieljohnsonxyz",
+    "https://pangea.app/profile/daniel-johnson",
+    "https://www.instagram.com/danieljohnsonxyz/",
+    "https://www.youtube.com/@danieljohnson6000",
+    "https://www.wescalestartups.com"
+  ]
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────

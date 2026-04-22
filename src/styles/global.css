@@ -496,6 +496,24 @@ a, button, summary {
     linear-gradient(180deg, #fafaf9 0%, #f3f0eb 100%);
 }
 
+.hero-section-compact {
+  padding-top: clamp(2rem, 4vh, 3.25rem);
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
+}
+
+.hero-section-compact .hero-photo-card {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.hero-section-compact .hero-portrait {
+  max-height: min(44vh, 26rem);
+}
+
+.hero-section-compact .hero-authority-panel {
+  padding: 1.1rem 1.2rem;
+}
+
 .service-label {
   display: inline-flex;
   width: fit-content;
@@ -515,6 +533,10 @@ a, button, summary {
 
 .hero-subcopy {
   color: #374151;
+}
+
+body > iframe[src*="assets.mailerlite.com/jsonp"] {
+  display: none !important;
 }
 
 .highlight-text {
@@ -1608,6 +1630,13 @@ summary::-webkit-details-marker {
 @media (min-width: 768px) {
   .hero-proof-bar {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section-compact .hero-proof-bar {
+    margin-top: 0;
+    padding-block: 0.8rem;
   }
 }
 

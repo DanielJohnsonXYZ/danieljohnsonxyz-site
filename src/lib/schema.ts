@@ -32,7 +32,7 @@ export function buildPersonSchema() {
       "Positioning",
       "Founder-led growth"
     ],
-    sameAs: [siteConfig.linkedin, siteConfig.growthMentor, siteConfig.youtube, siteConfig.companyUrl]
+    sameAs: siteConfig.sameAs
   };
 }
 
