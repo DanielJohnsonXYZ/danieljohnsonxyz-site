@@ -51,8 +51,7 @@ export const announcement = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// CTA library — outcome-led labels used across the site. Import by key so
-// each section can pull the right variant without hard-coding copy.
+// CTA library — only the approved commercial CTAs used across the site.
 // ──────────────────────────────────────────────────────────────────────────
 export const ctas = {
   primary: {
@@ -60,25 +59,10 @@ export const ctas = {
     href: siteConfig.bookingUrl,
     hint: "Free · 30 minutes · No pitch"
   },
-  diagnosis: {
-    label: "Get a Growth Diagnosis",
-    href: "/#growth-diagnosis",
-    hint: "2-minute quiz · Tailored output"
-  },
   bottleneck: {
     label: "Find Your Biggest Growth Bottleneck",
     href: "/#growth-diagnosis",
     hint: "Free · 2 minutes"
-  },
-  revenueReview: {
-    label: "Free Revenue Growth Review",
-    href: siteConfig.bookingUrl,
-    hint: "30 minutes with Daniel"
-  },
-  gtmAudit: {
-    label: "Diagnose Your GTM Issues",
-    href: siteConfig.bookingUrl,
-    hint: "30-min working session"
   }
 } as const;
 
@@ -95,7 +79,7 @@ export const footerNavigation = {
     { href: "/fractional-cmo/", label: "Fractional CMO" },
     { href: "/advisory/", label: "Advisory days" },
     { href: "/mentoring/", label: "Mentoring" },
-    { href: siteConfig.bookingUrl, label: "Book a Growth Audit" }
+    { href: siteConfig.bookingUrl, label: "Book a 30-min Growth Audit" }
   ],
   // Speaking sub-links consolidated under a single parent section.
   speaking: [

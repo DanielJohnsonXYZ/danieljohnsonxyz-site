@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ctas } from "../site";
+---
+
+<BaseLayout
+  title="Product-Led Growth for AI & B2B SaaS | Daniel Johnson"
+  description="Product-led growth support for SaaS teams improving activation, onboarding, trial conversion, retention, and expansion."
+  path="/product-led-growth"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">Product-Led Growth</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Make the product carry more of the growth work.</h1>
+        <p class="hero-subcopy text-xl leading-9 md:text-2xl">I help teams diagnose activation, onboarding, trial-to-paid conversion, retention, and expansion so PLG becomes a system, not a slogan.</p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
+          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-space pt-0">
+    <div class="shell grid gap-5 md:grid-cols-3">
+      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">Activation map, onboarding fixes, conversion experiments, usage triggers, and lifecycle priorities.</p></article>
+      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">SaaS teams with signups, trials, or freemium motion but unclear conversion or retention.</p></article>
+      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">Acquisition, onboarding, and product evidence start feeding the same growth loop.</p></article>
+    </div>
+  </section>
+</BaseLayout>

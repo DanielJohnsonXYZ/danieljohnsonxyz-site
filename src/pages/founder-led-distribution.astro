@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ctas } from "../site";
+---
+
+<BaseLayout
+  title="Founder-Led Distribution Systems | Daniel Johnson"
+  description="Founder-led distribution systems for LinkedIn, thought leadership, content-to-pipeline loops, and founder sales handoff."
+  path="/founder-led-distribution"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">Founder-Led Distribution</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Turn founder insight into repeatable distribution.</h1>
+        <p class="hero-subcopy text-xl leading-9 md:text-2xl">Founder voice, LinkedIn systems, newsletter loops, podcast leverage, and content-to-pipeline workflows that reduce dependency on ad hoc posting.</p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
+          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-space pt-0">
+    <div class="shell grid gap-5 md:grid-cols-3">
+      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">Narrative pillars, content operating rhythm, repurposing workflow, CTA map, and pipeline handoff.</p></article>
+      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">Founders whose insight sells on calls but does not yet compound through content or community.</p></article>
+      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">Founder-led content becomes a system, not a mood-dependent habit.</p></article>
+    </div>
+  </section>
+</BaseLayout>

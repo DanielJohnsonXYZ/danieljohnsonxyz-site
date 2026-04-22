@@ -33,12 +33,12 @@ const supportingTestimonials = [
 
 // ─── Method layers (one source of truth so the number never drifts) ─────
 const methodLayers = [
-  { title: "GTM systems", body: "ICP, positioning, channel strategy, acquisition engine design." },
-  { title: "Product-led growth", body: "Activation, retention, freemium and trial conversion." },
-  { title: "Experimentation", body: "Prioritisation, test design, learning loops." },
-  { title: "AI-native workflows", body: "Generative and agentic AI for research, messaging, enrichment, content." },
-  { title: "Founder-led distribution", body: "LinkedIn systems, content-to-pipeline loops." },
-  { title: "Revenue operations", body: "Channel, ICP, pipeline, reporting cadence." }
+  { title: "GTM systems", body: "ICP, positioning, channel strategy, acquisition engine design.", href: "/gtm-systems/" },
+  { title: "Product-led growth", body: "Activation, retention, freemium and trial conversion.", href: "/product-led-growth/" },
+  { title: "Experimentation", body: "Prioritisation, test design, learning loops.", href: "/experimentation/" },
+  { title: "AI-native workflows", body: "Generative and agentic AI for research, messaging, enrichment, content.", href: "/ai-native-workflows/" },
+  { title: "Founder-led distribution", body: "LinkedIn systems, content-to-pipeline loops.", href: "/founder-led-distribution/" },
+  { title: "Revenue operations", body: "Channel, ICP, pipeline, reporting cadence.", href: "/revenue-operations/" }
 ];
 const layerCount = methodLayers.length;
 
@@ -173,8 +173,8 @@ const faq = [
               <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
                 {ctas.primary.label} →
               </a>
-              <a class="button-link" href={ctas.diagnosis.href} data-cta="hero-diagnosis">
-                {ctas.diagnosis.label} →
+              <a class="button-link" href={ctas.bottleneck.href} data-cta="hero-bottleneck">
+                {ctas.bottleneck.label} →
               </a>
             </div>
             <p class="availability-line">{siteConfig.availability}</p>
@@ -330,8 +330,8 @@ const faq = [
     <div class="shell">
       <SectionHeader
         eyebrow="Why not an agency"
-        intro="A typical growth agency runs a different play. Here's the honest comparison."
-        title="Agency vs senior operator."
+        intro="You do not need another agency layer when the real problem is senior growth judgement."
+        title="Senior growth judgement, not junior execution."
       />
 
       <div class="mt-10 grid gap-5 md:grid-cols-2">
@@ -375,11 +375,11 @@ const faq = [
       <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {
           methodLayers.map((layer, index) => (
-            <article class="reveal card p-6">
+            <a class="reveal card p-6" href={layer.href}>
               <p class="card-label text-white/55">0{index + 1}</p>
               <h3 class="mt-3 text-xl font-bold tracking-[-0.04em] text-white">{layer.title}</h3>
               <p class="mt-3 text-sm leading-7 text-white/68">{layer.body}</p>
-            </article>
+            </a>
           ))
         }
       </div>
@@ -392,8 +392,8 @@ const faq = [
           <a class="button-accent" href={ctas.primary.href} data-cta="method-primary">
             {ctas.primary.label} →
           </a>
-          <a class="button-link-invert" href={ctas.revenueReview.href} data-cta="method-secondary">
-            {ctas.revenueReview.label} →
+          <a class="button-link-invert" href={ctas.bottleneck.href} data-cta="method-secondary">
+            {ctas.bottleneck.label} →
           </a>
         </div>
       </div>

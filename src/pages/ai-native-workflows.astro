@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ctas } from "../site";
+---
+
+<BaseLayout
+  title="AI-Native Workflows for GTM Teams | Daniel Johnson"
+  description="AI-native GTM workflows for research, messaging, campaign briefs, content, enrichment, reporting, and faster experimentation."
+  path="/ai-native-workflows"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">AI-Native Workflows</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Use AI to compress the slow parts of GTM.</h1>
+        <p class="hero-subcopy text-xl leading-9 md:text-2xl">Competitor teardown, ICP pain mining, messaging generation, campaign briefs, content workflows, enrichment, and reporting, with senior judgement deciding what gets used.</p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
+          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-space pt-0">
+    <div class="shell grid gap-5 md:grid-cols-3">
+      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">Workflow map, prompt patterns, approval rules, campaign briefs, and repeatable research/reporting systems.</p></article>
+      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">Teams that want practical speed without handing strategy or final judgement to tools.</p></article>
+      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">The team ships faster because the manual research and drafting burden drops.</p></article>
+    </div>
+  </section>
+</BaseLayout>

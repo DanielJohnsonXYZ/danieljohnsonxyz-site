@@ -60,6 +60,12 @@ stronger than they found it — not another agency retainer.
 
 - [Home](${siteConfig.siteUrl}/): positioning, principles, services overview
 - [Fractional CMO](${siteConfig.siteUrl}/fractional-cmo): the fractional CMO offer — scope, engagement model, FAQs
+- [GTM systems](${siteConfig.siteUrl}/gtm-systems): ICP, positioning, channel strategy, acquisition design, and operating cadence
+- [Product-led growth](${siteConfig.siteUrl}/product-led-growth): activation, onboarding, trial conversion, retention, and expansion support
+- [Experimentation](${siteConfig.siteUrl}/experimentation): prioritisation, hypotheses, test design, learning loops, and decision cadence
+- [AI-native workflows](${siteConfig.siteUrl}/ai-native-workflows): GTM workflows for research, messaging, campaign briefs, content, enrichment, and reporting
+- [Founder-led distribution](${siteConfig.siteUrl}/founder-led-distribution): founder voice, LinkedIn systems, content-to-pipeline loops, and handoff
+- [Revenue operations](${siteConfig.siteUrl}/revenue-operations): funnel visibility, pipeline process, CRM hygiene, and reporting cadence
 - [About](${siteConfig.siteUrl}/about): background, working style, principles
 - [Advisory](${siteConfig.siteUrl}/advisory): advisory days and short-engagement options
 - [Mentoring](${siteConfig.siteUrl}/mentoring): 1:1 mentoring for founders and heads of growth
