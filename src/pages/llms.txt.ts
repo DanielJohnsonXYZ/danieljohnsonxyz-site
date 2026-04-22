@@ -69,6 +69,9 @@ stronger than they found it — not another agency retainer.
 - [About](${siteConfig.siteUrl}/about): background, working style, principles
 - [Advisory](${siteConfig.siteUrl}/advisory): advisory days and short-engagement options
 - [Mentoring](${siteConfig.siteUrl}/mentoring): 1:1 mentoring for founders and heads of growth
+- [Not a fit](${siteConfig.siteUrl}/not-a-fit): qualification guidance for founders who are too early, need junior execution, or need a different route
+- [Newsletter](${siteConfig.siteUrl}/newsletter): occasional growth notes on AI-native GTM, fractional CMO work, founder-led growth, and repeatable systems
+- [Growth bottleneck checklist](${siteConfig.siteUrl}/growth-bottleneck-checklist): lead magnet for diagnosing ICP, channel, conversion, founder-led sales, and revenue operations constraints
 - [Case studies](${siteConfig.siteUrl}/case-studies): anonymised engagement write-ups showing bottleneck, approach, and outcome
 - [Speaking](${siteConfig.siteUrl}/speaking): talks, workshops, and programme sessions
 - [Topics & Talks](${siteConfig.siteUrl}/topics-and-talks): signature speaking topics and past talks

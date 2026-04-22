@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildFaqPageSchema } from "../lib/schema";
+import { ctas, siteConfig } from "../site";
+
+const bottlenecks = [
+  {
+    title: "ICP",
+    symptom: "Different customers buy for different reasons, and the team keeps changing who the offer is for.",
+    check: "Can you name the fastest-converting customer segment and the trigger that makes them act?"
+  },
+  {
+    title: "Channels",
+    symptom: "Activity is spread across paid, content, outbound, SEO, partnerships, and founder posting without a clear winner.",
+    check: "Can you say which channel creates the most qualified learning, not just the most motion?"
+  },
+  {
+    title: "Conversion",
+    symptom: "Traffic, demos, or trials exist, but the next step is weak because the offer, proof, or trust sequence is unclear.",
+    check: "Can a first-time buyer understand what changes after buying within five seconds?"
+  },
+  {
+    title: "Founder-led sales dependency",
+    symptom: "Deals move when the founder is involved, then slow down when the team runs the same motion.",
+    check: "Can the team repeat the founder's narrative without losing urgency, context, or credibility?"
+  },
+  {
+    title: "Revenue operations",
+    symptom: "The dashboard reports activity, but it does not explain what to scale, stop, or fix next.",
+    check: "Can the leadership team make one clear growth decision from the current reporting cadence?"
+  }
+];
+
+const faq = [
+  {
+    question: "Is this a replacement for a growth audit?",
+    answer:
+      "No. It is a quick self-diagnosis so founders can see which kind of problem they probably have before adding more tactics or budget."
+  },
+  {
+    question: "What should I do with the result?",
+    answer:
+      "Pick one bottleneck, gather evidence for it, and stop adding unrelated growth activity until the constraint is clear."
+  }
+];
+---
+
+<BaseLayout
+  description="A plain-English growth bottleneck checklist for post-PMF AI and B2B SaaS founders deciding whether the issue is ICP, channels, conversion, founder-led sales dependency, or revenue operations."
+  path="/growth-bottleneck-checklist"
+  schema={buildFaqPageSchema(faq)}
+  title="Growth Bottleneck Checklist | Daniel Johnson"
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">Lead magnet</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+          Find the growth bottleneck before you add another channel.
+        </h1>
+        <p class="hero-subcopy text-xl leading-9 md:text-2xl">
+          A quick checklist for post-PMF founders deciding whether growth is stuck because of ICP, channels,
+          conversion, founder dependency, or revenue operations.
+        </p>
+        <div class="cta-cluster">
+          <a class="button-accent" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
+          <a class="button-link" href={`mailto:${siteConfig.email}?subject=Send%20me%20the%20Growth%20Bottleneck%20Checklist`}>
+            Get the printable version →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {bottlenecks.map((item) => (
+          <article class="reveal card p-6 md:p-7">
+            <p class="card-label">{item.title}</p>
+            <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">Likely symptom</h2>
+            <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">{item.symptom}</p>
+            <div class="mt-6 border-t border-[color:var(--line)] pt-5">
+              <p class="card-label">Check</p>
+              <p class="mt-3 text-base font-semibold leading-7">{item.check}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card px-6 py-8 md:px-10 md:py-10">
+        <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div class="space-y-4">
+            <span class="eyebrow">Next step</span>
+            <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
+              Bring the checklist to a 30-minute growth audit.
+            </h2>
+            <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
+              We will pressure-test the diagnosis and decide whether the right next move is fractional leadership,
+              a sprint, a smaller mentoring session, or no paid work at all.
+            </p>
+          </div>
+          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

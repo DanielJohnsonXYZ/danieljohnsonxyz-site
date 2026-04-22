@@ -91,8 +91,11 @@ export const footerNavigation = {
   ],
   more: [
     { href: "/writing/", label: "Writing" },
+    { href: "/newsletter/", label: "Newsletter" },
+    { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" },
     { href: "/case-studies/", label: "Case studies" },
     { href: "/about/", label: "About" },
+    { href: "/not-a-fit/", label: "Not a fit" },
     { href: "/now/", label: "Now" },
     { href: "/contact/", label: "Contact" }
   ]

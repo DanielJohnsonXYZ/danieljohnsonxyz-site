@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ctas, siteConfig } from "../site";
+
+const notes = [
+  "How to decide whether your bottleneck is ICP, channel, conversion, or cadence.",
+  "What AI-native GTM looks like when it is practical rather than performative.",
+  "How founder-led distribution can create pipeline without turning the founder into a content machine.",
+  "What to fix before hiring a full-time CMO or another agency."
+];
+---
+
+<BaseLayout
+  description="Subscribe to Daniel Johnson's occasional growth notes on AI-native GTM, fractional CMO work, founder-led growth, and repeatable startup growth systems."
+  path="/newsletter"
+  title="Newsletter | Daniel Johnson"
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-start">
+        <div class="reveal space-y-6">
+          <span class="service-label">Newsletter</span>
+          <h1 class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+            Short notes on making startup growth less noisy.
+          </h1>
+          <p class="hero-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
+            Occasional writing for founders and operators who want clearer GTM decisions, better systems, and fewer
+            growth theatre exercises.
+          </p>
+          <div class="cta-cluster">
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Subscribe%20me%20to%20Growth%20Notes`}>
+              Subscribe by email →
+            </a>
+            <a class="button-link" href="/writing/">Read recent essays →</a>
+          </div>
+        </div>
+        <aside class="reveal card p-6 md:p-8">
+          <p class="card-label">What you get</p>
+          <ul class="mt-5 space-y-4 text-base leading-8 text-[color:var(--muted)]">
+            {notes.map((note) => <li class="fit-row fit-row-yes">{note}</li>)}
+          </ul>
+          <div class="mt-6 rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-4">
+            <p class="text-sm leading-6 text-[color:var(--muted)]">
+              No daily drip sequence. No recycled LinkedIn thread pretending to be strategy.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card px-6 py-8 md:px-10 md:py-10">
+        <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div class="space-y-4">
+            <span class="eyebrow">Prefer action now?</span>
+            <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
+              Find the bottleneck before you add more activity.
+            </h2>
+            <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
+              Use the checklist or book a 30-minute growth audit if you already know the current system is stuck.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <a class="button-accent" href="/growth-bottleneck-checklist/">Open the checklist</a>
+            <a class="button-secondary" href={ctas.primary.href}>{ctas.primary.label}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

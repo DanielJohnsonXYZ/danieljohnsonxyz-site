@@ -10,6 +10,8 @@ const [flagshipArticle, ...supportingArticles] = articles;
 const archive = sortByFeaturedThenOrder(await getCollection("media"));
 const primaryArchive = archive.filter((item) => ["Profile", "Interview", "Speaking", "Course"].includes(item.data.kind));
 const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item));
+const focusTags = ["GTM", "AI", "Founder Growth", "Fractional CMO", "Pipeline"];
+const allTags = [...new Set(articles.flatMap((article) => article.data.tags))];
 ---
 
 <BaseLayout
@@ -42,6 +44,10 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
               <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you are solving a growth problem</p>
               <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Read the essays by bottleneck: operating system, customer research, or fractional leadership.</p>
             </article>
+            <article class="card-muted p-4">
+              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you want future notes</p>
+              <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]"><a class="highlight-text" href="/newsletter/">Subscribe to Growth Notes</a> or use the <a class="highlight-text" href="/growth-bottleneck-checklist/">bottleneck checklist</a>.</p>
+            </article>
           </div>
         </aside>
       </div>
@@ -55,6 +61,11 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
         intro="Original writing published on this site. These pieces are written to make startup growth clearer, not more elaborate."
         title="Native essays."
       />
+
+      <div class="reveal mt-8 flex flex-wrap gap-2" aria-label="Writing topics">
+        {focusTags.map((tag) => <span class="chip">{tag}</span>)}
+        {allTags.filter((tag) => !focusTags.includes(tag)).map((tag) => <span class="chip chip-quiet">{tag}</span>)}
+      </div>
 
       <article class="insights-flagship reveal card mt-10 p-6 md:p-8">
         <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
@@ -88,6 +99,9 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
                 <a href={`/writing/${article.id}`}>{article.data.title}</a>
               </h2>
               <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {article.data.tags.map((tag) => <span class="chip">{tag}</span>)}
+              </div>
               <div class="mt-6">
                 <a class="link-arrow" href={`/writing/${article.id}`}>
                   Read essay
@@ -152,10 +166,13 @@ const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item)
               Want to apply this to your own growth bottleneck?
             </h2>
             <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              {siteConfig.bookingNote}
+              {siteConfig.bookingNote} If you want the lighter route first, subscribe for occasional notes or use the checklist.
             </p>
           </div>
-          <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+          <div class="flex flex-col gap-3">
+            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+            <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes</a>
+          </div>
         </div>
       </div>
     </div>
