@@ -218,12 +218,20 @@ const faq = [
         <div class="trust-strip-logos">
           {
             trustLogos.map((item) => (
-              <img alt={item.alt} decoding="async" height="48" loading="lazy" src={item.src} width="180" />
+              <img
+                alt={item.alt}
+                class={`trust-logo trust-logo-${item.id}`}
+                decoding="async"
+                height="48"
+                loading="lazy"
+                src={item.src}
+                width="180"
+              />
             ))
           }
           {
-            trustBadges.map((label) => (
-              <span class="trust-badge">{label}</span>
+            trustBadges.map((item) => (
+              <span class={`trust-badge trust-badge-${item.variant}`}>{item.label}</span>
             ))
           }
         </div>

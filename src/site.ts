@@ -169,16 +169,19 @@ export const agencyVsMe = {
 // ──────────────────────────────────────────────────────────────────────────
 export const trustLogos = [
   {
+    id: "growthmentor",
     src: "/images/logos/growthmentor.png",
     alt: "GrowthMentor",
     label: "GrowthMentor"
   },
   {
+    id: "google",
     src: "/images/logos/google.webp",
     alt: "Google for Startups (Launchpad)",
     label: "Google for Startups"
   },
   {
+    id: "cambridge",
     src: "/images/logos/cambridge.webp",
     alt: "University of Cambridge",
     label: "Cambridge"
@@ -188,9 +191,9 @@ export const trustLogos = [
 // Text-only affiliation badges — shown alongside logos until image assets
 // are added to public/images/logos/.
 export const trustBadges = [
-  "Techstars Alum",
-  "Google for Startups — Growth Mentor",
-  "Cambridge Judge — Visiting Lecturer"
+  { label: "Techstars Alum", variant: "compact" },
+  { label: "Google for Startups — Growth Mentor", variant: "wide" },
+  { label: "Cambridge Judge — Visiting Lecturer", variant: "wide" }
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
