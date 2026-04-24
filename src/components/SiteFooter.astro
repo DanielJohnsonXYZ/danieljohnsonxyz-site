@@ -12,8 +12,7 @@ import { ctas, footerNavigation, siteConfig } from "../site";
             {siteConfig.name}
           </h2>
           <p class="max-w-md text-base leading-7 text-white/60">
-            Fractional CMO and AI-native growth operator for post-PMF AI and B2B SaaS startups.
-            I help founders turn traction into predictable revenue.
+            Fractional CMO for founder-led AI and B2B SaaS startups where growth still depends too much on the founder.
           </p>
           <p class="max-w-md text-sm font-semibold leading-6 text-white/75">{siteConfig.availability}</p>
           <div class="flex flex-wrap gap-3">
@@ -41,18 +40,6 @@ import { ctas, footerNavigation, siteConfig } from "../site";
             }
           </ul>
 
-          <p class="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Speaking</p>
-          <ul class="space-y-3">
-            {
-              footerNavigation.speaking.map((item) => (
-                <li>
-                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
         </div>
 
         <div class="space-y-4">
@@ -76,9 +63,6 @@ import { ctas, footerNavigation, siteConfig } from "../site";
           <li><a class="hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
           <li><a class="hover:text-white" href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn</a></li>
           <li><a class="hover:text-white" href={siteConfig.youtube} rel="noreferrer" target="_blank">YouTube</a></li>
-          <li><a class="hover:text-white" href={siteConfig.growthMentor} rel="noreferrer" target="_blank">GrowthMentor</a></li>
-          <li><a class="hover:text-white" href={siteConfig.mentorCruise} rel="noreferrer" target="_blank">MentorCruise</a></li>
-          <li><a class="hover:text-white" href={siteConfig.instagram} rel="noreferrer" target="_blank">Instagram</a></li>
         </ul>
       </div>
 

@@ -28,15 +28,12 @@ export const GET: APIRoute = async () => {
     .map((c) => `- [${c.data.title}](${siteConfig.siteUrl}/case-studies/${c.id}): ${c.data.excerpt}`)
     .join("\n");
 
-  const body = `# Daniel Johnson — AI-Native GTM & Growth Operator
+  const body = `# Daniel Johnson — Fractional CMO for AI and B2B SaaS
 
-> Daniel Johnson is a UK-based AI-Native GTM & Growth Operator (currently working
-> from Asia) with post-PMF seed to Series B AI and B2B SaaS startups. He helps
-> founders replace one-off campaigns with a repeatable growth operating system —
-> combining GTM design, PLG mechanics, AI-native workflows, and experimentation
-> frameworks. His primary focus is fractional CMO engagements; he'll consider a
-> full-time Head of Growth or VP Marketing role for the right post-PMF AI or B2B
-> SaaS company.
+> Daniel Johnson is a UK-based fractional CMO and senior GTM operator for founder-led
+> AI and B2B SaaS startups. He helps founders build repeatable pipeline, sharpen
+> positioning, clean up reporting, and reduce the founder bottleneck before or
+> alongside a full-time growth leader.
 
 Daniel runs the advisory practice **We Scale Startups** (wescalestartups.com) and
 writes publicly at danieljohnson.xyz. He has worked with founder-led startups,
@@ -67,17 +64,12 @@ stronger than they found it — not another agency retainer.
 - [Founder-led distribution](${siteConfig.siteUrl}/founder-led-distribution): founder voice, LinkedIn systems, content-to-pipeline loops, and handoff
 - [Revenue operations](${siteConfig.siteUrl}/revenue-operations): funnel visibility, pipeline process, CRM hygiene, and reporting cadence
 - [About](${siteConfig.siteUrl}/about): background, working style, principles
-- [Advisory](${siteConfig.siteUrl}/advisory): advisory days and short-engagement options
-- [Mentoring](${siteConfig.siteUrl}/mentoring): 1:1 mentoring for founders and heads of growth
-- [Not a fit](${siteConfig.siteUrl}/not-a-fit): qualification guidance for founders who are too early, need junior execution, or need a different route
+- [Mentoring](${siteConfig.siteUrl}/mentoring): founder office hours and lower-ticket GTM decision support
 - [Newsletter](${siteConfig.siteUrl}/newsletter): occasional growth notes on AI-native GTM, fractional CMO work, founder-led growth, and repeatable systems
 - [Growth bottleneck checklist](${siteConfig.siteUrl}/growth-bottleneck-checklist): lead magnet for diagnosing ICP, channel, conversion, founder-led sales, and revenue operations constraints
 - [Case studies](${siteConfig.siteUrl}/case-studies): anonymised engagement write-ups showing bottleneck, approach, and outcome
 - [Speaking](${siteConfig.siteUrl}/speaking): talks, workshops, and programme sessions
-- [Topics & Talks](${siteConfig.siteUrl}/topics-and-talks): signature speaking topics and past talks
 - [Podcast appearances](${siteConfig.siteUrl}/podcast-appearances): interviews and conversations Daniel has been on
-- [Press & media](${siteConfig.siteUrl}/press-and-media): bios, headshot, and contact details for journalists and hosts
-- [Book Daniel to speak](${siteConfig.siteUrl}/book-daniel-to-speak): speaking enquiry page for events and programmes
 - [Writing](${siteConfig.siteUrl}/writing): essays on AI-native GTM, fractional leadership, and operating-system thinking
 - [Now](${siteConfig.siteUrl}/now): what Daniel is working on this month
 - [Contact](${siteConfig.siteUrl}/contact): booking, email, social

@@ -5,7 +5,7 @@ import { buildBreadcrumbSchema } from "../lib/schema";
 
 const title = "Contact Daniel Johnson | AI-Native GTM & Growth Operator";
 const description =
-  "Get in touch about fractional CMO, advisory, mentoring, or speaking enquiries. Response within two working days.";
+  "Get in touch about fractional CMO, founder office hours, or speaking enquiries with Daniel Johnson.";
 
 const breadcrumb = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
@@ -29,7 +29,7 @@ const breadcrumb = buildBreadcrumbSchema([
             <h2 class="mt-3 text-2xl font-bold tracking-[-0.04em]">{siteConfig.bookingLabel}</h2>
             <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{siteConfig.bookingNote}</p>
             <a class="button-primary mt-6 inline-flex" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
-              Open Calendly
+              {siteConfig.bookingLabel}
             </a>
           </article>
 
@@ -50,11 +50,6 @@ const breadcrumb = buildBreadcrumbSchema([
           <ul class="mt-4 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
             <li><strong>LinkedIn</strong> &ndash; <a class="underline" href={siteConfig.linkedin} rel="noreferrer" target="_blank">{siteConfig.linkedin}</a></li>
             <li><strong>YouTube</strong> &ndash; <a class="underline" href={siteConfig.youtube} rel="noreferrer" target="_blank">Field Notes channel</a></li>
-            <li><strong>GrowthMentor</strong> &ndash; <a class="underline" href={siteConfig.growthMentor} rel="noreferrer" target="_blank">Book a mentoring session</a></li>
-            <li><strong>MentorCruise</strong> &ndash; <a class="underline" href={siteConfig.mentorCruise} rel="noreferrer" target="_blank">Mentorship profile</a></li>
-            <li><strong>Malt</strong> &ndash; <a class="underline" href={siteConfig.malt} rel="noreferrer" target="_blank">Consultant profile</a></li>
-            <li><strong>Pangea</strong> &ndash; <a class="underline" href={siteConfig.pangea} rel="noreferrer" target="_blank">Freelance profile</a></li>
-            <li><strong>Instagram</strong> &ndash; <a class="underline" href={siteConfig.instagram} rel="noreferrer" target="_blank">@danieljohnsonxyz</a></li>
             <li><strong>Location</strong> &ndash; {siteConfig.location}</li>
           </ul>
         </div>

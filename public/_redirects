@@ -12,5 +12,16 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /book-a-call              https://calendly.com/wescalestartups  302
 /book-a-call/             https://calendly.com/wescalestartups  302
 
+/topics-and-talks         /speaking/  301
+/topics-and-talks/        /speaking/  301
+/press-and-media          /speaking/  301
+/press-and-media/         /speaking/  301
+/book-daniel-to-speak     /speaking/  301
+/book-daniel-to-speak/    /speaking/  301
+/not-a-fit                /fractional-cmo/  301
+/not-a-fit/               /fractional-cmo/  301
+/advisory                 /fractional-cmo/  301
+/advisory/                /fractional-cmo/  301
+
 # Serve 404.html with a real 404 status for unmatched routes
 /*  /404.html  404

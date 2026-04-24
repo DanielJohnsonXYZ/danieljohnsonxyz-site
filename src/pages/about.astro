@@ -4,10 +4,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../site";
 
 const proofStats = [
-  { value: "£18M+", label: "Revenue generated for clients" },
-  { value: "£6M+", label: "Ad spend managed" },
-  { value: "20+", label: "AI & SaaS startups" },
-  { value: "4.93/5", label: "Across 388+ mentor sessions" }
+  { value: "10+ years", label: "Founder, operator, and advisor work" },
+  { value: "20+", label: "AI and SaaS startups advised" },
+  { value: "2 exits", label: "Founder-side startup experience" },
+  { value: "£6.8M+", label: "Paid acquisition spend managed" }
 ];
 
 const timeline = [
@@ -55,8 +55,8 @@ const principles = [
 ---
 
 <BaseLayout
-  description="About Daniel Johnson — AI-Native GTM and growth operator for post-PMF AI and B2B SaaS startups. 10+ years, 20+ startups, £18M+ revenue generated, £6M+ ad spend, £15M+ raised."
-  title="About Daniel Johnson | AI-Native GTM & Growth Operator"
+  description="About Daniel Johnson, fractional CMO and senior GTM operator for founder-led AI and B2B SaaS startups."
+  title="About Daniel Johnson | Fractional CMO & GTM Operator"
 >
   <section class="section-space">
     <div class="shell">
@@ -64,13 +64,11 @@ const principles = [
         <div class="reveal space-y-6">
           <span class="service-label">About Daniel</span>
           <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
-            AI-Native GTM &amp; growth operator for AI and B2B SaaS founders.
+            A founder-side growth operator, now working as a fractional CMO.
           </h1>
           <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            I help post-PMF AI and B2B SaaS companies build repeatable GTM systems — spanning PLG/self-service
-            conversion, AI-enhanced growth planning, and founder-led distribution. Founders bring me in when scattered
-            experiments have stopped compounding and they need clearer priorities, sharper evidence, and an operating
-            rhythm the team can run.
+            Founders bring me in when growth still depends too much on them: unclear positioning, inconsistent pipeline,
+            scattered channel activity, and a team that needs better decisions before another hire or agency brief.
           </p>
         </div>
 
@@ -94,6 +92,22 @@ const principles = [
             </div>
           </div>
         </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card overflow-hidden md:grid md:grid-cols-[0.8fr_1fr] md:items-stretch">
+        <img alt="Daniel Johnson in a small aircraft, a personal photo showing the human side behind the operator profile" class="h-full min-h-[22rem] w-full object-cover" height="960" loading="lazy" src="/images/daniel-aircraft.webp" width="960" />
+        <div class="p-6 md:p-10">
+          <p class="card-label">Human detail</p>
+          <h2 class="mt-4 text-3xl font-bold tracking-[-0.05em] md:text-4xl">Not just another consulting bio.</h2>
+          <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
+            Outside the work, I care about travel, aviation, health, and building a life that leaves room for curiosity.
+            That matters because founders usually need a real thinking partner, not a polished brochure voice.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -159,11 +173,11 @@ const principles = [
               See how I advise teams.
             </h2>
             <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              The advisory page breaks down engagement modes, first-two-week priorities, and the kinds of teams where the fit is strongest.
+              The Fractional CMO page breaks down scope, 30/60/90-day priorities, pricing anchors, and the kinds of teams where the fit is strongest.
             </p>
           </div>
           <div class="flex flex-col gap-3">
-            <a class="button-accent" href="/advisory">Explore Advisory</a>
+            <a class="button-accent" href="/fractional-cmo/">Explore Fractional CMO</a>
             <a class="button-secondary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
           </div>
         </div>

@@ -11,13 +11,12 @@ danieljohnson.xyz {
 	encode zstd gzip
 	file_server
 
-	@hasTrailingSlash path_regexp trailing ^(.+)/$
-	redir @hasTrailingSlash {http.regexp.trailing.1} 308
-
 	@static {
-		path *.css *.js *.mjs *.svg *.png *.jpg *.jpeg *.webp *.woff *.woff2 *.txt *.xml
+		path *.css *.js *.mjs *.svg *.png *.jpg *.jpeg *.webp *.avif *.ico *.woff *.woff2 *.txt *.xml
 	}
 	header @static Cache-Control "public, max-age=31536000, immutable"
+	header /sitemap.xml Cache-Control "public, max-age=300, must-revalidate"
+	header /robots.txt Cache-Control "public, max-age=300, must-revalidate"
 	header {
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "strict-origin-when-cross-origin"

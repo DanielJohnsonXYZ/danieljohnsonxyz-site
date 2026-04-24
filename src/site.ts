@@ -19,7 +19,7 @@ export const siteConfig = {
   // surfaced only in About / FAQ, not on the headline cards.
   primaryLane: "Fractional CMO / Growth Operator for post-PMF Seed–Series B AI & B2B SaaS startups.",
   availability:
-    "Currently accepting a small number of fractional CMO engagements for Q2 2026.",
+    "2 fractional CMO slots available this quarter. Next start window: May 2026.",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",
@@ -81,36 +81,26 @@ export const ctas = {
 } as const;
 
 export const navigation = [
-  { href: "/", label: "Work with me" },
+  { href: "/fractional-cmo/", label: "Fractional CMO" },
   { href: "/case-studies/", label: "Results" },
-  { href: "/speaking/", label: "Speaking" },
   { href: "/writing/", label: "Writing" },
+  { href: "/speaking/", label: "Speaking" },
   { href: "/about/", label: "About" }
 ] as const;
 
 export const footerNavigation = {
   workWithMe: [
     { href: "/fractional-cmo/", label: "Fractional CMO" },
-    { href: "/advisory/", label: "Advisory days" },
-    { href: "/mentoring/", label: "Mentoring" },
+    { href: "/mentoring/", label: "Founder office hours" },
+    { href: "/speaking/", label: "Speaking / workshops" },
     { href: siteConfig.bookingUrl, label: "Book a 30-min Growth Audit" }
-  ],
-  // Speaking sub-links consolidated under a single parent section.
-  speaking: [
-    { href: "/speaking/", label: "Overview" },
-    { href: "/topics-and-talks/", label: "Topics & talks" },
-    { href: "/podcast-appearances/", label: "Podcast appearances" },
-    { href: "/press-and-media/", label: "Press & media" },
-    { href: "/book-daniel-to-speak/", label: "Book Daniel to speak" }
   ],
   more: [
     { href: "/writing/", label: "Writing" },
-    { href: "/newsletter/", label: "Newsletter" },
-    { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" },
     { href: "/case-studies/", label: "Case studies" },
     { href: "/about/", label: "About" },
-    { href: "/not-a-fit/", label: "Not a fit" },
-    { href: "/now/", label: "Now" },
+    { href: "/newsletter/", label: "Growth Notes" },
+    { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" },
     { href: "/contact/", label: "Contact" }
   ]
 } as const;
