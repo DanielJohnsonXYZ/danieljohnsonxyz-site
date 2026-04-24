@@ -1,6 +1,7 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import StickyCta from "../components/StickyCta.astro";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -13,6 +14,10 @@ interface Props {
   ogImage?: string;
   ogType?: "website" | "article";
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  /** Per-page override: set false to hide the sticky booking bar on pages that end in a full-width booking block. */
+  stickyCta?: boolean;
+  /** Opt in to preloading the hero headshot (homepage, about — pages where the image is above the fold). */
+  preloadHeadshot?: boolean;
 }
 
 const {
@@ -21,7 +26,9 @@ const {
   path = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
   ogType = "website",
-  schema = []
+  schema = [],
+  stickyCta = true,
+  preloadHeadshot = false
 } = Astro.props;
 
 const canonical = absoluteUrl(path);
@@ -85,14 +92,29 @@ document.addEventListener('click', (event) => {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0b0c" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content={siteConfig.name} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
+    <!-- Performance hints -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <!-- Calendly is linked from multiple CTAs — preconnect so the booking page opens fast. -->
+    <link rel="preconnect" href="https://calendly.com" crossorigin />
+    <link rel="dns-prefetch" href="https://calendly.com" />
+    {preloadHeadshot && (
+      <link
+        rel="preload"
+        as="image"
+        href={siteConfig.headshot}
+        fetchpriority="high"
+      />
+    )}
+
     <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} — Writing`} href="/rss.xml" />
 
     <meta property="og:site_name" content={siteConfig.name} />
@@ -112,6 +134,12 @@ document.addEventListener('click', (event) => {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
+
+    <!-- Hints for AI answer engines (GEO). Values kept in sync with site.ts + llms.txt. -->
+    <meta name="ai:summary" content={description} />
+    <meta name="ai:role" content="Fractional CMO & AI-Native Growth Operator" />
+    <meta name="ai:serves" content="Seed to Series B AI and B2B SaaS founders" />
+    <meta name="ai:contact" content={siteConfig.bookingUrl} />
 
     <script is:inline set:html={gtmScript}></script>
 
@@ -143,6 +171,8 @@ document.addEventListener('click', (event) => {
     </main>
 
     <SiteFooter />
+
+    <StickyCta enabled={stickyCta} />
 
     <script is:inline set:html={revealScript}></script>
   </body>

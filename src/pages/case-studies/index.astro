@@ -6,12 +6,39 @@ import { formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
 
 const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
+
+// Honest state: if we only have one case study live, the page still needs
+// to look intentional rather than thin. These "coming next" placeholders
+// render as upcoming cards so the grid isn't a single lonely tile.
+const comingNext = [
+  {
+    stage: "Series A",
+    sector: "AI DevTools",
+    title: "CAC down 35% in 8 weeks by rebuilding paid structure and ICP segmentation.",
+    description:
+      "Full write-up publishing shortly — the short version is in the homepage proof strip. Book a call and I'll walk you through the detail now."
+  },
+  {
+    stage: "Seed",
+    sector: "US B2B Fintech",
+    title: "500+ qualified signups from a single campaign at 8.6% CTR.",
+    description:
+      "Engagement diagnosed ICP and positioning before touching channel. Publishing the detailed write-up after client review."
+  },
+  {
+    stage: "Growth",
+    sector: "eCommerce",
+    title: "21% less churn in 90 days through lifecycle and win-back messaging.",
+    description:
+      "Case study in final review with the client. Email daniel@wescalestartups.com if you'd like the numbers in the meantime."
+  }
+];
 ---
 
 <BaseLayout
-  description="Anonymised case studies from Daniel Johnson's GTM, growth operator, and fractional CMO engagements with post-PMF AI and B2B SaaS startups."
+  description="Case studies and outcomes from Daniel Johnson's fractional CMO, growth operator, and GTM engagements with post-PMF AI and B2B SaaS startups. Real numbers, real attribution."
   path="/case-studies"
-  title="Case studies | Daniel Johnson"
+  title="Case studies | Fractional CMO engagements | Daniel Johnson"
 >
   <section class="section-space">
     <div class="shell">
@@ -22,8 +49,7 @@ const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
             What the work actually looks like.
           </h1>
           <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            Selected engagements, anonymised where needed. Each one is written to show the starting bottleneck, the
-            approach, and the decision changes that produced the outcome — not just the headline number.
+            Selected engagements, anonymised where needed. Each one is written to show the starting bottleneck, the approach, and the decision changes that produced the outcome — not just the headline number.
           </p>
         </div>
 
@@ -31,13 +57,13 @@ const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
           <p class="card-label">How to read these</p>
           <div class="mt-6 grid gap-4">
             <article class="card-muted p-4">
-              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you are evaluating fit</p>
+              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you're evaluating fit</p>
               <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">
                 Look at the stage, engagement mode, and starting bottleneck — not the metrics.
               </p>
             </article>
             <article class="card-muted p-4">
-              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you are solving a similar problem</p>
+              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you're solving a similar problem</p>
               <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">
                 The approach section is the important part. Metrics are context, not the claim.
               </p>
@@ -85,10 +111,36 @@ const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
                 <span>{item.data.timeframe}</span>
                 <span>{formatDate(item.data.publishedAt)}</span>
               </div>
+              <a class="link-arrow mt-5" href={`/case-studies/${item.id}`}>Read the full case study →</a>
             </article>
           ))
         }
       </div>
+
+      <!-- "Coming next" placeholders so the page doesn't look thin at one live case study. -->
+      {caseStudies.length < 3 && (
+        <div class="mt-10">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Publishing next</p>
+          <div class="grid gap-5 lg:grid-cols-2">
+            {comingNext.map((item) => (
+              <article class="card p-6 md:p-8 bg-[color:var(--surface-dim)] border-dashed">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="chip">{item.stage}</span>
+                  <span class="chip">{item.sector}</span>
+                  <span class="chip bg-[color:var(--accent)]/10 text-[color:var(--accent)]">Publishing next</span>
+                </div>
+                <h2 class="mt-5 text-2xl font-bold tracking-[-0.04em] md:text-3xl">
+                  {item.title}
+                </h2>
+                <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.description}</p>
+                <a class="link-arrow mt-5" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+                  Ask for the numbers on a call →
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -102,8 +154,7 @@ const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
               Have a similar bottleneck?
             </h2>
             <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              Start with a 30-minute growth diagnosis. You will know whether the right next step is a sprint, advisory
-              rhythm, fractional support, or no engagement at all.
+              Start with a 30-minute growth diagnosis. You'll know whether the right next step is a sprint, advisory rhythm, fractional support, or no engagement at all.
             </p>
           </div>
           <div class="flex flex-col gap-3">
