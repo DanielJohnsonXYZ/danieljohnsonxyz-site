@@ -3,12 +3,14 @@ import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildFaqPageSchema } from "../lib/schema";
-import { sortByFeaturedThenOrder } from "../lib/utils";
+import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
+import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import {
   agencyVsMe,
   ctas,
   fitSignals,
+  lifetimeTotals,
+  positioning,
   proofBar,
   siteConfig,
   trustBadges,
@@ -33,12 +35,12 @@ const supportingTestimonials = [
 
 // ─── Method layers (one source of truth so the number never drifts) ─────
 const methodLayers = [
-  { title: "GTM systems", body: "Output: ICP doc, positioning test results, weekly growth dashboard.", href: "/gtm-systems/" },
-  { title: "Acquisition", body: "Output: channel test map, experiment backlog, paid and organic decision rules.", href: "/experimentation/" },
-  { title: "Conversion", body: "Output: homepage message tests, funnel notes, activation and demo-booking fixes.", href: "/product-led-growth/" },
-  { title: "AI-assisted research", body: "Output: customer-call synthesis, competitor teardown, message bank.", href: "/ai-native-workflows/" },
-  { title: "Founder-led distribution", body: "Output: founder content pillars, proof library, content-to-pipeline loop.", href: "/founder-led-distribution/" },
-  { title: "Reporting", body: "Output: growth scorecard, pipeline view, weekly stop / scale / fix notes.", href: "/revenue-operations/" }
+  { title: "GTM systems", body: "ICP doc, positioning test results, weekly growth dashboard.", href: "/gtm-systems/" },
+  { title: "Acquisition", body: "Channel test map, experiment backlog, paid and organic decision rules.", href: "/experimentation/" },
+  { title: "Conversion", body: "Homepage message tests, funnel notes, activation and demo-booking fixes.", href: "/product-led-growth/" },
+  { title: "AI-assisted research", body: "Customer-call synthesis, competitor teardown, message bank.", href: "/ai-native-workflows/" },
+  { title: "Founder-led distribution", body: "Founder content pillars, proof library, content-to-pipeline loop.", href: "/founder-led-distribution/" },
+  { title: "Reporting", body: "Growth scorecard, pipeline view, weekly stop / scale / fix notes.", href: "/revenue-operations/" }
 ];
 const layerCount = methodLayers.length;
 
@@ -49,7 +51,7 @@ const serviceCards = [
     primary: true,
     strap: "Primary Offer · Senior growth operator, embedded 1 to 2 days a week.",
     body:
-      "I own the GTM priorities, reporting rhythm, acquisition tests, and team decisions until growth no longer depends on founder instinct.",
+      "I own GTM priorities, reporting rhythm, acquisition tests, and team decisions until growth no longer depends on founder instinct.",
     bestFor: "£1m to £10m ARR, founder-led, growth stuck, senior help needed before or alongside a full-time CMO hire.",
     href: "/fractional-cmo/",
     cta: "Explore Fractional CMO"
@@ -58,7 +60,7 @@ const serviceCards = [
     heading: "Growth Advisory",
     strap: "Focused decision sessions for founders not ready for an embedded engagement.",
     body:
-      "Use this when you need sharper positioning, a channel decision, a hiring read, or a second brain before spending more.",
+      "Sharper positioning, a channel decision, a hiring read, or a second brain before spending more.",
     bestFor: "Pre-PMF or early post-PMF founders with a specific GTM decision.",
     href: "/mentoring/",
     cta: "See founder office hours"
@@ -79,34 +81,27 @@ const outcomeCards = [
   {
     metric: "6×",
     metricSuffix: "app downloads",
-    context: "From roughly 2k monthly downloads to 12k+ after six months of acquisition and lifecycle rebuild.",
+    context: "2k → 12k+ monthly downloads in 6 months after acquisition and lifecycle rebuild.",
     sector: "HealthTech · AI"
   },
   {
     metric: "35%",
     metricSuffix: "lower CAC",
-    context: "Reduced CAC after eight weeks by rebuilding segmentation, paid account structure, and landing-page routing.",
+    context: "CAC down 35% in 8 weeks — segmentation, paid account structure, landing-page routing.",
     sector: "Fintech · Crypto"
   },
   {
     metric: "500+",
     metricSuffix: "qualified signups",
-    context: "Generated 500+ qualified signups from one campaign at 8.6% CTR for a US B2B fintech.",
+    context: "500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.",
     sector: "Fintech · B2B SaaS"
   },
   {
     metric: "21%",
     metricSuffix: "less churn",
-    context: "Improved retention after three months with targeted lifecycle and win-back messaging.",
+    context: "Retention up 21% in 3 months. Targeted lifecycle and win-back messaging.",
     sector: "eCommerce"
   }
-];
-
-const lifetimeTotals = [
-  "£18M+ revenue generated for clients",
-  "£6.8M+ ad spend managed",
-  "20+ startups scaled",
-  "Helped founders raise £15M+"
 ];
 
 // ─── FAQ ────────────────────────────────────────────────────────────────
@@ -132,12 +127,47 @@ const faq = [
       "Primary focus is fractional CMO engagements. I'll consider a full-time Head of Growth or VP Marketing role for the right post-PMF AI or B2B SaaS company. Book a growth audit to discuss either way."
   }
 ];
+
+// ─── Structured data ────────────────────────────────────────────────────
+const schemas = [
+  buildFaqPageSchema(faq),
+  buildAggregateRatingSchema(),
+  buildServiceSchema({
+    name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
+    description:
+      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire.",
+    url: absoluteUrl("/fractional-cmo/"),
+    priceRange: "£6,000 – £12,000",
+    serviceType: "Fractional CMO",
+    offers: [
+      {
+        name: "Strategy Sprint",
+        description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
+        price: "6000",
+        billingIncrement: "per engagement"
+      },
+      {
+        name: "Fractional CMO",
+        description: "3-month minimum. Embedded senior ownership 1 day a week.",
+        price: "7500",
+        billingIncrement: "per month"
+      },
+      {
+        name: "Fractional CMO Plus",
+        description: "Deeper operating support, agency management, faster execution.",
+        price: "12000",
+        billingIncrement: "per month"
+      }
+    ]
+  })
+];
 ---
 
 <BaseLayout
-  description="Fractional CMO for founder-led AI and B2B SaaS startups that need repeatable pipeline, sharper positioning, and senior growth leadership."
+  description={positioning.subheadline}
   path="/"
-  schema={buildFaqPageSchema(faq)}
+  preloadHeadshot
+  schema={schemas}
   title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
 >
   <!-- 1. Hero ─────────────────────────────────────────────────────────── -->
@@ -147,13 +177,12 @@ const faq = [
         <div class="reveal flex flex-col gap-5">
           <span class="service-label">Fractional CMO · AI-Native Growth Operator</span>
 
-          <div class="space-y-5">
+          <div class="space-y-4">
             <h1 id="hero-heading" class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]">
-              Growth still depends on you. <span class="hero-accent">I build the pipeline system around you.</span>
+              If growth still depends on the founder, <span class="hero-accent">I fix that.</span>
             </h1>
             <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
-              For founder-led AI and B2B SaaS startups where channels are active, GTM feels messy, and nothing compounds yet.
-              I embed as your fractional CMO to sharpen positioning, build repeatable pipeline, and reduce the founder bottleneck.
+              Fractional CMO for <strong class="font-semibold text-[color:var(--ink)]">Seed to Series B AI and B2B SaaS founders</strong> — predictable pipeline, sharper positioning, and senior growth leadership without a £150k full-time hire.
             </p>
           </div>
 
@@ -173,8 +202,8 @@ const faq = [
               <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
                 {ctas.primary.label} →
               </a>
-              <a class="button-link" href={ctas.bottleneck.href} data-cta="hero-bottleneck">
-                {ctas.bottleneck.label} →
+              <a class="button-link" href={ctas.caseStudies.href} data-cta="hero-case-studies">
+                {ctas.caseStudies.label} →
               </a>
             </div>
             <p class="availability-line">{siteConfig.availability}</p>
@@ -211,11 +240,11 @@ const faq = [
     </div>
   </section>
 
-  <!-- 2. Social proof strip ─────────────────────────────────────────── -->
+  <!-- 2. Social proof strip (selected affiliations — clarified heading) ─ -->
   <section class="section-space pt-0">
     <div class="shell">
       <div class="trust-strip trust-strip-large" aria-label="Selected affiliations and platforms">
-        <p class="trust-strip-label">As featured on / affiliated with</p>
+        <p class="trust-strip-label">Selected affiliations</p>
         <div class="trust-strip-logos">
           {
             trustLogos.map((item) => (
@@ -240,7 +269,7 @@ const faq = [
     </div>
   </section>
 
-  <!-- 3. Problem statement ─────────────────────────────────────────── -->
+  <!-- 3. Problem statement — tighter copy (was 3 paragraphs, now 2) ──── -->
   <section class="section-space pt-0" aria-labelledby="problem-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
@@ -248,17 +277,10 @@ const faq = [
           You've got traction. <span class="hero-accent">So why does growth still feel like guessing?</span>
         </h2>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          Paying customers. Revenue line moving. A fundraising deck that holds up. But the acquisition engine?
-          Growth plateauing, founder-led sales that doesn't scale, no repeatable pipeline, and a GTM stack that's
-          three tools taped together.
+          Paying customers. Revenue line moving. A deck that holds up. But the acquisition engine? Plateaued. Founder-led sales that doesn't scale. No repeatable pipeline. A GTM stack that's three tools taped together.
         </p>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          You've tried paid. You've tried content. You've tried hiring a generalist marketer. Something worked,
-          most of it didn't, and nobody on the team can tell you why.
-        </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          You don't need more tactics. You need a senior operator who can walk in, see the whole system at once,
-          and tell you, with specifics, which two levers actually matter for your company right now.
+          You don't need more tactics. You need a senior operator who can walk in, see the whole system at once, and tell you — with specifics — which two levers matter for your company right now.
         </p>
       </div>
     </div>
@@ -339,7 +361,7 @@ const faq = [
     <div class="shell">
       <SectionHeader
         eyebrow="Why not an agency"
-        intro="You do not need another agency layer when the real problem is senior growth judgement."
+        intro="You don't need another agency layer when the real problem is senior growth judgement."
         title="Senior growth judgement, not junior execution."
       />
 
@@ -371,10 +393,9 @@ const faq = [
       </div>
 
       <div class="reveal mx-auto mt-10 max-w-3xl space-y-5 text-lg leading-8 text-white/72">
-        <p>Most growth consultants arrive, ship a deck, and disappear. That's not how I work.</p>
+        <p>Most growth consultants arrive, ship a deck, and disappear. Not how I work.</p>
         <p>
-          Every engagement builds the same thing, a growth system. Not a campaign. Not a funnel. A repeatable architecture
-          your team can run after I'm gone.
+          Every engagement builds the same thing: a growth system. A repeatable architecture your team can run after I'm gone.
         </p>
         <p class="text-sm uppercase tracking-[0.16em] text-white/50">
           {layerCount} layers, tailored to where you are
@@ -415,20 +436,14 @@ const faq = [
       <div class="reveal mx-auto max-w-5xl space-y-6">
         <span class="eyebrow">Category</span>
         <h2 id="ai-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
-          AI should make GTM work faster, not vaguer.
+          AI should make GTM faster, not vaguer.
           <span class="hero-accent">The human decisions still matter.</span>
         </h2>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          In practice, I use AI to shorten research synthesis, customer-call review, competitor teardowns,
-          message testing, reporting, and campaign iteration. That means less manual drag and faster decisions.
+          I use AI to shorten research synthesis, customer-call review, competitor teardowns, message testing, reporting, and campaign iteration. Less manual drag, faster decisions.
         </p>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          You still need a human operator deciding which customer signal matters, which channel deserves budget,
-          and which message is strong enough to test. AI helps produce the raw material faster.
-        </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          The practical output is simple: faster research, sharper briefs, cleaner reporting, and fewer wasted weeks
-          between seeing a problem and testing the fix.
+          You still need a human operator deciding which customer signal matters, which channel deserves budget, which message is strong enough to test. AI helps produce the raw material faster.
         </p>
         <p>
           <a class="link-arrow" href="/writing/">Read: What AI-native GTM actually means →</a>
@@ -442,7 +457,7 @@ const faq = [
     <div class="shell">
       <SectionHeader
         eyebrow="Proof"
-        intro="The short list. Full case studies live below."
+        intro="The short list. Full case studies linked below."
         title="Real campaigns. Real numbers. Real attribution."
       />
 
@@ -523,14 +538,10 @@ const faq = [
         <span class="eyebrow">About</span>
         <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">About Daniel.</h2>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          10+ years in growth as a co-founder, an embedded Head of Growth, and a fractional CMO. I've worked with
-          20+ AI and B2B SaaS startups, managed £6.8M+ in paid spend, generated £18M+ in revenue, and helped founders
-          raise £15M+. I've co-founded two companies, one in mental-health tech (eQuoo) and one in eCommerce.
+          10+ years in growth as a co-founder, embedded Head of Growth, and fractional CMO. 20+ AI and B2B SaaS startups advised. £6.8M+ paid spend managed, £18M+ revenue generated, £15M+ helped founders raise. Two exits on the founder side: one mental-health tech (eQuoo), one eCommerce.
         </p>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          I mentor founders through Google for Startups, Techstars, and GrowthMentor. I've
-          lectured at Cambridge Judge Business School and Imperial College London, and delivered growth workshops at
-          Google Launchpad programmes across the UK, Europe, and Africa. {siteConfig.location}
+          I mentor founders through Google for Startups, Techstars, and GrowthMentor. I've lectured at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa. {siteConfig.location}
         </p>
         <p>
           <a class="link-arrow" href="/about/">Read more about Daniel →</a>
@@ -581,16 +592,14 @@ const faq = [
           {ctas.primary.label}.
         </h2>
         <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
-          30 minutes on your specific situation. No pitch, no deck, no trying-to-close. You'll leave with a clearer
-          read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell
-          you what I'd do instead and point you to the right operator, agency, or mentor.
+          30 minutes on your specific situation. No pitch, no deck, no trying-to-close. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="final-primary">
             {ctas.primary.label} →
           </a>
-          <a class="button-link-invert" href={ctas.bottleneck.href} data-cta="final-secondary">
-            {ctas.bottleneck.label}
+          <a class="button-link-invert" href={ctas.caseStudies.href} data-cta="final-case-studies">
+            {ctas.caseStudies.label} →
           </a>
         </div>
         <p class="text-sm text-white/60">

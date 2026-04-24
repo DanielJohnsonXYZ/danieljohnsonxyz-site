@@ -1,29 +1,55 @@
 ---
-import { ctas, footerNavigation, siteConfig } from "../site";
+import { ctas, footerNavigation, footerTestimonial, siteConfig } from "../site";
 ---
 
 <footer class="dark-section pb-10 pt-20">
   <div class="shell">
+    <!-- Active footer: testimonial pull-quote + proof strip so the footer does conversion work, not just navigation. -->
+    <div class="mb-8 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+      <blockquote class="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 md:p-8">
+        <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white md:text-xl">
+          "{footerTestimonial.quote}"
+        </p>
+        <footer class="mt-4 flex items-center justify-between text-sm">
+          <div>
+            <p class="font-semibold text-white">{footerTestimonial.name}</p>
+            <p class="text-white/55">{footerTestimonial.role}</p>
+          </div>
+          <a class="text-xs font-semibold uppercase tracking-[0.14em] text-white/60 hover:text-white" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
+            More reviews →
+          </a>
+        </footer>
+      </blockquote>
+
+      <aside class="flex flex-col gap-3 text-right md:items-end">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Top-rated mentor</p>
+        <p class="text-5xl font-extrabold tracking-[-0.06em] text-white">4.93<span class="text-2xl text-white/50">/5</span></p>
+        <p class="text-sm text-white/55">from 219 reviews · 388+ sessions</p>
+      </aside>
+    </div>
+
     <div class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 md:p-12">
       <div class="grid gap-10 md:grid-cols-4">
         <div class="flex flex-col gap-6 md:col-span-2">
-          <span class="eyebrow">Stay in touch</span>
+          <span class="eyebrow">Start a conversation</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
-            {siteConfig.name}
+            {ctas.primary.label}.
           </h2>
-          <p class="max-w-md text-base leading-7 text-white/60">
-            Fractional CMO for founder-led AI and B2B SaaS startups where growth still depends too much on the founder.
+          <p class="max-w-md text-base leading-7 text-white/65">
+            30 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense.
           </p>
-          <p class="max-w-md text-sm font-semibold leading-6 text-white/75">{siteConfig.availability}</p>
+          <p class="max-w-md rounded-full border border-white/20 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/75">
+            {siteConfig.availability}
+          </p>
           <div class="flex flex-wrap gap-3">
             <a class="button-accent" href={ctas.primary.href} data-cta="footer-primary">
               {ctas.primary.label} →
             </a>
-            <a class="button-secondary" href={ctas.bottleneck.href} data-cta="footer-secondary">
-              {ctas.bottleneck.label}
+            <a class="button-secondary" href={ctas.caseStudies.href} data-cta="footer-case-studies">
+              {ctas.caseStudies.label} →
             </a>
           </div>
-          <p class="text-xs text-white/65">{siteConfig.location}</p>
+          <p class="text-xs text-white/55">{siteConfig.location}</p>
         </div>
 
         <div class="space-y-4">
