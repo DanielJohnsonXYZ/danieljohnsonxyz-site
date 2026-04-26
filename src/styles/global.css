@@ -546,10 +546,6 @@ a, button, summary {
   color: #374151;
 }
 
-body > iframe[src*="assets.mailerlite.com/jsonp"] {
-  display: none !important;
-}
-
 .highlight-text {
   background: linear-gradient(180deg, transparent 58%, rgba(235, 247, 82, 0.42) 0);
   -webkit-box-decoration-break: clone;

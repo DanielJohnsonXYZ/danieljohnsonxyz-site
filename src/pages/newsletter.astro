@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { ctas, siteConfig } from "../site";
 
+const subscribeUrl = "https://listmonk.wescalestartups.com/subscription/form";
+
 const notes = [
   "How to decide whether your bottleneck is ICP, channel, conversion, or cadence.",
   "What AI-native GTM looks like when it is practical rather than performative.",
@@ -28,8 +30,8 @@ const notes = [
             growth theatre exercises.
           </p>
           <div class="cta-cluster">
-            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Subscribe%20me%20to%20Growth%20Notes`}>
-              Subscribe by email →
+            <a class="button-accent" href={subscribeUrl}>
+              Subscribe to Growth Notes →
             </a>
             <a class="button-link" href="/writing/">Read recent essays →</a>
           </div>
