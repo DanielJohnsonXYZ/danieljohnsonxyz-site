@@ -106,6 +106,39 @@ export const navigation = [
   { href: "/about/", label: "About" }
 ] as const;
 
+export const navigationGroups = [
+  {
+    label: "Work with me",
+    href: "/fractional-cmo/",
+    items: [
+      { href: "/fractional-cmo/", label: "Fractional CMO", description: "Embedded senior GTM leadership." },
+      { href: "/mentoring/", label: "Founder office hours", description: "Focused growth decisions and second-brain sessions." },
+      { href: "/speaking/", label: "Speaking", description: "Talks, workshops, and founder-cohort sessions." }
+    ]
+  },
+  {
+    label: "Expertise",
+    href: "/gtm-systems/",
+    items: [
+      { href: "/gtm-systems/", label: "GTM systems", description: "ICP, positioning, channel strategy, operating cadence." },
+      { href: "/product-led-growth/", label: "Product-led growth", description: "Activation, onboarding, trial conversion, retention." },
+      { href: "/experimentation/", label: "Experimentation", description: "Hypotheses, prioritisation, decision rules, learning loops." },
+      { href: "/ai-native-workflows/", label: "AI-native workflows", description: "Research, messaging, briefs, reporting, and faster iteration." },
+      { href: "/revenue-operations/", label: "Revenue operations", description: "Funnel visibility, pipeline process, reporting cadence." }
+    ]
+  },
+  {
+    label: "Media",
+    href: "/speaking/",
+    items: [
+      { href: "/speaking/", label: "Speaking", description: "Booker assets, talks, and selected rooms." },
+      { href: "/podcast-appearances/", label: "Podcast appearances", description: "Interviews on AI-native GTM and growth systems." },
+      { href: "/writing/", label: "Writing", description: "Essays and practical growth notes." },
+      { href: "/now/", label: "Now", description: "Current work, availability, and focus." }
+    ]
+  }
+] as const;
+
 export const footerNavigation = {
   workWithMe: [
     { href: "/fractional-cmo/", label: "Fractional CMO" },
@@ -113,15 +146,34 @@ export const footerNavigation = {
     { href: "/speaking/", label: "Speaking / workshops" },
     { href: siteConfig.bookingUrl, label: "Book a 30-min Growth Audit" }
   ],
+  expertise: [
+    { href: "/gtm-systems/", label: "GTM systems" },
+    { href: "/product-led-growth/", label: "Product-led growth" },
+    { href: "/experimentation/", label: "Experimentation" },
+    { href: "/ai-native-workflows/", label: "AI-native workflows" },
+    { href: "/revenue-operations/", label: "Revenue operations" }
+  ],
   more: [
     { href: "/writing/", label: "Writing" },
     { href: "/case-studies/", label: "Case studies" },
+    { href: "/podcast-appearances/", label: "Podcast appearances" },
+    { href: "/now/", label: "Now" },
     { href: "/about/", label: "About" },
     { href: "/newsletter/", label: "Growth Notes" },
     { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" },
     { href: "/contact/", label: "Contact" }
   ]
 } as const;
+
+export const socialLinks = [
+  { href: siteConfig.linkedin, label: "LinkedIn" },
+  { href: siteConfig.youtube, label: "YouTube" },
+  { href: siteConfig.growthMentor, label: "GrowthMentor" },
+  { href: siteConfig.mentorCruise, label: "MentorCruise" },
+  { href: siteConfig.instagram, label: "Instagram" },
+  { href: siteConfig.malt, label: "Malt" },
+  { href: siteConfig.pangea, label: "Pangea" }
+] as const;
 
 export const audienceBands = [
   "Seed to Series B founders with real traction and a growth plateau",
@@ -247,25 +299,41 @@ export const trustLogos = [
     src: "/images/logos/cambridge.webp",
     alt: "University of Cambridge — Visiting Lecturer",
     label: "Cambridge"
+  },
+  {
+    id: "techstars",
+    src: "/images/logos/techstars.svg",
+    alt: "Techstars — Mentor",
+    label: "Techstars"
+  },
+  {
+    id: "imperial",
+    src: "/images/logos/imperial.svg",
+    alt: "Imperial College London — Guest lecturer",
+    label: "Imperial"
+  },
+  {
+    id: "general-assembly",
+    src: "/images/logos/general-assembly.svg",
+    alt: "General Assembly — Training programme",
+    label: "General Assembly"
+  },
+  {
+    id: "uk-space-agency",
+    src: "/images/logos/uk-space-agency.svg",
+    alt: "UK Space Agency — Innovation talk",
+    label: "UK Space Agency"
   }
-] as const;
-
-// Text-only affiliation badges — shown alongside logos until image assets
-// are added to public/images/logos/.
-export const trustBadges = [
-  { label: "Techstars Mentor", variant: "compact" },
-  { label: "Google for Startups — Growth Mentor", variant: "wide" },
-  { label: "Cambridge Judge — Visiting Lecturer", variant: "wide" }
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
 // £18M+ moved OUT of here — it now lives only in the dark "lifetimeTotals"
 // strip lower down the page, to avoid the hero + proof-bar duplication.
 export const proofBar = [
-  { value: "4.93 / 5", label: "from 219 reviews on GrowthMentor", source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
-  { value: "388+", label: "mentor sessions delivered" },
-  { value: "20+", label: "AI & SaaS startups advised" },
-  { value: "£6.8M+", label: "ad spend managed" }
+  { icon: "⭐", value: "4.93 / 5", label: "from 219 reviews on GrowthMentor", source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
+  { icon: "🤝", value: "388+", label: "mentor sessions delivered" },
+  { icon: "🚀", value: "20+", label: "AI & SaaS startups advised" },
+  { icon: "📈", value: "£6.8M+", label: "ad spend managed" }
 ] as const;
 
 // Lifetime totals — one strip, lower on the homepage. Single home for the

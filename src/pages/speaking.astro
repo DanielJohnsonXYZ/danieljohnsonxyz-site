@@ -4,7 +4,7 @@ import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildTalkSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { siteConfig, trustLogos } from "../site";
+import { siteConfig, socialLinks, trustLogos } from "../site";
 
 const talks = sortByFeaturedThenOrder(await getCollection("talks"));
 const selectedTalks = talks.slice(0, 3);
@@ -90,7 +90,7 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
             </div>
           </article>
           <div class="reveal card overflow-hidden p-4">
-            <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="960" loading="eager" src="/images/cambridge-judge-business-school.png" width="1200" />
+            <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="720" loading="eager" src="/images/cambridge-judge-business-school-960.webp" width="960" />
           </div>
           <div class="reveal card p-6 md:p-8">
             <p class="card-label">Formats</p>
@@ -237,6 +237,27 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
             ))
           }
           <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Enquire About Speaking</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal social-panel">
+        <div>
+          <p class="card-label">Social proof and profiles</p>
+          <h2>More ways to assess fit before booking.</h2>
+          <p>
+            Recent thinking, mentor reviews, public profiles, interviews, and current work are linked here for organisers who want a fuller picture.
+          </p>
+        </div>
+        <div class="social-link-grid">
+          {socialLinks.map((item) => (
+            <a href={item.href} rel="noreferrer" target="_blank">{item.label}</a>
+          ))}
+          <a href="/podcast-appearances/">Podcast appearances</a>
+          <a href="/now/">Now page</a>
         </div>
       </div>
     </div>

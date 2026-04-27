@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-labelledby="title">
+  <title id="title">Techstars</title>
+  <rect width="360" height="96" fill="none"/>
+  <circle cx="46" cy="48" r="25" fill="#111827"/>
+  <path fill="#fff" d="m46 27 4.7 14.3h15.1L53.6 50l4.7 14.3L46 55.5 33.7 64.3 38.4 50 26.2 41.3h15.1z"/>
+  <text x="86" y="60" fill="#111827" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800" letter-spacing="-1">techstars</text>
+</svg>

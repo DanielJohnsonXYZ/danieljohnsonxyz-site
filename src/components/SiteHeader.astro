@@ -1,5 +1,5 @@
 ---
-import { announcement, ctas, navigation } from "../site";
+import { announcement, ctas, navigationGroups } from "../site";
 
 interface Props {
   currentPath?: string;
@@ -36,27 +36,47 @@ const active = normalise(currentPath);
           </span>
         </a>
 
-        <nav
-          aria-label="Primary"
-          class="hidden items-center gap-1 rounded-full border border-[color:var(--line)] bg-white/60 p-1 lg:flex"
-        >
+        <nav aria-label="Primary" class="hidden items-center gap-1 rounded-full border border-[color:var(--line)] bg-white/60 p-1 lg:flex">
           {
-            navigation.map((item) => {
-              const isActive = normalise(item.href) === active;
+            navigationGroups.map((group) => {
+              const isActive = group.items.some((item) => normalise(item.href) === active);
               return (
-                <a
-                  class:list={[
-                    "site-nav-link rounded-full px-4 py-2 text-sm font-medium",
-                    isActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
-                  ]}
-                  aria-current={isActive ? "page" : undefined}
-                  href={item.href}
-                >
-                  {item.label}
-                </a>
+                <details class="site-nav-menu">
+                  <summary
+                    class:list={[
+                      "site-nav-link rounded-full px-4 py-2 text-sm font-medium",
+                      isActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
+                    ]}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {group.label}
+                  </summary>
+                  <div class="site-nav-dropdown">
+                    <a class="site-nav-dropdown-feature" href={group.href}>
+                      <span>{group.label}</span>
+                      <strong>Explore the full section</strong>
+                    </a>
+                    <div class="site-nav-dropdown-list">
+                      {
+                        group.items.map((item) => (
+                          <a class="site-nav-dropdown-item" href={item.href}>
+                            <span>{item.label}</span>
+                            <small>{item.description}</small>
+                          </a>
+                        ))
+                      }
+                    </div>
+                  </div>
+                </details>
               );
             })
           }
+          <a class="site-nav-link rounded-full px-4 py-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--ink)]" href="/case-studies/">
+            Results
+          </a>
+          <a class="site-nav-link rounded-full px-4 py-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--ink)]" href="/about/">
+            About
+          </a>
         </nav>
 
         <div class="hidden lg:block">
@@ -70,24 +90,35 @@ const active = normalise(currentPath);
           <div class="mobile-nav-panel absolute right-0 top-[calc(100%+0.75rem)] w-72 p-3">
             <nav aria-label="Mobile" class="flex flex-col gap-1">
               {
-                navigation.map((item) => {
-                  const isActive = normalise(item.href) === active;
+                navigationGroups.map((group) => {
+                  const isActive = group.items.some((item) => normalise(item.href) === active);
                   return (
-                    <a
-                      class:list={[
-                        "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                        isActive
-                          ? "site-nav-link-active text-white"
-                          : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
-                      ]}
-                      aria-current={isActive ? "page" : undefined}
-                      href={item.href}
-                    >
-                      {item.label}
-                    </a>
+                    <details class="mobile-nav-group" open={isActive}>
+                      <summary class="mobile-nav-group-label">{group.label}</summary>
+                      <div class="mobile-nav-group-links">
+                        {
+                          group.items.map((item) => (
+                            <a
+                              class:list={[
+                                "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+                                normalise(item.href) === active
+                                  ? "site-nav-link-active text-white"
+                                  : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
+                              ]}
+                              aria-current={normalise(item.href) === active ? "page" : undefined}
+                              href={item.href}
+                            >
+                              {item.label}
+                            </a>
+                          ))
+                        }
+                      </div>
+                    </details>
                   );
                 })
               }
+              <a class="rounded-xl px-4 py-3 text-sm font-medium text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]" href="/case-studies/">Results</a>
+              <a class="rounded-xl px-4 py-3 text-sm font-medium text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]" href="/about/">About</a>
               <a class="button-primary mt-2" href={ctas.primary.href} data-cta="header-mobile-primary">
                 {ctas.primary.label}
               </a>

@@ -238,7 +238,6 @@ export function buildServiceSchema(opts: {
       "@type": "BusinessAudience",
       audienceType: "AI and B2B SaaS founders, Seed to Series B"
     },
-    ...(opts.priceRange ? { priceRange: opts.priceRange } : {}),
     ...(offers ? { hasOfferCatalog: { "@type": "OfferCatalog", name: opts.name, itemListElement: offers } } : {})
   };
 }

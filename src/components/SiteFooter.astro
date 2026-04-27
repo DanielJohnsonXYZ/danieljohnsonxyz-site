@@ -1,5 +1,5 @@
 ---
-import { ctas, footerNavigation, footerTestimonial, siteConfig } from "../site";
+import { ctas, footerNavigation, footerTestimonial, siteConfig, socialLinks } from "../site";
 ---
 
 <footer class="dark-section pb-10 pt-20">
@@ -29,7 +29,7 @@ import { ctas, footerNavigation, footerTestimonial, siteConfig } from "../site";
     </div>
 
     <div class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 md:p-12">
-      <div class="grid gap-10 md:grid-cols-4">
+      <div class="grid gap-10 md:grid-cols-5">
         <div class="flex flex-col gap-6 md:col-span-2">
           <span class="eyebrow">Start a conversation</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
@@ -69,6 +69,21 @@ import { ctas, footerNavigation, footerTestimonial, siteConfig } from "../site";
         </div>
 
         <div class="space-y-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Expertise</p>
+          <ul class="space-y-3">
+            {
+              footerNavigation.expertise.map((item) => (
+                <li>
+                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="space-y-4">
           <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">More</p>
           <ul class="space-y-3">
             {
@@ -87,8 +102,9 @@ import { ctas, footerNavigation, footerTestimonial, siteConfig } from "../site";
       <div class="mt-10 grid gap-4 border-t border-white/[0.06] pt-6 text-sm text-white/50 md:grid-cols-[1.2fr_0.8fr]">
         <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
           <li><a class="hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
-          <li><a class="hover:text-white" href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn</a></li>
-          <li><a class="hover:text-white" href={siteConfig.youtube} rel="noreferrer" target="_blank">YouTube</a></li>
+          {socialLinks.map((item) => (
+            <li><a class="hover:text-white" href={item.href} rel="noreferrer" target="_blank">{item.label}</a></li>
+          ))}
         </ul>
       </div>
 

@@ -13,7 +13,6 @@ import {
   positioning,
   proofBar,
   siteConfig,
-  trustBadges,
   trustLogos
 } from "../site";
 
@@ -21,6 +20,9 @@ import {
 const articles = (await getCollection("articles"))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
   .slice(0, 3);
+
+const media = sortByFeaturedThenOrder(await getCollection("media"));
+const featuredMedia = media.slice(0, 4);
 
 const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials"));
 
@@ -101,6 +103,27 @@ const outcomeCards = [
     metricSuffix: "less churn",
     context: "Retention up 21% in 3 months. Targeted lifecycle and win-back messaging.",
     sector: "eCommerce"
+  }
+];
+
+const imageStoryCards = [
+  {
+    eyebrow: "Speaking",
+    title: "Founder rooms, startup cohorts, practical commercial work.",
+    body: "Talks and workshops are built around the decision the room needs to make next, not a theatre of frameworks.",
+    href: "/speaking/",
+    cta: "See speaking assets",
+    image: "/images/cambridge-judge-business-school-960.webp",
+    alt: "Cambridge Judge Business School, one of Daniel Johnson's selected teaching and speaking affiliations"
+  },
+  {
+    eyebrow: "Operator mindset",
+    title: "Systems, instruments, judgment under uncertainty.",
+    body: "The same bias shows up in the work: define the signal, read the instruments, make the next decision before the system drifts.",
+    href: "/about/",
+    cta: "Read about Daniel",
+    image: "/images/daniel-aircraft.webp",
+    alt: "Daniel Johnson in a small aircraft, connecting systems thinking with growth operating work"
   }
 ];
 
@@ -190,7 +213,7 @@ const schemas = [
             {
               proofBar.slice(0, 4).map((item) => (
                 <div>
-                  <strong>{item.value}</strong>
+                  <strong><span aria-hidden="true">{item.icon}</span> {item.value}</strong>
                   <span>{item.label}</span>
                 </div>
               ))
@@ -237,13 +260,8 @@ const schemas = [
           </article>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 2. Social proof strip (selected affiliations — clarified heading) ─ -->
-  <section class="section-space pt-0">
-    <div class="shell">
-      <div class="trust-strip trust-strip-large" aria-label="Selected affiliations and platforms">
+      <div class="trust-strip trust-strip-large hero-trust-strip reveal" aria-label="Selected affiliations and platforms">
         <p class="trust-strip-label">Selected affiliations</p>
         <div class="trust-strip-logos">
           {
@@ -259,17 +277,12 @@ const schemas = [
               />
             ))
           }
-          {
-            trustBadges.map((item) => (
-              <span class={`trust-badge trust-badge-${item.variant}`}>{item.label}</span>
-            ))
-          }
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. Problem statement — tighter copy (was 3 paragraphs, now 2) ──── -->
+  <!-- 2. Problem statement — tighter copy (was 3 paragraphs, now 2) ──── -->
   <section class="section-space pt-0" aria-labelledby="problem-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
@@ -286,19 +299,19 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 4. Growth Diagnosis — interactive quiz ────────────────────────── -->
+  <!-- 3. Growth Diagnosis — interactive quiz ────────────────────────── -->
   <section class="section-space pt-0" id="growth-diagnosis" aria-labelledby="diagnosis-heading">
     <div class="shell">
       <SectionHeader
-        eyebrow="Free · 2 minutes"
-        intro="Five questions. Tailored output. A clear read on which lever matters most for your company right now."
+        eyebrow="AI-assisted diagnosis · Free · 2 minutes"
+        intro="Five questions. Tailored output. A clearer read on which lever matters most before another campaign, hire, or AI workflow gets bolted on."
         title="Find your biggest growth bottleneck."
       />
       <GrowthDiagnosis />
     </div>
   </section>
 
-  <!-- 5. What I do ──────────────────────────────────────────────────── -->
+  <!-- 4. What I do ──────────────────────────────────────────────────── -->
   <section class="section-space pt-0" id="services">
     <div class="shell">
       <SectionHeader
@@ -326,7 +339,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 6. Who this is for / not for ──────────────────────────────────── -->
+  <!-- 5. Who this is for / not for ──────────────────────────────────── -->
   <section class="section-space pt-0" aria-labelledby="fit-heading">
     <div class="shell">
       <SectionHeader
@@ -356,7 +369,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 7. Why me vs agency ─────────────────────────────────────────── -->
+  <!-- 6. Why me vs agency ─────────────────────────────────────────── -->
   <section class="section-space pt-0" aria-labelledby="vs-heading">
     <div class="shell">
       <SectionHeader
@@ -382,7 +395,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 8. The method ───────────────────────────────────────────────── -->
+  <!-- 7. The method ───────────────────────────────────────────────── -->
   <section class="dark-section section-space" aria-labelledby="method-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center">
@@ -430,7 +443,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 9. Why AI-native matters ─────────────────────────────────────── -->
+  <!-- 8. Why AI-native matters ─────────────────────────────────────── -->
   <section class="section-space" aria-labelledby="ai-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-5xl space-y-6">
@@ -448,6 +461,55 @@ const schemas = [
         <p>
           <a class="link-arrow" href="/writing/">Read: What AI-native GTM actually means →</a>
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Image-led credibility ────────────────────────────────────── -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Beyond the deck"
+        intro="A few more ways to read the work before you book: rooms, interviews, current focus, and the operator story behind the process."
+        title="More signal, fewer claims."
+      />
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        {
+          imageStoryCards.map((card) => (
+            <article class="reveal image-story-card">
+              <img alt={card.alt} decoding="async" height="720" loading="lazy" src={card.image} width="960" />
+              <div>
+                <p class="card-label">{card.eyebrow}</p>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <a class="link-arrow" href={card.href}>{card.cta} →</a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <a class="reveal media-link-card card p-5" href="/podcast-appearances/">
+          <span class="card-label">Podcast archive</span>
+          <strong>Interviews and conversations</strong>
+          <small>AI-native GTM, founder-led growth, experimentation, and fractional leadership.</small>
+        </a>
+        <a class="reveal media-link-card card p-5" href="/now/">
+          <span class="card-label">Now</span>
+          <strong>Current work and availability</strong>
+          <small>The most current picture of what I am working on this month.</small>
+        </a>
+        {
+          featuredMedia.slice(0, 2).map((item) => (
+            <a class="reveal media-link-card card p-5" href={item.data.href} rel="noreferrer" target="_blank">
+              <span class="card-label">{item.data.source}</span>
+              <strong>{item.data.title}</strong>
+              <small>{item.data.description}</small>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>

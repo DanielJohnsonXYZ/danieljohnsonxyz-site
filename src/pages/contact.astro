@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig } from "../site";
+import { siteConfig, socialLinks } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
 
 const title = "Contact Daniel Johnson | AI-Native GTM & Growth Operator";
@@ -48,9 +48,13 @@ const breadcrumb = buildBreadcrumbSchema([
         <div class="mt-10 rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 md:p-8">
           <p class="card-label">Also</p>
           <ul class="mt-4 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
-            <li><strong>LinkedIn</strong> &ndash; <a class="underline" href={siteConfig.linkedin} rel="noreferrer" target="_blank">{siteConfig.linkedin}</a></li>
-            <li><strong>YouTube</strong> &ndash; <a class="underline" href={siteConfig.youtube} rel="noreferrer" target="_blank">Field Notes channel</a></li>
-            <li><strong>Location</strong> &ndash; {siteConfig.location}</li>
+            <li><strong>Profiles</strong>, {socialLinks.map((item, index) => (
+              <>
+                <a class="underline" href={item.href} rel="noreferrer" target="_blank">{item.label}</a>{index < socialLinks.length - 1 ? ", " : ""}
+              </>
+            ))}</li>
+            <li><strong>Media</strong>, <a class="underline" href="/podcast-appearances/">Podcast appearances</a>, <a class="underline" href="/speaking/">speaking assets</a>, <a class="underline" href="/now/">now page</a></li>
+            <li><strong>Location</strong>, {siteConfig.location}</li>
           </ul>
         </div>
 
