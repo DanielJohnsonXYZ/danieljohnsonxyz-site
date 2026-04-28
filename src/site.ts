@@ -54,6 +54,16 @@ export const siteConfig = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
+// Single-idea anchor — the one sentence everything else on the site
+// reinforces. Used as the dark-section H2 on the home page, the eyebrow on
+// /start-here, and the opening line of /llms.txt for AI search engines.
+// ──────────────────────────────────────────────────────────────────────────
+export const singleIdea = {
+  short: "Growth systems that run without you.",
+  long: "I don't run campaigns. I build growth systems that run without you."
+} as const;
+
+// ──────────────────────────────────────────────────────────────────────────
 // Positioning — the buyer + outcome rewrite used in the hero subheadline
 // and as structured data inputs. Keeping it here means hero/meta/llms.txt
 // all draw from one source of truth.
@@ -62,8 +72,11 @@ export const positioning = {
   buyer: "Seed to Series B AI and B2B SaaS founders",
   outcome: "predictable pipeline, sharper positioning, senior growth leadership",
   without: "without a £150k full-time hire",
+  // Subheadline now leads with OUTCOME, not category. The category lives in
+  // the eyebrow above the H1, so the first thing a founder reads after the
+  // headline is what they actually get.
   subheadline:
-    "Fractional CMO for Seed to Series B AI and B2B SaaS founders — predictable pipeline, sharper positioning, and senior growth leadership without a £150k full-time hire."
+    "Predictable pipeline, sharper positioning, and senior growth leadership for Seed to Series B AI and B2B SaaS founders — without a £150k full-time hire."
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -95,10 +108,16 @@ export const ctas = {
     label: "Find Your Biggest Growth Bottleneck",
     href: "/#growth-diagnosis",
     hint: "Free · 2 minutes"
+  },
+  startHere: {
+    label: "Start here",
+    href: "/start-here/",
+    hint: "5-minute orientation"
   }
 } as const;
 
 export const navigation = [
+  { href: "/start-here/", label: "Start here" },
   { href: "/fractional-cmo/", label: "Fractional CMO" },
   { href: "/case-studies/", label: "Results" },
   { href: "/writing/", label: "Writing" },
@@ -109,11 +128,23 @@ export const navigation = [
 export const navigationGroups = [
   {
     label: "Work with me",
-    href: "/fractional-cmo/",
+    href: "/start-here/",
     items: [
-      { href: "/fractional-cmo/", label: "Fractional CMO", description: "Embedded senior GTM leadership." },
+      { href: "/start-here/", label: "Start here", description: "Five-minute orientation. Where to begin if it's your first visit." },
+      { href: "/growth-audit/", label: "30-min Growth Audit", description: "Free diagnostic call. Bottleneck read in 30 minutes." },
+      { href: "/strategy-sprint/", label: "Strategy Sprint", description: "From £6k. 2–4 weeks. Plan, artefacts, first wins." },
+      { href: "/fractional-cmo/", label: "Fractional CMO", description: "From £7.5k/mo. Embedded senior GTM leadership." },
       { href: "/mentoring/", label: "Founder office hours", description: "Focused growth decisions and second-brain sessions." },
       { href: "/speaking/", label: "Speaking", description: "Talks, workshops, and founder-cohort sessions." }
+    ]
+  },
+  {
+    label: "Compare",
+    href: "/fractional-cmo/",
+    items: [
+      { href: "/fractional-cmo-vs-agency/", label: "Fractional CMO vs. agency", description: "Senior judgement vs. junior execution. When each is right." },
+      { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO", description: "Cost, ramp, ownership, and notice-period maths." },
+      { href: "/fractional-cmo/#why-daniel", label: "All six options compared", description: "Agency, freelancer, junior, full-time, consultant, fractional CMO." }
     ]
   },
   {
@@ -141,10 +172,12 @@ export const navigationGroups = [
 
 export const footerNavigation = {
   workWithMe: [
+    { href: "/start-here/", label: "Start here" },
+    { href: "/growth-audit/", label: "30-min Growth Audit" },
+    { href: "/strategy-sprint/", label: "Strategy Sprint" },
     { href: "/fractional-cmo/", label: "Fractional CMO" },
     { href: "/mentoring/", label: "Founder office hours" },
-    { href: "/speaking/", label: "Speaking / workshops" },
-    { href: siteConfig.bookingUrl, label: "Book a 30-min Growth Audit" }
+    { href: "/speaking/", label: "Speaking / workshops" }
   ],
   expertise: [
     { href: "/gtm-systems/", label: "GTM systems" },
@@ -154,8 +187,10 @@ export const footerNavigation = {
     { href: "/revenue-operations/", label: "Revenue operations" }
   ],
   more: [
-    { href: "/writing/", label: "Writing" },
+    { href: "/fractional-cmo-vs-agency/", label: "vs. Agency" },
+    { href: "/fractional-cmo-vs-full-time-cmo/", label: "vs. Full-time CMO" },
     { href: "/case-studies/", label: "Case studies" },
+    { href: "/writing/", label: "Writing" },
     { href: "/podcast-appearances/", label: "Podcast appearances" },
     { href: "/now/", label: "Now" },
     { href: "/about/", label: "About" },
@@ -266,9 +301,7 @@ export const whyDaniel = [
   }
 ] as const;
 
-// ──────────────────────────────────────────────────────────────────────────
 // ROI framing for the pricing section on Fractional CMO page.
-// ──────────────────────────────────────────────────────────────────────────
 export const roiFrames = [
   "Less than one bad senior hire.",
   "Faster than waiting 6 months to recruit a full-time CMO.",
@@ -282,68 +315,299 @@ export const roiFrames = [
 // badges are rendered separately in the component.
 // ──────────────────────────────────────────────────────────────────────────
 export const trustLogos = [
-  {
-    id: "growthmentor",
-    src: "/images/logos/growthmentor.png",
-    alt: "GrowthMentor — Top-Rated Mentor",
-    label: "GrowthMentor"
-  },
-  {
-    id: "google",
-    src: "/images/logos/google.webp",
-    alt: "Google for Startups — Growth Mentor",
-    label: "Google for Startups"
-  },
-  {
-    id: "cambridge",
-    src: "/images/logos/cambridge.webp",
-    alt: "University of Cambridge — Visiting Lecturer",
-    label: "Cambridge"
-  },
-  {
-    id: "techstars",
-    src: "/images/logos/techstars.svg",
-    alt: "Techstars — Mentor",
-    label: "Techstars"
-  },
-  {
-    id: "imperial",
-    src: "/images/logos/imperial.svg",
-    alt: "Imperial College London — Guest lecturer",
-    label: "Imperial"
-  },
-  {
-    id: "general-assembly",
-    src: "/images/logos/general-assembly.svg",
-    alt: "General Assembly — Training programme",
-    label: "General Assembly"
-  },
-  {
-    id: "uk-space-agency",
-    src: "/images/logos/uk-space-agency.svg",
-    alt: "UK Space Agency — Innovation talk",
-    label: "UK Space Agency"
-  }
+  { id: "growthmentor", src: "/images/logos/growthmentor.png", alt: "GrowthMentor — Top-Rated Mentor", label: "GrowthMentor" },
+  { id: "google", src: "/images/logos/google.webp", alt: "Google for Startups — Growth Mentor", label: "Google for Startups" },
+  { id: "cambridge", src: "/images/logos/cambridge.webp", alt: "University of Cambridge — Visiting Lecturer", label: "Cambridge" },
+  { id: "techstars", src: "/images/logos/techstars.svg", alt: "Techstars — Mentor", label: "Techstars" },
+  { id: "imperial", src: "/images/logos/imperial.svg", alt: "Imperial College London — Guest lecturer", label: "Imperial" },
+  { id: "general-assembly", src: "/images/logos/general-assembly.svg", alt: "General Assembly — Training programme", label: "General Assembly" },
+  { id: "uk-space-agency", src: "/images/logos/uk-space-agency.svg", alt: "UK Space Agency — Innovation talk", label: "UK Space Agency" }
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
-// £18M+ moved OUT of here — it now lives only in the dark "lifetimeTotals"
-// strip lower down the page, to avoid the hero + proof-bar duplication.
+// £18M+ revenue is now the lead metric: it's the most concrete dollar-tangible
+// claim and what founders care about most. £6.8M+ ad spend moves to slot 4.
 export const proofBar = [
+  { icon: "💰", value: "£18M+", label: "client revenue generated", source: "/case-studies/" },
   { icon: "⭐", value: "4.93 / 5", label: "from 219 reviews on GrowthMentor", source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
-  { icon: "🤝", value: "388+", label: "mentor sessions delivered" },
   { icon: "🚀", value: "20+", label: "AI & SaaS startups advised" },
   { icon: "📈", value: "£6.8M+", label: "ad spend managed" }
 ] as const;
 
-// Lifetime totals — one strip, lower on the homepage. Single home for the
-// £18M+ revenue claim so it does not double-appear with the hero.
+// Lifetime totals — one strip, lower on the homepage. Now used as a wider
+// "lifetime aggregate" line that complements the proof bar without duplicating
+// its specific metrics. £18M+ stays as the lead claim where it matters.
 export const lifetimeTotals = [
-  "£18M+ revenue generated for clients",
-  "£6.8M+ ad spend managed",
-  "20+ startups scaled",
-  "Helped founders raise £15M+"
+  "388+ mentor sessions delivered",
+  "20+ AI & B2B SaaS startups scaled",
+  "£15M+ helped founders raise",
+  "Two founder exits — eQuoo (mental-health tech) and an eCommerce brand"
 ] as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// Home-page service ladder — a CLEAN buying ladder, not a service-shape mix.
+// Audit (free entry) → Sprint (£6k, fixed scope) → Fractional CMO (embedded).
+// Speaking and Office Hours move below the ladder as a "secondary" mention so
+// the home page reads like a buying journey, not a menu of unrelated services.
+// ──────────────────────────────────────────────────────────────────────────
+export const homeServiceLadder = [
+  {
+    tier: "Tier 1 · Entry",
+    heading: "30-min Growth Audit",
+    price: "Free",
+    cadence: "30 minutes · No pitch · No deck",
+    body:
+      "Bring the messy growth question. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.",
+    bestFor:
+      "Anyone unsure whether they need a fractional CMO, an agency, an internal hire, or just a sharper plan.",
+    outcome: "A clearer read on the bottleneck and the most useful next step.",
+    href: "/growth-audit/",
+    cta: "See what's covered",
+    primary: false
+  },
+  {
+    tier: "Tier 2 · Plan",
+    heading: "Strategy Sprint",
+    price: "From £6k",
+    cadence: "2–4 week engagement",
+    body:
+      "Diagnose, prioritise, and ship the first artefacts. ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.",
+    bestFor:
+      "Founders who need the plan, the operating rhythm, and the first wins before committing to ongoing work.",
+    outcome: "A 90-day growth plan, the first artefacts, and a working operating rhythm.",
+    href: "/strategy-sprint/",
+    cta: "See Strategy Sprint scope",
+    primary: false
+  },
+  {
+    tier: "Tier 3 · Embedded",
+    heading: "Fractional CMO",
+    price: "From £7.5k",
+    cadence: "/ month · 3-month minimum",
+    body:
+      "Embedded senior ownership 1–2 days a week. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Builds the system and then hands it off clean.",
+    bestFor:
+      "£1m–£10m ARR, founder-led, growth stuck, senior help needed before or alongside a £150k+ full-time CMO hire.",
+    outcome: "Pipeline rhythm, sharper positioning, and a growth system the team can run after I'm gone.",
+    href: "/fractional-cmo/",
+    cta: "Explore Fractional CMO",
+    primary: true
+  }
+] as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// Comparison: Fractional CMO vs Agency. Used on /fractional-cmo-vs-agency.
+// High-intent SEO term. Real founders type this query into Google and AI
+// search engines when they're picking between the two.
+// ──────────────────────────────────────────────────────────────────────────
+export const vsAgency = {
+  title: "Fractional CMO vs. Agency",
+  rows: [
+    { dimension: "Who's in the seat", agency: "Account manager + junior team", fractional: "Senior operator (10+ years), embedded" },
+    { dimension: "Scope", agency: "Defined channel — paid, SEO, content, outbound", fractional: "Whole GTM system — ICP, positioning, channels, conversion, reporting" },
+    { dimension: "Strategy ownership", agency: "Founder still owns it", fractional: "Operator owns it, founder makes the calls" },
+    { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix" },
+    { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company" },
+    { dimension: "Speed", agency: "Slower — agreed scope, change orders", fractional: "Faster — embedded operator, no handoffs" },
+    { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£7.5–12k/month, 3-month minimum" },
+    { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement" }
+  ],
+  whenAgency: [
+    "You already have senior GTM leadership in-house",
+    "You need execution capacity in a specific channel — not strategic ownership",
+    "Brand and compliance constraints require a credentialled agency partner",
+    "Scope is fixed and well-understood (e.g. paid media at scale)"
+  ],
+  whenFractional: [
+    "Founder still owns growth decisions and it's becoming a bottleneck",
+    "Strategy lives in the founder's head — there's no operating system",
+    "Reporting shows activity, not what to scale, stop, or fix",
+    "You'd hire a £150k+ CMO if you were ready, but you're not yet"
+  ],
+  faq: [
+    {
+      question: "Can I do both — fractional CMO and an agency?",
+      answer:
+        "Often yes. The fractional CMO sets priorities, channel rules, and reporting; the agency executes a specific channel inside that framework. The CMO runs the agency relationship instead of the founder. That's frequently the cleanest setup for £1m–£10m ARR teams."
+    },
+    {
+      question: "Is a fractional CMO more expensive than an agency?",
+      answer:
+        "Per month, similar — £7.5–12k for a fractional CMO, £6–20k for a typical agency. But you're buying different things. The agency runs a channel; the fractional CMO runs the system. Most agency engagements still need someone senior to direct them — that's the role the fractional CMO fills."
+    },
+    {
+      question: "How long does a fractional CMO engagement run?",
+      answer:
+        "3 to 9 months typically. The first 90 days build the diagnosis, operating rhythm, and first system. After that, it's either scale, hand off to internal hires, or move to a lighter advisory cadence."
+    }
+  ]
+} as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// Comparison: Fractional CMO vs Full-time CMO. Used on /fractional-cmo-vs-
+// full-time-cmo. Another high-intent SEO query. The honest answer is "it
+// depends on stage" — this page makes the trade-offs visible.
+// ──────────────────────────────────────────────────────────────────────────
+export const vsFulltimeCMO = {
+  title: "Fractional CMO vs. Full-time CMO",
+  rows: [
+    { dimension: "All-in cost", fractional: "£7.5–12k/month (~£90–144k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs" },
+    { dimension: "Time to start", fractional: "Days", fulltime: "6 months to hire, 12 months to ramp" },
+    { dimension: "Commitment", fractional: "3-month minimum, rolling thereafter", fulltime: "Permanent — 3-month notice on either side" },
+    { dimension: "Risk if it doesn't fit", fractional: "Low — end the engagement, no severance", fulltime: "High — recruitment fee, equity dilution, 3-month notice" },
+    { dimension: "Time on the seat", fractional: "1–2 days a week", fulltime: "5 days a week + leadership presence" },
+    { dimension: "Team management", fractional: "Yes, but limited bandwidth", fulltime: "Yes, full ownership" },
+    { dimension: "External representation", fractional: "Limited — focused on operating", fulltime: "Yes — investors, partners, hires" },
+    { dimension: "When it's right", fractional: "Pre-£10m ARR, growth stuck, no senior owner yet", fulltime: "Post-£10m ARR, growth proven, ready to scale a marketing org" }
+  ],
+  whenFractional: [
+    "£1m–£10m ARR or clear post-PMF traction",
+    "Founder still carrying revenue decisions",
+    "You need senior judgement now, but a 6-month hire cycle is too slow",
+    "You're not yet sure what shape the full-time CMO role should take",
+    "You want to de-risk the next senior hire by getting the system in place first"
+  ],
+  whenFulltime: [
+    "Post-£10m ARR with proven growth",
+    "Marketing has its own org chart and the role is clearly scoped",
+    "External presence (analyst calls, partner relationships, recruiting) is part of the role",
+    "Equity-based compensation is a real motivator for the candidate",
+    "You can absorb 6 months of hiring + 12 months of ramp"
+  ],
+  bridge:
+    "Many founders use a fractional CMO as the bridge: 6–12 months of embedded leadership while they recruit, then the fractional CMO hands off the operating system to the new full-time hire. Cleaner than starting cold.",
+  faq: [
+    {
+      question: "Can a fractional CMO bridge into a full-time hire?",
+      answer:
+        "Yes. The most common pattern: fractional CMO embeds for 6–9 months, builds the operating system, scopes the full-time role accurately, helps interview, then hands off cleanly. The new CMO inherits a working system instead of starting from zero."
+    },
+    {
+      question: "Will a fractional CMO sit in board meetings?",
+      answer:
+        "Sometimes, by exception. Fractional engagements are scoped on operating impact, not external representation. Investor calls and board meetings are typically the founder's job until the full-time CMO is in place."
+    },
+    {
+      question: "What's the per-hour cost difference?",
+      answer:
+        "Roughly the same — £7.5k/month for ~32 hours of senior time is ~£235/hour, comparable to a £150k full-time CMO once equity, on-costs, and ramp time are factored in. But the fractional version starts in days, not months."
+    }
+  ]
+} as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// /growth-audit page data — free 30-min diagnostic call. SEO surface for
+// "free growth audit" queries; bottom-of-funnel intent.
+// ──────────────────────────────────────────────────────────────────────────
+export const growthAuditPage = {
+  agenda: [
+    { title: "Bottleneck read", body: "Where's the constraint right now — ICP, channel, conversion, founder-led sales, or reporting?" },
+    { title: "Stage check", body: "Where the company actually is on the post-PMF curve, and what that means for what to fix next." },
+    { title: "Honest fit call", body: "Is a fractional CMO the right shape? Or an agency, freelancer, internal hire, or just sharper focus?" },
+    { title: "Next step", body: "A clear recommendation. If we're a fit, the engagement shape that makes sense. If not, who to talk to instead." }
+  ],
+  bring: [
+    "Your stage and current ARR or signal",
+    "Top 1–2 growth questions you actually want answered",
+    "What you've tried that didn't work",
+    "Anything you're considering — a hire, an agency, a re-org, a campaign"
+  ],
+  notForYou: [
+    "If you're pre-revenue and pre-PMF — that's customer research time, not GTM time",
+    "If you've already decided what to do and want validation",
+    "If you want a sales pitch — you won't get one"
+  ],
+  faq: [
+    {
+      question: "Is the call really free?",
+      answer:
+        "Yes. 30 minutes, no pitch, no deck. The economics work because most calls end with either a clear engagement shape, or a clear no — and 'no' founders refer the right founders later."
+    },
+    {
+      question: "What if you decide we're not a fit?",
+      answer:
+        "I'll tell you on the call and point you to the right person — an agency, a different operator, or just the right next step you can do yourself. That's the deal."
+    },
+    {
+      question: "Will I be sent recordings, decks, or follow-up sequences after?",
+      answer:
+        "No. If we agree to work together, the next step is a scoping conversation. If not, the call ends with the recommendation and you don't hear from me again unless you reach out."
+    }
+  ]
+} as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// /strategy-sprint page data — £6k, 2–4 week fixed-scope engagement.
+// Lower commitment than full Fractional CMO; higher than the audit.
+// ──────────────────────────────────────────────────────────────────────────
+export const strategySprintPage = {
+  price: "From £6,000",
+  cadence: "2–4 weeks · Fixed scope",
+  oneLiner:
+    "Diagnose the bottleneck, set 90-day priorities, ship the first artefacts. The plan and the operating rhythm before you commit to ongoing work.",
+  weeks: [
+    {
+      week: "Week 1 — Diagnose",
+      bullets: [
+        "Audit ICP, pipeline, funnel, CRM, acquisition channels, positioning, and current reporting",
+        "Interview founder, sales/customer team, and 3–5 customers",
+        "Build the constraint map: where the system is leaking pipeline, conversion, retention, or decision speed"
+      ]
+    },
+    {
+      week: "Week 2 — Prioritise",
+      bullets: [
+        "Agree the 90-day growth priorities — what to scale, stop, fix",
+        "Decide the operating cadence: weekly meeting, dashboard, owner map",
+        "Sequence the first 2–3 acquisition or conversion tests"
+      ]
+    },
+    {
+      week: "Weeks 3–4 — Ship",
+      bullets: [
+        "Ship the first artefacts: ICP doc, positioning lines, weekly dashboard, first campaign brief",
+        "Run the first growth meeting with the team using the new rhythm",
+        "Hand off a 90-day plan the team can actually execute"
+      ]
+    }
+  ],
+  deliverables: [
+    "ICP and positioning doc",
+    "90-day growth priorities (numbered, owner-mapped)",
+    "Weekly growth dashboard (the metrics the team checks every Monday)",
+    "First campaign brief or conversion test, ready to ship",
+    "Operating-rhythm playbook — meeting structure, decision rules, reporting cadence",
+    "Recommendation on the next engagement shape (fractional CMO, internal hire, agency, or none)"
+  ],
+  bestFor: [
+    "Post-PMF founder-led teams who need the plan first",
+    "Companies considering a CMO hire who want the role scoped before recruiting",
+    "Teams emerging from a re-org, pivot, or funding round who need fresh GTM clarity",
+    "Founders who want senior judgement without a 3-month minimum"
+  ],
+  notFor: [
+    "Pre-PMF teams — diagnosis can't fix product-market fit",
+    "Teams that need ongoing execution, not a plan",
+    "Companies that won't make hard priority calls after the sprint"
+  ],
+  faq: [
+    {
+      question: "Why fixed scope and fixed price?",
+      answer:
+        "Because the value is the diagnosis and the operating system, and that's a known shape of work. Hourly billing rewards drag; fixed pricing rewards getting to clarity fast."
+    },
+    {
+      question: "Can the sprint extend into a fractional engagement?",
+      answer:
+        "Yes — and often does. Roughly half of sprints become fractional engagements; the other half end with a clear plan the team executes themselves, with optional advisory check-ins."
+    },
+    {
+      question: "What happens if we don't like the diagnosis?",
+      answer:
+        "It's a working diagnosis, not a verdict. The week-2 prioritisation session is collaborative — your team's context shapes the priorities, and there's room to push back. If after the sprint you don't think it's useful, you don't pay for any further work."
+    }
+  ]
+} as const;
 
 // Short testimonial snippet used in the active footer and sticky CTA.
 export const footerTestimonial = {

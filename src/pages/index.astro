@@ -9,9 +9,11 @@ import {
   agencyVsMe,
   ctas,
   fitSignals,
+  homeServiceLadder,
   lifetimeTotals,
   positioning,
   proofBar,
+  singleIdea,
   siteConfig,
   trustLogos
 } from "../site";
@@ -45,38 +47,6 @@ const methodLayers = [
   { title: "Reporting", body: "Growth scorecard, pipeline view, weekly stop / scale / fix notes.", href: "/revenue-operations/" }
 ];
 const layerCount = methodLayers.length;
-
-// ─── "What I do" three cards ─────────────────────────────────────────────
-const serviceCards = [
-  {
-    heading: "Fractional CMO",
-    primary: true,
-    strap: "Primary Offer · Senior growth operator, embedded 1 to 2 days a week.",
-    body:
-      "I own GTM priorities, reporting rhythm, acquisition tests, and team decisions until growth no longer depends on founder instinct.",
-    bestFor: "£1m to £10m ARR, founder-led, growth stuck, senior help needed before or alongside a full-time CMO hire.",
-    href: "/fractional-cmo/",
-    cta: "Explore Fractional CMO"
-  },
-  {
-    heading: "Growth Advisory",
-    strap: "Focused decision sessions for founders not ready for an embedded engagement.",
-    body:
-      "Sharper positioning, a channel decision, a hiring read, or a second brain before spending more.",
-    bestFor: "Pre-PMF or early post-PMF founders with a specific GTM decision.",
-    href: "/mentoring/",
-    cta: "See founder office hours"
-  },
-  {
-    heading: "Speaking / Workshops",
-    strap: "Practical talks for founders, accelerators, and startup teams.",
-    body:
-      "Founder audiences get concrete frameworks, examples, and artefacts they can use after the session.",
-    bestFor: "Conferences, accelerators, founder offsites, podcasts.",
-    href: "/speaking/",
-    cta: "See speaking"
-  }
-];
 
 // ─── Proof — real outcomes (four cards) ─────────────────────────────────
 const outcomeCards = [
@@ -164,6 +134,12 @@ const schemas = [
     serviceType: "Fractional CMO",
     offers: [
       {
+        name: "30-min Growth Audit",
+        description: "Free 30-minute diagnostic call. Bottleneck read, fit decision, recommendation.",
+        price: "0",
+        billingIncrement: "per call"
+      },
+      {
         name: "Strategy Sprint",
         description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
         price: "6000",
@@ -198,14 +174,14 @@ const schemas = [
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.82fr)] lg:items-center">
         <div class="reveal flex flex-col gap-5">
-          <span class="service-label">Fractional CMO · AI-Native Growth Operator</span>
+          <span class="service-label">Fractional CMO · {singleIdea.short}</span>
 
           <div class="space-y-4">
             <h1 id="hero-heading" class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]">
               If growth still depends on the founder, <span class="hero-accent">I fix that.</span>
             </h1>
             <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
-              Fractional CMO for <strong class="font-semibold text-[color:var(--ink)]">Seed to Series B AI and B2B SaaS founders</strong> — predictable pipeline, sharper positioning, and senior growth leadership without a £150k full-time hire.
+              <strong class="font-semibold text-[color:var(--ink)]">Predictable pipeline. Sharper positioning. Senior growth leadership.</strong> For Seed to Series B AI and B2B SaaS founders — without a £150k full-time hire.
             </p>
           </div>
 
@@ -225,8 +201,8 @@ const schemas = [
               <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
                 {ctas.primary.label} →
               </a>
-              <a class="button-link" href={ctas.caseStudies.href} data-cta="hero-case-studies">
-                {ctas.caseStudies.label} →
+              <a class="button-link" href={ctas.startHere.href} data-cta="hero-start-here">
+                New here? Start here →
               </a>
             </div>
             <p class="availability-line">{siteConfig.availability}</p>
@@ -311,31 +287,43 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 4. What I do ──────────────────────────────────────────────────── -->
+  <!-- 4. Buying ladder — Audit → Sprint → Fractional CMO ──────────── -->
+  <!-- Was: Fractional CMO + Growth Advisory + Speaking (mixed shapes).  -->
+  <!-- Now: a clean 3-tier buying ladder with explicit price/scope.       -->
   <section class="section-space pt-0" id="services">
     <div class="shell">
       <SectionHeader
-        eyebrow="What I do"
-        intro="Three ways to work with me. Start wherever the shape fits."
-        title="Work with me."
+        eyebrow="Three ways in"
+        intro="Pick the smallest commitment that answers the question. You can move up the ladder later."
+        title="Where do you want to start?"
       />
 
       <div class="explore-grid mt-10">
         {
-          serviceCards.map((card) => (
-            <article class:list={["explore-card card p-6 md:p-8", card.primary && "explore-card-primary"]}>
-              <p class="card-label">{card.primary ? "Primary Offer" : "Secondary"}</p>
-              <h3 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">{card.heading}</h3>
-              <p class="mt-2 text-base font-semibold leading-7 tracking-[-0.02em]">{card.strap}</p>
-              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{card.body}</p>
+          homeServiceLadder.map((tier) => (
+            <article class:list={["explore-card card p-6 md:p-8", tier.primary && "explore-card-primary"]}>
+              <p class="card-label">{tier.tier}</p>
+              <h3 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">{tier.heading}</h3>
+              <div class="mt-3 flex items-baseline gap-1">
+                <span class="text-2xl font-extrabold tracking-[-0.06em]">{tier.price}</span>
+                <span class="text-sm text-[color:var(--muted)]">{tier.cadence}</span>
+              </div>
+              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{tier.body}</p>
               <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm leading-6 text-[color:var(--muted)]">
-                <strong class="font-semibold text-[color:var(--ink)]">Best for:</strong> {card.bestFor}
+                <strong class="font-semibold text-[color:var(--ink)]">Best for:</strong> {tier.bestFor}
               </p>
-              <a class="link-arrow mt-6" href={card.href}>{card.cta}</a>
+              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
+                <strong class="font-semibold text-[color:var(--ink)]">Outcome:</strong> {tier.outcome}
+              </p>
+              <a class="link-arrow mt-6" href={tier.href}>{tier.cta} →</a>
             </article>
           ))
         }
       </div>
+
+      <p class="reveal mt-8 text-center text-sm leading-7 text-[color:var(--muted)]">
+        Looking for <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/mentoring/">founder office hours</a>, <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/speaking/">speaking, or workshops</a>? See all the ways we can work together.
+      </p>
     </div>
   </section>
 
@@ -395,13 +383,13 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 7. The method ───────────────────────────────────────────────── -->
+  <!-- 7. The method — sharper anchor: campaigns vs. systems ───────── -->
   <section class="dark-section section-space" aria-labelledby="method-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center">
         <span class="eyebrow justify-center text-white/60">The method</span>
         <h2 id="method-heading" class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-6xl">
-          I don't sell services. <span class="hero-accent">I build systems.</span>
+          I don't run campaigns. <span class="hero-accent">I build growth systems that run without you.</span>
         </h2>
       </div>
 
@@ -431,12 +419,9 @@ const schemas = [
         <p class="text-base leading-8 text-white/68">
           If "growth system" sounds vague, that's fine. I'll show you exactly what it looks like on a 30-minute audit.
         </p>
-        <div class="mt-6 flex justify-center gap-3 flex-wrap">
+        <div class="mt-6 flex justify-center">
           <a class="button-accent" href={ctas.primary.href} data-cta="method-primary">
             {ctas.primary.label} →
-          </a>
-          <a class="button-link-invert" href={ctas.bottleneck.href} data-cta="method-secondary">
-            {ctas.bottleneck.label} →
           </a>
         </div>
       </div>
@@ -612,7 +597,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 13. Writing ─────────────────────────────────────────────────── -->
+  <!-- 13. Writing — soft conversions live alongside the essays ─────── -->
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -637,6 +622,8 @@ const schemas = [
         }
       </div>
 
+      <!-- Soft conversion ladder — three lower-commitment entry points beneath -->
+      <!-- the essays so visitors who aren't ready to book have somewhere to go. -->
       <div class="reveal mt-8 flex flex-wrap items-center gap-3">
         <a class="button-accent" href="/writing/">Read all writing →</a>
         <a class="button-link" href="/newsletter/">Subscribe to Growth Notes →</a>

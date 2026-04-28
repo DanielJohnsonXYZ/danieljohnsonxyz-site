@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { ctas, siteConfig, strategySprintPage } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Start here", url: "/start-here/" },
+    { name: "Strategy Sprint", url: "/strategy-sprint/" }
+  ]),
+  buildFaqPageSchema([...strategySprintPage.faq]),
+  buildServiceSchema({
+    name: "Strategy Sprint",
+    description:
+      "A 2–4 week fixed-scope engagement to diagnose the bottleneck, set 90-day priorities, and ship the first artefacts. ICP, positioning, weekly dashboard, first acquisition or conversion test live.",
+    url: absoluteUrl("/strategy-sprint/"),
+    serviceType: "Growth Strategy Sprint",
+    priceRange: "£6,000",
+    offers: [
+      {
+        name: "Strategy Sprint",
+        description: "2–4 week fixed-scope engagement. Diagnosis, 90-day priorities, first artefacts shipped.",
+        price: "6000",
+        billingIncrement: "per engagement"
+      }
+    ]
+  })
+];
+---
+
+<BaseLayout
+  description="A 2–4 week fixed-scope Strategy Sprint with Daniel Johnson, fractional CMO. Diagnose, prioritise, ship the first artefacts. £6,000. ICP, positioning, 90-day plan, weekly dashboard, first growth test live."
+  path="/strategy-sprint/"
+  schema={schemas}
+  stickyCta={false}
+  title="Strategy Sprint — 2–4 weeks, from £6k | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
+        <div class="space-y-6">
+          <span class="service-label">Tier 2 · Plan · {strategySprintPage.cadence}</span>
+          <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+            The plan, the operating rhythm, and the first wins. <span class="hero-accent">In four weeks.</span>
+          </h1>
+          <p class="hero-subcopy text-lg leading-8 md:text-xl">
+            {strategySprintPage.oneLiner}
+          </p>
+          <div class="flex flex-wrap items-baseline gap-1">
+            <span class="text-3xl font-extrabold tracking-[-0.06em]">{strategySprintPage.price}</span>
+            <span class="text-sm text-[color:var(--muted)]">· {strategySprintPage.cadence}</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a class="button-accent" href={ctas.primary.href} data-cta="sprint-hero-primary">
+              {ctas.primary.label} →
+            </a>
+            <a class="button-link" href="#scope" data-cta="sprint-hero-scope">
+              See the week-by-week scope ↓
+            </a>
+          </div>
+        </div>
+        <aside class="card p-6 md:p-8">
+          <p class="card-label">Best for</p>
+          <ul class="mt-5 scan-list">
+            {strategySprintPage.bestFor.slice(0, 4).map((item) => <li>{item}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0" id="scope" aria-labelledby="scope-heading">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Week by week"
+        title="Diagnose. Prioritise. Ship."
+        intro="Three phases, fixed scope. The work compounds — week 3 builds on week 1's diagnosis."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {strategySprintPage.weeks.map((week, index) => (
+          <article class="card p-6 md:p-7">
+            <p class="card-label">0{index + 1}</p>
+            <h2 class="mt-3 text-2xl font-extrabold tracking-[-0.05em]">{week.week}</h2>
+            <ul class="mt-4 space-y-3 text-base leading-7 text-[color:var(--muted)]">
+              {week.bullets.map((b) => <li class="fit-row fit-row-yes">{b}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="What you walk away with"
+        title="Six concrete deliverables. One operating system."
+      />
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {strategySprintPage.deliverables.map((item) => (
+          <article class="card p-6 text-base font-semibold leading-7 tracking-[-0.02em] text-white">{item}</article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="shell grid gap-6 md:grid-cols-2">
+      <article class="card p-6 md:p-8">
+        <p class="card-label text-[color:var(--accent)]">Best fit</p>
+        <ul class="mt-4 space-y-3 text-base leading-8">
+          {strategySprintPage.bestFor.map((item) => <li class="fit-row fit-row-yes">{item}</li>)}
+        </ul>
+      </article>
+      <article class="card p-6 md:p-8">
+        <p class="card-label">Not a fit</p>
+        <ul class="mt-4 space-y-3 text-base leading-8 text-[color:var(--muted)]">
+          {strategySprintPage.notFor.map((item) => <li class="fit-row fit-row-no">{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="FAQ" title="Three questions before you commit." />
+      <div class="faq-stack mt-8 mx-auto max-w-3xl">
+        {strategySprintPage.faq.map((item, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance text-white md:text-6xl">
+          Start with the 30-min Growth Audit.
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          We'll confirm the Sprint is the right shape for your situation, agree the scope, and pencil in a start window. {siteConfig.availability}
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="sprint-final-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href="/fractional-cmo/" data-cta="sprint-final-fractional">
+            Or jump straight to Fractional CMO →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

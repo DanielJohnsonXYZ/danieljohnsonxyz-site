@@ -16,8 +16,13 @@ export const GET: APIRoute = async () => {
   const caseStudies = await getCollection("caseStudies");
   const staticPaths = [
     "/",
+    "/start-here",
     "/about",
+    "/growth-audit",
+    "/strategy-sprint",
     "/fractional-cmo",
+    "/fractional-cmo-vs-agency",
+    "/fractional-cmo-vs-full-time-cmo",
     "/gtm-systems",
     "/product-led-growth",
     "/experimentation",

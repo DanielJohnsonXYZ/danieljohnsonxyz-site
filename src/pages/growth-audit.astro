@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { ctas, growthAuditPage, siteConfig } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Start here", url: "/start-here/" },
+    { name: "30-min Growth Audit", url: "/growth-audit/" }
+  ]),
+  buildFaqPageSchema([...growthAuditPage.faq]),
+  buildServiceSchema({
+    name: "30-minute Growth Audit",
+    description:
+      "A free 30-minute diagnostic call. Diagnose the bottleneck, decide whether a fractional CMO engagement makes sense, get a recommendation either way.",
+    url: absoluteUrl("/growth-audit/"),
+    serviceType: "Growth Consulting Audit",
+    priceRange: "Free",
+    offers: [
+      {
+        name: "30-min Growth Audit",
+        description: "Free diagnostic call. 30 minutes, no pitch, no deck.",
+        price: "0",
+        billingIncrement: "per call"
+      }
+    ]
+  })
+];
+---
+
+<BaseLayout
+  description="A free 30-minute diagnostic call with Daniel Johnson, fractional CMO. We diagnose your biggest growth bottleneck and decide together whether working together makes sense — or where else to go if it doesn't."
+  path="/growth-audit/"
+  schema={schemas}
+  stickyCta={false}
+  title="Free 30-min Growth Audit | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="service-label justify-center">Tier 1 · Free</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          Bring the messy growth question. <span class="hero-accent">Leave with a clearer next step.</span>
+        </h1>
+        <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
+          A free 30-minute diagnostic call. No pitch. No deck. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="growth-audit-hero-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link" href="#agenda" data-cta="growth-audit-hero-agenda">
+            See what's on the agenda ↓
+          </a>
+        </div>
+        <p class="text-sm text-[color:var(--muted)]">{siteConfig.availability}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0" id="agenda" aria-labelledby="agenda-heading">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="What's on the agenda"
+        title="30 minutes, four things."
+        intro="No prep deck on your end. The questions are designed to fit the time."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {growthAuditPage.agenda.map((item, index) => (
+          <article class="card p-6">
+            <p class="card-label">0{index + 1}</p>
+            <h2 class="mt-3 text-xl font-extrabold tracking-[-0.04em]">{item.title}</h2>
+            <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell grid gap-6 md:grid-cols-2">
+      <article class="card p-6 md:p-8">
+        <p class="card-label text-[color:var(--accent)]">Helpful to bring</p>
+        <ul class="mt-4 space-y-3 text-base leading-8">
+          {growthAuditPage.bring.map((item) => <li class="fit-row fit-row-yes">{item}</li>)}
+        </ul>
+      </article>
+      <article class="card p-6 md:p-8">
+        <p class="card-label">Probably not the right call if…</p>
+        <ul class="mt-4 space-y-3 text-base leading-8 text-[color:var(--muted)]">
+          {growthAuditPage.notForYou.map((item) => <li class="fit-row fit-row-no">{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl text-center">
+        <span class="eyebrow justify-center text-white/60">What you walk away with</span>
+        <h2 class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-5xl">
+          A clearer read on the bottleneck and the next step you'd actually take.
+        </h2>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/72">
+          If working together makes sense, we'll talk about engagement shape — Strategy Sprint or Fractional CMO. If it doesn't, you'll get the right operator, agency, or mentor to go to instead. Either way, you leave with a sharper plan than you came in with.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space" aria-labelledby="audit-faq-heading">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="FAQ"
+        title="Three questions founders ask first."
+      />
+      <div class="faq-stack mt-8 mx-auto max-w-3xl">
+        {growthAuditPage.faq.map((item, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-6xl">
+          Book the 30-min Growth Audit.
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          30 minutes. No pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="growth-audit-final-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href="/start-here/" data-cta="growth-audit-final-start-here">
+            Not ready? Read /start-here →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
