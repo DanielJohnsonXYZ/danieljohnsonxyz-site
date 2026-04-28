@@ -12,7 +12,7 @@ export function buildPersonSchema() {
     familyName: "Johnson",
     jobTitle: "Fractional CMO & AI-Native Growth Operator",
     description:
-      "Fractional CMO and senior GTM operator for post-PMF AI and B2B SaaS startups. 10+ years building growth systems for Seed to Series B founders. £18M+ revenue generated for clients, £6.8M+ ad spend managed, 20+ startups scaled, 388+ mentor sessions delivered.",
+      "Fractional CMO and senior GTM operator for post-PMF AI and B2B SaaS startups. 10+ years building growth systems for Seed to Series B founders. £18M+ revenue generated for clients, £6.8M+ ad spend managed, 20+ startups scaled, 389+ mentor sessions delivered.",
     url: siteConfig.siteUrl,
     image: {
       "@type": "ImageObject",
@@ -38,7 +38,7 @@ export function buildPersonSchema() {
       }
     ],
     award: [
-      "Top-Rated Mentor — GrowthMentor (4.93/5 from 219 reviews, 388+ sessions)",
+      "Top-Rated Mentor — GrowthMentor (4.93/5 from 220 reviews, 389+ sessions)",
       "Google for Startups — Growth Mentor",
       "Techstars Mentor"
     ],
@@ -255,7 +255,7 @@ export function buildAggregateRatingSchema() {
     ratingValue: "4.93",
     bestRating: "5",
     worstRating: "1",
-    reviewCount: "219",
+    reviewCount: "220",
     url: siteConfig.growthMentorReviews
   };
 }

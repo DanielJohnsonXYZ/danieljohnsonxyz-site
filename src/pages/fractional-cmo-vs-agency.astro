@@ -42,7 +42,11 @@ const schemas = [
         title="Eight dimensions. One table."
         intro="The trade-offs are concrete. This is the comparison founders should be making before signing anything."
       />
-      <div class="mt-8 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
+      <p class="mt-4 text-center text-sm text-[color:var(--muted)]">
+        <span class="inline-block h-3 w-3 align-middle" style="background: rgba(124,58,237,0.15); box-shadow: inset 3px 0 0 var(--accent);"></span>
+        <span class="ml-2">Recommended for the post-PMF founder-led buyer</span>
+      </p>
+      <div class="mt-6 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
         <table class="w-full min-w-[820px] text-left text-sm">
           <thead class="bg-[color:var(--surface-dim)]">
             <tr>
@@ -55,8 +59,8 @@ const schemas = [
             {vsAgency.rows.map((row) => (
               <tr class="border-t border-[color:var(--line)]">
                 <td class="p-4 align-top font-bold leading-6 text-[color:var(--ink)]">{row.dimension}</td>
-                <td class="p-4 align-top leading-6 text-[color:var(--muted)]">{row.agency}</td>
-                <td class="p-4 align-top leading-6 text-[color:var(--ink)]">{row.fractional}</td>
+                <td class:list={["p-4 align-top leading-6", row.winner === "agency" ? "compare-winner-cell" : "text-[color:var(--muted)]"]}>{row.agency}</td>
+                <td class:list={["p-4 align-top leading-6", row.winner === "fractional" ? "compare-winner-cell" : "text-[color:var(--ink)]"]}>{row.fractional}</td>
               </tr>
             ))}
           </tbody>

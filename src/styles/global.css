@@ -2237,3 +2237,124 @@ summary::-webkit-details-marker {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────
+   Buying-ladder grid — three cards on desktop with connecting arrows
+   and visual escalation toward the recommended tier (Tier 3).
+   ────────────────────────────────────────────────────────────────────── */
+.ladder-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .ladder-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+}
+
+.ladder-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 21rem;
+  /* Subtle staircase: each tier card sits a touch higher than the last */
+}
+
+@media (min-width: 768px) {
+  .ladder-card {
+    transform: translateY(0);
+    transition: transform 200ms ease;
+  }
+  .ladder-grid > .ladder-card:nth-child(2) {
+    transform: translateY(-12px);
+  }
+  .ladder-grid > .ladder-card:nth-child(3) {
+    transform: translateY(-24px);
+  }
+}
+
+.ladder-card-primary {
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.18) inset,
+    0 24px 48px -28px rgba(124, 58, 237, 0.45);
+  background:
+    linear-gradient(135deg, rgba(124, 58, 237, 0.14), rgba(255, 255, 255, 0.85) 45%),
+    var(--surface);
+}
+
+.ladder-step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -0.25rem;
+}
+
+.ladder-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.28);
+  color: var(--accent);
+  font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.ladder-card-primary .ladder-step-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 8px 18px -8px rgba(124, 58, 237, 0.55);
+}
+
+.ladder-step-arrow {
+  display: none;
+  font-family: "Inter", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(124, 58, 237, 0.45);
+  user-select: none;
+  /* Position the arrow as a connector between cards on desktop */
+  position: absolute;
+  right: -1rem;
+  top: 1.45rem;
+  transform: translateX(50%);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .ladder-step-arrow {
+    display: inline-flex;
+  }
+}
+
+.ladder-card .link-arrow {
+  margin-top: auto;
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────
+   Comparison table — winner cell highlighting
+   Subtle accent (left border + tint) on the recommended cell per row.
+   No green ticks; this is positioning shown through styling, not
+   marketing fluff.
+   ────────────────────────────────────────────────────────────────────── */
+.compare-winner-cell {
+  position: relative;
+  background: rgba(124, 58, 237, 0.06);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--accent);
+}

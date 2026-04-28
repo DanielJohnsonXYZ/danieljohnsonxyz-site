@@ -329,7 +329,7 @@ export const trustLogos = [
 // claim and what founders care about most. £6.8M+ ad spend moves to slot 4.
 export const proofBar = [
   { icon: "💰", value: "£18M+", label: "client revenue generated", source: "/case-studies/" },
-  { icon: "⭐", value: "4.93 / 5", label: "from 219 reviews on GrowthMentor", source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
+  { icon: "⭐", value: "4.93 / 5", label: "from 220 reviews on GrowthMentor", source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
   { icon: "🚀", value: "20+", label: "AI & SaaS startups advised" },
   { icon: "📈", value: "£6.8M+", label: "ad spend managed" }
 ] as const;
@@ -338,7 +338,7 @@ export const proofBar = [
 // "lifetime aggregate" line that complements the proof bar without duplicating
 // its specific metrics. £18M+ stays as the lead claim where it matters.
 export const lifetimeTotals = [
-  "388+ mentor sessions delivered",
+  "389+ mentor sessions delivered",
   "20+ AI & B2B SaaS startups scaled",
   "£15M+ helped founders raise",
   "Two founder exits — eQuoo (mental-health tech) and an eCommerce brand"
@@ -403,14 +403,14 @@ export const homeServiceLadder = [
 export const vsAgency = {
   title: "Fractional CMO vs. Agency",
   rows: [
-    { dimension: "Who's in the seat", agency: "Account manager + junior team", fractional: "Senior operator (10+ years), embedded" },
-    { dimension: "Scope", agency: "Defined channel — paid, SEO, content, outbound", fractional: "Whole GTM system — ICP, positioning, channels, conversion, reporting" },
-    { dimension: "Strategy ownership", agency: "Founder still owns it", fractional: "Operator owns it, founder makes the calls" },
-    { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix" },
-    { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company" },
-    { dimension: "Speed", agency: "Slower — agreed scope, change orders", fractional: "Faster — embedded operator, no handoffs" },
-    { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£7.5–12k/month, 3-month minimum" },
-    { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement" }
+    { dimension: "Who's in the seat", agency: "Account manager + junior team", fractional: "Senior operator (10+ years), embedded", winner: "fractional" },
+    { dimension: "Scope", agency: "Defined channel — paid, SEO, content, outbound", fractional: "Whole GTM system — ICP, positioning, channels, conversion, reporting", winner: "fractional" },
+    { dimension: "Strategy ownership", agency: "Founder still owns it", fractional: "Operator owns it, founder makes the calls", winner: "fractional" },
+    { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix", winner: "fractional" },
+    { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company", winner: "fractional" },
+    { dimension: "Speed", agency: "Slower — agreed scope, change orders", fractional: "Faster — embedded operator, no handoffs", winner: "fractional" },
+    { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£7.5–12k/month, 3-month minimum", winner: null },
+    { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement", winner: null }
   ],
   whenAgency: [
     "You already have senior GTM leadership in-house",
@@ -451,14 +451,14 @@ export const vsAgency = {
 export const vsFulltimeCMO = {
   title: "Fractional CMO vs. Full-time CMO",
   rows: [
-    { dimension: "All-in cost", fractional: "£7.5–12k/month (~£90–144k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs" },
-    { dimension: "Time to start", fractional: "Days", fulltime: "6 months to hire, 12 months to ramp" },
-    { dimension: "Commitment", fractional: "3-month minimum, rolling thereafter", fulltime: "Permanent — 3-month notice on either side" },
-    { dimension: "Risk if it doesn't fit", fractional: "Low — end the engagement, no severance", fulltime: "High — recruitment fee, equity dilution, 3-month notice" },
-    { dimension: "Time on the seat", fractional: "1–2 days a week", fulltime: "5 days a week + leadership presence" },
-    { dimension: "Team management", fractional: "Yes, but limited bandwidth", fulltime: "Yes, full ownership" },
-    { dimension: "External representation", fractional: "Limited — focused on operating", fulltime: "Yes — investors, partners, hires" },
-    { dimension: "When it's right", fractional: "Pre-£10m ARR, growth stuck, no senior owner yet", fulltime: "Post-£10m ARR, growth proven, ready to scale a marketing org" }
+    { dimension: "All-in cost", fractional: "£7.5–12k/month (~£90–144k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs", winner: "fractional" },
+    { dimension: "Time to start", fractional: "Days", fulltime: "6 months to hire, 12 months to ramp", winner: "fractional" },
+    { dimension: "Commitment", fractional: "3-month minimum, rolling thereafter", fulltime: "Permanent — 3-month notice on either side", winner: "fractional" },
+    { dimension: "Risk if it doesn't fit", fractional: "Low — end the engagement, no severance", fulltime: "High — recruitment fee, equity dilution, 3-month notice", winner: "fractional" },
+    { dimension: "Time on the seat", fractional: "1–2 days a week", fulltime: "5 days a week + leadership presence", winner: "fulltime" },
+    { dimension: "Team management", fractional: "Yes, but limited bandwidth", fulltime: "Yes, full ownership", winner: "fulltime" },
+    { dimension: "External representation", fractional: "Limited — focused on operating", fulltime: "Yes — investors, partners, hires", winner: "fulltime" },
+    { dimension: "When it's right", fractional: "Pre-£10m ARR, growth stuck, no senior owner yet", fulltime: "Post-£10m ARR, growth proven, ready to scale a marketing org", winner: null }
   ],
   whenFractional: [
     "£1m–£10m ARR or clear post-PMF traction",

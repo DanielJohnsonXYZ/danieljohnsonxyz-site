@@ -42,7 +42,11 @@ const schemas = [
         title="Eight dimensions, side-by-side."
         intro="Cost, time-to-start, commitment, risk, and what each role actually owns."
       />
-      <div class="mt-8 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
+      <p class="mt-4 text-center text-sm text-[color:var(--muted)]">
+        <span class="inline-block h-3 w-3 align-middle" style="background: rgba(124,58,237,0.15); box-shadow: inset 3px 0 0 var(--accent);"></span>
+        <span class="ml-2">Stronger choice in this row (highlighted by use-case, not absolute winner)</span>
+      </p>
+      <div class="mt-6 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
         <table class="w-full min-w-[820px] text-left text-sm">
           <thead class="bg-[color:var(--surface-dim)]">
             <tr>
@@ -55,8 +59,8 @@ const schemas = [
             {vsFulltimeCMO.rows.map((row) => (
               <tr class="border-t border-[color:var(--line)]">
                 <td class="p-4 align-top font-bold leading-6 text-[color:var(--ink)]">{row.dimension}</td>
-                <td class="p-4 align-top leading-6 text-[color:var(--ink)]">{row.fractional}</td>
-                <td class="p-4 align-top leading-6 text-[color:var(--muted)]">{row.fulltime}</td>
+                <td class:list={["p-4 align-top leading-6", row.winner === "fractional" ? "compare-winner-cell" : "text-[color:var(--ink)]"]}>{row.fractional}</td>
+                <td class:list={["p-4 align-top leading-6", row.winner === "fulltime" ? "compare-winner-cell" : "text-[color:var(--muted)]"]}>{row.fulltime}</td>
               </tr>
             ))}
           </tbody>
