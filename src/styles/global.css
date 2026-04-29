@@ -378,6 +378,37 @@ a, button, summary {
   border-color: var(--accent);
 }
 
+.tldr-block {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(20, 184, 166, 0.06)), var(--surface);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.tldr-block p:last-child {
+  margin-top: 0.7rem;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+.evergreen-updated {
+  padding-bottom: 3rem;
+}
+
+.evergreen-updated p {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.75rem;
+  margin: 0;
+  padding-top: 1rem;
+  text-transform: uppercase;
+}
+
 /* ─── Logo card ─── */
 .logo-card {
   border: 1px solid var(--line);

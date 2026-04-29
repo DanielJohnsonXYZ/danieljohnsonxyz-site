@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildFaqPageSchema } from "../lib/schema";
+import { buildFaqPageSchema, buildHowToSchema } from "../lib/schema";
 import { ctas, siteConfig } from "../site";
 
 const bottlenecks = [
@@ -43,12 +43,25 @@ const faq = [
       "Pick one bottleneck, gather evidence for it, and stop adding unrelated growth activity until the constraint is clear."
   }
 ];
+
+const schemas = [
+  buildFaqPageSchema(faq),
+  buildHowToSchema({
+    name: "How to diagnose your growth bottleneck",
+    description: "Use five checks to decide whether growth is blocked by ICP, channels, conversion, founder-led sales dependency, or revenue operations.",
+    url: "/growth-bottleneck-checklist/",
+    steps: bottlenecks.map((item) => ({
+      name: `Check ${item.title}`,
+      text: `${item.symptom} Ask: ${item.check}`
+    }))
+  })
+];
 ---
 
 <BaseLayout
   description="A plain-English growth bottleneck checklist for post-PMF AI and B2B SaaS founders deciding whether the issue is ICP, channels, conversion, founder-led sales dependency, or revenue operations."
   path="/growth-bottleneck-checklist"
-  schema={buildFaqPageSchema(faq)}
+  schema={schemas}
   title="Growth Bottleneck Checklist | Daniel Johnson"
 >
   <section class="section-space">

@@ -18,6 +18,7 @@ interface Props {
   stickyCta?: boolean;
   /** Opt in to preloading the hero headshot (homepage, about — pages where the image is above the fold). */
   preloadHeadshot?: boolean;
+  lastUpdated?: string | false;
 }
 
 const {
@@ -28,7 +29,8 @@ const {
   ogType = "website",
   schema = [],
   stickyCta = true,
-  preloadHeadshot = false
+  preloadHeadshot = false,
+  lastUpdated = siteConfig.lastUpdated
 } = Astro.props;
 
 const canonical = absoluteUrl(path);
@@ -168,6 +170,11 @@ document.addEventListener('click', (event) => {
 
     <main class="site-main" id="main-content">
       <slot />
+      {lastUpdated && (
+        <section class="evergreen-updated shell" aria-label="Page freshness">
+          <p>Last updated: {lastUpdated}</p>
+        </section>
+      )}
     </main>
 
     <SiteFooter />

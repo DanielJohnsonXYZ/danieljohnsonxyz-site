@@ -12,6 +12,9 @@ const schemas = [
   ]),
   buildFaqPageSchema([...vsFulltimeCMO.faq])
 ];
+
+const tldr =
+  "A fractional CMO is usually the lower-risk bridge when a post-PMF startup needs senior growth ownership now but is not ready for a permanent executive hire. A full-time CMO makes more sense once growth is proven, the marketing org is large enough, and external leadership is part of the role.";
 ---
 
 <BaseLayout
@@ -31,6 +34,10 @@ const schemas = [
         <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
           Both can run growth. They cost different amounts, take different lengths of time to start, and carry different risk profiles. Below: the trade-offs, written for founders who don't need to be sold to.
         </p>
+        <aside class="tldr-block text-left">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">TL;DR</p>
+          <p>{tldr}</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -126,7 +133,7 @@ const schemas = [
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center space-y-4">
         <p class="text-base leading-8 text-[color:var(--muted)]">
-          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-agency/">Fractional CMO vs. agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a>
+          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-agency/">Fractional CMO vs. agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="https://wescalestartups.com/services/fractional-cmo" rel="noreferrer" target="_blank">WSS Fractional CMO service</a>
         </p>
       </div>
     </div>

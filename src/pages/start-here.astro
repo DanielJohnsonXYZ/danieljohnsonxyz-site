@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
-import { buildBreadcrumbSchema } from "../lib/schema";
+import { buildBreadcrumbSchema, buildHowToSchema } from "../lib/schema";
 import { ctas, singleIdea, siteConfig } from "../site";
 
 // Stage-based reading paths. The three left columns of the table map to the
@@ -58,7 +58,17 @@ const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Start here", url: "/start-here" }
-  ])
+  ]),
+  buildHowToSchema({
+    name: "How to start with Daniel Johnson's fractional CMO site",
+    description: "Choose the right first page based on company stage, then read the offer, case evidence, writing, or checklist before booking a growth audit.",
+    url: "/start-here/",
+    steps: paths.map((item) => ({
+      name: item.stage,
+      text: `${item.you} ${item.nextStep}`,
+      url: item.href
+    }))
+  })
 ];
 ---
 

@@ -12,6 +12,9 @@ const schemas = [
   ]),
   buildFaqPageSchema([...vsAgency.faq])
 ];
+
+const tldr =
+  "A fractional CMO is the better fit when growth needs senior judgement, priorities, and operating rhythm. An agency is the better fit when strategy is clear and you need execution capacity in one channel. Many post-PMF teams need both: fractional leadership to set the system, agency support to execute inside it.";
 ---
 
 <BaseLayout
@@ -31,6 +34,10 @@ const schemas = [
         <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
           Both ship growth work. They do not solve the same problem. The honest answer depends on whether your bottleneck is execution capacity (agency) or senior judgement (fractional CMO).
         </p>
+        <aside class="tldr-block text-left">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">TL;DR</p>
+          <p>{tldr}</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -126,7 +133,7 @@ const schemas = [
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center space-y-4">
         <p class="text-base leading-8 text-[color:var(--muted)]">
-          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a>
+          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="https://wescalestartups.com/fractional-cmo-vs-agency/" rel="noreferrer" target="_blank">WSS consultancy comparison</a>
         </p>
       </div>
     </div>

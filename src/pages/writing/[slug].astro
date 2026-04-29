@@ -23,6 +23,7 @@ const pathname = `/writing/${article.id}`;
   ogType="article"
   path={pathname}
   schema={buildArticleSchema(article, pathname)}
+  lastUpdated={false}
   title={`${article.data.title} | Daniel Johnson`}
 >
   <section class="section-space">
@@ -35,6 +36,7 @@ const pathname = `/writing/${article.id}`;
           <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">{article.data.description}</p>
           <div class="flex flex-wrap gap-2">
             <span class="chip">{formatDate(article.data.publishedAt)}</span>
+            <span class="chip">By Daniel Johnson</span>
             {article.data.tags.map((tag) => <span class="chip">{tag}</span>)}
           </div>
         </div>
@@ -65,6 +67,11 @@ const pathname = `/writing/${article.id}`;
       </div>
 
       <div class="mx-auto max-w-4xl">
+        <aside class="reveal tldr-block mt-12">
+          <p class="mono text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">TL;DR</p>
+          <p>{article.data.tldr}</p>
+        </aside>
+
         <article class="reveal prose-wrap mt-12 xl:mt-16">
           <Content />
         </article>

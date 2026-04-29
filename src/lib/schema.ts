@@ -122,14 +122,41 @@ export function buildArticleSchema(article: CollectionEntry<"articles">, pathnam
     headline: article.data.title,
     description: article.data.description,
     datePublished: article.data.publishedAt.toISOString(),
+    dateModified: (article.data.updatedAt ?? article.data.publishedAt).toISOString(),
     author: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": `${siteConfig.siteUrl}/#person`,
+      name: siteConfig.name
     },
     publisher: {
       "@id": `${siteConfig.siteUrl}/#organization`
     },
     mainEntityOfPage: canonical,
     image: absoluteUrl(article.data.ogImage ?? siteConfig.ogImage)
+  };
+}
+
+export function buildHowToSchema(opts: {
+  name: string;
+  description: string;
+  url: string;
+  steps: Array<{ name: string; text: string; url?: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.name,
+    description: opts.description,
+    url: absoluteUrl(opts.url),
+    author: {
+      "@id": `${siteConfig.siteUrl}/#person`
+    },
+    step: opts.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      url: step.url ? absoluteUrl(step.url) : undefined
+    }))
   };
 }
 
