@@ -34,13 +34,12 @@ export const siteConfig = {
   pangea: "https://pangea.app/profile/daniel-johnson",
   instagram: "https://www.instagram.com/danieljohnsonxyz/",
   youtube: "https://www.youtube.com/@danieljohnson6000",
-  youtubeUploadsEmbed: "https://www.youtube-nocookie.com/embed/videoseries?list=UUkEPRVEnpDIdSk8o2vC3_WA",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
   gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.png",
-  headshot: "/images/daniel-headshot.webp",
+  headshot: "/images/daniel-hero-cutout.webp",
   sameAs: [
     "https://www.linkedin.com/in/danieljohnsonxyz/",
     "https://app.growthmentor.com/mentors/daniel-johnson",
@@ -51,6 +50,50 @@ export const siteConfig = {
     "https://www.youtube.com/@danieljohnson6000",
     "https://www.wescalestartups.com"
   ]
+} as const;
+
+export const siteImages = {
+  heroCutout: {
+    src: "/images/daniel-hero-cutout.webp",
+    width: 760,
+    height: 925,
+    alt: "Daniel Johnson, fractional CMO and AI-native GTM operator"
+  },
+  outdoorPortrait: {
+    src: "/images/daniel-outdoor-portrait.webp",
+    width: 1200,
+    height: 1460,
+    alt: "Portrait of Daniel Johnson outdoors"
+  },
+  speakingCircle: {
+    src: "/images/daniel-speaking-circle.webp",
+    width: 900,
+    height: 900,
+    alt: "Daniel Johnson speaking with a microphone"
+  },
+  speakingMic: {
+    src: "/images/daniel-speaking-mic.webp",
+    width: 1080,
+    height: 1078,
+    alt: "Daniel Johnson presenting during a startup growth session"
+  },
+  speakingStageBw: {
+    src: "/images/daniel-speaking-stage-bw.webp",
+    width: 1100,
+    height: 1100,
+    alt: "Daniel Johnson speaking on stage"
+  }
+} as const;
+
+export const proofStats = {
+  revenueImpact: "£18M+",
+  adSpend: "£6.8M+",
+  startupsAdvised: "20+",
+  mentorSessions: "479+",
+  mentorRating: "4.97",
+  mentorReviewCount: "220",
+  founderRaiseSupport: "£15M+",
+  founderExits: "Two founder exits — eQuoo (mental-health tech) and an eCommerce brand"
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -317,32 +360,124 @@ export const roiFrames = [
 export const trustLogos = [
   { id: "growthmentor", src: "/images/logos/growthmentor.png", alt: "GrowthMentor — Top-Rated Mentor", label: "GrowthMentor" },
   { id: "google", src: "/images/logos/google.webp", alt: "Google for Startups — Growth Mentor", label: "Google for Startups" },
-  { id: "cambridge", src: "/images/logos/cambridge.webp", alt: "University of Cambridge — Visiting Lecturer", label: "Cambridge" },
-  { id: "techstars", src: "/images/logos/techstars.svg", alt: "Techstars — Mentor", label: "Techstars" },
-  { id: "imperial", src: "/images/logos/imperial.svg", alt: "Imperial College London — Guest lecturer", label: "Imperial" },
-  { id: "general-assembly", src: "/images/logos/general-assembly.svg", alt: "General Assembly — Training programme", label: "General Assembly" },
-  { id: "uk-space-agency", src: "/images/logos/uk-space-agency.svg", alt: "UK Space Agency — Innovation talk", label: "UK Space Agency" }
+  { id: "cambridge", src: "/images/logos/cambridge.webp", alt: "University of Cambridge — Visiting Lecturer", label: "Cambridge" }
+] as const;
+
+export const trustAffiliations = [
+  "Techstars mentor",
+  "Imperial College London guest lecturer",
+  "General Assembly trainer",
+  "UK Space Agency innovation talk"
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
 // £18M+ revenue is now the lead metric: it's the most concrete dollar-tangible
 // claim and what founders care about most. £6.8M+ ad spend moves to slot 4.
 export const proofBar = [
-  { icon: "💰", value: "£18M+", label: "client revenue generated", source: "/case-studies/" },
-  { icon: "⭐", value: "4.93 / 5", label: "from 220 reviews on GrowthMentor", source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
-  { icon: "🚀", value: "20+", label: "AI & SaaS startups advised" },
-  { icon: "📈", value: "£6.8M+", label: "ad spend managed" }
+  { icon: "💰", value: proofStats.revenueImpact, label: "client revenue generated", source: "/case-studies/" },
+  { icon: "⭐", value: `${proofStats.mentorRating} / 5`, label: `from ${proofStats.mentorReviewCount} reviews on GrowthMentor`, source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
+  { icon: "🚀", value: proofStats.startupsAdvised, label: "AI & SaaS startups advised" },
+  { icon: "📈", value: proofStats.adSpend, label: "ad spend managed" }
 ] as const;
 
 // Lifetime totals — one strip, lower on the homepage. Now used as a wider
 // "lifetime aggregate" line that complements the proof bar without duplicating
 // its specific metrics. £18M+ stays as the lead claim where it matters.
 export const lifetimeTotals = [
-  "389+ mentor sessions delivered",
+  `${proofStats.mentorSessions} mentor sessions delivered`,
   "20+ AI & B2B SaaS startups scaled",
-  "£15M+ helped founders raise",
-  "Two founder exits — eQuoo (mental-health tech) and an eCommerce brand"
+  `${proofStats.founderRaiseSupport} helped founders raise`,
+  proofStats.founderExits
 ] as const;
+
+export const aiWorkflowExamples = [
+  {
+    input: "Customer calls",
+    synthesis: "Message bank",
+    decision: "Which pain is sharp enough to lead with",
+    output: "Landing page tests"
+  },
+  {
+    input: "Competitor teardown",
+    synthesis: "Positioning gaps",
+    decision: "Where the category is overclaimed or underexplained",
+    output: "Campaign angles"
+  },
+  {
+    input: "CRM data",
+    synthesis: "Pipeline diagnosis",
+    decision: "What to stop, fix, or scale this week",
+    output: "Weekly decision rhythm"
+  }
+] as const;
+
+export const speakingVideos = [
+  {
+    id: "9CR19_PiuGs",
+    title: "Daniel Johnson Introduction",
+    source: "How Startups Win With AI",
+    description: "A quick intro to Daniel's growth operator background and current point of view."
+  },
+  {
+    id: "B_GVNYU_StM",
+    title: "What The Hell is Growth",
+    source: "How Startups Win With AI",
+    description: "An actionable guide to growth marketing for startup founders."
+  },
+  {
+    id: "p5Q7PuUNHtc",
+    title: "How to Use AI for Product Market Fit",
+    source: "How Startups Win With AI",
+    description: "A practical view on using AI to sharpen product-market fit and startup growth."
+  },
+  {
+    id: "A4dE89dp3K4",
+    title: "Founding Partner of We Scale Startups",
+    source: "First Customers",
+    description: "A founder interview covering early customers, building businesses, and growth lessons."
+  },
+  {
+    id: "lapORJpeEHE",
+    title: "Growth Marketing for Startups",
+    source: "TechGenez",
+    description: "A startup growth session from StartupsExpo 2022."
+  },
+  {
+    id: "25UGbSw941g",
+    title: "Getting the Best Out of Your Team",
+    source: "Staff Treats",
+    description: "A conversation on team performance and founder operating habits."
+  },
+  {
+    id: "Qg9vSybTKz8",
+    title: "Beginners Guide to Growth Marketing",
+    source: "Tom West",
+    description: "A beginner-friendly explanation of growth marketing foundations."
+  },
+  {
+    id: "rJoHvpYewEo",
+    title: "Repeatable, Predictable & Scalable Growth Engines",
+    source: "GrowthMatch",
+    description: "How tech startups can build growth engines rather than chase isolated tactics."
+  },
+  {
+    id: "jgn2QTH8c44",
+    title: "Actionable Growth Marketing for Startups",
+    source: "Unit Network",
+    description: "A London startup growth talk with practical acquisition and experimentation ideas."
+  },
+  {
+    id: "ZKU9B_jcrQU",
+    title: "What Startups in Taiwan Neglect to Prioritize",
+    source: "Startup Taiwan",
+    description: "A startup ecosystem talk on neglected growth and prioritisation decisions."
+  }
+].map((video) => ({
+  ...video,
+  href: `https://www.youtube.com/watch?v=${video.id}`,
+  embed: `https://www.youtube-nocookie.com/embed/${video.id}`,
+  thumbnail: `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
+}));
 
 // ──────────────────────────────────────────────────────────────────────────
 // Home-page service ladder — a CLEAN buying ladder, not a service-shape mix.

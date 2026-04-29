@@ -8,6 +8,7 @@ import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } fr
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import {
   agencyVsMe,
+  aiWorkflowExamples,
   ctas,
   fitSignals,
   homeServiceLadder,
@@ -16,6 +17,8 @@ import {
   proofBar,
   singleIdea,
   siteConfig,
+  siteImages,
+  trustAffiliations,
   trustLogos
 } from "../site";
 
@@ -84,8 +87,8 @@ const imageStoryCards = [
     body: "Talks and workshops are built around the decision the room needs to make next, not a theatre of frameworks.",
     href: "/speaking/",
     cta: "See speaking assets",
-    image: "/images/cambridge-judge-business-school-960.webp",
-    alt: "Cambridge Judge Business School, one of Daniel Johnson's selected teaching and speaking affiliations"
+    image: siteImages.speakingStageBw.src,
+    alt: siteImages.speakingStageBw.alt
   },
   {
     eyebrow: "Operator mindset",
@@ -93,8 +96,8 @@ const imageStoryCards = [
     body: "The same bias shows up in the work: define the signal, read the instruments, make the next decision before the system drifts.",
     href: "/about/",
     cta: "Read about Daniel",
-    image: "/images/daniel-aircraft.webp",
-    alt: "Daniel Johnson in a small aircraft, connecting systems thinking with growth operating work"
+    image: siteImages.outdoorPortrait.src,
+    alt: siteImages.outdoorPortrait.alt
   }
 ];
 
@@ -216,10 +219,10 @@ const schemas = [
               class="aspect-[4/5] w-full object-cover object-top hero-portrait"
               decoding="async"
               fetchpriority="high"
-              height="960"
+              height={siteImages.heroCutout.height}
               loading="eager"
-              src={siteConfig.headshot}
-              width="768"
+              src={siteImages.heroCutout.src}
+              width={siteImages.heroCutout.width}
             />
             <div class="hero-authority-panel">
               <p class="card-label">Primary Offer</p>
@@ -251,6 +254,11 @@ const schemas = [
                 src={item.src}
                 width="180"
               />
+            ))
+          }
+          {
+            trustAffiliations.map((item) => (
+              <span class="trust-text-badge">{item}</span>
             ))
           }
         </div>
@@ -304,7 +312,7 @@ const schemas = [
       <div class="ladder-grid mt-10">
         {
           homeServiceLadder.map((tier, index) => (
-            <article class:list={["ladder-card card p-6 md:p-8", tier.primary && "ladder-card-primary"]}>
+            <a class:list={["ladder-card card p-6 md:p-8", tier.primary && "ladder-card-primary"]} href={tier.href} aria-label={`${tier.heading}: ${tier.cta}`}>
               <div class="ladder-step" aria-hidden="true">
                 <span class="ladder-step-num">0{index + 1}</span>
                 {index < homeServiceLadder.length - 1 && <span class="ladder-step-arrow">→</span>}
@@ -322,8 +330,8 @@ const schemas = [
               <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
                 <strong class="font-semibold text-[color:var(--ink)]">Outcome:</strong> {tier.outcome}
               </p>
-              <a class="link-arrow mt-6" href={tier.href}>{tier.cta} →</a>
-            </article>
+              <span class="link-arrow mt-6">{tier.cta}</span>
+            </a>
           ))
         }
       </div>
@@ -448,21 +456,44 @@ const schemas = [
   <!-- 8. Why AI-native matters ─────────────────────────────────────── -->
   <section class="section-space" aria-labelledby="ai-heading">
     <div class="shell">
-      <div class="reveal mx-auto max-w-5xl space-y-6">
-        <span class="eyebrow">Category</span>
-        <h2 id="ai-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
-          AI should make GTM faster, not vaguer.
-          <span class="hero-accent">The human decisions still matter.</span>
-        </h2>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          I use AI to shorten research synthesis, customer-call review, competitor teardowns, message testing, reporting, and campaign iteration. Less manual drag, faster decisions.
-        </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          You still need a human operator deciding which customer signal matters, which channel deserves budget, which message is strong enough to test. AI helps produce the raw material faster.
-        </p>
-        <p>
-          <a class="link-arrow" href="/writing/">Read: What AI-native GTM actually means →</a>
-        </p>
+      <div class="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+        <div class="reveal space-y-6">
+          <span class="eyebrow">AI-native GTM</span>
+          <h2 id="ai-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
+            AI should turn messy signal into sharper commercial decisions.
+          </h2>
+          <p class="text-lg leading-8 text-[color:var(--muted)]">
+            The useful bit is not "AI content". It's faster synthesis: call notes, competitor pages, CRM exports, funnel reports, and sales objections turned into the raw material for better tests.
+          </p>
+          <p class="text-lg leading-8 text-[color:var(--muted)]">
+            The judgement still sits with the operator: which signal matters, which promise is believable, which channel deserves the next week of effort.
+          </p>
+          <a class="link-arrow" href="/ai-native-workflows/">See AI-native workflows</a>
+        </div>
+
+        <div class="reveal ai-workflow-panel">
+          <div class="ai-workflow-head">
+            <p class="card-label">How the work moves</p>
+            <div class="ai-workflow-labels" aria-hidden="true">
+              <span>Input</span>
+              <span>AI-assisted synthesis</span>
+              <span>Human decision</span>
+              <span>Commercial output</span>
+            </div>
+          </div>
+          <div class="ai-workflow-grid">
+            {
+              aiWorkflowExamples.map((item) => (
+                <article class="ai-workflow-row">
+                  <span>{item.input}</span>
+                  <span>{item.synthesis}</span>
+                  <span>{item.decision}</span>
+                  <strong>{item.output}</strong>
+                </article>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -485,7 +516,7 @@ const schemas = [
                 <p class="card-label">{card.eyebrow}</p>
                 <h3>{card.title}</h3>
                 <p>{card.body}</p>
-                <a class="link-arrow" href={card.href}>{card.cta} →</a>
+                <a class="link-arrow" href={card.href}>{card.cta}</a>
               </div>
             </article>
           ))
@@ -545,7 +576,7 @@ const schemas = [
       </div>
 
       <div class="reveal mt-6 text-center">
-        <a class="link-arrow" href="/case-studies/">See full case studies →</a>
+        <a class="link-arrow" href="/case-studies/">See full case studies</a>
       </div>
     </div>
   </section>
@@ -589,7 +620,7 @@ const schemas = [
 
       <div class="reveal mt-6 text-center">
         <a class="link-arrow" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
-          Read more founder feedback →
+          Read more founder feedback
         </a>
       </div>
     </div>
@@ -608,7 +639,7 @@ const schemas = [
           I mentor founders through Google for Startups, Techstars, and GrowthMentor. I've lectured at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa. {siteConfig.location}
         </p>
         <p>
-          <a class="link-arrow" href="/about/">Read more about Daniel →</a>
+          <a class="link-arrow" href="/about/">Read more about Daniel</a>
         </p>
       </div>
     </div>
@@ -633,7 +664,7 @@ const schemas = [
               </p>
               <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{article.data.title}</h3>
               <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{article.data.description}</p>
-              <a class="link-arrow mt-5" href={`/writing/${article.id}/`}>Read essay →</a>
+              <a class="link-arrow mt-5" href={`/writing/${article.id}/`}>Read essay</a>
             </article>
           ))
         }

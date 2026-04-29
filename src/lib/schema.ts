@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { siteConfig } from "../site";
+import { proofStats, siteConfig, siteImages } from "../site";
 import { absoluteUrl } from "./utils";
 
 export function buildPersonSchema() {
@@ -12,13 +12,13 @@ export function buildPersonSchema() {
     familyName: "Johnson",
     jobTitle: "Fractional CMO & AI-Native Growth Operator",
     description:
-      "Fractional CMO and senior GTM operator for post-PMF AI and B2B SaaS startups. 10+ years building growth systems for Seed to Series B founders. £18M+ revenue generated for clients, £6.8M+ ad spend managed, 20+ startups scaled, 389+ mentor sessions delivered.",
+      `Fractional CMO and senior GTM operator for post-PMF AI and B2B SaaS startups. 10+ years building growth systems for Seed to Series B founders. ${proofStats.revenueImpact} revenue generated for clients, ${proofStats.adSpend} ad spend managed, ${proofStats.startupsAdvised} startups scaled, ${proofStats.mentorSessions} mentor sessions delivered.`,
     url: siteConfig.siteUrl,
     image: {
       "@type": "ImageObject",
-      url: absoluteUrl(siteConfig.headshot),
-      width: 768,
-      height: 960
+      url: absoluteUrl(siteImages.heroCutout.src),
+      width: siteImages.heroCutout.width,
+      height: siteImages.heroCutout.height
     },
     email: `mailto:${siteConfig.email}`,
     telephone: siteConfig.phone,
@@ -38,7 +38,7 @@ export function buildPersonSchema() {
       }
     ],
     award: [
-      "Top-Rated Mentor — GrowthMentor (4.93/5 from 220 reviews, 389+ sessions)",
+      `Top-Rated Mentor — GrowthMentor (${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} reviews, ${proofStats.mentorSessions} sessions)`,
       "Google for Startups — Growth Mentor",
       "Techstars Mentor"
     ],
@@ -193,6 +193,32 @@ export function buildTalkSchema(talk: CollectionEntry<"talks">) {
   };
 }
 
+export function buildVideoSchema(video: {
+  title: string;
+  description: string;
+  thumbnail: string;
+  href: string;
+  embed: string;
+  source: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.title,
+    description: video.description,
+    thumbnailUrl: video.thumbnail,
+    url: video.href,
+    embedUrl: video.embed,
+    publisher: {
+      "@type": "Organization",
+      name: video.source
+    },
+    about: {
+      "@id": `${siteConfig.siteUrl}/#person`
+    }
+  };
+}
+
 /**
  * Service schema — helps Google surface the Fractional CMO page as a service
  * offering with price and audience, and gives AI engines a structured
@@ -251,10 +277,10 @@ export function buildAggregateRatingSchema() {
     "@context": "https://schema.org",
     "@type": "AggregateRating",
     itemReviewed: { "@id": `${siteConfig.siteUrl}/#person` },
-    ratingValue: "4.93",
+    ratingValue: proofStats.mentorRating,
     bestRating: "5",
     worstRating: "1",
-    reviewCount: "220",
+    reviewCount: proofStats.mentorReviewCount,
     url: siteConfig.growthMentorReviews
   };
 }

@@ -15,8 +15,8 @@ npm run preview
 
 - `src/site.ts`
   - `gtmId`
-- `public/images/daniel-headshot.png`
-  - Replace with Daniel's final approved headshot if needed
+- `public/images/daniel-hero-cutout.webp`
+  - Current homepage hero image, generated from Daniel's supplied headshot asset
 
 ## Deployment Notes
 

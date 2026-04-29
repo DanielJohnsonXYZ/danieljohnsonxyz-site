@@ -1,5 +1,5 @@
 ---
-import { ctas, footerNavigation, footerTestimonial, siteConfig, socialLinks } from "../site";
+import { ctas, footerNavigation, footerTestimonial, proofStats, siteConfig, socialLinks } from "../site";
 ---
 
 <footer class="dark-section pb-10 pt-20">
@@ -23,8 +23,8 @@ import { ctas, footerNavigation, footerTestimonial, siteConfig, socialLinks } fr
 
       <aside class="flex flex-col gap-3 text-right md:items-end">
         <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Top-rated mentor</p>
-        <p class="text-5xl font-extrabold tracking-[-0.06em] text-white">4.93<span class="text-2xl text-white/50">/5</span></p>
-        <p class="text-sm text-white/55">from 220 reviews · 389+ sessions</p>
+        <p class="text-5xl font-extrabold tracking-[-0.06em] text-white">{proofStats.mentorRating}<span class="text-2xl text-white/50">/5</span></p>
+        <p class="text-sm text-white/55">from {proofStats.mentorReviewCount} reviews · {proofStats.mentorSessions} sessions</p>
       </aside>
     </div>
 

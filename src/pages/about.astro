@@ -1,13 +1,13 @@
 ---
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig } from "../site";
+import { proofStats, siteConfig, siteImages } from "../site";
 
-const proofStats = [
+const proofTiles = [
   { value: "10+ yrs", label: "Founder, operator, and advisor work" },
-  { value: "20+", label: "AI and SaaS startups advised" },
-  { value: "2 exits", label: "Founder-side: eQuoo (mental-health tech) + Jaanuu (eCommerce)" },
-  { value: "£6.8M+", label: "Paid acquisition spend managed" }
+  { value: proofStats.startupsAdvised, label: "AI and SaaS startups advised" },
+  { value: "2 exits", label: "Founder-side: eQuoo (mental-health tech) + an eCommerce brand" },
+  { value: proofStats.adSpend, label: "Paid acquisition spend managed" }
 ];
 
 // Timeline split: always-on vs time-bounded. Chapters that are still running
@@ -34,7 +34,7 @@ const timeline = [
   {
     year: "2019 → now",
     title: "Teaching & mentoring at scale",
-    body: "Google Launchpad, Techstars, GrowthMentor, Cambridge Judge Business School, Imperial College London, General Assembly, UK Space Agency. 389+ sessions delivered, 4.93/5 rating.",
+    body: `Google Launchpad, Techstars, GrowthMentor, Cambridge Judge Business School, Imperial College London, General Assembly, UK Space Agency. ${proofStats.mentorSessions} sessions delivered, ${proofStats.mentorRating}/5 rating.`,
     ongoing: true
   },
   {
@@ -88,7 +88,7 @@ const principles = [
         </div>
 
         <aside class="reveal card overflow-hidden">
-          <img alt="Portrait of Daniel Johnson" class="aspect-[4/3] w-full object-cover object-top" height="720" src={siteConfig.headshot} width="960" />
+          <img alt={siteImages.outdoorPortrait.alt} class="aspect-[4/3] w-full object-cover object-top" height={siteImages.outdoorPortrait.height} src={siteImages.outdoorPortrait.src} width={siteImages.outdoorPortrait.width} />
           <div class="p-6 md:p-8">
             <p class="card-label">Why it matters</p>
             <p class="mt-3 text-base leading-8">
@@ -96,7 +96,7 @@ const principles = [
             </p>
             <div class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[color:var(--line)]">
               {
-                proofStats.map((item) => (
+                proofTiles.map((item) => (
                   <div class="bg-[color:var(--surface)] p-4">
                     <p class="text-2xl font-extrabold tracking-[-0.07em]">{item.value}</p>
                     <p class="mt-1 text-xs leading-5 text-[color:var(--muted)]">{item.label}</p>
@@ -113,15 +113,15 @@ const principles = [
   <section class="section-space pt-0">
     <div class="shell">
       <div class="reveal card overflow-hidden md:grid md:grid-cols-[0.8fr_1fr] md:items-stretch">
-        <img alt="Daniel Johnson in a small aircraft — flying connects to how he approaches work: systems thinking, judgment under uncertainty, and a bias toward instruments over instinct" class="h-full min-h-[22rem] w-full object-cover" height="960" loading="lazy" src="/images/daniel-aircraft.webp" width="960" />
+        <img alt={siteImages.speakingCircle.alt} class="h-full min-h-[22rem] w-full object-cover" height={siteImages.speakingCircle.height} loading="lazy" src={siteImages.speakingCircle.src} width={siteImages.speakingCircle.width} />
         <div class="p-6 md:p-10">
-          <p class="card-label">Human detail</p>
-          <h2 class="mt-4 text-3xl font-bold tracking-[-0.05em] md:text-4xl">What flying taught me about growth.</h2>
+          <p class="card-label">Teaching style</p>
+          <h2 class="mt-4 text-3xl font-bold tracking-[-0.05em] md:text-4xl">Practical, direct, and built around the next decision.</h2>
           <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
-            Learning to fly is 90% systems and 10% nerve. You run a checklist before you touch the throttle. You trust the instruments over the feeling in your stomach. You stay ahead of the aircraft — anticipate the next decision two steps before it arrives.
+            The public speaking and mentoring work is the same style as the client work: take a messy growth question, separate signal from noise, and make the next commercial decision easier to see.
           </p>
           <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
-            Growth is the same job. Founders get into trouble when they're chasing the feeling in their stomach instead of reading the instruments. My job is the checklist, the dashboard, and the quiet voice that says "we've already decided what to do when this happens."
+            Founders do not need a theatre of frameworks. They need sharper choices: which segment to focus on, which message to test, which channel to stop, and what the team should do this week.
           </p>
         </div>
       </div>

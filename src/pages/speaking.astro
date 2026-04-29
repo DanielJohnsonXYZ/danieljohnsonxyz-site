@@ -2,17 +2,17 @@
 import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildTalkSchema } from "../lib/schema";
+import { buildTalkSchema, buildVideoSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { siteConfig, socialLinks, trustLogos } from "../site";
+import { proofStats, siteConfig, siteImages, socialLinks, speakingVideos, trustAffiliations, trustLogos } from "../site";
 
 const talks = sortByFeaturedThenOrder(await getCollection("talks"));
 const selectedTalks = talks.slice(0, 3);
 const speakingHighlights = [
   { metric: "£18M+", label: "Revenue impact generated for clients" },
-  { metric: "£6M+", label: "Paid media managed across Google, Meta, LinkedIn and more" },
+  { metric: proofStats.adSpend, label: "Paid media managed across Google, Meta, LinkedIn and more" },
   { metric: "35%", label: "Average CAC reduction for acquisition clients" },
-  { metric: "479+", label: "Mentorship sessions rated 4.97/5 on GrowthMentor" },
+  { metric: proofStats.mentorSessions, label: `Mentorship sessions rated ${proofStats.mentorRating}/5 on GrowthMentor` },
   { metric: "6x", label: "App download growth driven for a B2B HealthTech client" },
   { metric: "7+", label: "Universities lectured at, including Cambridge and Imperial" }
 ];
@@ -36,7 +36,7 @@ const topics = [
 const organiserTakeaways = [
   "Podcast appearances, keynotes, panels, press interviews, and advisory conversations.",
   "Sharp operator perspective on AI-native GTM, PLG, experimentation, and founder-led distribution.",
-  "Practical examples from 20+ startups, 479+ founder sessions, and programme work with Google and Techstars."
+  `Practical examples from 20+ startups, ${proofStats.mentorSessions} founder sessions, and programme work with Google and Techstars.`
 ];
 const deliverables = [
   "Podcasts and press interviews",
@@ -70,7 +70,7 @@ const episodeIdeas = [
     bestFor: "SaaS-specific podcasts, product and growth newsletters"
   },
   {
-    title: "479 Founder Conversations: What Separates the Ones That Make It",
+    title: `${proofStats.mentorSessions} Founder Conversations: What Separates the Ones That Make It`,
     body:
       "Patterns that predict founder success — and the self-sabotage patterns that keep otherwise strong founders stuck.",
     bestFor: "Entrepreneurship shows, community platforms, accelerator events"
@@ -80,7 +80,7 @@ const sampleQuestions = [
   "You've worked with 20+ startups across AI, SaaS, and Web3. What's the most common growth mistake you see founders make?",
   "What does building a growth machine actually mean in practice — how is it different from just running campaigns?",
   "How has AI changed the way you approach GTM strategy for clients?",
-  "You've done 479+ mentorship sessions. What separates the founders who break through from those who stay stuck?",
+  `You've done ${proofStats.mentorSessions} mentorship sessions. What separates the founders who break through from those who stay stuck?`,
   "Growth hacking had its moment — is it dead? What's replaced it?",
   "How do you think about product-led growth for early-stage B2B SaaS companies who can't yet afford to give the product away?",
   "What's the one thing most growth teams get wrong about experimentation?",
@@ -98,7 +98,7 @@ const speakingMentoring = {
   mentoring: [
     "Google for Startups Accelerator (UK, Poland, Ukraine, Nigeria, Romania)",
     "Techstars",
-    "GrowthMentor — 479+ sessions, 4.97/5"
+    `GrowthMentor — ${proofStats.mentorSessions} sessions, ${proofStats.mentorRating}/5`
   ],
   press: "Appearances being added — check back soon."
 };
@@ -106,20 +106,20 @@ const bios = [
   {
     label: "Short bio (50 words)",
     body:
-      "Daniel Johnson is a fractional CMO, GTM operator, and founder of We Scale Startups. He helps AI and B2B SaaS companies build repeatable growth systems — and mentors founders through Google, Techstars, and GrowthMentor (479+ sessions, 4.97/5). He teaches startup growth at Cambridge University."
+      `Daniel Johnson is a fractional CMO, GTM operator, and founder of We Scale Startups. He helps AI and B2B SaaS companies build repeatable growth systems — and mentors founders through Google, Techstars, and GrowthMentor (${proofStats.mentorSessions} sessions, ${proofStats.mentorRating}/5). He teaches startup growth at Cambridge University.`
   },
   {
     label: "Medium bio (120 words)",
     body:
-      "Daniel Johnson is a fractional CMO, GTM growth operator, and the founder of We Scale Startups — a consultancy helping post-PMF AI and B2B SaaS companies build repeatable, scalable growth systems.\n\nOver 10+ years and 20+ startups, Daniel has managed £6M+ in ad spend, generated £18M+ in revenue impact, and built growth infrastructure across paid acquisition, product-led growth, and AI-native execution. He's cut client CAC by 35%, reduced churn by 21%, and driven 6x download growth for HealthTech clients.\n\nBeyond client work, Daniel mentors founders through Google for Startups, Techstars, and GrowthMentor (479+ sessions, rated 4.97/5), and is a Visiting Lecturer at Cambridge University's Judge Business School. Based in London."
+      `Daniel Johnson is a fractional CMO, GTM growth operator, and the founder of We Scale Startups — a consultancy helping post-PMF AI and B2B SaaS companies build repeatable, scalable growth systems.\n\nOver 10+ years and 20+ startups, Daniel has managed ${proofStats.adSpend} in ad spend, generated ${proofStats.revenueImpact} in revenue impact, and built growth infrastructure across paid acquisition, product-led growth, and AI-native execution. He's cut client CAC by 35%, reduced churn by 21%, and driven 6x download growth for HealthTech clients.\n\nBeyond client work, Daniel mentors founders through Google for Startups, Techstars, and GrowthMentor (${proofStats.mentorSessions} sessions, rated ${proofStats.mentorRating}/5), and is a Visiting Lecturer at Cambridge University's Judge Business School. Based in London.`
   },
   {
     label: "Long bio (280 words)",
     body:
-      "Daniel Johnson is a fractional CMO, GTM operator, and founder of We Scale Startups — a growth consultancy that helps post-PMF AI and B2B SaaS companies build the repeatable growth systems that turn promising products into scalable businesses.\n\nDaniel's career spans over a decade of hands-on growth work across more than 20 startups in SaaS, AI, Web3, eCommerce, and HealthTech. He has managed £6M+ in paid media across Google, Meta, LinkedIn, Twitter, and Taboola — generating £18M+ in measurable revenue impact for clients. In practice, that means reducing CAC by 35%, cutting churn by 21%, driving 6x app download growth, and scaling client budgets from £50K to £2M+ monthly with consistent 3x ROI.\n\nHis work sits at the intersection of go-to-market strategy, product-led growth, AI-native workflows, and founder-led distribution — helping growth teams move faster, test smarter, and convert ambiguity into commercial momentum.\n\nOutside of client work, Daniel is one of the most active startup growth mentors in the UK. He has completed 479+ mentorship sessions on GrowthMentor with a 4.97/5 rating, mentored cohorts through Google for Startups Accelerator and Techstars, and supported founders in raising £15M+ across Seed to Series B rounds. He is a Visiting Lecturer on startup growth at Cambridge University's Judge Business School and has taught at Imperial College London, the UK Space Agency, and six other institutions.\n\nDaniel is based in London and open to podcast appearances, keynote speaking, panel discussions, press interviews, and advisory conversations."
+      `Daniel Johnson is a fractional CMO, GTM operator, and founder of We Scale Startups — a growth consultancy that helps post-PMF AI and B2B SaaS companies build the repeatable growth systems that turn promising products into scalable businesses.\n\nDaniel's career spans over a decade of hands-on growth work across more than 20 startups in SaaS, AI, Web3, eCommerce, and HealthTech. He has managed ${proofStats.adSpend} in paid media across Google, Meta, LinkedIn, Twitter, and Taboola — generating ${proofStats.revenueImpact} in measurable revenue impact for clients. In practice, that means reducing CAC by 35%, cutting churn by 21%, driving 6x download growth, and scaling client budgets from £50K to £2M+ monthly with consistent 3x ROI.\n\nHis work sits at the intersection of go-to-market strategy, product-led growth, AI-native workflows, and founder-led distribution — helping growth teams move faster, test smarter, and convert ambiguity into commercial momentum.\n\nOutside of client work, Daniel is one of the most active startup growth mentors in the UK. He has completed ${proofStats.mentorSessions} mentorship sessions on GrowthMentor with a ${proofStats.mentorRating}/5 rating, mentored cohorts through Google for Startups Accelerator and Techstars, and supported founders in raising ${proofStats.founderRaiseSupport} across Seed to Series B rounds. He is a Visiting Lecturer on startup growth at Cambridge University's Judge Business School and has taught at Imperial College London, the UK Space Agency, and six other institutions.\n\nDaniel is based in London and open to podcast appearances, keynote speaking, panel discussions, press interviews, and advisory conversations.`
   }
 ];
-const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
+const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speakingVideos.map((video) => buildVideoSchema(video))];
 ---
 
 <BaseLayout
@@ -157,24 +157,16 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
         </div>
         <aside class="grid gap-5">
           <article class="reveal video-panel">
-            <div class="video-frame">
-              <iframe
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                loading="lazy"
-                src={siteConfig.youtubeUploadsEmbed}
-                title="Daniel Johnson YouTube videos"
-              ></iframe>
-            </div>
+            <img alt={siteImages.speakingMic.alt} class="aspect-[16/10] w-full rounded-lg object-cover object-top" height={siteImages.speakingMic.height} loading="eager" src={siteImages.speakingMic.src} width={siteImages.speakingMic.width} />
             <div class="video-panel-copy">
-              <p class="card-label">YouTube field notes</p>
-              <h2>Short growth and GTM notes for founders.</h2>
-              <p>Use this as a quick read on Daniel's pace, language, and practical teaching style before booking a talk, panel, or interview.</p>
+              <p class="card-label">Speaking examples</p>
+              <h2>See the pace, language, and practical teaching style.</h2>
+              <p>Curated talks and interviews are below, with direct links for organisers and producers who want to review fit quickly.</p>
               <a class="link-arrow" href={siteConfig.youtube} rel="noreferrer" target="_blank">Watch more on YouTube</a>
             </div>
           </article>
           <div class="reveal card overflow-hidden p-4">
-            <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="720" loading="eager" src="/images/cambridge-judge-business-school-960.webp" width="960" />
+            <img alt={siteImages.speakingStageBw.alt} class="aspect-[4/3] w-full rounded-xl object-cover" height={siteImages.speakingStageBw.height} loading="eager" src={siteImages.speakingStageBw.src} width={siteImages.speakingStageBw.width} />
           </div>
           <div class="reveal card p-6 md:p-8">
             <p class="card-label">Available for</p>
@@ -193,12 +185,43 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
       </div>
 
       <div class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {
-          trustLogos.map((item) => (
+          {
+            trustLogos.map((item) => (
             <article class="reveal logo-card flex items-center justify-between gap-4 px-5 py-4">
               <img alt={item.alt} class="h-10 w-auto max-w-[10rem] object-contain" height="48" loading="lazy" src={item.src} width="180" />
               <span class="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">{item.label}</span>
             </article>
+          ))
+        }
+        {
+          trustAffiliations.map((item) => (
+            <article class="reveal logo-card logo-card-text flex items-center px-5 py-4">
+              <span class="text-sm font-semibold leading-6 text-[color:var(--ink)]">{item}</span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Watch"
+        intro="A curated set of talks, interviews, and founder-facing sessions. These replace the generic channel embed so producers can review the right examples quickly."
+        title="Speaking examples that show the range."
+      />
+      <div class="video-grid mt-10">
+        {
+          speakingVideos.map((video) => (
+            <a class="reveal video-example-card" href={video.href} rel="noreferrer" target="_blank">
+              <img alt={`${video.title} video thumbnail`} height="360" loading="lazy" src={video.thumbnail} width="480" />
+              <div>
+                <p class="card-label">{video.source}</p>
+                <h2>{video.title}</h2>
+                <p>{video.description}</p>
+              </div>
+            </a>
           ))
         }
       </div>
@@ -235,10 +258,10 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
               Daniel Johnson is a fractional CMO, GTM growth operator, and founder of We Scale Startups — a consultancy helping post-PMF AI and B2B SaaS companies build the repeatable growth systems that turn promising products into scalable businesses.
             </p>
             <p>
-              Over 10+ years and 20+ startups, Daniel has managed £6M+ in paid media, generated £18M+ in measurable revenue impact, and built growth infrastructure across paid acquisition, product-led growth, and AI-native execution.
+              Over 10+ years and 20+ startups, Daniel has managed {proofStats.adSpend} in paid media, generated {proofStats.revenueImpact} in measurable revenue impact, and built growth infrastructure across paid acquisition, product-led growth, and AI-native execution.
             </p>
             <p>
-              Outside of client work, Daniel is one of the most active startup growth mentors in the UK — with 479+ sessions on GrowthMentor rated 4.97/5 and cohorts mentored through Google for Startups and Techstars. He is a Visiting Lecturer at Cambridge University's Judge Business School.
+              Outside of client work, Daniel is one of the most active startup growth mentors in the UK — with {proofStats.mentorSessions} sessions on GrowthMentor rated {proofStats.mentorRating}/5 and cohorts mentored through Google for Startups and Techstars. He is a Visiting Lecturer at Cambridge University's Judge Business School.
             </p>
             <p>
               He is based in London and open to podcast appearances, speaking engagements, press interviews, and advisory conversations.
