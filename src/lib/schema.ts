@@ -202,7 +202,6 @@ export function buildServiceSchema(opts: {
   name: string;
   description: string;
   url: string;
-  priceRange?: string;
   offers?: Array<{ name: string; description: string; price: string; priceCurrency?: string; billingIncrement?: string }>;
   serviceType?: string;
 }) {

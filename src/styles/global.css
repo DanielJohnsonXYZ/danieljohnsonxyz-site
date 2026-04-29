@@ -439,14 +439,29 @@ a, button, summary {
   position: relative;
 }
 
-.site-nav-menu > summary {
-  display: inline-flex;
-  cursor: pointer;
-  list-style: none;
+.site-nav-menu::after {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 0.8rem;
+  content: "";
 }
 
-.site-nav-menu > summary::-webkit-details-marker {
-  display: none;
+.site-nav-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-nav-menu-trigger::after {
+  margin-left: 0.35rem;
+  color: currentColor;
+  font-size: 0.62rem;
+  line-height: 1;
+  opacity: 0.7;
+  content: "▾";
 }
 
 .site-nav-dropdown {
@@ -467,7 +482,6 @@ a, button, summary {
   backdrop-filter: blur(20px);
 }
 
-.site-nav-menu[open] .site-nav-dropdown,
 .site-nav-menu:hover .site-nav-dropdown,
 .site-nav-menu:focus-within .site-nav-dropdown {
   display: grid;
