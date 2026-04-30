@@ -4,11 +4,11 @@ import { absoluteUrl } from "../lib/utils";
 
 export const prerender = true;
 
-function urlNode(path: string) {
-  // Ensure trailing slash to match Astro's trailingSlash: "always" config
-  // and avoid 308 redirect hops on every crawl hit.
+const today = () => new Date().toISOString().slice(0, 10);
+
+function urlNode(path: string, lastmod: string = today()) {
   const withSlash = path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
-  return `<url><loc>${absoluteUrl(withSlash)}</loc></url>`;
+  return `<url><loc>${absoluteUrl(withSlash)}</loc><lastmod>${lastmod}</lastmod></url>`;
 }
 
 export const GET: APIRoute = async () => {
@@ -38,22 +38,21 @@ export const GET: APIRoute = async () => {
     "/writing",
     "/contact",
     "/podcast-guest",
-    "/testimonials",
+    "/press",
     "/now",
+    "/testimonials",
     "/privacy",
     "/terms"
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticPaths.map((path) => urlNode(path)).join("")}
-${articles.map((article) => urlNode(`/writing/${article.id}`)).join("")}
-${caseStudies.map((item) => urlNode(`/case-studies/${item.id}`)).join("")}
+${staticPaths.map((path) => urlNode(path)).join("\n")}
+${articles.map((article) => urlNode(`/writing/${article.id}`, article.data.updatedAt?.toISOString().slice(0, 10) ?? article.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
+${caseStudies.map((item) => urlNode(`/case-studies/${item.id}`, item.data.updatedAt?.toISOString().slice(0, 10) ?? item.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
 </urlset>`;
 
   return new Response(xml, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8"
-    }
+    headers: { "Content-Type": "application/xml; charset=utf-8" }
   });
 };
