@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Expertise — connected operating layers">
+  <title>Expertise</title>
+  <desc>Six connected nodes representing GTM systems, PLG, experimentation, AI workflows, founder distribution, RevOps.</desc>
+  <defs>
+    <linearGradient id="gradEXP" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0B0B0C"/>
+      <stop offset="100%" stop-color="#1a1a1d"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" fill="url(#gradEXP)" rx="14"/>
+  <!-- Hex pattern with center -->
+  <g fill="none" stroke="#A445FF" stroke-width="1.2" opacity="0.6">
+    <!-- Outer hex nodes -->
+    <circle cx="160" cy="60" r="10"/>
+    <circle cx="240" cy="90" r="10"/>
+    <circle cx="240" cy="135" r="10"/>
+    <circle cx="160" cy="165" r="10"/>
+    <circle cx="80" cy="135" r="10"/>
+    <circle cx="80" cy="90" r="10"/>
+  </g>
+  <!-- Center -->
+  <circle cx="160" cy="112" r="14" fill="#7B3EFF" opacity="0.9"/>
+  <text x="160" y="116" text-anchor="middle" fill="#fff" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700">DJ</text>
+  <!-- Connecting lines -->
+  <g stroke="#A445FF" stroke-width="0.8" opacity="0.45" fill="none">
+    <line x1="160" y1="70" x2="160" y2="98"/>
+    <line x1="232" y1="94" x2="172" y2="108"/>
+    <line x1="232" y1="131" x2="172" y2="116"/>
+    <line x1="160" y1="155" x2="160" y2="126"/>
+    <line x1="88" y1="131" x2="148" y2="116"/>
+    <line x1="88" y1="94" x2="148" y2="108"/>
+  </g>
+  <!-- Node labels (small) -->
+  <g fill="#fff" opacity="0.7" font-family="Inter, system-ui, sans-serif" font-size="7" font-weight="600" text-anchor="middle">
+    <text x="160" y="44">GTM</text>
+    <text x="265" y="92">PLG</text>
+    <text x="270" y="138">EXP</text>
+    <text x="160" y="186">AI</text>
+    <text x="56" y="138">DIST</text>
+    <text x="55" y="92">REV</text>
+  </g>
+  <!-- Caption -->
+  <text x="160" y="208" text-anchor="middle" fill="#fff" opacity="0.5" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" letter-spacing="0.12em">SIX OPERATING LAYERS</text>
+</svg>

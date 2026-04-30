@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Compare — fractional CMO vs alternatives">
+  <title>Compare</title>
+  <desc>Two-column comparison visual showing fractional CMO vs agency vs full-time CMO trade-offs.</desc>
+  <defs>
+    <linearGradient id="gradCMP" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1d"/>
+      <stop offset="100%" stop-color="#0B0B0C"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" fill="url(#gradCMP)" rx="14"/>
+  <!-- Left column header -->
+  <text x="80" y="42" text-anchor="middle" fill="#fff" opacity="0.5" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" letter-spacing="0.12em">AGENCY</text>
+  <!-- Left bars (lower) -->
+  <rect x="40" y="60" width="80" height="6" rx="3" fill="#fff" opacity="0.18"/>
+  <rect x="40" y="76" width="56" height="6" rx="3" fill="#fff" opacity="0.18"/>
+  <rect x="40" y="92" width="68" height="6" rx="3" fill="#fff" opacity="0.18"/>
+  <rect x="40" y="108" width="44" height="6" rx="3" fill="#fff" opacity="0.18"/>
+  <rect x="40" y="124" width="60" height="6" rx="3" fill="#fff" opacity="0.18"/>
+  <rect x="40" y="140" width="52" height="6" rx="3" fill="#fff" opacity="0.18"/>
+  <!-- Divider -->
+  <line x1="160" y1="32" x2="160" y2="180" stroke="#fff" stroke-width="0.5" opacity="0.15" stroke-dasharray="3,4"/>
+  <!-- Right column header (winner) -->
+  <text x="240" y="42" text-anchor="middle" fill="#A445FF" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" letter-spacing="0.12em">FRACTIONAL CMO</text>
+  <!-- Right bars (higher = better) -->
+  <rect x="200" y="60" width="80" height="6" rx="3" fill="url(#gradCMPbar)" opacity="1"/>
+  <rect x="200" y="76" width="76" height="6" rx="3" fill="url(#gradCMPbar)" opacity="0.95"/>
+  <rect x="200" y="92" width="80" height="6" rx="3" fill="url(#gradCMPbar)" opacity="1"/>
+  <rect x="200" y="108" width="72" height="6" rx="3" fill="url(#gradCMPbar)" opacity="0.9"/>
+  <rect x="200" y="124" width="80" height="6" rx="3" fill="url(#gradCMPbar)" opacity="1"/>
+  <rect x="200" y="140" width="76" height="6" rx="3" fill="url(#gradCMPbar)" opacity="0.95"/>
+  <defs>
+    <linearGradient id="gradCMPbar" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#7B3EFF"/>
+      <stop offset="100%" stop-color="#A445FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Caption -->
+  <text x="160" y="195" text-anchor="middle" fill="#fff" opacity="0.75" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.1em">SIDE-BY-SIDE TRADE-OFFS</text>
+</svg>
