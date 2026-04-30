@@ -1,0 +1,144 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ctas, siteConfig } from "../site";
+
+// Press / coverage / external mentions. Extend as new mentions ship.
+// Each entry becomes a CreativeWork inside an ItemList JSON-LD block,
+// which is one of the most-cited shapes by ChatGPT and Perplexity for
+// "where has X been quoted / interviewed" prompts.
+const coverage = [
+  { type: "Speaking", date: "2025", title: "AI-native GTM workshop — Cambridge Judge Business School", url: "https://www.jbs.cam.ac.uk/", venue: "Cambridge Judge Business School" },
+  { type: "Speaking", date: "2025", title: "Founder growth session — Imperial College London", url: "https://www.imperial.ac.uk/", venue: "Imperial College London" },
+  { type: "Mentoring", date: "Ongoing", title: "Top mentor — GrowthMentor (4.97/5 from 220+ reviews)", url: siteConfig.growthMentor, venue: "GrowthMentor" },
+  { type: "Mentoring", date: "Ongoing", title: "Mentor — Google for Startups", url: "https://startup.google.com/", venue: "Google for Startups" },
+  { type: "Mentoring", date: "Ongoing", title: "Mentor — Techstars", url: "https://www.techstars.com/", venue: "Techstars" },
+  { type: "Speaking", date: "2024", title: "Growth systems workshop — Google Launchpad", url: "https://startup.google.com/", venue: "Google Launchpad" },
+  { type: "Speaking", date: "2024", title: "Founder cohort talk — Foundervine", url: "https://foundervine.com/", venue: "Foundervine" },
+  { type: "Speaking", date: "2024", title: "GTM panel — Nomad Summit", url: "https://nomadsummit.com/", venue: "Nomad Summit" },
+  { type: "Speaking", date: "2024", title: "SaaS growth — Shenzhen SaaS", url: "https://www.shenzhensaas.com/", venue: "Shenzhen SaaS" }
+];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: coverage.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: c.title,
+      url: c.url,
+      datePublished: c.date,
+      publisher: { "@type": "Organization", name: c.venue }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Press, speaking, and coverage | Daniel Johnson"
+  description="Speaking engagements, mentoring affiliations, podcast appearances, and press mentions for Daniel Johnson — fractional CMO and AI-native growth operator."
+  path="/press"
+  schema={[itemListSchema]}
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6">
+        <span class="service-label">Press &amp; coverage</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          Speaking, mentoring, and where Daniel has been cited.
+        </h1>
+        <p class="hero-subcopy text-lg leading-8 md:text-xl">
+          A live record of external mentions, talks, and affiliations. Producers and journalists — the
+          <a class="link-arrow" href="/media-kit/">media kit</a> has bios, headshots, and topic angles ready to use.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href="/media-kit/" data-cta="press-media-kit">Open the media kit →</a>
+          <a class="button-link" href="/podcast-guest/" data-cta="press-podcast">Podcast guest pitch →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl">
+        <p class="card-label">Selected coverage</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15] mt-2 mb-6">
+          Speaking, mentoring, panels, and platform affiliations.
+        </h2>
+        <ul class="press-list" role="list">
+          {coverage.map((c) => (
+            <li class="press-item">
+              <span class="press-type">{c.type}</span>
+              <div class="press-body">
+                <h3>{c.title}</h3>
+                <p>{c.venue} · {c.date}</p>
+              </div>
+              <a class="press-link" href={c.url} rel="noreferrer" target="_blank">Visit →</a>
+            </li>
+          ))}
+        </ul>
+        <p class="press-note">
+          Want to invite Daniel to your podcast, conference, or founder cohort? See the
+          <a href="/podcast-guest/">podcast guest pitch</a> or
+          <a href={`mailto:${siteConfig.email}?subject=Press%20enquiry%20for%20Daniel%20Johnson`}>email directly</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Producer-friendly</span>
+        <h2 class="text-4xl md:text-6xl font-extrabold tracking-[-0.06em] leading-[1.05] text-white">
+          Three bio lengths, headshots, host intros — all in the media kit.
+        </h2>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href="/media-kit/" data-cta="press-final-mediakit">Open the media kit →</a>
+          <a class="button-link-invert" href={ctas.primary.href} data-cta="press-final-book">{ctas.primary.label} →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .press-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+  .press-item {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    transition: border-color 150ms ease;
+  }
+  .press-item:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  @media (max-width: 600px) {
+    .press-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+  .press-type {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .press-body h3 { margin: 0; font-size: 0.95rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em; color: var(--ink); }
+  .press-body p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--muted); }
+  .press-link {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .press-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .press-note { margin-top: 1.5rem; color: var(--muted); font-size: 0.92rem; }
+  .press-note a { color: var(--ink); border-bottom: 1px solid var(--line); }
+  .press-note a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+</style>
