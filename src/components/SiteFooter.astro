@@ -1,5 +1,11 @@
 ---
 import { ctas, footerNavigation, footerTestimonial, proofStats, siteConfig, socialLinks } from "../site";
+
+interface Props {
+  mediaCta?: boolean;
+}
+
+const { mediaCta = false } = Astro.props;
 ---
 
 <footer class="dark-section pb-10 pt-20">
@@ -33,21 +39,41 @@ import { ctas, footerNavigation, footerTestimonial, proofStats, siteConfig, soci
         <div class="flex flex-col gap-6 md:col-span-2">
           <span class="eyebrow">Start a conversation</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
-            {ctas.primary.label}.
+            {mediaCta ? "Invite Daniel, request a quote, or get the media kit." : `${ctas.primary.label}.`}
           </h2>
           <p class="max-w-md text-base leading-7 text-white/65">
-            30 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense.
+            {mediaCta
+              ? "For podcasts, press, speaking, panels, workshops, and newsletter interviews, email Daniel directly or use the producer-ready media kit."
+              : "30 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense."}
           </p>
-          <p class="max-w-md rounded-full border border-white/20 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/75">
-            {siteConfig.availability}
-          </p>
+          {!mediaCta && (
+            <p class="max-w-md rounded-full border border-white/20 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/75">
+              {siteConfig.availability}
+            </p>
+          )}
           <div class="flex flex-wrap gap-3">
-            <a class="button-accent" href={ctas.primary.href} data-cta="footer-primary">
-              {ctas.primary.label} →
-            </a>
-            <a class="button-secondary" href={ctas.caseStudies.href} data-cta="footer-case-studies">
-              {ctas.caseStudies.label} →
-            </a>
+            {mediaCta ? (
+              <>
+                <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`} data-cta="footer-media-email">
+                  Email Daniel →
+                </a>
+                <a class="button-secondary" href="/media-kit/" data-cta="footer-media-kit">
+                  Download media kit →
+                </a>
+                <a class="button-secondary" href="/podcast-guest/" data-cta="footer-podcast">
+                  Book Daniel for your podcast →
+                </a>
+              </>
+            ) : (
+              <>
+                <a class="button-accent" href={ctas.primary.href} data-cta="footer-primary">
+                  {ctas.primary.label} →
+                </a>
+                <a class="button-secondary" href={ctas.caseStudies.href} data-cta="footer-case-studies">
+                  {ctas.caseStudies.label} →
+                </a>
+              </>
+            )}
           </div>
           <p class="text-xs text-white/55">{siteConfig.location}</p>
         </div>

@@ -12,6 +12,9 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /book-a-call              https://calendly.com/wescalestartups  302
 /book-a-call/             https://calendly.com/wescalestartups  302
 
+/podcast-appearances      /podcast-guest/  301
+/podcast-appearances/     /podcast-guest/  301
+
 /topics-and-talks         /speaking/  301
 /topics-and-talks/        /speaking/  301
 /press-and-media          /speaking/  301

@@ -163,10 +163,11 @@ danieljohnson.xyz documents Daniel's working approach, the frameworks he uses wi
 - [Revenue operations](${siteConfig.siteUrl}/revenue-operations/): funnel visibility, pipeline process, CRM hygiene, reporting cadence
 - [Mentoring](${siteConfig.siteUrl}/mentoring/): founder office hours and lower-ticket GTM decision support
 - [Speaking](${siteConfig.siteUrl}/speaking/): talks, workshops, and programme sessions
+- [Media kit](${siteConfig.siteUrl}/media-kit/): bios, headshots, proof, topics, producer assets, and press contact details
 - [Writing](${siteConfig.siteUrl}/writing/): essays on AI-native GTM, fractional leadership, operating-system thinking
 - [Newsletter](${siteConfig.siteUrl}/newsletter/): Growth Notes — occasional writing for founders
 - [Growth bottleneck checklist](${siteConfig.siteUrl}/growth-bottleneck-checklist/): lead magnet — diagnose ICP, channel, conversion, founder-led sales, and RevOps constraints
-- [Podcast appearances](${siteConfig.siteUrl}/podcast-appearances/): interviews and conversations Daniel has been on
+- [Podcast guest](${siteConfig.siteUrl}/podcast-guest/): podcast angles, sample questions, host intro, and producer assets
 - [Now](${siteConfig.siteUrl}/now/): what Daniel is working on this month
 - [Contact](${siteConfig.siteUrl}/contact/): booking, email, social
 

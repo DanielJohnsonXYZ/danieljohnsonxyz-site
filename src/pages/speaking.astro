@@ -34,7 +34,7 @@ const topics = [
   }
 ];
 const organiserTakeaways = [
-  "Podcast appearances, keynotes, panels, press interviews, and advisory conversations.",
+  "Keynotes, panels, workshops, founder-cohort sessions, and practical operator conversations.",
   "Sharp operator perspective on AI-native GTM, PLG, experimentation, and founder-led distribution.",
   `Practical examples from 20+ startups, ${proofStats.mentorSessions} founder sessions, and programme work with Google and Techstars.`
 ];
@@ -123,16 +123,18 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
 ---
 
 <BaseLayout
-  description="Media, speaking, podcast, and press assets for Daniel Johnson: fractional CMO, GTM operator, founder of We Scale Startups, and mentor through Google, Techstars, Cambridge, and GrowthMentor."
+  description="Invite Daniel Johnson to speak on AI-native GTM, founder-led growth, product-led growth, and repeatable startup growth systems."
+  mediaCta
   path="/speaking"
   schema={speakingSchema}
-  title="Media, Speaking & Visibility | Daniel Johnson"
+  stickyCta={false}
+  title="Speaking & Workshops | Daniel Johnson"
 >
   <section class="section-space">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="reveal space-y-6">
-          <span class="service-label">Media / Speaking / Visibility</span>
+          <span class="service-label">Speaking / Workshops / Panels</span>
           <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
             The Growth Operator Behind the Machine
           </h1>
@@ -144,11 +146,11 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
             Fractional CMO · GTM Operator · Founder, We Scale Startups · Mentor: Google · Techstars · Cambridge
           </p>
           <div class="flex flex-wrap gap-3 pt-1">
-            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank" data-cta="speaking-hero-book-me">
-              Book Me →
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20invitation%20for%20Daniel%20Johnson`} data-cta="speaking-hero-invite">
+              Invite Daniel to speak
             </a>
-            <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Media%20or%20speaking%20enquiry%20for%20Daniel%20Johnson`}>
-              Email Daniel
+            <a class="button-secondary" href="/media-kit/">
+              Download media kit
             </a>
           </div>
           <ul class="scan-list max-w-3xl">
@@ -404,7 +406,7 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
         <article class="reveal card p-6 md:p-7">
           <p class="card-label">Press & Podcasts</p>
           <p class="mt-5 text-sm leading-7 text-[color:var(--muted)]">{speakingMentoring.press}</p>
-          <a class="link-arrow mt-5" href="/podcast-appearances/">See podcast appearances</a>
+          <a class="link-arrow mt-5" href="/podcast-guest/">See podcast guest page</a>
         </article>
       </div>
     </div>
@@ -446,7 +448,8 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
           {socialLinks.map((item) => (
             <a href={item.href} rel="noreferrer" target="_blank">{item.label}</a>
           ))}
-          <a href="/podcast-appearances/">Podcast appearances</a>
+          <a href="/podcast-guest/">Podcast guest page</a>
+          <a href="/media-kit/">Media kit</a>
           <a href="/now/">Now page</a>
         </div>
       </div>

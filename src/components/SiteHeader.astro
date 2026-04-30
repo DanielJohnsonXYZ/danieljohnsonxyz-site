@@ -1,11 +1,18 @@
 ---
-import { announcement, ctas, navigationGroups } from "../site";
+import { announcement, ctas, navigationGroups, siteConfig } from "../site";
 
 interface Props {
   currentPath?: string;
+  mediaCta?: boolean;
 }
 
-const { currentPath = "/" } = Astro.props;
+const { currentPath = "/", mediaCta = false } = Astro.props;
+const headerCta = mediaCta
+  ? {
+      href: `mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`,
+      label: "Email Daniel"
+    }
+  : ctas.primary;
 
 // Normalise paths so trailing-slash doesn't break active state.
 const normalise = (p: string) => (p.endsWith("/") ? p : `${p}/`);
@@ -83,8 +90,8 @@ const active = normalise(currentPath);
         </nav>
 
         <div class="hidden lg:block">
-          <a class="button-primary" href={ctas.primary.href} data-cta="header-primary">
-            {ctas.primary.label}
+          <a class="button-primary" href={headerCta.href} data-cta={mediaCta ? "header-media" : "header-primary"}>
+            {headerCta.label}
           </a>
         </div>
 
@@ -123,12 +130,18 @@ const active = normalise(currentPath);
               }
               <a class="rounded-xl px-4 py-3 text-sm font-medium text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]" href="/case-studies/">Results</a>
               <a class="rounded-xl px-4 py-3 text-sm font-medium text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]" href="/about/">About</a>
-              <a class="button-primary mt-2" href={ctas.primary.href} data-cta="header-mobile-primary">
-                {ctas.primary.label}
+              <a class="button-primary mt-2" href={headerCta.href} data-cta={mediaCta ? "header-mobile-media" : "header-mobile-primary"}>
+                {headerCta.label}
               </a>
-              <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href={ctas.bottleneck.href}>
-                {ctas.bottleneck.label} →
-              </a>
+              {mediaCta ? (
+                <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href="/media-kit/">
+                  Download media kit →
+                </a>
+              ) : (
+                <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href={ctas.bottleneck.href}>
+                  {ctas.bottleneck.label} →
+                </a>
+              )}
             </nav>
           </div>
         </details>

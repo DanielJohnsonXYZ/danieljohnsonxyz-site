@@ -12,11 +12,21 @@ const primaryArchive = archive.filter((item) => ["Profile", "Interview", "Speaki
 const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item));
 const focusTags = ["GTM", "AI", "Founder Growth", "Fractional CMO", "Pipeline"];
 const allTags = [...new Set(articles.flatMap((article) => article.data.tags))];
+const suggestedInterviewFormats = [
+  "30-minute podcast interview",
+  "45-minute founder growth teardown",
+  "60-minute keynote",
+  "Panel guest",
+  "Written Q&A",
+  "Expert quote for articles"
+];
 ---
 
 <BaseLayout
   description="Essays by Daniel Johnson on AI-native GTM, growth systems, and why most startup growth advice is wrong — plus a curated archive of talks, profiles, and interviews."
+  mediaCta
   path="/writing"
+  stickyCta={false}
   title="Writing | Daniel Johnson"
 >
   <section class="section-space">
@@ -31,6 +41,9 @@ const allTags = [...new Set(articles.flatMap((article) => article.data.tags))];
             Native essays by Daniel on AI-native GTM, fractional leadership, and operating-system thinking — plus a smaller
             curated archive of profiles, interviews, talks, and resources that show how the point of view travels.
           </p>
+          <p class="max-w-3xl text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">
+            These essays are useful starting points for interviews, quotes, and podcast conversations.
+          </p>
         </div>
 
         <aside class="reveal card p-6 md:p-8">
@@ -43,6 +56,10 @@ const allTags = [...new Set(articles.flatMap((article) => article.data.tags))];
             <article class="card-muted p-4">
               <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you are solving a growth problem</p>
               <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Read the essays by bottleneck: operating system, customer research, or fractional leadership.</p>
+            </article>
+            <article class="card-muted p-4">
+              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you are booking media</p>
+              <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Use the <a class="highlight-text" href="/media-kit/">media kit</a> for bios, headshots, topics, and producer assets.</p>
             </article>
             <article class="card-muted p-4">
               <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">If you want future notes</p>
@@ -158,19 +175,33 @@ const allTags = [...new Set(articles.flatMap((article) => article.data.tags))];
 
   <section class="section-space pt-0">
     <div class="shell">
+      <div class="reveal card mb-6 p-6 md:p-8">
+        <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p class="card-label">Suggested interview formats</p>
+            <h2 class="mt-3 text-3xl font-bold tracking-[-0.05em] md:text-4xl">Send this to your producer.</h2>
+            <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">Writing proves the thinking; the media kit turns it into a clean briefing pack.</p>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            {suggestedInterviewFormats.map((item) => <span class="card-muted p-4 text-sm font-bold">{item}</span>)}
+            <a class="button-secondary sm:col-span-2" href="/media-kit/">Open Daniel's media kit</a>
+          </div>
+        </div>
+      </div>
       <div class="reveal card px-6 py-8 md:px-10 md:py-10">
         <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div class="space-y-4">
-            <span class="eyebrow">Apply the thinking</span>
+            <span class="eyebrow">Use the thinking</span>
             <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
-              Want to apply this to your own growth bottleneck?
+              For interviews, quotes, or a deeper commercial conversation.
             </h2>
             <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              {siteConfig.bookingNote} If you want the lighter route first, subscribe for occasional notes or use the checklist.
+              Producers can start with the media kit. Founders with a live growth bottleneck can use the commercial route after the media context is clear.
             </p>
           </div>
           <div class="flex flex-col gap-3">
-            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+            <a class="button-accent" href="/media-kit/">Open media kit</a>
+            <a class="button-secondary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
             <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes</a>
           </div>
         </div>

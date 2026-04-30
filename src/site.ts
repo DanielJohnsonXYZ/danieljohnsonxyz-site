@@ -204,10 +204,11 @@ export const navigationGroups = [
   },
   {
     label: "Media",
-    href: "/speaking/",
+    href: "/media-kit/",
     items: [
-      { href: "/speaking/", label: "Speaking", description: "Booker assets, talks, and selected rooms." },
-      { href: "/podcast-appearances/", label: "Podcast appearances", description: "Interviews on AI-native GTM and growth systems." },
+      { href: "/media-kit/", label: "Media kit", description: "Bios, headshots, topics, proof, and producer assets." },
+      { href: "/podcast-guest/", label: "Podcast guest", description: "Book Daniel for AI-native GTM and growth-system interviews." },
+      { href: "/speaking/", label: "Speaking", description: "Talks, workshops, panels, and founder-cohort sessions." },
       { href: "/writing/", label: "Writing", description: "Essays and practical growth notes." },
       { href: "/now/", label: "Now", description: "Current work, availability, and focus." }
     ]
@@ -235,7 +236,8 @@ export const footerNavigation = {
     { href: "/fractional-cmo-vs-full-time-cmo/", label: "vs. Full-time CMO" },
     { href: "/case-studies/", label: "Case studies" },
     { href: "/writing/", label: "Writing" },
-    { href: "/podcast-appearances/", label: "Podcast appearances" },
+    { href: "/media-kit/", label: "Media kit" },
+    { href: "/podcast-guest/", label: "Podcast guest" },
     { href: "/now/", label: "Now" },
     { href: "/about/", label: "About" },
     { href: "/newsletter/", label: "Growth Notes" },

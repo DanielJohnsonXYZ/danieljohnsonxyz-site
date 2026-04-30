@@ -1,0 +1,287 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { sortByFeaturedThenOrder } from "../lib/utils";
+import { proofStats, siteConfig, siteImages, socialLinks, trustAffiliations, trustLogos } from "../site";
+
+const media = sortByFeaturedThenOrder(await getCollection("media"));
+const interviews = media.filter((item) => item.data.kind === "Interview");
+
+const proof = [
+  { metric: proofStats.revenueImpact, label: "revenue impact" },
+  { metric: "£6M+", label: "managed ad spend" },
+  { metric: proofStats.startupsAdvised, label: "startups advised" },
+  { metric: proofStats.mentorSessions, label: "founder sessions" }
+];
+
+const bestFit = [
+  "AI startups",
+  "B2B SaaS",
+  "Founder/operator shows",
+  "GTM and revenue podcasts",
+  "Product-led growth shows",
+  "Future of work / AI adoption shows"
+];
+
+const episodeAngles = [
+  "Why growth hacking is dead, and what replaces it",
+  "The GTM mistakes AI founders keep making",
+  "How to build a growth machine, not a growth hack",
+  "Why founder-led growth breaks after the first customers",
+  `What ${proofStats.mentorSessions} founder conversations reveal about growth`,
+  "How AI changes marketing teams, but not marketing judgment",
+  "Why most startup messaging sounds the same"
+];
+
+const sampleQuestions = [
+  "What do most founders misunderstand about growth?",
+  "Why does founder-led growth stop working?",
+  "What makes AI startup messaging so generic?",
+  "When should a founder hire marketing leadership?",
+  "What does a repeatable growth system actually include?",
+  "How should startups think about AI in GTM without chasing hype?"
+];
+
+const quickFacts = [
+  ["Name", "Daniel Johnson"],
+  ["Role", "Fractional CMO and GTM operator"],
+  ["Company", "Founder, We Scale Startups"],
+  ["Location / time zone", siteConfig.location],
+  ["Best topics", "AI GTM, B2B SaaS growth, founder-led growth, repeatable GTM systems"],
+  ["Email", siteConfig.email],
+  ["Website", siteConfig.siteUrl],
+  ["LinkedIn", siteConfig.linkedin]
+];
+
+const notFit = [
+  "Generic motivational speaking",
+  "Crypto hype",
+  "AI doom commentary",
+  "Beginner marketing 101 unless framed for founders"
+];
+
+const assets = [
+  { label: "Short bio", href: "/media/daniel-johnson-short-bio.txt" },
+  { label: "Long bio", href: "/media/daniel-johnson-long-bio.txt" },
+  { label: "Approved intro", href: "/media/daniel-johnson-approved-intro.txt" },
+  { label: "Topic list", href: "/media/daniel-johnson-topic-list.txt" },
+  { label: "Headshot", href: "/images/daniel-headshot.webp" },
+  { label: "Square headshot", href: siteImages.speakingCircle.src },
+  { label: "Company logo", href: "/images/logos/wss.webp" }
+];
+
+const hostIntro =
+  "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor. Today we are talking about AI-native GTM, founder-led growth, and how startups build growth systems instead of chasing one-off hacks.";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Podcast Guest", url: "/podcast-guest" }
+]);
+---
+
+<BaseLayout
+  description="Book Daniel Johnson as a podcast guest on AI-native GTM, founder-led growth, startup positioning, and repeatable growth systems."
+  path="/podcast-guest"
+  schema={schema}
+  mediaCta
+  stickyCta={false}
+  title="Podcast Guest: AI GTM, Founder-Led Growth & Startup Growth Systems | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div class="reveal max-w-4xl space-y-6">
+          <span class="service-label">Podcast Guest</span>
+          <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+            Podcast guest on AI-native GTM, founder-led growth, and building repeatable growth systems.
+          </h1>
+          <div class="hero-subcopy max-w-3xl space-y-4 text-lg leading-8 md:text-xl md:leading-9">
+            <p>Daniel is useful for startup, SaaS, AI, founder, and growth audiences who want practical operator judgment rather than vague marketing theory.</p>
+            <p>He brings sharp opinions on AI-native GTM, founder bottlenecks, startup positioning, product-led growth, and how marketing teams change when tactics become cheaper.</p>
+            <p>Expect concrete examples from post-PMF AI and B2B SaaS work, founder mentoring, and growth systems built in the mess of real companies.</p>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation%20for%20Daniel%20Johnson`}>Book Daniel for your podcast</a>
+            <a class="button-secondary" href="/media-kit/">Download media kit</a>
+          </div>
+        </div>
+        <aside class="reveal card p-5 md:p-6">
+          <img alt={siteImages.speakingMic.alt} class="aspect-[4/3] w-full rounded-xl object-cover object-top" height={siteImages.speakingMic.height} loading="eager" src={siteImages.speakingMic.src} width={siteImages.speakingMic.width} />
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {proof.map((item) => (
+              <article class="card-muted p-4">
+                <p class="text-3xl font-extrabold tracking-[-0.05em]">{item.metric}</p>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">{item.label}</p>
+              </article>
+            ))}
+          </div>
+        </aside>
+      </div>
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {trustLogos.map((item) => (
+          <article class="reveal logo-card flex items-center justify-between gap-4 px-5 py-4">
+            <img alt={item.alt} class="h-10 w-auto max-w-[10rem] object-contain" height="48" loading="lazy" src={item.src} width="180" />
+            <span class="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">{item.label}</span>
+          </article>
+        ))}
+        {trustAffiliations.slice(0, 2).map((item) => (
+          <article class="reveal logo-card logo-card-text flex items-center px-5 py-4">
+            <span class="text-sm font-semibold leading-6 text-[color:var(--ink)]">{item}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <SectionHeader eyebrow="Best-fit podcasts" intro="The strongest fit is practical, founder-facing, and operator-led rather than generic business inspiration." title="Shows where Daniel is useful." />
+        <div class="grid gap-4 sm:grid-cols-2">
+          {bestFit.map((item) => (
+            <article class="reveal card p-5">
+              <p class="text-lg font-bold tracking-[-0.03em]">{item}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader eyebrow="Episode angles" intro="Ready-made hooks producers can use as the title, intro, or first segment." title="Opinionated topics that travel." />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {episodeAngles.map((item) => (
+          <article class="reveal card p-6">
+            <h2 class="text-2xl font-bold tracking-[-0.04em] text-white">{item}</h2>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="shell">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <article>
+          <SectionHeader eyebrow="Sample questions" intro="Use these as-is or adapt them around your audience." title="Questions Daniel can answer well." />
+          <ol class="reveal card mt-8 grid gap-4 p-6 md:p-8">
+            {sampleQuestions.map((question, index) => (
+              <li class="grid grid-cols-[2rem_1fr] gap-3 border-b border-[color:var(--line)] pb-4 text-base leading-8 last:border-b-0 last:pb-0">
+                <span class="flex size-8 items-center justify-center rounded-full bg-[color:var(--surface-dim)] text-xs font-bold text-[color:var(--muted)]">{index + 1}</span>
+                <span>{question}</span>
+              </li>
+            ))}
+          </ol>
+        </article>
+        <aside class="reveal card p-6 md:p-8">
+          <p class="card-label">Suggested host intro</p>
+          <p class="mt-5 text-base leading-8 text-[color:var(--muted)]">{hostIntro}</p>
+          <a class="button-secondary mt-6 inline-flex" href="/media/daniel-johnson-approved-intro.txt">Download approved intro</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label">Quick facts</p>
+          <dl class="mt-6 grid gap-4">
+            {quickFacts.map(([label, value]) => (
+              <div class="border-b border-[color:var(--line)] pb-4 last:border-b-0 last:pb-0">
+                <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--subtle)]">{label}</dt>
+                <dd class="mt-2 text-base font-semibold leading-7">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label">Producer assets</p>
+          <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
+            For podcasts, press, and speaking: <a class="highlight-text" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>. Available for remote interviews, podcast recordings, expert quotes, panels, and workshops.
+          </p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            {assets.map((asset) => (
+              <a class="card-muted p-4 text-sm font-bold tracking-[-0.02em] hover:text-[color:var(--accent)]" href={asset.href} download>{asset.label}</a>
+            ))}
+            <a class="card-muted p-4 text-sm font-bold tracking-[-0.02em] hover:text-[color:var(--accent)]" href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>
+            <a class="card-muted p-4 text-sm font-bold tracking-[-0.02em] hover:text-[color:var(--accent)]" href={siteConfig.youtube} rel="noreferrer" target="_blank">YouTube</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <SectionHeader eyebrow="Quality filter" intro="Useful for producers deciding whether to pitch Daniel for a show or segment." title="What Daniel is not a fit for." />
+        <div class="grid gap-4 sm:grid-cols-2">
+          {notFit.map((item) => (
+            <article class="reveal card p-5">
+              <p class="text-base font-bold leading-7 tracking-[-0.02em]">{item}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {interviews.length > 0 && (
+    <section class="section-space pt-0">
+      <div class="shell">
+        <SectionHeader eyebrow="Selected appearances" intro="A short archive for producers who want to hear the pace and point of view." title="Past conversations." />
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {interviews.map((item) => (
+            <article class="reveal card p-6 md:p-7">
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">{item.data.source}</span>
+                <span class="chip">{item.data.yearLabel}</span>
+              </div>
+              <h3 class="mt-4 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <a class="link-arrow mt-5" href={item.data.href} rel="noreferrer" target="_blank">Listen / watch</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal social-panel">
+        <div>
+          <p class="card-label">Follow Daniel's thinking</p>
+          <h2>Useful before and after the interview.</h2>
+          <p>LinkedIn keeps people warm, YouTube shows the speaking style, and writing proves the thinking behind the short takes.</p>
+        </div>
+        <div class="social-link-grid">
+          <a href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn: practical notes on AI-native GTM, founder-led growth, and growth systems</a>
+          <a href={siteConfig.youtube} rel="noreferrer" target="_blank">YouTube: talks, podcast clips, and founder-facing explainers</a>
+          <a href="/writing/">Writing: deeper essays on startup growth, AI GTM, and decision-making</a>
+          <a href="/media-kit/">Media kit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card p-8 text-center md:p-10">
+        <span class="eyebrow justify-center">Podcasts / press / speaking</span>
+        <h2 class="mt-4 text-4xl font-extrabold tracking-[-0.05em] md:text-5xl">For podcasts, press, and speaking: {siteConfig.email}</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-[color:var(--muted)]">Available for remote interviews, podcast recordings, expert quotes, panels, and workshops.</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation%20for%20Daniel%20Johnson`}>Book Daniel for your podcast</a>
+          <a class="button-secondary" href="/media-kit/">Download media kit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

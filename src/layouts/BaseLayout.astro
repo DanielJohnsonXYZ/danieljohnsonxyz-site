@@ -16,6 +16,8 @@ interface Props {
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   /** Per-page override: set false to hide the sticky booking bar on pages that end in a full-width booking block. */
   stickyCta?: boolean;
+  /** Switch shared header/footer CTAs from commercial booking to media-specific contact links. */
+  mediaCta?: boolean;
   /** Opt in to preloading the hero headshot (homepage, about — pages where the image is above the fold). */
   preloadHeadshot?: boolean;
   lastUpdated?: string | false;
@@ -29,6 +31,7 @@ const {
   ogType = "website",
   schema = [],
   stickyCta = true,
+  mediaCta = false,
   preloadHeadshot = false,
   lastUpdated = siteConfig.lastUpdated
 } = Astro.props;
@@ -166,7 +169,7 @@ document.addEventListener('click', (event) => {
       ></iframe>
     </noscript>
 
-    <SiteHeader currentPath={Astro.url.pathname} />
+    <SiteHeader currentPath={Astro.url.pathname} mediaCta={mediaCta} />
 
     <main class="site-main" id="main-content">
       <slot />
@@ -177,7 +180,7 @@ document.addEventListener('click', (event) => {
       )}
     </main>
 
-    <SiteFooter />
+    <SiteFooter mediaCta={mediaCta} />
 
     <StickyCta enabled={stickyCta} />
 

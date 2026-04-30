@@ -34,9 +34,10 @@ export const GET: APIRoute = async () => {
     "/growth-bottleneck-checklist",
     "/case-studies",
     "/speaking",
+    "/media-kit",
     "/writing",
     "/contact",
-    "/podcast-appearances",
+    "/podcast-guest",
     "/now",
     "/privacy",
     "/terms"
