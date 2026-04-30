@@ -1,0 +1,171 @@
+---
+// HeroEngagementCard.astro
+// Lightweight "Ways to work together" module that lives on the right side
+// of the hero on the homepage. Three engagement modes, ordered by
+// commitment, each with one-line copy and a single CTA per row.
+//
+// Designed to be elegant and quiet — three rows, no images, no animation.
+// On mobile the card stacks under the photo. On desktop it sits beneath
+// a small portrait so the right column reads: face → ways to work.
+---
+
+<aside class="hero-engagement-card" aria-label="Ways to work with Daniel">
+  <header class="hec-head">
+    <p class="hec-eyebrow">Ways to work together</p>
+    <h2 class="hec-title">Pick the smallest commitment that answers your question.</h2>
+  </header>
+
+  <ul class="hec-list" role="list">
+    <li class="hec-row">
+      <a class="hec-link" href="/growth-audit/" data-cta="hero-engage-audit">
+        <span class="hec-step" aria-hidden="true">01</span>
+        <span class="hec-body">
+          <strong>Growth Diagnosis</strong>
+          <span class="hec-sub">Find the bottleneck. 30-minute audit, free.</span>
+        </span>
+        <span class="hec-arr" aria-hidden="true">→</span>
+      </a>
+    </li>
+    <li class="hec-row">
+      <a class="hec-link" href="/strategy-sprint/" data-cta="hero-engage-sprint">
+        <span class="hec-step" aria-hidden="true">02</span>
+        <span class="hec-body">
+          <strong>90-Day Growth Sprint</strong>
+          <span class="hec-sub">Fix positioning, funnel, and acquisition.</span>
+        </span>
+        <span class="hec-arr" aria-hidden="true">→</span>
+      </a>
+    </li>
+    <li class="hec-row hec-row-primary">
+      <a class="hec-link" href="/fractional-cmo/" data-cta="hero-engage-cmo">
+        <span class="hec-step" aria-hidden="true">03</span>
+        <span class="hec-body">
+          <strong>Fractional CMO</strong>
+          <span class="hec-sub">Senior growth leadership without a full-time hire.</span>
+        </span>
+        <span class="hec-arr" aria-hidden="true">→</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="hec-foot">
+    <span class="hec-foot-label">Not sure which fits?</span>
+    <a class="hec-foot-link" href="#growth-diagnosis">Try the 2-minute diagnosis →</a>
+  </footer>
+</aside>
+
+<style>
+  .hero-engagement-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 14px -8px color-mix(in srgb, var(--ink) 18%, transparent);
+  }
+
+  @media (min-width: 768px) {
+    .hero-engagement-card { padding: 1.5rem; }
+  }
+
+  .hec-head { display: flex; flex-direction: column; gap: 0.4rem; padding-bottom: 1rem; }
+  .hec-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hec-title {
+    font-size: 1.05rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .hec-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .hec-row {
+    border-bottom: 1px solid var(--line);
+  }
+  .hec-link {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 0.25rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 160ms ease, transform 160ms ease;
+    border-radius: 0.5rem;
+  }
+  .hec-link:hover {
+    background: var(--surface-dim);
+    transform: translateX(2px);
+  }
+  .hec-step {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--muted);
+    width: 1.6rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+  .hec-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+  .hec-body strong {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .hec-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .hec-arr {
+    color: var(--muted);
+    font-size: 1.05rem;
+    transition: color 160ms ease, transform 160ms ease;
+  }
+  .hec-link:hover .hec-arr {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  /* Tertiary highlight on the premium offer */
+  .hec-row-primary .hec-link strong {
+    background: linear-gradient(95deg, var(--ink) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hec-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.78rem;
+  }
+  .hec-foot-label { color: var(--muted); }
+  .hec-foot-link {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .hec-foot-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+</style>

@@ -1,0 +1,228 @@
+---
+// /testimonials — internal testimonials & reviews page.
+// Replaces the old "Read more founder feedback" external link to GrowthMentor.
+//
+// Sources testimonials from src/content/testimonials/*.json (existing collection).
+// Categorisation is heuristic on the `source` field — adjust the categoriseSource
+// function below if you add new source labels.
+
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { ctas, proofStats, siteConfig } from "../site";
+import { sortByFeaturedThenOrder } from "../lib/utils";
+
+type Category = "Founder advisory" | "Mentoring" | "Fractional CMO" | "Strategy Sprint" | "Other";
+
+function categoriseSource(source: string, role: string): Category {
+  const s = `${source} ${role}`.toLowerCase();
+  if (/fractional cmo|fractional|cmo/.test(s)) return "Fractional CMO";
+  if (/strategy sprint|sprint/.test(s)) return "Strategy Sprint";
+  if (/mentor|growthmentor|mentorcruise/.test(s)) return "Mentoring";
+  if (/advisory|founder|growth session|advisor/.test(s)) return "Founder advisory";
+  return "Other";
+}
+
+const all = sortByFeaturedThenOrder(await getCollection("testimonials"));
+
+const decorated = all.map((t) => ({
+  ...t,
+  category: categoriseSource(t.data.source ?? "", t.data.role ?? "")
+}));
+
+const categories: Category[] = ["Founder advisory", "Fractional CMO", "Strategy Sprint", "Mentoring"];
+const counts = categories.reduce<Record<string, number>>((acc, c) => {
+  acc[c] = decorated.filter((t) => t.category === c).length;
+  return acc;
+}, { all: decorated.length });
+---
+
+<BaseLayout
+  description="Founder testimonials, advisory feedback, and mentoring reviews for Daniel Johnson — fractional CMO and AI-native growth operator. Filter by engagement type."
+  path="/testimonials/"
+  title="Testimonials & founder feedback | Daniel Johnson"
+>
+  <!-- Hero -->
+  <section class="section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl text-center space-y-5">
+        <span class="service-label justify-center">Testimonials &amp; founder feedback</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          What founders, operators, and clients say.
+        </h1>
+        <p class="text-lg leading-8 text-[color:var(--muted)] md:text-xl">
+          {proofStats.mentorSessions} mentor sessions, {proofStats.startupsAdvised} startups advised,
+          {proofStats.mentorRating}/5 average rating from {proofStats.mentorReviewCount}+ reviews.
+          Filter by engagement type below.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="testimonials-hero-book">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link" href="/case-studies/" data-cta="testimonials-hero-cases">
+            See case studies →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter pills + grid -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Filter testimonials">
+        <button class="tm-pill tm-pill-active" type="button" data-filter="all" aria-pressed="true">
+          All <span class="tm-pill-count">{counts.all}</span>
+        </button>
+        {categories.map((cat) => (
+          counts[cat] > 0 && (
+            <button class="tm-pill" type="button" data-filter={cat} aria-pressed="false">
+              {cat} <span class="tm-pill-count">{counts[cat]}</span>
+            </button>
+          )
+        ))}
+      </div>
+
+      <div class="tm-grid mt-10" id="testimonialsGrid">
+        {decorated.map((t) => (
+          <figure class="reveal card p-6 md:p-7 tm-card" data-category={t.category}>
+            <p class="card-label tm-card-cat">{t.category}</p>
+            <blockquote>
+              <p class="text-base leading-7 md:text-lg md:leading-8 font-medium tracking-[-0.01em]">
+                &ldquo;{t.data.quote}&rdquo;
+              </p>
+            </blockquote>
+            <figcaption class="mt-5 border-t border-[color:var(--line)] pt-4">
+              <p class="font-semibold text-[color:var(--ink)]">{t.data.name}</p>
+              <p class="text-sm text-[color:var(--muted)]">
+                {t.data.role}{t.data.organisation ? ` · ${t.data.organisation}` : ""}
+              </p>
+              {t.data.source && (
+                <p class="mt-1 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">
+                  {t.data.source}
+                </p>
+              )}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <p class="reveal mt-8 text-center text-sm text-[color:var(--muted)]">
+        Want the unfiltered view? See&nbsp;
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]"
+           href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
+          {proofStats.mentorReviewCount}+ public reviews on GrowthMentor →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance text-white md:text-6xl">
+          Want this kind of feedback from your team?
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          The fastest way to find out if it would work for your company is a 30-minute call.
+          No deck, no pitch, just the bottleneck.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="testimonials-final-book">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href="/start-here/" data-cta="testimonials-final-start">
+            Or, start here →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tm-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .tm-pill:hover {
+    color: var(--ink);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  }
+  .tm-pill-active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .tm-pill-active:hover {
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .tm-pill-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4rem;
+    padding: 0 0.4rem;
+    height: 1.2rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .tm-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .tm-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .tm-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .tm-card { transition: opacity 200ms ease, transform 200ms ease; }
+  .tm-card.is-hidden { display: none; }
+
+  .tm-card-cat {
+    color: var(--accent);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var pills = document.querySelectorAll(".tm-pill");
+    var cards = document.querySelectorAll("#testimonialsGrid .tm-card");
+    if (!pills.length || !cards.length) return;
+
+    pills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        pills.forEach(function (p) {
+          p.classList.remove("tm-pill-active");
+          p.setAttribute("aria-pressed", "false");
+        });
+        pill.classList.add("tm-pill-active");
+        pill.setAttribute("aria-pressed", "true");
+        var filter = pill.getAttribute("data-filter") || "all";
+        cards.forEach(function (card) {
+          if (filter === "all" || card.getAttribute("data-category") === filter) {
+            card.classList.remove("is-hidden");
+          } else {
+            card.classList.add("is-hidden");
+          }
+        });
+      });
+    });
+  })();
+</script>
