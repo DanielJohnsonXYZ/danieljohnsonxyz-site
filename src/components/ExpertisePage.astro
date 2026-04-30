@@ -1,0 +1,457 @@
+---
+// ExpertisePage.astro
+// Shared layout for the six "expertise" topic pages: GTM systems,
+// product-led growth, experimentation, AI-native workflows, founder-led
+// distribution, revenue operations.
+//
+// Renders the standardised 10-section structure:
+//   1. Hero
+//   2. What this problem looks like
+//   3. Why it usually happens
+//   4. How I diagnose it
+//   5. How I fix it
+//   6. Example deliverables
+//   7. Mini case-study / example
+//   8. Who this is for
+//   9. Common mistakes
+//   10. FAQ
+//   11. Final CTA
+//
+// All content comes in via props so the six pages can reuse this without duplication.
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ctas, siteConfig } from "../site";
+
+interface FAQ { q: string; a: string }
+interface MiniCase { sector: string; problem: string; action: string; result: string }
+
+interface Props {
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  path: string;
+  eyebrow: string;
+  headline: string;
+  subhead: string;
+  problemSignals: string[];
+  rootCauses: string[];
+  diagnoseSteps: string[];
+  fixActions: string[];
+  deliverables: string[];
+  miniCase: MiniCase;
+  whoFor: string[];
+  commonMistakes: string[];
+  faqs: FAQ[];
+  ogImage?: string;
+}
+
+const props = Astro.props as Props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: props.faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a }
+  }))
+};
+---
+
+<BaseLayout
+  title={props.metaTitle}
+  description={props.metaDescription}
+  path={props.path}
+  schema={[faqSchema]}
+>
+  <!-- 1. HERO -->
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">{props.eyebrow}</span>
+        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.06em] text-balance md:text-7xl">
+          {props.headline}
+        </h1>
+        <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
+          {props.subhead}
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta={`${props.eyebrow}-hero-book`}>
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link" href={ctas.bottleneck.href} data-cta={`${props.eyebrow}-hero-bottleneck`}>
+            {ctas.bottleneck.label} →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. WHAT THIS PROBLEM LOOKS LIKE -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">What this problem looks like</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">If you recognise three of these, this page is for you.</h2>
+        <ul class="exp-signals">
+          {props.problemSignals.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. WHY IT USUALLY HAPPENS -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">Why it usually happens</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">The root cause is rarely what the team thinks it is.</h2>
+        <div class="exp-cause-grid">
+          {props.rootCauses.map((c, i) => (
+            <article class="exp-cause-card">
+              <span class="exp-cause-num">0{i + 1}</span>
+              <p>{c}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW I DIAGNOSE IT -->
+  <section class="dark-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="eyebrow text-white/55">How I diagnose it</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15] text-white">A focused diagnostic, not a six-week consultancy review.</h2>
+        <ol class="exp-steps">
+          {props.diagnoseSteps.map((s, i) => (
+            <li><span class="exp-step-num">{String(i + 1).padStart(2, "0")}</span><span class="exp-step-body">{s}</span></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HOW I FIX IT -->
+  <section class="section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">How I fix it</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">Build the system, then transfer it.</h2>
+        <ol class="exp-steps exp-steps-light">
+          {props.fixActions.map((s, i) => (
+            <li><span class="exp-step-num">{String(i + 1).padStart(2, "0")}</span><span class="exp-step-body">{s}</span></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. EXAMPLE DELIVERABLES -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">Example deliverables</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">What you actually leave with.</h2>
+        <div class="exp-deliv-grid">
+          {props.deliverables.map((d, i) => (
+            <article class="exp-deliv-card">
+              <span class="exp-deliv-num">0{i + 1}</span>
+              <p>{d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. MINI CASE -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl">
+        <article class="exp-mini-case">
+          <p class="card-label">Mini example · {props.miniCase.sector}</p>
+          <dl class="exp-mini-rows">
+            <dt>Problem</dt><dd>{props.miniCase.problem}</dd>
+            <dt>Action</dt><dd>{props.miniCase.action}</dd>
+            <dt>Result</dt><dd>{props.miniCase.result}</dd>
+          </dl>
+          <a class="link-arrow mt-4" href="/case-studies/">See full case studies →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. WHO THIS IS FOR -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">Who this is for</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">Best fit if any of these apply.</h2>
+        <ul class="exp-signals">
+          {props.whoFor.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. COMMON MISTAKES -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">Common mistakes</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">What teams get wrong before they call.</h2>
+        <ul class="exp-mistakes">
+          {props.commonMistakes.map((m) => <li>{m}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-5">
+        <p class="card-label">FAQ</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">Common questions before booking.</h2>
+        <div class="exp-faq-grid">
+          {props.faqs.map((f) => (
+            <details class="exp-faq-item">
+              <summary><strong>{f.q}</strong></summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FINAL CTA -->
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-4xl md:text-6xl font-extrabold tracking-[-0.06em] leading-[1.05] text-white">
+          Diagnose this in 30 minutes.
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          Bring the current state of your {props.eyebrow.toLowerCase()}. We'll diagnose the constraint and decide if working together makes sense — or where else to go if it doesn't.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta={`${props.eyebrow}-final-book`}>
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href={ctas.caseStudies.href} data-cta={`${props.eyebrow}-final-cases`}>
+            {ctas.caseStudies.label} →
+          </a>
+        </div>
+        <p class="text-sm text-white/55">
+          Prefer email? <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Signals lists with violet check */
+  .exp-signals {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .exp-signals li {
+    position: relative;
+    padding: 0.75rem 0 0.75rem 2rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .exp-signals li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Cause cards */
+  .exp-cause-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .exp-cause-grid { grid-template-columns: repeat(3, 1fr); } }
+  .exp-cause-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+  .exp-cause-num {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .exp-cause-card p {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Numbered steps */
+  .exp-steps {
+    list-style: none;
+    counter-reset: stepcount;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .exp-steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 0.85rem 1.1rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0.75rem;
+  }
+  .exp-steps-light li {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .exp-step-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+  .dark-section .exp-step-num { color: #a445ff; }
+  .exp-step-body {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .dark-section .exp-step-body { color: rgba(255,255,255,0.8); }
+
+  /* Deliverables grid */
+  .exp-deliv-grid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .exp-deliv-grid { grid-template-columns: 1fr 1fr; } }
+  .exp-deliv-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1rem 1.1rem;
+  }
+  .exp-deliv-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+    display: inline-block;
+  }
+  .exp-deliv-card p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  /* Mini case */
+  .exp-mini-case {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.75rem 1.75rem;
+  }
+  .exp-mini-rows { margin: 1rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.85rem; }
+  .exp-mini-rows dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border-top: 1px solid var(--line);
+    padding-top: 0.85rem;
+  }
+  .exp-mini-rows dd {
+    margin: 0.4rem 0 0;
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  /* Mistakes — red-tinged */
+  .exp-mistakes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .exp-mistakes li {
+    position: relative;
+    padding: 0.75rem 0 0.75rem 2rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .exp-mistakes li::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    color: #d44a4a;
+    font-weight: 700;
+  }
+
+  /* FAQs */
+  .exp-faq-grid { display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .exp-faq-grid { grid-template-columns: 1fr 1fr; } }
+  .exp-faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1rem 1.25rem;
+  }
+  .exp-faq-item summary {
+    cursor: pointer;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.45;
+    list-style: none;
+  }
+  .exp-faq-item summary::-webkit-details-marker { display: none; }
+  .exp-faq-item summary::after {
+    content: "+";
+    float: right;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .exp-faq-item[open] summary::after { content: "−"; }
+  .exp-faq-item p {
+    margin-top: 0.85rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+</style>
