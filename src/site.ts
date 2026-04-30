@@ -3,7 +3,7 @@ export const siteConfig = {
   firstName: "Daniel",
   title: "Fractional CMO for Seed–Series B AI & B2B SaaS | Daniel Johnson",
   description:
-    "Fractional CMO and AI-native growth operator for Seed to Series B AI and B2B SaaS founders. Predictable pipeline, sharper positioning, senior growth leadership — without a £150k full-time hire.",
+    "Fractional CMO and AI-native growth operator for founder-led companies, with specialist experience across Seed to Series B AI and B2B SaaS. Predictable pipeline, sharper positioning, senior growth leadership, without a £150k full-time hire.",
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
@@ -20,7 +20,7 @@ export const siteConfig = {
   // surfaced only in About / FAQ, not on the headline cards.
   primaryLane: "Fractional CMO / Growth Operator for post-PMF Seed–Series B AI & B2B SaaS startups.",
   availability:
-    "2 fractional CMO slots available this quarter. Next start window: May 2026.",
+    "2 Fractional CMO slots available this quarter. Next start window: May 2026.",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",
@@ -120,7 +120,7 @@ export const positioning = {
   // the eyebrow above the H1, so the first thing a founder reads after the
   // headline is what they actually get.
   subheadline:
-    "Predictable pipeline, sharper positioning, and senior growth leadership for Seed to Series B AI and B2B SaaS founders — without a £150k full-time hire."
+    "Predictable pipeline, sharper positioning, and senior growth leadership for founder-led companies, with specialist experience across Seed to Series B AI and B2B SaaS."
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────

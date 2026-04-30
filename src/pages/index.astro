@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
+import HeroEngagementCard from "../components/HeroEngagementCard.astro";
+import NewsletterFormInline from "../components/NewsletterFormInline.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
@@ -32,16 +34,13 @@ const featuredMedia = media.slice(0, 4);
 
 const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials"));
 
-// Lead testimonial — strongest specific result.
 const leadTestimonial = testimonials.find((t) => t.data.name === "Christian A");
-
-// Two supporting testimonials with named attribution.
 const supportingTestimonials = [
   testimonials.find((t) => t.data.name === "Camiel Roex"),
   testimonials.find((t) => t.data.name === "Greg Weinstein")
 ].filter(Boolean) as typeof testimonials;
 
-// ─── Method layers (one source of truth so the number never drifts) ─────
+// ─── Method layers ──────────────────────────────────────────────────────
 const methodLayers = [
   { title: "GTM systems", body: "ICP doc, positioning test results, weekly growth dashboard.", href: "/gtm-systems/" },
   { title: "Acquisition", body: "Channel test map, experiment backlog, paid and organic decision rules.", href: "/experimentation/" },
@@ -52,32 +51,12 @@ const methodLayers = [
 ];
 const layerCount = methodLayers.length;
 
-// ─── Proof — real outcomes (four cards) ─────────────────────────────────
+// ─── Proof — real outcomes ──────────────────────────────────────────────
 const outcomeCards = [
-  {
-    metric: "6×",
-    metricSuffix: "app downloads",
-    context: "2k → 12k+ monthly downloads in 6 months after acquisition and lifecycle rebuild.",
-    sector: "HealthTech · AI"
-  },
-  {
-    metric: "35%",
-    metricSuffix: "lower CAC",
-    context: "CAC down 35% in 8 weeks — segmentation, paid account structure, landing-page routing.",
-    sector: "Fintech · Crypto"
-  },
-  {
-    metric: "500+",
-    metricSuffix: "qualified signups",
-    context: "500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.",
-    sector: "Fintech · B2B SaaS"
-  },
-  {
-    metric: "21%",
-    metricSuffix: "less churn",
-    context: "Retention up 21% in 3 months. Targeted lifecycle and win-back messaging.",
-    sector: "eCommerce"
-  }
+  { metric: "6×",  metricSuffix: "app downloads",     context: "2k → 12k+ monthly downloads in 6 months after acquisition and lifecycle rebuild.",   sector: "HealthTech · AI" },
+  { metric: "35%", metricSuffix: "lower CAC",         context: "CAC down 35% in 8 weeks — segmentation, paid account structure, landing-page routing.", sector: "Fintech · Crypto" },
+  { metric: "500+",metricSuffix: "qualified signups", context: "500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.",          sector: "Fintech · B2B SaaS" },
+  { metric: "21%", metricSuffix: "less churn",        context: "Retention up 21% in 3 months. Targeted lifecycle and win-back messaging.",            sector: "eCommerce" }
 ];
 
 const imageStoryCards = [
@@ -106,7 +85,7 @@ const faq = [
   {
     question: "Who do you work with?",
     answer:
-      "Founders of post-PMF AI and B2B SaaS startups, typically Seed to Series B. Product-strong teams where growth has plateaued or feels noisy and hard to prioritise. UK-based, currently working from Asia, serving US, UK, Europe, and APAC clients remotely."
+      "Founder-led companies where growth has plateaued or feels noisy and hard to prioritise. Specialist focus on Seed to Series B AI and B2B SaaS, but I also work with healthtech, fintech, edtech, and eCommerce teams. UK-based, currently working from Asia, serving US, UK, Europe, and APAC clients remotely."
   },
   {
     question: "What's the difference between a fractional CMO and a growth operator?",
@@ -130,36 +109,16 @@ const schemas = [
   buildFaqPageSchema(faq),
   buildAggregateRatingSchema(),
   buildServiceSchema({
-    name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
+    name: "Fractional CMO for founder-led companies",
     description:
-      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire.",
+      "Embedded senior GTM leadership for founder-led companies. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire. Specialist experience across Seed to Series B AI and B2B SaaS.",
     url: absoluteUrl("/fractional-cmo/"),
     serviceType: "Fractional CMO",
     offers: [
-      {
-        name: "30-min Growth Audit",
-        description: "Free 30-minute diagnostic call. Bottleneck read, fit decision, recommendation.",
-        price: "0",
-        billingIncrement: "per call"
-      },
-      {
-        name: "Strategy Sprint",
-        description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
-        price: "6000",
-        billingIncrement: "per engagement"
-      },
-      {
-        name: "Fractional CMO",
-        description: "3-month minimum. Embedded senior ownership 1 day a week.",
-        price: "7500",
-        billingIncrement: "per month"
-      },
-      {
-        name: "Fractional CMO Plus",
-        description: "Deeper operating support, agency management, faster execution.",
-        price: "12000",
-        billingIncrement: "per month"
-      }
+      { name: "30-min Growth Audit", description: "Free 30-minute diagnostic call. Bottleneck read, fit decision, recommendation.", price: "0", billingIncrement: "per call" },
+      { name: "Strategy Sprint", description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.", price: "6000", billingIncrement: "per engagement" },
+      { name: "Fractional CMO", description: "3-month minimum. Embedded senior ownership 1 day a week.", price: "7500", billingIncrement: "per month" },
+      { name: "Fractional CMO Plus", description: "Deeper operating support, agency management, faster execution.", price: "12000", billingIncrement: "per month" }
     ]
   })
 ];
@@ -175,16 +134,20 @@ const schemas = [
   <!-- 1. Hero ─────────────────────────────────────────────────────────── -->
   <section class="hero-section hero-section-compact section-space" aria-labelledby="hero-heading">
     <div class="shell">
-      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.82fr)] lg:items-center">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.78fr)] lg:items-start">
         <div class="reveal flex flex-col gap-5">
           <span class="service-label">Fractional CMO · {singleIdea.short}</span>
 
           <div class="space-y-4">
-            <h1 id="hero-heading" class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]">
-              If growth still depends on the founder, <span class="hero-accent">I fix that.</span>
+            <!-- Hero headline: full-line subtle ink → violet gradient. -->
+            <h1
+              id="hero-heading"
+              class="hero-gradient-line max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]"
+            >
+              If growth still depends on the founder, I fix that.
             </h1>
             <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
-              <strong class="font-semibold text-[color:var(--ink)]">Predictable pipeline. Sharper positioning. Senior growth leadership.</strong> For Seed to Series B AI and B2B SaaS founders — without a £150k full-time hire.
+              <strong class="font-semibold text-[color:var(--ink)]">Predictable pipeline. Sharper positioning. Senior growth leadership for founder-led companies,</strong> with specialist experience across Seed to Series B AI and B2B SaaS.
             </p>
             <p class="max-w-3xl text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">
               Available for podcasts, press commentary, and talks on AI-native GTM, founder-led growth, and startup growth systems.
@@ -215,11 +178,11 @@ const schemas = [
           </div>
         </div>
 
-        <div class="reveal">
-          <article class="hero-photo-card hero-offer-card">
+        <!-- Right column: smaller portrait on top, engagement-model card below. -->
+        <div class="reveal hero-right-stack">
+          <figure class="hero-portrait-compact">
             <img
               alt="Daniel Johnson, fractional CMO and AI-native growth operator"
-              class="aspect-[4/5] w-full object-cover object-top hero-portrait"
               decoding="async"
               fetchpriority="high"
               height={siteImages.heroCutout.height}
@@ -227,23 +190,21 @@ const schemas = [
               src={siteImages.heroCutout.src}
               width={siteImages.heroCutout.width}
             />
-            <div class="hero-authority-panel">
-              <p class="card-label">Primary Offer</p>
-              <h2 class="mt-2 text-2xl font-extrabold tracking-[-0.05em]">
-                Fractional CMO for post-PMF AI and SaaS.
-              </h2>
-              <ul class="mt-5 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
-                <li>Best for £1m to £10m ARR</li>
-                <li>Founder-led, growth stuck, no senior GTM owner</li>
-                <li>Senior help without a £150k+ full-time hire</li>
-                <li>Recent work: AI health, B2B fintech, edtech, SaaS tooling</li>
-              </ul>
-            </div>
-          </article>
+          </figure>
+          <HeroEngagementCard />
         </div>
       </div>
 
-      <div class="trust-strip trust-strip-large hero-trust-strip reveal" aria-label="Selected affiliations and platforms">
+      <!-- Newsletter inline strip — quiet, sits under hero, full-width inside shell. -->
+      <div class="reveal mt-10">
+        <NewsletterFormInline
+          variant="strip"
+          heading="Get practical notes on founder-led growth, AI GTM, positioning, and pipeline systems."
+          subline="Occasional. No daily drip. Unsubscribe in one click."
+        />
+      </div>
+
+      <div class="trust-strip trust-strip-large hero-trust-strip reveal mt-10" aria-label="Selected affiliations and platforms">
         <p class="trust-strip-label">Selected affiliations</p>
         <div class="trust-strip-logos">
           {
@@ -269,7 +230,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 2. Problem statement — tighter copy (was 3 paragraphs, now 2) ──── -->
+  <!-- 2. Problem statement ───────────────────────────────────────────── -->
   <section class="section-space pt-0" aria-labelledby="problem-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
@@ -298,9 +259,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 4. Buying ladder — Audit → Sprint → Fractional CMO ──────────── -->
-  <!-- Was: Fractional CMO + Growth Advisory + Speaking (mixed shapes).  -->
-  <!-- Now: a clean 3-tier buying ladder with explicit price/scope.       -->
+  <!-- 4. Buying ladder ───────────────────────────────────────────── -->
   <section class="section-space pt-0" id="services">
     <div class="shell">
       <SectionHeader
@@ -308,10 +267,6 @@ const schemas = [
         intro="Pick the smallest commitment that answers the question. You can move up the ladder later."
         title="Where do you want to start?"
       />
-
-      <!-- Visual ladder — numbered step badges + connecting line on desktop -->
-      <!-- so the progression reads as Audit -> Sprint -> Fractional CMO,    -->
-      <!-- not three side-by-side equal-weight cards.                         -->
       <div class="ladder-grid mt-10">
         {
           homeServiceLadder.map((tier, index) => (
@@ -338,7 +293,6 @@ const schemas = [
           ))
         }
       </div>
-
       <p class="reveal mt-8 text-center text-sm leading-7 text-[color:var(--muted)]">
         Looking for <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/mentoring/">founder office hours</a>, <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/speaking/">speaking, or workshops</a>? See all the ways we can work together.
       </p>
@@ -353,22 +307,17 @@ const schemas = [
         intro="I'd rather save us both a 30-minute call if we're not the right match."
         title="Who this is for, and who it's not."
       />
-
       <div class="mt-10 grid gap-5 md:grid-cols-2">
         <article class="reveal card p-6 md:p-8">
           <p class="card-label text-[color:var(--accent)]">Best fit</p>
           <ul class="mt-4 space-y-3 text-base leading-8">
-            {fitSignals.bestFor.map((point) => (
-              <li class="fit-row fit-row-yes">{point}</li>
-            ))}
+            {fitSignals.bestFor.map((point) => (<li class="fit-row fit-row-yes">{point}</li>))}
           </ul>
         </article>
         <article class="reveal card p-6 md:p-8">
           <p class="card-label">Not a fit</p>
           <ul class="mt-4 space-y-3 text-base leading-8 text-[color:var(--muted)]">
-            {fitSignals.notFor.map((point) => (
-              <li class="fit-row fit-row-no">{point}</li>
-            ))}
+            {fitSignals.notFor.map((point) => (<li class="fit-row fit-row-no">{point}</li>))}
           </ul>
         </article>
       </div>
@@ -383,7 +332,6 @@ const schemas = [
         intro="You don't need another agency layer when the real problem is senior growth judgement."
         title="Senior growth judgement, not junior execution."
       />
-
       <div class="mt-10 grid gap-5 md:grid-cols-2">
         <article class="reveal card p-6 md:p-8">
           <p class="card-label">{agencyVsMe.agency.heading}</p>
@@ -401,7 +349,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 7. The method — sharper anchor: campaigns vs. systems ───────── -->
+  <!-- 7. The method ──────────────────────────────────────────── -->
   <section class="dark-section section-space" aria-labelledby="method-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center">
@@ -410,27 +358,17 @@ const schemas = [
           I don't run campaigns. <span class="hero-accent">I build growth systems that run without you.</span>
         </h2>
       </div>
-
       <div class="reveal mx-auto mt-10 max-w-3xl space-y-5 text-lg leading-8 text-white/72">
         <p>Most growth consultants arrive, ship a deck, and disappear. Not how I work.</p>
-        <p>
-          Every engagement builds the same thing: a growth system. A repeatable architecture your team can run after I'm gone.
-        </p>
-        <p class="text-sm uppercase tracking-[0.16em] text-white/50">
-          {layerCount} layers, one loop
-        </p>
+        <p>Every engagement builds the same thing: a growth system. A repeatable architecture your team can run after I'm gone.</p>
+        <p class="text-sm uppercase tracking-[0.16em] text-white/50">{layerCount} layers, one loop</p>
       </div>
-
-      <!-- System diagram — shows the loop visually so "growth system" -->
-      <!-- isn't just an abstract claim. -->
       <div class="reveal mt-12">
         <GrowthSystemDiagram />
       </div>
-
       <p class="reveal mt-6 text-center text-sm uppercase tracking-[0.14em] text-white/45">
         Each layer also exists as a deeper page — click below
       </p>
-
       <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {
           methodLayers.map((layer, index) => (
@@ -442,7 +380,6 @@ const schemas = [
           ))
         }
       </div>
-
       <div class="reveal mt-10 text-center">
         <p class="text-base leading-8 text-white/68">
           If "growth system" sounds vague, that's fine. I'll show you exactly what it looks like on a 30-minute audit.
@@ -473,7 +410,6 @@ const schemas = [
           </p>
           <a class="link-arrow" href="/ai-native-workflows/">See AI-native workflows</a>
         </div>
-
         <div class="reveal ai-workflow-panel">
           <div class="ai-workflow-head">
             <p class="card-label">How the work moves</p>
@@ -509,7 +445,6 @@ const schemas = [
         intro="A few more ways to read the work before you book: rooms, interviews, current focus, and the operator story behind the process."
         title="More signal, fewer claims."
       />
-
       <div class="mt-10 grid gap-5 lg:grid-cols-2">
         {
           imageStoryCards.map((card) => (
@@ -525,7 +460,6 @@ const schemas = [
           ))
         }
       </div>
-
       <div class="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         <a class="reveal media-link-card card p-5" href="/podcast-guest/">
           <span class="card-label">Podcast guest</span>
@@ -561,9 +495,7 @@ const schemas = [
         <div>
           <p class="card-label">Follow Daniel's thinking</p>
           <h2>Press page builds authority. Writing proves the thinking. LinkedIn keeps people warm.</h2>
-          <p>
-            The personal site is the media and authority hub; We Scale Startups converts commercial demand when the conversation turns into a growth problem.
-          </p>
+          <p>The personal site is the media and authority hub; We Scale Startups converts commercial demand when the conversation turns into a growth problem.</p>
         </div>
         <div class="social-link-grid">
           <a href={siteConfig.linkedin} rel="noreferrer" target="_blank">LinkedIn: practical notes on AI-native GTM, founder-led growth, and growth systems</a>
@@ -584,7 +516,6 @@ const schemas = [
         intro="The short list. Full case studies linked below."
         title="Real campaigns. Real numbers. Real attribution."
       />
-
       <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {
           outcomeCards.map((card) => (
@@ -592,18 +523,14 @@ const schemas = [
               <p class="text-5xl font-extrabold tracking-[-0.07em] text-white">{card.metric}</p>
               <p class="mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-white/65">{card.metricSuffix}</p>
               <p class="mt-5 text-sm leading-7 text-white/70">{card.context}</p>
-              <p class="mt-5 border-t border-white/[0.08] pt-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/45">
-                {card.sector}
-              </p>
+              <p class="mt-5 border-t border-white/[0.08] pt-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{card.sector}</p>
             </article>
           ))
         }
       </div>
-
       <div class="reveal mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm font-semibold uppercase tracking-[0.12em] text-white/60">
         {lifetimeTotals.map((item) => <span>{item}</span>)}
       </div>
-
       <div class="reveal mt-6 text-center">
         <a class="link-arrow" href="/case-studies/">See full case studies</a>
       </div>
@@ -618,26 +545,20 @@ const schemas = [
         intro="Founder feedback from mentoring, advisory, and growth sessions."
         title="What founders say."
       />
-
       {leadTestimonial && (
         <blockquote class="reveal mt-10 card p-8 md:p-12 testimonial-lead">
-          <p class="text-2xl font-semibold leading-10 tracking-[-0.04em] md:text-3xl">
-            "{leadTestimonial.data.quote}"
-          </p>
+          <p class="text-2xl font-semibold leading-10 tracking-[-0.04em] md:text-3xl">"{leadTestimonial.data.quote}"</p>
           <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
             <p class="font-semibold">{leadTestimonial.data.name}</p>
             <p class="text-[color:var(--muted)]">{leadTestimonial.data.role}{leadTestimonial.data.organisation ? ` · ${leadTestimonial.data.organisation}` : ""}</p>
           </footer>
         </blockquote>
       )}
-
       <div class="mt-5 grid gap-5 md:grid-cols-2">
         {
           supportingTestimonials.map((item) => (
             <blockquote class="reveal card p-6 md:p-7">
-              <p class="text-lg font-semibold leading-8 tracking-[-0.03em]">
-                "{item.data.quote}"
-              </p>
+              <p class="text-lg font-semibold leading-8 tracking-[-0.03em]">"{item.data.quote}"</p>
               <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
                 <p class="font-semibold">{item.data.name}</p>
                 <p class="text-[color:var(--muted)]">{item.data.role}{item.data.organisation ? ` · ${item.data.organisation}` : ""}</p>
@@ -646,10 +567,10 @@ const schemas = [
           ))
         }
       </div>
-
+      <!-- Internal testimonials page replaces the old external GrowthMentor link. -->
       <div class="reveal mt-6 text-center">
-        <a class="link-arrow" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
-          Read more founder feedback
+        <a class="link-arrow" href="/testimonials/" data-cta="home-see-all-testimonials">
+          Read all testimonials &amp; founder feedback →
         </a>
       </div>
     </div>
@@ -674,7 +595,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 13. Writing — soft conversions live alongside the essays ─────── -->
+  <!-- 13. Writing ─────────────────────────── -->
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -682,7 +603,6 @@ const schemas = [
         intro="Essays on AI-native GTM, growth systems, and why most startup growth advice is wrong."
         title="Writing."
       />
-
       <div class="mt-10 grid gap-5 md:grid-cols-3">
         {
           articles.map((article) => (
@@ -699,11 +619,17 @@ const schemas = [
         }
       </div>
 
-      <!-- Soft conversion ladder — three lower-commitment entry points beneath -->
-      <!-- the essays so visitors who aren't ready to book have somewhere to go. -->
+      <!-- Embedded newsletter signup directly under writing essays — second placement. -->
+      <div class="reveal mt-8">
+        <NewsletterFormInline
+          variant="card"
+          heading="Get the next essay first."
+          subline="Practical notes on founder-led growth, AI GTM, positioning, and pipeline systems. No daily drip."
+        />
+      </div>
+
       <div class="reveal mt-8 flex flex-wrap items-center gap-3">
         <a class="button-accent" href="/writing/">Read all writing →</a>
-        <a class="button-link" href="/newsletter/">Subscribe to Growth Notes →</a>
         <a class="button-link" href="/growth-bottleneck-checklist/">Open the bottleneck checklist →</a>
       </div>
     </div>
@@ -721,12 +647,8 @@ const schemas = [
           30 minutes on your specific situation. No pitch, no deck, no trying-to-close. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={ctas.primary.href} data-cta="final-primary">
-            {ctas.primary.label} →
-          </a>
-          <a class="button-link-invert" href={ctas.caseStudies.href} data-cta="final-case-studies">
-            {ctas.caseStudies.label} →
-          </a>
+          <a class="button-accent" href={ctas.primary.href} data-cta="final-primary">{ctas.primary.label} →</a>
+          <a class="button-link-invert" href={ctas.caseStudies.href} data-cta="final-case-studies">{ctas.caseStudies.label} →</a>
         </div>
         <p class="text-sm text-white/60">
           Prefer email first? <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
@@ -735,3 +657,57 @@ const schemas = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Hero gradient line — subtle ink → violet, premium and quiet. */
+  .hero-gradient-line {
+    background-image: linear-gradient(
+      120deg,
+      #0b0b0c 0%,
+      #1a1a1d 38%,
+      #3a2168 72%,
+      #6c2bd9 92%,
+      #7b3eff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Fallback for browsers that don't support background-clip: text */
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+    .hero-gradient-line {
+      background: none;
+      color: var(--ink);
+    }
+  }
+
+  /* Compact right-column stack: small portrait + engagement card. */
+  .hero-right-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-portrait-compact {
+    width: 100%;
+    aspect-ratio: 5 / 3;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: var(--surface-dim);
+    border: 1px solid var(--line);
+  }
+  @media (min-width: 1024px) {
+    .hero-portrait-compact {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  .hero-portrait-compact img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-gradient-line { transition: none; }
+  }
+</style>

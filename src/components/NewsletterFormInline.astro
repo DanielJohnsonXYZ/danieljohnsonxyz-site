@@ -1,0 +1,158 @@
+---
+// NewsletterFormInline.astro
+// Inline newsletter capture form embedded directly on pages (homepage strip,
+// writing index, end of articles, footer). No external link — the form posts
+// to Listmonk directly.
+//
+// SETUP NOTE FOR DEV:
+//   1. Replace LIST_UUID_PLACEHOLDER below with the real Listmonk list UUID.
+//      You can find it at: https://listmonk.wescalestartups.com/admin/lists
+//   2. The "nonce" hidden input gets populated by Listmonk via JS — leave empty.
+//   3. After successful submit, Listmonk redirects to its built-in thanks page.
+//      To redirect to a custom /newsletter/thanks page, append ?l=...&redirect_url=
+//
+// Variants: pass `variant` prop = "strip" (compact one-line) or "card" (full block).
+// Default: "strip".
+
+interface Props {
+  variant?: "strip" | "card";
+  heading?: string;
+  subline?: string;
+}
+
+const {
+  variant = "strip",
+  heading = "Practical notes on founder-led growth, AI GTM, positioning, and pipeline systems.",
+  subline = "Occasional. No daily drip. Unsubscribe in one click."
+} = Astro.props;
+
+const listmonkUrl = "https://listmonk.wescalestartups.com/subscription/form";
+const listUuid = "LIST_UUID_PLACEHOLDER"; // TODO replace with real list UUID
+---
+
+<section class:list={["nl-form", `nl-form-${variant}`]} aria-labelledby="nl-form-title">
+  <div class="nl-inner">
+    <div class="nl-copy">
+      <p class="nl-eyebrow">Growth Notes</p>
+      <h3 id="nl-form-title">{heading}</h3>
+      {subline && <p class="nl-sub">{subline}</p>}
+    </div>
+    <form
+      class="nl-fields"
+      action={listmonkUrl}
+      method="post"
+      data-cta="newsletter-inline-submit"
+    >
+      <input type="hidden" name="nonce" value="" />
+      <input type="hidden" name="l" value={listUuid} />
+      <label class="nl-label" for="nl-email">
+        <span class="sr-only">Email address</span>
+        <input
+          id="nl-email"
+          class="nl-input"
+          type="email"
+          name="email"
+          required
+          placeholder="you@company.com"
+          autocomplete="email"
+          inputmode="email"
+        />
+      </label>
+      <button class="nl-submit button-accent" type="submit">
+        Subscribe →
+      </button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .nl-form {
+    background: var(--surface-dim);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.25rem 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .nl-form { padding: 1.5rem 1.75rem; }
+  }
+
+  .nl-inner {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .nl-form-strip .nl-inner {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  }
+
+  .nl-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .nl-form h3 {
+    font-size: 1.1rem;
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 38ch;
+  }
+  @media (min-width: 768px) {
+    .nl-form-card h3 { font-size: 1.35rem; }
+  }
+
+  .nl-sub {
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .nl-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  @media (min-width: 540px) {
+    .nl-fields { flex-direction: row; gap: 0.5rem; }
+  }
+
+  .nl-label { flex: 1; min-width: 0; }
+  .nl-input {
+    width: 100%;
+    padding: 0.7rem 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 0.9rem;
+    color: var(--ink);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .nl-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  .nl-submit {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+</style>
