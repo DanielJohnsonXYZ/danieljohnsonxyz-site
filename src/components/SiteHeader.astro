@@ -14,9 +14,37 @@ const headerCta = mediaCta
     }
   : ctas.primary;
 
-// Normalise paths so trailing-slash doesn't break active state.
 const normalise = (p: string) => (p.endsWith("/") ? p : `${p}/`);
 const active = normalise(currentPath);
+
+// Image card per dropdown — matches navigationGroups by .label.
+// Files live in /public/images/nav/ as SVGs (light + dark friendly).
+const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string; tagline: string }> = {
+  "Work with me": {
+    src: "/images/nav/work-with-me.svg",
+    alt: "Diagram of a connected growth system: ICP, channel, offer, rhythm",
+    eyebrow: "Senior growth operator",
+    tagline: "Embed senior judgement, build the system, transfer it clean."
+  },
+  "Compare": {
+    src: "/images/nav/compare.svg",
+    alt: "Side-by-side comparison of agency vs fractional CMO trade-offs",
+    eyebrow: "vs. agency · vs. full-time",
+    tagline: "Senior judgement vs junior execution. Cost, ramp, and ownership maths."
+  },
+  "Expertise": {
+    src: "/images/nav/expertise.svg",
+    alt: "Six connected nodes representing GTM, PLG, experimentation, AI, distribution, RevOps",
+    eyebrow: "Six operating layers",
+    tagline: "GTM, PLG, experimentation, AI workflows, founder distribution, RevOps."
+  },
+  "Media": {
+    src: "/images/nav/media.svg",
+    alt: "Audio waveform with microphone — speaking, podcasts, writing, press",
+    eyebrow: "Speaking · Podcasts · Writing",
+    tagline: "Press kit, podcast guest pitches, and speaking assets ready for producers."
+  }
+};
 ---
 
 {
@@ -38,9 +66,7 @@ const active = normalise(currentPath);
       <div class="flex items-center justify-between gap-4">
         <a class="group flex items-center gap-3" href="/">
           <span class="brand-mark">DJ</span>
-          <span class="text-sm font-semibold tracking-[-0.02em]">
-            Daniel Johnson
-          </span>
+          <span class="text-sm font-semibold tracking-[-0.02em]">Daniel Johnson</span>
         </a>
 
         <nav aria-label="Primary" class="hidden items-center gap-1 rounded-full border border-[color:var(--line)] bg-white/60 p-1 lg:flex">
@@ -48,6 +74,7 @@ const active = normalise(currentPath);
             navigationGroups.map((group) => {
               const isActive =
                 normalise(group.href) === active || group.items.some((item) => normalise(item.href) === active);
+              const img = dropdownImages[group.label];
               return (
                 <div class="site-nav-menu">
                   <a
@@ -61,11 +88,18 @@ const active = normalise(currentPath);
                   >
                     {group.label}
                   </a>
-                  <div class="site-nav-dropdown">
-                    <a class="site-nav-dropdown-feature" href={group.href}>
-                      <span>{group.label}</span>
-                      <strong>Explore the full section</strong>
-                    </a>
+                  <div class="site-nav-dropdown site-nav-dropdown-with-image">
+                    {img && (
+                      <a class="site-nav-dropdown-image" href={group.href} aria-label={`${group.label} — ${img.tagline}`}>
+                        <img src={img.src} alt={img.alt} loading="lazy" decoding="async" width="320" height="220" />
+                        <div class="site-nav-dropdown-image-copy">
+                          <p class="site-nav-dropdown-image-eyebrow">{img.eyebrow}</p>
+                          <strong class="site-nav-dropdown-image-title">{group.label}</strong>
+                          <p class="site-nav-dropdown-image-tag">{img.tagline}</p>
+                          <span class="site-nav-dropdown-image-cta">Explore →</span>
+                        </div>
+                      </a>
+                    )}
                     <div class="site-nav-dropdown-list">
                       {
                         group.items.map((item) => (
@@ -81,12 +115,8 @@ const active = normalise(currentPath);
               );
             })
           }
-          <a class="site-nav-link rounded-full px-4 py-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--ink)]" href="/case-studies/">
-            Results
-          </a>
-          <a class="site-nav-link rounded-full px-4 py-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--ink)]" href="/about/">
-            About
-          </a>
+          <a class="site-nav-link rounded-full px-4 py-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--ink)]" href="/case-studies/">Results</a>
+          <a class="site-nav-link rounded-full px-4 py-2 text-sm font-medium text-[color:var(--muted)] hover:text-[color:var(--ink)]" href="/about/">About</a>
         </nav>
 
         <div class="hidden lg:block">
@@ -149,3 +179,85 @@ const active = normalise(currentPath);
     </div>
   </div>
 </header>
+
+<style>
+  /* Image-augmented dropdown — sits to the LEFT of the link list. */
+  .site-nav-dropdown-with-image {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    min-width: min(720px, 90vw);
+  }
+
+  .site-nav-dropdown-image {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .site-nav-dropdown-image img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .site-nav-dropdown-image-copy {
+    position: absolute;
+    inset: 0;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    background: linear-gradient(180deg, rgba(11,11,12,0) 50%, rgba(11,11,12,0.78) 100%);
+  }
+  .site-nav-dropdown-image-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+  }
+  .site-nav-dropdown-image-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .site-nav-dropdown-image-tag {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.78);
+    margin: 0;
+    line-height: 1.4;
+  }
+  .site-nav-dropdown-image-cta {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 0.3rem;
+  }
+  .site-nav-dropdown-image:hover .site-nav-dropdown-image-cta {
+    color: #fff;
+  }
+  .site-nav-dropdown-image:hover .site-nav-dropdown-image-copy {
+    background: linear-gradient(180deg, rgba(11,11,12,0) 30%, rgba(11,11,12,0.85) 100%);
+  }
+
+  /* Hide the image on narrow viewports — desktop only enhancement. */
+  @media (max-width: 980px) {
+    .site-nav-dropdown-with-image {
+      grid-template-columns: 1fr;
+      min-width: 0;
+    }
+    .site-nav-dropdown-image {
+      display: none;
+    }
+  }
+</style>

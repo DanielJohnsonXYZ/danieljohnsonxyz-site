@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Media — speaking, podcasts, writing, press">
+  <title>Media</title>
+  <desc>Stylised audio waveform with microphone silhouette indicating podcasts, speaking and press.</desc>
+  <defs>
+    <linearGradient id="gradMED" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1d"/>
+      <stop offset="100%" stop-color="#3a2168"/>
+    </linearGradient>
+    <linearGradient id="gradMEDbar" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#A445FF"/>
+      <stop offset="100%" stop-color="#7B3EFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" fill="url(#gradMED)" rx="14"/>
+  <!-- Microphone silhouette (left) -->
+  <g transform="translate(50, 70)" fill="none" stroke="#fff" stroke-width="1.6" opacity="0.85">
+    <rect x="0" y="0" width="20" height="34" rx="10"/>
+    <path d="M-6 28 a16 16 0 0 0 32 0"/>
+    <line x1="10" y1="44" x2="10" y2="60"/>
+    <line x1="2" y1="60" x2="18" y2="60"/>
+  </g>
+  <!-- Waveform bars (centre to right) -->
+  <g fill="url(#gradMEDbar)">
+    <rect x="100" y="100" width="4" height="20" rx="2"/>
+    <rect x="110" y="80" width="4" height="60" rx="2"/>
+    <rect x="120" y="92" width="4" height="36" rx="2"/>
+    <rect x="130" y="60" width="4" height="100" rx="2"/>
+    <rect x="140" y="74" width="4" height="72" rx="2"/>
+    <rect x="150" y="52" width="4" height="116" rx="2"/>
+    <rect x="160" y="40" width="4" height="140" rx="2"/>
+    <rect x="170" y="60" width="4" height="100" rx="2"/>
+    <rect x="180" y="80" width="4" height="60" rx="2"/>
+    <rect x="190" y="50" width="4" height="120" rx="2"/>
+    <rect x="200" y="70" width="4" height="80" rx="2"/>
+    <rect x="210" y="86" width="4" height="48" rx="2"/>
+    <rect x="220" y="94" width="4" height="32" rx="2"/>
+    <rect x="230" y="80" width="4" height="60" rx="2"/>
+    <rect x="240" y="100" width="4" height="20" rx="2"/>
+    <rect x="250" y="92" width="4" height="36" rx="2"/>
+    <rect x="260" y="100" width="4" height="20" rx="2"/>
+  </g>
+  <!-- Caption -->
+  <text x="160" y="195" text-anchor="middle" fill="#fff" opacity="0.7" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.1em">SPEAKING · PODCASTS · WRITING</text>
+</svg>
