@@ -154,6 +154,7 @@ danieljohnson.xyz documents Daniel's working approach, the frameworks he uses wi
 - [Fractional CMO vs. Agency](${siteConfig.siteUrl}/fractional-cmo-vs-agency/): comparison page
 - [Fractional CMO vs. Full-time CMO](${siteConfig.siteUrl}/fractional-cmo-vs-full-time-cmo/): comparison page
 - [Case studies](${siteConfig.siteUrl}/case-studies/): anonymised engagement write-ups with bottleneck, approach, and outcome
+- [Testimonials](${siteConfig.siteUrl}/testimonials/): founder, mentoring, and client feedback filtered by engagement type
 - [About](${siteConfig.siteUrl}/about/): background, operating history, and why founders trust Daniel
 - [GTM systems](${siteConfig.siteUrl}/gtm-systems/): ICP, positioning, channel strategy, acquisition design, operating cadence
 - [Product-led growth](${siteConfig.siteUrl}/product-led-growth/): activation, onboarding, trial conversion, retention, expansion
