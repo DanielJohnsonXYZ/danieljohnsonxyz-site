@@ -1,31 +1,70 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { ctas } from "../site";
+import ExpertisePage from "../components/ExpertisePage.astro";
 ---
 
-<BaseLayout
-  title="Growth Experimentation for Startups | Daniel Johnson"
-  description="Experimentation systems for post-PMF startups: prioritisation, hypotheses, test design, learning loops, and decision cadence."
+<ExpertisePage
+  metaTitle="Experimentation for AI & B2B SaaS Startups | Daniel Johnson"
+  metaDescription="Hypotheses, prioritisation, decision rules, and learning loops for AI and B2B SaaS startups. How Daniel Johnson runs experiments that produce real decisions."
   path="/experimentation"
->
-  <section class="hero-section section-space">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-6">
-        <span class="service-label">Experimentation</span>
-        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Run fewer experiments and learn more from each one.</h1>
-        <p class="hero-subcopy text-xl leading-9 md:text-2xl">A practical system for prioritising tests, writing useful hypotheses, setting decision rules, and turning results into better growth judgement.</p>
-        <div class="flex flex-wrap gap-3">
-          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
-          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section-space pt-0">
-    <div class="shell grid gap-5 md:grid-cols-3">
-      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">Experiment backlog, scoring model, test briefs, weekly review cadence, and learning archive.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">Teams doing lots of marketing work but struggling to explain what they have learned.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">Growth activity becomes a learning system tied to revenue, conversion, and pipeline quality.</p></article>
-    </div>
-  </section>
-</BaseLayout>
+  eyebrow="Experimentation"
+  title="Experimentation"
+  headline="Run fewer experiments. Learn more. Decide faster."
+  subhead="The problem with most growth experimentation isn't volume — it's that the team is running 12 tests at once with no decision rules, no statistical discipline, and no clean handoff into the operating system."
+  problemSignals={[
+    "The team runs experiments but rarely scales or kills any of them — every result becomes \"interesting\".",
+    "There's no central backlog; experiments live in five Notion docs and one Google Sheet.",
+    "Tests run for 5-7 days then get called regardless of significance, because the team needs to ship the next thing.",
+    "Nobody can confidently name the three biggest learnings from the last quarter.",
+    "The same hypothesis gets re-tested every 6 months because nothing was documented."
+  ]}
+  rootCauses={[
+    "No shared definition of what counts as a hypothesis worth testing — anything with a hunch becomes an experiment.",
+    "No prioritisation framework, so the loudest voice or the easiest test wins.",
+    "No decision rule before the test starts — \"we'll see what the data says\" makes every result ambiguous after the fact."
+  ]}
+  diagnoseSteps={[
+    "Audit the last 90 days of experiments: which had hypotheses, which had pre-set decision rules, which were actually statistically valid.",
+    "Read the team's experiment doc / Notion / sheet for evidence of what was scaled, killed, or shelved — and how the call was made.",
+    "Score each test on whether it produced a decision the team acted on (the only metric that matters).",
+    "Find the three biggest unanswered questions about acquisition or activation that no current experiment is addressing.",
+    "Prioritise the next 6-8 experiments using ICE or similar — but force the team to write the decision rule before launch."
+  ]}
+  fixActions={[
+    "Rewrite hypotheses in a strict format: \"If we change X for users in segment Y, conversion will move by Z, because [insight].\"",
+    "Set decision rules before launch: what result scales it, what kills it, what triggers another test.",
+    "Build one experiment backlog (not five) with status, owner, success criteria, and outcome.",
+    "Set a weekly experiment review: 30 minutes, decisions captured, no debates about \"interesting\" results without action.",
+    "Document the win and the kill — both feed the team's institutional memory and stop re-testing dead ideas."
+  ]}
+  deliverables={[
+    "Hypothesis template (one-pager) the team uses for every test",
+    "ICE-scored experiment backlog with named owners",
+    "Pre-set decision rules per test (scale / kill / iterate)",
+    "Weekly experiment review format and decision log",
+    "Quarterly learnings doc — wins, kills, abandoned hypotheses",
+    "Sample-size calculator (or Optimizely / VWO setup if needed)"
+  ]}
+  miniCase={{
+    sector: "B2B Fintech · paid acquisition",
+    problem: "Team was running 14 paid landing-page variants with no clear hypothesis, no decision rule, and no documented winner. Two new tests went live each week and nothing got scaled.",
+    action: "Cut the backlog to 4 prioritised tests with pre-set decision rules. Standardised the hypothesis format. Added a weekly review where every test got a verdict.",
+    result: "CAC dropped 35% in 8 weeks because the team finally scaled the winners and killed the losers — same volume of tests, dramatically more decisions."
+  }}
+  whoFor={[
+    "Post-PMF teams running real experimentation but feeling like the learning isn't compounding.",
+    "Marketing or product leaders who want a defensible quarterly learnings narrative for the board.",
+    "Founders who suspect the team is busy but not learning fast enough."
+  ]}
+  commonMistakes={[
+    "Running A/B tests on traffic too low for statistical significance, then making decisions on noise.",
+    "Calling tests early because the team needs to ship, then re-running the same test six months later.",
+    "Confusing dashboards with learning — vanity metrics climb, decisions don't.",
+    "No documentation of kills, so the same dead hypothesis gets retested annually."
+  ]}
+  faqs={[
+    { q: "Do we need a stats tool?", a: "Eventually. For most Seed-Series A teams, a simple sample-size calculator and a disciplined hypothesis template do 80% of the work. Stats tools are a 6-month conversation, not week one." },
+    { q: "What if our traffic is too low for statistical significance?", a: "Run sequential / Bayesian-style tests, qualitative interviews, or in-funnel-event analysis. Sample-size constraints are real — pretending otherwise is the bigger problem." },
+    { q: "How is this different from CRO?", a: "CRO is one input. This covers the whole experimentation system: hypothesis quality, prioritisation, decision rules, and institutional memory across product, marketing, and growth." },
+    { q: "Should we hire a CRO specialist?", a: "Maybe — but later. The system needs to exist before a specialist plugs in. Otherwise the specialist runs experiments inside the same broken framework." }
+  ]}
+/>

@@ -1,31 +1,70 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { ctas } from "../site";
+import ExpertisePage from "../components/ExpertisePage.astro";
 ---
 
-<BaseLayout
-  title="GTM Systems for AI & B2B SaaS Startups | Daniel Johnson"
-  description="GTM systems for post-PMF AI and B2B SaaS startups: ICP, positioning, channel strategy, acquisition design, and operating cadence."
+<ExpertisePage
+  metaTitle="GTM Systems for AI & B2B SaaS Startups | Daniel Johnson"
+  metaDescription="GTM systems for post-PMF AI and B2B SaaS startups: ICP, positioning, channel strategy, acquisition design, and operating cadence. How Daniel Johnson diagnoses and fixes founder-led GTM."
   path="/gtm-systems"
->
-  <section class="hero-section section-space">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-6">
-        <span class="service-label">GTM Systems</span>
-        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Turn messy GTM into a system your team can run.</h1>
-        <p class="hero-subcopy text-xl leading-9 md:text-2xl">For founders with traction, unclear channel sequence, and too many growth decisions living in the founder's head.</p>
-        <div class="flex flex-wrap gap-3">
-          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
-          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section-space pt-0">
-    <div class="shell grid gap-5 md:grid-cols-3">
-      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">ICP, positioning, channel strategy, experiment roadmap, reporting cadence, and handoff rules.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">Seed to Series B teams where acquisition exists but pipeline is inconsistent or hard to explain.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">The team gets a shared operating system instead of another list of tactics.</p></article>
-    </div>
-  </section>
-</BaseLayout>
+  eyebrow="GTM systems"
+  title="GTM systems"
+  headline="Turn messy GTM into a system your team can run."
+  subhead="If growth still depends on a founder reading every dashboard, every sales call, and every campaign brief, the answer isn't more channels. It's a GTM operating system the team actually shares."
+  problemSignals={[
+    "Pipeline arrives in waves — three good months, then two flat ones, no obvious explanation.",
+    "Founder is still reading every analytics dashboard and writing every campaign brief.",
+    "ICP shifts depending on who is in the room — sales says one thing, marketing another.",
+    "Channels are running, but no one can confidently say which one is producing real revenue.",
+    "Reporting shows activity (impressions, clicks, MQLs) but doesn't drive decisions."
+  ]}
+  rootCauses={[
+    "Positioning was set at a different stage of the company and never refreshed when the buyer changed.",
+    "Channels were added one at a time without a system to compare them — paid, content, outbound, lifecycle each report on themselves, not on commercial outcome.",
+    "No one inside the team has explicit ownership of the GTM operating cadence, so it falls back on the founder."
+  ]}
+  diagnoseSteps={[
+    "Review the last 6 months of pipeline data, ad accounts, CRM, and analytics — read for pattern, not vanity metrics.",
+    "Run 3-5 customer interviews to test whether buyers describe the problem the way the website does.",
+    "Audit the channel mix: which channel is doing actual acquisition work, which is decoration, which is duplicating effort.",
+    "Score the GTM constraint across six layers — ICP, positioning, acquisition, conversion, reporting, team ownership — and identify the one or two that are blocking the rest.",
+    "Walk through the constraint map with the founder + leadership team in a 90-minute decision workshop."
+  ]}
+  fixActions={[
+    "Rewrite ICP and positioning in one document the whole team agrees on — anchored to actual buyer language from the customer interviews.",
+    "Sequence channels: pick the next 2-3 to invest in, name the ones to stop, and define the success criteria up-front.",
+    "Build a single growth dashboard that shows pipeline, channel contribution, conversion, and decision rules in one view.",
+    "Set the weekly operating rhythm: read signal Monday, ship the next move midweek, decide scale / stop / fix on Friday.",
+    "Transfer everything to an internal owner so the system survives without me in every loop."
+  ]}
+  deliverables={[
+    "ICP + positioning doc (one page, plain English)",
+    "Channel test map with experiment backlog and success criteria",
+    "Single growth dashboard — pipeline, channel mix, decisions",
+    "Weekly operating cadence (meeting format, decision rules, owners)",
+    "Reporting framework that connects activity to commercial outcome",
+    "Transfer pack so the team runs it without me"
+  ]}
+  miniCase={{
+    sector: "Post-PMF B2B SaaS · Series A",
+    problem: "Founder still wrote every campaign brief and read every dashboard. Pipeline came in waves. Marketing team felt like they were running, but couldn't explain which channel was working.",
+    action: "Two-week diagnostic, then 90-day GTM rebuild: positioning rewrite, channel sequencing, single dashboard, weekly cadence, transfer to a senior marketer hire.",
+    result: "Pipeline became predictable within 90 days. Founder stepped out of the GTM loop. Hired a permanent Head of Growth into a clean operating system instead of into chaos."
+  }}
+  whoFor={[
+    "Post-PMF AI or B2B SaaS founders, typically Seed to Series B.",
+    "Teams with real traction but inconsistent acquisition.",
+    "Founders who are ready to step out of the GTM decision loop but haven't found the operator to step in."
+  ]}
+  commonMistakes={[
+    "Hiring a senior marketer or agency before the GTM system exists — they end up rebuilding it themselves, expensively.",
+    "Adding a fifth channel before figuring out why the first four aren't connected.",
+    "Buying tooling (HubSpot, Salesforce, big BI stack) before there's a single decision view to put in it.",
+    "Treating positioning as a one-time exercise instead of a quarterly check."
+  ]}
+  faqs={[
+    { q: "How is this different from buying a positioning workshop?", a: "Positioning is one input. The system also includes channel sequencing, reporting, and weekly cadence — without those, even great positioning gets lost." },
+    { q: "Do I need to hire a CMO first?", a: "Often the opposite. Build the system first so the CMO walks into clarity, not chaos. Most teams pair this with Fractional CMO support during the build." },
+    { q: "How long until pipeline gets predictable?", a: "Most teams see signal within 30 days and a working operating rhythm within 90 days. Predictable pipeline is usually 4-6 months in once the system has a couple of test cycles behind it." },
+    { q: "What if my channels are very specialised (e.g. enterprise outbound only)?", a: "The framework still applies; the channel sequencing just looks different. The constraint is usually still positioning, conversion, or reporting — not the channel itself." }
+  ]}
+/>

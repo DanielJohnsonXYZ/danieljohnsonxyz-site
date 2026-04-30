@@ -1,31 +1,70 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { ctas } from "../site";
+import ExpertisePage from "../components/ExpertisePage.astro";
 ---
 
-<BaseLayout
-  title="Product-Led Growth for AI & B2B SaaS | Daniel Johnson"
-  description="Product-led growth support for SaaS teams improving activation, onboarding, trial conversion, retention, and expansion."
+<ExpertisePage
+  metaTitle="Product-Led Growth for AI & B2B SaaS Startups | Daniel Johnson"
+  metaDescription="Activation, onboarding, trial conversion, and retention for product-led AI and B2B SaaS startups. How Daniel Johnson diagnoses and fixes leaky PLG funnels."
   path="/product-led-growth"
->
-  <section class="hero-section section-space">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-6">
-        <span class="service-label">Product-Led Growth</span>
-        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Make the product carry more of the growth work.</h1>
-        <p class="hero-subcopy text-xl leading-9 md:text-2xl">I help teams diagnose activation, onboarding, trial-to-paid conversion, retention, and expansion so PLG becomes a system, not a slogan.</p>
-        <div class="flex flex-wrap gap-3">
-          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
-          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section-space pt-0">
-    <div class="shell grid gap-5 md:grid-cols-3">
-      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">Activation map, onboarding fixes, conversion experiments, usage triggers, and lifecycle priorities.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">SaaS teams with signups, trials, or freemium motion but unclear conversion or retention.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">Acquisition, onboarding, and product evidence start feeding the same growth loop.</p></article>
-    </div>
-  </section>
-</BaseLayout>
+  eyebrow="Product-led growth"
+  title="Product-led growth"
+  headline="Stop adding traffic to a leaky activation funnel."
+  subhead="If signups are climbing but activation, paid conversion, or retention is flat, more acquisition spend won't fix the underlying problem. It usually amplifies it."
+  problemSignals={[
+    "Signups are growing but activation rate is stuck or sliding.",
+    "Free-to-paid conversion lives in a 1-3% range and nobody knows why.",
+    "Onboarding is a tour, a checklist, or both — and most users don't finish either.",
+    "Retention drops sharply after week 2 or week 4 and the team is debating churn vs. activation.",
+    "Sales is stepping in to manually convert PLG leads, blurring the model."
+  ]}
+  rootCauses={[
+    "The activation event was set early in the company's life and no longer matches the buyer's actual moment of value.",
+    "Onboarding optimises for product completeness, not for one specific job-to-be-done that proves the value.",
+    "Retention is treated as a churn problem when it's actually an activation-quality problem upstream."
+  ]}
+  diagnoseSteps={[
+    "Define the real activation event with the product and CS teams — not the dashboard's default \"signed in 3 times\" placeholder.",
+    "Cohort the funnel: signup → activation → first paid signal → 30-day retention. Look for the steep cliff.",
+    "Watch 5-10 user sessions of new signups (Hotjar, FullStory, or Maze) to see where attention drops.",
+    "Run 3-5 customer interviews specifically with users who activated AND converted — what was the moment that made it worth paying for.",
+    "Score the constraint: activation timing, trial length, onboarding path, value proof, or pricing — pick the one that actually moves the needle."
+  ]}
+  fixActions={[
+    "Rewrite the activation definition to match the moment of real value, not first login.",
+    "Cut onboarding to the shortest path that gets a user to that moment — usually 30-60% shorter than the current flow.",
+    "Insert one explicit \"value moment\" in the trial that mirrors the use case the user signed up for.",
+    "Build a 4-6 week lifecycle sequence keyed to the new activation, not based on time-since-signup.",
+    "Set the conversion-to-paid trigger off behaviour (value events) instead of trial expiry."
+  ]}
+  deliverables={[
+    "Activation event definition + dashboard view",
+    "Onboarding flow rewrite — new path with copy + UX briefs",
+    "Lifecycle sequence keyed to value events (4-6 weeks)",
+    "Trial-to-paid conversion experiment backlog",
+    "Cohort retention dashboard the team can read weekly",
+    "Handoff doc connecting product, marketing, and CS on the new model"
+  ]}
+  miniCase={{
+    sector: "AI HealthTech · post-launch",
+    problem: "App downloads were healthy but D7 retention was 14% and the team was about to spend on more acquisition. Activation was defined as \"opened the app twice\" — useless signal.",
+    action: "Redefined activation around the user's first symptom log + insight; rewrote onboarding to guide to that in under 90 seconds; built a 14-day lifecycle sequence keyed to behaviour.",
+    result: "App downloads went from 2k to 12k+/month over 6 months and D7 retention improved enough that paid CAC paid back inside 60 days."
+  }}
+  whoFor={[
+    "Post-launch AI or B2B SaaS products with traffic but flat activation or conversion.",
+    "Teams that need a clean line from acquisition to activation to revenue before another spend cycle.",
+    "Founders who want a PLG motion that actually works, not a sales motion bolted onto a freemium product."
+  ]}
+  commonMistakes={[
+    "Treating churn as a CS problem when it's really an activation-quality problem.",
+    "Adding gamification (badges, streaks) to onboarding instead of removing steps.",
+    "Sales chasing PLG-qualified leads manually before the activation pattern is understood.",
+    "Optimising free-to-paid conversion before activation is fixed — you'll just convert less."
+  ]}
+  faqs={[
+    { q: "Do you replace the product team?", a: "No. I work alongside product and CS — the system needs people who own onboarding flow and lifecycle to ship the changes. I diagnose, design, and direct, not build the UI." },
+    { q: "What if we have both PLG and sales-led motions?", a: "Common in mid-stage SaaS. The fix is to be explicit about which user pattern goes which way, not to merge them." },
+    { q: "How long until activation moves?", a: "Most teams see meaningful signal in the first 30 days because the activation redefinition itself moves the metric — and then real lift in 60-90 days as the new flow ships." },
+    { q: "Is this just CRO?", a: "No. CRO optimises a button. PLG fixes the model — what value the user gets, when they get it, and how the system proves it before pay." }
+  ]}
+/>

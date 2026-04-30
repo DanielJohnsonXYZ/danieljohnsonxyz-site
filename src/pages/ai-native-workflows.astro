@@ -1,31 +1,70 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { ctas } from "../site";
+import ExpertisePage from "../components/ExpertisePage.astro";
 ---
 
-<BaseLayout
-  title="AI-Native Workflows for GTM Teams | Daniel Johnson"
-  description="AI-native GTM workflows for research, messaging, campaign briefs, content, enrichment, reporting, and faster experimentation."
+<ExpertisePage
+  metaTitle="AI-Native GTM Workflows for Founders | Daniel Johnson"
+  metaDescription="Practical AI-native workflows for go-to-market: research, messaging, briefs, reporting, and faster iteration for AI and B2B SaaS founders."
   path="/ai-native-workflows"
->
-  <section class="hero-section section-space">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-6">
-        <span class="service-label">AI-Native Workflows</span>
-        <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">Use AI to compress the slow parts of GTM.</h1>
-        <p class="hero-subcopy text-xl leading-9 md:text-2xl">Competitor teardown, ICP pain mining, messaging generation, campaign briefs, content workflows, enrichment, and reporting, with senior judgement deciding what gets used.</p>
-        <div class="flex flex-wrap gap-3">
-          <a class="button-accent" href={ctas.primary.href}>{ctas.primary.label} →</a>
-          <a class="button-link" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section-space pt-0">
-    <div class="shell grid gap-5 md:grid-cols-3">
-      <article class="card p-6"><h2 class="text-2xl font-bold">Outputs</h2><p class="mt-3 text-[color:var(--muted)]">Workflow map, prompt patterns, approval rules, campaign briefs, and repeatable research/reporting systems.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">Best For</h2><p class="mt-3 text-[color:var(--muted)]">Teams that want practical speed without handing strategy or final judgement to tools.</p></article>
-      <article class="card p-6"><h2 class="text-2xl font-bold">What Changes</h2><p class="mt-3 text-[color:var(--muted)]">The team ships faster because the manual research and drafting burden drops.</p></article>
-    </div>
-  </section>
-</BaseLayout>
+  eyebrow="AI-native workflows"
+  title="AI-native workflows"
+  headline="Use AI to make sharper commercial decisions, faster."
+  subhead="Most teams use AI to write more bad content. The useful play is faster synthesis: customer calls, competitor pages, and CRM data turned into the raw material for better tests and better decisions."
+  problemSignals={[
+    "The team uses ChatGPT and Claude but the output rarely changes a real growth decision.",
+    "AI-generated content lands on the blog and on LinkedIn but nobody can point to its commercial impact.",
+    "Customer-call transcripts pile up unread because there's no system to extract insight from them.",
+    "Competitor analysis takes 2 weeks per cycle and is out of date by the time it's read.",
+    "Reporting summaries are still hand-written and most of the team skips reading them."
+  ]}
+  rootCauses={[
+    "AI is being used as a content factory, not as a synthesis engine — the wrong layer of the workflow.",
+    "There's no clean source data (call recordings, structured CRM, competitor pages) for AI to operate on, so output is generic.",
+    "No human-in-the-loop discipline: AI drafts go out without a senior operator filtering for what actually matters."
+  ]}
+  diagnoseSteps={[
+    "Audit the team's current AI usage: where it's used, what output it produces, what decisions it changed.",
+    "Look at the source data: are call recordings transcribed, are competitor pages tracked, is CRM clean enough to feed an LLM.",
+    "Find the three highest-frequency, lowest-leverage manual tasks the team currently does and assess if AI synthesis would shrink them by 5x or more.",
+    "Test one workflow end-to-end with the team: input → AI synthesis → human decision → commercial output. Measure time saved.",
+    "Decide which 3-5 workflows are worth building permanently and which are noise."
+  ]}
+  fixActions={[
+    "Set up systematic call-recording → transcript → AI message-bank synthesis. Output: a living messaging doc the marketing team uses for every brief.",
+    "Build a competitor-watch loop: weekly scrape → AI diff summary → 5-minute team digest. Output: positioning gaps and counter-moves.",
+    "Build the AI-assisted weekly readout: pull dashboards, summarise the week's signal, propose stop / scale / fix calls — human verifies, ships.",
+    "Use AI to ICE-score new experiment hypotheses against historical learnings, so the team stops re-running dead tests.",
+    "Train the team on prompt patterns that work for synthesis (not generation) — typically 1-2 sessions plus a shared prompt library."
+  ]}
+  deliverables={[
+    "AI-assisted message bank, refreshed monthly from customer calls",
+    "Weekly competitor digest (5-minute read)",
+    "AI-assisted weekly growth readout the team actually reads",
+    "Hypothesis-vs-history scoring template",
+    "Shared prompt library scoped to the team's actual workflows",
+    "30-60-day rollout plan for additional AI workflows"
+  ]}
+  miniCase={{
+    sector: "AI HealthTech · marketing function from zero",
+    problem: "Founder/CEO was creating content herself, managing agency relationships ad hoc, and running outbound from her personal account. No system for turning customer insight into messaging.",
+    action: "Built an AI-native synthesis loop: call recordings → message bank → landing-page tests. Plus AI-assisted research for a 100-podcast outreach programme with personalised pitches.",
+    result: "First structured marketing operation in the company's history. 100-podcast outreach delivered with personalised, not templated, pitches. CEO stepped out of day-to-day messaging."
+  }}
+  whoFor={[
+    "Post-PMF founders who use AI casually but want it embedded in the GTM operating system.",
+    "Lean teams (1-3 marketers) where AI synthesis is the difference between shipping and stalling.",
+    "Operators who want senior judgement on which AI workflows are worth building, not another AI tool review."
+  ]}
+  commonMistakes={[
+    "Treating AI as a content factory and measuring its impact in volume of output, not commercial outcome.",
+    "Buying five AI tools before deciding which two workflows actually matter.",
+    "Skipping the human-in-the-loop step — AI drafts go out unfiltered, brand quality drops, results suffer.",
+    "Trying to automate the entire funnel before fixing the source data (calls, CRM, analytics)."
+  ]}
+  faqs={[
+    { q: "Will AI replace my marketing team?", a: "No. It changes what good marketers do. The leverage moves from drafting to synthesis and judgement — fewer people, sharper decisions, more output per head." },
+    { q: "Which AI tools do you use?", a: "Tool-agnostic. The workflow matters more than the tool. Most engagements use Claude, ChatGPT, and a couple of API-level integrations — but tool choice depends on the team's stack." },
+    { q: "Is this the same as agentic AI?", a: "Adjacent. Agentic AI runs multi-step tasks autonomously; AI-native workflows are still human-in-the-loop, but synthesis-first. Most B2B teams aren't ready for full agentic yet — start with synthesis." },
+    { q: "Can the team learn this without consulting?", a: "Yes — but it usually takes 6-12 months of trial and error. The faster path is one focused setup of 3-5 workflows plus a training session, then the team takes over." }
+  ]}
+/>
