@@ -182,24 +182,25 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
 
 <style>
   /* Image-augmented dropdown — sits to the LEFT of the link list. */
+  /* v2 — !important on critical box-model so old cached CSS bundle cannot win the cascade. */
   .site-nav-dropdown-with-image {
-    display: grid;
-    grid-template-columns: 240px 1fr;
+    display: grid !important;
+    grid-template-columns: 240px 1fr !important;
     gap: 0;
     padding: 0;
     overflow: hidden;
-    width: min(540px, 88vw);
-    /* Hide by default — shown only when parent .site-nav-menu is hovered or focused. */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    width: min(540px, 88vw) !important;
+    min-width: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
     transition: opacity 140ms ease, visibility 140ms ease;
   }
   .site-nav-menu:hover .site-nav-dropdown-with-image,
   .site-nav-menu:focus-within .site-nav-dropdown-with-image {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
   /* Right-align the rightmost two dropdowns so they do not bleed off-screen. */
   .site-nav-menu:nth-last-of-type(-n+2) .site-nav-dropdown-with-image {
