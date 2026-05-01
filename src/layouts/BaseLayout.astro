@@ -1,4 +1,5 @@
 ---
+import EasterEgg from "../components/EasterEgg.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import StickyCta from "../components/StickyCta.astro";
@@ -184,6 +185,7 @@ document.addEventListener('click', (event) => {
 
     <StickyCta enabled={stickyCta} />
 
+    <EasterEgg />
     <script is:inline set:html={revealScript}></script>
   </body>
 </html>
