@@ -184,11 +184,27 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
   /* Image-augmented dropdown — sits to the LEFT of the link list. */
   .site-nav-dropdown-with-image {
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 240px 1fr;
     gap: 0;
     padding: 0;
     overflow: hidden;
-    min-width: min(720px, 90vw);
+    width: min(540px, 88vw);
+    /* Hide by default — shown only when parent .site-nav-menu is hovered or focused. */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 140ms ease, visibility 140ms ease;
+  }
+  .site-nav-menu:hover .site-nav-dropdown-with-image,
+  .site-nav-menu:focus-within .site-nav-dropdown-with-image {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  /* Right-align the rightmost two dropdowns so they do not bleed off-screen. */
+  .site-nav-menu:nth-last-of-type(-n+2) .site-nav-dropdown-with-image {
+    right: 0;
+    left: auto;
   }
 
   .site-nav-dropdown-image {
@@ -202,7 +218,7 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
   .site-nav-dropdown-image img {
     display: block;
     width: 100%;
-    height: 220px;
+    height: 165px;
     object-fit: cover;
   }
   .site-nav-dropdown-image-copy {

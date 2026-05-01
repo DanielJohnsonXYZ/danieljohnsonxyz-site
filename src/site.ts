@@ -362,14 +362,14 @@ export const roiFrames = [
 // ──────────────────────────────────────────────────────────────────────────
 export const trustLogos = [
   { id: "growthmentor", src: "/images/logos/growthmentor.png", alt: "GrowthMentor — Top-Rated Mentor", label: "GrowthMentor" },
-  { id: "google", src: "/images/logos/google.webp", alt: "Google for Startups — Growth Mentor", label: "Google for Startups" },
-  { id: "cambridge", src: "/images/logos/cambridge.webp", alt: "University of Cambridge — Visiting Lecturer", label: "Cambridge" }
+  { id: "cambridge-judge", src: "/images/cambridge-judge-business-school-640.webp", alt: "Cambridge Judge Business School — Guest Lecturer", label: "Cambridge Judge" },
+  { id: "imperial", src: "/images/logos/imperial.png", alt: "Imperial College London — Guest Lecturer", label: "Imperial" },
+  { id: "techstars", src: "/images/logos/techstars.png", alt: "Techstars — Mentor", label: "Techstars" },
+  { id: "general-assembly", src: "/images/logos/general-assembly.png", alt: "General Assembly — Trainer", label: "General Assembly" }
 ] as const;
 
 export const trustAffiliations = [
-  "Techstars mentor",
-  "Imperial College London guest lecturer",
-  "General Assembly trainer",
+  "Google for Startups mentor",
   "UK Space Agency innovation talk"
 ] as const;
 
