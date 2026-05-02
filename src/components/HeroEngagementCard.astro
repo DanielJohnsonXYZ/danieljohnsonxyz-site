@@ -7,6 +7,7 @@
 // Designed to be elegant and quiet — three rows, no images, no animation.
 // On mobile the card stacks under the photo. On desktop it sits beneath
 // a small portrait so the right column reads: face → ways to work.
+import { proofStats, siteConfig } from "../site";
 ---
 
 <aside class="hero-engagement-card" aria-label="Ways to work with Daniel">
@@ -52,6 +53,21 @@
     <span class="hec-foot-label">Not sure which fits?</span>
     <a class="hec-foot-link" href="#growth-diagnosis">Try the 2-minute diagnosis →</a>
   </footer>
+
+  <div class="hec-wss" aria-label="We Scale Startups consultancy">
+    <p class="hec-wss-eyebrow">Consultancy · {siteConfig.companyName}</p>
+    <p class="hec-wss-copy">
+      Team-facing engagements: diagnosis, sprints, acquisition system builds, and fractional leadership —{" "}
+      <a class="hec-wss-link" href={`${siteConfig.companyUrl}/start-here`} rel="noopener noreferrer" target="_blank" data-cta="hero-wss-start-here">
+        start on the WSS guided path →
+      </a>
+    </p>
+    <p class="hec-wss-stats">
+      <span><strong>{proofStats.adSpend}</strong> paid spend managed</span>
+      <span aria-hidden="true">·</span>
+      <span><strong>{proofStats.startupsAdvised}</strong> startups advised</span>
+    </p>
+  </div>
 </aside>
 
 <style>
@@ -167,5 +183,47 @@
   .hec-foot-link:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
+  }
+
+  .hec-wss {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .hec-wss-eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hec-wss-copy {
+    margin: 0 0 0.5rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .hec-wss-link {
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .hec-wss-link:hover {
+    opacity: 0.9;
+  }
+  .hec-wss-stats {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+  }
+  .hec-wss-stats strong {
+    color: var(--ink);
+    font-weight: 700;
   }
 </style>
