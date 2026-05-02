@@ -37,7 +37,8 @@ export const siteConfig = {
   youtube: "https://www.youtube.com/@danieljohnson6000",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
-  gtmId: "GTM-TV6C7GS",
+  /** Must match the GTM container for danieljohnson.xyz in Tag Manager */
+  gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.png",
   headshot: "/images/daniel-hero-cutout.webp",
