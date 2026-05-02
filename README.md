@@ -23,4 +23,4 @@ npm run preview
 - Build output is static in `dist/`
 - A sample host config is included at `ops/Caddyfile.example`
 - `danieljohnsonx.xyz` should 301 redirect to `danieljohnson.xyz`
-- Current booking CTA points to `https://calendly.com/wescalestartups`
+- Current booking CTA points to `https://calendly.com/danieljohnson`

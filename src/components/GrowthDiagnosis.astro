@@ -19,6 +19,15 @@ import { ctas } from "../site";
 
 type LeverKey = "pipeline" | "conversion" | "messaging" | "founder" | "spend";
 
+interface ResultCopy {
+  title: string;
+  body: string;
+  recommendation: string;
+  /** Contextual next step before the booking CTA (Growth Hub: route by bottleneck). */
+  nextHref: string;
+  nextLabel: string;
+}
+
 interface Question {
   id: string;
   prompt: string;
@@ -79,41 +88,51 @@ const questions: Question[] = [
 ];
 
 // Result copy — what the user gets back, tied to the diagnosed lever.
-const results: Record<LeverKey, { title: string; body: string; recommendation: string }> = {
+const results: Record<LeverKey, ResultCopy> = {
   pipeline: {
     title: "Your bottleneck is pipeline.",
     body:
       "You have a product people buy, but no repeatable system creating qualified conversations each month. The growth number depends on what your team manually chases.",
     recommendation:
-      "Build a pipeline engine — ICP + offer + two or three channels instrumented end-to-end. Prioritise the one channel with the best attach rate to your ICP, systemise it, then layer the next."
+      "Build a pipeline engine — ICP + offer + two or three channels instrumented end-to-end. Prioritise the one channel with the best attach rate to your ICP, systemise it, then layer the next.",
+    nextHref: "/gtm-systems/",
+    nextLabel: "See how GTM systems build pipeline"
   },
   conversion: {
     title: "Your bottleneck is conversion.",
     body:
       "Traffic is arriving, demos are being booked, trials are starting — but the funnel is leaking between steps. The acquisition cost looks fine until you trace revenue backwards.",
     recommendation:
-      "Instrument each funnel step, isolate the two worst-performing transitions, and design a focused experiment programme against them. Messaging and onboarding usually move the needle first."
+      "Instrument each funnel step, isolate the two worst-performing transitions, and design a focused experiment programme against them. Messaging and onboarding usually move the needle first.",
+    nextHref: "/experimentation/",
+    nextLabel: "See the experimentation playbook"
   },
   messaging: {
     title: "Your bottleneck is messaging.",
     body:
       "The product is real, the market exists, but the website and sales calls aren't telling the same story. Founders who close well on calls often have a site that doesn't.",
     recommendation:
-      "Rerun the ICP and positioning work — one sentence on who it's for, one sentence on the category, one sentence on what replaces. Then rewrite the homepage, demo deck, and top-of-funnel ads to match."
+      "Rerun the ICP and positioning work — one sentence on who it's for, one sentence on the category, one sentence on what replaces. Then rewrite the homepage, demo deck, and top-of-funnel ads to match.",
+    nextHref: "/gtm-systems/",
+    nextLabel: "See ICP & positioning work"
   },
   founder: {
     title: "Your bottleneck is founder-led sales.",
     body:
       "Revenue grows in proportion to the founder's calendar. It's working — which is why it's dangerous. The second you're not in every conversation, close rates fall off a cliff.",
     recommendation:
-      "Document the founder's sales motion, then systemise it. SDR or AE handoff, a repeatable demo structure, a CRM cadence that doesn't require the founder to be the closer. Start with what converts, not what's new."
+      "Document the founder's sales motion, then systemise it. SDR or AE handoff, a repeatable demo structure, a CRM cadence that doesn't require the founder to be the closer. Start with what converts, not what's new.",
+    nextHref: "/strategy-sprint/",
+    nextLabel: "See the Strategy Sprint"
   },
   spend: {
     title: "Your bottleneck is spend efficiency.",
     body:
       "Paid channels are running, dashboards are green, but nobody on the team can tell you CAC payback by segment. You're either over-spending on the wrong ICP or under-investing in the one that works.",
     recommendation:
-      "Rebuild attribution from first principles — channel, ICP, cohort, payback. Cut the bottom half of spend, reinvest in the top-performing slice, and only scale once payback is predictable."
+      "Rebuild attribution from first principles — channel, ICP, cohort, payback. Cut the bottom half of spend, reinvest in the top-performing slice, and only scale once payback is predictable.",
+    nextHref: "/growth-audit/",
+    nextLabel: "Read how the Growth Audit works"
   }
 };
 
@@ -193,13 +212,19 @@ const resultsJson = JSON.stringify(results);
         <p class="mt-3 text-base leading-8" data-gd-result-reco></p>
       </div>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a class="button-accent" href={ctas.primary.href} data-cta="diagnosis-primary" data-gd-cta>
+        <a class="button-accent" href="/gtm-systems/" data-cta="diagnosis-next-step" data-gd-next-step>
+          Next step →
+        </a>
+        <a class="button-secondary" href={ctas.primary.href} data-cta="diagnosis-primary" data-gd-cta>
           {ctas.primary.label} →
         </a>
         <button type="button" class="button-link" data-gd-restart>
           Retake the diagnosis
         </button>
       </div>
+      <p class="mt-2 text-xs text-[color:var(--muted)]">
+        <a class="underline underline-offset-2" href="/newsletter/">Get Growth Notes</a> — one more way to follow the system thinking without booking.
+      </p>
       <p class="mt-4 text-xs text-[color:var(--muted)]">
         No data stored. Your answers never leave your browser.
       </p>
@@ -272,6 +297,13 @@ const resultsJson = JSON.stringify(results);
       if (titleEl) titleEl.textContent = out.title;
       if (bodyEl) bodyEl.textContent = out.body;
       if (recoEl) recoEl.textContent = out.recommendation;
+
+      const nextLink = root.querySelector("[data-gd-next-step]");
+      if (nextLink && out.nextHref && out.nextLabel) {
+        nextLink.setAttribute("href", out.nextHref);
+        nextLink.textContent = out.nextLabel + " →";
+        nextLink.setAttribute("data-cta", "diagnosis-next-" + winner);
+      }
 
       // Append lever to CTA analytics attribute so GTM can read which branch
       // the user saw when they clicked through.

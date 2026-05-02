@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { ctas, siteConfig, whyDaniel } from "../site";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Compare growth options", url: "/compare-growth-options/" }
+]);
+---
+
+<BaseLayout
+  description="Compare agency, freelancer, junior marketer, full-time CMO, consultant, and fractional CMO — typical cost, who owns the work, and the failure mode for post-PMF B2B SaaS and AI startups."
+  path="/compare-growth-options/"
+  schema={schema}
+  title="Compare your growth options | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">Compare · six ways to get GTM help</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          Agency, freelancer, full-time CMO, consultant, junior hire — or fractional CMO.
+        </h1>
+        <p class="hero-subcopy text-lg leading-8 md:text-xl">
+          The same surface symptom (flat pipeline, noisy metrics, founder bottleneck) can point to six different
+          organisational fixes. This table is the honest map of trade-offs — then the{" "}
+          <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href="/fractional-cmo-vs-agency/"
+            >vs. agency</a>{" "}
+          and{" "}
+          <a
+            class="font-semibold text-[color:var(--ink)] underline underline-offset-4"
+            href="/fractional-cmo-vs-full-time-cmo/">vs. full-time CMO</a>{" "}
+          pages go deeper on the two closest options.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="compare-hero-book">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-secondary" href="/fractional-cmo/">See fractional CMO scope</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Six options"
+        intro="Typical cost bands are indicative — the structural difference is who owns judgement versus execution."
+        title="Where each option works — and where it breaks."
+      />
+      <div class="mt-8 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
+        <table class="w-full min-w-[820px] text-left text-sm">
+          <thead class="bg-[color:var(--surface-dim)]">
+            <tr>
+              <th class="p-4">Option</th>
+              <th class="p-4">Typical cost</th>
+              <th class="p-4">Who owns it</th>
+              <th class="p-4">The problem</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              whyDaniel.map((row) => (
+                <tr class:list={["border-t border-[color:var(--line)]", row.highlight && "bg-[color:var(--surface-dim)]"]}>
+                  <td class:list={["p-4 align-top leading-6 font-bold text-[color:var(--ink)]"]}>{row.option}</td>
+                  <td class="p-4 align-top leading-6 text-[color:var(--muted)]">{row.cost}</td>
+                  <td class="p-4 align-top leading-6 text-[color:var(--muted)]">{row.owner}</td>
+                  <td class="p-4 align-top leading-6 text-[color:var(--muted)]">{row.problem}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="reveal mt-8 text-center text-sm leading-7 text-[color:var(--muted)]">
+        Prefer the full commercial offer, pricing, and booking flow? Continue on the{" "}
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href="/fractional-cmo/"
+          >fractional CMO page</a>{" "}
+        — this comparison is excerpted from the same decision framework.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-2xl rounded-[1.5rem] border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-8 text-center">
+        <p class="card-label">Next step</p>
+        <h2 class="mt-3 text-2xl font-extrabold tracking-[-0.04em]">Still unsure which bucket you’re in?</h2>
+        <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{siteConfig.bookingNote}</p>
+        <a class="button-accent mt-6 inline-flex" href={ctas.primary.href} data-cta="compare-final-book">
+          {ctas.primary.label} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

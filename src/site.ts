@@ -11,7 +11,7 @@ export const siteConfig = {
 
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
-  bookingUrl: "https://calendly.com/wescalestartups",
+  bookingUrl: "https://calendly.com/danieljohnson",
   bookingLabel: "Book a 30-min Growth Audit",
   bookingNote:
     "30 minutes. No pitch. We diagnose your biggest growth bottleneck and decide whether it makes sense to work together.",
@@ -37,7 +37,7 @@ export const siteConfig = {
   youtube: "https://www.youtube.com/@danieljohnson6000",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
-  gtmId: "GTM-5S892HK",
+  gtmId: "GTM-TV6C7GS",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.png",
   headshot: "/images/daniel-hero-cutout.webp",
@@ -143,6 +143,12 @@ export const ctas = {
     href: siteConfig.bookingUrl,
     hint: "Free · 30 minutes · No pitch"
   },
+  /** Mid-page / method sections — same destination, varied copy (Growth Hub CTA ladder). */
+  methodDeepDive: {
+    label: "Talk through your growth system in 30 minutes",
+    href: siteConfig.bookingUrl,
+    hint: "Free · 30 minutes · No pitch"
+  },
   caseStudies: {
     label: "View case studies",
     href: "/case-studies/",
@@ -157,6 +163,11 @@ export const ctas = {
     label: "Start here",
     href: "/start-here/",
     hint: "5-minute orientation"
+  },
+  growthNote: {
+    label: "Get the Growth Notes newsletter",
+    href: "/newsletter/",
+    hint: "Occasional, no fluff"
   }
 } as const;
 
@@ -188,7 +199,7 @@ export const navigationGroups = [
     items: [
       { href: "/fractional-cmo-vs-agency/", label: "Fractional CMO vs. agency", description: "Senior judgement vs. junior execution. When each is right." },
       { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO", description: "Cost, ramp, ownership, and notice-period maths." },
-      { href: "/fractional-cmo/#why-daniel", label: "All six options compared", description: "Agency, freelancer, junior, full-time, consultant, fractional CMO." }
+      { href: "/compare-growth-options/", label: "All six options compared", description: "Agency, freelancer, junior, full-time, consultant, fractional CMO." }
     ]
   },
   {
@@ -232,6 +243,7 @@ export const footerNavigation = {
     { href: "/revenue-operations/", label: "Revenue operations" }
   ],
   more: [
+    { href: "/compare-growth-options/", label: "Compare six growth options" },
     { href: "/fractional-cmo-vs-agency/", label: "vs. Agency" },
     { href: "/fractional-cmo-vs-full-time-cmo/", label: "vs. Full-time CMO" },
     { href: "/case-studies/", label: "Case studies" },

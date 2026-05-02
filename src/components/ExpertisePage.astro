@@ -43,9 +43,14 @@ interface Props {
   commonMistakes: string[];
   faqs: FAQ[];
   ogImage?: string;
+  /** Override default booking CTA copy (Growth Hub: contextual CTAs per expertise page). */
+  bookCtaLabel?: string;
+  bookCtaHref?: string;
 }
 
 const props = Astro.props as Props;
+const bookLabel = props.bookCtaLabel ?? ctas.primary.label;
+const bookHref = props.bookCtaHref ?? ctas.primary.href;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -76,8 +81,8 @@ const faqSchema = {
           {props.subhead}
         </p>
         <div class="flex flex-wrap gap-3">
-          <a class="button-accent" href={ctas.primary.href} data-cta={`${props.eyebrow}-hero-book`}>
-            {ctas.primary.label} →
+          <a class="button-accent" href={bookHref} data-cta={`${props.eyebrow}-hero-book`}>
+            {bookLabel} →
           </a>
           <a class="button-link" href={ctas.bottleneck.href} data-cta={`${props.eyebrow}-hero-bottleneck`}>
             {ctas.bottleneck.label} →
@@ -239,8 +244,8 @@ const faqSchema = {
           Bring the current state of your {props.eyebrow.toLowerCase()}. We'll diagnose the constraint and decide if working together makes sense — or where else to go if it doesn't.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={ctas.primary.href} data-cta={`${props.eyebrow}-final-book`}>
-            {ctas.primary.label} →
+          <a class="button-accent" href={bookHref} data-cta={`${props.eyebrow}-final-book`}>
+            {bookLabel} →
           </a>
           <a class="button-link-invert" href={ctas.caseStudies.href} data-cta={`${props.eyebrow}-final-cases`}>
             {ctas.caseStudies.label} →
