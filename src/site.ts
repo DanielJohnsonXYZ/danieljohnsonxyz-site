@@ -7,7 +7,7 @@ export const siteConfig = {
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
-  lastUpdated: "30 April 2026",
+  lastUpdated: "2 May 2026",
 
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
@@ -782,3 +782,26 @@ export const principleCards = [
     body: "The real unlock is usually sharper positioning, cleaner decision-making, and a team that knows what to test next."
   }
 ] as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// Mautic — Growth Notes signup (replaces Listmonk). Set real values in
+// Cloudflare Pages → Environment variables, or edit the fallbacks below.
+// PUBLIC_MAUTIC_BASE_URL — no trailing slash, e.g. https://comms.wescalestartups.com
+// PUBLIC_MAUTIC_NEWSLETTER_FORM_ID — numeric id from Mautic → Forms
+// CONFIRM before relying on production: default formId below is a placeholder; match
+// the real form in Mautic and set env per Pages project (DJ vs WSS may differ).
+// ──────────────────────────────────────────────────────────────────────────
+const mauticBaseRaw =
+  (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||
+  "https://comms.wescalestartups.com";
+const mauticBase = mauticBaseRaw.replace(/\/$/, "");
+const mauticNewsletterFormId =
+  (typeof import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID === "string" &&
+    import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID.trim()) ||
+  "2";
+
+export const mauticNewsletter = {
+  baseUrl: mauticBase,
+  formId: mauticNewsletterFormId,
+  submitUrl: `${mauticBase}/form/submit/${mauticNewsletterFormId}`
+} as const;

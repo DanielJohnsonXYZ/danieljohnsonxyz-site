@@ -11,6 +11,8 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  /** Optional discoverability meta for hub and money pages. */
+  keywords?: string;
   path?: string;
   ogImage?: string;
   ogType?: "website" | "article";
@@ -27,6 +29,7 @@ interface Props {
 const {
   title = siteConfig.title,
   description = siteConfig.description,
+  keywords,
   path = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
   ogType = "website",
@@ -100,6 +103,7 @@ document.addEventListener('click', (event) => {
     <meta name="theme-color" content="#0b0b0c" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="author" content={siteConfig.name} />
     <link rel="canonical" href={canonical} />

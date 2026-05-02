@@ -153,6 +153,7 @@ danieljohnson.xyz documents Daniel's working approach, the frameworks he uses wi
 - [Fractional CMO](${siteConfig.siteUrl}/fractional-cmo/): Tier 3 — embedded, £7.5–12k/month
 - [Fractional CMO vs. Agency](${siteConfig.siteUrl}/fractional-cmo-vs-agency/): comparison page
 - [Fractional CMO vs. Full-time CMO](${siteConfig.siteUrl}/fractional-cmo-vs-full-time-cmo/): comparison page
+- [Compare six growth options](${siteConfig.siteUrl}/compare-growth-options/): agency, freelancer, junior hire, full-time CMO, consultant, fractional CMO — when each is the right shape
 - [Case studies](${siteConfig.siteUrl}/case-studies/): anonymised engagement write-ups with bottleneck, approach, and outcome
 - [Testimonials](${siteConfig.siteUrl}/testimonials/): founder, mentoring, and client feedback filtered by engagement type
 - [About](${siteConfig.siteUrl}/about/): background, operating history, and why founders trust Daniel
@@ -215,7 +216,7 @@ If quoting an article, link to the canonical URL on danieljohnson.xyz and attrib
 - [RSS feed](${siteConfig.siteUrl}/rss.xml)
 - [robots.txt](${siteConfig.siteUrl}/robots.txt)
 
-Last updated: ${new Date().toISOString().slice(0, 10)}
+Last updated: ${siteConfig.lastUpdated}
 `;
 
   return new Response(body, {

@@ -117,8 +117,8 @@ const comingNext = [
         }
       </div>
 
-      <!-- "Coming next" placeholders so the page doesn't look thin at one live case study. -->
-      {caseStudies.length < 3 && (
+      <!-- Placeholders only when there are no live case studies yet. -->
+      {caseStudies.length === 0 && (
         <div class="mt-10">
           <p class="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Publishing next</p>
           <div class="grid gap-5 lg:grid-cols-2">

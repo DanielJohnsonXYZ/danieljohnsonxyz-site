@@ -1,8 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { ctas, siteConfig } from "../site";
-
-const subscribeUrl = "https://listmonk.wescalestartups.com/subscription/form";
+import NewsletterFormInline from "../components/NewsletterFormInline.astro";
+import { ctas } from "../site";
 
 const notes = [
   "How to decide whether your bottleneck is ICP, channel, conversion, or cadence.",
@@ -30,9 +29,7 @@ const notes = [
             growth theatre exercises.
           </p>
           <div class="cta-cluster">
-            <a class="button-accent" href={subscribeUrl}>
-              Subscribe to Growth Notes →
-            </a>
+            <a class="button-accent" href="#newsletter-signup">Subscribe to Growth Notes →</a>
             <a class="button-link" href="/writing/">Read recent essays →</a>
           </div>
         </div>
@@ -41,10 +38,13 @@ const notes = [
           <ul class="mt-5 space-y-4 text-base leading-8 text-[color:var(--muted)]">
             {notes.map((note) => <li class="fit-row fit-row-yes">{note}</li>)}
           </ul>
-          <div class="mt-6 rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-4">
-            <p class="text-sm leading-6 text-[color:var(--muted)]">
-              No daily drip sequence. No recycled LinkedIn thread pretending to be strategy.
-            </p>
+          <div class="mt-6 space-y-4">
+            <NewsletterFormInline
+              variant="card"
+              anchorId="newsletter-signup"
+              heading="Subscribe here"
+              subline="No daily drip sequence. No recycled LinkedIn thread pretending to be strategy."
+            />
           </div>
         </aside>
       </div>

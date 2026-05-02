@@ -1,36 +1,36 @@
 ---
-// NewsletterFormInline.astro
-// Inline newsletter capture form embedded directly on pages (homepage strip,
-// writing index, end of articles, footer). No external link — the form posts
-// to Listmonk directly.
+// NewsletterFormInline.astro — inline Growth Notes capture; posts to Mautic.
 //
-// SETUP NOTE FOR DEV:
-//   1. Replace f056259b-fd4f-4eb0-bc43-bf661c7fc2b6 below with the real Listmonk list UUID.
-//      You can find it at: https://listmonk.wescalestartups.com/admin/lists
-//   2. The "nonce" hidden input gets populated by Listmonk via JS — leave empty.
-//   3. After successful submit, Listmonk redirects to its built-in thanks page.
-//      To redirect to a custom /newsletter/thanks page, append ?l=...&redirect_url=
+// Form id and base URL: src/site.ts → mauticNewsletter (env:
+// PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID).
 //
-// Variants: pass `variant` prop = "strip" (compact one-line) or "card" (full block).
-// Default: "strip".
+// Variants: `variant` = "strip" (compact) or "card" (full block).
+
+import { mauticNewsletter } from "../site";
 
 interface Props {
   variant?: "strip" | "card";
   heading?: string;
   subline?: string;
+  /** Set on pages with a hero link to #anchor (e.g. /newsletter). Omit when multiple forms on one page. */
+  anchorId?: string;
 }
 
 const {
   variant = "strip",
   heading = "Practical notes on founder-led growth, AI GTM, positioning, and pipeline systems.",
-  subline = "Occasional. No daily drip. Unsubscribe in one click."
+  subline = "Occasional. No daily drip. Unsubscribe in one click.",
+  anchorId
 } = Astro.props;
 
-const listmonkUrl = "https://listmonk.wescalestartups.com/subscription/form";
-const listUuid = "f056259b-fd4f-4eb0-bc43-bf661c7fc2b6"; // We Scale Startups Updates list
+const { submitUrl, formId } = mauticNewsletter;
 ---
 
-<section class:list={["nl-form", `nl-form-${variant}`]} aria-labelledby="nl-form-title">
+<section
+  {...(anchorId ? { id: anchorId } : {})}
+  class:list={["nl-form", `nl-form-${variant}`]}
+  aria-labelledby="nl-form-title"
+>
   <div class="nl-inner">
     <div class="nl-copy">
       <p class="nl-eyebrow">Growth Notes</p>
@@ -39,19 +39,19 @@ const listUuid = "f056259b-fd4f-4eb0-bc43-bf661c7fc2b6"; // We Scale Startups Up
     </div>
     <form
       class="nl-fields"
-      action={listmonkUrl}
+      action={submitUrl}
       method="post"
+      accept-charset="UTF-8"
       data-cta="newsletter-inline-submit"
     >
-      <input type="hidden" name="nonce" value="" />
-      <input type="hidden" name="l" value={listUuid} />
+      <input type="hidden" name="mauticform[formId]" value={formId} />
       <label class="nl-label" for="nl-email">
         <span class="sr-only">Email address</span>
         <input
           id="nl-email"
           class="nl-input"
           type="email"
-          name="email"
+          name="mauticform[email]"
           required
           placeholder="you@company.com"
           autocomplete="email"

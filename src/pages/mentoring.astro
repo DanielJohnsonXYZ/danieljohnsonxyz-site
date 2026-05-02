@@ -64,6 +64,7 @@ const faq = [
 
 <BaseLayout
   description="Mentoring sessions with Daniel Johnson for founders who need sharper GTM, customer, and growth decisions."
+  keywords="founder mentoring, GrowthMentor, startup GTM advice, office hours growth"
   path="/mentoring"
   schema={buildFaqPageSchema(faq)}
   title="Mentoring | Daniel Johnson"
@@ -90,8 +91,8 @@ const faq = [
           <h2 class="mt-4 text-3xl font-extrabold tracking-[-0.05em]">
             Founders who want sharper judgment, not a generic marketing checklist.
           </h2>
-          <ul class="mt-6 space-y-4">
-            {focusAreas.map((item) => <li class="flex gap-3 text-base leading-7 text-[color:var(--muted)]"><span class="text-[color:var(--accent)]">-&gt;</span>{item}</li>)}
+          <ul class="mt-6 list-disc space-y-3 pl-5 text-base leading-7 text-[color:var(--muted)] marker:text-[color:var(--accent)]">
+            {focusAreas.map((item) => <li class="pl-1">{item}</li>)}
           </ul>
         </article>
       </div>

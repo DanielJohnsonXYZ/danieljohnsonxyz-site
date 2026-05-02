@@ -22,7 +22,7 @@ const bios = [
   {
     label: "120-word bio",
     body:
-      `Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.\n\nHis work sits at the intersection of AI-native GTM, founder-led growth, product-led growth, positioning, and startup growth systems. Across ${proofStats.startupsAdvised} startups, his proof base includes ${proofStats.revenueImpact} in revenue impact, £6M+ in managed ad spend, and ${proofStats.mentorSessions} founder mentoring sessions.\n\nDaniel is available for podcasts, press quotes, panels, keynotes, workshops, and newsletter interviews on AI startups, B2B SaaS, founder-led growth, and repeatable GTM systems.`
+      `Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.\n\nHis work sits at the intersection of AI-native GTM, founder-led growth, product-led growth, positioning, and startup growth systems. Across ${proofStats.startupsAdvised} startups, his proof base includes ${proofStats.revenueImpact} in revenue impact, ${proofStats.adSpend} in managed ad spend, and ${proofStats.mentorSessions} founder mentoring sessions.\n\nDaniel is available for podcasts, press quotes, panels, keynotes, workshops, and newsletter interviews on AI startups, B2B SaaS, founder-led growth, and repeatable GTM systems.`
   }
 ];
 
@@ -140,7 +140,7 @@ const schema = buildBreadcrumbSchema([
       <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {[
           [proofStats.revenueImpact, "revenue impact"],
-          ["£6M+", "managed ad spend"],
+          [proofStats.adSpend, "managed ad spend"],
           [proofStats.startupsAdvised, "startups advised"],
           [proofStats.mentorSessions, "founder mentoring sessions"]
         ].map(([metric, label]) => (
