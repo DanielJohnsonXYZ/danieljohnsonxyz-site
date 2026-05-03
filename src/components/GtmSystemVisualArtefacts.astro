@@ -1,0 +1,327 @@
+---
+// Abstract, non-client-specific previews of GTM system artefacts (CSS-only).
+---
+<section class="section-space pt-0 gtm-artefacts-wrap" aria-labelledby="gtm-artefacts-heading">
+  <div class="shell">
+    <div class="reveal mx-auto max-w-5xl space-y-8">
+      <header class="max-w-3xl space-y-3">
+        <p class="card-label">System artefacts</p>
+        <h2 id="gtm-artefacts-heading" class="text-3xl font-bold tracking-[-0.04em] leading-[1.15] md:text-4xl">
+          What the operating system looks like in practice
+        </h2>
+        <p class="text-base leading-7 text-[color:var(--muted)]">
+          Stylised placeholders — not real client data — to show the shape of the docs, dashboards, and cadence you leave with.
+        </p>
+      </header>
+
+      <div class="gtm-artefacts-grid" role="list">
+        <article class="gtm-art gtm-art--doc" role="listitem" aria-label="ICP and positioning document preview">
+          <p class="gtm-art-label">ICP + positioning</p>
+          <div class="gtm-art-body gtm-blur-lines" aria-hidden="true">
+            <span class="gtm-line gtm-line-title" />
+            <span class="gtm-line" />
+            <span class="gtm-line gtm-line-short" />
+            <span class="gtm-line" />
+            <span class="gtm-line gtm-line-medium" />
+          </div>
+        </article>
+
+        <article class="gtm-art gtm-art--dash" role="listitem" aria-label="Growth dashboard preview">
+          <p class="gtm-art-label">Growth dashboard</p>
+          <div class="gtm-art-body" aria-hidden="true">
+            <div class="gtm-kpis">
+              <span class="gtm-kpi"><i />Pipeline</span>
+              <span class="gtm-kpi"><i />CAC</span>
+              <span class="gtm-kpi"><i />Conv.</span>
+            </div>
+            <div class="gtm-bars">
+              <i style="height: 42%" />
+              <i style="height: 68%" />
+              <i style="height: 55%" />
+              <i style="height: 88%" />
+              <i style="height: 36%" />
+            </div>
+          </div>
+        </article>
+
+        <article class="gtm-art gtm-art--backlog" role="listitem" aria-label="Experiment backlog preview">
+          <p class="gtm-art-label">Experiment backlog</p>
+          <div class="gtm-art-body" aria-hidden="true">
+            <div class="gtm-row"><span class="gtm-pill">Test</span><span class="gtm-row-text">Channel · Hypothesis A</span></div>
+            <div class="gtm-row"><span class="gtm-pill">Test</span><span class="gtm-row-text">Landing · Variant B</span></div>
+            <div class="gtm-row"><span class="gtm-pill gtm-pill--hold">Hold</span><span class="gtm-row-text">Lifecycle · Sequence C</span></div>
+          </div>
+        </article>
+
+        <article class="gtm-art gtm-art--cadence" role="listitem" aria-label="Weekly cadence preview">
+          <p class="gtm-art-label">Weekly cadence</p>
+          <div class="gtm-art-body gtm-week" aria-hidden="true">
+            <div class="gtm-day"><strong>Mon</strong><span>Read signal</span></div>
+            <div class="gtm-day"><strong>Wed</strong><span>Ship move</span></div>
+            <div class="gtm-day"><strong>Fri</strong><span>Scale / stop / fix</span></div>
+          </div>
+        </article>
+
+        <article class="gtm-art gtm-art--map" role="listitem" aria-label="Channel decision map preview">
+          <p class="gtm-art-label">Channel map</p>
+          <div class="gtm-art-body gtm-map" aria-hidden="true">
+            <span class="gtm-node">Paid</span>
+            <span class="gtm-connector" />
+            <span class="gtm-node">Content</span>
+            <span class="gtm-connector gtm-connector--down" />
+            <span class="gtm-node gtm-node--wide">Pipeline</span>
+          </div>
+        </article>
+
+        <article class="gtm-art gtm-art--report" role="listitem" aria-label="Reporting framework preview">
+          <p class="gtm-art-label">Reporting</p>
+          <div class="gtm-art-body" aria-hidden="true">
+            <div class="gtm-table">
+              <div class="gtm-th"><span>Metric</span><span>Wk</span><span>Δ</span></div>
+              <div class="gtm-tr"><span>Signal A</span><span>—</span><span class="gtm-up">↑</span></div>
+              <div class="gtm-tr"><span>Signal B</span><span>—</span><span class="gtm-flat">→</span></div>
+              <div class="gtm-tr"><span>Signal C</span><span>—</span><span class="gtm-down">↓</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gtm-artefacts-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .gtm-artefacts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .gtm-artefacts-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .gtm-art {
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--surface);
+    padding: 1rem 1.1rem 1.15rem;
+    box-shadow: var(--shadow-sm);
+    min-height: 11.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gtm-art-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .gtm-art-body {
+    flex: 1;
+    border-radius: 0.65rem;
+    background: var(--surface-dim);
+    border: 1px solid var(--line);
+    padding: 0.85rem;
+    overflow: hidden;
+  }
+
+  .gtm-blur-lines {
+    filter: blur(0.45px);
+    opacity: 0.92;
+  }
+
+  .gtm-line {
+    display: block;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--line-strong), rgba(124, 58, 237, 0.15));
+    margin-bottom: 0.5rem;
+  }
+  .gtm-line-title {
+    height: 0.65rem;
+    width: 72%;
+    margin-bottom: 0.65rem;
+  }
+  .gtm-line-short {
+    width: 55%;
+  }
+  .gtm-line-medium {
+    width: 80%;
+  }
+
+  .gtm-kpis {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .gtm-kpi {
+    flex: 1;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--subtle);
+    text-align: center;
+  }
+  .gtm-kpi i {
+    display: block;
+    height: 1.75rem;
+    margin-bottom: 0.35rem;
+    border-radius: 0.35rem;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(37, 99, 235, 0.12));
+    border: 1px solid var(--line);
+  }
+
+  .gtm-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.35rem;
+    height: 4.5rem;
+    padding-top: 0.25rem;
+  }
+  .gtm-bars i {
+    flex: 1;
+    border-radius: 0.25rem 0.25rem 0 0;
+    background: linear-gradient(180deg, rgba(124, 58, 237, 0.55), rgba(124, 58, 237, 0.15));
+    min-height: 18%;
+  }
+
+  .gtm-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.78rem;
+  }
+  .gtm-row:last-child {
+    border-bottom: none;
+  }
+  .gtm-pill {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .gtm-pill--hold {
+    background: rgba(9, 9, 11, 0.06);
+    color: var(--muted);
+  }
+  .gtm-row-text {
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gtm-week {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .gtm-day {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0.35rem;
+    border-radius: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .gtm-day strong {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+  }
+  .gtm-day span {
+    font-size: 0.68rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .gtm-map {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 6.5rem;
+    padding: 0.5rem;
+  }
+  .gtm-node {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .gtm-node--wide {
+    flex: 1 1 100%;
+    text-align: center;
+    margin-top: 0.15rem;
+  }
+  .gtm-connector {
+    width: 1.25rem;
+    height: 2px;
+    background: var(--line-strong);
+    border-radius: 999px;
+  }
+  .gtm-connector--down {
+    flex: 1 1 100%;
+    width: 2px;
+    height: 0.65rem;
+    margin: -0.15rem 0;
+  }
+
+  .gtm-table {
+    font-size: 0.72rem;
+  }
+  .gtm-th,
+  .gtm-tr {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
+    padding: 0.35rem 0.15rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+  }
+  .gtm-th {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.6rem;
+    color: var(--subtle);
+  }
+  .gtm-tr:last-child {
+    border-bottom: none;
+  }
+  .gtm-up {
+    color: #059669;
+    font-weight: 700;
+  }
+  .gtm-down {
+    color: #dc2626;
+    font-weight: 700;
+  }
+  .gtm-flat {
+    color: var(--subtle);
+    font-weight: 700;
+  }
+</style>

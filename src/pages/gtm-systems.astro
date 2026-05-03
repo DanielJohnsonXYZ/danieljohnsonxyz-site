@@ -1,5 +1,6 @@
 ---
 import ExpertisePage from "../components/ExpertisePage.astro";
+import GtmSystemVisualArtefacts from "../components/GtmSystemVisualArtefacts.astro";
 ---
 
 <ExpertisePage
@@ -70,4 +71,6 @@ import ExpertisePage from "../components/ExpertisePage.astro";
     { q: "How long until pipeline gets predictable?", a: "Most teams see signal within 30 days and a working operating rhythm within 90 days. Predictable pipeline is usually 4-6 months in once the system has a couple of test cycles behind it." },
     { q: "What if my channels are very specialised (e.g. enterprise outbound only)?", a: "The framework still applies; the channel sequencing just looks different. The constraint is usually still positioning, conversion, or reporting — not the channel itself." }
   ]}
-/>
+>
+  <GtmSystemVisualArtefacts slot="after-deliverables" />
+</ExpertisePage>

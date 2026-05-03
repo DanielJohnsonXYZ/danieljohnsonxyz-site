@@ -504,24 +504,67 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 8. Why AI-native matters ─────────────────────────────────────── -->
+  <!-- 8. What AI-native GTM means here (concrete homepage block) ───── -->
   <section class="section-space" aria-labelledby="ai-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-5xl space-y-6">
-        <span class="eyebrow">Category</span>
+        <span class="eyebrow">How I work</span>
         <h2 id="ai-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
-          AI should make GTM faster, not vaguer.
-          <span class="hero-accent">The human decisions still matter.</span>
+          What AI-native GTM means <span class="hero-accent">here.</span>
         </h2>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          I use AI to shorten research synthesis, customer-call review, competitor teardowns, message testing, reporting, and campaign iteration. Less manual drag, faster decisions.
+        <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
+          AI should make GTM faster, not vaguer — with human judgement still owning ICP, budget, sequencing, and what ships.
         </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          You still need a human operator deciding which customer signal matters, which channel deserves budget, which message is strong enough to test. AI helps produce the raw material faster.
-        </p>
-        <p>
+        <div
+          class="rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 shadow-[var(--shadow-sm)] md:p-8"
+          aria-labelledby="ai-native-block-heading"
+        >
+          <p class="card-label">On engagements</p>
+          <h3 id="ai-native-block-heading" class="mt-3 text-2xl font-bold tracking-[-0.04em] text-balance md:text-3xl">
+            Not replacing judgement with automation — compressing the work that feeds decisions.
+          </h3>
+          <p class="mt-4 text-base leading-7 text-[color:var(--muted)] md:text-lg md:leading-8">
+            AI-native GTM does not mean replacing judgement with content automation. It means using AI to compress customer-call synthesis, competitor research, message testing, CRM diagnosis, campaign learning, and weekly decision-making, so founders and teams can make better commercial decisions faster.
+          </p>
+          <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(0,17rem)] lg:gap-8">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--subtle)]">Where AI speeds up the loop</p>
+              <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+                {
+                  [
+                    "Customer-call synthesis",
+                    "Competitor research",
+                    "Message testing",
+                    "CRM diagnosis",
+                    "Campaign learning",
+                    "Weekly decision-making"
+                  ].map((label) => (
+                    <li class="flex items-start gap-2 text-sm leading-6 text-[color:var(--ink)] md:text-base">
+                      <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" aria-hidden="true" />
+                      {label}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <aside
+              class="rounded-lg border border-[color:var(--line-strong)] bg-[color:var(--surface-dim)] p-4 md:p-5"
+              aria-label="Where human judgement stays central"
+            >
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">Human judgement stays central</p>
+              <ul class="mt-3 space-y-2 text-sm leading-6 text-[color:var(--muted)]">
+                <li>Which customer signal matters for the next bet</li>
+                <li>Channel mix, budget, and sequencing</li>
+                <li>What is strong enough to ship or test</li>
+                <li>Trade-offs and ownership the team will live with</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-x-6 gap-y-2">
+          <a class="link-arrow" href="/ai-native-workflows/">AI-native workflows on engagements →</a>
           <a class="link-arrow" href="/writing/">Read: What AI-native GTM actually means →</a>
-        </p>
+        </div>
       </div>
     </div>
   </section>
