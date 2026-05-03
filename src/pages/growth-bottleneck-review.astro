@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { siteConfig } from "../../site";
+
+const pageSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Growth Bottleneck Review", url: "/growth-bottleneck-review/" }
+  ])
+];
+
+const whatsIncluded = [
+  "Pre-call audit (10 minutes): website, LinkedIn, and materials review",
+  "60-minute structured diagnostic call covering ICP, messaging, acquisition, conversion, team ownership",
+  "Written Growth Bottleneck Summary delivered within 48 hours",
+  "Primary constraint identified with 3 specific recommendations",
+  "Clear recommendation on whether a WSS engagement makes sense"
+];
+
+const whoFor = [
+  "Founders who are not yet ready for a full engagement",
+  "Teams that want a credible second opinion on plateaued growth",
+  "Companies deciding between agency, hire, or fractional support",
+  "Post-PMF startups that need clarity before spending more"
+];
+---
+
+<BaseLayout
+  title="Growth Bottleneck Review | Daniel Johnson"
+  description="Find out exactly where growth is stuck in 60 minutes. £497 tripwire offer for post-PMF founders who want clarity before committing to a larger engagement."
+  path="/growth-bottleneck-review/"
+  schema={pageSchema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Tripwire Offer</p>
+      <h1>Find out exactly where growth is stuck — in 60 minutes.</h1>
+      <p class="hero-copy">
+        Most founders know something is off. Pipeline is inconsistent, paid acquisition isn't scaling, 
+        or the team is busy but decisions are unclear. The Growth Bottleneck Review identifies the specific 
+        constraint — not in theory, but in the context of your actual business.
+      </p>
+      <div class="hero-actions">
+        <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+          Book a Growth Bottleneck Review — £497 →
+        </a>
+        <a class="button-link" href="/case-studies/">See the proof first →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="What's Included"
+        title="60 minutes + written summary."
+        intro="You get a structured diagnostic call and a written summary of the bottleneck, the fix, and whether WSS is the right next step."
+      />
+      <div class="grid-2">
+        {whatsIncluded.map((item) => (
+          <div class="card p-5 flex items-start gap-3">
+            <span class="text-[color:var(--accent)] mt-1">✓</span>
+            <span class="text-base leading-7">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1fr]">
+        <div>
+          <p class="eyebrow">Who This Is For</p>
+          <h2 class="text-3xl font-bold tracking-[-0.04em]">Not ready for a full engagement yet?</h2>
+          <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
+            This offer converts "not yet" prospects into paid clients and seeds trust for larger engagements. 
+            A high percentage of Bottleneck Review clients naturally roll into Growth Sprints or Fractional CMO engagements.
+          </p>
+          <div class="mt-6">
+            <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+              Book Now — £497 →
+            </a>
+          </div>
+        </div>
+        <div class="grid gap-4">
+          {whoFor.map((item) => (
+            <div class="card p-4 flex items-start gap-3">
+              <span class="text-[color:var(--accent)] mt-1">✦</span>
+              <span class="text-base leading-7">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Why It Works"
+        title="A low-friction way to buy trust."
+        intro="£497 is low enough to be a no-brainer, high enough to qualify intent."
+      />
+      <div class="grid-3">
+        <div class="card p-6">
+          <h3 class="text-xl font-bold tracking-[-0.04em]">Qualify Intent</h3>
+          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">
+            Price point filters for serious founders while remaining accessible to those who need clarity.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-xl font-bold tracking-[-0.04em]">Build Trust</h3>
+          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">
+            A high percentage of Review clients roll into larger engagements. It's a natural path into WSS.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-xl font-bold tracking-[-0.04em]">No Commitment</h3>
+          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">
+            No retainer, no lock-in. Just clarity on whether WSS is the right next step for your company.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section">
+    <div class="shell">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="eyebrow justify-center text-white/60">Testimonial</p>
+        <blockquote class="mt-6">
+          <p class="text-3xl font-extrabold leading-[1.16] tracking-[-0.06em] text-white">
+            "The 60-minute review named our bottleneck immediately. The written summary was clearer than decks we'd paid £5k for previously."
+          </p>
+          <footer class="mt-6 border-t border-white/[0.08] pt-5 text-sm text-white/65">
+            <p class="font-semibold text-white">Founder, Series A FinTech</p>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Book Now</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">
+        Find out where growth is stuck.
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto text-lg leading-8 text-white/72">
+        60-minute diagnostic call + written summary within 48 hours. £497. No retainer, no commitment.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+          Book a Growth Bottleneck Review — £497 →
+        </a>
+        <a class="button-link-invert" href="/growth-audit/">Compare with free audit →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

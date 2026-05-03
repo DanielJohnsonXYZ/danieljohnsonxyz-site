@@ -1,0 +1,191 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { proofStats, siteConfig } from "../../site";
+
+const cases = (await getCollection("cases"))
+  .sort((a, b) => (b.data.order || 0) - (a.data.order || 0));
+
+const testimonials = (await getCollection("testimonials"))
+  .sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+
+const proofFaqs = [
+  {
+    question: "How should I verify these outcomes?",
+    answer:
+      "Read the individual case studies, check the GrowthMentor reviews, or book a 30-min Growth Audit to discuss your specific context."
+  },
+  {
+    question: "Does this guarantee the same result for my company?",
+    answer:
+      "No. Every company has a different constraint map. The proof shows what was fixed in each context — your bottleneck may be different."
+  },
+  {
+    question: "Can I use these numbers in my own materials?",
+    answer:
+      "Yes, with attribution. Please cite Daniel Johnson or We Scale Startups when referencing specific metrics."
+  }
+];
+
+const proofSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Proof", url: "/proof/" }
+  ]),
+  buildFaqSchema(proofFaqs)
+];
+---
+
+<BaseLayout
+  title="Proof | Daniel Johnson"
+  description="Case studies, testimonials, and outcomes from post-PMF AI and B2B SaaS startups. Real metrics, real constraints, real systems."
+  path="/proof/"
+  schema={proofSchema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Proof</p>
+      <h1>Proof that the work becomes a system, not another strategy deck.</h1>
+      <p class="lede">
+        Before/after evidence from founders who built repeatable acquisition systems.
+        Same Problem / Action / Result format for every case.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="hero-proof" style="grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: none; padding-top: 0;">
+        <div>
+          <strong>{proofStats.revenueImpact}</strong>
+          <span>revenue generated</span>
+        </div>
+        <div>
+          <strong>{proofStats.adSpend}</strong>
+          <span>paid spend managed</span>
+        </div>
+        <div>
+          <strong>{proofStats.startupsAdvised}</strong>
+          <span>startups advised</span>
+        </div>
+        <div>
+          <strong>{proofStats.mentorRating}/5</strong>
+          <span>{proofStats.mentorReviewCount} mentor reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Case Studies"
+        title="Before, after, and the system that made it stick."
+        intro="Each case study follows the same structure: problem, intervention, system built, numbers, timeline, and why it worked."
+      />
+      <div class="grid-2">
+        {cases.map((c) => (
+          <article class="card p-6 md:p-8">
+            <p class="card-label">{c.data.sector}</p>
+            <h3 class="text-xl font-bold tracking-[-0.04em]">{c.data.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{c.data.summary}</p>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+              {c.data.results.slice(0, 3).map((result) => (
+                <div>
+                  <span class="text-lg font-bold text-[color:var(--accent)]">{result.split(" ")[0]}</span>
+                  <span class="text-xs text-[color:var(--muted)]">{result}</span>
+                </div>
+              ))}
+            </div>
+            <a class="link-arrow mt-4" href={`/case-studies/${c.id}/`}>Read the case →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Testimonials"
+        title="What founders say after the work."
+        intro="Feedback from mentoring, advisory, and growth sessions."
+      />
+      <div class="grid-2">
+        {testimonials.slice(0, 6).map((t) => (
+          <blockquote class="card p-6 md:p-8 border-l-4 border-[color:var(--accent)]">
+            <p class="text-lg font-medium leading-7">"{t.data.quote}"</p>
+            <footer class="mt-4 text-sm text-[color:var(--muted)]">
+              <p class="font-semibold">{t.data.name}</p>
+              <p>{t.data.role}{t.data.organisation ? ` · ${t.data.organisation}` : ""}</p>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+      <div class="mt-6 text-center">
+        <a class="link-arrow" href="/testimonials/">See all testimonials →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Mentorship"
+        title="GrowthMentor & MentorCruise credentials."
+        intro="Top-rated mentor with 479+ sessions and 4.97/5 average rating."
+      />
+      <div class="max-w-3xl mx-auto grid gap-4">
+        <div class="card p-4 flex items-center gap-4">
+          <span class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] w-40">GrowthMentor</span>
+          <span class="text-base font-medium">{proofStats.mentorRating}/5 · {proofStats.mentorReviewCount} reviews · {proofStats.mentorSessions}+ sessions</span>
+        </div>
+        <div class="card p-4 flex items-center gap-4">
+          <span class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] w-40">MentorCruise</span>
+          <span class="text-base font-medium">Verified mentor profile</span>
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <a class="button-accent" href={siteConfig.growthMentor} rel="noreferrer" target="_blank">Read mentor reviews →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="FAQ"
+        title="Questions about the proof."
+        intro="How to read the evidence and what it means for your company."
+      />
+      <div class="grid-3">
+        {proofFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Next step</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">
+        {siteConfig.bookingLabel}.
+      </h2>
+      <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+       30 minutes on your specific situation. You'll leave with a clearer read on your biggest growth bottleneck.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button-link-invert" href="/case-studies/">See all case studies →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

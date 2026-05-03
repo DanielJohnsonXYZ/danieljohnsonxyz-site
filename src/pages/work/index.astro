@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { proofStats, siteConfig } from "../../site";
+
+const workSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Work", url: "/work/" }
+  ])
+];
+---
+
+<BaseLayout
+  title="Work | Daniel Johnson"
+  description="Case studies and outcomes from post-PMF AI and B2B SaaS startups. Real metrics, real constraints, real systems built."
+  path="/work/"
+  schema={workSchema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Work</p>
+      <h1>How the work shows up in practice.</h1>
+      <p class="hero-copy">
+        Before/after evidence from founders who built repeatable acquisition systems. 
+        Each case study follows the same structure: problem, intervention, system built, numbers, timeline, and why it worked.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Approach"
+        title="Problem → Action → Result"
+        intro="Every engagement uses the same three-part structure so you can see exactly what changed and why it stuck."
+      />
+      <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div>
+          <h2 class="text-2xl font-bold tracking-[-0.04em]">Problem</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            What was breaking when we started. Written in plain language so founders recognise themselves in the paragraph.
+          </p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold tracking-[-0.04em]">Action</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            The 3–5 specific interventions. Not "improved positioning" but "rewrote homepage headline to lead with ICP pain point."
+          </p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold tracking-[-0.04em]">Result</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            What changed at 3–6 months. Metrics where possible, qualitative outcomes where the client prefers anonymity.
+          </p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold tracking-[-0.04em]">System</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            What was handed over. The artefacts, processes, and rhythms the team now owns without Daniel.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Outcomes"
+        title="What the numbers say."
+        intro="Aggregated metrics across 20+ startups. Anonymous where the client prefers."
+      />
+      <div class="hero-proof" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+        <div>
+          <strong>{proofStats.revenueImpact}</strong>
+          <span>revenue generated</span>
+        </div>
+        <div>
+          <strong>{proofStats.adSpend}</strong>
+          <span>paid spend managed</span>
+        </div>
+        <div>
+          <strong>{proofStats.startupsAdvised}</strong>
+          <span>startups advised</span>
+        </div>
+        <div>
+          <strong>{proofStats.mentorSessions}+</strong>
+          <span>mentoring sessions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Case Studies"
+        title="Read the full stories."
+        intro="Each case study is anonymous where needed. Company type and stage are always visible."
+      />
+      <div class="mt-8 text-center">
+        <a class="button-accent" href="/case-studies/">View all case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Testimonials"
+        title="What founders say after the work."
+        intro="Feedback from mentoring, advisory, and growth sessions."
+      />
+      <div class="mt-8 text-center">
+        <a class="button-accent" href="/testimonials/">Read founder testimonials →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Book a 30-min Growth Audit</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">
+        See if this is the right fit for your company.
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto text-lg leading-8 text-white/72">
+        {siteConfig.bookingNote}
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button-link-invert" href="/case-studies/">See the proof →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
