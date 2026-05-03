@@ -2,177 +2,123 @@
 import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildTalkSchema, buildVideoSchema } from "../lib/schema";
+import { buildTalkSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { proofStats, siteConfig, siteImages, socialLinks, speakingVideos, trustAffiliations, trustLogos } from "../site";
+import { siteConfig, socialLinks, trustLogos } from "../site";
 
 const talks = sortByFeaturedThenOrder(await getCollection("talks"));
 const selectedTalks = talks.slice(0, 3);
 const speakingHighlights = [
-  { metric: "£18M+", label: "Revenue impact generated for clients" },
-  { metric: proofStats.adSpend, label: "Paid media managed across Google, Meta, LinkedIn and more" },
-  { metric: "35%", label: "Average CAC reduction for acquisition clients" },
-  { metric: proofStats.mentorSessions, label: `Mentorship sessions rated ${proofStats.mentorRating}/5 on GrowthMentor` },
-  { metric: "6x", label: "App download growth driven for a B2B HealthTech client" },
-  { metric: "7+", label: "Universities lectured at, including Cambridge and Imperial" }
+  { metric: "388+", label: "Founder and operator mentoring sessions" },
+  { metric: "10+ years", label: "Startup growth experience behind the content" },
+  { metric: "Google, Cambridge, Imperial", label: "Institutional rooms and programmes" },
+  { metric: "10+ countries", label: "Startup audiences reached through teaching and mentoring" }
 ];
-const topics = [
+const signatureSessions = [
   {
-    title: "AI-Native GTM Strategy",
-    body:
-      "How modern startups go to market in an AI-first world — ICP definition, positioning, acquisition engines, and founder-led distribution built for speed and scale."
+    title: "How to build a repeatable growth system",
+    outcome: "Founders leave with a practical model for turning fragmented marketing into a clearer operating rhythm.",
+    bestFor: "Founder cohorts, accelerators, and operator teams"
   },
   {
-    title: "Growth Systems & Product-Led Growth",
-    body:
-      "How to build the infrastructure for compounding growth — PLG pathways, experimentation frameworks, retention loops, and the metrics that actually predict revenue."
+    title: "Go-to-market judgment for early teams",
+    outcome: "Teams learn how to choose what to test, what to ignore, and how to connect message, channel, and customer learning.",
+    bestFor: "Seed-stage teams, innovation programmes, and product-led audiences"
   },
   {
-    title: "The Future of Growth Roles",
-    body:
-      "How the growth function is changing, what skills survive AI commoditisation, and how founders and operators should structure their teams for the next decade."
+    title: "Turning innovation into commercial traction",
+    outcome: "Technical audiences get a usable bridge between invention, market clarity, and demand creation.",
+    bestFor: "Universities, R&D programmes, and innovation teams"
   }
 ];
 const organiserTakeaways = [
-  "Keynotes, panels, workshops, founder-cohort sessions, and practical operator conversations.",
-  "Sharp operator perspective on AI-native GTM, PLG, experimentation, and founder-led distribution.",
-  `Practical examples from 20+ startups, ${proofStats.mentorSessions} founder sessions, and programme work with Google and Techstars.`
+  "A practical growth framework the audience can use after the session.",
+  "Examples from founder, operator, and advisory work, not just theory.",
+  "A speaker who can flex between executive-level strategy and hands-on startup detail."
+];
+const presentationFeedback = [
+  { quote: "Finally, a growth talk that cuts through the fluff. Clear frameworks I could use the next day.", source: "Nomad Summit attendee" },
+  { quote: "No-nonsense, practical, and specific to our stage. Exactly what we needed.", source: "SaaS & AI SEO session" },
+  { quote: "Left with three concrete things to fix on our GTM. Highly recommended.", source: "Workshop participant" },
+  { quote: "The clearest positioning session we've had. No theory, just what to change.", source: "Growth workshop attendee" },
+  { quote: "Practical, actionable, and refreshingly honest about what works at our stage.", source: "Founder session" },
+  { quote: "Daniel's framework gave us the clarity we'd been missing for months.", source: "Innovation programme" }
+];
+const eventPhotos = [
+  {
+    src: "/images/nomad-summit-group.webp",
+    alt: "Daniel Johnson speaking at Nomad Summit — founder growth session",
+    caption: "Speaking on growth systems and positioning at Nomad Summit"
+  },
+  {
+    src: "/images/daniel-presenting-slide.webp",
+    alt: "Daniel Johnson presenting a slide on SaaS and AI growth",
+    caption: "SaaS & AI growth session in Shenzhen"
+  },
+  {
+    src: "/images/shenzhen-seo-event-poster.webp",
+    alt: "Shenzhen SEO & SaaS event poster featuring Daniel Johnson as speaker",
+    caption: "Event poster — Shenzhen SEO & SaaS session"
+  }
 ];
 const deliverables = [
-  "Podcasts and press interviews",
   "Keynotes for founder and innovation audiences",
-  "Panels, fireside chats, and moderated conversations",
-  "Interactive workshops for startup or accelerator cohorts"
+  "Interactive workshops for startup or accelerator cohorts",
+  "Training sessions for marketing and commercial teams",
+  "Panels, fireside chats, and moderated conversations"
 ];
-const episodeIdeas = [
-  {
-    title: "Why Growth Hacking Is Dead — and What Replaces It",
-    body:
-      "AI has commoditised the tactics that made growth hackers famous. The new competitive edge isn't channel fluency — it's systems thinking, cross-functional influence, and judgment.",
-    bestFor: "Future-of-work shows, business media, startup publications"
-  },
-  {
-    title: "The GTM Mistakes AI Founders Keep Making",
-    body:
-      "Most AI founders build great products and terrible go-to-market strategies: ICP confusion, premature paid spend, and positioning that sounds like every competitor.",
-    bestFor: "AI and tech podcasts, startup newsletters, VC blogs"
-  },
-  {
-    title: "How to Build a Growth Machine (Not a Growth Hack)",
-    body:
-      "The difference between a startup that grows reliably and one that chases tactics is infrastructure: the components of a repeatable growth system, and why most companies skip them.",
-    bestFor: "Operator-focused shows, growth newsletters, B2B SaaS media"
-  },
-  {
-    title: "Product-Led Growth in Practice: What Actually Works for B2B SaaS",
-    body:
-      "The practical Seed and Series A PLG playbook: freemium decisions, activation design, expansion triggers, and where product-led motion breaks.",
-    bestFor: "SaaS-specific podcasts, product and growth newsletters"
-  },
-  {
-    title: `${proofStats.mentorSessions} Founder Conversations: What Separates the Ones That Make It`,
-    body:
-      "Patterns that predict founder success — and the self-sabotage patterns that keep otherwise strong founders stuck.",
-    bestFor: "Entrepreneurship shows, community platforms, accelerator events"
-  }
+const assets = [
+  { label: "Short bio", detail: "Use the speaking bio below for event pages and introductions." },
+  { label: "Headshot", detail: "Use the current site headshot as a placeholder until Daniel supplies final event photography." },
+  { label: "Talk topics", detail: "Use the three signature sessions as starting points, then tailor to the audience." }
 ];
-const sampleQuestions = [
-  "You've worked with 20+ startups across AI, SaaS, and Web3. What's the most common growth mistake you see founders make?",
-  "What does building a growth machine actually mean in practice — how is it different from just running campaigns?",
-  "How has AI changed the way you approach GTM strategy for clients?",
-  `You've done ${proofStats.mentorSessions} mentorship sessions. What separates the founders who break through from those who stay stuck?`,
-  "Growth hacking had its moment — is it dead? What's replaced it?",
-  "How do you think about product-led growth for early-stage B2B SaaS companies who can't yet afford to give the product away?",
-  "What's the one thing most growth teams get wrong about experimentation?",
-  "You teach at Cambridge. What's the single most important thing founders get wrong about startup marketing?"
-];
-const speakingMentoring = {
-  speaking: [
-    "Cambridge University — Judge Business School",
-    "Imperial College London",
-    "UK Space Agency",
-    "Royal College of Veterinary Surgeons",
-    "General Assembly — Riyadh",
-    "Growth Velocity — Dubai"
-  ],
-  mentoring: [
-    "Google for Startups Accelerator (UK, Poland, Ukraine, Nigeria, Romania)",
-    "Techstars",
-    `GrowthMentor — ${proofStats.mentorSessions} sessions, ${proofStats.mentorRating}/5`
-  ],
-  press: "Appearances being added — check back soon."
-};
-const bios = [
-  {
-    label: "Short bio (50 words)",
-    body:
-      `Daniel Johnson is a fractional CMO, GTM operator, and founder of We Scale Startups. He helps AI and B2B SaaS companies build repeatable growth systems — and mentors founders through Google, Techstars, and GrowthMentor (${proofStats.mentorSessions} sessions, ${proofStats.mentorRating}/5). He teaches startup growth at Cambridge University.`
-  },
-  {
-    label: "Medium bio (120 words)",
-    body:
-      `Daniel Johnson is a fractional CMO, GTM growth operator, and the founder of We Scale Startups — a consultancy helping post-PMF AI and B2B SaaS companies build repeatable, scalable growth systems.\n\nOver 10+ years and 20+ startups, Daniel has managed ${proofStats.adSpend} in ad spend, generated ${proofStats.revenueImpact} in revenue impact, and built growth infrastructure across paid acquisition, product-led growth, and AI-native execution. He's cut client CAC by 35%, reduced churn by 21%, and driven 6x download growth for HealthTech clients.\n\nBeyond client work, Daniel mentors founders through Google for Startups, Techstars, and GrowthMentor (${proofStats.mentorSessions} sessions, rated ${proofStats.mentorRating}/5), and is a Visiting Lecturer at Cambridge University's Judge Business School. Based in London.`
-  },
-  {
-    label: "Long bio (280 words)",
-    body:
-      `Daniel Johnson is a fractional CMO, GTM operator, and founder of We Scale Startups — a growth consultancy that helps post-PMF AI and B2B SaaS companies build the repeatable growth systems that turn promising products into scalable businesses.\n\nDaniel's career spans over a decade of hands-on growth work across more than 20 startups in SaaS, AI, Web3, eCommerce, and HealthTech. He has managed ${proofStats.adSpend} in paid media across Google, Meta, LinkedIn, Twitter, and Taboola — generating ${proofStats.revenueImpact} in measurable revenue impact for clients. In practice, that means reducing CAC by 35%, cutting churn by 21%, driving 6x download growth, and scaling client budgets from £50K to £2M+ monthly with consistent 3x ROI.\n\nHis work sits at the intersection of go-to-market strategy, product-led growth, AI-native workflows, and founder-led distribution — helping growth teams move faster, test smarter, and convert ambiguity into commercial momentum.\n\nOutside of client work, Daniel is one of the most active startup growth mentors in the UK. He has completed ${proofStats.mentorSessions} mentorship sessions on GrowthMentor with a ${proofStats.mentorRating}/5 rating, mentored cohorts through Google for Startups Accelerator and Techstars, and supported founders in raising ${proofStats.founderRaiseSupport} across Seed to Series B rounds. He is a Visiting Lecturer on startup growth at Cambridge University's Judge Business School and has taught at Imperial College London, the UK Space Agency, and six other institutions.\n\nDaniel is based in London and open to podcast appearances, keynote speaking, panel discussions, press interviews, and advisory conversations.`
-  }
-];
-const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speakingVideos.map((video) => buildVideoSchema(video))];
+const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
 ---
 
 <BaseLayout
-  description="Invite Daniel Johnson to speak on AI-native GTM, founder-led growth, product-led growth, and repeatable startup growth systems."
-  keywords="startup speaker, AI GTM keynote, fractional CMO talks, workshop facilitator, Cambridge Imperial lecturer"
-  mediaCta
-  path="/speaking"
+  description="Speaking with Daniel Johnson: talks, workshops, and training for founder, startup, and innovation audiences that need practical growth and GTM thinking."
   schema={speakingSchema}
-  stickyCta={false}
-  title="Speaking & Workshops | Daniel Johnson"
+  title="Speaking | Daniel Johnson"
 >
   <section class="section-space">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="reveal space-y-6">
-          <span class="service-label">Speaking / Workshops / Panels</span>
+          <span class="service-label">Speaking / Workshops</span>
           <h1 class="max-w-4xl text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">
-            The Growth Operator Behind the Machine
+            Practical startup growth talks for rooms that need clarity, not hype.
           </h1>
           <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            I help post-PMF AI and B2B SaaS companies stop guessing and start growing — by building repeatable GTM
-            systems that compound.
+            I speak to founders, operators, students, and innovation teams about growth systems, GTM judgment,
+            experimentation, and the commercial work required to turn momentum into repeatability.
           </p>
-          <p class="max-w-3xl text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">
-            Fractional CMO · GTM Operator · Founder, We Scale Startups · Mentor: Google · Techstars · Cambridge
-          </p>
-          <div class="flex flex-wrap gap-3 pt-1">
-            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20invitation%20for%20Daniel%20Johnson`} data-cta="speaking-hero-invite">
-              Invite Daniel to speak
-            </a>
-            <a class="button-secondary" href="/media-kit/">
-              Download media kit
-            </a>
-          </div>
           <ul class="scan-list max-w-3xl">
             {organiserTakeaways.map((item) => <li>{item}</li>)}
           </ul>
         </div>
         <aside class="grid gap-5">
           <article class="reveal video-panel">
-            <img alt={siteImages.speakingMic.alt} class="aspect-[16/10] w-full rounded-lg object-cover object-top" height={siteImages.speakingMic.height} loading="eager" src={siteImages.speakingMic.src} width={siteImages.speakingMic.width} />
+            <div class="video-frame">
+              <iframe
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+                src={siteConfig.youtubeUploadsEmbed}
+                title="Daniel Johnson YouTube videos"
+              ></iframe>
+            </div>
             <div class="video-panel-copy">
-              <p class="card-label">Speaking examples</p>
-              <h2>See the pace, language, and practical teaching style.</h2>
-              <p>Curated talks and interviews are below, with direct links for organisers and producers who want to review fit quickly.</p>
+              <p class="card-label">YouTube field notes</p>
+              <h2>Short growth and GTM notes for founders.</h2>
+              <p>Use this as a quick read on Daniel's pace, language, and practical teaching style before booking a talk or workshop.</p>
               <a class="link-arrow" href={siteConfig.youtube} rel="noreferrer" target="_blank">Watch more on YouTube</a>
             </div>
           </article>
           <div class="reveal card overflow-hidden p-4">
-            <img alt={siteImages.speakingStageBw.alt} class="aspect-[4/3] w-full rounded-xl object-cover" height={siteImages.speakingStageBw.height} loading="eager" src={siteImages.speakingStageBw.src} width={siteImages.speakingStageBw.width} />
+            <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="720" loading="eager" src="/images/cambridge-judge-business-school-960.webp" width="960" />
           </div>
           <div class="reveal card p-6 md:p-8">
-            <p class="card-label">Available for</p>
+            <p class="card-label">Formats</p>
             <ul class="mt-6 space-y-4">
               {
                 deliverables.map((item) => (
@@ -187,22 +133,26 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
         </aside>
       </div>
 
-      <div class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {
-            trustLogos.map((item) => (
+      <div class="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {
+          speakingHighlights.map((item) => (
+            <article class="reveal card p-5">
+              <p class="text-2xl font-bold tracking-[-0.04em] md:text-3xl">{item.metric}</p>
+              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{item.label}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {
+          trustLogos.map((item) => (
             <article class="reveal logo-card flex items-center justify-between gap-4 px-5 py-4">
               <img alt={item.alt} class="h-10 w-auto max-w-[10rem] object-contain" height="48" loading="lazy" src={item.src} width="180" />
               <span class="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">{item.label}</span>
             </article>
           ))
         }
-        {
-          trustAffiliations.map((item) => (
-            <article class="reveal logo-card logo-card-text flex items-center px-5 py-4">
-              <span class="text-sm font-semibold leading-6 text-[color:var(--ink)]">{item}</span>
-            </article>
-          ))
-        }
       </div>
     </div>
   </section>
@@ -210,104 +160,25 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
-        eyebrow="Watch"
-        intro="A curated set of talks, interviews, and founder-facing sessions. These replace the generic channel embed so producers can review the right examples quickly."
-        title="Speaking examples that show the range."
-      />
-      <div class="video-grid mt-10">
-        {
-          speakingVideos.map((video) => (
-            <a class="reveal video-example-card" href={video.href} rel="noreferrer" target="_blank">
-              <img alt={`${video.title} video thumbnail`} height="360" loading="lazy" src={video.thumbnail} width="480" />
-              <div>
-                <p class="card-label">{video.source}</p>
-                <h2>{video.title}</h2>
-                <p>{video.description}</p>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Topics"
-        intro="Each topic can become a keynote, podcast segment, panel contribution, workshop, or founder-cohort session."
-        title="Sharp, practical angles on modern growth."
+        eyebrow="Signature Sessions"
+        intro="Each topic can become a keynote, workshop, training session, or founder-cohort format depending on the audience."
+        title="Talks designed around what the room should do next."
       />
       <div class="mt-10 grid gap-5 md:grid-cols-3">
         {
-          topics.map((item) => (
+          signatureSessions.map((item) => (
             <article class="reveal advisory-mode-card card p-6 md:p-7">
               <h2 class="text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-5 text-base leading-8 text-[color:var(--muted)]">{item.body}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="dark-section section-space">
-    <div class="shell">
-      <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label text-white/55">About Daniel</p>
-          <div class="mt-5 space-y-5 text-base leading-8 text-white/70">
-            <p>
-              Daniel Johnson is a fractional CMO, GTM growth operator, and founder of We Scale Startups — a consultancy helping post-PMF AI and B2B SaaS companies build the repeatable growth systems that turn promising products into scalable businesses.
-            </p>
-            <p>
-              Over 10+ years and 20+ startups, Daniel has managed {proofStats.adSpend} in paid media, generated {proofStats.revenueImpact} in measurable revenue impact, and built growth infrastructure across paid acquisition, product-led growth, and AI-native execution.
-            </p>
-            <p>
-              Outside of client work, Daniel is one of the most active startup growth mentors in the UK — with {proofStats.mentorSessions} sessions on GrowthMentor rated {proofStats.mentorRating}/5 and cohorts mentored through Google for Startups and Techstars. He is a Visiting Lecturer at Cambridge University's Judge Business School.
-            </p>
-            <p>
-              He is based in London and open to podcast appearances, speaking engagements, press interviews, and advisory conversations.
-            </p>
-          </div>
-        </article>
-        <div>
-          <SectionHeader
-            eyebrow="By the Numbers"
-            intro="Quick proof points for show notes, event pages, media packs, and producer research."
-            title="Operator proof, not borrowed credibility."
-          />
-          <div class="mt-8 grid gap-4 sm:grid-cols-2">
-            {
-              speakingHighlights.map((item) => (
-                <article class="reveal card p-5">
-                  <p class="text-3xl font-bold tracking-[-0.04em] text-white md:text-4xl">{item.metric}</p>
-                  <p class="mt-3 text-sm leading-6 text-white/64">{item.label}</p>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Episode Ideas"
-        intro="Not sure if we're a fit? Here are five angles that have resonated with audiences — ready to pitch to your producer or adapt for your format."
-        title="Strong angles for podcasts, newsletters, and events."
-      />
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
-        {
-          episodeIdeas.map((item) => (
-            <article class="reveal card p-6 md:p-7">
-              <h2 class="text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
-              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{item.body}</p>
-              <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">
-                Best for: {item.bestFor}
-              </p>
+              <dl class="mt-6 grid gap-5">
+                <div>
+                  <dt>Best for</dt>
+                  <dd>{item.bestFor}</dd>
+                </div>
+                <div>
+                  <dt>Audience leaves with</dt>
+                  <dd>{item.outcome}</dd>
+                </div>
+              </dl>
             </article>
           ))
         }
@@ -317,24 +188,40 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
 
   <section class="section-space pt-0">
     <div class="shell">
-      <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-        <SectionHeader
-          eyebrow="Sample Questions"
-          intro="Feel free to use these as-is or adapt them for your format."
-          title="Questions Daniel can answer well."
-        />
-        <div class="reveal card p-6 md:p-8">
-          <ol class="grid gap-4 [counter-reset:item]">
-            {
-              sampleQuestions.map((question, index) => (
-                <li class="grid grid-cols-[2rem_1fr] gap-3 border-b border-[color:var(--line)] pb-4 text-base leading-8 last:border-b-0 last:pb-0">
-                  <span class="flex size-8 items-center justify-center rounded-full bg-[color:var(--surface-dim)] text-xs font-bold text-[color:var(--muted)]">{index + 1}</span>
-                  <span>{question}</span>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
+      <SectionHeader
+        eyebrow="Presentation Feedback"
+        intro="Recent attendee reactions from live sessions and workshops."
+        title="What founders say after the session."
+      />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          presentationFeedback.map((item) => (
+            <blockquote class="reveal p-4 md:p-5 border-l-2 border-[color:var(--line)] bg-[color:var(--surface)]/50">
+              <p class="text-sm leading-6 text-[color:var(--muted)]">"{item.quote}"</p>
+              <footer class="mt-2 text-xs text-[color:var(--subtle)]">{item.source}</footer>
+            </blockquote>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Event Photos"
+        intro="Visual proof from recent speaking engagements and founder events."
+        title="Daniel on stage and in the room."
+      />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          eventPhotos.map((item) => (
+            <figure class="reveal card overflow-hidden">
+              <img src={item.src} alt={item.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" />
+              <figcaption class="p-4 text-sm text-[color:var(--muted)]">{item.caption}</figcaption>
+            </figure>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -357,7 +244,7 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
         <div>
           <SectionHeader
             eyebrow="Selected Rooms"
-            intro="A concise sample of rooms and programmes Daniel has taught in, with enough context for organisers to assess fit quickly."
+            intro="A tighter sample rather than a dense wall of cards. More examples can live in the full speaking archive later."
             title="Recent speaking and teaching footprint."
           />
           <div class="mt-8 grid gap-5">
@@ -387,48 +274,35 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
   <section class="section-space">
     <div class="shell">
       <SectionHeader
-        eyebrow="Speaking & Mentoring"
-        intro="A clean list of teaching, speaking, and mentoring credibility. Press and podcast appearances can be added as they land."
-        title="Where Daniel has shown up."
+        eyebrow="Booker Assets"
+        intro="Practical details for organisers who already know the room and need to decide quickly whether there is a fit."
+        title="Useful materials for organisers."
       />
-      <div class="mt-10 grid gap-5 lg:grid-cols-3">
-        <article class="reveal card p-6 md:p-7">
-          <p class="card-label">Speaking</p>
-          <ul class="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--muted)]">
-            {speakingMentoring.speaking.map((item) => <li>{item}</li>)}
-          </ul>
+      <div class="mt-10 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label">Speaking bio</p>
+          <h2 class="mt-4 text-3xl font-bold tracking-[-0.05em] md:text-4xl">
+            Daniel Johnson is an AI-Native GTM &amp; growth operator for post-PMF AI and B2B SaaS startups — founder,
+            mentor, and speaker.
+          </h2>
+          <p class="mt-5 max-w-3xl text-base leading-8 text-[color:var(--muted)]">
+            Over 10+ years he has worked with 20+ AI and B2B SaaS startups, managed £6M+ in paid spend, generated
+            £18M+ in revenue, and helped founders raise £15M+. He mentors through Google for Startups, Techstars, and
+            GrowthMentor (388+ sessions, 4.93/5), and has lectured at Cambridge Judge, Imperial College London,
+            General Assembly, and the UK Space Agency.
+          </p>
         </article>
-        <article class="reveal card p-6 md:p-7">
-          <p class="card-label">Mentoring</p>
-          <ul class="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--muted)]">
-            {speakingMentoring.mentoring.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-        <article class="reveal card p-6 md:p-7">
-          <p class="card-label">Press & Podcasts</p>
-          <p class="mt-5 text-sm leading-7 text-[color:var(--muted)]">{speakingMentoring.press}</p>
-          <a class="link-arrow mt-5" href="/podcast-guest/">See podcast guest page</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Media Assets"
-        intro="Need copy for a show notes page, event programme, or press piece? Use the versions below."
-        title="Bios for media use."
-      />
-      <div class="mt-10 grid gap-5">
-        {
-          bios.map((bio) => (
-            <article class="reveal card p-6 md:p-8">
-              <p class="card-label">{bio.label}</p>
-              <div class="mt-5 grid gap-4 whitespace-pre-line text-base leading-8 text-[color:var(--muted)]">{bio.body}</div>
-            </article>
-          ))
-        }
+        <div class="grid gap-4">
+          {
+            assets.map((item) => (
+              <article class="reveal card p-5">
+                <p class="card-label">{item.label}</p>
+                <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.detail}</p>
+              </article>
+            ))
+          }
+          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Enquire About Speaking</a>
+        </div>
       </div>
     </div>
   </section>
@@ -437,20 +311,17 @@ const speakingSchema = [...talks.map((talk) => buildTalkSchema(talk)), ...speaki
     <div class="shell">
       <div class="reveal social-panel">
         <div>
-          <p class="card-label">Let's Work Together</p>
-          <h2>Available for podcasts, panels, keynotes, press interviews, and newsletter features.</h2>
+          <p class="card-label">Social proof and profiles</p>
+          <h2>More ways to assess fit before booking.</h2>
           <p>
-            For media, speaking, or collaboration enquiries, email Daniel directly or review his public profiles and current work.
+            Recent thinking, mentor reviews, public profiles, interviews, and current work are linked here for organisers who want a fuller picture.
           </p>
         </div>
         <div class="social-link-grid">
-          <a href={`mailto:${siteConfig.email}?subject=Media%20or%20speaking%20enquiry%20for%20Daniel%20Johnson`}>Get In Touch</a>
-          <a href={siteConfig.companyUrl} rel="noreferrer" target="_blank">View my work at wescalestartups.com</a>
           {socialLinks.map((item) => (
             <a href={item.href} rel="noreferrer" target="_blank">{item.label}</a>
           ))}
-          <a href="/podcast-guest/">Podcast guest page</a>
-          <a href="/media-kit/">Media kit</a>
+          <a href="/podcast-appearances/">Podcast appearances</a>
           <a href="/now/">Now page</a>
         </div>
       </div>

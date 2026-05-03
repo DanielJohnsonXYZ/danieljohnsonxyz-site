@@ -1,317 +1,286 @@
 ---
-import { getCollection } from "astro:content";
-import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { sortByFeaturedThenOrder } from "../lib/utils";
-import { proofStats, siteConfig, siteImages, socialLinks, speakingVideos, trustAffiliations, trustLogos } from "../site";
+import { siteConfig, trustLogos } from "../site";
 
-const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(0, 4);
-const talks = sortByFeaturedThenOrder(await getCollection("talks")).slice(0, 4);
-
-const bios = [
-  {
-    label: "25-word bio",
-    body: "Daniel Johnson is a fractional CMO and GTM operator helping post-PMF AI and B2B SaaS startups build repeatable growth systems."
-  },
-  {
-    label: "50-word bio",
-    body:
-      "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor."
-  },
-  {
-    label: "120-word bio",
-    body:
-      `Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.\n\nHis work sits at the intersection of AI-native GTM, founder-led growth, product-led growth, positioning, and startup growth systems. Across ${proofStats.startupsAdvised} startups, his proof base includes ${proofStats.revenueImpact} in revenue impact, ${proofStats.adSpend} in managed ad spend, and ${proofStats.mentorSessions} founder mentoring sessions.\n\nDaniel is available for podcasts, press quotes, panels, keynotes, workshops, and newsletter interviews on AI startups, B2B SaaS, founder-led growth, and repeatable GTM systems.`
-  }
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Media kit", url: "/media-kit" }
+  ])
 ];
 
-const commentAreas = [
-  "AI-native marketing teams",
-  "Founder-led sales",
-  "Startup positioning",
-  "GTM strategy",
-  "Product-led growth",
-  "Fractional CMO models",
-  "B2B SaaS growth",
-  "AI startup messaging",
-  "Startup pipeline building"
+const doNotDescribeAs = [
+  "a generic marketing consultant",
+  "an AI influencer",
+  "a growth hacker",
+  "a motivational speaker",
+  "an agency owner focused only on paid ads"
 ];
 
-const podcastTopics = [
-  "AI has made tactics cheaper. The new advantage is growth judgment.",
-  "Most AI startups do not have a product problem, they have a messaging problem.",
-  "Founder-led growth works until it becomes the bottleneck.",
-  "Growth hacking is dead. Growth systems replaced it.",
-  "The next marketing team will be smaller, sharper, and AI-enabled."
+const preferredDescription = "Daniel Johnson is a fractional CMO and GTM operator helping post-PMF AI and B2B SaaS startups build repeatable growth systems.";
+
+const quickFacts = [
+  { label: "Primary role", value: "Fractional CMO / Growth Operator" },
+  { label: "Focus", value: "Post-PMF AI & B2B SaaS, Seed–Series B" },
+  { label: "Geography", value: "UK-based, serving US, UK, Europe, APAC" },
+  { label: "Typical engagement", value: "£7.5–12k/month, 3-month minimum" },
+  { label: "Track record", value: "20+ startups, £18M+ revenue generated" }
 ];
 
-const pressQuoteTopics = [
-  "How AI changes marketing teams without replacing marketing judgment",
-  "Why AI startup messaging converges into generic claims",
-  "When founders should hire marketing leadership",
-  "How startups can build pipeline without chasing every channel",
-  "Why repeatable GTM systems beat one-off campaign spikes"
-];
-
-const speakingTopics = [
-  "AI-native GTM for post-PMF startups",
-  "Building a growth machine, not a growth hack",
-  "Founder-led growth after the first customers",
-  "Product-led growth for B2B SaaS",
-  "How smaller AI-enabled marketing teams will operate"
-];
-
-const formats = [
-  "30-minute podcast interview",
-  "45-minute founder growth teardown",
-  "60-minute keynote",
-  "Panel guest",
-  "Written Q&A",
-  "Expert quote for articles"
-];
-
-const assets = [
-  { label: "Headshot", href: "/images/daniel-headshot.webp" },
-  { label: "Square headshot", href: siteImages.speakingCircle.src },
-  { label: "Company logo", href: "/images/logos/wss.webp" },
-  { label: "Short bio", href: "/media/daniel-johnson-short-bio.txt" },
-  { label: "Long bio", href: "/media/daniel-johnson-long-bio.txt" },
-  { label: "Approved intro", href: "/media/daniel-johnson-approved-intro.txt" },
-  { label: "Topic list", href: "/media/daniel-johnson-topic-list.txt" }
-];
-
-const availability = [
-  "Available for podcasts",
-  "Available for press quotes",
-  "Available for panels",
-  "Available for keynotes",
-  "Available for workshops",
-  "Available for newsletter interviews"
-];
-
-const schema = buildBreadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "Media Kit", url: "/media-kit" }
-]);
+const affiliations = trustLogos.map((logo) => ({
+  name: logo.label,
+  relationship: logo.alt.split(" — ").pop() || "Affiliation"
+}));
 ---
 
 <BaseLayout
-  description="Daniel Johnson's personal media kit for podcasts, press quotes, speaking, bios, headshots, topics, and producer assets."
-  path="/media-kit"
-  schema={schema}
-  mediaCta
-  stickyCta={false}
   title="Media Kit | Daniel Johnson"
+  description="Official media kit for Daniel Johnson — bio, headshots, logos, speaking topics, and how to describe (and not describe) Daniel in press."
+  path="/media-kit"
+  schema={schemas}
 >
-  <section class="hero-section section-space">
+  <section class="page-hero">
     <div class="shell">
-      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div class="reveal max-w-4xl space-y-6">
-          <span class="service-label">Daniel Johnson Media Kit</span>
-          <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
-            Press, podcasts, speaking, writing, and producer-ready assets.
-          </h1>
-          <p class="hero-subcopy max-w-3xl text-lg leading-9 md:text-xl">
-            Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. Use this page for bios, headshots, topic angles, selected work, and contact details.
-          </p>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`}>Email Daniel</a>
-            <a class="button-secondary" href="/media/daniel-johnson-topic-list.txt">Download media kit</a>
-          </div>
+      <p class="eyebrow">Media Kit</p>
+      <h1>Assets and guidance for press, podcasts, and events.</h1>
+      <p>Everything you need to introduce Daniel Johnson accurately — bio, headshots, logos, speaking topics, and positioning guidance.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Positioning"
+        title="Please avoid describing Daniel as…"
+        intro="Using the right language protects Daniel's positioning across press, podcasts, and events."
+      />
+      <div class="max-w-3xl">
+        <div class="card p-8 md:p-10 border-2 border-[color:var(--accent)]/30 bg-[color:var(--accent)]/5">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 text-[color:var(--accent)]">Do not use these descriptions</h3>
+          <ul class="space-y-3">
+            {doNotDescribeAs.map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="text-[color:var(--accent)] mt-0.5">✕</span>
+                <span class="text-lg">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <aside class="reveal card p-5 md:p-6">
-          <img alt={siteImages.heroCutout.alt} class="aspect-[4/5] w-full rounded-xl object-cover object-top" height={siteImages.heroCutout.height} loading="eager" src={siteImages.heroCutout.src} width={siteImages.heroCutout.width} />
-        </aside>
-      </div>
-      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {availability.map((item) => (
-          <article class="reveal card p-5">
-            <p class="text-base font-bold leading-7 tracking-[-0.02em]">{item}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 
-  <section class="dark-section section-space">
-    <div class="shell">
-      <SectionHeader eyebrow="Proof" intro="Credibility points for show notes, article intros, speaker pages, and producer research." title="Useful proof near the top." />
-      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {[
-          [proofStats.revenueImpact, "revenue impact"],
-          [proofStats.adSpend, "managed ad spend"],
-          [proofStats.startupsAdvised, "startups advised"],
-          [proofStats.mentorSessions, "founder mentoring sessions"]
-        ].map(([metric, label]) => (
-          <article class="reveal card p-6">
-            <p class="text-4xl font-extrabold tracking-[-0.05em] text-white md:text-5xl">{metric}</p>
-            <p class="mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-white/60">{label}</p>
-          </article>
-        ))}
-      </div>
-      <div class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {trustLogos.map((item) => (
-          <article class="reveal logo-card flex items-center justify-between gap-4 px-5 py-4">
-            <img alt={item.alt} class="h-10 w-auto max-w-[10rem] object-contain" height="48" loading="lazy" src={item.src} width="180" />
-            <span class="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/60">{item.label}</span>
-          </article>
-        ))}
-        {trustAffiliations.slice(0, 2).map((item) => (
-          <article class="reveal logo-card logo-card-text flex items-center px-5 py-4">
-            <span class="text-sm font-semibold leading-6 text-white/80">{item}</span>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space">
-    <div class="shell">
-      <SectionHeader eyebrow="Bios" intro="Use the version that fits your format. The tighter positioning should lead with AI startups, B2B SaaS, founder-led growth, and repeatable GTM systems." title="Copy/paste bios." />
-      <div class="mt-10 grid gap-5">
-        {bios.map((bio) => (
-          <article class="reveal card p-6 md:p-8">
-            <p class="card-label">{bio.label}</p>
-            <p class="mt-5 whitespace-pre-line text-base leading-8 text-[color:var(--muted)]">{bio.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label">Headshots and assets</p>
-          <div class="mt-6 grid gap-5 sm:grid-cols-2">
-            <img alt="Daniel Johnson headshot" class="aspect-square rounded-xl object-cover object-top" src="/images/daniel-headshot.webp" />
-            <img alt="Daniel Johnson square headshot" class="aspect-square rounded-xl object-cover object-top" src={siteImages.speakingCircle.src} />
-          </div>
-          <div class="mt-6 grid gap-3 sm:grid-cols-2">
-            {assets.map((asset) => (
-              <a class="card-muted p-4 text-sm font-bold hover:text-[color:var(--accent)]" href={asset.href} download>{asset.label}</a>
-            ))}
-          </div>
-        </article>
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label">Quick contact route</p>
-          <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
-            For podcasts, press, and speaking: <a class="highlight-text" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+        <div class="card p-8 md:p-10 mt-6">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4">Preferred description</h3>
+          <p class="text-lg leading-8 text-[color:var(--ink)] bg-[color:var(--surface)] p-4 rounded-lg border border-[color:var(--line)]">
+            {preferredDescription}
           </p>
-          <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">Available for remote interviews, podcast recordings, expert quotes, panels, and workshops.</p>
-          <div class="mt-6 grid gap-3">
-            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`}>Email Daniel</a>
-            <a class="button-secondary" href="/podcast-guest/">Book Daniel for your podcast</a>
-            <a class="button-secondary" href="/speaking/">Invite Daniel to speak</a>
-          </div>
-        </article>
+        </div>
+
+        <div class="card p-8 md:p-10 mt-6">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4">One-line bio (short)</h3>
+          <p class="text-lg leading-8 text-[color:var(--muted)]">
+            Daniel Johnson is a fractional CMO helping post-PMF AI and B2B SaaS startups build growth systems that run without the founder.
+          </p>
+        </div>
+
+        <div class="card p-8 md:p-10 mt-6">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4">Two-line bio (standard)</h3>
+          <p class="text-lg leading-8 text-[color:var(--muted)]">
+            Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF AI and B2B SaaS startups. He embeds as senior GTM leadership to build repeatable acquisition systems, then transfers them to the team.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section-space pt-0">
+  <section class="section section-alt">
     <div class="shell">
-      <div class="grid gap-8 lg:grid-cols-3">
-        <article class="reveal card p-6 md:p-7">
-          <p class="card-label">Areas Daniel can comment on</p>
-          <ul class="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--muted)]">{commentAreas.map((item) => <li>{item}</li>)}</ul>
-        </article>
-        <article class="reveal card p-6 md:p-7">
-          <p class="card-label">Podcast topics</p>
-          <ul class="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--muted)]">{podcastTopics.map((item) => <li>{item}</li>)}</ul>
-        </article>
-        <article class="reveal card p-6 md:p-7">
-          <p class="card-label">Press quote topics</p>
-          <ul class="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--muted)]">{pressQuoteTopics.map((item) => <li>{item}</li>)}</ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label">Speaking topics</p>
-          <ul class="mt-5 grid gap-3 text-base leading-8 text-[color:var(--muted)]">{speakingTopics.map((item) => <li>{item}</li>)}</ul>
-        </article>
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label">Suggested interview formats</p>
-          <div class="mt-5 grid gap-3 sm:grid-cols-2">
-            {formats.map((item) => (
-              <span class="card-muted p-4 text-sm font-bold">{item}</span>
-            ))}
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader eyebrow="Selected writing" intro="These pieces are useful starting points for interviews, quotes, and podcast conversations." title="Thinking worth citing." />
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
-        {articles.map((article) => (
-          <article class="reveal card p-6 md:p-7">
-            <h2 class="text-2xl font-semibold tracking-[-0.04em]"><a href={`/writing/${article.id}`}>{article.data.title}</a></h2>
-            <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
-            <a class="link-arrow mt-5" href={`/writing/${article.id}`}>Read essay</a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader eyebrow="Selected talks" intro="A quick sample of stage, workshop, and programme experience." title="Talks and rooms." />
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
-        {talks.map((talk) => (
-          <article class="reveal card p-6 md:p-7">
-            <div class="flex flex-wrap gap-2">
-              <span class="chip">{talk.data.organiser}</span>
-              <span class="chip">{talk.data.yearLabel}</span>
+      <SectionHeader
+        eyebrow="Quick facts"
+        title="Key details for producers and editors."
+        intro="Use these facts for intros, bios, and speaker blurbs."
+      />
+      <div class="max-w-3xl">
+        <div class="grid gap-4">
+          {quickFacts.map((fact) => (
+            <div class="card p-4 flex items-center gap-4">
+              <span class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] w-40 shrink-0">{fact.label}</span>
+              <span class="text-base font-medium text-[color:var(--ink)]">{fact.value}</span>
             </div>
-            <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">{talk.data.title}</h2>
-            <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{talk.data.summary}</p>
-          </article>
-        ))}
-      </div>
-      {speakingVideos.length > 0 && (
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          {speakingVideos.slice(0, 2).map((video) => (
-            <a class="reveal video-example-card" href={video.href} rel="noreferrer" target="_blank">
-              <img alt={`${video.title} video thumbnail`} height="360" loading="lazy" src={video.thumbnail} width="480" />
-              <div>
-                <p class="card-label">{video.source}</p>
-                <h2>{video.title}</h2>
-                <p>{video.description}</p>
-              </div>
-            </a>
           ))}
         </div>
-      )}
+      </div>
     </div>
   </section>
 
-  <section class="section-space pt-0">
+  <section class="section">
     <div class="shell">
-      <div class="reveal social-panel">
-        <div>
-          <p class="card-label">Send this to your producer</p>
-          <h2>Daniel is available for podcasts, press commentary, and talks on AI-native GTM, founder-led growth, and startup growth systems.</h2>
-          <p>Use the intro, bios, headshots, and topic list above. For booking or quotes, email Daniel directly.</p>
-        </div>
-        <div class="social-link-grid">
-          <a href={`mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`}>Email Daniel</a>
-          <a href="/media/daniel-johnson-approved-intro.txt">Download approved intro</a>
-          <a href="/media/daniel-johnson-topic-list.txt">Download topic list</a>
-          {socialLinks.slice(0, 3).map((item) => (
-            <a href={item.href} rel="noreferrer" target="_blank">{item.label}</a>
+      <SectionHeader
+        eyebrow="Affiliations"
+        title="How to reference each relationship."
+        intro="Daniel works with the following organisations in various capacities. Please reference the relationship accurately."
+      />
+      <div class="max-w-3xl">
+        <div class="grid gap-4">
+          {affiliations.map((item) => (
+            <div class="card p-4 flex items-center gap-4">
+              <span class="font-semibold text-[color:var(--ink)] min-w-[140px]">{item.name}</span>
+              <span class="text-[color:var(--muted)]">{item.relationship}</span>
+            </div>
           ))}
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Platforms & communities"
+        title="Where to find Daniel online."
+        intro="Key platforms for organisers, podcast hosts, and community managers to reference."
+      />
+      <div class="max-w-3xl">
+        <div class="grid gap-3">
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">GrowthMentor</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Top-rated mentor</span>
+            </div>
+            <a href={siteConfig.growthMentor} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
+          </div>
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">MentorCruise</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Verified mentor</span>
+            </div>
+            <a href={siteConfig.mentorCruise} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
+          </div>
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">Malt</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Freelance platform</span>
+            </div>
+            <a href={siteConfig.malt} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
+          </div>
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">Pangea</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Talent platform</span>
+            </div>
+            <a href={siteConfig.pangea} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
+          </div>
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">LinkedIn</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Professional network</span>
+            </div>
+            <a href={siteConfig.linkedin} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
+          </div>
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">YouTube</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Video content</span>
+            </div>
+            <a href={siteConfig.youtube} class="text-sm link-arrow" target="_blank" rel="noreferrer">View channel →</a>
+          </div>
+          <div class="card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="font-semibold text-[color:var(--ink)]">Instagram</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Social presence</span>
+            </div>
+            <a href={siteConfig.instagram} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Positioning reinforcement"
+        title="What the feedback consistently says."
+        intro="Direct quotes from founders and organisers that reinforce Daniel's positioning as a clear, practical, no-nonsense operator."
+      />
+      <div class="max-w-3xl grid gap-4">
+        <div class="card p-5 border-l-4 border-[color:var(--accent)]">
+          <p class="text-base leading-7 text-[color:var(--ink)]">"Finally, a growth talk that cuts through the fluff. Clear frameworks I could use the next day."</p>
+          <p class="mt-2 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">Nomad Summit attendee</p>
+        </div>
+        <div class="card p-5 border-l-4 border-[color:var(--accent)]">
+          <p class="text-base leading-7 text-[color:var(--ink)]">"No-nonsense, practical, and specific to our stage. Exactly what we needed."</p>
+          <p class="mt-2 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">SaaS & AI SEO session</p>
+        </div>
+        <div class="card p-5 border-l-4 border-[color:var(--accent)]">
+          <p class="text-base leading-7 text-[color:var(--ink)]">"The clearest positioning session we've had. No theory, just what to change."</p>
+          <p class="mt-2 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">Growth workshop attendee</p>
+        </div>
+        <div class="card p-5 border-l-4 border-[color:var(--accent)]">
+          <p class="text-base leading-7 text-[color:var(--ink)]">"Daniel walked in, saw the whole system at once, and named the two levers that mattered."</p>
+          <p class="mt-2 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">Christian A., Founder — AI Healthtech</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Speaking topics"
+        title="Ready-to-use talk themes."
+        intro="Daniel speaks on AI-native GTM, growth systems, and fractional leadership for post-PMF startups."
+      />
+      <div class="max-w-3xl grid gap-5">
+        <div class="card p-6">
+          <h3 class="font-bold text-lg">AI-Native GTM: What It Actually Means</h3>
+          <p class="mt-2 text-[color:var(--muted)]">How generative and agentic AI accelerate ICP research, messaging tests, and campaign iteration — without replacing human GTM judgement.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold text-lg">Growth Systems vs. Campaigns</h3>
+          <p class="mt-2 text-[color:var(--muted)]">Why most startup growth advice is wrong, and how to build a system your team can run after the fractional CMO leaves.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold text-lg">Fractional CMO: When It Works, When It Doesn't</h3>
+          <p class="mt-2 text-[color:var(--muted)]">The honest comparison between agency, full-time hire, and fractional CMO for Seed to Series B startups.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold text-lg">Founder-Led Sales: When to Scale Out</h3>
+          <p class="mt-2 text-[color:var(--muted)]">How to recognise when founder dependency is plateauing growth, and the system to build so the team can take over.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Assets"
+        title="Headshots and logos."
+        intro="Download high-resolution assets for press and event use."
+      />
+      <div class="max-w-3xl grid gap-5 md:grid-cols-2">
+        <a class="card p-6" href="/images/daniel-headshot.webp" download>
+          <h3 class="font-bold">Daniel Headshot (WebP)</h3>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">High-resolution headshot for press use.</p>
+          <span class="link-arrow mt-4">Download →</span>
+        </a>
+        <a class="card p-6" href="/images/daniel-headshot-640.webp" download>
+          <h3 class="font-bold">Daniel Headshot (Small)</h3>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Smaller version for web and digital use.</p>
+          <span class="link-arrow mt-4">Download →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Book Daniel</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">For speaking, workshops, or fractional CMO enquiries.</h2>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl}>Book a 30-min Growth Audit →</a>
+        <a class="button-link-invert" href="/speaking/">Speaking assets →</a>
       </div>
     </div>
   </section>

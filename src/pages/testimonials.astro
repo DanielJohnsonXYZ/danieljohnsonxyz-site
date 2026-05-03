@@ -99,7 +99,12 @@ const counts = categories.reduce<Record<string, number>>((acc, c) => {
               </p>
               {t.data.source && (
                 <p class="mt-1 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">
-                  {t.data.source}
+                  {t.data.source}{t.data.date ? ` · ${t.data.date}` : ""}
+                </p>
+              )}
+              {t.data.permission && t.data.permission !== "public" && (
+                <p class="mt-1 text-xs font-medium {t.data.permission === 'anonymous' ? 'text-[color:var(--muted)]' : 'text-amber-600'}">
+                  {t.data.permission === "anonymous" ? "Anonymous" : "Permission required for public use"}
                 </p>
               )}
             </figcaption>
