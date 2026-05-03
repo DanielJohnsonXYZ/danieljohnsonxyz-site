@@ -101,6 +101,9 @@ document.addEventListener('click', (event) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0b0c" />
+    <!-- Google Tag Manager — high in <head> per GTM install instructions. -->
+    <script is:inline set:html={gtmScript}></script>
+    <!-- End Google Tag Manager -->
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
@@ -150,8 +153,6 @@ document.addEventListener('click', (event) => {
     <meta name="ai:serves" content="Seed to Series B AI and B2B SaaS founders" />
     <meta name="ai:contact" content={siteConfig.bookingUrl} />
 
-    <script is:inline set:html={gtmScript}></script>
-
     {
       serializedSchemas.map((json) => (
         <script is:inline type="application/ld+json" set:html={json} />
@@ -160,10 +161,7 @@ document.addEventListener('click', (event) => {
   </head>
 
   <body class="overflow-x-hidden">
-    <a class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-black focus:px-4 focus:py-2 focus:text-white" href="#main-content">
-      Skip to content
-    </a>
-
+    <!-- Google Tag Manager (noscript) — immediately after <body> per GTM install instructions. -->
     <noscript>
       <iframe
         height="0"
@@ -172,6 +170,11 @@ document.addEventListener('click', (event) => {
         width="0"
       ></iframe>
     </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <a class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-black focus:px-4 focus:py-2 focus:text-white" href="#main-content">
+      Skip to content
+    </a>
 
     <SiteHeader currentPath={Astro.url.pathname} mediaCta={mediaCta} />
 
