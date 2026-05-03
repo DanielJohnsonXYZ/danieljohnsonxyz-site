@@ -7,7 +7,9 @@ export const prerender = true;
 const today = () => new Date().toISOString().slice(0, 10);
 
 function urlNode(path: string, lastmod: string = today()) {
-  const withSlash = path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
+  const hasFileExt = /\.[a-z0-9]+$/i.test(path);
+  const withSlash =
+    path === "/" ? "/" : path.endsWith("/") ? path : hasFileExt ? path : `${path}/`;
   return `<url><loc>${absoluteUrl(withSlash)}</loc><lastmod>${lastmod}</lastmod></url>`;
 }
 
@@ -21,6 +23,7 @@ export const GET: APIRoute = async () => {
     "/growth-audit/",
     "/strategy-sprint/",
     "/fractional-cmo/",
+    "/fractional-cmo-cost-uk/",
     "/fractional-cmo-vs-agency/",
     "/fractional-cmo-vs-full-time-cmo/",
     "/compare-growth-options/",

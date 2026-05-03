@@ -1,0 +1,181 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
+import { ctas, siteConfig } from "../site";
+
+const faq = [
+  {
+    question: "What do UK fractional CMO engagements typically cost?",
+    answer:
+      "Daniel’s public anchors are a £6k Strategy Sprint (2–4 weeks), £7.5k/month for embedded Fractional CMO (1 day/week, 3-month minimum), and £12k/month for Fractional CMO Plus (~2 days/week). Final scope depends on days per week, reporting depth, and how many channels need senior ownership."
+  },
+  {
+    question: "What moves the price up or down?",
+    answer:
+      "Days per week, number of acquisition channels in scope, agency or contractor coordination, reporting and CRM hygiene, international go-to-market complexity, and how much of the first 90 days is diagnosis versus execution. A sprint is fixed-duration; ongoing retainers scale with embedded time."
+  },
+  {
+    question: "How does that compare to a full-time UK CMO?",
+    answer:
+      "A full-time marketing leader is often £120–180k base plus bonus, pension, and recruitment fees, with a multi-month ramp. Fractional work buys senior judgement in days per week without that fixed cost. See the full-time comparison page for TCO framing."
+  },
+  {
+    question: "Is VAT included?",
+    answer:
+      "Quotes are discussed on the call. UK B2B buyers should assume VAT may apply depending on entity and place of supply. The Growth Audit call is the right place to align commercial shape."
+  },
+  {
+    question: "Where can I model ROI in UK terms?",
+    answer:
+      "Use the on-site ROI calculator to stress-test payback against your pipeline assumptions, then book a Growth Audit if you want a human read on whether fractional support fits."
+  }
+];
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Fractional CMO", url: "/fractional-cmo/" },
+    { name: "Cost (UK)", url: "/fractional-cmo-cost-uk/" }
+  ]),
+  buildFaqPageSchema(faq)
+];
+
+const anchors = [
+  {
+    title: "Strategy Sprint",
+    range: "From £6,000",
+    body: "Two to four weeks. Diagnosis, 90-day priorities, first artefacts, and the first tests in motion. Best when you need clarity and momentum before a retainer."
+  },
+  {
+    title: "Fractional CMO",
+    range: "From £7,500 / month",
+    body: "One day a week of embedded senior ownership, 3-month minimum. Weekly rhythm, reporting, acquisition and positioning decisions, team and agency context."
+  },
+  {
+    title: "Fractional CMO Plus",
+    range: "From £12,000 / month",
+    body: "Roughly two days a week. For teams that need faster execution, heavier agency management, or more parallel channel work while keeping one senior owner."
+  }
+];
+---
+
+<BaseLayout
+  description="UK fractional CMO cost guide: benchmark ranges for sprint and retainer engagements, what moves price, comparison to full-time hire, and links to ROI modelling and booking."
+  keywords="fractional CMO cost UK, fractional CMO pricing UK, CMO retainer UK, startup marketing leadership cost"
+  path="/fractional-cmo-cost-uk/"
+  schema={schemas}
+  stickyCta={false}
+  title="Fractional CMO Cost (UK) | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="service-label justify-center">Pricing · UK context</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          What a UK fractional CMO <span class="hero-accent">actually costs</span>
+        </h1>
+        <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
+          Public anchors for sprint and retainer work, what changes the number, and how that compares to a full-time hire — so finance and founders can sanity-check the decision before a call.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <a class="button-accent" href="/growth-audit/" data-cta="cost-uk-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link" href="/roi-calculator/" data-cta="cost-uk-roi">
+            Model ROI (UK) →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Benchmarks"
+        title="Three shapes founders actually buy."
+        intro="These are the same anchors as the Fractional CMO service page — repeated here for search and finance reviewers who land on cost-first queries."
+      />
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        {anchors.map((tier) => (
+          <article class="card p-7">
+            <p class="card-label">{tier.title}</p>
+            <p class="mt-3 text-2xl font-extrabold tracking-[-0.05em]">{tier.range}</p>
+            <p class="mt-4 leading-7 text-[color:var(--muted)]">{tier.body}</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm leading-7 text-[color:var(--muted)]">
+        Full scope, week structure, and fit filters live on{" "}
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">
+          the Fractional CMO page
+        </a>
+        . TCO versus a full-time CMO is on{" "}
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-full-time-cmo/">
+          the comparison page
+        </a>
+        .
+      </p>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <div>
+        <span class="service-label text-white/80">What moves price</span>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-[-0.05em] text-white md:text-4xl">Senior judgement is priced in days per week and decision surface area.</h2>
+        <p class="mt-4 leading-8 text-white/75">
+          More channels, more stakeholders, weaker reporting, or a messy handoff from founder-led sales usually increases the time required to run a clean weekly rhythm. That is why the call focuses on bottleneck and team shape before quoting.
+        </p>
+      </div>
+      <ul class="grid gap-3 text-white">
+        {[
+          "Embedded days per week (1 vs ~2)",
+          "Depth of reporting, CRM, and funnel instrumentation",
+          "Number of live acquisition experiments in parallel",
+          "Agency or contractor coordination load",
+          "International or multi-segment GTM complexity"
+        ].map((item) => (
+          <li class="rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-sm font-semibold leading-6">{item}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-space pt-0" id="faq" aria-labelledby="faq-heading">
+    <div class="shell">
+      <SectionHeader eyebrow="FAQ" title="Cost questions that show up before the first call." />
+      <div class="faq-stack mt-8 mx-auto max-w-3xl">
+        {faq.map((item, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <article class="card grid gap-6 p-8 md:grid-cols-[1fr_auto] md:items-center md:p-10">
+        <div>
+          <p class="card-label">Next step</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-[-0.05em]">Sanity-check the number against your pipeline.</h2>
+          <p class="mt-3 text-[color:var(--muted)]">
+            Use the ROI calculator, then book a 30-minute Growth Audit if you want a direct read on fit — no pitch deck, no obligation.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a class="button-accent" href="/roi-calculator/" data-cta="cost-uk-footer-roi">
+            Open ROI calculator →
+          </a>
+          <a class="button-link" href="/growth-audit/" data-cta="cost-uk-footer-book">
+            {siteConfig.bookingLabel} →
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

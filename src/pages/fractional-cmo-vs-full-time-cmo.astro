@@ -78,6 +78,77 @@ const tldr =
   </section>
 
   <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="UK hiring maths"
+        title="Total cost of a full-time UK CMO in year one."
+        intro="Founders compare retainer lines to salary lines. The honest comparison needs employer costs, recruiter fees, and ramp — not just the base number on the job spec."
+      />
+      <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <article class="card p-7">
+          <p class="card-label">Worked example</p>
+          <p class="mt-4 leading-8 text-[color:var(--muted)]">
+            Take a <strong class="text-[color:var(--ink)]">£120k</strong> base. Employer National Insurance is broadly{" "}
+            <strong class="text-[color:var(--ink)]">13.8%</strong> on earnings above the secondary threshold (~£16.6k on this band in 2025/26 terms — verify with your payroll).
+            Pension auto-enrolment employer contribution is often <strong class="text-[color:var(--ink)]">3–5%</strong> of qualifying
+            earnings (£3.6–6k on a £120k base depending on scheme rules). Specialist CMO search fees commonly land around{" "}
+            <strong class="text-[color:var(--ink)]">£24–36k</strong> (20–30% of first-year cash compensation). Add three to six months of
+            ramp where pipeline impact is still building. That first year is rarely &quot;just&quot; £120k.
+          </p>
+        </article>
+        <article class="card p-7">
+          <p class="card-label">Contrast with fractional anchors</p>
+          <p class="mt-4 leading-8 text-[color:var(--muted)]">
+            Published fractional anchors: <strong class="text-[color:var(--ink)]">£7.5k/month</strong> (1 day/week) and{" "}
+            <strong class="text-[color:var(--ink)]">£12k/month</strong> (deeper support) with a 3-month minimum — see{" "}
+            <a class="font-semibold text-[color:var(--accent)] underline underline-offset-4" href="/fractional-cmo-cost-uk/">
+              the UK cost page
+            </a>{" "}
+            and{" "}
+            <a class="font-semibold text-[color:var(--accent)] underline underline-offset-4" href="/roi-calculator/">
+              ROI calculator
+            </a>
+            . This is not a like-for-like replacement for a five-day executive — it is a bridge that buys senior judgement and an operating system without the full employment stack.
+          </p>
+        </article>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
+        <table class="w-full min-w-[520px] text-left text-sm">
+          <thead class="bg-[color:var(--surface-dim)]">
+            <tr>
+              <th class="p-4">Line item</th>
+              <th class="p-4">Full-time CMO (illustrative year 1)</th>
+              <th class="p-4">Fractional (illustrative 12 months)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Cash compensation</td>
+              <td class="p-4 text-[color:var(--muted)]">£120k base (+ bonus if offered)</td>
+              <td class="p-4 text-[color:var(--muted)]">£90k at £7.5k/mo · £144k at £12k/mo</td>
+            </tr>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Employer NI + pension (order of magnitude)</td>
+              <td class="p-4 text-[color:var(--muted)]">Often ~£20–25k combined on this base — confirm with payroll</td>
+              <td class="p-4 text-[color:var(--muted)]">N/A — B2B services engagement</td>
+            </tr>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Recruitment</td>
+              <td class="p-4 text-[color:var(--muted)]">Often £24–36k for senior marketing search</td>
+              <td class="p-4 text-[color:var(--muted)]">None in this model</td>
+            </tr>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Commitment / exit</td>
+              <td class="p-4 text-[color:var(--muted)]">Permanent — notice, severance risk, equity grants</td>
+              <td class="p-4 text-[color:var(--muted)]">3-month minimum then rolling — scope-led exit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
     <div class="shell grid gap-6 md:grid-cols-2">
       <article class="card p-6 md:p-8 card-accent-border">
         <p class="card-label text-[color:var(--accent)]">Pick a fractional CMO when…</p>
@@ -118,7 +189,7 @@ const tldr =
 
   <section class="section-space" aria-labelledby="vs-fulltime-faq-heading">
     <div class="shell">
-      <SectionHeader eyebrow="FAQ" title="Three more questions founders ask." />
+      <SectionHeader eyebrow="FAQ" title="Questions founders ask before they choose." />
       <div class="faq-stack mt-8 mx-auto max-w-3xl">
         {vsFulltimeCMO.faq.map((item, index) => (
           <details class="faq-item" open={index === 0}>

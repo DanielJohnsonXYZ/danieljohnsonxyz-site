@@ -99,33 +99,50 @@ const imageStoryCards = [
   }
 ];
 
-// ─── FAQ ────────────────────────────────────────────────────────────────
-const faq = [
+// ─── FAQ (homepage objections — matches hub brief; visible block + FAQPage schema) ─
+const homepageFaq: Array<{
+  question: string;
+  answer: string;
+  link?: { href: string; label: string };
+}> = [
   {
-    question: "Who do you work with?",
+    question: "What does a fractional CMO actually do day-to-day?",
     answer:
-      "Founders of post-PMF AI and B2B SaaS startups, typically Seed to Series B. Product-strong teams where growth has plateaued or feels noisy and hard to prioritise. UK-based, currently working from Asia, serving US, UK, Europe, and APAC clients remotely."
+      "Owns the weekly GTM rhythm: sharp ICP and positioning, channel and experiment priorities, reporting that drives scale/stop/fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings — not a monthly slide deck."
   },
   {
-    question: "What's the difference between a fractional CMO and a growth operator?",
+    question: "How is this different from hiring a full-time CMO?",
     answer:
-      "Same seniority, different framing. 'Growth operator' signals that I work at the intersection of product and growth, build systems rather than campaigns, and operate rather than just advise. 'Fractional CMO' is the label buyers expect on job boards and mentoring platforms, so it appears where that's useful."
+      "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
+    link: { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time →" }
   },
   {
-    question: "What does \"AI-native\" mean in practice?",
+    question: "What stage should my startup be at?",
     answer:
-      "Every engagement uses generative and agentic AI to accelerate ICP research, messaging tests, competitor teardowns, outbound sequences, and content, reducing execution time without sacrificing rigour. You pay for senior judgement, not manual consulting deliverables."
+      "Post-PMF with real revenue and repeat buyers — typically Seed to Series B — where the constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product; the GTM system comes after that clarity.",
+    link: { href: "/fractional-cmo-vs-full-time-cmo/", label: "When each model fits →" }
   },
   {
-    question: "Are you open to full-time roles?",
+    question: "How quickly will I see results?",
     answer:
-      "Primary focus is fractional CMO engagements. I'll consider a full-time Head of Growth or VP Marketing role for the right post-PMF AI or B2B SaaS company. Book a growth audit to discuss either way."
+      "You should see sharper decisions and cleaner reporting within the first few weeks; meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I do not promise miracles — I promise a visible system and honest calls on what is working."
+  },
+  {
+    question: "What does it cost?",
+    answer:
+      "UK engagements typically start around £6k for a short strategy sprint, £7.5–12k/month for fractional CMO (3-month minimum), scoped to days per week and depth. The service page lists how the week runs; the UK cost page lists benchmark ranges and what moves price.",
+    link: { href: "/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK) →" }
+  },
+  {
+    question: "How do I know if this will work for my business?",
+    answer:
+      "If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 30-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong."
   }
 ];
 
 // ─── Structured data ────────────────────────────────────────────────────
 const schemas = [
-  buildFaqPageSchema(faq),
+  buildFaqPageSchema(homepageFaq.map(({ question, answer }) => ({ question, answer }))),
   buildAggregateRatingSchema(),
   buildServiceSchema({
     name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
@@ -673,7 +690,42 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 14. Final CTA ───────────────────────────────────────────────── -->
+  <!-- 14. FAQ — objections before the final CTA ─────────────────────── -->
+  <section class="section-space pt-0" id="faq" aria-labelledby="home-faq-heading">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="FAQ"
+        title="Questions founders ask before a first call."
+        intro="Six practical answers on scope, stage, timing, cost, and fit — same topics we cover on the audit so you are not buying blind."
+      />
+      <div class="faq-stack mt-8 mx-auto max-w-3xl">
+        {
+          homepageFaq.map((item, index) => (
+            <details class="faq-item" open={index === 0}>
+              <summary>{item.question}</summary>
+              <p>
+                {item.answer}
+                {item.link && (
+                  <>
+                    {" "}
+                    <a
+                      class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]"
+                      href={item.link.href}
+                      data-cta={`home-faq-${index}`}
+                    >
+                      {item.link.label}
+                    </a>
+                  </>
+                )}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. Final CTA ───────────────────────────────────────────────── -->
   <section class="cta-gradient section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">

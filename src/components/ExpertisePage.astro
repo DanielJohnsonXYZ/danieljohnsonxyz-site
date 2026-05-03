@@ -49,6 +49,8 @@ interface Props {
   /** Override default booking CTA copy (Growth Hub: contextual CTAs per expertise page). */
   bookCtaLabel?: string;
   bookCtaHref?: string;
+  /** Optional softer third CTA in the final band (checklist, download, etc.). */
+  finalSoftCta?: { href: string; label: string };
 }
 
 const props = Astro.props as Props;
@@ -254,6 +256,11 @@ const faqSchema = {
           <a class="button-link-invert" href={ctas.caseStudies.href} data-cta={`${props.eyebrow}-final-cases`}>
             {ctas.caseStudies.label} →
           </a>
+          {props.finalSoftCta && (
+            <a class="button-link-invert" href={props.finalSoftCta.href} data-cta={`${props.eyebrow}-final-soft`}>
+              {props.finalSoftCta.label} →
+            </a>
+          )}
         </div>
         <div class="text-sm text-white/55">
           Prefer email?{" "}

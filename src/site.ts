@@ -636,6 +636,11 @@ export const vsFulltimeCMO = {
     "Many founders use a fractional CMO as the bridge: 6–12 months of embedded leadership while they recruit, then the fractional CMO hands off the operating system to the new full-time hire. Cleaner than starting cold.",
   faq: [
     {
+      question: "Is a fractional CMO cheaper in the UK?",
+      answer:
+        "Usually yes on first-year cash and employment risk, when you compare a retainer to the true cost of hiring. A £120k base marketing leader often lands around £170–200k+ in year one once employer National Insurance, pension auto-enrolment, recruiter fees, and a realistic ramp are included — before equity. A 12-month fractional engagement at published anchor pricing is typically lower cash cost, with a 3-month minimum instead of permanent notice periods. Use your own payroll and recruiter quotes for board-ready numbers."
+    },
+    {
       question: "Can a fractional CMO bridge into a full-time hire?",
       answer:
         "Yes. The most common pattern: fractional CMO embeds for 6–9 months, builds the operating system, scopes the full-time role accurately, helps interview, then hands off cleanly. The new CMO inherits a working system instead of starting from zero."

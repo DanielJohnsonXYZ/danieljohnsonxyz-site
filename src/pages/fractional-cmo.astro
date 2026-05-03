@@ -352,7 +352,16 @@ const schemas = [
 
   <section class="section-space pt-0">
     <div class="shell">
-      <SectionHeader eyebrow="Pricing" title="Clear starting points before scope gets specific." intro="Three shapes. Pick the closest fit — we refine on the call." />
+      <SectionHeader
+        eyebrow="Pricing"
+        title="Clear starting points before scope gets specific."
+        intro="Three shapes. Pick the closest fit — we refine on the call. UK benchmark framing and what moves price: see the dedicated cost page."
+      />
+      <p class="reveal mt-4 text-center text-sm leading-7 text-[color:var(--muted)]">
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-cost-uk/" data-cta="fractional-pricing-cost-uk">
+          Fractional CMO cost (UK) — benchmarks & FAQ →
+        </a>
+      </p>
 
       <div class="mt-8 grid gap-4 md:grid-cols-3">
         {pricing.map((tier) => (
