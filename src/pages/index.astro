@@ -227,6 +227,34 @@ const schemas = [
             <p class="availability-line">{siteConfig.availability}</p>
           </div>
 
+          <p class="reveal max-w-2xl text-sm leading-6 text-[color:var(--muted)]">
+            Not ready to book?{" "}
+            <a
+              class="font-semibold text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
+              href="/newsletter/"
+              data-cta="hero-soft-newsletter"
+            >
+              Get practical notes on AI-native GTM and founder-led growth
+            </a>
+            ,{" "}
+            <a
+              class="font-semibold text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
+              href="/growth-bottleneck-checklist/"
+              data-cta="hero-soft-checklist"
+            >
+              download the Growth Bottleneck Checklist
+            </a>
+            , or{" "}
+            <a
+              class="font-semibold text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
+              href={ctas.bottleneck.href}
+              data-cta="hero-soft-diagnostic"
+            >
+              run the 2-minute diagnostic
+            </a>
+            .
+          </p>
+
           <aside
             class="commercial-path-note reveal mt-5 max-w-2xl rounded-lg border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 text-sm leading-6 text-[color:var(--muted)]"
             aria-label="How this site relates to We Scale Startups"

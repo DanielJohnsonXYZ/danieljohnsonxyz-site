@@ -7,7 +7,7 @@ export const siteConfig = {
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
-  lastUpdated: "2 May 2026",
+  lastUpdated: "5 May 2026",
 
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
