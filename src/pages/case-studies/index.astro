@@ -1,38 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import CfEmailOff from "../../components/CfEmailOff.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
 
 const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
-
-// Honest state: if we only have one case study live, the page still needs
-// to look intentional rather than thin. These "coming next" placeholders
-// render as upcoming cards so the grid isn't a single lonely tile.
-const comingNext = [
-  {
-    stage: "Series A",
-    sector: "AI DevTools",
-    title: "CAC down 35% in 8 weeks by rebuilding paid structure and ICP segmentation.",
-    description:
-      "Full write-up publishing shortly — the short version is in the homepage proof strip. Book a call and I'll walk you through the detail now."
-  },
-  {
-    stage: "Seed",
-    sector: "US B2B Fintech",
-    title: "500+ qualified signups from a single campaign at 8.6% CTR.",
-    description:
-      "Engagement diagnosed ICP and positioning before touching channel. Publishing the detailed write-up after client review."
-  },
-  {
-    stage: "Growth",
-    sector: "eCommerce",
-    title: "21% less churn in 90 days through lifecycle and win-back messaging.",
-    description:
-      "Case study in final review with the client. Email daniel@wescalestartups.com if you'd like the numbers in the meantime."
-  }
-];
 ---
 
 <BaseLayout
@@ -117,28 +91,18 @@ const comingNext = [
         }
       </div>
 
-      <!-- Placeholders only when there are no live case studies yet. -->
       {caseStudies.length === 0 && (
-        <div class="mt-10">
-          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">Publishing next</p>
-          <div class="grid gap-5 lg:grid-cols-2">
-            {comingNext.map((item) => (
-              <article class="card p-6 md:p-8 bg-[color:var(--surface-dim)] border-dashed">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="chip">{item.stage}</span>
-                  <span class="chip">{item.sector}</span>
-                  <span class="chip bg-[color:var(--accent)]/10 text-[color:var(--accent)]">Publishing next</span>
-                </div>
-                <h2 class="mt-5 text-2xl font-bold tracking-[-0.04em] md:text-3xl">
-                  {item.title}
-                </h2>
-                <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{item.description}</p>
-                <a class="link-arrow mt-5" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
-                  Ask for the numbers on a call →
-                </a>
-              </article>
-            ))}
-          </div>
+        <div class="mt-10 reveal card max-w-3xl p-6 md:p-8">
+          <p class="card-label">More write-ups</p>
+          <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">
+            Additional anonymised case studies will be added here when each one is ready to publish. Until then, see the{" "}
+            <a class="link-arrow" href="/#proof">outcome snapshots on the homepage</a>
+            {" "}or{" "}
+            <a class="link-arrow" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+              book a call
+            </a>
+            {" "}to walk through similar engagements in detail.
+          </p>
         </div>
       )}
     </div>
@@ -159,7 +123,9 @@ const comingNext = [
           </div>
           <div class="flex flex-col gap-3">
             <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-            <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+            <CfEmailOff>
+              <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+            </CfEmailOff>
           </div>
         </div>
       </div>
