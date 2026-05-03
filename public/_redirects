@@ -15,6 +15,9 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /podcast-appearances      /podcast-guest/  301
 /podcast-appearances/     /podcast-guest/  301
 
+/speaking-and-training     /speaking/  301
+/speaking-and-training/    /speaking/  301
+
 /topics-and-talks         /speaking/  301
 /topics-and-talks/        /speaking/  301
 /press-and-media          /speaking/  301
