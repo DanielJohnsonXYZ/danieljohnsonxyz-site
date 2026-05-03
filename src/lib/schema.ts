@@ -311,3 +311,16 @@ export function buildAggregateRatingSchema() {
     url: siteConfig.growthMentorReviews
   };
 }
+
+export function buildWebPageSchema(opts: { name: string; description: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    author: { "@id": `${siteConfig.siteUrl}/#person` },
+    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    inLanguage: "en-US"
+  };
+}

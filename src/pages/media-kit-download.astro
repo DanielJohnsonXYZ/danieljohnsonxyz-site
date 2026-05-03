@@ -1,0 +1,280 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/schema";
+import { absoluteUrl, formatCurrency } from "../lib/utils";
+import { siteConfig, trustLogos } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Media Kit", url: "/media-kit/" },
+    { name: "Download", url: "/media-kit-download/" }
+  ]),
+  buildWebPageSchema({
+    name: "Media Kit Download",
+    description: "Download the Daniel Johnson media kit — bio, headshots, speaking topics, and contact information.",
+    url: absoluteUrl("/media-kit-download/")
+  })
+];
+
+const quickFacts = [
+  { label: "Primary role", value: "Fractional CMO / Growth Operator" },
+  { label: "Focus", value: "Post-PMF AI & B2B SaaS, Seed–Series B" },
+  { label: "Geography", value: "UK-based, serving US, UK, Europe, APAC" },
+  { label: "Typical engagement", value: "£7.5–12k/month, 3-month minimum" },
+  { label: "Track record", value: "20+ startups, £18M+ revenue generated" }
+];
+
+const speakingTopics = [
+  { title: "AI-Native GTM: What It Actually Means", desc: "How generative and agentic AI accelerate ICP research, messaging tests, and campaign iteration — without replacing human GTM judgement." },
+  { title: "Growth Systems vs. Campaigns", desc: "Why most startup growth advice is wrong, and how to build a system your team can run after the fractional CMO leaves." },
+  { title: "Fractional CMO: When It Works, When It Doesn't", desc: "The honest comparison between agency, full-time hire, and fractional CMO for Seed to Series B startups." },
+  { title: "Founder-Led Sales: When to Scale Out", desc: "How to recognise when founder dependency is plateauing growth, and the system to build so the team can take over." }
+];
+
+const pastAppearances = [
+  { event: "Nomad Summit", type: "Speaker", topic: "Growth systems for location-independent startups" },
+  { event: "SaaStock Local", type: "Panelist", topic: "GTM strategies for Seed-stage SaaS" },
+  { event: "GrowthMentor Webinar", type: "Guest Expert", topic: "Fractional CMO model deep-dive" },
+  { event: "AI Founder Circle", type: "Workshop Lead", topic: "AI-native GTM workflows" },
+  { event: "B2B SaaS Collective Podcast", type: "Guest", topic: "Building growth systems that run without the founder" }
+];
+---
+
+<BaseLayout
+  description="Download the Daniel Johnson media kit — official bio, headshot, speaking topics, past appearances, and contact information for press and podcasts."
+  keywords="Daniel Johnson media kit, press kit, speaker bio, podcast guest, headshot download"
+  path="/media-kit-download/"
+  schema={schemas}
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
+        <div class="space-y-6">
+          <span class="service-label">Press & Media</span>
+          <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+            Media Kit Download
+          </h1>
+          <p class="hero-subcopy text-xl leading-9 md:text-2xl">
+            Everything you need to introduce Daniel Johnson in press, podcasts, and events — available as a printable page or PDF.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <button class="button-accent" onclick="window.print()">
+              Print / Save as PDF →
+            </button>
+            <a class="button-link" href="/media-kit/">
+              View online media kit →
+            </a>
+          </div>
+        </div>
+        <aside class="card p-6 md:p-8">
+          <p class="card-label">What's included</p>
+          <ul class="mt-5 scan-list">
+            <li>Professional bio (short & long)</li>
+            <li>High-resolution headshot</li>
+            <li>Speaking topics & talking points</li>
+            <li>Past appearances & affiliations</li>
+            <li>Contact information</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Printable Media Kit Section -->
+  <section class="section-space pt-0" id="printable-kit">
+    <div class="shell">
+      <div class="max-w-4xl mx-auto card p-8 md:p-12 print:shadow-none print:border-none">
+        <!-- Header -->
+        <div class="text-center border-b border-[color:var(--line)] pb-8 mb-8">
+          <h2 class="text-3xl font-extrabold tracking-[-0.06em]">Daniel Johnson</h2>
+          <p class="mt-2 text-lg text-[color:var(--muted)]">Fractional CMO & GTM Operator</p>
+          <p class="mt-1 text-sm text-[color:var(--subtle)]">For AI & B2B SaaS Startups</p>
+        </div>
+
+        <!-- Bio Section -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 pb-2 border-b border-[color:var(--line)]">Biography</h3>
+          <div class="grid gap-6 md:grid-cols-[200px_1fr]">
+            <div class="print:block hidden">
+              <img src="/images/daniel-headshot.webp" alt="Daniel Johnson headshot" class="rounded-xl w-full" />
+            </div>
+            <div class="space-y-4 text-[color:var(--ink)] leading-7">
+              <p><strong>Short bio (1 line):</strong><br/>
+              Daniel Johnson is a fractional CMO helping post-PMF AI and B2B SaaS startups build growth systems that run without the founder.</p>
+              <p><strong>Standard bio (2 lines):</strong><br/>
+              Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF AI and B2B SaaS startups. He embeds as senior GTM leadership to build repeatable acquisition systems, then transfers them to the team.</p>
+              <p><strong>Long bio (full):</strong><br/>
+              Daniel Johnson is a fractional CMO and AI-native growth operator specialising in post-product-market-fit AI and B2B SaaS startups. He embeds as senior GTM leadership to diagnose growth bottlenecks, build repeatable acquisition systems, and transfer them to the team. With 20+ startup engagements and £18M+ revenue generated, Daniel focuses on practical systems over theoretical frameworks. His engagements typically run 3–9 months and cover positioning, channel strategy, reporting, and team rhythm. Daniel is UK-based and works with founders across the US, UK, Europe, and APAC.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Facts -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 pb-2 border-b border-[color:var(--line)]">Quick Facts</h3>
+          <div class="grid gap-3">
+            {quickFacts.map((fact) => (
+              <div class="flex gap-4 py-2 border-b border-[color:var(--line)] last:border-b-0">
+                <span class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] w-40 shrink-0">{fact.label}</span>
+                <span class="text-base text-[color:var(--ink)]">{fact.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Speaking Topics -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 pb-2 border-b border-[color:var(--line)]">Speaking Topics</h3>
+          <div class="grid gap-4">
+            {speakingTopics.map((topic) => (
+              <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
+                <h4 class="font-bold text-[color:var(--ink)]">{topic.title}</h4>
+                <p class="mt-1 text-sm text-[color:var(--muted)] leading-6">{topic.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Past Appearances -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 pb-2 border-b border-[color:var(--line)]">Past Appearances</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[color:var(--surface-dim)]">
+                <tr>
+                  <th class="text-left p-3">Event</th>
+                  <th class="text-left p-3">Type</th>
+                  <th class="text-left p-3">Topic</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pastAppearances.map((appearance) => (
+                  <tr class="border-t border-[color:var(--line)]">
+                    <td class="p-3 font-semibold text-[color:var(--ink)]">{appearance.event}</td>
+                    <td class="p-3 text-[color:var(--muted)]">{appearance.type}</td>
+                    <td class="p-3 text-[color:var(--muted)]">{appearance.topic}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mb-8">
+          <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 pb-2 border-b border-[color:var(--line)]">Contact Information</h3>
+          <div class="grid gap-3 md:grid-cols-2">
+            <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
+              <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Email</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)]">daniel@danieljohnson.xyz</p>
+            </div>
+            <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
+              <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Website</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)]">https://danieljohnson.xyz</p>
+            </div>
+            <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
+              <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">LinkedIn</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)]">linkedin.com/in/johnson144</p>
+            </div>
+            <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
+              <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Booking</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)]">calendly.com/danieljohnson</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferred Description -->
+        <div class="p-6 rounded-xl bg-[color:var(--accent)]/10 border border-[color:var(--accent)]/30">
+          <h3 class="text-lg font-bold tracking-[-0.03em] text-[color:var(--accent)] mb-3">How to describe Daniel</h3>
+          <p class="text-[color:var(--ink)] leading-7">
+            Daniel Johnson is a fractional CMO and GTM operator helping post-PMF AI and B2B SaaS startups build repeatable growth systems.
+          </p>
+          <div class="mt-4 pt-4 border-t border-[color:var(--accent)]/20">
+            <p class="text-sm font-semibold text-[color:var(--accent)] mb-2">Please avoid:</p>
+            <ul class="text-sm text-[color:var(--muted)] space-y-1">
+              <li>× "A generic marketing consultant"</li>
+              <li>× "An AI influencer"</li>
+              <li>× "A growth hacker"</li>
+              <li>× "A motivational speaker"</li>
+              <li>× "An agency owner focused only on paid ads"</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer for print -->
+        <div class="mt-8 pt-6 border-t border-[color:var(--line)] text-center">
+          <p class="text-xs text-[color:var(--subtle)]">Media kit last updated: May 2026 · https://danieljohnson.xyz/media-kit-download/</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold tracking-[-0.06em] mb-4">Need a specific asset?</h2>
+        <p class="text-lg text-[color:var(--muted)] mb-8">Headshot, logo, or custom bio for your event — all available on the media kit page.</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href="/media-kit/">View Full Media Kit →</a>
+          <a class="button-link" href="/speaking/">Speaking Information →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Book Daniel</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">
+        For speaking, workshops, or fractional CMO enquiries.
+      </h2>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl}>Book a 30-min Growth Audit →</a>
+        <a class="button-link-invert" href="/media-kit/">Media Kit →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media print {
+    /* Reset background colors and hide non-printable elements */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      background: white !important;
+      color: black !important;
+    }
+
+    .hero-section,
+    .cta-gradient,
+    .section-space:last-of-type,
+    nav,
+    footer,
+    .button-accent,
+    .button-link,
+    .button-link-invert {
+      display: none !important;
+    }
+
+    .card {
+      box-shadow: none !important;
+      border: 1px solid #e5e7eb !important;
+    }
+
+    #printable-kit {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .shell {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+  }
+</style>

@@ -1,0 +1,341 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/schema";
+import { absoluteUrl, formatCurrency } from "../lib/utils";
+import { ctas } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Services", url: "/services/fractional-cmo/" },
+    { name: "ROI Calculator", url: "/roi-calculator/" }
+  ]),
+  buildWebPageSchema({
+    name: "Fractional CMO ROI Calculator",
+    description: "Calculate the potential return on investment from hiring a fractional CMO for your startup.",
+    url: absoluteUrl("/roi-calculator/")
+  })
+];
+---
+
+<BaseLayout
+  description="Calculate your potential ROI from hiring a Fractional CMO. See how much additional revenue a £5,500/month engagement could generate for your startup."
+  keywords="fractional CMO ROI calculator, marketing ROI calculator UK, fractional CMO cost vs return, startup growth calculator"
+  path="/roi-calculator/"
+  schema={schemas}
+  title="Fractional CMO ROI Calculator | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
+        <div class="space-y-6">
+          <span class="service-label">Tool · ROI Calculator</span>
+          <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
+            What could a Fractional CMO be worth to you?
+          </h1>
+          <p class="hero-subcopy text-xl leading-9 md:text-2xl">
+            Plug in your numbers and see the potential annual gain from embedding senior GTM leadership at £5,500/month.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a class="button-accent" href="/growth-bottleneck-review/" data-cta="roi-book-diagnostic">
+              Book a diagnostic →
+            </a>
+            <a class="button-link" href="/services/fractional-cmo/">
+              Learn about the service →
+            </a>
+          </div>
+        </div>
+        <aside class="card p-6 md:p-8">
+          <p class="card-label">Why this matters</p>
+          <ul class="mt-5 scan-list">
+            <li>Most startups leave 15–30% revenue on the table</li>
+            <li>A Fractional CMO costs ~£66k/year</li>
+            <li>One positioning fix can pay for the year</li>
+            <li>Build a system that runs without you</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="grid gap-8 lg:grid-cols-[1fr_0.85fr]">
+        <!-- Calculator Inputs -->
+        <div class="card p-8 md:p-10">
+          <h2 class="text-2xl font-extrabold tracking-[-0.05em] mb-6">Your numbers</h2>
+          <form id="roi-calculator" class="space-y-6">
+            <div>
+              <label for="spend" class="block text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mb-2">
+                Current marketing spend
+              </label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[color:var(--muted)] text-lg">£</span>
+                <input
+                  type="number"
+                  id="spend"
+                  name="spend"
+                  value="10000"
+                  min="0"
+                  step="500"
+                  class="w-full rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] py-3 pl-8 pr-4 text-lg font-semibold tracking-[-0.02em] focus:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/20"
+                  aria-describedby="spend-hint"
+                />
+              </div>
+              <p id="spend-hint" class="mt-1 text-xs text-[color:var(--subtle)]">Per month</p>
+            </div>
+
+            <div>
+              <label for="revenue" class="block text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mb-2">
+                Current monthly revenue
+              </label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[color:var(--muted)] text-lg">£</span>
+                <input
+                  type="number"
+                  id="revenue"
+                  name="revenue"
+                  value="50000"
+                  min="0"
+                  step="1000"
+                  class="w-full rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] py-3 pl-8 pr-4 text-lg font-semibold tracking-[-0.02em] focus:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/20"
+                  aria-describedby="revenue-hint"
+                />
+              </div>
+              <p id="revenue-hint" class="mt-1 text-xs text-[color:var(--subtle)]">Monthly recurring or average</p>
+            </div>
+
+            <div>
+              <label for="cmo-cost" class="block text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mb-2">
+                Fractional CMO cost
+              </label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[color:var(--muted)] text-lg">£</span>
+                <input
+                  type="number"
+                  id="cmo-cost"
+                  name="cmo-cost"
+                  value="5500"
+                  min="0"
+                  step="500"
+                  class="w-full rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] py-3 pl-8 pr-4 text-lg font-semibold tracking-[-0.02em] focus:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/20"
+                  aria-describedby="cmo-cost-hint"
+                />
+              </div>
+              <p id="cmo-cost-hint" class="mt-1 text-xs text-[color:var(--subtle)]">Per month (default £5,500)</p>
+            </div>
+
+            <div>
+              <label for="improvement" class="block text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mb-2">
+                Expected improvement
+              </label>
+              <div class="relative">
+                <input
+                  type="number"
+                  id="improvement"
+                  name="improvement"
+                  value="20"
+                  min="0"
+                  max="100"
+                  step="1"
+                  class="w-full rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] py-3 pl-4 pr-8 text-lg font-semibold tracking-[-0.02em] focus:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/20"
+                  aria-describedby="improvement-hint"
+                />
+                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-[color:var(--muted)] text-lg">%</span>
+              </div>
+              <p id="improvement-hint" class="mt-1 text-xs text-[color:var(--subtle)]">Of current revenue (default 20%)</p>
+            </div>
+
+            <button
+              type="button"
+              id="calculate-btn"
+              class="button-accent w-full"
+              onclick="calculateROI()"
+            >
+              Calculate ROI →
+            </button>
+          </form>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="space-y-6">
+          <div id="results-panel" class="card p-8 md:p-10 bg-[color:var(--surface-dim)] border-2 border-[color:var(--accent)]/30 hidden">
+            <p class="card-label text-[color:var(--accent)]">Your Result</p>
+            <h2 class="mt-3 text-3xl font-extrabold tracking-[-0.05em] text-[color:var(--ink)]">
+              You could gain <span id="annual-gain" class="text-[color:var(--accent)]">£0</span> per year
+            </h2>
+            <p class="mt-4 text-sm leading-7 text-[color:var(--muted)]">
+              That's the estimated net annual gain after paying for a Fractional CMO at the rate above.
+            </p>
+
+            <div class="mt-8 space-y-4">
+              <div class="flex justify-between items-end border-b border-[color:var(--line)] pb-3">
+                <span class="text-sm text-[color:var(--muted)]">Current monthly revenue</span>
+                <span id="result-revenue" class="font-bold text-lg">£0</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-[color:var(--line)] pb-3">
+                <span class="text-sm text-[color:var(--muted)]">Expected improvement</span>
+                <span id="result-improvement" class="font-bold text-lg">0%</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-[color:var(--line)] pb-3">
+                <span class="text-sm text-[color:var(--muted)]">Additional monthly revenue</span>
+                <span id="result-additional" class="font-bold text-lg text-green-600">£0</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-[color:var(--line)] pb-3">
+                <span class="text-sm text-[color:var(--muted)]">Fractional CMO cost / month</span>
+                <span id="result-cmo-cost" class="font-bold text-lg text-red-600">£0</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-[color:var(--line)] pb-3">
+                <span class="text-sm text-[color:var(--muted)]">Net monthly gain</span>
+                <span id="result-net-monthly" class="font-bold text-lg">£0</span>
+              </div>
+              <div class="flex justify-between items-end pt-2">
+                <span class="text-base font-semibold text-[color:var(--ink)]">Net annual gain</span>
+                <span id="result-net-annual" class="font-extrabold text-2xl text-[color:var(--accent)]">£0</span>
+              </div>
+            </div>
+
+            <div class="mt-8 rounded-xl bg-[color:var(--accent)]/10 p-5">
+              <p class="text-sm leading-6 text-[color:var(--ink)]">
+                <strong>Note:</strong> This is a simplified model. Real outcomes depend on your ICP clarity, channel mix, team capacity, and how quickly we can ship fixes. The first 30 days are diagnostic — we'll know the real levers by day 30.
+              </p>
+            </div>
+          </div>
+
+          <div id="empty-state" class="card p-8 md:p-10 text-center">
+            <div class="text-4xl mb-4">📊</div>
+            <p class="text-lg font-semibold text-[color:var(--ink)]">Enter your numbers to see your potential ROI</p>
+            <p class="mt-2 text-sm text-[color:var(--muted)]">The calculator updates live as you type — or click Calculate.</p>
+          </div>
+
+          <a href="/growth-bottleneck-review/" class="card p-6 flex items-center justify-between group hover:ring-2 hover:ring-[color:var(--accent)] transition-all">
+            <div>
+              <p class="font-bold text-lg tracking-[-0.03em]">Ready to dig deeper?</p>
+              <p class="mt-1 text-sm text-[color:var(--muted)]">Book a free 30-min diagnostic — no pitch, just clarity.</p>
+            </div>
+            <span class="link-arrow text-lg">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="How it works"
+        title="The math behind the calculator."
+        intro="A simple model to show why fractional leadership often pays for itself within months."
+      />
+      <div class="mt-8 grid gap-4 md:grid-cols-3 max-w-4xl mx-auto">
+        <article class="card p-6 text-center">
+          <div class="text-3xl mb-3">1</div>
+          <h3 class="font-bold text-lg mb-2">Additional revenue</h3>
+          <p class="text-sm text-[color:var(--muted)]">Current revenue × improvement % = extra monthly revenue</p>
+        </article>
+        <article class="card p-6 text-center">
+          <div class="text-3xl mb-3">2</div>
+          <h3 class="font-bold text-lg mb-2">Net monthly gain</h3>
+          <p class="text-sm text-[color:var(--muted)]">Additional revenue − CMO cost = net gain per month</p>
+        </article>
+        <article class="card p-6 text-center">
+          <div class="text-3xl mb-3">3</div>
+          <h3 class="font-bold text-lg mb-2">Annual impact</h3>
+          <p class="text-sm text-[color:var(--muted)]">Net monthly gain × 12 = total annual net gain</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <a href="/services/fractional-cmo/" class="card p-6 group">
+          <p class="card-label">Service</p>
+          <h3 class="mt-3 font-bold text-xl tracking-[-0.03em]">Fractional CMO</h3>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Embedded senior GTM leadership for post-PMF startups.</p>
+          <span class="link-arrow mt-4">Learn more →</span>
+        </a>
+        <a href="/work/" class="card p-6 group">
+          <p class="card-label">Case studies</p>
+          <h3 class="mt-3 font-bold text-xl tracking-[-0.03em]">See the work</h3>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Real outcomes from Fractional CMO engagements.</p>
+          <span class="link-arrow mt-4">View work →</span>
+        </a>
+        <a href="/growth-bottleneck-review/" class="card p-6 group">
+          <p class="card-label">Next step</p>
+          <h3 class="mt-3 font-bold text-xl tracking-[-0.03em]">Growth Diagnostic</h3>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">30 minutes to map your bottleneck and next step.</p>
+          <span class="link-arrow mt-4">Book now →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Book a Diagnostic</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">
+        Numbers look good? Let's talk about your growth bottleneck.
+      </h2>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href="/growth-bottleneck-review/">
+          Book a free diagnostic →
+        </a>
+        <a class="button-link-invert" href="/services/fractional-cmo/">
+          How it works →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function formatCurrency(value) {
+    return new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(value);
+  }
+
+  function calculateROI() {
+    const spend = parseFloat(document.getElementById('spend').value) || 0;
+    const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+    const cmoCost = parseFloat(document.getElementById('cmo-cost').value) || 5500;
+    const improvement = parseFloat(document.getElementById('improvement').value) || 20;
+
+    const additionalMonthly = revenue * (improvement / 100);
+    const netMonthly = additionalMonthly - cmoCost;
+    const netAnnual = netMonthly * 12;
+
+    // Update result fields
+    document.getElementById('result-revenue').textContent = formatCurrency(revenue);
+    document.getElementById('result-improvement').textContent = improvement + '%';
+    document.getElementById('result-additional').textContent = formatCurrency(additionalMonthly);
+    document.getElementById('result-cmo-cost').textContent = formatCurrency(cmoCost);
+    document.getElementById('result-net-monthly').textContent = formatCurrency(netMonthly);
+    document.getElementById('result-net-annual').textContent = formatCurrency(netAnnual);
+    document.getElementById('annual-gain').textContent = formatCurrency(netAnnual);
+
+    // Toggle visibility
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('results-panel').classList.remove('hidden');
+  }
+
+  // Calculate on input change
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('#roi-calculator input');
+    inputs.forEach(input => {
+      input.addEventListener('input', calculateROI);
+    });
+    // Initial calculation
+    calculateROI();
+  });
+</script>
+
+<style>
+  .hidden { display: none !important; }
+</style>

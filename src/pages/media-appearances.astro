@@ -1,0 +1,188 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { sortByFeaturedThenOrder } from "../lib/utils";
+import { siteConfig } from "../site";
+
+const media = sortByFeaturedThenOrder(await getCollection("media"));
+
+const interviews = media.filter((item) => item.data.kind === "Interview");
+const articles = media.filter((item) => item.data.kind === "Article");
+const profiles = media.filter((item) => item.data.kind === "Profile");
+const courses = media.filter((item) => item.data.kind === "Course");
+const speaking = media.filter((item) => item.data.kind === "Speaking");
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Media Appearances", url: "/media-appearances/" }
+]);
+---
+
+<BaseLayout
+  description="Archive of Daniel Johnson's media appearances — podcast interviews, articles, guest features, speaking engagements, and courses."
+  path="/media-appearances/"
+  schema={schema}
+  title="Media Appearances | Daniel Johnson"
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6 text-center">
+        <span class="service-label justify-center">Media Archive</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          Media appearances &amp; press archive.
+        </h1>
+        <p class="text-lg leading-8 text-[color:var(--muted)] md:text-xl">
+          Podcast interviews, guest articles, speaking engagements, workshops, panels, newsletter features, and press quotes — all in one place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {interviews.length > 0 && (
+    <section class="section-space pt-0">
+      <div class="shell">
+        <SectionHeader
+          eyebrow="Interviews"
+          title="Podcast & media interviews."
+          intro="Conversations on AI-native GTM, founder-led growth, and fractional leadership."
+        />
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {interviews.map((item) => (
+            <a class="card p-6 reveal" href={item.data.href} rel="noopener" target="_blank">
+              <p class="card-label">{item.data.source} · {item.data.yearLabel}</p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <span class="link-arrow mt-4">Listen / Watch →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {articles.length > 0 && (
+    <section class="section-space pt-0">
+      <div class="shell">
+        <SectionHeader
+          eyebrow="Articles"
+          title="Guest articles & op-eds."
+          intro="Deep-dive pieces on growth systems, fractional CMO strategy, and AI-native GTM."
+        />
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {articles.map((item) => (
+            <a class="card p-6 reveal" href={item.data.href} rel="noopener" target="_blank">
+              <p class="card-label">{item.data.source} · {item.data.yearLabel}</p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <span class="link-arrow mt-4">Read article →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {speaking.length > 0 && (
+    <section class="section-space pt-0">
+      <div class="shell">
+        <SectionHeader
+          eyebrow="Speaking"
+          title="Speaking engagements & workshops."
+          intro="Keynotes, workshops, and founder cohort sessions at accelerators and universities."
+        />
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {speaking.map((item) => (
+            <a class="card p-6 reveal" href={item.data.href} rel="noopener" target="_blank">
+              <p class="card-label">{item.data.source} · {item.data.yearLabel}</p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <span class="link-arrow mt-4">View details →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {profiles.length > 0 && (
+    <section class="section-space pt-0">
+      <div class="shell">
+        <SectionHeader
+          eyebrow="Profiles"
+          title="Professional profiles & directories."
+          intro="Where to find Daniel's credentials, reviews, and platform presence."
+        />
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {profiles.map((item) => (
+            <a class="card p-6 reveal" href={item.data.href} rel="noopener" target="_blank">
+              <p class="card-label">{item.data.source} · {item.data.yearLabel}</p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <span class="link-arrow mt-4">View profile →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {courses.length > 0 && (
+    <section class="section-space pt-0">
+      <div class="shell">
+        <SectionHeader
+          eyebrow="Courses"
+          title="Training & course appearances."
+          intro="Educational content and structured programmes featuring Daniel's growth frameworks."
+        />
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {courses.map((item) => (
+            <a class="card p-6 reveal" href={item.data.href} rel="noopener" target="_blank">
+              <p class="card-label">{item.data.source} · {item.data.yearLabel}</p>
+              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{item.data.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.description}</p>
+              <span class="link-arrow mt-4">View course →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section-alt section-space">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="All appearances"
+        title="Complete archive."
+        intro="Every media appearance in chronological order."
+      />
+      <div class="mt-10 max-w-4xl mx-auto">
+        <div class="space-y-4">
+          {media.map((item) => (
+            <a class="card p-5 flex items-start gap-4 reveal" href={item.data.href} rel="noopener" target="_blank">
+              <span class="chip shrink-0 mt-1">{item.data.kind}</span>
+              <div>
+                <p class="font-semibold text-[color:var(--ink)]">{item.data.title}</p>
+                <p class="text-sm text-[color:var(--muted)]">{item.data.source} · {item.data.yearLabel}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">Book Daniel</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">
+        For speaking, workshops, or fractional CMO enquiries.
+      </h2>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl}>Book a 30-min Growth Audit →</a>
+        <a class="button-link-invert" href="/speaking/">Speaking assets →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
