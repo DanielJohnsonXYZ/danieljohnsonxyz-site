@@ -109,9 +109,9 @@ export const singleIdea = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// Positioning — the buyer + outcome rewrite used in the hero subheadline
-// and as structured data inputs. Keeping it here means hero/meta/llms.txt
-// all draw from one source of truth.
+// Positioning — buyer + outcome strings. `subheadline` feeds llms.txt; the
+// homepage uses `metaDescription` for SERP length limits while the hero
+// subcopy is authored directly in `index.astro`.
 // ──────────────────────────────────────────────────────────────────────────
 export const positioning = {
   buyer: "Seed to Series B AI and B2B SaaS founders",
@@ -121,7 +121,10 @@ export const positioning = {
   // the eyebrow above the H1, so the first thing a founder reads after the
   // headline is what they actually get.
   subheadline:
-    "Predictable pipeline, sharper positioning, and senior growth leadership for founder-led companies, with specialist experience across Seed to Series B AI and B2B SaaS."
+    "Predictable pipeline, sharper positioning, and senior growth leadership for founder-led companies, with specialist experience across Seed to Series B AI and B2B SaaS.",
+  /** SERP meta description (~155 chars max). */
+  metaDescription:
+    "Fractional CMO for Seed–Series B AI & B2B SaaS: predictable pipeline, sharper positioning, senior growth leadership—without a £150k full-time hire."
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
