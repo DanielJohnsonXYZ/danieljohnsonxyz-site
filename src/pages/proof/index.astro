@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
-import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../../lib/schema";
 import { proofStats, siteConfig } from "../../site";
 
 const cases = (await getCollection("cases"))
@@ -34,7 +34,7 @@ const proofSchema = [
     { name: "Home", url: "/" },
     { name: "Proof", url: "/proof/" }
   ]),
-  buildFaqSchema(proofFaqs)
+  buildFaqPageSchema(proofFaqs)
 ];
 ---
 
