@@ -172,7 +172,7 @@ const pastAppearances = [
             </div>
             <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
               <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Website</p>
-              <p class="mt-1 font-medium text-[color:var(--ink)]">https://danieljohnson.xyz</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)]">{siteConfig.siteUrl}</p>
             </div>
             <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
               <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">LinkedIn</p>
@@ -205,7 +205,7 @@ const pastAppearances = [
 
         <!-- Footer for print -->
         <div class="mt-8 pt-6 border-t border-[color:var(--line)] text-center">
-          <p class="text-xs text-[color:var(--subtle)]">Media kit last updated: May 2026 · https://danieljohnson.xyz/media-kit-download/</p>
+          <p class="text-xs text-[color:var(--subtle)]">Media kit last updated: May 2026 · {absoluteUrl("/media-kit-download/")}</p>
         </div>
       </div>
     </div>
