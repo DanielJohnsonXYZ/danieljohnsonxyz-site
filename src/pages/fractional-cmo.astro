@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FractionalCmoIntakeThenCalendly from "../components/FractionalCmoIntakeThenCalendly.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { buildAggregateRatingSchema, buildBreadcrumbSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
@@ -143,7 +144,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="Fractional CMO for Seed to Series B AI and B2B SaaS founders. Embedded senior growth leadership, predictable pipeline, sharper positioning — without a £150k full-time hire."
+  description="Fractional CMO for Seed–Series B AI & B2B SaaS founders: embedded senior leadership on pipeline, positioning & GTM—without the £150k full-time hire."
   keywords="fractional CMO UK, AI startup GTM, B2B SaaS marketing leadership, Seed Series B growth operator, embedded CMO"
   path="/fractional-cmo/"
   schema={schemas}
@@ -169,7 +170,7 @@ const schemas = [
           </div>
 
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a class="button-accent" href={ctas.primary.href} rel="noreferrer" target="_blank" data-cta="fractional-hero-primary">
+            <a class="button-accent" href="#book" data-cta="fractional-hero-primary">
               {ctas.primary.label} →
             </a>
             <a class="button-link" href="#faq" data-cta="fractional-hero-faq">
@@ -417,14 +418,7 @@ const schemas = [
           </h2>
           <p class="text-lg leading-8 text-[color:var(--muted)]">{siteConfig.bookingNote}</p>
         </div>
-        <div class="card overflow-hidden p-2">
-          <iframe
-            title="Book a 30-min Growth Audit with Daniel Johnson"
-            src="https://calendly.com/danieljohnson?hide_gdpr_banner=1"
-            class="h-[720px] w-full rounded-[1rem] border-0"
-            loading="lazy"
-          ></iframe>
-        </div>
+        <FractionalCmoIntakeThenCalendly />
       </div>
     </div>
   </section>
