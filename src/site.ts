@@ -44,13 +44,15 @@ export const siteConfig = {
   headshot: "/images/daniel-hero-cutout.webp",
   sameAs: [
     "https://www.linkedin.com/in/danieljohnsonxyz/",
+    "https://x.com/djohnsonxyz",
     "https://app.growthmentor.com/mentors/daniel-johnson",
     "https://mentorcruise.com/mentor/danieljohnson/",
     "https://www.malt.uk/profile/danieljohnsonxyz",
     "https://pangea.app/profile/daniel-johnson",
     "https://www.instagram.com/danieljohnsonxyz/",
     "https://www.youtube.com/@danieljohnson6000",
-    "https://www.wescalestartups.com"
+    "https://www.wescalestartups.com",
+    "https://www.wescalestartups.com/kassy-cho-interview/"
   ]
 } as const;
 
