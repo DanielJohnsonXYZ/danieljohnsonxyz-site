@@ -44,7 +44,9 @@ export const GET: APIRoute = async () => {
     "/now/",
     "/testimonials/",
     "/privacy/",
-    "/terms/"
+    "/terms/",
+    "/llms.txt",
+    "/llms-full.txt"
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
