@@ -1,4 +1,5 @@
 ---
+import CfEmailOff from "./CfEmailOff.astro";
 import { announcement, ctas, navigationGroups, siteConfig } from "../site";
 
 interface Props {
@@ -120,9 +121,17 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
         </nav>
 
         <div class="hidden lg:block">
-          <a class="button-primary" href={headerCta.href} data-cta={mediaCta ? "header-media" : "header-primary"}>
-            {headerCta.label}
-          </a>
+          {mediaCta ? (
+            <CfEmailOff>
+              <a class="button-primary" href={headerCta.href} data-cta="header-media">
+                {headerCta.label}
+              </a>
+            </CfEmailOff>
+          ) : (
+            <a class="button-primary" href={headerCta.href} data-cta="header-primary">
+              {headerCta.label}
+            </a>
+          )}
         </div>
 
         <details class="group relative lg:hidden">
@@ -160,9 +169,17 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
               }
               <a class="rounded-xl px-4 py-3 text-sm font-medium text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]" href="/case-studies/">Results</a>
               <a class="rounded-xl px-4 py-3 text-sm font-medium text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]" href="/about/">About</a>
-              <a class="button-primary mt-2" href={headerCta.href} data-cta={mediaCta ? "header-mobile-media" : "header-mobile-primary"}>
-                {headerCta.label}
-              </a>
+              {mediaCta ? (
+                <CfEmailOff>
+                  <a class="button-primary mt-2" href={headerCta.href} data-cta="header-mobile-media">
+                    {headerCta.label}
+                  </a>
+                </CfEmailOff>
+              ) : (
+                <a class="button-primary mt-2" href={headerCta.href} data-cta="header-mobile-primary">
+                  {headerCta.label}
+                </a>
+              )}
               {mediaCta ? (
                 <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href="/media-kit/">
                   Download media kit →

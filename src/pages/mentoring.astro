@@ -1,4 +1,5 @@
 ---
+import CfEmailOff from "../components/CfEmailOff.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { buildFaqPageSchema } from "../lib/schema";
@@ -82,7 +83,9 @@ const faq = [
           </p>
           <div class="flex flex-wrap gap-3">
             <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-            <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Mentoring%20enquiry`}>Ask about mentoring</a>
+            <CfEmailOff>
+              <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Mentoring%20enquiry`}>Ask about mentoring</a>
+            </CfEmailOff>
           </div>
         </div>
 
@@ -159,7 +162,9 @@ const faq = [
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a mentoring session</a>
-          <a class="button-secondary button-secondary-dark" href={`mailto:${siteConfig.email}?subject=Mentoring%20enquiry`}>Ask about mentoring</a>
+          <CfEmailOff>
+            <a class="button-secondary button-secondary-dark" href={`mailto:${siteConfig.email}?subject=Mentoring%20enquiry`}>Ask about mentoring</a>
+          </CfEmailOff>
         </div>
       </div>
     </div>

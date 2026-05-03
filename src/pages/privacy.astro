@@ -1,4 +1,5 @@
 ---
+import CfEmailOff from "../components/CfEmailOff.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
@@ -28,7 +29,11 @@ const breadcrumb = buildBreadcrumbSchema([
             <h2 class="text-2xl font-bold tracking-[-0.03em]">Who this policy is from</h2>
             <p>
               This site (<strong>danieljohnson.xyz</strong>) is operated by Daniel Johnson, a sole trader based in {siteConfig.location}.
-              For questions about this policy or your data, email <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+              For questions about this policy or your data, email{" "}
+              <CfEmailOff>
+                <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+              </CfEmailOff>
+              .
             </p>
           </section>
 
@@ -88,7 +93,11 @@ const breadcrumb = buildBreadcrumbSchema([
             <h2 class="text-2xl font-bold tracking-[-0.03em]">Your rights</h2>
             <p>
               Under UK GDPR you can ask us to access, correct, delete, or restrict use of your personal data. You can also withdraw consent for anything
-              you previously opted in to. Email <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> to do any of these.
+              you previously opted in to. Email{" "}
+              <CfEmailOff>
+                <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+              </CfEmailOff>{" "}
+              to do any of these.
               You also have the right to complain to the ICO (<a class="underline" href="https://ico.org.uk" rel="noreferrer" target="_blank">ico.org.uk</a>).
             </p>
           </section>

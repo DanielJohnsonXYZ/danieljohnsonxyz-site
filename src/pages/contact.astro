@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CfEmailOff from "../components/CfEmailOff.astro";
 import { siteConfig, socialLinks } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
 
@@ -45,9 +46,11 @@ const breadcrumb = buildBreadcrumbSchema([
             <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
               For speaking, media, and advisory enquiries. A short note about context helps the first reply.
             </p>
-            <a class="button-secondary mt-6 inline-flex" href={`mailto:${siteConfig.email}`}>
-              {siteConfig.email}
-            </a>
+            <CfEmailOff>
+              <a class="button-secondary mt-6 inline-flex" href={`mailto:${siteConfig.email}`}>
+                {siteConfig.email}
+              </a>
+            </CfEmailOff>
           </article>
         </div>
 

@@ -20,6 +20,7 @@
 // All content comes in via props so the six pages can reuse this without duplication.
 
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CfEmailOff from "./CfEmailOff.astro";
 import { ctas, siteConfig } from "../site";
 
 interface FAQ { q: string; a: string }
@@ -254,9 +255,12 @@ const faqSchema = {
             {ctas.caseStudies.label} →
           </a>
         </div>
-        <p class="text-sm text-white/55">
-          Prefer email? <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-        </p>
+        <div class="text-sm text-white/55">
+          Prefer email?{" "}
+          <CfEmailOff>
+            <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          </CfEmailOff>
+        </div>
       </div>
     </div>
   </section>

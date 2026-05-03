@@ -154,11 +154,9 @@ document.addEventListener('click', (event) => {
     <meta name="ai:serves" content="Seed to Series B AI and B2B SaaS founders" />
     <meta name="ai:contact" content={siteConfig.bookingUrl} />
 
-    {
-      serializedSchemas.map((json) => (
-        <script is:inline type="application/ld+json" set:html={json} />
-      ))
-    }
+    <!--email_off-->
+    {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
+    <!--/email_off-->
   </head>
 
   <body class="overflow-x-hidden">

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import CfEmailOff from "../components/CfEmailOff.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildTalkSchema } from "../lib/schema";
@@ -301,7 +302,9 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
               </article>
             ))
           }
-          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Enquire About Speaking</a>
+          <CfEmailOff>
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Enquire About Speaking</a>
+          </CfEmailOff>
         </div>
       </div>
     </div>

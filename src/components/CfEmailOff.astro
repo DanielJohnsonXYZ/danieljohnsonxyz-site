@@ -1,0 +1,23 @@
+---
+/**
+ * Cloudflare Email Address Obfuscation rewrites mailto:/visible emails into
+ * /cdn-cgi/l/email-protection links (bad for crawlers). Wrapping content with
+ * these comments disables obfuscation for this subtree only.
+ * @see https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/
+ *
+ * HTML comments must be nested under a real element — Astro strips comment-only
+ * roots / Fragment siblings in `.astro` components.
+ */
+---
+<span class="cf-email-off-root">
+  <!--email_off-->
+  <span class="cf-email-off"><slot /></span>
+  <!--/email_off-->
+</span>
+
+<style>
+  .cf-email-off-root,
+  .cf-email-off {
+    display: contents;
+  }
+</style>

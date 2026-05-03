@@ -1,4 +1,5 @@
 ---
+import CfEmailOff from "../components/CfEmailOff.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { ctas, siteConfig } from "../site";
 
@@ -83,7 +84,10 @@ const itemListSchema = {
         <p class="press-note">
           Want to invite Daniel to your podcast, conference, or founder cohort? See the
           <a href="/podcast-guest/">podcast guest pitch</a> or
-          <a href={`mailto:${siteConfig.email}?subject=Press%20enquiry%20for%20Daniel%20Johnson`}>email directly</a>.
+          <CfEmailOff>
+            <a href={`mailto:${siteConfig.email}?subject=Press%20enquiry%20for%20Daniel%20Johnson`}>email directly</a>
+          </CfEmailOff>
+          .
         </p>
       </div>
     </div>

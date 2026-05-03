@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
+import CfEmailOff from "../components/CfEmailOff.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
@@ -691,9 +692,12 @@ const schemas = [
             {ctas.caseStudies.label} →
           </a>
         </div>
-        <p class="text-sm text-white/60">
-          Prefer email first? <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-        </p>
+        <div class="text-sm text-white/60">
+          Prefer email first?{" "}
+          <CfEmailOff>
+            <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          </CfEmailOff>
+        </div>
       </div>
     </div>
   </section>

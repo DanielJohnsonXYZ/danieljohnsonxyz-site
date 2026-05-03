@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import CfEmailOff from "../components/CfEmailOff.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
@@ -106,7 +107,9 @@ const schema = buildBreadcrumbSchema([
             <p>Expect concrete examples from post-PMF AI and B2B SaaS work, founder mentoring, and growth systems built in the mess of real companies.</p>
           </div>
           <div class="flex flex-wrap gap-3 pt-2">
-            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation%20for%20Daniel%20Johnson`}>Book Daniel for your podcast</a>
+            <CfEmailOff>
+              <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation%20for%20Daniel%20Johnson`}>Book Daniel for your podcast</a>
+            </CfEmailOff>
             <a class="button-secondary" href="/media-kit/">Download media kit</a>
           </div>
         </div>
@@ -198,7 +201,15 @@ const schema = buildBreadcrumbSchema([
             {quickFacts.map(([label, value]) => (
               <div class="border-b border-[color:var(--line)] pb-4 last:border-b-0 last:pb-0">
                 <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--subtle)]">{label}</dt>
-                <dd class="mt-2 text-base font-semibold leading-7">{value}</dd>
+                <dd class="mt-2 text-base font-semibold leading-7">
+                  {label === "Email" ? (
+                    <CfEmailOff>
+                      <span>{value}</span>
+                    </CfEmailOff>
+                  ) : (
+                    value
+                  )}
+                </dd>
               </div>
             ))}
           </dl>
@@ -206,7 +217,11 @@ const schema = buildBreadcrumbSchema([
         <article class="reveal card p-6 md:p-8">
           <p class="card-label">Producer assets</p>
           <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
-            For podcasts, press, and speaking: <a class="highlight-text" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>. Available for remote interviews, podcast recordings, expert quotes, panels, and workshops.
+            For podcasts, press, and speaking:{" "}
+            <CfEmailOff>
+              <a class="highlight-text" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+            </CfEmailOff>
+            . Available for remote interviews, podcast recordings, expert quotes, panels, and workshops.
           </p>
           <div class="mt-6 grid gap-3 sm:grid-cols-2">
             {assets.map((asset) => (
@@ -278,10 +293,15 @@ const schema = buildBreadcrumbSchema([
     <div class="shell">
       <div class="reveal card p-8 text-center md:p-10">
         <span class="eyebrow justify-center">Podcasts / press / speaking</span>
-        <h2 class="mt-4 text-4xl font-extrabold tracking-[-0.05em] md:text-5xl">For podcasts, press, and speaking: {siteConfig.email}</h2>
+        <h2 class="mt-4 text-4xl font-extrabold tracking-[-0.05em] md:text-5xl">
+          For podcasts, press, and speaking:{" "}
+          <CfEmailOff>{siteConfig.email}</CfEmailOff>
+        </h2>
         <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-[color:var(--muted)]">Available for remote interviews, podcast recordings, expert quotes, panels, and workshops.</p>
         <div class="mt-6 flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation%20for%20Daniel%20Johnson`}>Book Daniel for your podcast</a>
+          <CfEmailOff>
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Podcast%20invitation%20for%20Daniel%20Johnson`}>Book Daniel for your podcast</a>
+          </CfEmailOff>
           <a class="button-secondary" href="/media-kit/">Download media kit</a>
         </div>
       </div>

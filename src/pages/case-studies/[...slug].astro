@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import CfEmailOff from "../../components/CfEmailOff.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildCaseStudySchema } from "../../lib/schema";
 import { formatDate } from "../../lib/utils";
@@ -128,7 +129,9 @@ const pathname = `/case-studies/${caseStudy.id}`;
             </div>
             <div class="flex flex-col gap-3">
               <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
-              <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+              <CfEmailOff>
+                <a class="button-secondary" href={`mailto:${siteConfig.email}`}>Email Daniel</a>
+              </CfEmailOff>
             </div>
           </div>
         </div>
