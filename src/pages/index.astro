@@ -604,9 +604,15 @@ const schemas = [
         }
       </div>
 
-      <div class="reveal mt-6 text-center">
+      <div class="reveal mt-6 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
+        <a class="link-arrow" href="/testimonials/" data-cta="home-testimonials-page">
+          Named outcomes &amp; metrics — full testimonials page →
+        </a>
+        <span class="hidden text-[color:var(--subtle)] sm:inline" aria-hidden="true">
+          ·
+        </span>
         <a class="link-arrow" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
-          Read more founder feedback →
+          GrowthMentor reviews →
         </a>
       </div>
     </div>

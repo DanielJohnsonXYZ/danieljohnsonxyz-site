@@ -324,3 +324,48 @@ export function buildWebPageSchema(opts: { name: string; description: string; ur
     inLanguage: "en-US"
   };
 }
+
+const testimonialSlug = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/**
+ * Individual Review items for client quotes on /testimonials (itemReviewed = Person).
+ * Pair with WebPage + BreadcrumbList in page `schema` prop.
+ */
+export function buildTestimonialReviewSchemas(
+  entries: Array<{
+    name: string;
+    quote: string;
+    outcomeMetric: string;
+    date?: string;
+  }>
+) {
+  return entries.map((t) => {
+    const slug = testimonialSlug(t.name);
+    const node: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "@id": `${siteConfig.siteUrl}/testimonials/#review-${slug}`,
+      name: t.outcomeMetric,
+      reviewBody: t.quote,
+      itemReviewed: { "@id": `${siteConfig.siteUrl}/#person` },
+      author: {
+        "@type": "Person",
+        name: t.name
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: 5,
+        bestRating: 5,
+        worstRating: 1
+      }
+    };
+    if (t.date) {
+      node.datePublished = t.date;
+    }
+    return node;
+  });
+}

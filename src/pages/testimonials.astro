@@ -1,121 +1,210 @@
 ---
-// /testimonials — internal testimonials & reviews page.
-// Replaces the old "Read more founder feedback" external link to GrowthMentor.
-//
-// Sources testimonials from src/content/testimonials/*.json (existing collection).
-// Categorisation is heuristic on the `source` field — adjust the categoriseSource
-// function below if you add new source labels.
+// /testimonials — named, metric-bearing testimonials by engagement type + Review JSON-LD.
 
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import {
+  buildBreadcrumbSchema,
+  buildTestimonialReviewSchemas,
+  buildWebPageSchema
+} from "../lib/schema";
+import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import { ctas, proofStats, siteConfig } from "../site";
-import { sortByFeaturedThenOrder } from "../lib/utils";
 
-type Category = "Founder advisory" | "Mentoring" | "Fractional CMO" | "Strategy Sprint" | "Other";
+type PageSection = "fractional-cmo" | "strategy-sprint" | "speaking";
 
-function categoriseSource(source: string, role: string): Category {
-  const s = `${source} ${role}`.toLowerCase();
-  if (/fractional cmo|fractional|cmo/.test(s)) return "Fractional CMO";
-  if (/strategy sprint|sprint/.test(s)) return "Strategy Sprint";
-  if (/mentor|growthmentor|mentorcruise/.test(s)) return "Mentoring";
-  if (/advisory|founder|growth session|advisor/.test(s)) return "Founder advisory";
-  return "Other";
-}
+const sectionMeta: Record<
+  PageSection,
+  { title: string; intro: string; href: string; linkLabel: string }
+> = {
+  "fractional-cmo": {
+    title: "Fractional CMO",
+    intro:
+      "Embedded GTM leadership, reporting rhythm, and sequencing work — outcomes from deeper engagements.",
+    href: "/fractional-cmo/",
+    linkLabel: "Fractional CMO scope & pricing →"
+  },
+  "strategy-sprint": {
+    title: "Strategy Sprint",
+    intro:
+      "Intensive diagnostics, GrowthMentor sessions, and short sprints where a sharp bottleneck call changes the quarter.",
+    href: "/strategy-sprint/",
+    linkLabel: "Strategy Sprint overview →"
+  },
+  speaking: {
+    title: "Speaking",
+    intro: "Programme partners and organisers who have seen the work in front of founder rooms.",
+    href: "/speaking/",
+    linkLabel: "Speaking & workshops →"
+  }
+};
+
+const sectionOrder: PageSection[] = ["fractional-cmo", "strategy-sprint", "speaking"];
 
 const all = sortByFeaturedThenOrder(await getCollection("testimonials"));
 
-const decorated = all.map((t) => ({
-  ...t,
-  category: categoriseSource(t.data.source ?? "", t.data.role ?? "")
-}));
+const bySection = sectionOrder.reduce<Record<PageSection, typeof all>>(
+  (acc, key) => {
+    acc[key] = all.filter((t) => t.data.pageSection === key);
+    return acc;
+  },
+  { "fractional-cmo": [], "strategy-sprint": [], speaking: [] }
+);
 
-const categories: Category[] = ["Founder advisory", "Fractional CMO", "Strategy Sprint", "Mentoring"];
-const counts = categories.reduce<Record<string, number>>((acc, c) => {
-  acc[c] = decorated.filter((t) => t.category === c).length;
-  return acc;
-}, { all: decorated.length });
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Testimonials", url: "/testimonials/" }
+  ]),
+  buildWebPageSchema({
+    name: "Client testimonials | Daniel Johnson",
+    description:
+      "Named founder and operator testimonials with specific outcomes across fractional CMO work, strategy sprints, and speaking.",
+    url: absoluteUrl("/testimonials/")
+  }),
+  ...buildTestimonialReviewSchemas(
+    all.map((t) => ({
+      name: t.data.name,
+      quote: t.data.quote,
+      outcomeMetric: t.data.outcomeMetric,
+      date: t.data.date
+    }))
+  )
+];
 ---
 
 <BaseLayout
-  description="Founder testimonials, advisory feedback, and mentoring reviews for Daniel Johnson — fractional CMO and AI-native growth operator. Filter by engagement type."
+  description="Named testimonials with specific metrics — fractional CMO, strategy sprints, and speaking. Social proof for AI and B2B SaaS founders."
+  keywords="Daniel Johnson testimonials, fractional CMO reviews, startup growth advisor outcomes"
   path="/testimonials/"
-  title="Testimonials & founder feedback | Daniel Johnson"
+  schema={schemas}
+  title="Testimonials — named outcomes | Daniel Johnson"
 >
   <!-- Hero -->
   <section class="section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center space-y-5">
-        <span class="service-label justify-center">Testimonials &amp; founder feedback</span>
+        <span class="service-label justify-center">Testimonials</span>
         <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
-          What founders, operators, and clients say.
+          Named people. Real companies. Specific outcomes.
         </h1>
         <p class="text-lg leading-8 text-[color:var(--muted)] md:text-xl">
           {proofStats.mentorSessions} mentor sessions, {proofStats.startupsAdvised} startups advised,
-          {proofStats.mentorRating}/5 average rating from {proofStats.mentorReviewCount}+ reviews.
-          Filter by engagement type below.
+          {proofStats.mentorRating}/5 from {proofStats.mentorReviewCount}+ public reviews — organised here by how we worked together.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="testimonials-hero-book">
             {ctas.primary.label} →
           </a>
           <a class="button-link" href="/case-studies/" data-cta="testimonials-hero-cases">
-            See case studies →
+            Case studies →
           </a>
         </div>
+        <nav class="flex flex-wrap justify-center gap-2 pt-4 text-sm font-semibold" aria-label="Jump to testimonial sections">
+          {sectionOrder.map((key) =>
+            bySection[key].length ? (
+              <a
+                class="rounded-full border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-2 text-[color:var(--muted)] hover:border-[color:var(--accent)]/40 hover:text-[color:var(--ink)]"
+                href={`#${key}`}
+              >
+                {sectionMeta[key].title}
+                <span class="ml-1 tabular-nums opacity-60">({bySection[key].length})</span>
+              </a>
+            ) : null
+          )}
+        </nav>
       </div>
     </div>
   </section>
 
-  <!-- Filter pills + grid -->
+  {
+    sectionOrder.map((key) =>
+      bySection[key].length ? (
+        <section
+          class="section-space pt-0"
+          id={key}
+          aria-label={`${sectionMeta[key].title} testimonials`}
+        >
+          <div class="shell">
+            <SectionHeader
+              eyebrow={sectionMeta[key].title}
+              intro={sectionMeta[key].intro}
+              title={`${sectionMeta[key].title} testimonials.`}
+            />
+            <p class="reveal mt-6">
+              <a class="link-arrow" href={sectionMeta[key].href} data-cta={`testimonials-link-${key}`}>
+                {sectionMeta[key].linkLabel}
+              </a>
+            </p>
+
+            <div class="tm-grid mt-10">
+              {bySection[key].map((t) => (
+                <figure class="reveal card p-6 md:p-7 tm-card">
+                  <p class="card-label tm-metric">{t.data.outcomeMetric}</p>
+                  <blockquote>
+                    <p class="text-base leading-7 md:text-lg md:leading-8 font-medium tracking-[-0.01em]">
+                      &ldquo;{t.data.quote}&rdquo;
+                    </p>
+                  </blockquote>
+                  <figcaption class="mt-5 flex gap-4 border-t border-[color:var(--line)] pt-4">
+                    {t.data.logoUrl && (
+                      <img
+                        alt=""
+                        class="tm-logo h-12 w-12 shrink-0 rounded-lg object-cover"
+                        height="48"
+                        loading="lazy"
+                        src={t.data.logoUrl}
+                        width="48"
+                      />
+                    )}
+                    <div class="min-w-0">
+                      <p class="font-semibold text-[color:var(--ink)]">{t.data.name}</p>
+                      <p class="text-sm text-[color:var(--muted)]">
+                        {t.data.role}
+                        {t.data.organisation ? ` · ${t.data.organisation}` : ""}
+                      </p>
+                      {t.data.source && (
+                        <p class="mt-1 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">
+                          {t.data.source}
+                          {t.data.date ? ` · ${t.data.date}` : ""}
+                        </p>
+                      )}
+                      {t.data.permission && t.data.permission !== "public" && (
+                        <p
+                          class:list={[
+                            "mt-1 text-xs font-medium",
+                            t.data.permission === "anonymous"
+                              ? "text-[color:var(--muted)]"
+                              : "text-amber-600"
+                          ]}
+                        >
+                          {t.data.permission === "anonymous"
+                            ? "Anonymous"
+                            : "Permission required for public use"}
+                        </p>
+                      )}
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null
+    )
+  }
+
   <section class="section-space pt-0">
     <div class="shell">
-      <div class="reveal flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Filter testimonials">
-        <button class="tm-pill tm-pill-active" type="button" data-filter="all" aria-pressed="true">
-          All <span class="tm-pill-count">{counts.all}</span>
-        </button>
-        {categories.map((cat) => (
-          counts[cat] > 0 && (
-            <button class="tm-pill" type="button" data-filter={cat} aria-pressed="false">
-              {cat} <span class="tm-pill-count">{counts[cat]}</span>
-            </button>
-          )
-        ))}
-      </div>
-
-      <div class="tm-grid mt-10" id="testimonialsGrid">
-        {decorated.map((t) => (
-          <figure class="reveal card p-6 md:p-7 tm-card" data-category={t.category}>
-            <p class="card-label tm-card-cat">{t.category}</p>
-            <blockquote>
-              <p class="text-base leading-7 md:text-lg md:leading-8 font-medium tracking-[-0.01em]">
-                &ldquo;{t.data.quote}&rdquo;
-              </p>
-            </blockquote>
-            <figcaption class="mt-5 border-t border-[color:var(--line)] pt-4">
-              <p class="font-semibold text-[color:var(--ink)]">{t.data.name}</p>
-              <p class="text-sm text-[color:var(--muted)]">
-                {t.data.role}{t.data.organisation ? ` · ${t.data.organisation}` : ""}
-              </p>
-              {t.data.source && (
-                <p class="mt-1 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">
-                  {t.data.source}{t.data.date ? ` · ${t.data.date}` : ""}
-                </p>
-              )}
-              {t.data.permission && t.data.permission !== "public" && (
-                <p class="mt-1 text-xs font-medium {t.data.permission === 'anonymous' ? 'text-[color:var(--muted)]' : 'text-amber-600'}">
-                  {t.data.permission === "anonymous" ? "Anonymous" : "Permission required for public use"}
-                </p>
-              )}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-
-      <p class="reveal mt-8 text-center text-sm text-[color:var(--muted)]">
-        Want the unfiltered view? See&nbsp;
-        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]"
-           href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
+      <p class="reveal text-center text-sm text-[color:var(--muted)]">
+        Want the unfiltered mentor feed? See&nbsp;
+        <a
+          class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]"
+          href={siteConfig.growthMentorReviews}
+          rel="noreferrer"
+          target="_blank"
+        >
           {proofStats.mentorReviewCount}+ public reviews on GrowthMentor →
         </a>
       </p>
@@ -148,86 +237,34 @@ const counts = categories.reduce<Record<string, number>>((acc, c) => {
 </BaseLayout>
 
 <style>
-  .tm-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.45rem 0.95rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--muted);
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
-  }
-  .tm-pill:hover {
-    color: var(--ink);
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
-  }
-  .tm-pill-active {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-  .tm-pill-active:hover {
-    color: #fff;
-    border-color: var(--ink);
-  }
-  .tm-pill-count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.4rem;
-    padding: 0 0.4rem;
-    height: 1.2rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, currentColor 12%, transparent);
-    font-size: 0.7rem;
-    font-weight: 700;
-    line-height: 1;
-  }
-
   .tm-grid {
     display: grid;
     gap: 1.25rem;
     grid-template-columns: 1fr;
   }
-  @media (min-width: 720px) { .tm-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1080px) { .tm-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 720px) {
+    .tm-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 1080px) {
+    .tm-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 
-  .tm-card { transition: opacity 200ms ease, transform 200ms ease; }
-  .tm-card.is-hidden { display: none; }
+  .tm-card {
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
 
-  .tm-card-cat {
+  .tm-metric {
     color: var(--accent);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+  }
+
+  .tm-logo {
+    border: 1px solid var(--line);
   }
 </style>
-
-<script is:inline>
-  (function () {
-    var pills = document.querySelectorAll(".tm-pill");
-    var cards = document.querySelectorAll("#testimonialsGrid .tm-card");
-    if (!pills.length || !cards.length) return;
-
-    pills.forEach(function (pill) {
-      pill.addEventListener("click", function () {
-        pills.forEach(function (p) {
-          p.classList.remove("tm-pill-active");
-          p.setAttribute("aria-pressed", "false");
-        });
-        pill.classList.add("tm-pill-active");
-        pill.setAttribute("aria-pressed", "true");
-        var filter = pill.getAttribute("data-filter") || "all";
-        cards.forEach(function (card) {
-          if (filter === "all" || card.getAttribute("data-category") === filter) {
-            card.classList.remove("is-hidden");
-          } else {
-            card.classList.add("is-hidden");
-          }
-        });
-      });
-    });
-  })();
-</script>
