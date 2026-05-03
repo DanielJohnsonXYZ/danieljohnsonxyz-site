@@ -109,6 +109,8 @@ const testimonials = defineCollection({
     role: z.string(),
     organisation: z.string(),
     source: z.string(),
+    date: z.string().optional(),
+    permission: z.enum(["public", "needs_permission", "anonymous"]).default("public"),
     featured: z.boolean().default(false),
     order: z.number().default(999)
   })
