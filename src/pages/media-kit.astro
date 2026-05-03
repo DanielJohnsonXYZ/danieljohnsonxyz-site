@@ -21,6 +21,23 @@ const doNotDescribeAs = [
 
 const preferredDescription = "Daniel Johnson is a fractional CMO and GTM operator helping post-PMF AI and B2B SaaS startups build repeatable growth systems.";
 
+// "Fast facts" — the scannable single-card block journalists, producers,
+// and event organisers copy directly into briefs and booking forms.
+// Source: Notion 353f99a79fdb81c9a29ed1d16b70cbb4
+const fastFacts = [
+  { label: "Name", value: "Daniel Johnson" },
+  { label: "Role", value: "Fractional CMO and GTM operator" },
+  { label: "Company", value: "Founder, We Scale Startups (wescalestartups.com)" },
+  { label: "Focus", value: "Post-PMF AI & B2B SaaS startups, Seed–Series B" },
+  { label: "Best topics", value: "AI-native GTM, founder-led growth, startup positioning, product-led growth, growth operating systems" },
+  { label: "Location", value: "UK-based, currently in Asia. Serving US, UK, Europe, APAC" },
+  { label: "Available for", value: "Expert quotes, podcast guest spots, panels, keynotes, workshops, newsletter interviews" },
+  { label: "Track record", value: "20+ startups · £18M+ revenue generated · 4.93/5 from 220 GrowthMentor reviews" },
+  { label: "Contact", value: siteConfig.email }
+];
+
+// Kept for backward-compatibility with the existing Quick-facts section
+// further down the page.
 const quickFacts = [
   { label: "Primary role", value: "Fractional CMO / Growth Operator" },
   { label: "Focus", value: "Post-PMF AI & B2B SaaS, Seed–Series B" },
@@ -57,6 +74,30 @@ const affiliations = trustLogos.map((logo) => ({
           We Scale Startups press kit →
         </a>
       </p>
+    </div>
+  </section>
+
+  <!-- Fast facts — single scannable card near top of media kit so producers and -->
+  <!-- journalists can copy directly into briefs. Source: Notion 353f99a79fdb81c9a29ed1d16b70cbb4 -->
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Fast facts"
+        title="Copy and paste — everything in one card."
+        intro="Designed for producers, journalists, and event organisers writing briefs at speed. One card, all of it."
+      />
+      <div class="max-w-3xl mx-auto">
+        <article class="card p-8 md:p-10 border-2 border-[color:var(--accent)]/40">
+          <dl class="grid gap-4 md:grid-cols-[10rem_1fr]">
+            {fastFacts.map((fact) => (
+              <Fragment>
+                <dt class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] md:pt-1">{fact.label}</dt>
+                <dd class="text-base leading-7 text-[color:var(--ink)]">{fact.value}</dd>
+              </Fragment>
+            ))}
+          </dl>
+        </article>
+      </div>
     </div>
   </section>
 

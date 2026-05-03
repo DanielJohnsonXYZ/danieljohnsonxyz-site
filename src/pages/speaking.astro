@@ -15,21 +15,34 @@ const speakingHighlights = [
   { metric: "Google, Cambridge, Imperial", label: "Institutional rooms and programmes" },
   { metric: "10+ countries", label: "Startup audiences reached through teaching and mentoring" }
 ];
+// Five named "Signature talks" — each is a bookable session organisers
+// can propose to their committee. Named talks make event briefing easier
+// and rank for specific topic searches. Source: Notion 353f99a79fdb81f0a60bec41f5e43ffc
 const signatureSessions = [
   {
-    title: "How to build a repeatable growth system",
-    outcome: "Founders leave with a practical model for turning fragmented marketing into a clearer operating rhythm.",
-    bestFor: "Founder cohorts, accelerators, and operator teams"
+    title: "What the Hell Is Growth?",
+    outcome: "A practical explanation of what growth actually means after early traction, and why most founders confuse channels with systems.",
+    bestFor: "Founder cohorts, accelerators, early-stage operator teams"
   },
   {
-    title: "Go-to-market judgment for early teams",
-    outcome: "Teams learn how to choose what to test, what to ignore, and how to connect message, channel, and customer learning.",
-    bestFor: "Seed-stage teams, innovation programmes, and product-led audiences"
+    title: "AI-Native GTM for Startup Teams",
+    outcome: "How smaller teams use AI to improve research, messaging, experimentation, and decision-making — without outsourcing judgement to tools.",
+    bestFor: "Startup teams adopting AI, innovation programmes, AI-native founder cohorts"
   },
   {
-    title: "Turning innovation into commercial traction",
-    outcome: "Technical audiences get a usable bridge between invention, market clarity, and demand creation.",
-    bestFor: "Universities, R&D programmes, and innovation teams"
+    title: "Founder-Led Growth After the First Customers",
+    outcome: "Why founder-led sales works early, where it breaks, and how to build a commercial system that does not depend on the founder's calendar.",
+    bestFor: "Post-PMF founders, growth-stage operator teams, scale-up programmes"
+  },
+  {
+    title: "Positioning Before Pipeline",
+    outcome: "Why most acquisition problems are actually messaging, ICP, and category problems — and how to fix them before spending more on channels.",
+    bestFor: "Seed to Series A teams, GTM workshops, marketing leadership offsites"
+  },
+  {
+    title: "Build a Growth Machine, Not a Growth Hack",
+    outcome: "A practical operating model for prioritising experiments, reading signal, and building a repeatable growth function the team can run.",
+    bestFor: "Series A/B teams, growth leadership audiences, fractional-CMO conferences"
   }
 ];
 const organiserTakeaways = [
@@ -62,11 +75,17 @@ const eventPhotos = [
     caption: "Event poster — Shenzhen SEO & SaaS session"
   }
 ];
+// Formats — be explicit about every shape, including the higher-value
+// workshop and private formats organisers often assume aren't available.
+// Source: Notion 353f99a79fdb8165ab39c4ede9d7347f
 const deliverables = [
-  "Keynotes for founder and innovation audiences",
-  "Interactive workshops for startup or accelerator cohorts",
-  "Training sessions for marketing and commercial teams",
-  "Panels, fireside chats, and moderated conversations"
+  "30-minute keynote",
+  "45-minute practical talk",
+  "60–90-minute workshop for founder cohorts and operator teams",
+  "Founder cohort session inside an accelerator or programme",
+  "Panel guest or moderated conversation",
+  "Live growth teardown — Daniel reviews a real company on stage",
+  "Private team session — internal training for a single company"
 ];
 const assets = [
   { label: "Short bio", detail: "Use the speaking bio below for event pages and introductions." },
