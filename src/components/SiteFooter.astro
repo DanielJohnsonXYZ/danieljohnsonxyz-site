@@ -1,4 +1,5 @@
 ---
+import NewsletterFormInline from "./NewsletterFormInline.astro";
 import { ctas, footerNavigation, footerTestimonial, proofStats, siteConfig, socialLinks } from "../site";
 
 interface Props {
@@ -76,6 +77,18 @@ const { mediaCta = false } = Astro.props;
             )}
           </div>
           <p class="text-xs text-white/55">{siteConfig.location}</p>
+
+          <div class="mt-6 max-w-lg">
+            <NewsletterFormInline
+              variant="strip"
+              tone="dark"
+              heading="Growth Notes — practical founder-led GTM, one email at a time."
+              subline="Same list as the newsletter page. Unsubscribe anytime."
+            />
+            <p class="mt-3 text-xs text-white/50">
+              <a class="font-semibold text-white/70 hover:text-white" href="/newsletter/">About the newsletter →</a>
+            </p>
+          </div>
         </div>
 
         <div class="space-y-4">

@@ -10,6 +10,8 @@ import { mauticNewsletter } from "../site";
 
 interface Props {
   variant?: "strip" | "card";
+  /** Use on dark backgrounds (e.g. site footer). */
+  tone?: "light" | "dark";
   heading?: string;
   subline?: string;
   /** Set on pages with a hero link to #anchor (e.g. /newsletter). Omit when multiple forms on one page. */
@@ -18,6 +20,7 @@ interface Props {
 
 const {
   variant = "strip",
+  tone = "light",
   heading = "Practical notes on founder-led growth, AI GTM, positioning, and pipeline systems.",
   subline = "Occasional. No daily drip. Unsubscribe in one click.",
   anchorId
@@ -28,7 +31,7 @@ const { submitUrl, formId } = mauticNewsletter;
 
 <section
   {...(anchorId ? { id: anchorId } : {})}
-  class:list={["nl-form", `nl-form-${variant}`]}
+  class:list={["nl-form", `nl-form-${variant}`, tone === "dark" && "nl-form--dark"]}
   aria-labelledby="nl-form-title"
 >
   <div class="nl-inner">
@@ -145,6 +148,30 @@ const { submitUrl, formId } = mauticNewsletter;
   .nl-submit {
     flex-shrink: 0;
     white-space: nowrap;
+  }
+
+  /* Dark footer / band */
+  .nl-form--dark {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  .nl-form--dark .nl-eyebrow {
+    color: color-mix(in srgb, var(--accent) 85%, white);
+  }
+  .nl-form--dark h3,
+  .nl-form--dark .nl-sub {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .nl-form--dark .nl-sub {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .nl-form--dark .nl-input {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  .nl-form--dark .nl-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
   }
 
   .sr-only {
