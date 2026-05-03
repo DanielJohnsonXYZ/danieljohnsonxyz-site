@@ -5,17 +5,18 @@
   <div class="shell">
     <div class="reveal mx-auto max-w-5xl space-y-8">
       <header class="max-w-3xl space-y-3">
-        <p class="card-label">System artefacts</p>
+        <p class="card-label">What it looks like in practice</p>
         <h2 id="gtm-artefacts-heading" class="text-3xl font-bold tracking-[-0.04em] leading-[1.15] md:text-4xl">
-          What the operating system looks like in practice
+          Anonymised artefact previews
         </h2>
         <p class="text-base leading-7 text-[color:var(--muted)]">
-          Stylised placeholders — not real client data — to show the shape of the docs, dashboards, and cadence you leave with.
+          Stylised cards — no real client data — showing the shape of ICP docs, dashboards, backlog, cadence, channel map, and reporting you leave with.
         </p>
       </header>
 
       <div class="gtm-artefacts-grid" role="list">
         <article class="gtm-art gtm-art--doc" role="listitem" aria-label="ICP and positioning document preview">
+          <p class="gtm-art-anon">Anonymised · Series A B2B SaaS</p>
           <p class="gtm-art-label">ICP + positioning</p>
           <div class="gtm-art-body gtm-blur-lines" aria-hidden="true">
             <span class="gtm-line gtm-line-title" />
@@ -27,6 +28,7 @@
         </article>
 
         <article class="gtm-art gtm-art--dash" role="listitem" aria-label="Growth dashboard preview">
+          <p class="gtm-art-anon">Anonymised · Post-PMF fintech</p>
           <p class="gtm-art-label">Growth dashboard</p>
           <div class="gtm-art-body" aria-hidden="true">
             <div class="gtm-kpis">
@@ -45,6 +47,7 @@
         </article>
 
         <article class="gtm-art gtm-art--backlog" role="listitem" aria-label="Experiment backlog preview">
+          <p class="gtm-art-anon">Anonymised · Seed AI healthtech</p>
           <p class="gtm-art-label">Experiment backlog</p>
           <div class="gtm-art-body" aria-hidden="true">
             <div class="gtm-row"><span class="gtm-pill">Test</span><span class="gtm-row-text">Channel · Hypothesis A</span></div>
@@ -115,6 +118,15 @@
     min-height: 11.5rem;
     display: flex;
     flex-direction: column;
+  }
+
+  .gtm-art-anon {
+    margin: 0 0 0.35rem;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .gtm-art-label {
