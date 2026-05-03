@@ -375,15 +375,17 @@ export const roiFrames = [
 // ──────────────────────────────────────────────────────────────────────────
 export const trustLogos = [
   { id: "growthmentor", src: "/images/logos/growthmentor.png", alt: "GrowthMentor — Top-Rated Mentor", label: "GrowthMentor" },
-  { id: "cambridge-judge", src: "/images/cambridge-judge-business-school-640.webp", alt: "Cambridge Judge Business School — Guest Lecturer", label: "Cambridge Judge" },
+  { id: "cambridge-judge", src: "/images/logos/cambridge.webp", alt: "Cambridge Judge Business School — Guest Lecturer", label: "Cambridge Judge" },
   { id: "imperial", src: "/images/logos/imperial.png", alt: "Imperial College London — Guest Lecturer", label: "Imperial" },
   { id: "techstars", src: "/images/logos/techstars.png", alt: "Techstars — Mentor", label: "Techstars" },
-  { id: "general-assembly", src: "/images/logos/general-assembly.png", alt: "General Assembly — Trainer", label: "General Assembly" }
+  { id: "general-assembly", src: "/images/logos/general-assembly.png", alt: "General Assembly — Trainer", label: "General Assembly" },
+  { id: "uk-space-agency", src: "/images/logos/uk-space-agency.png", alt: "UK Space Agency — Innovation Talk", label: "UK Space Agency" }
 ] as const;
 
 export const trustAffiliations = [
   "Google for Startups mentor",
-  "UK Space Agency innovation talk"
+  "UK Space Agency innovation talk",
+  "Techstars mentor"
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
