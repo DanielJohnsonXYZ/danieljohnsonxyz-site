@@ -8,7 +8,7 @@ import { siteConfig } from "../site";
 
 const schema = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
-  { name: "Now", url: "/now" }
+    { name: "Now", url: "/now/" }
 ]);
 
 const updatedOn = "April 2026";
@@ -51,7 +51,7 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
 
 <BaseLayout
   description="What Daniel Johnson is working on right now — active client engagements, writing in progress, speaking commitments, and what he's saying no to."
-  path="/now"
+  path="/now/"
   schema={schema}
   title="Now | Daniel Johnson"
 >
@@ -97,7 +97,7 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
               </li>
             ))}
           </ul>
-          <a class="button-link mt-6 inline-block" href="/writing">See recent essays →</a>
+          <a class="button-link mt-6 inline-block" href="/writing/">See recent essays →</a>
         </div>
         <div>
           <h2 class="text-3xl font-extrabold tracking-[-0.03em]">Speaking</h2>
@@ -159,7 +159,7 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
         </p>
         <div class="flex flex-wrap justify-center gap-4 pt-2">
           <a class="button-primary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a growth call</a>
-          <a class="button-link text-white" href="/fractional-cmo">See the fractional CMO offer →</a>
+          <a class="button-link text-white" href="/fractional-cmo/">See the fractional CMO offer →</a>
         </div>
       </div>
     </div>

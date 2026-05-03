@@ -1,8 +1,20 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+  let changed = false;
 
+  // Force HTTPS
+  if (url.protocol === "http:") {
+    url.protocol = "https:";
+    changed = true;
+  }
+
+  // Force non-www
   if (url.hostname === "www.danieljohnson.xyz") {
     url.hostname = "danieljohnson.xyz";
+    changed = true;
+  }
+
+  if (changed) {
     return Response.redirect(url.toString(), 301);
   }
 

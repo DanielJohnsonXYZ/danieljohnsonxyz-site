@@ -5,7 +5,7 @@ import SectionHeader from "../../components/SectionHeader.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig, proofStats } from "../../site";
 
-const cases = (await getCollection("cases"))
+const cases = (await getCollection("caseStudies"))
   .sort((a, b) => (b.data.order || 0) - (a.data.order || 0));
 
 const resultsSchema = [
@@ -70,15 +70,15 @@ const resultsSchema = [
             <h3 class="mt-3 text-2xl font-bold tracking-[-0.04em]">{c.data.title}</h3>
             <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">{c.data.summary}</p>
             <div class="mt-4 grid grid-cols-2 gap-4">
-              {c.data.results.slice(0, 3).map((result) => (
+              {c.data.metrics.slice(0, 3).map((result) => (
                 <div>
-                  <span class="text-lg font-bold text-[color:var(--accent)]">{result.split(" ")[0]}</span>
-                  <span class="text-xs text-[color:var(--muted)]">{result}</span>
+                  <span class="text-lg font-bold text-[color:var(--accent)]">{result.value}</span>
+                  <span class="text-xs text-[color:var(--muted)]">{result.label}</span>
                 </div>
               ))}
             </div>
             <div class="mt-4 text-sm text-[color:var(--muted)]">
-              <strong>What made it work:</strong> {c.data.whyWorked}
+              <strong>What made it work:</strong> {c.data.outcome}
             </div>
             <a class="link-arrow mt-4" href={`/case-studies/${c.id}/`}>Read the case →</a>
           </article>
