@@ -26,6 +26,13 @@ const bestFit = [
   "Future of work / AI adoption shows"
 ];
 
+/** Opinion hooks for cold opens — Notion 353f99a79fdb817d99d5e52ca7faef15 */
+const hotTakes = [
+  "Most AI startups do not have a product problem. They have a positioning problem.",
+  "AI makes marketing execution cheaper, but commercial judgment matters more.",
+  "Founder-led growth works early — and becomes risky when every serious deal still runs through the founder."
+];
+
 const episodeAngles = [
   "Why every AI startup sounds the same — and what actually differentiates them",
   "The end of growth hacking, and what replaces it",
@@ -152,6 +159,23 @@ const schema = buildBreadcrumbSchema([
             </article>
           ))}
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Open strong"
+        intro="Short takes producers can lift for episode titles, cold opens, or clip copy."
+        title="Three useful starting points."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {hotTakes.map((item) => (
+          <article class="reveal card p-6">
+            <p class="text-lg font-bold leading-snug tracking-[-0.03em]">{item}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

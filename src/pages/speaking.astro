@@ -50,6 +50,18 @@ const organiserTakeaways = [
   "Examples from founder, operator, and advisory work, not just theory.",
   "A speaker who can flex between executive-level strategy and hands-on startup detail."
 ];
+
+/** Notion 353f99a79fdb819aae61dfaf234b343e */
+const bestAudiences = [
+  "Seed to Series B founders",
+  "AI startup teams",
+  "B2B SaaS operators",
+  "Startup accelerators",
+  "VC portfolio companies",
+  "Founder communities",
+  "Growth and product teams",
+  "University entrepreneurship programmes"
+];
 const presentationFeedback = [
   { quote: "Finally, a growth talk that cuts through the fluff. Clear frameworks I could use the next day.", source: "Nomad Summit attendee" },
   { quote: "No-nonsense, practical, and specific to our stage. Exactly what we needed.", source: "SaaS & AI SEO session" },
@@ -178,6 +190,23 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
             </article>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Audience fit"
+        intro="Daniel lands best when the room matches these profiles — so organisers can self-qualify before booking."
+        title="Best audiences."
+      />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {bestAudiences.map((item) => (
+          <article class="reveal card p-5">
+            <p class="text-base font-bold leading-7 tracking-[-0.02em]">{item}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

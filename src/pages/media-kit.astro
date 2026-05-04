@@ -59,6 +59,44 @@ const affiliations = trustLogos.map((logo) => ({
   name: logo.label,
   relationship: logo.alt.split(" — ").pop() || "Affiliation"
 }));
+
+/** Sharp producer hooks — Notion 353f99a79fdb818d9c96cc8e837cc982 */
+const mediaTopicHooks = [
+  {
+    title: "Most AI startups do not have a product problem — they have a GTM problem.",
+    body: "When the tech is similar, wins come from ICP clarity, narrative, and distribution judgment — not another feature slide."
+  },
+  {
+    title: "Founder-led growth breaks after early traction.",
+    body: "What worked in the first customers becomes a bottleneck when pipeline, messaging, and decisions still route through the founder."
+  },
+  {
+    title: "AI changes marketing teams without replacing judgement.",
+    body: "Execution gets cheaper and faster; the scarce skill is deciding what is worth doing and what to stop."
+  },
+  {
+    title: "Build the growth system before you hire the CMO.",
+    body: "A senior hire cannot fix a missing rhythm, weak instrumentation, or unclear ownership — the system has to be legible first."
+  },
+  {
+    title: "Smaller, AI-enabled teams can outperform bloated marketing departments.",
+    body: "Lean teams with tight loops and clear accountability often beat large groups busy with activity metrics."
+  },
+  {
+    title: "More traffic rarely fixes weak positioning.",
+    body: "If the story and ICP are fuzzy, paid and organic spend mostly amplify confusion — not demand."
+  }
+];
+
+/** Headline-ready press hooks — Notion 353f99a79fdb81ddab97ef250be0c702 */
+const recentQuoteAngles = [
+  "Why AI startups are starting to sound the same.",
+  "Why founder-led growth breaks between Seed and Series A.",
+  "Why smaller AI-enabled marketing teams may outperform bloated departments.",
+  "Why fractional CMOs are becoming more attractive than agencies for post-PMF startups.",
+  "Why pipeline problems are often positioning problems in disguise.",
+  "Why AI makes tactics cheaper, but judgment more valuable."
+];
 ---
 
 <BaseLayout
@@ -174,6 +212,25 @@ const affiliations = trustLogos.map((logo) => ({
           <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           . Typical response: same day where possible.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Press hooks"
+        title="Recent quote angles."
+        intro="Concrete, headline-friendly lines editors can place in a story today — not abstract expertise labels."
+      />
+      <div class="max-w-3xl mx-auto">
+        <ul
+          class="card p-8 md:p-10 border-2 border-[color:var(--accent)]/25 space-y-3 list-disc pl-5 marker:text-[color:var(--accent)] text-[color:var(--ink)] leading-7"
+        >
+          {recentQuoteAngles.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
@@ -344,26 +401,16 @@ const affiliations = trustLogos.map((logo) => ({
     <div class="shell">
       <SectionHeader
         eyebrow="Speaking topics"
-        title="Ready-to-use talk themes."
-        intro="Daniel speaks on AI-native GTM, growth systems, and fractional leadership for post-PMF startups."
+        title="Hooks, not generic themes."
+        intro="Framed for producers and editors who need a sharp segment — commercial AI, GTM judgment, and founder-led growth."
       />
       <div class="max-w-3xl grid gap-5">
-        <div class="card p-6">
-          <h3 class="font-bold text-lg">AI-Native GTM: What It Actually Means</h3>
-          <p class="mt-2 text-[color:var(--muted)]">How generative and agentic AI accelerate ICP research, messaging tests, and campaign iteration — without replacing human GTM judgement.</p>
-        </div>
-        <div class="card p-6">
-          <h3 class="font-bold text-lg">Growth Systems vs. Campaigns</h3>
-          <p class="mt-2 text-[color:var(--muted)]">Why most startup growth advice is wrong, and how to build a system your team can run after the fractional CMO leaves.</p>
-        </div>
-        <div class="card p-6">
-          <h3 class="font-bold text-lg">Fractional CMO: When It Works, When It Doesn't</h3>
-          <p class="mt-2 text-[color:var(--muted)]">The honest comparison between agency, full-time hire, and fractional CMO for Seed to Series B startups.</p>
-        </div>
-        <div class="card p-6">
-          <h3 class="font-bold text-lg">Founder-Led Sales: When to Scale Out</h3>
-          <p class="mt-2 text-[color:var(--muted)]">How to recognise when founder dependency is plateauing growth, and the system to build so the team can take over.</p>
-        </div>
+        {mediaTopicHooks.map((hook) => (
+          <div class="card p-6">
+            <h3 class="font-bold text-lg leading-snug">{hook.title}</h3>
+            <p class="mt-2 text-[color:var(--muted)] leading-7">{hook.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>

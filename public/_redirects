@@ -15,6 +15,7 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /podcast-appearances      /podcast-guest/  301
 /podcast-appearances/     /podcast-guest/  301
 
+# Legacy speaking URL — Notion 353f99a79fdb81b4978dfab2b0a7d454
 /speaking-and-training     /speaking/  301
 /speaking-and-training/    /speaking/  301
 
