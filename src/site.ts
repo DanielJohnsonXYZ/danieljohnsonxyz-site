@@ -37,6 +37,9 @@ export const siteConfig = {
   youtube: "https://www.youtube.com/@danieljohnson6000",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
+  /** Canonical WSS podcast hub (How Startups Win With AI). */
+  wssPodcastUrl: "https://wescalestartups.com/podcast",
+  wssPodcastGuestApplyUrl: "https://wescalestartups.com/podcast-guest-application",
   /** Must match the GTM container for danieljohnson.xyz in Tag Manager */
   gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
@@ -52,6 +55,7 @@ export const siteConfig = {
     "https://www.instagram.com/danieljohnsonxyz/",
     "https://www.youtube.com/@danieljohnson6000",
     "https://www.wescalestartups.com",
+    "https://wescalestartups.com/podcast",
     "https://www.wescalestartups.com/kassy-cho-interview/"
   ]
 } as const;

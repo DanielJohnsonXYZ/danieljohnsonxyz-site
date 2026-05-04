@@ -328,6 +328,39 @@ const schemas = [
     </div>
   </section>
 
+  <!-- Hosted podcast — cross-link to WSS canonical show page -->
+  <section class="section-space pt-0" aria-labelledby="podcast-host-heading">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-8 md:p-10">
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Hosted by Daniel</p>
+        <h2 id="podcast-host-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.05em] text-balance md:text-4xl">
+          How Startups Win With AI
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
+          A practical founder-facing podcast from We Scale Startups. Founders and operators share how they are using AI to grow faster, save time, and make sharper commercial decisions — without tool hype.
+        </p>
+        <ul class="mt-5 list-disc space-y-2 pl-5 text-base leading-7 text-[color:var(--muted)]">
+          <li>Watch or listen on the canonical show page.</li>
+          <li>Suggest a guest or apply if you have a concrete story listeners can reuse.</li>
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a class="button-accent" href={siteConfig.wssPodcastUrl} rel="noopener" target="_blank" data-cta="home-podcast-hub">
+            Open the podcast hub →
+          </a>
+          <a
+            class="button-link"
+            href={siteConfig.wssPodcastGuestApplyUrl}
+            rel="noopener"
+            target="_blank"
+            data-cta="home-podcast-guest"
+          >
+            Apply as a guest →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 2. Problem statement — tighter copy (was 3 paragraphs, now 2) ──── -->
   <section class="section-space pt-0" aria-labelledby="problem-heading">
     <div class="shell">

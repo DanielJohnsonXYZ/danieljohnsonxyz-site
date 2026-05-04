@@ -53,6 +53,7 @@ const allSchemas = [
   ...pageSchemas
 ].filter(Boolean);
 const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
+const bingSiteVerification = import.meta.env.PUBLIC_BING_MS_VALIDATE?.trim() ?? "";
 // Standard GTM bootstrap (immediate) — matches Tag Manager “Install” snippet so verification tools detect gtm.js.
 const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -133,6 +134,7 @@ document.addEventListener('submit', (event) => {
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content={metaRobots} />
+    {bingSiteVerification ? <meta name="msvalidate.01" content={bingSiteVerification} /> : null}
     <meta name="author" content={siteConfig.name} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
