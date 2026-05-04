@@ -377,8 +377,20 @@ const schemas = [
         ))}
       </div>
 
+      <!-- Decision helper beneath pricing — turns "which one?" into a one-line read. -->
+      <!-- Source: Notion 353f99a79fdb81f49d74d72a605e13f6                             -->
+      <div class="mt-6 rounded-[1.5rem] border-2 border-[color:var(--accent)]/30 bg-[color:var(--accent)]/[0.04] p-6 md:p-7">
+        <p class="card-label text-[color:var(--accent)]">Which one should I choose?</p>
+        <ul class="mt-4 space-y-2 text-base leading-7">
+          <li><strong class="text-[color:var(--ink)]">Strategy Sprint</strong> <span class="text-[color:var(--muted)]">— if you need diagnosis, 90-day priorities, and the first artefacts shipped before committing to ongoing work.</span></li>
+          <li><strong class="text-[color:var(--ink)]">Fractional CMO</strong> <span class="text-[color:var(--muted)]">— if you need senior ownership 1 day a week and a working operating rhythm. The default for most £1m–£10m ARR teams.</span></li>
+          <li><strong class="text-[color:var(--ink)]">Fractional CMO Plus</strong> <span class="text-[color:var(--muted)]">— if the team needs deeper operating support, agency management, and faster execution (~2 days a week).</span></li>
+        </ul>
+        <p class="mt-4 text-sm text-[color:var(--muted)]">Not sure? Book the free 30-min Growth Audit and we'll pick the right shape together.</p>
+      </div>
+
       <!-- ROI framing — speaks to the founder's "can I justify this?" moment. -->
-      <div class="mt-8 rounded-[1.5rem] border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-6 md:p-8">
+      <div class="mt-6 rounded-[1.5rem] border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-6 md:p-8">
         <p class="card-label">Put in context</p>
         <ul class="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {roiFrames.map((frame) => (
