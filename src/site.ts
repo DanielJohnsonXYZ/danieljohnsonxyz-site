@@ -31,6 +31,7 @@ export const siteConfig = {
   growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
+    "https://www.crunchbase.com/person/daniel-johnson-2",
   malt: "https://www.malt.uk/profile/danieljohnsonxyz",
   pangea: "https://pangea.app/profile/daniel-johnson",
   instagram: "https://www.instagram.com/danieljohnsonxyz/",
