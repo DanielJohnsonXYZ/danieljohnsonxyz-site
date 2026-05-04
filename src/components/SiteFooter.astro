@@ -37,7 +37,7 @@ const { mediaCta = false } = Astro.props;
     </div>
 
     <div class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 md:p-12">
-      <div class="grid gap-10 md:grid-cols-5">
+      <div class="grid gap-10 md:grid-cols-6">
         <div class="flex flex-col gap-6 md:col-span-2">
           <span class="eyebrow">Start a conversation</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
@@ -111,10 +111,10 @@ const { mediaCta = false } = Astro.props;
         </div>
 
         <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Expertise</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Learn the method</p>
           <ul class="space-y-3">
             {
-              footerNavigation.expertise.map((item) => (
+              footerNavigation.learnTheMethod.map((item) => (
                 <li>
                   <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
                     {item.label}
@@ -126,10 +126,25 @@ const { mediaCta = false } = Astro.props;
         </div>
 
         <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">More</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Proof</p>
           <ul class="space-y-3">
             {
-              footerNavigation.more.map((item) => (
+              footerNavigation.proof.map((item) => (
+                <li>
+                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Company</p>
+          <ul class="space-y-3">
+            {
+              footerNavigation.company.map((item) => (
                 <li>
                   <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
                     {item.label}
@@ -140,6 +155,21 @@ const { mediaCta = false } = Astro.props;
           </ul>
         </div>
       </div>
+
+      <nav aria-label="Resources and comparisons" class="mt-10 border-t border-white/[0.06] pt-6">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Resources</p>
+        <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/60">
+          {
+            footerNavigation.resources.map((item) => (
+              <li>
+                <a class="font-medium text-white/70 hover:text-white" href={item.href}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
 
       <div class="mt-10 grid gap-4 border-t border-white/[0.06] pt-6 text-sm text-white/50 md:grid-cols-[1.2fr_0.8fr]">
         <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">

@@ -232,37 +232,44 @@ export const navigationGroups = [
   }
 ] as const;
 
+/** Footer columns follow Notion hub: intent-based IA (Work with me → Learn → Proof → Company). */
 export const footerNavigation = {
   workWithMe: [
-    { href: "/start-here/", label: "Start here" },
-    { href: "/growth-audit/", label: "30-min Growth Audit" },
+    { href: "/growth-audit/", label: "Growth Audit" },
     { href: "/strategy-sprint/", label: "Strategy Sprint" },
     { href: "/fractional-cmo/", label: "Fractional CMO" },
-    { href: "/mentoring/", label: "Founder office hours" },
+    { href: "/mentoring/", label: "Founder Office Hours" },
     { href: "/speaking/", label: "Speaking / workshops" }
   ],
-  expertise: [
+  learnTheMethod: [
     { href: "/gtm-systems/", label: "GTM systems" },
-    { href: "/product-led-growth/", label: "Product-led growth" },
-    { href: "/experimentation/", label: "Experimentation" },
     { href: "/ai-native-workflows/", label: "AI-native workflows" },
-    { href: "/revenue-operations/", label: "Revenue operations" }
+    { href: "/experimentation/", label: "Experimentation" },
+    { href: "/revenue-operations/", label: "Revenue operations" },
+    { href: "/product-led-growth/", label: "Product-led growth" }
   ],
-  more: [
+  proof: [
+    { href: "/case-studies/", label: "Case studies" },
+    { href: "/testimonials/", label: "Testimonials" },
+    { href: "/media-kit/", label: "Media kit" },
+    { href: "/speaking/", label: "Speaking" }
+  ],
+  company: [
+    { href: "/start-here/", label: "Start here" },
+    { href: "/about/", label: "About" },
+    { href: "/now/", label: "Now" },
+    { href: "/writing/", label: "Writing" },
+    { href: "/contact/", label: "Contact" }
+  ],
+  resources: [
     { href: "/faq/", label: "FAQ" },
     { href: "/glossary/", label: "Glossary" },
     { href: "/compare-growth-options/", label: "Compare six growth options" },
-    { href: "/fractional-cmo-vs-agency/", label: "vs. Agency" },
-    { href: "/fractional-cmo-vs-full-time-cmo/", label: "vs. Full-time CMO" },
-    { href: "/case-studies/", label: "Case studies" },
-    { href: "/writing/", label: "Writing" },
-    { href: "/media-kit/", label: "Media kit" },
+    { href: "/fractional-cmo-vs-agency/", label: "Fractional CMO vs. agency" },
+    { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO" },
     { href: "/podcast-guest/", label: "Podcast guest" },
-    { href: "/now/", label: "Now" },
-    { href: "/about/", label: "About" },
     { href: "/newsletter/", label: "Growth Notes" },
-    { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" },
-    { href: "/contact/", label: "Contact" }
+    { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" }
   ]
 } as const;
 
