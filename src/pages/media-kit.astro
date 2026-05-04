@@ -21,6 +21,14 @@ const doNotDescribeAs = [
 
 const preferredDescription = "Daniel Johnson is a fractional CMO and GTM operator helping post-PMF AI and B2B SaaS startups build repeatable growth systems.";
 
+/** Plain text for producer copy buttons (Notion: media kit downloadable assets). */
+const bioShortOneLine =
+  "Daniel Johnson is a fractional CMO helping post-PMF AI and B2B SaaS startups build growth systems that run without the founder.";
+const bioStandardTwoLines =
+  "Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF AI and B2B SaaS startups. He embeds as senior GTM leadership to build repeatable acquisition systems, then transfers them to the team.";
+const approvedPodcastIntro =
+  "Daniel Johnson is a fractional CMO and GTM operator for post-PMF AI and B2B SaaS startups. He helps teams diagnose growth bottlenecks, build repeatable acquisition systems, and transfer ownership back to the company.";
+
 // "Fast facts" — the scannable single-card block journalists, producers,
 // and event organisers copy directly into briefs and booking forms.
 // Source: Notion 353f99a79fdb81c9a29ed1d16b70cbb4
@@ -33,6 +41,7 @@ const fastFacts = [
   { label: "Location", value: "UK-based, currently in Asia. Serving US, UK, Europe, APAC" },
   { label: "Available for", value: "Expert quotes, podcast guest spots, panels, keynotes, workshops, newsletter interviews" },
   { label: "Track record", value: "20+ startups · £18M+ revenue generated · 4.93/5 from 220 GrowthMentor reviews" },
+  { label: "Community", value: "Moderator, Online Geniuses (53,000+ member marketing Slack)" },
   { label: "Contact", value: siteConfig.email }
 ];
 
@@ -74,6 +83,46 @@ const affiliations = trustLogos.map((logo) => ({
           We Scale Startups press kit →
         </a>
       </p>
+    </div>
+  </section>
+
+  <!-- Producer pack — one-click downloads + copy (Notion 353f99a79fdb819a8f43ca5abb57d50d) -->
+  <section class="section section-alt" aria-labelledby="producer-pack-heading">
+    <div class="shell">
+      <h2 id="producer-pack-heading" class="sr-only">Producer pack</h2>
+      <div class="max-w-3xl mx-auto card p-6 md:p-8 border-2 border-[color:var(--accent)]/35">
+        <p class="eyebrow">Producer pack</p>
+        <p class="mt-2 text-lg font-semibold text-[color:var(--ink)]">Grab assets in one place — download or copy to clipboard.</p>
+        <p class="mt-2 text-sm text-[color:var(--muted)]">
+          Full printable kit: <a class="font-semibold underline underline-offset-4" href="/media-kit-download/">Media kit download →</a>
+        </p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          <li>
+            <a class="button-accent block text-center" href="/images/daniel-headshot.webp" download> Download headshot (WebP) → </a>
+          </li>
+          <li>
+            <a class="button-accent block text-center" href="/images/daniel-headshot-640.webp" download> Download headshot (small) → </a>
+          </li>
+        </ul>
+        <div class="mt-6 grid gap-2 sm:grid-cols-2">
+          <button type="button" class="button-link producer-copy-btn w-full justify-center border border-[color:var(--line)] rounded-lg py-3" data-copy={bioShortOneLine}>
+            Copy short bio
+          </button>
+          <button type="button" class="button-link producer-copy-btn w-full justify-center border border-[color:var(--line)] rounded-lg py-3" data-copy={bioStandardTwoLines}>
+            Copy standard bio
+          </button>
+          <button type="button" class="button-link producer-copy-btn w-full justify-center border border-[color:var(--line)] rounded-lg py-3" data-copy={preferredDescription}>
+            Copy preferred description
+          </button>
+          <button type="button" class="button-link producer-copy-btn w-full justify-center border border-[color:var(--line)] rounded-lg py-3" data-copy={approvedPodcastIntro}>
+            Copy show intro
+          </button>
+          <button type="button" class="button-link producer-copy-btn w-full justify-center border border-[color:var(--line)] rounded-lg py-3 sm:col-span-2" data-copy={siteConfig.email}>
+            Copy email ({siteConfig.email})
+          </button>
+        </div>
+        <p class="producer-copy-status mt-4 text-center text-sm font-medium text-[color:var(--accent)] min-h-[1.25rem]" aria-live="polite"></p>
+      </div>
     </div>
   </section>
 
@@ -324,3 +373,26 @@ const affiliations = trustLogos.map((logo) => ({
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  (function () {
+    const status = document.querySelector(".producer-copy-status");
+    document.querySelectorAll(".producer-copy-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const text = btn.getAttribute("data-copy");
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          if (status) {
+            status.textContent = "Copied to clipboard.";
+            window.setTimeout(() => {
+              if (status) status.textContent = "";
+            }, 2500);
+          }
+        } catch {
+          if (status) status.textContent = "Copy failed — select text manually or use the printable page.";
+        }
+      });
+    });
+  })();
+</script>
