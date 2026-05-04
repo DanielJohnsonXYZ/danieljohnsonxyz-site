@@ -2592,3 +2592,49 @@ summary::-webkit-details-marker {
   font-weight: 600;
   box-shadow: inset 3px 0 0 var(--accent);
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile audit: comparison-table scroll affordance
+   The 820px-min-width comparison tables horizontal-scroll on mobile. Add
+   a visible scrollbar + a "Swipe ↔" hint so the scroll is discoverable.
+   Source: Notion 353f99a79fdb813f8f68f5b13147e11c
+   ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 819px) {
+  .overflow-x-auto:has(table[class*="min-w-"]) {
+    position: relative;
+    /* Visible scrollbar so the swipe is discoverable */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124, 58, 237, 0.4) transparent;
+  }
+  .overflow-x-auto:has(table[class*="min-w-"])::-webkit-scrollbar {
+    height: 8px;
+  }
+  .overflow-x-auto:has(table[class*="min-w-"])::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.45);
+    border-radius: 4px;
+  }
+  .overflow-x-auto:has(table[class*="min-w-"])::after {
+    content: "← Swipe to compare →";
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(124, 58, 237, 0.05);
+  }
+}
+
+/* Mobile: ensure the credential logos in the WSS founder card never */
+/* overflow on iPhone SE (375px). Fall back to wrapping at 16px. */
+@media (max-width: 380px) {
+  .wss-hero-redesign .credential-logo img {
+    height: 14px;
+  }
+  .wss-hero-redesign .credential-logos {
+    gap: 0.5rem;
+  }
+}
