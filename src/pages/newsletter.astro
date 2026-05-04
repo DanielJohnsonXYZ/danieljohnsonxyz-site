@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import NewsletterFormInline from "../components/NewsletterFormInline.astro";
-import { ctas } from "../site";
+import { ctas, siteConfig } from "../site";
 
 const notes = [
   "How to decide whether your bottleneck is ICP, channel, conversion, or cadence.",
@@ -27,6 +27,12 @@ const notes = [
           <p class="hero-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
             Occasional writing for founders and operators who want clearer GTM decisions, better systems, and fewer
             growth theatre exercises.
+          </p>
+          <p class="max-w-3xl text-base leading-7 text-[color:var(--muted)]">
+            Want the We Scale Startups list instead (fortnightly, acquisition systems for post-PMF teams)?{" "}
+            <a class="link-arrow" href={`${siteConfig.companyUrl}/newsletter/`} rel="noopener">
+              Here's Some Growth on {siteConfig.companyName} →
+            </a>
           </p>
           <div class="cta-cluster">
             <a class="button-accent" href="#newsletter-signup">Subscribe to Growth Notes →</a>

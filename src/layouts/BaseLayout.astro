@@ -24,6 +24,8 @@ interface Props {
   /** Opt in to preloading the hero headshot (homepage, about — pages where the image is above the fold). */
   preloadHeadshot?: boolean;
   lastUpdated?: string | false;
+  /** Override default robots meta (e.g. noindex for 404). */
+  metaRobots?: string;
 }
 
 const {
@@ -37,7 +39,8 @@ const {
   stickyCta = true,
   mediaCta = false,
   preloadHeadshot = false,
-  lastUpdated = siteConfig.lastUpdated
+  lastUpdated = siteConfig.lastUpdated,
+  metaRobots = "index,follow,max-image-preview:large"
 } = Astro.props;
 
 const canonical = absoluteUrl(path);
@@ -129,7 +132,7 @@ document.addEventListener('submit', (event) => {
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
-    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="robots" content={metaRobots} />
     <meta name="author" content={siteConfig.name} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
