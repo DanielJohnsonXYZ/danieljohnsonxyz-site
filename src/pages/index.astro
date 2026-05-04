@@ -12,6 +12,7 @@ import {
   ctas,
   fitSignals,
   homeServiceLadder,
+  icpFirmographics,
   lifetimeTotals,
   positioning,
   proofBar,
@@ -202,6 +203,9 @@ const schemas = [
             <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
               <strong class="font-semibold text-[color:var(--ink)]">Predictable pipeline. Sharper positioning. Senior growth leadership.</strong> For Seed to Series B AI and B2B SaaS founders — without a £150k full-time hire.
             </p>
+            <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
+              {icpFirmographics.oneLiner}
+            </p>
             <p class="max-w-3xl text-sm leading-7 text-[color:var(--muted)] md:text-base">
               <strong class="font-semibold text-[color:var(--ink)]">We Scale Startups</strong> is the growth operating system behind Daniel&apos;s fractional CMO and GTM work — this site is where you hire him personally;{" "}
               <a class="font-semibold underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]" href={siteConfig.companyUrl} rel="noopener" target="_blank">
@@ -293,7 +297,7 @@ const schemas = [
                 Fractional CMO for post-PMF AI and SaaS.
               </h2>
               <ul class="mt-5 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
-                <li>Best for £1m to £10m ARR</li>
+                <li>{icpFirmographics.arrBandUsd} · {icpFirmographics.headcountBand}</li>
                 <li>Founder-led, growth stuck, no senior GTM owner</li>
                 <li>Senior help without a £150k+ full-time hire</li>
                 <li>Recent work: AI health, B2B fintech, edtech, SaaS tooling</li>

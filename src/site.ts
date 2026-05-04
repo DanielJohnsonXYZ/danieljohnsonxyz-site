@@ -129,6 +129,23 @@ export const positioning = {
     "Fractional CMO for Seed–Series B AI & B2B SaaS: predictable pipeline, sharper positioning, senior growth leadership—without a £150k full-time hire."
 } as const;
 
+/** Firmographic ICP — explicit bands for self-qualification (growth hub brief). */
+export const icpFirmographics = {
+  arrBandUsd: "$2M–$20M ARR",
+  headcountBand: "~10–50 people",
+  /** One-line supplement for hero / about (USD band + headcount). */
+  oneLiner:
+    "Typical clients are B2B SaaS or AI with $2M–$20M ARR, ~10–50 people, and the founder still owning weekly GTM decisions.",
+  /** “You’re a fit if…” bullets — /fractional-cmo and mirrored on home/about. */
+  fitIf: [
+    "B2B SaaS or AI product with repeat revenue",
+    "$2M–$20M ARR (or the same stage of traction in your market)",
+    "Hired or actively considering your first serious marketing leadership",
+    "Founder still owns GTM priorities week to week",
+    "~6–18 months to your next funding round or profitability milestone"
+  ]
+} as const;
+
 // ──────────────────────────────────────────────────────────────────────────
 // Announcement banner (feature-flagged)
 // Flip `enabled` to true once the copy is agreed. Keep `message` short.
@@ -295,6 +312,7 @@ export const audienceBands = [
 // Who this is for / not for — used on homepage to qualify leads early.
 export const fitSignals = {
   bestFor: [
+    `${icpFirmographics.arrBandUsd} B2B SaaS or AI · ${icpFirmographics.headcountBand} · founder-led GTM`,
     "Seed to Series B, post-PMF",
     "Real traction — founders already have paying customers",
     "Founder bottlenecked on growth decisions",

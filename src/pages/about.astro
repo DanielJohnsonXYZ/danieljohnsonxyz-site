@@ -1,7 +1,7 @@
 ---
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { proofStats, siteConfig, siteImages } from "../site";
+import { icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
 
 const proofTiles = [
   { value: "10+ yrs", label: "Founder, operator, and advisor work" },
@@ -78,6 +78,9 @@ const principles = [
           </h1>
           <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
             Founders bring me in when growth still depends too much on them: unclear positioning, inconsistent pipeline, scattered channel activity, and a team that needs better decisions before another hire or agency brief.
+          </p>
+          <p class="max-w-3xl text-base leading-8 text-[color:var(--ink)] md:text-lg">
+            {icpFirmographics.oneLiner}
           </p>
 
           <!-- Why founders trust me — short personal story block. -->
