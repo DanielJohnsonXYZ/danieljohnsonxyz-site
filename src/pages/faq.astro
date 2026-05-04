@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
+import { ctas, siteConfig } from "../site";
+
+/**
+ * FAQ / Objection page — answers price, process, fit, timeline, and
+ * engagement-model questions before the call. Source: Notion
+ * 353f99a79fdb81fa8b1bf384dee1836d.
+ *
+ * Cross-linked from homepage CTA sections, /fractional-cmo,
+ * /strategy-sprint, /growth-audit, and any booking surface.
+ */
+
+const sections = [
+  {
+    eyebrow: "Fit",
+    title: "Is this for me?",
+    items: [
+      {
+        question: "Who is this for?",
+        answer: "Founders of post-PMF AI and B2B SaaS startups, typically Seed to Series B (£1m–£10m ARR). Product-strong teams where growth has plateaued, founder-led sales is a bottleneck, or there's no senior GTM owner yet. UK-based, currently in Asia, serving US, UK, Europe, and APAC clients with US-friendly time-zone overlap."
+      },
+      {
+        question: "Who is this NOT for?",
+        answer: "Pre-PMF / pre-revenue teams still searching for a problem (you don't need a fractional CMO, you need to keep finding product-market fit). Teams looking for a cheap agency to run ads. Founders who want a junior FTE replaced at junior cost. Teams that want vanity-metric reporting rather than revenue impact. I'll tell you on the audit call if any of these apply."
+      },
+      {
+        question: "What stage should my startup be at?",
+        answer: "The useful window is post-PMF, when demand is real but pipeline is inconsistent, the founder is still carrying revenue decisions, and the company needs senior GTM judgement before or alongside a full-time hire. Most engagements are with companies between £1m and £10m ARR."
+      }
+    ]
+  },
+  {
+    eyebrow: "Pricing & engagement",
+    title: "What does it cost and how does it work?",
+    items: [
+      {
+        question: "What does it cost?",
+        answer: "Three pricing anchors: (1) free 30-min Growth Audit — diagnostic call, no pitch; (2) Strategy Sprint — from £6,000 for a 2–4 week fixed-scope engagement; (3) Fractional CMO — from £7,500/month for embedded ownership 1 day/week (3-month minimum), or £12,000/month for Fractional CMO Plus (~2 days/week, deeper operating support)."
+      },
+      {
+        question: "How long does an engagement last?",
+        answer: "Most fractional CMO engagements run 3 to 9 months. The first 90 days create the diagnosis, operating rhythm, and first growth system. After that, we either scale, hand off cleanly, or move to a lighter advisory rhythm. Strategy Sprint engagements are 2–4 weeks fixed-scope."
+      },
+      {
+        question: "Do you require a minimum commitment?",
+        answer: "Yes for Fractional CMO — 3 months minimum so the operating system has time to take effect. The Strategy Sprint is 2–4 weeks fixed-scope, no rolling commitment. The Growth Audit is a single free call."
+      },
+      {
+        question: "What happens after I book the audit call?",
+        answer: "30 minutes. No pitch. No deck. We diagnose your bottleneck and decide together whether working together makes sense — or where else to go if it doesn't. If it does, we agree the engagement shape (Sprint or Fractional CMO) and pencil in a start window. If not, you get the right operator, agency, or mentor to go to instead."
+      }
+    ]
+  },
+  {
+    eyebrow: "Process",
+    title: "How the work runs.",
+    items: [
+      {
+        question: "What does a fractional CMO actually do day-to-day?",
+        answer: "Owns GTM priorities, the weekly growth meeting, reporting rhythm, acquisition decision rules, hiring and agency calls, and the operating cadence the team runs against. Embedded inside the company 1–2 days a week. Builds the system, then hands it off cleanly to internal hires."
+      },
+      {
+        question: "What happens in the first 30 days?",
+        answer: "Two-week diagnosis covering ICP, pipeline, funnel, CRM, acquisition channels, positioning, and current reporting. Customer interviews, founder interview, sales-team conversations. Constraint map: where the system is leaking pipeline, conversion, retention, or decision speed. Agreed 90-day priorities and the new weekly operating rhythm. First fixes shipped: homepage messaging, a campaign brief, a reporting view, or a channel test depending on the bottleneck."
+      },
+      {
+        question: "What do you need from me / our team?",
+        answer: "An internal owner who'll receive the system (we don't ship strategy decks for someone to find later — there has to be a builder inside the company). Founder time for the first two weeks (interviews, decisions, hard priority calls). Read access to your CRM, analytics, ad accounts, and customer-call recordings. A willingness to retire activities that aren't working — even when they're someone's pet project."
+      }
+    ]
+  },
+  {
+    eyebrow: "Differentiation",
+    title: "How is this different from agency or full-time?",
+    items: [
+      {
+        question: "How is this different from hiring an agency?",
+        answer: "Agencies execute a defined channel scope (paid, SEO, content, outbound) with junior account managers. Strategy lives in the founder's head. A fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, and team direction. Often the cleanest setup is both — fractional CMO sets priorities and channel rules; the agency executes one channel inside that framework. Full comparison at /fractional-cmo-vs-agency/."
+      },
+      {
+        question: "How is this different from a full-time CMO?",
+        answer: "Full-time CMO: £120–180k base + 0.5–1.5% equity, 6-month hire cycle, 12-month ramp, 3-month notice. Fractional CMO: £7.5–12k/month, starts in days, 3-month minimum. The bridge pattern — fractional first, full-time later — is the cleanest path for most teams. Full comparison at /fractional-cmo-vs-full-time-cmo/."
+      },
+      {
+        question: "How is this different from a strategy consultant?",
+        answer: "Generic consultants ship a deck and disappear. The fractional CMO embeds, owns the operating rhythm, and stays accountable for revenue. No handoff between strategy and execution — same person, same context, faster decisions."
+      },
+      {
+        question: "Are you open to full-time roles?",
+        answer: "Primary focus is fractional CMO engagements. I'll consider a full-time Head of Growth or VP Marketing role for the right post-PMF AI or B2B SaaS company. Book the Growth Audit to discuss either way."
+      }
+    ]
+  },
+  {
+    eyebrow: "Outcomes",
+    title: "What can you actually expect?",
+    items: [
+      {
+        question: "How quickly will I see results?",
+        answer: "First operating-rhythm changes in the first 2 weeks. First measurable growth movement (CAC, conversion, pipeline rhythm) in 30–60 days, depending on the bottleneck and where the leverage sits. Compounding system improvements over 90+ days. The point isn't speed — it's that the team can defend each number on a board call by month two."
+      },
+      {
+        question: "What kinds of results have you produced?",
+        answer: "Selected outcomes from real engagements: 6× growth in monthly app downloads (2k → 12k+) for an AI healthtech in 6 months; 35% reduction in CAC in 8 weeks for a fintech; 500+ qualified signups from a single campaign at 8.6% CTR for a US B2B fintech; 21% improvement in retention for an eCommerce brand. Lifetime: £18M+ revenue generated, £6.8M+ ad spend managed, £15M+ helped founders raise. Full case studies at /case-studies/."
+      },
+      {
+        question: "What can you not promise?",
+        answer: "I can't promise specific growth numbers — anyone who does is selling. I can promise senior judgement, an operating rhythm, a defensible system, and honesty about what's working and what isn't. If after 90 days the system isn't producing the right kind of decisions, we end the engagement clean."
+      }
+    ]
+  }
+];
+
+const allFaqs = sections.flatMap((section) => section.items);
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "FAQ", url: "/faq/" }
+  ]),
+  buildFaqPageSchema(allFaqs)
+];
+---
+
+<BaseLayout
+  description="FAQ for Daniel Johnson — pricing, process, fit, timeline, and how the fractional CMO engagement actually runs. Answers to the questions founders ask before booking."
+  path="/faq/"
+  schema={schemas}
+  title="FAQ — pricing, process, and fit | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="service-label justify-center">FAQ · 5-minute read</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          The questions founders ask <span class="hero-accent">before booking.</span>
+        </h1>
+        <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
+          Pricing, process, fit, timeline, engagement model, and how this differs from an agency or a full-time CMO. Designed to answer the objections you'd otherwise spend the first audit call on.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="faq-hero-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link" href="/start-here/" data-cta="faq-hero-start-here">
+            Or read /start-here →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {sections.map((section, sectionIndex) => (
+    <section class={`section-space ${sectionIndex === 0 ? "" : "pt-0"}`}>
+      <div class="shell">
+        <SectionHeader eyebrow={section.eyebrow} title={section.title} />
+        <div class="faq-stack mt-8 mx-auto max-w-3xl">
+          {section.items.map((item, index) => (
+            <details class="faq-item" open={sectionIndex === 0 && index === 0}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Still have questions?</span>
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance text-white md:text-6xl">
+          Bring them to the audit call.
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          30 minutes. No pitch. The audit is designed to surface the bottleneck — but it's also where any remaining questions get answered honestly. {siteConfig.availability}
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="faq-final-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href={`mailto:${siteConfig.email}?subject=FAQ%20follow-up`} data-cta="faq-final-email">
+            Or email a question first →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

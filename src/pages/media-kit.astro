@@ -185,6 +185,11 @@ const affiliations = trustLogos.map((logo) => ({
     </div>
   </section>
 
+  <!-- Platforms — re-ordered with the strongest media-credibility links first. -->
+  <!-- Marketplace links (MentorCruise, Malt, Pangea, Instagram) moved into a   -->
+  <!-- separate "Marketplace profiles" subsection below so they don't dilute    -->
+  <!-- the signal for journalists / event organisers landing here.              -->
+  <!-- Source: Notion 353f99a79fdb81eba129f6ca1740cd48                          -->
   <section class="section section-alt">
     <div class="shell">
       <SectionHeader
@@ -193,34 +198,14 @@ const affiliations = trustLogos.map((logo) => ({
         intro="Key platforms for organisers, podcast hosts, and community managers to reference."
       />
       <div class="max-w-3xl">
-        <div class="grid gap-3">
+        <p class="card-label">Primary credibility</p>
+        <div class="grid gap-3 mt-3">
           <div class="card p-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
               <span class="font-semibold text-[color:var(--ink)]">GrowthMentor</span>
-              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Top-rated mentor</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Top-rated mentor · 4.93/5 · 220 reviews</span>
             </div>
             <a href={siteConfig.growthMentor} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
-          </div>
-          <div class="card p-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span class="font-semibold text-[color:var(--ink)]">MentorCruise</span>
-              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Verified mentor</span>
-            </div>
-            <a href={siteConfig.mentorCruise} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
-          </div>
-          <div class="card p-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span class="font-semibold text-[color:var(--ink)]">Malt</span>
-              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Freelance platform</span>
-            </div>
-            <a href={siteConfig.malt} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
-          </div>
-          <div class="card p-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span class="font-semibold text-[color:var(--ink)]">Pangea</span>
-              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Talent platform</span>
-            </div>
-            <a href={siteConfig.pangea} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
           </div>
           <div class="card p-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -236,13 +221,15 @@ const affiliations = trustLogos.map((logo) => ({
             </div>
             <a href={siteConfig.youtube} class="text-sm link-arrow" target="_blank" rel="noreferrer">View channel →</a>
           </div>
-          <div class="card p-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span class="font-semibold text-[color:var(--ink)]">Instagram</span>
-              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--muted)]">Social presence</span>
-            </div>
-            <a href={siteConfig.instagram} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
-          </div>
+        </div>
+
+        <p class="card-label mt-8">Marketplace profiles</p>
+        <p class="text-sm text-[color:var(--muted)] mt-2 mb-3">For booking lower-ticket mentor sessions or freelance scoping. Not the primary credibility surface for press and speaking enquiries.</p>
+        <div class="grid gap-2 text-sm">
+          <a href={siteConfig.mentorCruise} class="text-[color:var(--muted)] hover:text-[color:var(--ink)] underline underline-offset-4" target="_blank" rel="noreferrer">MentorCruise — verified mentor →</a>
+          <a href={siteConfig.malt} class="text-[color:var(--muted)] hover:text-[color:var(--ink)] underline underline-offset-4" target="_blank" rel="noreferrer">Malt — freelance platform →</a>
+          <a href={siteConfig.pangea} class="text-[color:var(--muted)] hover:text-[color:var(--ink)] underline underline-offset-4" target="_blank" rel="noreferrer">Pangea — talent platform →</a>
+          <a href={siteConfig.instagram} class="text-[color:var(--muted)] hover:text-[color:var(--ink)] underline underline-offset-4" target="_blank" rel="noreferrer">Instagram — personal social →</a>
         </div>
       </div>
     </div>

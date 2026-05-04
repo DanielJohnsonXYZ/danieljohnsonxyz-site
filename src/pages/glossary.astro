@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
+import { ctas, siteConfig } from "../site";
+
+/**
+ * Glossary page — definitional content for LLM retrieval and topical
+ * authority on the terms Daniel uses across the site. Source: Notion
+ * 353f99a79fdb812b8260dfb1771893fd.
+ *
+ * Each entry is FAQPage-schema-eligible so AI search engines can cite
+ * the canonical definition verbatim. Cross-linked from /faq, /start-here,
+ * and the relevant deep pages.
+ */
+
+const terms = [
+  {
+    term: "Fractional CMO",
+    short: "An embedded senior GTM operator who runs a company's growth function part-time, on a 3- to 12-month engagement.",
+    long: "A fractional CMO embeds with a company 1–2 days a week, owns GTM priorities, reporting rhythm, and team direction, and builds an operating system the team can run after the engagement ends. Different from a consultant (who advises but doesn't own execution), a full-time CMO (who's permanent and 5x more expensive), or an agency (which executes a defined channel scope without owning the strategy). Best fit: post-PMF AI and B2B SaaS startups, £1m–£10m ARR, where the founder is still carrying revenue decisions.",
+    relatedHref: "/fractional-cmo/"
+  },
+  {
+    term: "Growth operating system",
+    short: "A repeatable architecture for prioritising, learning, and compounding what works in growth — not a campaign or a tactic.",
+    long: "A growth operating system has six layers: customer research, GTM systems (ICP, positioning, channels), acquisition, conversion, founder-led distribution, and reporting. It's defined by decision rules, weekly rhythm, and a shared definition of what to scale, stop, or fix. The opposite of campaign-led growth, where each tactic is run in isolation and dies when the operator leaves. The growth operating system is what gets handed to the team after a fractional CMO engagement ends.",
+    relatedHref: "/start-here/"
+  },
+  {
+    term: "Founder-led growth",
+    short: "Growth that depends on the founder being personally in every revenue decision — works early, breaks at scale.",
+    long: "Founder-led growth is how most startups reach product-market fit: the founder talks to customers, runs sales, makes positioning calls, and approves every campaign. It works because the founder has full context and high credibility. It breaks when the company tries to scale because no one else has the same context. The transition from founder-led to system-led growth is the constraint most fractional CMO engagements solve.",
+    relatedHref: "/founder-led-distribution/"
+  },
+  {
+    term: "Post-PMF growth",
+    short: "Growth work for companies that have product-market fit but inconsistent pipeline and no repeatable acquisition system.",
+    long: "Post-PMF means paying customers, working retention, and a deck that holds up — but acquisition is plateaued, founder-led sales doesn't scale, and there's no repeatable pipeline. This is the window where a fractional CMO has the most leverage. Pre-PMF teams shouldn't hire a CMO; they need to keep finding product-market fit. Post-Series-B teams typically need a full-time CMO; the org chart no longer fits a fractional engagement.",
+    relatedHref: "/start-here/"
+  },
+  {
+    term: "Growth diagnosis",
+    short: "A structured 30-minute call to identify which constraint is actually blocking growth — before spending more on channels or hires.",
+    long: "A growth diagnosis is the diagnostic step before any engagement. The five constraints we usually find: ICP unclear, positioning weak, acquisition account structure mixed across audiences, conversion funnel leaking, or no operating rhythm to read what's working. Most teams know they have a growth problem but can't name the constraint. The diagnosis names it.",
+    relatedHref: "/growth-audit/"
+  },
+  {
+    term: "Strategy Sprint",
+    short: "A 2–4 week fixed-scope engagement that diagnoses the bottleneck, sets 90-day priorities, and ships the first artefacts.",
+    long: "Strategy Sprint sits between the free Growth Audit and a full Fractional CMO engagement. From £6,000. Outputs: ICP doc, positioning lines, 90-day growth priorities, weekly dashboard, first acquisition or conversion test live, and an operating-rhythm playbook. Best for founders who need the plan before committing to ongoing work, or for teams scoping the right shape of a longer engagement.",
+    relatedHref: "/strategy-sprint/"
+  },
+  {
+    term: "AI-native GTM",
+    short: "Using generative and agentic AI to accelerate GTM workflows — research, messaging, experimentation, reporting — without outsourcing senior judgement.",
+    long: "AI-native GTM means using AI to shorten manual work in customer research, competitor teardowns, message testing, campaign briefs, and reporting. AI doesn't replace judgement — it reduces drag so senior decisions happen faster. The principle: pay for operator judgement, not for manual consulting deliverables AI could produce in minutes.",
+    relatedHref: "/ai-native-workflows/"
+  },
+  {
+    term: "Weekly growth cadence",
+    short: "The Monday-read, Wednesday-ship, Friday-decide rhythm that turns growth into a system instead of a series of one-off campaigns.",
+    long: "A weekly growth cadence has three beats: Monday — read pipeline, channel numbers, and founder priorities; Wednesday — ship the next campaign, landing-page change, or outbound iteration; Friday — review what moved, decide what to scale / stop / fix, write the short Friday note. The cadence is what makes growth experiments compound rather than fragment."
+  },
+  {
+    term: "Growth bottleneck",
+    short: "The single constraint blocking compound growth — usually one of: ICP, positioning, channel mix, conversion, or operating rhythm.",
+    long: "A growth bottleneck is the constraint that, if removed, would unlock the next 6–12 months of growth. It's almost always one of five things: unclear ICP, weak positioning, channel mix mixed across audiences, conversion funnel leaking, or no operating rhythm. The first job of a fractional CMO engagement is naming the bottleneck specifically — not in theory, in the context of your actual business.",
+    relatedHref: "/growth-bottleneck-checklist/"
+  },
+  {
+    term: "Founder-led distribution",
+    short: "Using the founder's voice and presence (LinkedIn, podcasts, speaking) as a distribution channel — and knowing when to move beyond it.",
+    long: "Founder-led distribution turns the founder's authority into pipeline through personal LinkedIn writing, podcast appearances, conference talks, and direct outbound. It's the highest-leverage early channel because trust transfers. It's also the channel that breaks first as the company scales — because it doesn't scale beyond the founder's calendar. Most engagements include a plan for handing parts of founder-led distribution to a content/operations layer over time.",
+    relatedHref: "/founder-led-distribution/"
+  }
+];
+
+const faqItems = terms.map((t) => ({
+  question: `What is ${t.term.toLowerCase()}?`,
+  answer: t.long
+}));
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Glossary", url: "/glossary/" }
+  ]),
+  buildFaqPageSchema(faqItems)
+];
+---
+
+<BaseLayout
+  description="Definitions of the terms used across danieljohnson.xyz — fractional CMO, growth operating system, founder-led growth, post-PMF growth, AI-native GTM, weekly growth cadence, and more."
+  path="/glossary/"
+  schema={schemas}
+  title="Glossary — fractional CMO, growth operating system, AI-native GTM | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="service-label justify-center">Glossary · Definitions</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
+          The terms used here, <span class="hero-accent">defined.</span>
+        </h1>
+        <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
+          Plain-English definitions of fractional CMO, growth operating system, founder-led growth, post-PMF growth, AI-native GTM, and the rest of the vocabulary used across the site. Designed for quick scanning and AI-search citation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="mx-auto max-w-3xl space-y-6">
+        {terms.map((entry) => (
+          <article class="card p-6 md:p-8" id={entry.term.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
+            <h2 class="text-2xl font-extrabold tracking-[-0.05em]">{entry.term}</h2>
+            <p class="mt-3 text-base leading-7 font-semibold text-[color:var(--ink)]">{entry.short}</p>
+            <p class="mt-4 text-base leading-7 text-[color:var(--muted)]">{entry.long}</p>
+            {entry.relatedHref && (
+              <p class="mt-4">
+                <a class="link-arrow" href={entry.relatedHref}>Read more →</a>
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance text-white md:text-6xl">
+          Got the vocabulary. Want the diagnosis?
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
+          The terms only matter once they apply to your specific situation. The 30-min Growth Audit is where they meet your real numbers.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} data-cta="glossary-final-primary">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href="/start-here/" data-cta="glossary-final-start-here">
+            Or read /start-here →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

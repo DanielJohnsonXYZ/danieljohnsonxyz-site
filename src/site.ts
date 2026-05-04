@@ -249,6 +249,8 @@ export const footerNavigation = {
     { href: "/revenue-operations/", label: "Revenue operations" }
   ],
   more: [
+    { href: "/faq/", label: "FAQ" },
+    { href: "/glossary/", label: "Glossary" },
     { href: "/compare-growth-options/", label: "Compare six growth options" },
     { href: "/fractional-cmo-vs-agency/", label: "vs. Agency" },
     { href: "/fractional-cmo-vs-full-time-cmo/", label: "vs. Full-time CMO" },
@@ -264,14 +266,17 @@ export const footerNavigation = {
   ]
 } as const;
 
+// Ordered by media-credibility weight — strongest links first so the
+// footer signal isn't diluted in press / podcast / event-organiser
+// contexts. Source: Notion 353f99a79fdb81eba129f6ca1740cd48
 export const socialLinks = [
+  { href: siteConfig.growthMentor, label: "GrowthMentor" },
   { href: siteConfig.linkedin, label: "LinkedIn" },
   { href: siteConfig.youtube, label: "YouTube" },
-  { href: siteConfig.growthMentor, label: "GrowthMentor" },
   { href: siteConfig.mentorCruise, label: "MentorCruise" },
-  { href: siteConfig.instagram, label: "Instagram" },
   { href: siteConfig.malt, label: "Malt" },
-  { href: siteConfig.pangea, label: "Pangea" }
+  { href: siteConfig.pangea, label: "Pangea" },
+  { href: siteConfig.instagram, label: "Instagram" }
 ] as const;
 
 export const audienceBands = [
