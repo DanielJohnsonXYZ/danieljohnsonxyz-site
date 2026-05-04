@@ -18,6 +18,15 @@ export function formatDate(date: Date) {
   }).format(date);
 }
 
+export function formatCurrency(value: number, currency = "GBP", locale = "en-GB") {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(value);
+}
+
 export function sortByFeaturedThenOrder<T extends { data: { featured?: boolean; order?: number } }>(
   items: T[]
 ) {

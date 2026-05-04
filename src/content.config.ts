@@ -14,7 +14,8 @@ const articles = defineCollection({
     featured: z.boolean().default(false),
     order: z.number().default(999),
     heroAlt: z.string(),
-    ogImage: z.string().optional()
+    ogImage: z.string().optional(),
+    readingTime: z.string().optional()
   })
 });
 

@@ -109,14 +109,14 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
     const errEl = root.querySelector("[data-fc-error]");
     const backBtn = root.querySelector("[data-fc-back]");
 
-    function showError(msg) {
-      if (!errEl) return;
+    function showError(msg: string) {
+      if (!errEl || !(errEl instanceof HTMLElement)) return;
       errEl.textContent = msg;
       errEl.hidden = false;
     }
 
     function clearError() {
-      if (!errEl) return;
+      if (!errEl || !(errEl instanceof HTMLElement)) return;
       errEl.textContent = "";
       errEl.hidden = true;
     }

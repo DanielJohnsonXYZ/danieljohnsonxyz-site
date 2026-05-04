@@ -1,9 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/schema";
-import { absoluteUrl, formatCurrency } from "../lib/utils";
-import { siteConfig, trustLogos } from "../site";
+import { absoluteUrl } from "../lib/utils";
+import { siteConfig } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([

@@ -5,7 +5,7 @@ import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { proofStats, siteConfig, siteImages, socialLinks, trustAffiliations, trustLogos } from "../site";
+import { proofStats, siteConfig, siteImages, trustAffiliations, trustLogos } from "../site";
 
 const media = sortByFeaturedThenOrder(await getCollection("media"));
 const interviews = media.filter((item) => item.data.kind === "Interview");

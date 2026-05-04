@@ -35,12 +35,17 @@ export const siteConfig = {
   pangea: "https://pangea.app/profile/daniel-johnson",
   instagram: "https://www.instagram.com/danieljohnsonxyz/",
   youtube: "https://www.youtube.com/@danieljohnson6000",
+  /** Latest uploads embed for /speaking (single featured video; swap for videoseries + list ID if needed). */
+  youtubeUploadsEmbed: "https://www.youtube.com/embed/9CR19_PiuGs?rel=0",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
   /** Canonical WSS podcast hub (How Startups Win With AI). */
   wssPodcastUrl: "https://wescalestartups.com/podcast",
   wssPodcastGuestApplyUrl: "https://wescalestartups.com/podcast-guest-application",
-  /** Must match the GTM container for danieljohnson.xyz in Tag Manager */
+  /**
+   * Google Tag Manager — production container for danieljohnson.xyz only.
+   * Do not use the We Scale Startups site container (GTM-TV6C7GS).
+   */
   gtmId: "GTM-5S892HK",
   twitterHandle: "@djohnsonxyz",
   ogImage: "/og/default.png",
@@ -55,9 +60,16 @@ export const siteConfig = {
     "https://www.instagram.com/danieljohnsonxyz/",
     "https://www.youtube.com/@danieljohnson6000",
     "https://www.wescalestartups.com",
+    "https://www.linkedin.com/company/wescalestartups",
     "https://wescalestartups.com/podcast",
     "https://www.wescalestartups.com/kassy-cho-interview/"
   ]
+} as const;
+
+/** Canonical JSON-LD @id values — aligned with wescalestartups-site `entityGraph`. */
+export const entityGraph = {
+  danielPerson: "https://danieljohnson.xyz/#person",
+  wssOrganization: "https://wescalestartups.com/#organization"
 } as const;
 
 export const siteImages = {
@@ -364,31 +376,36 @@ export const whyDaniel = [
     option: "Agency",
     cost: "£6–20k/month + long retainer",
     owner: "Account manager, junior team",
-    problem: "Channel execution, not senior GTM judgement. Strategy lives in the founder's head."
+    problem: "Channel execution, not senior GTM judgement. Strategy lives in the founder's head.",
+    highlight: false
   },
   {
     option: "Freelancer",
     cost: "£2–6k/month, one channel",
     owner: "Freelancer owns execution",
-    problem: "Narrow by design. No ownership of the full system, no senior calls."
+    problem: "Narrow by design. No ownership of the full system, no senior calls.",
+    highlight: false
   },
   {
     option: "Junior marketer hire",
     cost: "£50–80k + on-costs",
     owner: "Needs your direction",
-    problem: "You become the CMO. The bottleneck you wanted to fix now reports to you."
+    problem: "You become the CMO. The bottleneck you wanted to fix now reports to you.",
+    highlight: false
   },
   {
     option: "Full-time Head of Growth",
     cost: "£120–180k + equity",
     owner: "Full ownership",
-    problem: "Often too early. A 6-month hire cycle and a 12-month ramp before impact."
+    problem: "Often too early. A 6-month hire cycle and a 12-month ramp before impact.",
+    highlight: false
   },
   {
     option: "Generic consultant",
     cost: "£500–2,000/day",
     owner: "Advice only",
-    problem: "Ships a deck, disappears. No operating ownership, no accountability for revenue."
+    problem: "Ships a deck, disappears. No operating ownership, no accountability for revenue.",
+    highlight: false
   },
   {
     option: "Daniel (Fractional CMO)",
@@ -592,18 +609,29 @@ export const homeServiceLadder = [
 // High-intent SEO term. Real founders type this query into Google and AI
 // search engines when they're picking between the two.
 // ──────────────────────────────────────────────────────────────────────────
+export type VsAgencyWinner = "agency" | "fractional" | null;
+
+type VsAgencyRow = {
+  dimension: string;
+  agency: string;
+  fractional: string;
+  winner: VsAgencyWinner;
+};
+
+const vsAgencyRows: VsAgencyRow[] = [
+  { dimension: "Who's in the seat", agency: "Account manager + junior team", fractional: "Senior operator (10+ years), embedded", winner: "fractional" },
+  { dimension: "Scope", agency: "Defined channel — paid, SEO, content, outbound", fractional: "Whole GTM system — ICP, positioning, channels, conversion, reporting", winner: "fractional" },
+  { dimension: "Strategy ownership", agency: "Founder still owns it", fractional: "Operator owns it, founder makes the calls", winner: "fractional" },
+  { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix", winner: "fractional" },
+  { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company", winner: "fractional" },
+  { dimension: "Speed", agency: "Slower — agreed scope, change orders", fractional: "Faster — embedded operator, no handoffs", winner: "fractional" },
+  { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£7.5–12k/month, 3-month minimum", winner: null },
+  { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement", winner: null }
+];
+
 export const vsAgency = {
   title: "Fractional CMO vs. Agency",
-  rows: [
-    { dimension: "Who's in the seat", agency: "Account manager + junior team", fractional: "Senior operator (10+ years), embedded", winner: "fractional" },
-    { dimension: "Scope", agency: "Defined channel — paid, SEO, content, outbound", fractional: "Whole GTM system — ICP, positioning, channels, conversion, reporting", winner: "fractional" },
-    { dimension: "Strategy ownership", agency: "Founder still owns it", fractional: "Operator owns it, founder makes the calls", winner: "fractional" },
-    { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix", winner: "fractional" },
-    { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company", winner: "fractional" },
-    { dimension: "Speed", agency: "Slower — agreed scope, change orders", fractional: "Faster — embedded operator, no handoffs", winner: "fractional" },
-    { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£7.5–12k/month, 3-month minimum", winner: null },
-    { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement", winner: null }
-  ],
+  rows: vsAgencyRows,
   whenAgency: [
     "You already have senior GTM leadership in-house",
     "You need execution capacity in a specific channel — not strategic ownership",
@@ -633,7 +661,7 @@ export const vsAgency = {
         "3 to 9 months typically. The first 90 days build the diagnosis, operating rhythm, and first system. After that, it's either scale, hand off to internal hires, or move to a lighter advisory cadence."
     }
   ]
-} as const;
+};
 
 // ──────────────────────────────────────────────────────────────────────────
 // Comparison: Fractional CMO vs Full-time CMO. Used on /fractional-cmo-vs-

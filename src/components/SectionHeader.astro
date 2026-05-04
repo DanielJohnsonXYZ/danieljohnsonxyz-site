@@ -2,10 +2,10 @@
 interface Props {
   eyebrow: string;
   title: string;
-  intro: string;
+  intro?: string;
 }
 
-const { eyebrow, title, intro } = Astro.props;
+const { eyebrow, title, intro = "" } = Astro.props;
 ---
 
 <div class="reveal flex flex-col gap-5">
@@ -15,7 +15,7 @@ const { eyebrow, title, intro } = Astro.props;
         <span class="eyebrow">{eyebrow}</span>
         <h2 class="section-title">{title}</h2>
       </div>
-      <p class="lede">{intro}</p>
+      {intro ? <p class="lede">{intro}</p> : null}
     </div>
   </div>
 </div>

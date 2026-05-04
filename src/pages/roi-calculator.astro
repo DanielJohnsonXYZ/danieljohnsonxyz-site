@@ -2,8 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/schema";
-import { absoluteUrl, formatCurrency } from "../lib/utils";
-import { ctas } from "../site";
+import { absoluteUrl } from "../lib/utils";
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -292,37 +291,45 @@ const schemas = [
 </BaseLayout>
 
 <script>
-  function formatCurrency(value) {
-    return new Intl.NumberFormat('en-GB', {
-      style: 'currency',
-      currency: 'GBP',
+  function formatCurrency(value: number) {
+    return new Intl.NumberFormat("en-GB", {
+      style: "currency",
+      currency: "GBP",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(value);
   }
 
+  function inputNum(id: string, fallback: number) {
+    const el = document.getElementById(id);
+    if (!(el instanceof HTMLInputElement)) return fallback;
+    return parseFloat(el.value) || fallback;
+  }
+
   function calculateROI() {
-    const spend = parseFloat(document.getElementById('spend').value) || 0;
-    const revenue = parseFloat(document.getElementById('revenue').value) || 0;
-    const cmoCost = parseFloat(document.getElementById('cmo-cost').value) || 5500;
-    const improvement = parseFloat(document.getElementById('improvement').value) || 20;
+    const revenue = inputNum("revenue", 0);
+    const cmoCost = inputNum("cmo-cost", 5500);
+    const improvement = inputNum("improvement", 20);
 
     const additionalMonthly = revenue * (improvement / 100);
     const netMonthly = additionalMonthly - cmoCost;
     const netAnnual = netMonthly * 12;
 
-    // Update result fields
-    document.getElementById('result-revenue').textContent = formatCurrency(revenue);
-    document.getElementById('result-improvement').textContent = improvement + '%';
-    document.getElementById('result-additional').textContent = formatCurrency(additionalMonthly);
-    document.getElementById('result-cmo-cost').textContent = formatCurrency(cmoCost);
-    document.getElementById('result-net-monthly').textContent = formatCurrency(netMonthly);
-    document.getElementById('result-net-annual').textContent = formatCurrency(netAnnual);
-    document.getElementById('annual-gain').textContent = formatCurrency(netAnnual);
+    const setText = (id: string, text: string) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
 
-    // Toggle visibility
-    document.getElementById('empty-state').classList.add('hidden');
-    document.getElementById('results-panel').classList.remove('hidden');
+    setText("result-revenue", formatCurrency(revenue));
+    setText("result-improvement", improvement + "%");
+    setText("result-additional", formatCurrency(additionalMonthly));
+    setText("result-cmo-cost", formatCurrency(cmoCost));
+    setText("result-net-monthly", formatCurrency(netMonthly));
+    setText("result-net-annual", formatCurrency(netAnnual));
+    setText("annual-gain", formatCurrency(netAnnual));
+
+    document.getElementById("empty-state")?.classList.add("hidden");
+    document.getElementById("results-panel")?.classList.remove("hidden");
   }
 
   // Calculate on input change

@@ -1,12 +1,12 @@
 import type { CollectionEntry } from "astro:content";
-import { proofStats, siteConfig, siteImages } from "../site";
+import { entityGraph, proofStats, siteConfig, siteImages } from "../site";
 import { absoluteUrl } from "./utils";
 
 export function buildPersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${siteConfig.siteUrl}/#person`,
+    "@id": entityGraph.danielPerson,
     name: siteConfig.name,
     givenName: "Daniel",
     familyName: "Johnson",
@@ -20,7 +20,7 @@ export function buildPersonSchema() {
       width: siteImages.heroCutout.width,
       height: siteImages.heroCutout.height
     },
-    email: `mailto:${siteConfig.email}`,
+    email: siteConfig.email,
     telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
@@ -28,7 +28,7 @@ export function buildPersonSchema() {
       addressCountry: "United Kingdom"
     },
     worksFor: {
-      "@id": `${siteConfig.siteUrl}/#organization`
+      "@id": entityGraph.wssOrganization
     },
     alumniOf: [
       {
@@ -64,16 +64,25 @@ export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${siteConfig.siteUrl}/#organization`,
+    "@id": entityGraph.wssOrganization,
     name: siteConfig.companyName,
     legalName: "We Scale Startups",
-    url: siteConfig.companyUrl,
-    logo: absoluteUrl(siteConfig.headshot),
+    url: "https://wescalestartups.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://wescalestartups.com/images/logos/wss-logo.webp"
+    },
     founder: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     },
     areaServed: ["United Kingdom", "United States", "European Union", "APAC"],
     email: siteConfig.email,
+    sameAs: [
+      "https://www.linkedin.com/company/wescalestartups",
+      siteConfig.companyUrl,
+      siteConfig.wssPodcastUrl,
+      siteConfig.wssPodcastGuestApplyUrl
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
@@ -94,7 +103,7 @@ export function buildWebSiteSchema() {
     name: siteConfig.name,
     description: siteConfig.description,
     publisher: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     },
     inLanguage: "en-US"
   };
@@ -124,11 +133,11 @@ export function buildArticleSchema(article: CollectionEntry<"articles">, pathnam
     datePublished: article.data.publishedAt.toISOString(),
     dateModified: (article.data.updatedAt ?? article.data.publishedAt).toISOString(),
     author: {
-      "@id": `${siteConfig.siteUrl}/#person`,
+      "@id": entityGraph.danielPerson,
       name: siteConfig.name
     },
     publisher: {
-      "@id": `${siteConfig.siteUrl}/#organization`
+      "@id": entityGraph.wssOrganization
     },
     mainEntityOfPage: canonical,
     image: absoluteUrl(article.data.ogImage ?? siteConfig.ogImage)
@@ -148,7 +157,7 @@ export function buildHowToSchema(opts: {
     description: opts.description,
     url: absoluteUrl(opts.url),
     author: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     },
     step: opts.steps.map((step, index) => ({
       "@type": "HowToStep",
@@ -170,10 +179,10 @@ export function buildCaseStudySchema(caseStudy: CollectionEntry<"caseStudies">, 
     datePublished: caseStudy.data.publishedAt.toISOString(),
     dateModified: (caseStudy.data.updatedAt ?? caseStudy.data.publishedAt).toISOString(),
     author: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     },
     publisher: {
-      "@id": `${siteConfig.siteUrl}/#organization`
+      "@id": entityGraph.wssOrganization
     },
     mainEntityOfPage: canonical,
     image: absoluteUrl(caseStudy.data.ogImage ?? siteConfig.ogImage),
@@ -206,7 +215,7 @@ export function buildTalkSchema(talk: CollectionEntry<"talks">) {
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventCompleted",
     performer: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     },
     organizer: {
       "@type": "Organization",
@@ -241,7 +250,7 @@ export function buildVideoSchema(video: {
       name: video.source
     },
     about: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     }
   };
 }
@@ -284,7 +293,7 @@ export function buildServiceSchema(opts: {
     description: opts.description,
     url: opts.url,
     serviceType: opts.serviceType ?? "Fractional CMO",
-    provider: { "@id": `${siteConfig.siteUrl}/#person` },
+    provider: { "@id": entityGraph.danielPerson },
     areaServed: ["United Kingdom", "United States", "European Union", "APAC"],
     audience: {
       "@type": "BusinessAudience",
@@ -303,7 +312,7 @@ export function buildAggregateRatingSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "AggregateRating",
-    itemReviewed: { "@id": `${siteConfig.siteUrl}/#person` },
+    itemReviewed: { "@id": entityGraph.danielPerson },
     ratingValue: proofStats.mentorRating,
     bestRating: "5",
     worstRating: "1",
@@ -319,8 +328,8 @@ export function buildWebPageSchema(opts: { name: string; description: string; ur
     name: opts.name,
     description: opts.description,
     url: opts.url,
-    author: { "@id": `${siteConfig.siteUrl}/#person` },
-    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    author: { "@id": entityGraph.danielPerson },
+    publisher: { "@id": entityGraph.wssOrganization },
     inLanguage: "en-US"
   };
 }
@@ -351,7 +360,7 @@ export function buildTestimonialReviewSchemas(
       "@id": `${siteConfig.siteUrl}/testimonials/#review-${slug}`,
       name: t.outcomeMetric,
       reviewBody: t.quote,
-      itemReviewed: { "@id": `${siteConfig.siteUrl}/#person` },
+      itemReviewed: { "@id": entityGraph.danielPerson },
       author: {
         "@type": "Person",
         name: t.name
