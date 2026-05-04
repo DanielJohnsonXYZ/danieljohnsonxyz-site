@@ -1,0 +1,246 @@
+
+/* ──────────────────────────────────────────────────────────────────────
+   Visual system upgrade — tokens, rhythm, focus, prose, hover polish.
+   Additive: appended after existing rules so it overrides where it
+   needs to and leaves the rest untouched. Companion pass to the WSS
+   site upgrade — same design quality bar, no behavioural changes.
+   ────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Radius scale — fills the gap between the existing --radius (1rem) and --radius-lg (1.5rem). */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-xl: 2rem;
+
+  /* Shadow scale — adds an --shadow-xl for hover-elevated cards and modals. */
+  --shadow-xs: 0 1px 2px rgba(9, 9, 11, 0.04);
+  --shadow-xl: 0 32px 80px rgba(9, 9, 11, 0.12);
+
+  /* Section rhythm — fluid clamp tokens replace the two-step 3rem/4.5rem. */
+  --space-section: clamp(3rem, 6vw + 1rem, 6rem);
+  --space-section-tight: clamp(2rem, 4vw + 1rem, 4rem);
+
+  /* Type scale — small fluid jumps for hero/title sizes without rewriting components. */
+  --fs-display: clamp(2.5rem, 4.4vw + 1rem, 4.5rem);
+  --fs-h2: clamp(1.875rem, 2.4vw + 1rem, 3rem);
+  --fs-lede: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
+
+  /* Reading width — used for prose and long-form copy. */
+  --measure: 65ch;
+
+  /* Focus ring — single source of truth for keyboard outlines. */
+  --focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.32);
+}
+
+/* ─── Global focus-visible ring ───────────────────────────────────────
+   Accessibility: every interactive element gets a consistent, visible
+   keyboard focus state. Mouse focus is unaffected (focus-visible only). */
+:where(a, button, summary, [role="button"], [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 0.5rem;
+}
+
+:where(input, textarea, select):focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+}
+
+/* Pill buttons keep their shape under focus. */
+.button-primary:focus-visible,
+.button-secondary:focus-visible,
+.button-accent:focus-visible,
+.button-link:focus-visible,
+.button-link-invert:focus-visible {
+  border-radius: 999px;
+}
+
+/* ─── Body type rhythm ───────────────────────────────────────────────
+   Adds a sensible default line-height to body copy without overriding
+   component-level leading utilities. */
+body {
+  line-height: 1.6;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* ─── Section rhythm ─────────────────────────────────────────────────
+   Replace the two-step .section-space with fluid clamp padding. Older
+   selector still wins because it's earlier — but we override it here. */
+.section-space {
+  padding-block: var(--space-section);
+}
+
+@media (min-width: 48rem) {
+  .section-space {
+    padding-block: var(--space-section);
+  }
+}
+
+.section-space-tight {
+  padding-block: var(--space-section-tight);
+}
+
+/* ─── Shell padding — fluid mobile-first ───────────────────────────── */
+.shell {
+  padding-inline: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* ─── Cards — uniform hover elevation ────────────────────────────────
+   Previously only .explore-card had a lift on hover. Make every .card
+   feel alive on hover (skip when nested inside .dark-section to keep
+   that subdued treatment). */
+.card {
+  transition:
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 200ms ease,
+    box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.dark-section .card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Section headers — softer, longer divider gradient ──────────── */
+.section-head::before {
+  background: linear-gradient(90deg, var(--line-strong) 0%, rgba(124, 58, 237, 0.22) 35%, transparent 80%);
+  margin-bottom: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+}
+
+/* ─── Display headlines — wire fluid type to existing classes ────── */
+.section-title {
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.6;
+}
+
+/* ─── Prose width and link niceness ────────────────────────────────
+   Better line length for readability + a subtle underline-offset that
+   makes inline links look intentional. */
+.prose-wrap {
+  max-width: var(--measure);
+}
+
+.prose-wrap a:not(.button-primary):not(.button-secondary):not(.button-accent):not(.button-link):not(.link-arrow) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(124, 58, 237, 0.35);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color 160ms ease, color 160ms ease;
+}
+
+.prose-wrap a:hover,
+.prose-wrap a:focus-visible {
+  text-decoration-color: var(--accent);
+}
+
+/* ─── Image rounding helper — for portraits, screenshots, og images ─ */
+.image-rounded,
+.hero-portrait,
+.hero-photo-card img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.image-rounded-sm {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+}
+
+/* ─── Header dock — slightly stronger glass ──────────────────────── */
+.site-nav-dock {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(9, 9, 11, 0.08);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Header dock active link — keep the current pill but soften the shadow. */
+.site-nav-link-active {
+  box-shadow: 0 6px 16px rgba(9, 9, 11, 0.18);
+}
+
+/* ─── Footer — top divider line for crisper section transition ──── */
+.dark-section.footer-shell,
+footer.dark-section {
+  position: relative;
+}
+
+footer.dark-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.4), transparent);
+  pointer-events: none;
+}
+
+/* ─── Chips — softer hover, better focus ─────────────────────────── */
+.chip:hover,
+.chip:focus-visible {
+  transform: translateY(-1px);
+}
+
+/* ─── Buttons — refine the hover/active feel ─────────────────────── */
+.button-primary:active,
+.button-secondary:active,
+.button-accent:active {
+  transform: translateY(0);
+  transition-duration: 80ms;
+}
+
+/* ─── Reduced motion — extend the existing block to new transforms ─ */
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .chip:hover,
+  .chip:focus-visible,
+  .button-primary:hover,
+  .button-secondary:hover,
+  .button-accent:hover,
+  .button-primary:focus-visible,
+  .button-secondary:focus-visible,
+  .button-accent:focus-visible {
+    transform: none;
+  }
+}
+
+/* ─── Mobile polish ─────────────────────────────────────────────────
+   Tighter shell padding on small screens, softer card radius so cards
+   don't dominate at narrow widths. */
+@media (max-width: 480px) {
+  .card {
+    border-radius: var(--radius);
+  }
+
+  .section-title {
+    letter-spacing: -0.035em;
+  }
+
+  /* Pull-quote in the footer is the largest text block on mobile —
+     give it a touch more breathing room. */
+  .testimonial-lead,
+  blockquote {
+    font-size: 1rem;
+  }
+}
+
+/* ─── Selection — subtler tint over the hero gradient wash ──────── */
+::selection {
+  background: rgba(124, 58, 237, 0.18);
+  color: var(--ink);
+}
