@@ -56,7 +56,15 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${siteConfig.gtmId}');`;
-const revealScript = `const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealScript = `window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  event: 'page_context',
+  page_path: window.location.pathname,
+  page_title: document.title,
+  page_location: window.location.href
+});
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealObserver = prefersReducedMotion
   ? null
   : new IntersectionObserver((entries) => {
@@ -92,6 +100,19 @@ document.addEventListener('click', (event) => {
     cta_href: link.href,
     page_path: window.location.pathname
   });
+});
+
+document.addEventListener('submit', (event) => {
+  const form = event.target;
+  if (!(form instanceof HTMLFormElement)) return;
+  if (form.hasAttribute('data-fc-intake-form')) return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'form_submit',
+    form_id: form.id || form.name || 'unknown',
+    form_action: form.action || 'unknown',
+    page_path: window.location.pathname
+  });
 });`;
 ---
 
@@ -101,7 +122,7 @@ document.addEventListener('click', (event) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0b0c" />
-    <!-- Analytics: GTM loads gtm.js; dataLayer events are pushed from the inline click handler in body. Add a CMP via GTM if you need consent gating by region. -->
+    <!-- Analytics: GTM + dataLayer — page_context; cta_click; resource_download_click; form_submit (not data-fc-intake-form — that emits fractional_cmo_intake_submit). CMP via GTM if needed. -->
     <!-- Google Tag Manager — high in <head> per GTM install instructions. -->
     <script is:inline set:html={gtmScript}></script>
     <!-- End Google Tag Manager -->
