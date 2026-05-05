@@ -114,7 +114,7 @@ export const proofStats = {
   mentorRating: "4.97",
   mentorReviewCount: "220",
   founderRaiseSupport: "£15M+",
-  founderExits: "Two founder exits — eQuoo (mental-health tech) and an eCommerce brand"
+  founderExits: "Founder-side exit experience, including eQuoo (mental-health tech)"
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
