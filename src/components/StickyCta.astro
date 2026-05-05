@@ -44,7 +44,9 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
   </div>
 )}
 
-<style>
+<style is:global>
+  @import "../styles/mobile-qa.css";
+
   .sticky-cta {
     position: fixed;
     inset-inline: 0;
@@ -173,6 +175,8 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
     var revealAfter = Number(bar.getAttribute('data-reveal-after') || 640);
     var dismissKey = 'dj-sticky-cta-dismissed';
     var dismissed = false;
+    var overlapSelector = 'footer, .site-footer-v2, form, .growth-diagnosis, .cta-gradient, .evergreen-updated';
+    var overlapsSensitiveArea = false;
 
     try {
       dismissed = sessionStorage.getItem(dismissKey) === '1';
@@ -187,7 +191,7 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
 
     function update() {
       if (dismissed) return;
-      var shouldShow = window.scrollY > revealAfter;
+      var shouldShow = window.scrollY > revealAfter && !overlapsSensitiveArea;
       bar.classList.toggle('is-visible', shouldShow);
       bar.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
     }
@@ -206,7 +210,24 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
       });
     }
 
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        overlapsSensitiveArea = entries.some(function (entry) {
+          return entry.isIntersecting;
+        });
+        update();
+      }, {
+        rootMargin: '0px 0px -12% 0px',
+        threshold: 0.02
+      });
+
+      document.querySelectorAll(overlapSelector).forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+
     window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
     // Run once on load so it's correct after a deep-link / back-nav.
     update();
   })();
