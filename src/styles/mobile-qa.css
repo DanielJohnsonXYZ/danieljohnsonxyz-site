@@ -1,0 +1,230 @@
+/* Mobile QA implementation - 2026-05-05
+   Makes the Daniel Johnson mobile journey less crowded and keeps interactive,
+   menu, CTA, form, proof, and footer surfaces usable on narrow screens. */
+
+@media (max-width: 1023px) {
+  header.sticky {
+    padding-inline: 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .site-nav-dock {
+    border-radius: 1.25rem;
+  }
+
+  .mobile-nav-panel {
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top, 0px) + 4.75rem) !important;
+    right: max(0.75rem, env(safe-area-inset-right, 0px)) !important;
+    left: max(0.75rem, env(safe-area-inset-left, 0px)) !important;
+    width: auto !important;
+    max-height: min(76vh, 38rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-nav-group-label,
+  .mobile-nav-group-links a,
+  .mobile-nav-panel .button-primary,
+  .mobile-nav-panel .button-secondary {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 767px) {
+  .shell {
+    padding-inline: 1rem;
+  }
+
+  .section-space {
+    padding-block: 2.4rem;
+  }
+
+  .hero-section-compact {
+    padding-top: 1.75rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .hero-section-compact h1 {
+    font-size: clamp(2.55rem, 12.5vw, 3.35rem);
+    line-height: 1.02;
+    letter-spacing: 0 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-section-compact .hero-subcopy,
+  .hero-section-compact p,
+  .commercial-path-note {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .hero-proof-bar {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding-block: 0.9rem;
+  }
+
+  .hero-proof-bar strong {
+    font-size: 1.1rem;
+  }
+
+  .cta-cluster .flex,
+  .hero-section .flex.flex-wrap.items-center,
+  .cta-gradient .flex.flex-wrap,
+  .gd-result .flex.flex-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .button-accent,
+  .button-primary,
+  .button-secondary,
+  .button-link,
+  .button-link-invert {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .service-label {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .commercial-path-note {
+    margin-top: 0.25rem;
+    padding: 1rem;
+  }
+
+  .hero-section-compact .hero-photo-card {
+    max-width: 25rem;
+  }
+
+  .hero-section-compact .hero-portrait {
+    max-height: 22rem;
+  }
+
+  .trust-strip-large,
+  .trust-strip {
+    width: 100%;
+  }
+
+  .trust-strip-large .trust-strip-logos {
+    align-items: stretch;
+  }
+
+  .trust-strip-large .trust-strip-logos .trust-logo,
+  .trust-strip-large .trust-badge {
+    max-width: 100%;
+  }
+
+  .growth-diagnosis {
+    margin-top: 1.5rem;
+  }
+
+  .growth-diagnosis .card {
+    padding: 1rem !important;
+  }
+
+  .gd-step legend,
+  .gd-result h3 {
+    font-size: clamp(1.45rem, 7vw, 2rem);
+    line-height: 1.15;
+  }
+
+  .gd-answer {
+    min-height: 54px;
+    padding: 0.9rem;
+  }
+
+  .gd-controls {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ladder-grid {
+    gap: 0.9rem;
+  }
+
+  .ladder-card {
+    min-height: auto;
+  }
+
+  .image-story-card h3,
+  .social-panel h2,
+  .section-title {
+    font-size: clamp(1.85rem, 9vw, 2.7rem);
+    line-height: 1.08;
+  }
+
+  .media-link-card {
+    min-height: auto;
+  }
+
+  .cta-gradient h2 {
+    font-size: clamp(2.5rem, 13vw, 4rem);
+  }
+
+  .evergreen-updated {
+    padding-bottom: 5.75rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .sticky-cta {
+    bottom: max(0.55rem, env(safe-area-inset-bottom, 0px));
+    padding-inline: 0.65rem;
+  }
+
+  .sticky-cta-inner {
+    width: 100%;
+    border-radius: 1.1rem;
+    padding: 0.65rem;
+  }
+
+  .sticky-cta-copy {
+    display: none;
+  }
+
+  .sticky-cta-primary {
+    flex: 1 1 auto;
+    min-height: 44px;
+    padding-inline: 0.75rem;
+    white-space: normal;
+  }
+
+  .sticky-cta-dismiss {
+    flex: 0 0 2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-nav-dock {
+    padding: 0.65rem 0.75rem !important;
+  }
+
+  .brand-mark {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .hero-section-compact h1 {
+    font-size: clamp(2.25rem, 12vw, 2.9rem);
+  }
+
+  .trust-strip-large .trust-strip-logos .trust-logo-growthmentor,
+  .trust-strip-large .trust-strip-logos .trust-logo-google,
+  .trust-strip-large .trust-strip-logos .trust-logo-cambridge {
+    width: min(100%, 11.5rem);
+  }
+}
