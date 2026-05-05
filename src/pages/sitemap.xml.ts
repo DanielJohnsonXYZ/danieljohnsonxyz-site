@@ -57,8 +57,8 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticPaths.map((path) => urlNode(path)).join("\n")}
-${articles.map((article) => urlNode(`/writing/${article.id}`, article.data.updatedAt?.toISOString().slice(0, 10) ?? article.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
-${caseStudies.map((item) => urlNode(`/case-studies/${item.id}`, item.data.updatedAt?.toISOString().slice(0, 10) ?? item.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
+${articles.map((article) => urlNode(`/writing/${article.id}/`, article.data.updatedAt?.toISOString().slice(0, 10) ?? article.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
+${caseStudies.map((item) => urlNode(`/case-studies/${item.id}/`, item.data.updatedAt?.toISOString().slice(0, 10) ?? item.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
 </urlset>`;
 
   return new Response(xml, {

@@ -21,7 +21,7 @@ export const GET: APIRoute = async () => {
       title: article.data.title,
       pubDate: article.data.publishedAt,
       description: article.data.description,
-      link: absoluteUrl(`/writing/${article.id}`),
+      link: absoluteUrl(`/writing/${article.id}/`),
       categories: article.data.tags
     })),
     customData: `<language>en-gb</language>`,

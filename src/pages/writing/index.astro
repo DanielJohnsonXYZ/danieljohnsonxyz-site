@@ -90,7 +90,7 @@ const suggestedInterviewFormats = [
           <div>
             <p class="card-label">Flagship essay</p>
             <h2 class="mt-4 text-4xl font-extrabold tracking-[-0.06em] md:text-6xl">
-              <a href={`/writing/${flagshipArticle.id}`}>{flagshipArticle.data.title}</a>
+              <a href={`/writing/${flagshipArticle.id}/`}>{flagshipArticle.data.title}</a>
             </h2>
             <p class="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">{flagshipArticle.data.description}</p>
           </div>
@@ -100,7 +100,7 @@ const suggestedInterviewFormats = [
               <span class="chip">{formatDate(flagshipArticle.data.publishedAt)}</span>
               {flagshipArticle.data.tags.map((tag) => <span class="chip">{tag}</span>)}
             </div>
-            <a class="link-arrow mt-6" href={`/writing/${flagshipArticle.id}`}>Read flagship essay</a>
+            <a class="link-arrow mt-6" href={`/writing/${flagshipArticle.id}/`}>Read flagship essay</a>
           </div>
         </div>
       </article>
@@ -114,14 +114,14 @@ const suggestedInterviewFormats = [
                 <span class="chip">{formatDate(article.data.publishedAt)}</span>
               </div>
               <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
-                <a href={`/writing/${article.id}`}>{article.data.title}</a>
+                <a href={`/writing/${article.id}/`}>{article.data.title}</a>
               </h2>
               <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
               <div class="mt-5 flex flex-wrap gap-2">
                 {article.data.tags.map((tag) => <span class="chip">{tag}</span>)}
               </div>
               <div class="mt-6">
-                <a class="link-arrow" href={`/writing/${article.id}`}>
+                <a class="link-arrow" href={`/writing/${article.id}/`}>
                   Read essay
                 </a>
               </div>
