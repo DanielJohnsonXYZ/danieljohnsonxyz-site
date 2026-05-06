@@ -675,6 +675,40 @@ a, button, summary {
   padding-bottom: clamp(2.5rem, 5vh, 4rem);
 }
 
+/* Homepage hero: mobile order is headline → photo → proof/CTAs; desktop keeps text | portrait. */
+.hero-home-grid {
+  display: grid;
+  align-items: start;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "top"
+    "photo"
+    "rest";
+}
+
+@media (min-width: 1024px) {
+  .hero-home-grid {
+    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.82fr);
+    grid-template-areas:
+      "top photo"
+      "rest photo";
+  }
+}
+
+.hero-home-top {
+  grid-area: top;
+}
+
+.hero-home-photo {
+  grid-area: photo;
+}
+
+.hero-home-rest {
+  grid-area: rest;
+}
+
 .hero-section-compact .hero-photo-card {
   max-width: 34rem;
   margin-inline: auto;

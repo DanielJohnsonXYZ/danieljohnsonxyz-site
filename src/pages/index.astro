@@ -196,8 +196,8 @@ const schemas = [
   <!-- 1. Hero — WSS redesign: pain-led subcopy, founder column + engagement ladder -->
   <section class="hero-section hero-section-compact section-space wss-hero-redesign" aria-labelledby="hero-heading">
     <div class="shell">
-      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.88fr)] lg:items-start">
-        <div class="reveal flex flex-col gap-5 lg:pt-1">
+      <div class="hero-home-grid">
+        <div class="hero-home-top reveal flex flex-col gap-5 lg:pt-1">
           <span class="service-label">Fractional CMO · {singleIdea.short}</span>
 
           <div class="space-y-4">
@@ -207,6 +207,36 @@ const schemas = [
             <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
               <strong class="font-semibold text-[color:var(--ink)]">Traction without a reliable engine:</strong> acquisition plateauing, founder-led sales that does not scale, and GTM that still depends on you in the weeds. I embed as fractional CMO to install positioning, pipeline discipline, and a weekly decision rhythm — the growth system behind predictable pipeline and sharper messaging, without a £150k full-time hire.
             </p>
+          </div>
+        </div>
+
+        <div class="hero-home-photo reveal hero-founder-stack flex flex-col gap-5 lg:gap-6 lg:sticky lg:top-28">
+          <article class="hero-photo-card overflow-hidden">
+            <img
+              alt="Daniel Johnson, fractional CMO and AI-native growth operator"
+              class="aspect-[4/5] w-full object-cover object-top hero-portrait"
+              decoding="async"
+              fetchpriority="high"
+              height="960"
+              loading="eager"
+              src={siteConfig.headshot}
+              width="768"
+            />
+            <div class="credential-logos" aria-label="Selected external affiliations">
+              {
+                heroCredentialLogos.map((item) => (
+                  <span class="credential-logo">
+                    <img alt={item.alt} decoding="async" height="24" loading="lazy" src={item.src} width="120" />
+                  </span>
+                ))
+              }
+            </div>
+          </article>
+          <HeroEngagementCard />
+        </div>
+
+        <div class="hero-home-rest reveal flex flex-col gap-5">
+          <div class="space-y-4">
             <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
               {icpFirmographics.oneLiner}
             </p>
@@ -269,31 +299,6 @@ const schemas = [
             </a>
             .
           </p>
-        </div>
-
-        <div class="reveal hero-founder-stack flex flex-col gap-5 lg:gap-6 lg:sticky lg:top-28">
-          <article class="hero-photo-card overflow-hidden">
-            <img
-              alt="Daniel Johnson, fractional CMO and AI-native growth operator"
-              class="aspect-[4/5] w-full object-cover object-top hero-portrait"
-              decoding="async"
-              fetchpriority="high"
-              height="960"
-              loading="eager"
-              src={siteConfig.headshot}
-              width="768"
-            />
-            <div class="credential-logos" aria-label="Selected external affiliations">
-              {
-                heroCredentialLogos.map((item) => (
-                  <span class="credential-logo">
-                    <img alt={item.alt} decoding="async" height="24" loading="lazy" src={item.src} width="120" />
-                  </span>
-                ))
-              }
-            </div>
-          </article>
-          <HeroEngagementCard />
         </div>
       </div>
 

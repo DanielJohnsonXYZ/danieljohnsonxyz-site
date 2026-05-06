@@ -150,10 +150,15 @@ body {
 
 /* ─── Image rounding helper — for portraits, screenshots, og images ─ */
 .image-rounded,
-.hero-portrait,
-.hero-photo-card img {
+.hero-portrait {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+}
+
+/* Stack portrait flush into the offer panel — full radius on standalone portraits only. */
+.hero-photo-card img.hero-portrait {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: none;
 }
 
 .image-rounded-sm {
