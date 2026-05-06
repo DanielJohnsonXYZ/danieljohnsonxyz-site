@@ -663,7 +663,8 @@ a, button, summary {
 /* ─── Claude direction homepage additions ─── */
 .hero-section {
   position: relative;
-  overflow: hidden;
+  /* not overflow:hidden — that creates a scrollport and breaks position:sticky on the portrait column */
+  overflow: visible;
   background:
     radial-gradient(circle at 80% 0, rgba(124, 58, 237, 0.08), transparent 30rem),
     radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.06), transparent 20rem),
@@ -817,6 +818,16 @@ a, button, summary {
   gap: 1.15rem;
 }
 
+.trust-strip-large .trust-strip-logos img {
+  max-width: 10.625rem;
+  min-height: 1.875rem;
+  max-height: 2.625rem;
+  width: auto;
+  height: auto;
+  opacity: 0.9;
+  filter: grayscale(1) contrast(1.08);
+}
+
 .trust-strip-large {
   max-width: 70.5rem;
   margin-inline: auto;
@@ -838,6 +849,26 @@ a, button, summary {
   display: flex;
   justify-content: center;
   gap: 1rem 1.45rem;
+}
+
+.trust-strip-large .trust-strip-logos .trust-logo {
+  flex: 0 0 auto;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.trust-strip-large .trust-strip-logos .trust-logo-growthmentor {
+  width: clamp(8.6rem, 11vw, 10.4rem);
+}
+
+.trust-strip-large .trust-strip-logos .trust-logo-google {
+  width: clamp(8rem, 10vw, 9.8rem);
+}
+
+.trust-strip-large .trust-strip-logos .trust-logo-cambridge {
+  width: clamp(9rem, 11vw, 10.8rem);
 }
 
 .trust-text-badge {
@@ -2023,6 +2054,12 @@ summary::-webkit-details-marker {
     gap: 1rem 1.25rem;
   }
 
+  .trust-strip-large .trust-strip-logos .trust-logo-growthmentor,
+  .trust-strip-large .trust-strip-logos .trust-logo-google,
+  .trust-strip-large .trust-strip-logos .trust-logo-cambridge {
+    width: clamp(9.5rem, 38vw, 12rem);
+  }
+
   .trust-strip-large .trust-badge {
     min-height: 2.8rem;
     width: 100%;
@@ -2038,6 +2075,12 @@ summary::-webkit-details-marker {
   .trust-strip-large .trust-strip-logos {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .trust-strip-large .trust-strip-logos .trust-logo-growthmentor,
+  .trust-strip-large .trust-strip-logos .trust-logo-google,
+  .trust-strip-large .trust-strip-logos .trust-logo-cambridge {
+    width: min(100%, 13rem);
   }
 }
 
@@ -2618,46 +2661,6 @@ summary::-webkit-details-marker {
     color: var(--accent);
     background: rgba(124, 58, 237, 0.05);
   }
-}
-
-/* Homepage hero redesign — portrait + credential strip + engagement card */
-.wss-hero-redesign .hero-founder-stack {
-  max-width: 34rem;
-  margin-inline: auto;
-}
-
-@media (min-width: 1024px) {
-  .wss-hero-redesign .hero-founder-stack {
-    margin-inline: 0;
-    margin-left: auto;
-  }
-}
-
-.wss-hero-redesign .credential-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem 1rem;
-  padding: 0.85rem 1rem;
-  border-top: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.wss-hero-redesign .credential-logo {
-  display: flex;
-  align-items: center;
-  line-height: 0;
-}
-
-.wss-hero-redesign .credential-logo img {
-  height: 18px;
-  width: auto;
-  max-width: 6.75rem;
-  object-fit: contain;
-  filter: grayscale(1) contrast(1.05);
-  opacity: 0.88;
-  mix-blend-mode: multiply;
 }
 
 /* Mobile: ensure the credential logos in the WSS founder card never */
