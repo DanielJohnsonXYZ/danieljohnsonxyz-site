@@ -4,6 +4,7 @@ import SectionHeader from "../components/SectionHeader.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
+import HeroEngagementCard from "../components/HeroEngagementCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
@@ -50,6 +51,10 @@ const methodLayers = [
   { title: "Reporting", body: "Growth scorecard, pipeline view, weekly stop / scale / fix notes.", href: "/revenue-operations/" }
 ];
 const layerCount = methodLayers.length;
+
+// Hero credential strip — external affiliations only (matches trust brief).
+const heroCredentialIds = new Set(["growthmentor", "cambridge-judge", "techstars", "imperial"]);
+const heroCredentialLogos = trustLogos.filter((item) => heroCredentialIds.has(item.id));
 
 // ─── Proof — real outcomes (four cards) ─────────────────────────────────
 const outcomeCards = [
@@ -188,11 +193,11 @@ const schemas = [
   schema={schemas}
   title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
 >
-  <!-- 1. Hero ─────────────────────────────────────────────────────────── -->
-  <section class="hero-section hero-section-compact section-space" aria-labelledby="hero-heading">
+  <!-- 1. Hero — WSS redesign: pain-led subcopy, founder column + engagement ladder -->
+  <section class="hero-section hero-section-compact section-space wss-hero-redesign" aria-labelledby="hero-heading">
     <div class="shell">
-      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.82fr)] lg:items-center">
-        <div class="reveal flex flex-col gap-5">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.88fr)] lg:items-start">
+        <div class="reveal flex flex-col gap-5 lg:pt-1">
           <span class="service-label">Fractional CMO · {singleIdea.short}</span>
 
           <div class="space-y-4">
@@ -200,17 +205,17 @@ const schemas = [
               If growth still depends on the founder, <span class="hero-accent">I fix that.</span>
             </h1>
             <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
-              <strong class="font-semibold text-[color:var(--ink)]">Predictable pipeline. Sharper positioning. Senior growth leadership.</strong> For Seed to Series B AI and B2B SaaS founders — without a £150k full-time hire.
+              <strong class="font-semibold text-[color:var(--ink)]">Traction without a reliable engine:</strong> acquisition plateauing, founder-led sales that does not scale, and GTM that still depends on you in the weeds. I embed as fractional CMO to install positioning, pipeline discipline, and a weekly decision rhythm — the growth system behind predictable pipeline and sharper messaging, without a £150k full-time hire.
             </p>
             <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
               {icpFirmographics.oneLiner}
             </p>
             <p class="max-w-3xl text-sm leading-7 text-[color:var(--muted)] md:text-base">
-              <strong class="font-semibold text-[color:var(--ink)]">We Scale Startups</strong> is the growth operating system behind Daniel&apos;s fractional CMO and GTM work — this site is where you hire him personally;{" "}
+              <strong class="font-semibold text-[color:var(--ink)]">We Scale Startups</strong> is the operator bench behind the same methodology — hire Daniel here for a personal engagement;{" "}
               <a class="font-semibold underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]" href={siteConfig.companyUrl} rel="noopener" target="_blank">
                 wescalestartups.com
               </a>{" "}
-              is the company brand for commercial systems, case studies, and team engagements.
+              for team-facing diagnosis, sprints, and broader bench work.
             </p>
           </div>
 
@@ -264,22 +269,10 @@ const schemas = [
             </a>
             .
           </p>
-
-          <aside
-            class="commercial-path-note reveal mt-5 max-w-2xl rounded-lg border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 text-sm leading-6 text-[color:var(--muted)]"
-            aria-label="How this site relates to We Scale Startups"
-          >
-            <strong class="font-semibold text-[color:var(--ink)]">We Scale Startups vs this site.</strong>{" "}
-            <a class="font-medium text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-2" href={siteConfig.companyUrl}>
-              We Scale Startups
-            </a>{" "}
-            is the operator bench for teams: diagnosis, sprints, and embedded fractional leadership. This site is Daniel as fractional CMO, speaker, and
-            writer — use the audit here for a personal engagement; broader bench engagements typically run through WSS.
-          </aside>
         </div>
 
-        <div class="reveal">
-          <article class="hero-photo-card hero-offer-card">
+        <div class="reveal hero-founder-stack flex flex-col gap-5 lg:gap-6 lg:sticky lg:top-28">
+          <article class="hero-photo-card overflow-hidden">
             <img
               alt="Daniel Johnson, fractional CMO and AI-native growth operator"
               class="aspect-[4/5] w-full object-cover object-top hero-portrait"
@@ -290,19 +283,17 @@ const schemas = [
               src={siteConfig.headshot}
               width="768"
             />
-            <div class="hero-authority-panel">
-              <p class="card-label">Primary Offer</p>
-              <h2 class="mt-2 text-2xl font-extrabold tracking-[-0.05em]">
-                Fractional CMO for post-PMF AI and SaaS.
-              </h2>
-              <ul class="mt-5 space-y-3 text-sm leading-6 text-[color:var(--muted)]">
-                <li>{icpFirmographics.arrBandUsd} · {icpFirmographics.headcountBand}</li>
-                <li>Founder-led, growth stuck, no senior GTM owner</li>
-                <li>Senior help without a £150k+ full-time hire</li>
-                <li>Recent work: AI health, B2B fintech, edtech, SaaS tooling</li>
-              </ul>
+            <div class="credential-logos" aria-label="Selected external affiliations">
+              {
+                heroCredentialLogos.map((item) => (
+                  <span class="credential-logo">
+                    <img alt={item.alt} decoding="async" height="24" loading="lazy" src={item.src} width="120" />
+                  </span>
+                ))
+              }
             </div>
           </article>
+          <HeroEngagementCard />
         </div>
       </div>
 

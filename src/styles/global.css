@@ -2628,6 +2628,46 @@ summary::-webkit-details-marker {
   }
 }
 
+/* Homepage hero redesign — portrait + credential strip + engagement card */
+.wss-hero-redesign .hero-founder-stack {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 1024px) {
+  .wss-hero-redesign .hero-founder-stack {
+    margin-inline: 0;
+    margin-left: auto;
+  }
+}
+
+.wss-hero-redesign .credential-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem 1rem;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.wss-hero-redesign .credential-logo {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.wss-hero-redesign .credential-logo img {
+  height: 18px;
+  width: auto;
+  max-width: 6.75rem;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.05);
+  opacity: 0.88;
+  mix-blend-mode: multiply;
+}
+
 /* Mobile: ensure the credential logos in the WSS founder card never */
 /* overflow on iPhone SE (375px). Fall back to wrapping at 16px. */
 @media (max-width: 380px) {
