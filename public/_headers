@@ -1,4 +1,9 @@
 # Cloudflare Pages custom headers
+#
+# Unstyled site / “no CSS”: the HTML <link> points at /_astro/BaseLayout.<hash>.css.
+# If the edge caches HTML but a new deploy drops that old hashed file, the stylesheet
+# URL 404s (often as HTML) and the page looks naked. Purge Cloudflare cache after
+# deploy, and avoid dashboard “Cache Everything” rules that cache HTML at the edge.
 
 # Long cache for hashed static assets
 /_astro/*
@@ -11,6 +16,14 @@
 # Long cache for OG assets
 /og/*
   Cache-Control: public, max-age=31536000, immutable
+
+# HTML entry points — no-store so index never references dead hashed CSS after a deploy.
+# (More specific than /* so it wins if rules merge.)
+/
+  Cache-Control: private, no-store, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: private, no-store, max-age=0, must-revalidate
 
 # Do not edge-cache HTML. The custom domain may have Cloudflare cache rules
 # layered above Pages, so be explicit here and in the Pages middleware.
