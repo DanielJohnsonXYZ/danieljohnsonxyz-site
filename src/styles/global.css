@@ -784,11 +784,12 @@ a, button, summary {
 }
 
 .trust-strip-large .trust-strip-logos img {
-  max-width: 10.625rem;
-  min-height: 1.875rem;
-  max-height: 2.625rem;
+  flex: 0 0 auto;
   width: auto;
   height: auto;
+  max-width: min(100%, 10.5rem);
+  max-height: 2.5rem;
+  object-fit: contain;
   opacity: 0.9;
   filter: grayscale(1) contrast(1.08);
 }
@@ -814,26 +815,6 @@ a, button, summary {
   display: flex;
   justify-content: center;
   gap: 1rem 1.45rem;
-}
-
-.trust-strip-large .trust-strip-logos .trust-logo {
-  flex: 0 0 auto;
-  max-width: none;
-  max-height: none;
-  min-height: 0;
-  object-fit: contain;
-}
-
-.trust-strip-large .trust-strip-logos .trust-logo-growthmentor {
-  width: clamp(8.6rem, 11vw, 10.4rem);
-}
-
-.trust-strip-large .trust-strip-logos .trust-logo-google {
-  width: clamp(8rem, 10vw, 9.8rem);
-}
-
-.trust-strip-large .trust-strip-logos .trust-logo-cambridge {
-  width: clamp(9rem, 11vw, 10.8rem);
 }
 
 .trust-text-badge {
@@ -2019,12 +2000,6 @@ summary::-webkit-details-marker {
     gap: 1rem 1.25rem;
   }
 
-  .trust-strip-large .trust-strip-logos .trust-logo-growthmentor,
-  .trust-strip-large .trust-strip-logos .trust-logo-google,
-  .trust-strip-large .trust-strip-logos .trust-logo-cambridge {
-    width: clamp(9.5rem, 38vw, 12rem);
-  }
-
   .trust-strip-large .trust-badge {
     min-height: 2.8rem;
     width: 100%;
@@ -2040,12 +2015,6 @@ summary::-webkit-details-marker {
   .trust-strip-large .trust-strip-logos {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .trust-strip-large .trust-strip-logos .trust-logo-growthmentor,
-  .trust-strip-large .trust-strip-logos .trust-logo-google,
-  .trust-strip-large .trust-strip-logos .trust-logo-cambridge {
-    width: min(100%, 13rem);
   }
 }
 

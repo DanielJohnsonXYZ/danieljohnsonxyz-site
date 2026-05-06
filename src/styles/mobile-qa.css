@@ -221,10 +221,4 @@
   .hero-section-compact h1 {
     font-size: clamp(2.25rem, 12vw, 2.9rem);
   }
-
-  .trust-strip-large .trust-strip-logos .trust-logo-growthmentor,
-  .trust-strip-large .trust-strip-logos .trust-logo-google,
-  .trust-strip-large .trust-strip-logos .trust-logo-cambridge {
-    width: min(100%, 11.5rem);
-  }
 }
