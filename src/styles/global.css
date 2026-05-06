@@ -783,17 +783,6 @@ a, button, summary {
   gap: 1.15rem;
 }
 
-.trust-strip-large .trust-strip-logos img {
-  flex: 0 0 auto;
-  width: auto;
-  height: auto;
-  max-width: min(100%, 10.5rem);
-  max-height: 2.5rem;
-  object-fit: contain;
-  opacity: 0.9;
-  filter: grayscale(1) contrast(1.08);
-}
-
 .trust-strip-large {
   max-width: 70.5rem;
   margin-inline: auto;

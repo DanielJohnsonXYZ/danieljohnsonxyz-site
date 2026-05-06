@@ -304,12 +304,12 @@ const schemas = [
             trustLogos.map((item) => (
               <img
                 alt={item.alt}
-                class={`trust-logo trust-logo-${item.id}`}
+                class={`trust-logo trust-logo-${item.id} !h-10 !max-h-10 !w-auto !max-w-[10.5rem] shrink-0 !object-contain !grayscale contrast-[1.08] !opacity-90 !mix-blend-multiply`}
                 decoding="async"
-                height="48"
+                height="40"
                 loading="lazy"
                 src={item.src}
-                width="180"
+                width="160"
               />
             ))
           }
