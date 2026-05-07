@@ -12,9 +12,9 @@ export const siteConfig = {
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
   bookingUrl: "https://calendly.com/danieljohnson",
-  bookingLabel: "Book a 30-min Growth Audit",
+  bookingLabel: "Book a 20-min Growth Audit",
   bookingNote:
-    "30 minutes. No pitch. We diagnose your biggest growth bottleneck and decide whether it makes sense to work together.",
+    "20 minutes. No pitch. We diagnose your biggest growth bottleneck and decide whether it makes sense to work together.",
 
   // Positioning — fractional is the primary lane; full-time is a supporting note
   // surfaced only in About / FAQ, not on the headline cards.
@@ -179,15 +179,15 @@ export const announcement = {
 // ──────────────────────────────────────────────────────────────────────────
 export const ctas = {
   primary: {
-    label: "Book a 30-min Growth Audit",
+    label: "Book a 20-min Growth Audit",
     href: siteConfig.bookingUrl,
-    hint: "Free · 30 minutes · No pitch"
+    hint: "Free · 20 minutes · No pitch"
   },
   /** Mid-page / method sections — same destination, varied copy (Growth Hub CTA ladder). */
   methodDeepDive: {
-    label: "Talk through your growth system in 30 minutes",
+    label: "Talk through your growth system in 20 minutes",
     href: siteConfig.bookingUrl,
-    hint: "Free · 30 minutes · No pitch"
+    hint: "Free · 20 minutes · No pitch"
   },
   caseStudies: {
     label: "View case studies",
@@ -226,7 +226,7 @@ export const navigationGroups = [
     href: "/start-here/",
     items: [
       { href: "/start-here/", label: "Start here", description: "Five-minute orientation. Where to begin if it's your first visit." },
-      { href: "/growth-audit/", label: "30-min Growth Audit", description: "Free diagnostic call. Bottleneck read in 30 minutes." },
+      { href: "/growth-audit/", label: "20-min Growth Audit", description: "Free diagnostic call. Bottleneck read in 20 minutes." },
       { href: "/strategy-sprint/", label: "Strategy Sprint", description: "From £6k. 2–4 weeks. Plan, artefacts, first wins." },
       { href: "/fractional-cmo/", label: "Fractional CMO", description: "From £7.5k/mo. Embedded senior GTM leadership." },
       { href: "/mentoring/", label: "Founder office hours", description: "Focused growth decisions and second-brain sessions." },
@@ -563,9 +563,9 @@ export const speakingVideos = [
 export const homeServiceLadder = [
   {
     tier: "Tier 1 · Entry",
-    heading: "30-min Growth Audit",
+    heading: "20-min Growth Audit",
     price: "Free",
-    cadence: "30 minutes · No pitch · No deck",
+    cadence: "20 minutes · No pitch · No deck",
     body:
       "Bring the messy growth question. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.",
     bestFor:
@@ -722,7 +722,7 @@ export const vsFulltimeCMO = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// /growth-audit page data — free 30-min diagnostic call. SEO surface for
+// /growth-audit page data — free 20-min diagnostic call. SEO surface for
 // "free growth audit" queries; bottom-of-funnel intent.
 // ──────────────────────────────────────────────────────────────────────────
 export const growthAuditPage = {
@@ -747,7 +747,7 @@ export const growthAuditPage = {
     {
       question: "Is the call really free?",
       answer:
-        "Yes. 30 minutes, no pitch, no deck. The economics work because most calls end with either a clear engagement shape, or a clear no — and 'no' founders refer the right founders later."
+        "Yes. 20 minutes, no pitch, no deck. The economics work because most calls end with either a clear engagement shape, or a clear no — and 'no' founders refer the right founders later."
     },
     {
       question: "What if you decide we're not a fit?",

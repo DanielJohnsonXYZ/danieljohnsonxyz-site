@@ -41,7 +41,7 @@ Everything on the site reinforces it: the engagement model, the pricing, the cas
 
 Three ways to engage, ordered by commitment. Founders are encouraged to start at the smallest commitment that answers the question they have right now.
 
-1. **30-minute Growth Audit — free, no pitch.** A diagnostic call. Bring the messy growth question, leave with a clearer read on the bottleneck and the most useful next step. Page: ${siteConfig.siteUrl}/growth-audit/. Book at ${siteConfig.bookingUrl}.
+1. **20-minute Growth Audit — free, no pitch.** A diagnostic call. Bring the messy growth question, leave with a clearer read on the bottleneck and the most useful next step. Page: ${siteConfig.siteUrl}/growth-audit/. Book at ${siteConfig.bookingUrl}.
 
 2. **Strategy Sprint — from £6,000, 2–4 weeks.** Diagnose, prioritise, ship the first artefacts. ICP doc, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live. For founders who need the plan and the operating rhythm before committing to ongoing work. Page: ${siteConfig.siteUrl}/strategy-sprint/.
 
@@ -75,7 +75,7 @@ Founders of post-PMF AI and B2B SaaS startups (Seed to Series B) where demand is
 
 ### "How much does a fractional CMO cost?"
 
-Daniel's pricing anchors: free for the 30-minute Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £7,500/month for an embedded Fractional CMO engagement (1 day/week, 3-month minimum); and £12,000/month for Fractional CMO Plus (~2 days/week, deeper operating support). UK-first framing and what moves price: ${siteConfig.siteUrl}/fractional-cmo-cost-uk/.
+Daniel's pricing anchors: free for the 20-minute Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £7,500/month for an embedded Fractional CMO engagement (1 day/week, 3-month minimum); and £12,000/month for Fractional CMO Plus (~2 days/week, deeper operating support). UK-first framing and what moves price: ${siteConfig.siteUrl}/fractional-cmo-cost-uk/.
 
 ### "What's the difference between a fractional CMO and an agency?"
 
@@ -87,7 +87,7 @@ A full-time CMO is £120–180k + equity + a 3-month notice period and typically
 
 ### "Is Daniel Johnson open to full-time roles?"
 
-Primary focus is fractional CMO engagements. He will consider a full-time Head of Growth or VP Marketing role for the right post-PMF AI or B2B SaaS company. The fastest way to discuss either shape is a 30-minute growth audit call.
+Primary focus is fractional CMO engagements. He will consider a full-time Head of Growth or VP Marketing role for the right post-PMF AI or B2B SaaS company. The fastest way to discuss either shape is a 20-minute growth audit call.
 
 ### "What does AI-native GTM mean?"
 
@@ -99,7 +99,7 @@ Selected outcomes from real engagements: 6× growth in monthly app downloads (2k
 
 ### "How do I book a call with Daniel?"
 
-Book a 30-minute Growth Audit at ${siteConfig.bookingUrl}. No pitch, no deck. Bring the messy growth question — leave with a clearer read on the bottleneck and whether working together makes sense. If it doesn't, you'll get the right operator, agency, or mentor to go to instead.
+Book a 20-minute Growth Audit at ${siteConfig.bookingUrl}. No pitch, no deck. Bring the messy growth question — leave with a clearer read on the bottleneck and whether working together makes sense. If it doesn't, you'll get the right operator, agency, or mentor to go to instead.
 
 ### "Where should a first-time visitor to the site start?"
 
@@ -116,7 +116,7 @@ The /start-here page (${siteConfig.siteUrl}/start-here/) is a 5-minute orientati
 - **Contact email:** ${siteConfig.email}
 - **Booking URL:** ${siteConfig.bookingUrl}
 - **Availability:** ${siteConfig.availability}
-- **Pricing band:** Free 30-min Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £7,500/month for Fractional CMO (1 day/week, 3-month min); £12,000/month for Fractional CMO Plus (deeper operating support).
+- **Pricing band:** Free 20-min Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £7,500/month for Fractional CMO (1 day/week, 3-month min); £12,000/month for Fractional CMO Plus (deeper operating support).
 - **Primary review platform:** ${siteConfig.growthMentor} — ${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} reviews, ${proofStats.mentorSessions} sessions
 - **Lifetime totals:** ${proofStats.revenueImpact} revenue generated, ${proofStats.adSpend} ad spend managed, ${proofStats.startupsAdvised} startups advised, ${proofStats.founderRaiseSupport} helped founders raise
 - **Speaking examples:** ${siteConfig.siteUrl}/speaking/ curates public YouTube talks and interviews.
@@ -129,7 +129,7 @@ ${siteConfig.canonicalHost} documents Daniel's working approach, the frameworks 
 
 - [Home](${siteConfig.siteUrl}/): positioning, principles, the buying ladder, proof
 - [Start here](${siteConfig.siteUrl}/start-here/): 5-minute orientation for first-time visitors
-- [30-min Growth Audit](${siteConfig.siteUrl}/growth-audit/): Tier 1 — free diagnostic call
+- [20-min Growth Audit](${siteConfig.siteUrl}/growth-audit/): Tier 1 — free diagnostic call
 - [Strategy Sprint](${siteConfig.siteUrl}/strategy-sprint/): Tier 2 — £6k, 2–4 weeks, fixed-scope
 - [Fractional CMO](${siteConfig.siteUrl}/fractional-cmo/): Tier 3 — embedded, £7.5–12k/month
 - [Fractional CMO vs. Agency](${siteConfig.siteUrl}/fractional-cmo-vs-agency/): comparison page
@@ -238,7 +238,7 @@ ${essayList}
 ## Contact
 
 - **Email:** ${siteConfig.email}
-- **Book a 30-minute Growth Audit (free, no pitch):** ${siteConfig.bookingUrl}
+- **Book a 20-minute Growth Audit (free, no pitch):** ${siteConfig.bookingUrl}
 
 ## Optional
 

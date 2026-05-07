@@ -9,19 +9,19 @@ const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Start here", url: "/start-here/" },
-    { name: "30-min Growth Audit", url: "/growth-audit/" }
+    { name: "20-min Growth Audit", url: "/growth-audit/" }
   ]),
   buildFaqPageSchema([...growthAuditPage.faq]),
   buildServiceSchema({
-    name: "30-minute Growth Audit",
+    name: "20-minute Growth Audit",
     description:
-      "A free 30-minute diagnostic call. Diagnose the bottleneck, decide whether a fractional CMO engagement makes sense, get a recommendation either way.",
+      "A free 20-minute diagnostic call. Diagnose the bottleneck, decide whether a fractional CMO engagement makes sense, get a recommendation either way.",
     url: absoluteUrl("/growth-audit/"),
     serviceType: "Growth Consulting Audit",
     offers: [
       {
-        name: "30-min Growth Audit",
-        description: "Free diagnostic call. 30 minutes, no pitch, no deck.",
+        name: "20-min Growth Audit",
+        description: "Free diagnostic call. 20 minutes, no pitch, no deck.",
         price: "0",
         billingIncrement: "per call"
       }
@@ -31,12 +31,12 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="Book a free 30-minute growth audit—Daniel Johnson helps diagnose your bottleneck & decides with you if engaging makes sense (or what to do instead)."
-  keywords="free growth audit, startup bottleneck call, fractional CMO diagnostic, 30 minute GTM call"
+  description="Book a free 20-minute growth audit—Daniel Johnson helps diagnose your bottleneck & decides with you if engaging makes sense (or what to do instead)."
+  keywords="free growth audit, startup bottleneck call, fractional CMO diagnostic, 20 minute GTM call"
   path="/growth-audit/"
   schema={schemas}
   stickyCta={false}
-  title="Free 30-min Growth Audit | Daniel Johnson"
+  title="Free 20-min Growth Audit | Daniel Johnson"
 >
   <section class="hero-section section-space">
     <div class="shell">
@@ -46,7 +46,7 @@ const schemas = [
           Bring the messy growth question. <span class="hero-accent">Leave with a clearer next step.</span>
         </h1>
         <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
-          A free 30-minute diagnostic call. No pitch. No deck. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.
+          A free 20-minute diagnostic call. No pitch. No deck. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="growth-audit-hero-primary">
@@ -65,7 +65,7 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="What's on the agenda"
-        title="30 minutes, four things."
+        title="20 minutes, four things."
         intro="No prep deck on your end. The questions are designed to fit the time."
       />
       <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -138,10 +138,10 @@ const schemas = [
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
         <span class="eyebrow justify-center text-white/60">Next step</span>
         <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-6xl">
-          Book the 30-min Growth Audit.
+          Book the 20-min Growth Audit.
         </h2>
         <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
-          30 minutes. No pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense.
+          20 minutes. No pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="growth-audit-final-primary">

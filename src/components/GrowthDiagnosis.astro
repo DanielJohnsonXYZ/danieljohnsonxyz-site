@@ -134,7 +134,7 @@ const resultsJson = JSON.stringify(results);
   data-cta-href={ctas.primary.href}
   data-cta-label={ctas.primary.label}
   data-audit-href="/growth-audit/"
-  data-audit-label="Book a 30-min Growth Audit"
+  data-audit-label="Book a 20-min Growth Audit"
 >
   <div class="card p-6 md:p-10">
     <div class="gd-progress" aria-hidden="true">
@@ -197,7 +197,7 @@ const resultsJson = JSON.stringify(results);
           Next step →
         </a>
         <a class="button-secondary" href="/growth-audit/" data-cta="diagnosis-audit-soft" data-gd-audit-soft>
-          Book a 30-min Growth Audit →
+          Book a 20-min Growth Audit →
         </a>
         <a class="button-secondary" href={ctas.primary.href} data-cta="diagnosis-primary" data-gd-cta>
           {ctas.primary.label} →
@@ -224,7 +224,7 @@ const resultsJson = JSON.stringify(results);
     const results = JSON.parse(root.dataset.results || "{}");
     const total = questions.length;
     const auditHref = root.dataset.auditHref || "/growth-audit/";
-    const auditLabel = (root.dataset.auditLabel || "30-min Growth Audit") + " →";
+    const auditLabel = (root.dataset.auditLabel || "20-min Growth Audit") + " →";
 
     const steps = Array.from(root.querySelectorAll("[data-gd-step]"));
     const resultEl = root.querySelector("[data-gd-result]");
