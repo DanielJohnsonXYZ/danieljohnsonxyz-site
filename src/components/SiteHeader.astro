@@ -61,7 +61,7 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
   )
 }
 
-<header class="sticky top-0 z-50 px-4 pt-4">
+<header id="site-header" class="sticky top-0 z-50 px-4 pt-4">
   <div class="shell">
     <div class="site-nav-dock px-5 py-3">
       <div class="flex items-center justify-between gap-4">
@@ -337,6 +337,7 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
   // touch (no hover) and keyboard (Enter/Space on the trigger) by toggling
   // aria-expanded, which CSS keys off to keep the dropdown open.
   (() => {
+    const header = document.getElementById("site-header");
     const menus = document.querySelectorAll<HTMLElement>("[data-nav-menu]");
 
     function closeAllExcept(except: HTMLElement | null) {
@@ -377,5 +378,13 @@ const dropdownImages: Record<string, { src: string; alt: string; eyebrow: string
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeAllExcept(null);
     });
+
+    const onScroll = () => {
+      if (!header) return;
+      header.classList.toggle("site-header-scrolled", window.scrollY > 14);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
   })();
 </script>
