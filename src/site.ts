@@ -11,7 +11,7 @@ export const siteConfig = {
 
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
-  bookingUrl: "https://calendly.com/danieljohnson",
+  bookingUrl: "https://calendly.com/wescalestartups",
   bookingLabel: "Book a 20-min Growth Audit",
   bookingNote:
     "20 minutes. No pitch. We diagnose your biggest growth bottleneck and decide whether it makes sense to work together.",
