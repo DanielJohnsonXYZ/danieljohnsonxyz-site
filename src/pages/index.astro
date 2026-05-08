@@ -4,8 +4,9 @@ import SectionHeader from "../components/SectionHeader.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
-import HeroEngagementCard from "../components/HeroEngagementCard.astro";
+import HeroDiagnosticPanel from "../components/HeroDiagnosticPanel.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/hero-v2.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import {
@@ -193,65 +194,28 @@ const schemas = [
   schema={schemas}
   title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
 >
-  <!-- 1. Hero — WSS redesign: pain-led subcopy, founder column + engagement ladder -->
-  <section class="hero-section hero-section-compact section-space wss-hero-redesign" aria-labelledby="hero-heading">
+  <!-- 1. Hero v2 — 2-col layout: left content + right diagnostic panel -->
+  <section class="hero-section section-space" aria-labelledby="hero-heading">
     <div class="shell">
-      <div class="hero-home-grid">
-        <div class="hero-home-top reveal flex flex-col gap-5 lg:pt-1">
-          <span class="service-label">Fractional CMO · AI & B2B SaaS</span>
+      <div class="hv2-grid">
 
-          <div class="space-y-4">
-            <h1 id="hero-heading" class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]">
-              I build the growth engine. <span class="hero-accent">Your team runs it.</span>
-            </h1>
-            <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
-              Acquisition is plateauing, founder-led sales won't scale, and GTM still depends on you in the weeds — that's the pattern I fix. I embed as fractional CMO to install positioning, pipeline discipline, and a weekly decision cadence, then transfer it to your team. Senior growth leadership without the £150k full-time hire.
-            </p>
-          </div>
-        </div>
+        <!-- Left column -->
+        <div class="hv2-left reveal">
+          <span class="hv2-label">Fractional CMO · AI &amp; B2B SaaS</span>
 
-        <div class="hero-home-photo reveal hero-founder-stack flex flex-col gap-5 lg:gap-6 lg:sticky lg:top-28">
-          <article class="hero-photo-card overflow-hidden">
-            <img
-              alt="Daniel Johnson, fractional CMO and AI-native growth operator"
-              class="aspect-[4/5] w-full object-cover object-top hero-portrait"
-              decoding="async"
-              fetchpriority="high"
-              height="960"
-              loading="eager"
-              src={siteConfig.headshot}
-              width="768"
-            />
-            <div class="credential-logos" aria-label="Selected external affiliations">
-              {
-                heroCredentialLogos.map((item) => (
-                  <span class="credential-logo">
-                    <img alt={item.alt} decoding="async" height="24" loading="lazy" src={item.src} width="120" />
-                  </span>
-                ))
-              }
-            </div>
-          </article>
-          <HeroEngagementCard />
-        </div>
+          <h1 id="hero-heading" class="hv2-h1">
+            Your growth still depends on you.
+            <span class="hero-accent">That&rsquo;s the bottleneck I fix.</span>
+          </h1>
 
-        <div class="hero-home-rest reveal flex flex-col gap-5">
-          <div class="space-y-3">
-            <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
-              <span class="text-[color:var(--muted)] font-normal">Who this fits: </span>{icpFirmographics.oneLiner}
-            </p>
-            <p class="max-w-3xl text-sm leading-7 text-[color:var(--muted)] md:text-base">
-              Need team-facing delivery rather than a personal engagement?{" "}
-              <a class="font-semibold underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]" href={siteConfig.companyUrl} rel="noopener" target="_blank">
-                We Scale Startups handles that →
-              </a>
-            </p>
-          </div>
+          <p class="hv2-subcopy">
+            Acquisition plateaued. Founder-led sales won&rsquo;t scale. GTM decisions still route through you every week. I embed as fractional CMO, name the constraint, install the system, and transfer it to your team &mdash; without the &pound;150k full-time hire.
+          </p>
 
-          <div class="hero-proof-bar" aria-label="Daniel's track record at a glance">
+          <div class="hv2-proofbar" aria-label="Track record at a glance">
             {
               proofBar.slice(0, 4).map((item) => (
-                <div>
+                <div class="hv2-chip">
                   <strong><span aria-hidden="true">{item.icon}</span> {item.value}</strong>
                   <span>{item.label}</span>
                 </div>
@@ -259,48 +223,37 @@ const schemas = [
             }
           </div>
 
-          <div class="cta-cluster">
-            <div class="flex flex-wrap items-center gap-3">
-              <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
-                {ctas.primary.label} →
-              </a>
-              <a class="button-link" href={ctas.startHere.href} data-cta="hero-start-here">
-                New here? Start here →
-              </a>
-            </div>
-            <p class="availability-line">{siteConfig.availability}</p>
+          <div class="hv2-ctas">
+            <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
+              {ctas.primary.label} &rarr;
+            </a>
+            <a class="button-link" href={ctas.startHere.href} data-cta="hero-start-here">
+              New here? Start here &rarr;
+            </a>
           </div>
 
-          <p class="reveal max-w-2xl text-sm leading-6 text-[color:var(--muted)]">
+          <p class="hv2-availability">{siteConfig.availability}</p>
+
+          <p class="hv2-icp">
+            <span class="hv2-icp-label">Best fit: </span>{icpFirmographics.oneLiner}
+          </p>
+
+          <p class="hv2-softlinks">
             Not ready to book?{" "}
-            <a
-              class="font-semibold text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
-              href={ctas.bottleneck.href}
-              data-cta="hero-soft-diagnostic"
-            >
-              Run the 2-minute bottleneck diagnostic
-            </a>
-            ,{" "}
-            <a
-              class="font-semibold text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
-              href="/newsletter/"
-              data-cta="hero-soft-newsletter"
-            >
-              get practical notes on AI-native GTM
-            </a>
-            , or{" "}
-            <a
-              class="font-semibold text-[color:var(--ink)] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
-              href="/growth-bottleneck-checklist/"
-              data-cta="hero-soft-checklist"
-            >
-              download the Growth Bottleneck Checklist
-            </a>
-            .
+            <a href={ctas.bottleneck.href} data-cta="hero-soft-diagnostic">Run the 2-min bottleneck diagnostic</a>,{" "}
+            <a href="/newsletter/" data-cta="hero-soft-newsletter">get weekly AI-native GTM notes</a>, or{" "}
+            <a href="/growth-bottleneck-checklist/" data-cta="hero-soft-checklist">download the checklist</a>.
           </p>
         </div>
+
+        <!-- Right column — diagnostic panel -->
+        <div class="hv2-right reveal">
+          <HeroDiagnosticPanel />
+        </div>
+
       </div>
 
+      <!-- Trust strip -->
       <div class="trust-strip trust-strip-large hero-trust-strip reveal" aria-label="Selected affiliations and platforms">
         <p class="trust-strip-label">Selected affiliations</p>
         <div class="trust-strip-logos">
