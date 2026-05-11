@@ -8,9 +8,9 @@
 # Canonical host consolidation
 https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 
-# Booking shortlink → Calendly
-/book-a-call              https://calendly.com/danieljohnson  302
-/book-a-call/             https://calendly.com/danieljohnson  302
+# Booking shortlink → primary Growth Audit page
+/book-a-call              /growth-audit/  301
+/book-a-call/             /growth-audit/  301
 
 /podcast-appearances      /podcast-guest/  301
 /podcast-appearances/     /podcast-guest/  301

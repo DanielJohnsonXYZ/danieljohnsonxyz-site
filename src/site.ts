@@ -441,8 +441,8 @@ export const proofBar = [
   { value: proofStats.revenueImpact, label: "client revenue generated", source: "/case-studies/" },
   { value: `${proofStats.mentorRating} / 5`, label: `from ${proofStats.mentorReviewCount} reviews on GrowthMentor`, source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
   { value: proofStats.mentorSessions, label: "mentor sessions delivered", source: siteConfig.growthMentor },
-  { value: proofStats.startupsAdvised, label: "AI & B2B SaaS startups advised" },
-  { value: proofStats.adSpend, label: "ad spend managed" }
+  { value: proofStats.startupsAdvised, label: "AI & B2B SaaS startups advised", source: "/case-studies/" },
+  { value: proofStats.adSpend, label: "ad spend managed", source: "/case-studies/" }
 ] as const;
 
 // Lifetime totals — one strip, lower on the homepage. Now used as a wider

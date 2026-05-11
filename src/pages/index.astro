@@ -262,18 +262,14 @@ const schemas = [
               proofBar.map((item) => (
                 <div>
                   <strong>
-                    {item.source ? (
-                      <a
-                        class="text-[color:inherit] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
-                        href={item.source}
-                        rel={item.source.startsWith("http") ? "noreferrer noopener" : undefined}
-                        target={item.source.startsWith("http") ? "_blank" : undefined}
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      item.value
-                    )}
+                    <a
+                      class="text-[color:inherit] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
+                      href={item.source}
+                      rel={item.source.startsWith("http") ? "noreferrer noopener" : undefined}
+                      target={item.source.startsWith("http") ? "_blank" : undefined}
+                    >
+                      {item.value}
+                    </a>
                   </strong>
                   <span>{item.label}</span>
                 </div>
