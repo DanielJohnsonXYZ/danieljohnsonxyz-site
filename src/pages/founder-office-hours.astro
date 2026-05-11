@@ -1,0 +1,172 @@
+---
+import CfEmailOff from "../components/CfEmailOff.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
+import { ctas, siteConfig } from "../site";
+
+const focusAreas = [
+  "A single sharp GTM, positioning, funnel, or experiment decision",
+  "Turning founder instinct into a cadence the team can reuse",
+  "Prioritising tests by impact, confidence, and ease — without adding noise",
+  "Accelerator or programme cohorts that need practical GTM judgement"
+];
+
+const sessionShapes = [
+  {
+    title: "One-off session",
+    body: "Bring one messy decision; leave with a clearer read and a concrete next move. Lighter than a Growth Audit if you already know the bottleneck is narrow."
+  },
+  {
+    title: "Short sequence",
+    body: "A small run of sessions when you want accountability while turning insight into shipped experiments — not embedded fractional leadership."
+  },
+  {
+    title: "Programme support",
+    body: "Office hours for accelerators, universities, or ecosystems that want senior GTM input for cohorts."
+  }
+];
+
+const faq = [
+  {
+    question: "Is this one-off or recurring?",
+    answer:
+      "Both. Many founders book a single session for one decision. Others use a short sequence for accountability. Fractional CMO is the recurring, embedded option when the whole GTM system needs an owner."
+  },
+  {
+    question: "Who is Founder Office Hours for?",
+    answer:
+      "Post-traction founders, product leads, and small teams who need senior judgement in the room for a specific GTM call — not a long retainer and not junior execution."
+  },
+  {
+    question: "What does one session produce?",
+    answer:
+      "A working conversation that ends with a sharper framing of the customer and problem, a clearer decision, and next actions you can ship — practical, not theoretical."
+  },
+  {
+    question: "How is this different from the free Growth Audit?",
+    answer:
+      "The 20-minute Growth Audit is free, no pitch: we map the bottleneck and whether we’re a fit to work together. Office Hours is a paid working session when you want depth on one decision — often after you already know the problem shape."
+  },
+  {
+    question: "How is this different from Fractional CMO?",
+    answer:
+      "Fractional CMO embeds in your weekly rhythm, reporting, and team. Office Hours is session-based: you own execution; I bring senior input for the decisions you book."
+  },
+  {
+    question: "How long are sessions?",
+    answer: "Most founder sessions are 45–60 minutes. Programme formats are scoped per cohort."
+  },
+  {
+    question: "How do I start?",
+    answer:
+      "If you’re unsure which shape fits, start with the free 20-minute Growth Audit. If you already know you want a working session, email with context and we’ll align format."
+  }
+];
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Founder Office Hours", url: "/founder-office-hours/" }
+  ]),
+  buildFaqPageSchema(faq)
+];
+---
+
+<BaseLayout
+  description="Founder Office Hours with Daniel Johnson — one-off or short-run GTM sessions for founders who need sharper positioning, funnel, and experiment decisions."
+  keywords="founder office hours, startup GTM advice, GrowthMentor, mentoring sessions"
+  path="/founder-office-hours/"
+  schema={schemas}
+  title="Founder Office Hours | Daniel Johnson"
+>
+  <section class="hero-section section-space">
+    <div class="shell">
+      <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div class="reveal flex flex-col gap-6">
+          <span class="service-label">Founder Office Hours</span>
+          <h1 class="max-w-5xl text-5xl font-extrabold leading-[0.98] tracking-[-0.07em] text-balance md:text-7xl">
+            Founder Office Hours for one-off GTM decisions, growth bottlenecks, and founder-led marketing questions.
+          </h1>
+          <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+            Practical sessions when you need senior judgement on the decision in front of you — without signing up for embedded fractional leadership.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a class="button-accent" href={ctas.primary.href} rel="noreferrer" target="_blank">{ctas.primary.label} →</a>
+            <CfEmailOff>
+              <a class="button-secondary" href={`mailto:${siteConfig.email}?subject=Founder%20Office%20Hours%20enquiry`}>Email about a session</a>
+            </CfEmailOff>
+          </div>
+        </div>
+
+        <article class="reveal card p-6 md:p-8">
+          <p class="card-label">Best fit</p>
+          <h2 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">When you want judgement, not a checklist.</h2>
+          <ul class="mt-6 list-disc space-y-3 pl-5 text-base leading-7 text-[color:var(--muted)] marker:text-[color:var(--accent)]">
+            {focusAreas.map((item) => (
+              <li class="pl-1">{item}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="section-head">
+        <div class="section-head-grid">
+          <div class="space-y-5">
+            <span class="eyebrow">Formats</span>
+            <h2 class="section-title">Use the lightest useful level of support.</h2>
+          </div>
+          <p class="lede">Pick the shape that matches how much of my week you need — not everything is Fractional CMO.</p>
+        </div>
+      </div>
+
+      <div class="signal-map-grid reveal">
+        {sessionShapes.map((item) => (
+          <article>
+            <span>Office Hours</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="FAQ" intro="Practical questions before you book." title="Common questions." />
+      <div class="faq-stack mt-10">
+        {faq.map((item, index) => (
+          <details class="reveal faq-item card p-6 md:p-7" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-8 text-center">
+        <span class="eyebrow justify-center text-white/60">Next step</span>
+        <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-7xl">
+          Unsure if this is the right shape?
+        </h2>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/68">
+          Start with the free 20-minute Growth Audit — we’ll map the bottleneck and only then talk about Office Hours, a Sprint, or Fractional CMO.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a class="button-accent" href={ctas.primary.href} rel="noreferrer" target="_blank">
+            {ctas.primary.label} →
+          </a>
+          <a class="button-secondary button-secondary-dark" href="/growth-audit/">{ctas.bookingFallback.label} →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

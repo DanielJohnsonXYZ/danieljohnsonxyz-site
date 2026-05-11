@@ -112,6 +112,9 @@ const testimonials = defineCollection({
     source: z.string(),
     outcomeMetric: z.string(),
     pageSection: z.enum(["fractional-cmo", "strategy-sprint", "speaking"]).default("strategy-sprint"),
+    /** Optional editorial grouping for /testimonials (overrides default section label when set). */
+    category: z.string().optional(),
+    linkedin: z.string().url().optional(),
     logoUrl: z.string().url().optional(),
     date: z.string().optional(),
     permission: z.enum(["public", "needs_permission", "anonymous"]).default("public"),

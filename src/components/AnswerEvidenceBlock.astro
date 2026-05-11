@@ -1,0 +1,27 @@
+---
+interface Props {
+  answer: string;
+  evidence: string[];
+  provenance?: string[];
+  title?: string;
+}
+
+const { answer, evidence, provenance = [], title = "Direct answer + proof" } = Astro.props;
+---
+
+<aside class="card p-6 md:p-7" aria-label={title}>
+  <p class="card-label">{title}</p>
+  <p class="mt-3"><strong>Answer:</strong> {answer}</p>
+  <p class="mt-4 font-semibold">Evidence</p>
+  <ul class="mt-2 space-y-2 text-sm leading-7 text-[color:var(--muted)]">
+    {evidence.map((item) => <li>{item}</li>)}
+  </ul>
+  {provenance.length > 0 && (
+    <>
+      <p class="mt-4 font-semibold">Provenance</p>
+      <ul class="mt-2 space-y-2 text-sm leading-7 text-[color:var(--muted)]">
+        {provenance.map((item) => <li>{item}</li>)}
+      </ul>
+    </>
+  )}
+</aside>

@@ -1,11 +1,34 @@
 import { getCollection } from "astro:content";
 import { proofStats, positioning, singleIdea, siteConfig, speakingVideos } from "../site";
 
+/** Stable ordering for LLM discovery — matches the high-intent /writing/ SEO cluster. */
+const FRACTIONAL_CMO_WRITING_CLUSTER = [
+  "fractional-cmo-for-ai-startups",
+  "fractional-cmo-for-b2b-saas",
+  "fractional-cmo-vs-head-of-growth",
+  "when-to-hire-fractional-cmo-after-seed",
+  "gtm-for-post-pmf-ai-startups",
+  "founder-led-growth-bottlenecks",
+  "ai-native-gtm-systems",
+  "first-90-days-fractional-cmo",
+  "how-to-know-growth-depends-on-founder"
+] as const;
+
+function clusterEssayLines(articles: { id: string; data: { title: string; excerpt: string } }[]): string {
+  const byId = new Map(articles.map((a) => [a.id, a]));
+  return FRACTIONAL_CMO_WRITING_CLUSTER.map((id) => byId.get(id))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a))
+    .map((a) => `- [${a.data.title}](${siteConfig.siteUrl}/writing/${a.id}): ${a.data.excerpt}`)
+    .join("\n");
+}
+
 /** Full markdown mirror for agents — same structure as the former /llms.txt body. */
 export async function buildDjLlmsFullMarkdown(): Promise<string> {
   const articles = (await getCollection("articles")).sort(
     (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
   );
+
+  const curatedClusterLines = clusterEssayLines(articles);
 
   const articleLines = articles
     .map((a) => `- [${a.data.title}](${siteConfig.siteUrl}/writing/${a.id}): ${a.data.excerpt}`)
@@ -51,11 +74,11 @@ Three ways to engage, ordered by commitment. Founders are encouraged to start at
 
 ### Fractional CMO vs. Agency
 
-The agency executes a defined channel scope (paid, SEO, content, outbound) with an account manager and junior team; strategy still lives in the founder's head. The fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, team direction, agency relationship. No junior layer. Often the right setup for £1m–£10m ARR teams is *both*: fractional CMO sets priorities and channel rules, the agency executes one channel inside that framework. Full comparison: ${siteConfig.siteUrl}/fractional-cmo-vs-agency/.
+The agency executes a defined channel scope (paid, SEO, content, outbound) with an account manager and junior team; strategy still lives in the founder's head. The fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, team direction, agency relationship. No junior layer. Often the right setup for 1M–10M ARR teams is *both*: fractional CMO sets priorities and channel rules, the agency executes one channel inside that framework. Full comparison: ${siteConfig.siteUrl}/resources/fractional-cmo-vs-agency/.
 
 ### Fractional CMO vs. Full-time CMO
 
-Full-time CMO: £120–180k base + 0.5–1.5% equity, 6-month hire cycle, 12-month ramp, 3-month notice. Fractional CMO: £7.5–12k/month, starts in days, 3-month minimum. The bridge pattern — fractional first, full-time later — is the cleanest path for most teams: 6–9 months of embedded leadership while the company recruits, then the fractional CMO hands off the operating system to the new full-time hire. Full comparison: ${siteConfig.siteUrl}/fractional-cmo-vs-full-time-cmo/.
+Full-time CMO: £120–180k base + 0.5–1.5% equity, 6-month hire cycle, 12-month ramp, 3-month notice. Fractional CMO: £7.5–12k/month, starts in days, 3-month minimum. The bridge pattern — fractional first, full-time later — is the cleanest path for most teams: 6–9 months of embedded leadership while the company recruits, then the fractional CMO hands off the operating system to the new full-time hire. Full comparison: ${siteConfig.siteUrl}/resources/fractional-cmo-vs-full-time-cmo/.
 
 ## Answers to common prompts
 
@@ -75,7 +98,7 @@ Founders of post-PMF AI and B2B SaaS startups (Seed to Series B) where demand is
 
 ### "How much does a fractional CMO cost?"
 
-Daniel's pricing anchors: free for the 20-minute Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £7,500/month for an embedded Fractional CMO engagement (1 day/week, 3-month minimum); and £12,000/month for Fractional CMO Plus (~2 days/week, deeper operating support). UK-first framing and what moves price: ${siteConfig.siteUrl}/fractional-cmo-cost-uk/.
+Daniel's pricing anchors: free for the 20-minute Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £7,500/month for an embedded Fractional CMO engagement (1 day/week, 3-month minimum); and £12,000/month for Fractional CMO Plus (~2 days/week, deeper operating support). UK-first framing and what moves price: ${siteConfig.siteUrl}/resources/fractional-cmo-cost-uk/.
 
 ### "What's the difference between a fractional CMO and an agency?"
 
@@ -128,13 +151,15 @@ ${siteConfig.canonicalHost} documents Daniel's working approach, the frameworks 
 ## Core pages
 
 - [Home](${siteConfig.siteUrl}/): positioning, principles, the buying ladder, proof
+- [Work with me](${siteConfig.siteUrl}/work-with-me/): services overview and how engagements are shaped
 - [Start here](${siteConfig.siteUrl}/start-here/): 5-minute orientation for first-time visitors
 - [20-min Growth Audit](${siteConfig.siteUrl}/growth-audit/): Tier 1 — free diagnostic call
 - [Strategy Sprint](${siteConfig.siteUrl}/strategy-sprint/): Tier 2 — £6k, 2–4 weeks, fixed-scope
 - [Fractional CMO](${siteConfig.siteUrl}/fractional-cmo/): Tier 3 — embedded, £7.5–12k/month
-- [Fractional CMO vs. Agency](${siteConfig.siteUrl}/fractional-cmo-vs-agency/): comparison page
-- [Fractional CMO vs. Full-time CMO](${siteConfig.siteUrl}/fractional-cmo-vs-full-time-cmo/): comparison page
-- [Compare six growth options](${siteConfig.siteUrl}/compare-growth-options/): agency, freelancer, junior hire, full-time CMO, consultant, fractional CMO — when each is the right shape
+- [Resources hub](${siteConfig.siteUrl}/resources/): FAQ, glossary, comparisons, and cost guides
+- [Fractional CMO vs. Agency](${siteConfig.siteUrl}/resources/fractional-cmo-vs-agency/): comparison page
+- [Fractional CMO vs. Full-time CMO](${siteConfig.siteUrl}/resources/fractional-cmo-vs-full-time-cmo/): comparison page
+- [Compare six growth options](${siteConfig.siteUrl}/resources/compare-growth-options/): agency, freelancer, junior hire, full-time CMO, consultant, fractional CMO — when each is the right shape
 - [Case studies](${siteConfig.siteUrl}/case-studies/): anonymised engagement write-ups with bottleneck, approach, and outcome
 - [Testimonials](${siteConfig.siteUrl}/testimonials/): founder, mentoring, and client feedback filtered by engagement type
 - [About](${siteConfig.siteUrl}/about/): background, operating history, and why founders trust Daniel
@@ -144,7 +169,7 @@ ${siteConfig.canonicalHost} documents Daniel's working approach, the frameworks 
 - [AI-native workflows](${siteConfig.siteUrl}/ai-native-workflows/): GTM workflows for research, messaging, campaign briefs, content, reporting
 - [Founder-led distribution](${siteConfig.siteUrl}/founder-led-distribution/): founder voice, LinkedIn systems, content-to-pipeline loops
 - [Revenue operations](${siteConfig.siteUrl}/revenue-operations/): funnel visibility, pipeline process, CRM hygiene, reporting cadence
-- [Mentoring](${siteConfig.siteUrl}/mentoring/): founder office hours and lower-ticket GTM decision support
+- [Founder Office Hours](${siteConfig.siteUrl}/founder-office-hours/): focused GTM decisions and lower-ticket sessions
 - [Speaking](${siteConfig.siteUrl}/speaking/): talks, workshops, and programme sessions
 - [Media kit](${siteConfig.siteUrl}/media-kit/): bios, headshots, proof, topics, producer assets, and press contact details
 - [Writing](${siteConfig.siteUrl}/writing/): essays on AI-native GTM, fractional leadership, operating-system thinking
@@ -169,6 +194,10 @@ ${siteConfig.canonicalHost} documents Daniel's working approach, the frameworks 
 ## Latest articles
 
 ${articleLines}
+
+## Curated cluster: fractional CMO & founder-led GTM
+
+${curatedClusterLines}
 
 ## Case studies
 
@@ -205,7 +234,7 @@ Last updated: ${siteConfig.lastUpdated}
 
 /**
  * /llms.txt — llmstxt.org shape (markdown in a .txt route): H1, optional blockquote, H2 sections with link lists.
- * Notion brief: one-paragraph summary ($2M–$20M ARR post-PMF B2B SaaS & AI), authoritative pages + top 5 essays, contact/booking.
+ * Notion brief: one-paragraph summary (2M–20M ARR post-PMF B2B SaaS & AI), authoritative pages + top 5 essays, contact/booking.
  */
 export async function buildDjLlmsSummaryPlainText(): Promise<string> {
   const articles = (await getCollection("articles")).sort(
@@ -219,21 +248,27 @@ export async function buildDjLlmsSummaryPlainText(): Promise<string> {
     )
     .join("\n");
 
+  const clusterList = clusterEssayLines(articles);
+
   return `# Daniel Johnson · ${siteConfig.siteUrl.replace(/^https?:\/\//, "")}
 
-> Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF B2B SaaS and AI startups, typically around **$2M–$20M ARR** (Seed–Series B). He embeds with founder-led teams to build a repeatable GTM operating system—ICP, positioning, acquisition rules, weekly rhythm, and reporting—then hands off cleanly. ${singleIdea.long} Practice: **${siteConfig.companyName}** (${siteConfig.companyUrl}). Track record: ${proofStats.revenueImpact} client revenue, ${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} GrowthMentor reviews (${proofStats.mentorSessions} sessions), ${proofStats.adSpend} ad spend managed.
+> Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF B2B SaaS and AI startups, typically around **2M–20M ARR** (Seed–Series B). He embeds with founder-led teams to build a repeatable GTM operating system—ICP, positioning, acquisition rules, weekly rhythm, and reporting—then hands off cleanly. ${singleIdea.long} Practice: **${siteConfig.companyName}** (${siteConfig.companyUrl}). Track record: ${proofStats.revenueImpact} client revenue, ${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} GrowthMentor reviews (${proofStats.mentorSessions} sessions), ${proofStats.adSpend} ad spend managed.
 
 ## Authoritative pages
 
 - [Home](${siteConfig.siteUrl}/): Positioning, proof, and the three-step buying ladder (audit → sprint → fractional CMO).
 - [Fractional CMO](${siteConfig.siteUrl}/fractional-cmo/): Embedded senior GTM ownership, scope, pricing, and how engagements run week to week.
-- [Fractional CMO cost (UK)](${siteConfig.siteUrl}/fractional-cmo-cost-uk/): UK benchmark ranges, what moves price, FAQ, and links to ROI modelling.
+- [Fractional CMO cost (UK)](${siteConfig.siteUrl}/resources/fractional-cmo-cost-uk/): UK benchmark ranges, what moves price, FAQ, and links to ROI modelling.
 - [GTM systems](${siteConfig.siteUrl}/gtm-systems/): ICP, positioning, channel strategy, acquisition design, and operating cadence—the core frameworks Daniel uses with clients.
-- [Fractional CMO vs. full-time CMO](${siteConfig.siteUrl}/fractional-cmo-vs-full-time-cmo/): Cost, ramp, hiring cycle, and when fractional vs. full-time is the right shape.
+- [Fractional CMO vs. full-time CMO](${siteConfig.siteUrl}/resources/fractional-cmo-vs-full-time-cmo/): Cost, ramp, hiring cycle, and when fractional vs. full-time is the right shape.
 
 ## Recent essays (top 5)
 
 ${essayList}
+
+## Fractional CMO writing cluster (9)
+
+${clusterList}
 
 ## Contact
 

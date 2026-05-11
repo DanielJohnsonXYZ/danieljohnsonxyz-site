@@ -12,9 +12,12 @@ import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } fr
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import {
   agencyVsMe,
+  aiWorkflowExamples,
+  afterYouBookSteps,
   ctas,
   fitSignals,
   homeServiceLadder,
+  homepageHeroOutcome,
   icpFirmographics,
   lifetimeTotals,
   positioning,
@@ -122,13 +125,13 @@ const homepageFaq: Array<{
     question: "How is this different from hiring a full-time CMO?",
     answer:
       "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
-    link: { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time →" }
+    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time →" }
   },
   {
     question: "What stage should my startup be at?",
     answer:
       "Post-PMF with real revenue and repeat buyers — typically Seed to Series B — where the constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product; the GTM system comes after that clarity.",
-    link: { href: "/fractional-cmo-vs-full-time-cmo/", label: "When each model fits →" }
+    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "When each model fits →" }
   },
   {
     question: "How quickly will I see results?",
@@ -139,7 +142,7 @@ const homepageFaq: Array<{
     question: "What does it cost?",
     answer:
       "UK engagements typically start around £6k for a short strategy sprint, £7.5–12k/month for fractional CMO (3-month minimum), scoped to days per week and depth. The service page lists how the week runs; the UK cost page lists benchmark ranges and what moves price.",
-    link: { href: "/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK) →" }
+    link: { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK) →" }
   },
   {
     question: "How do I know if this will work for my business?",
@@ -196,7 +199,7 @@ const schemas = [
   title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
 >
   <!-- 1. Hero — WSS redesign: pain-led subcopy, founder column + engagement ladder -->
-  <section class="hero-section hero-section-compact section-space wss-hero-redesign" aria-labelledby="hero-heading">
+  <section class="hero-section hero-section-compact section-space conversion-hero wss-hero-redesign" aria-labelledby="hero-heading">
     <div class="shell">
       <div class="hero-home-grid">
         <div class="hero-home-top reveal flex flex-col gap-5 lg:pt-1">
@@ -204,10 +207,13 @@ const schemas = [
 
           <div class="space-y-4">
             <h1 id="hero-heading" class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]">
-              If growth still depends on the founder, <span class="hero-accent">I fix that.</span>
+              Your growth still depends on you. <span class="hero-accent">That&apos;s the bottleneck I fix.</span>
             </h1>
-            <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
-              <strong class="font-semibold text-[color:var(--ink)]">Traction without a reliable engine:</strong> acquisition plateauing, founder-led sales that does not scale, and GTM that still depends on you in the weeds. I embed as fractional CMO to install positioning, pipeline discipline, and a weekly decision rhythm — the growth system behind predictable pipeline and sharper messaging, without a £150k full-time hire.
+            <p class="hero-subcopy conversion-subcopy max-w-3xl text-lg font-medium leading-8 text-[color:var(--ink)] md:text-xl">
+              {homepageHeroOutcome}
+            </p>
+            <p class="max-w-3xl text-base leading-8 text-[color:var(--muted)] md:text-lg">
+              <strong class="font-semibold text-[color:var(--ink)]">Traction without a reliable engine:</strong> acquisition plateauing, founder-led sales that does not scale, and GTM that still routes through your calendar. I embed as fractional CMO to install positioning, pipeline discipline, and a weekly decision rhythm — without a £150k full-time hire.
             </p>
           </div>
         </div>
@@ -251,26 +257,61 @@ const schemas = [
             </p>
           </div>
 
-          <div class="hero-proof-bar" aria-label="Daniel's track record at a glance">
+          <div class="hero-proof-bar hero-proof-bar--five" aria-label="Daniel's track record at a glance">
             {
-              proofBar.slice(0, 4).map((item) => (
+              proofBar.map((item) => (
                 <div>
-                  <strong>{item.value}</strong>
+                  <strong>
+                    {item.source ? (
+                      <a
+                        class="text-[color:inherit] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
+                        href={item.source}
+                        rel={item.source.startsWith("http") ? "noreferrer noopener" : undefined}
+                        target={item.source.startsWith("http") ? "_blank" : undefined}
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      item.value
+                    )}
+                  </strong>
                   <span>{item.label}</span>
                 </div>
               ))
             }
           </div>
 
+          <div class="rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-5 md:p-6">
+            <p class="card-label">After you book the Growth Audit</p>
+            <ul class="mt-3 grid gap-3 sm:grid-cols-3">
+              {
+                afterYouBookSteps.map((step) => (
+                  <li class="text-sm leading-6 text-[color:var(--muted)]">
+                    <strong class="font-semibold text-[color:var(--ink)]">{step.title}</strong>
+                    <span class="mt-1 block">{step.body}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
           <div class="cta-cluster">
-            <div class="flex flex-wrap items-center gap-3">
+            <div class="cta-row flex-wrap">
               <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
                 {ctas.primary.label} →
               </a>
-              <a class="button-link" href={ctas.startHere.href} data-cta="hero-start-here">
-                New here? Start here →
+              <a class="button-secondary" href={ctas.bottleneck.href} data-cta="hero-bottleneck">
+                {ctas.bottleneck.label} →
+              </a>
+              <a class="button-link" href={ctas.caseStudies.href} data-cta="hero-case-studies">
+                {ctas.caseStudies.label} →
               </a>
             </div>
+            <p class="text-sm text-[color:var(--muted)]">
+              <a class="font-semibold underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]" href="/start-here/">
+                New here? Start here →
+              </a>
+            </p>
             <p class="availability-line">{siteConfig.availability}</p>
           </div>
 
@@ -317,39 +358,6 @@ const schemas = [
           "Cross-entity reference: wescalestartups.com operational methodology."
         ]}
       />
-    </div>
-  </section>
-
-  <!-- Hosted podcast — cross-link to WSS canonical show page -->
-  <section class="section-space pt-0" aria-labelledby="podcast-host-heading">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-8 md:p-10">
-        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Hosted by Daniel</p>
-        <h2 id="podcast-host-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.05em] text-balance md:text-4xl">
-          How Startups Win With AI
-        </h2>
-        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
-          A practical founder-facing podcast from We Scale Startups. Founders and operators share how they are using AI to grow faster, save time, and make sharper commercial decisions — without tool hype.
-        </p>
-        <ul class="mt-5 list-disc space-y-2 pl-5 text-base leading-7 text-[color:var(--muted)]">
-          <li>Watch or listen on the canonical show page.</li>
-          <li>Suggest a guest or apply if you have a concrete story listeners can reuse.</li>
-        </ul>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a class="button-accent" href={siteConfig.wssPodcastUrl} rel="noopener" target="_blank" data-cta="home-podcast-hub">
-            Open the podcast hub →
-          </a>
-          <a
-            class="button-link"
-            href={siteConfig.wssPodcastGuestApplyUrl}
-            rel="noopener"
-            target="_blank"
-            data-cta="home-podcast-guest"
-          >
-            Apply as a guest →
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -424,7 +432,7 @@ const schemas = [
       </div>
 
       <p class="reveal mt-8 text-center text-sm leading-7 text-[color:var(--muted)]">
-        Looking for <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/mentoring/">founder office hours</a>, <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/speaking/">speaking, or workshops</a>? See all the ways we can work together.
+        Looking for <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/founder-office-hours/">founder office hours</a>, <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/speaking/">speaking, or workshops</a>? See <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/work-with-me/">all the ways we can work together</a>.
       </p>
     </div>
   </section>
@@ -540,6 +548,39 @@ const schemas = [
     </div>
   </section>
 
+  <!-- Hosted podcast — below method / system section -->
+  <section class="section-space pt-0" aria-labelledby="podcast-host-heading">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-8 md:p-10">
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Hosted by Daniel</p>
+        <h2 id="podcast-host-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.05em] text-balance md:text-4xl">
+          How Startups Win With AI
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
+          A practical founder-facing podcast from We Scale Startups. Founders and operators share how they are using AI to grow faster, save time, and make sharper commercial decisions — without tool hype.
+        </p>
+        <ul class="mt-5 list-disc space-y-2 pl-5 text-base leading-7 text-[color:var(--muted)]">
+          <li>Watch or listen on the canonical show page.</li>
+          <li>Suggest a guest or apply if you have a concrete story listeners can reuse.</li>
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a class="button-accent" href={siteConfig.wssPodcastUrl} rel="noopener" target="_blank" data-cta="home-podcast-hub">
+            Open the podcast hub →
+          </a>
+          <a
+            class="button-link"
+            href={siteConfig.wssPodcastGuestApplyUrl}
+            rel="noopener"
+            target="_blank"
+            data-cta="home-podcast-guest"
+          >
+            Apply as a guest →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 8. What AI-native GTM means here (concrete homepage block) ───── -->
   <section class="section-space" aria-labelledby="ai-heading">
     <div class="shell">
@@ -551,6 +592,26 @@ const schemas = [
         <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
           AI should make GTM faster, not vaguer — with human judgement still owning ICP, budget, sequencing, and what ships.
         </p>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="rounded-xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-6 md:p-7">
+            <p class="card-label text-[color:var(--muted)]">Before</p>
+            <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">Manual drag, fuzzy signal</h3>
+            <ul class="mt-4 space-y-2 text-sm leading-7 text-[color:var(--muted)]">
+              <li>Calls and CRM notes sit in silos — patterns are slow to see.</li>
+              <li>Research and drafts eat the week; decisions still default to the founder.</li>
+              <li>Reporting shows activity — not what to stop, fix, or scale this Monday.</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-[color:var(--accent)]/35 bg-[color:var(--surface)] p-6 md:p-7 shadow-[var(--shadow-sm)]">
+            <p class="card-label">After</p>
+            <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">Compressed synthesis, sharper calls</h3>
+            <ul class="mt-4 space-y-2 text-sm leading-7 text-[color:var(--ink)]">
+              <li>Customer and competitor inputs become comparable signals, faster.</li>
+              <li>Message and funnel tests ship with a clear hypothesis and owner.</li>
+              <li>Weekly rhythm ties metrics to one bottleneck and the next experiment.</li>
+            </ul>
+          </div>
+        </div>
         <div
           class="rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 shadow-[var(--shadow-sm)] md:p-8"
           aria-labelledby="ai-native-block-heading"
@@ -562,6 +623,25 @@ const schemas = [
           <p class="mt-4 text-base leading-7 text-[color:var(--muted)] md:text-lg md:leading-8">
             AI-native GTM does not mean replacing judgement with content automation. It means using AI to compress customer-call synthesis, competitor research, message testing, CRM diagnosis, campaign learning, and weekly decision-making, so founders and teams can make better commercial decisions faster.
           </p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {
+              aiWorkflowExamples.map((row) => (
+                <article class="rounded-lg border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-4 md:p-5">
+                  <p class="mono text-[0.65rem] uppercase tracking-[0.14em] text-[color:var(--subtle)]">Input → output</p>
+                  <p class="mt-2 text-sm font-semibold text-[color:var(--ink)]">{row.input}</p>
+                  <p class="mt-2 text-xs leading-6 text-[color:var(--muted)]">
+                    <span class="font-semibold text-[color:var(--ink)]">Synthesis:</span> {row.synthesis}
+                  </p>
+                  <p class="mt-1 text-xs leading-6 text-[color:var(--muted)]">
+                    <span class="font-semibold text-[color:var(--ink)]">Decision:</span> {row.decision}
+                  </p>
+                  <p class="mt-1 text-xs leading-6 text-[color:var(--muted)]">
+                    <span class="font-semibold text-[color:var(--accent)]">Ships as:</span> {row.output}
+                  </p>
+                </article>
+              ))
+            }
+          </div>
           <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(0,17rem)] lg:gap-8">
             <div>
               <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--subtle)]">Where AI speeds up the loop</p>
@@ -633,7 +713,7 @@ const schemas = [
       <!-- Audience reaction snippets — lightweight social proof for speaking/workshop CTA -->
       <div class="mt-8 reveal">
         <p class="card-label text-center text-xs uppercase tracking-[0.16em] text-[color:var(--subtle)]">Recent attendee feedback</p>
-        <div class="mx-auto mt-3 flex max-w-3xl flex-wrap justify-center gap-3">
+        <div class="testimonial-strip mx-auto mt-3 max-w-3xl">
           <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
             <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> "Excellent presentation"
           </span>
@@ -646,8 +726,8 @@ const schemas = [
         </div>
       </div>
 
-      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        <a class="reveal media-link-card card p-5" href="/podcast-appearances/">
+      <div class="resource-link-row mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <a class="reveal media-link-card card p-5" href="/podcast-guest/">
           <span class="card-label">Podcast archive</span>
           <strong>Interviews and conversations</strong>
           <small>AI-native GTM, founder-led growth, experimentation, and fractional leadership.</small>
@@ -679,7 +759,7 @@ const schemas = [
         title="Real campaigns. Real numbers. Real attribution."
       />
 
-      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div class="proof-card-grid mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {
           outcomeCards.map((card) => (
             <article class="reveal card p-6">
@@ -801,10 +881,10 @@ const schemas = [
 
       <!-- Soft conversion ladder — three lower-commitment entry points beneath -->
       <!-- the essays so visitors who aren't ready to book have somewhere to go. -->
-      <div class="reveal mt-8 flex flex-wrap items-center gap-3">
+      <div class="cta-row reveal mt-8">
         <a class="button-accent" href="/writing/">Read all writing →</a>
-        <a class="button-link" href="/newsletter/">Subscribe to Growth Notes →</a>
-        <a class="button-link" href="/growth-bottleneck-checklist/">Open the bottleneck checklist →</a>
+        <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes →</a>
+        <a class="button-secondary" href="/growth-bottleneck-checklist/">Open the bottleneck checklist →</a>
       </div>
     </div>
   </section>

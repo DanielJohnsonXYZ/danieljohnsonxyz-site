@@ -24,7 +24,7 @@ const pathname = `/writing/${article.id}`;
   path={pathname}
   schema={buildArticleSchema(article, pathname)}
   lastUpdated={false}
-  title={`${article.data.title} | Daniel Johnson`}
+  title={article.data.title}
 >
   <section class="section-space">
     <div class="shell">

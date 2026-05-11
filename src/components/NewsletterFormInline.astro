@@ -16,6 +16,8 @@ interface Props {
   subline?: string;
   /** Set on pages with a hero link to #anchor (e.g. /newsletter). Omit when multiple forms on one page. */
   anchorId?: string;
+  headingLevel?: 2 | 3;
+  idPrefix?: string;
 }
 
 const {
@@ -23,21 +25,27 @@ const {
   tone = "light",
   heading = "Practical notes on founder-led growth, AI GTM, positioning, and pipeline systems.",
   subline = "Occasional. No daily drip. Unsubscribe in one click.",
-  anchorId
+  anchorId,
+  headingLevel = 3,
+  idPrefix
 } = Astro.props;
 
 const { submitUrl, formId } = mauticNewsletter;
+const formIdSuffix = idPrefix ?? `nl-${variant}-${tone}`;
+const headingId = `${formIdSuffix}-title`;
+const emailId = `${formIdSuffix}-email`;
+const HeadingTag = headingLevel === 2 ? "h2" : "h3";
 ---
 
 <section
   {...(anchorId ? { id: anchorId } : {})}
   class:list={["nl-form", `nl-form-${variant}`, tone === "dark" && "nl-form--dark"]}
-  aria-labelledby="nl-form-title"
+  aria-labelledby={headingId}
 >
   <div class="nl-inner">
     <div class="nl-copy">
       <p class="nl-eyebrow">Growth Notes</p>
-      <h3 id="nl-form-title">{heading}</h3>
+      <HeadingTag id={headingId}>{heading}</HeadingTag>
       {subline && <p class="nl-sub">{subline}</p>}
     </div>
     <form
@@ -48,10 +56,10 @@ const { submitUrl, formId } = mauticNewsletter;
       data-cta="newsletter-inline-submit"
     >
       <input type="hidden" name="mauticform[formId]" value={formId} />
-      <label class="nl-label" for="nl-email">
+      <label class="nl-label" for={emailId}>
         <span class="sr-only">Email address</span>
         <input
-          id="nl-email"
+          id={emailId}
           class="nl-input"
           type="email"
           name="mauticform[email]"
@@ -107,7 +115,7 @@ const { submitUrl, formId } = mauticNewsletter;
     letter-spacing: -0.02em;
     color: var(--ink);
     margin: 0;
-    max-width: 38ch;
+    max-width: 42rem;
   }
   @media (min-width: 768px) {
     .nl-form-card h3 { font-size: 1.35rem; }
@@ -122,13 +130,26 @@ const { submitUrl, formId } = mauticNewsletter;
   .nl-fields {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.65rem;
+    width: 100%;
   }
-  @media (min-width: 540px) {
-    .nl-fields { flex-direction: row; gap: 0.5rem; }
+  /* Strip: stack on mobile for tap targets; row only from md */
+  @media (min-width: 768px) {
+    .nl-form-strip .nl-fields {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0.5rem;
+    }
   }
 
-  .nl-label { flex: 1; min-width: 0; }
+  .nl-label {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .nl-form-strip .nl-label { width: auto; }
+  }
   .nl-input {
     width: 100%;
     padding: 0.7rem 0.95rem;
@@ -148,6 +169,14 @@ const { submitUrl, formId } = mauticNewsletter;
   .nl-submit {
     flex-shrink: 0;
     white-space: nowrap;
+    width: 100%;
+    justify-content: center;
+  }
+  @media (min-width: 768px) {
+    .nl-form-strip .nl-submit {
+      width: auto;
+      justify-content: center;
+    }
   }
 
   /* Dark footer / band */

@@ -3,14 +3,14 @@ import { getCollection } from "astro:content";
 import CfEmailOff from "../components/CfEmailOff.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildTalkSchema } from "../lib/schema";
+import { buildBreadcrumbSchema, buildTalkSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { siteConfig, socialLinks, trustLogos } from "../site";
+import { proofStats, siteConfig, socialLinks, speakingVideos, trustLogos } from "../site";
 
 const talks = sortByFeaturedThenOrder(await getCollection("talks"));
 const selectedTalks = talks.slice(0, 3);
 const speakingHighlights = [
-  { metric: "388+", label: "Founder and operator mentoring sessions" },
+  { metric: proofStats.mentorSessions, label: "Founder and operator mentoring sessions" },
   { metric: "10+ years", label: "Startup growth experience behind the content" },
   { metric: "Google, Cambridge, Imperial", label: "Institutional rooms and programmes" },
   { metric: "10+ countries", label: "Startup audiences reached through teaching and mentoring" }
@@ -101,14 +101,22 @@ const deliverables = [
 ];
 const assets = [
   { label: "Short bio", detail: "Use the speaking bio below for event pages and introductions." },
-  { label: "Headshot", detail: "Use the current site headshot as a placeholder until Daniel supplies final event photography." },
-  { label: "Talk topics", detail: "Use the three signature sessions as starting points, then tailor to the audience." }
+  { label: "Headshot", detail: "Download WebP headshots and producer pack from the media kit — print- and event-ready." },
+  { label: "Talk topics", detail: "Use the signature sessions as starting points, then tailor to the audience." }
 ];
-const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
+const featuredVideos = speakingVideos.slice(0, 4);
+const speakingSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Speaking", url: "/speaking/" }
+  ]),
+  ...talks.map((talk) => buildTalkSchema(talk))
+];
 ---
 
 <BaseLayout
   description="Speaking with Daniel Johnson: talks, workshops, and training for founder, startup, and innovation audiences that need practical growth and GTM thinking."
+  path="/speaking/"
   schema={speakingSchema}
   title="Speaking | Daniel Johnson"
 >
@@ -132,25 +140,56 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
           <ul class="scan-list max-w-3xl">
             {organiserTakeaways.map((item) => <li>{item}</li>)}
           </ul>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <CfEmailOff>
+              <a
+                class="button-accent"
+                href={`mailto:${siteConfig.email}?subject=Keynote%20enquiry%20%E2%80%94%20Daniel%20Johnson`}
+                >Keynote enquiry →</a
+              >
+            </CfEmailOff>
+            <CfEmailOff>
+              <a
+                class="button-secondary"
+                href={`mailto:${siteConfig.email}?subject=Workshop%20%2F%20cohort%20session%20%E2%80%94%20Daniel%20Johnson`}
+                >Workshop / cohort →</a
+              >
+            </CfEmailOff>
+            <a class="button-secondary" href="/podcast-guest/">Podcast guest →</a>
+            <a class="button-link" href="/media-kit/">Media kit →</a>
+          </div>
         </div>
         <aside class="grid gap-5">
-          <article class="reveal video-panel">
-            <div class="video-frame">
-              <iframe
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                loading="lazy"
-                src={siteConfig.youtubeUploadsEmbed}
-                title="Daniel Johnson YouTube videos"
-              ></iframe>
-            </div>
-            <div class="video-panel-copy">
-              <p class="card-label">YouTube field notes</p>
-              <h2>Short growth and GTM notes for founders.</h2>
-              <p>Use this as a quick read on Daniel's pace, language, and practical teaching style before booking a talk or workshop.</p>
-              <a class="link-arrow" href={siteConfig.youtube} rel="noreferrer" target="_blank">Watch more on YouTube</a>
-            </div>
-          </article>
+          <div class="grid gap-5">
+            {
+              featuredVideos.map((video) => (
+                <article class="reveal video-panel">
+                  <div class="video-frame">
+                    <iframe
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                      loading="lazy"
+                      src={video.embed}
+                      title={video.title}
+                    />
+                  </div>
+                  <div class="video-panel-copy">
+                    <p class="card-label">{video.source}</p>
+                    <h2>{video.title}</h2>
+                    <p>{video.description}</p>
+                    <a class="link-arrow" href={video.href} rel="noreferrer" target="_blank">
+                      Watch on YouTube →
+                    </a>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+          <p class="reveal text-center text-sm text-[color:var(--muted)]">
+            <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href={siteConfig.youtube} rel="noreferrer" target="_blank">
+              More on Daniel&apos;s YouTube channel →
+            </a>
+          </p>
           <div class="reveal card overflow-hidden p-4">
             <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="720" loading="eager" src="/images/cambridge-judge-business-school-960.webp" width="960" />
           </div>
@@ -340,9 +379,9 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
             mentor, and speaker.
           </h2>
           <p class="mt-5 max-w-3xl text-base leading-8 text-[color:var(--muted)]">
-            Over 10+ years he has worked with 20+ AI and B2B SaaS startups, managed £6M+ in paid spend, generated
-            £18M+ in revenue, and helped founders raise £15M+. He mentors through Google for Startups, Techstars, and
-            GrowthMentor (388+ sessions, 4.93/5), and has lectured at Cambridge Judge, Imperial College London,
+            Over 10+ years he has worked with {proofStats.startupsAdvised} AI and B2B SaaS startups, managed {proofStats.adSpend} in paid spend, generated
+            {proofStats.revenueImpact} in revenue, and helped founders raise {proofStats.founderRaiseSupport}. He mentors through Google for Startups, Techstars, and
+            GrowthMentor ({proofStats.mentorSessions} sessions, {proofStats.mentorRating}/5), and has lectured at Cambridge Judge, Imperial College London,
             General Assembly, and the UK Space Agency.
           </p>
         </article>
@@ -377,7 +416,7 @@ const speakingSchema = talks.map((talk) => buildTalkSchema(talk));
           {socialLinks.map((item) => (
             <a href={item.href} rel="noreferrer" target="_blank">{item.label}</a>
           ))}
-          <a href="/podcast-appearances/">Podcast appearances</a>
+          <a href="/podcast-guest/">Podcast guest hub</a>
           <a href="/now/">Now page</a>
         </div>
       </div>

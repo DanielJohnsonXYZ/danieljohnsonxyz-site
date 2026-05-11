@@ -131,10 +131,8 @@ const resultsJson = JSON.stringify(results);
   class="growth-diagnosis reveal mt-10"
   data-questions={questionsJson}
   data-results={resultsJson}
-  data-cta-href={ctas.primary.href}
-  data-cta-label={ctas.primary.label}
-  data-audit-href="/growth-audit/"
-  data-audit-label="Book a 20-min Growth Audit"
+  data-calendly-href={ctas.primary.href}
+  data-calendly-label={ctas.primary.label}
 >
   <div class="card p-6 md:p-10">
     <div class="gd-progress" aria-hidden="true">
@@ -193,14 +191,14 @@ const resultsJson = JSON.stringify(results);
         <p class="mt-3 text-base leading-8" data-gd-result-reco></p>
       </div>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a class="button-accent" href="/gtm-systems/" data-cta="diagnosis-next-step" data-gd-next-step>
-          Next step →
-        </a>
-        <a class="button-secondary" href="/growth-audit/" data-cta="diagnosis-audit-soft" data-gd-audit-soft>
+        <a class="button-accent" href="/growth-audit/" data-cta="diagnosis-primary-audit">
           Book a 20-min Growth Audit →
         </a>
-        <a class="button-secondary" href={ctas.primary.href} data-cta="diagnosis-primary" data-gd-cta>
-          {ctas.primary.label} →
+        <a class="button-secondary" href="/gtm-systems/" data-cta="diagnosis-next-step" data-gd-next-step>
+          Next step →
+        </a>
+        <a class="button-link" href={ctas.primary.href} data-cta="diagnosis-calendly-direct" data-gd-cta>
+          Or grab a Calendly slot directly →
         </a>
         <button type="button" class="button-link" data-gd-restart>
           Retake the diagnosis
@@ -223,8 +221,8 @@ const resultsJson = JSON.stringify(results);
     const questions = JSON.parse(root.dataset.questions || "[]");
     const results = JSON.parse(root.dataset.results || "{}");
     const total = questions.length;
-    const auditHref = root.dataset.auditHref || "/growth-audit/";
-    const auditLabel = (root.dataset.auditLabel || "20-min Growth Audit") + " →";
+    const calendlyHref = root.dataset.calendlyHref || "";
+    const calendlyLabel = (root.dataset.calendlyLabel || "Book directly") + " →";
 
     const steps = Array.from(root.querySelectorAll("[data-gd-step]"));
     const resultEl = root.querySelector("[data-gd-result]");
@@ -288,15 +286,12 @@ const resultsJson = JSON.stringify(results);
         nextLink.setAttribute("data-cta", "diagnosis-next-" + winner);
       }
 
-      const auditSoft = root.querySelector("[data-gd-audit-soft]");
-      if (auditSoft) {
-        auditSoft.setAttribute("href", auditHref);
-        auditSoft.textContent = auditLabel;
-        auditSoft.setAttribute("data-cta", "diagnosis-audit-soft-" + winner);
-      }
-
       const cta = root.querySelector("[data-gd-cta]");
-      if (cta) cta.setAttribute("data-cta", "diagnosis-primary-" + winner);
+      if (cta && calendlyHref) {
+        cta.setAttribute("href", calendlyHref);
+        cta.textContent = calendlyLabel;
+        cta.setAttribute("data-cta", "diagnosis-calendly-" + winner);
+      }
 
       steps.forEach((s) => (s.hidden = true));
       resultEl.hidden = false;

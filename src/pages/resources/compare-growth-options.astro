@@ -1,19 +1,20 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
-import { buildBreadcrumbSchema } from "../lib/schema";
-import { ctas, siteConfig, whyDaniel } from "../site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { ctas, siteConfig, whyDaniel } from "../../site";
 
 const schema = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
-  { name: "Compare growth options", url: "/compare-growth-options/" }
+  { name: "Resources", url: "/resources/" },
+  { name: "Compare growth options", url: "/resources/compare-growth-options/" }
 ]);
 ---
 
 <BaseLayout
   description="Compare agency, freelancer, junior marketer, full-time CMO, consultant, and fractional CMO — typical cost, who owns the work, and the failure mode for post-PMF B2B SaaS and AI startups."
   keywords="fractional CMO vs agency, vs full-time CMO, startup marketing options, growth hire comparison"
-  path="/compare-growth-options/"
+  path="/resources/compare-growth-options/"
   schema={schema}
   title="Compare your growth options | Daniel Johnson"
 >
@@ -27,12 +28,12 @@ const schema = buildBreadcrumbSchema([
         <p class="hero-subcopy text-lg leading-8 md:text-xl">
           The same surface symptom (flat pipeline, noisy metrics, founder bottleneck) can point to six different
           organisational fixes. This table is the honest map of trade-offs — then the{" "}
-          <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href="/fractional-cmo-vs-agency/"
+          <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href="/resources/fractional-cmo-vs-agency/"
             >vs. agency</a>{" "}
           and{" "}
           <a
             class="font-semibold text-[color:var(--ink)] underline underline-offset-4"
-            href="/fractional-cmo-vs-full-time-cmo/">vs. full-time CMO</a>{" "}
+            href="/resources/fractional-cmo-vs-full-time-cmo/">vs. full-time CMO</a>{" "}
           pages go deeper on the two closest options.
         </p>
         <div class="flex flex-wrap gap-3">

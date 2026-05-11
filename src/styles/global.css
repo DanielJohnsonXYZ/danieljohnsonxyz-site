@@ -410,6 +410,12 @@ a, button, summary {
   color: var(--muted);
 }
 
+button.chip.case-chip-active {
+  border-color: rgba(124, 58, 237, 0.45);
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--accent);
+}
+
 .divider {
   height: 1px;
   background: var(--line);
@@ -2041,6 +2047,16 @@ summary::-webkit-details-marker {
   .hero-proof-bar {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  .hero-proof-bar.hero-proof-bar--five {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-proof-bar.hero-proof-bar--five {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1024px) {
@@ -2142,6 +2158,106 @@ summary::-webkit-details-marker {
     min-height: 2.8rem;
     width: 100%;
     white-space: normal;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Design and UX quality pass (Priority 1.5 + Priority 3)
+   Shared conversion hierarchy, CTA consistency, and repeatable spacing.
+   ────────────────────────────────────────────────────────────────────── */
+
+.conversion-hero {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.conversion-hero h1 {
+  max-width: 20ch;
+  line-height: 1.06;
+}
+
+.conversion-subcopy {
+  max-width: 60ch;
+  line-height: 1.75;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cta-stack {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.cta-stack > .button-secondary,
+.cta-row > .button-secondary {
+  border-width: 1.5px;
+}
+
+.button-accent {
+  font-weight: 750;
+}
+
+.button-secondary {
+  font-weight: 700;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+
+.button-link {
+  color: color-mix(in srgb, var(--ink) 88%, var(--accent) 12%);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.proof-card-grid {
+  gap: clamp(0.9rem, 2vw, 1.25rem);
+}
+
+.resource-link-row {
+  gap: clamp(0.85rem, 1.8vw, 1.25rem);
+}
+
+.testimonial-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.testimonial-strip > span {
+  line-height: 1.3;
+}
+
+.media-link-card {
+  min-height: 11rem;
+  gap: 0.5rem;
+}
+
+.media-link-card small {
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .conversion-hero h1 {
+    font-size: clamp(2.25rem, 9vw, 3.2rem);
+    letter-spacing: -0.05em;
+  }
+
+  .cta-row .button-accent,
+  .cta-row .button-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .proof-card-grid {
+    gap: 0.85rem;
   }
 }
 

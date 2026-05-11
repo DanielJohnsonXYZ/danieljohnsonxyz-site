@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { entityGraph, proofStats, siteConfig, siteImages } from "../site";
+import { entityGraph, positioning, proofStats, singleIdea, siteConfig, siteImages } from "../site";
 import { absoluteUrl } from "./utils";
 
 export function buildPersonSchema() {
@@ -11,8 +11,7 @@ export function buildPersonSchema() {
     givenName: "Daniel",
     familyName: "Johnson",
     jobTitle: "Fractional CMO & AI-Native Growth Operator",
-    description:
-      `Fractional CMO and senior GTM operator for post-PMF AI and B2B SaaS startups. 10+ years building growth systems for Seed to Series B founders. ${proofStats.revenueImpact} revenue generated for clients, ${proofStats.adSpend} ad spend managed, ${proofStats.startupsAdvised} startups scaled, ${proofStats.mentorSessions} mentor sessions delivered.`,
+    description: `${singleIdea.long} ${positioning.subheadline} Track record: ${proofStats.revenueImpact} client revenue, ${proofStats.adSpend} ad spend managed, ${proofStats.startupsAdvised} startups advised, ${proofStats.mentorSessions} mentor sessions (${proofStats.mentorRating}/5 on GrowthMentor). Primary site: ${siteConfig.siteUrl}.`,
     url: siteConfig.siteUrl,
     image: {
       "@type": "ImageObject",

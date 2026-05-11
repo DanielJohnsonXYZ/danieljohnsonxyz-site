@@ -40,17 +40,49 @@ const sectionMeta: Record<
   }
 };
 
-const sectionOrder: PageSection[] = ["fractional-cmo", "strategy-sprint", "speaking"];
+function slugifyLabel(label: string) {
+  return label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function metaForLabel(label: string) {
+  if (label === sectionMeta["fractional-cmo"].title) return sectionMeta["fractional-cmo"];
+  if (label === sectionMeta["strategy-sprint"].title) return sectionMeta["strategy-sprint"];
+  if (label === sectionMeta.speaking.title) return sectionMeta.speaking;
+  return {
+    title: label,
+    intro: "Named feedback grouped for easier scanning.",
+    href: "/work-with-me/",
+    linkLabel: "Work with me →"
+  };
+}
+
+const sectionPriority = [
+  sectionMeta["fractional-cmo"].title,
+  sectionMeta["strategy-sprint"].title,
+  sectionMeta.speaking.title
+];
 
 const all = sortByFeaturedThenOrder(await getCollection("testimonials"));
 
-const bySection = sectionOrder.reduce<Record<PageSection, typeof all>>(
-  (acc, key) => {
-    acc[key] = all.filter((t) => t.data.pageSection === key);
-    return acc;
-  },
-  { "fractional-cmo": [], "strategy-sprint": [], speaking: [] }
-);
+const groups = new Map<string, typeof all>();
+for (const t of all) {
+  const label = t.data.category ?? sectionMeta[t.data.pageSection].title;
+  const bucket = groups.get(label) ?? [];
+  bucket.push(t);
+  groups.set(label, bucket);
+}
+
+const groupLabels = [...groups.keys()].sort((a, b) => {
+  const ia = sectionPriority.indexOf(a);
+  const ib = sectionPriority.indexOf(b);
+  if (ia === -1 && ib === -1) return a.localeCompare(b);
+  if (ia === -1) return 1;
+  if (ib === -1) return -1;
+  return ia - ib;
+});
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -91,7 +123,7 @@ const schemas = [
         </h1>
         <p class="text-lg leading-8 text-[color:var(--muted)] md:text-xl">
           {proofStats.mentorSessions} mentor sessions, {proofStats.startupsAdvised} startups advised,
-          {proofStats.mentorRating}/5 from {proofStats.mentorReviewCount}+ public reviews — organised here by how we worked together.
+          {proofStats.mentorRating}/5 from {proofStats.mentorReviewCount} public reviews — organised here by how we worked together.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="testimonials-hero-book">
@@ -102,44 +134,43 @@ const schemas = [
           </a>
         </div>
         <nav class="flex flex-wrap justify-center gap-2 pt-4 text-sm font-semibold" aria-label="Jump to testimonial sections">
-          {sectionOrder.map((key) =>
-            bySection[key].length ? (
-              <a
-                class="rounded-full border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-2 text-[color:var(--muted)] hover:border-[color:var(--accent)]/40 hover:text-[color:var(--ink)]"
-                href={`#${key}`}
-              >
-                {sectionMeta[key].title}
-                <span class="ml-1 tabular-nums opacity-60">({bySection[key].length})</span>
-              </a>
-            ) : null
-          )}
+          {
+            groupLabels.map((label) => {
+              const items = groups.get(label) ?? [];
+              return items.length ? (
+                <a
+                  class="rounded-full border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-2 text-[color:var(--muted)] hover:border-[color:var(--accent)]/40 hover:text-[color:var(--ink)]"
+                  href={`#${slugifyLabel(label)}`}
+                >
+                  {label}
+                  <span class="ml-1 tabular-nums opacity-60">({items.length})</span>
+                </a>
+              ) : null;
+            })
+          }
         </nav>
       </div>
     </div>
   </section>
 
   {
-    sectionOrder.map((key) =>
-      bySection[key].length ? (
-        <section
-          class="section-space pt-0"
-          id={key}
-          aria-label={`${sectionMeta[key].title} testimonials`}
-        >
+    groupLabels.map((label) => {
+      const items = groups.get(label) ?? [];
+      if (!items.length) return null;
+      const meta = metaForLabel(label);
+      const sectionId = slugifyLabel(label);
+      return (
+        <section class="section-space pt-0" id={sectionId} aria-label={`${label} testimonials`}>
           <div class="shell">
-            <SectionHeader
-              eyebrow={sectionMeta[key].title}
-              intro={sectionMeta[key].intro}
-              title={`${sectionMeta[key].title} testimonials.`}
-            />
+            <SectionHeader eyebrow={label} intro={meta.intro} title={`${label} testimonials.`} />
             <p class="reveal mt-6">
-              <a class="link-arrow" href={sectionMeta[key].href} data-cta={`testimonials-link-${key}`}>
-                {sectionMeta[key].linkLabel}
+              <a class="link-arrow" href={meta.href} data-cta={`testimonials-link-${sectionId}`}>
+                {meta.linkLabel}
               </a>
             </p>
 
             <div class="tm-grid mt-10">
-              {bySection[key].map((t) => (
+              {items.map((t) => (
                 <figure class="reveal card p-6 md:p-7 tm-card">
                   <p class="card-label tm-metric">{t.data.outcomeMetric}</p>
                   <blockquote>
@@ -164,6 +195,18 @@ const schemas = [
                         {t.data.role}
                         {t.data.organisation ? ` · ${t.data.organisation}` : ""}
                       </p>
+                      {t.data.linkedin && (
+                        <p class="mt-1">
+                          <a
+                            class="text-xs font-semibold text-[color:var(--accent)] underline underline-offset-4 hover:text-[color:var(--ink)]"
+                            href={t.data.linkedin}
+                            rel="noreferrer"
+                            target="_blank"
+                          >
+                            LinkedIn →
+                          </a>
+                        </p>
+                      )}
                       {t.data.source && (
                         <p class="mt-1 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">
                           {t.data.source}
@@ -191,8 +234,8 @@ const schemas = [
             </div>
           </div>
         </section>
-      ) : null
-    )
+      );
+    })
   }
 
   <section class="section-space pt-0">
@@ -205,7 +248,7 @@ const schemas = [
           rel="noreferrer"
           target="_blank"
         >
-          {proofStats.mentorReviewCount}+ public reviews on GrowthMentor →
+          {proofStats.mentorReviewCount} public reviews on GrowthMentor →
         </a>
       </p>
     </div>

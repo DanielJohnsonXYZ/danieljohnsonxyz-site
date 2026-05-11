@@ -15,13 +15,13 @@ const { mediaCta = false } = Astro.props;
     <!-- Active footer: testimonial pull-quote + proof strip so the footer does conversion work, not just navigation. -->
     <div class="mb-8 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-end">
       <blockquote class="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 md:p-8">
-        <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white md:text-xl">
+        <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white/90 md:text-xl">
           "{footerTestimonial.quote}"
         </p>
         <footer class="mt-4 flex items-center justify-between text-sm">
           <div>
             <p class="font-semibold text-white">{footerTestimonial.name}</p>
-            <p class="text-white/55">{footerTestimonial.role}</p>
+            <p class="text-white/65">{footerTestimonial.role}</p>
           </div>
           <a class="text-xs font-semibold uppercase tracking-[0.14em] text-white/60 hover:text-white" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
             More reviews →
@@ -30,15 +30,15 @@ const { mediaCta = false } = Astro.props;
       </blockquote>
 
       <aside class="flex flex-col gap-3 text-right md:items-end">
-        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Top-rated mentor</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Top-rated mentor</p>
         <p class="text-5xl font-extrabold tracking-[-0.06em] text-white">{proofStats.mentorRating}<span class="text-2xl text-white/50">/5</span></p>
-        <p class="text-sm text-white/55">from {proofStats.mentorReviewCount} reviews · {proofStats.mentorSessions} sessions</p>
+        <p class="text-sm text-white/65">from {proofStats.mentorReviewCount} reviews · {proofStats.mentorSessions} sessions</p>
       </aside>
     </div>
 
     <div class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 md:p-12">
-      <div class="grid gap-10 md:grid-cols-6">
-        <div class="flex flex-col gap-6 md:col-span-2">
+      <div class="grid gap-10 lg:grid-cols-7">
+        <div class="flex flex-col gap-6 lg:col-span-2">
           <span class="eyebrow">Start a conversation</span>
           <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
             {mediaCta ? "Invite Daniel, request a quote, or get the media kit." : `${ctas.primary.label}.`}
@@ -49,9 +49,12 @@ const { mediaCta = false } = Astro.props;
               : "20 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense."}
           </p>
           {!mediaCta && (
-            <p class="max-w-md rounded-full border border-white/20 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/75">
-              {siteConfig.availability}
-            </p>
+            <div class="max-w-md space-y-2">
+              <p class="rounded-full border border-white/20 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/80">
+                {siteConfig.availability}
+              </p>
+              <p class="text-xs font-medium leading-relaxed text-white/65">{siteConfig.nextStartWindow}</p>
+            </div>
           )}
           <div class="flex flex-wrap gap-3">
             {mediaCta ? (
@@ -73,13 +76,13 @@ const { mediaCta = false } = Astro.props;
                 <a class="button-accent" href={ctas.primary.href} data-cta="footer-primary">
                   {ctas.primary.label} →
                 </a>
-                <a class="button-secondary" href={ctas.caseStudies.href} data-cta="footer-case-studies">
-                  {ctas.caseStudies.label} →
+                <a class="button-secondary" href={ctas.bookingFallback.href} data-cta="footer-booking-fallback">
+                  {ctas.bookingFallback.label} →
                 </a>
               </>
             )}
           </div>
-          <p class="text-xs text-white/55">{siteConfig.location}</p>
+          <p class="text-xs text-white/65">{siteConfig.location}</p>
 
           <div class="mt-6 max-w-lg">
             <NewsletterFormInline
@@ -87,6 +90,7 @@ const { mediaCta = false } = Astro.props;
               tone="dark"
               heading="Growth Notes — practical founder-led GTM, one email at a time."
               subline="Same list as the newsletter page. Unsubscribe anytime."
+              idPrefix="nl-footer"
             />
             <p class="mt-3 text-xs text-white/50">
               <a class="font-semibold text-white/70 hover:text-white" href="/newsletter/">About the newsletter →</a>
@@ -100,7 +104,7 @@ const { mediaCta = false } = Astro.props;
             {
               footerNavigation.workWithMe.map((item) => (
                 <li>
-                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -111,12 +115,12 @@ const { mediaCta = false } = Astro.props;
         </div>
 
         <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Learn the method</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Method</p>
           <ul class="space-y-3">
             {
-              footerNavigation.learnTheMethod.map((item) => (
+              footerNavigation.method.map((item) => (
                 <li>
-                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -131,7 +135,7 @@ const { mediaCta = false } = Astro.props;
             {
               footerNavigation.proof.map((item) => (
                 <li>
-                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -146,7 +150,7 @@ const { mediaCta = false } = Astro.props;
             {
               footerNavigation.company.map((item) => (
                 <li>
-                  <a class="text-sm font-medium text-white/70 hover:text-white" href={item.href}>
+                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -154,15 +158,39 @@ const { mediaCta = false } = Astro.props;
             }
           </ul>
         </div>
+
+        <div class="space-y-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Contact</p>
+          <ul class="space-y-3">
+            {
+              footerNavigation.contact.map((item) => (
+                <li>
+                  <a
+                    class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0"
+                    href={item.href}
+                    {...(item.href.startsWith("http") ? { rel: "noreferrer", target: "_blank" } : {})}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href="/contact/">
+                Contact page →
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <nav aria-label="Resources and comparisons" class="mt-10 border-t border-white/[0.06] pt-6">
         <p class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Resources</p>
-        <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/60">
+        <ul class="flex flex-wrap gap-x-5 gap-y-3 text-sm text-white/60">
           {
             footerNavigation.resources.map((item) => (
               <li>
-                <a class="font-medium text-white/70 hover:text-white" href={item.href}>
+                <a class="inline-flex min-h-[44px] items-center font-medium text-white/75 hover:text-white" href={item.href}>
                   {item.label}
                 </a>
               </li>

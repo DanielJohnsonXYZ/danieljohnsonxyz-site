@@ -16,8 +16,8 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
   <div
     class="sticky-cta"
     data-reveal-after={revealAfter}
-    aria-hidden="true"
     role="complementary"
+    inert
   >
     <div class="sticky-cta-inner">
       <div class="sticky-cta-copy">
@@ -193,7 +193,7 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
       if (dismissed) return;
       var shouldShow = window.scrollY > revealAfter && !overlapsSensitiveArea;
       bar.classList.toggle('is-visible', shouldShow);
-      bar.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      bar.toggleAttribute('inert', !shouldShow);
     }
 
     var dismissBtn = bar.querySelector('.sticky-cta-dismiss');
@@ -201,6 +201,7 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
       dismissBtn.addEventListener('click', function () {
         dismissed = true;
         bar.classList.remove('is-visible');
+        bar.setAttribute('inert', '');
         bar.classList.add('is-dismissed');
         try {
           sessionStorage.setItem(dismissKey, '1');

@@ -1,14 +1,14 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
-import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
-import { ctas, vsFulltimeCMO } from "../site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../../lib/schema";
+import { ctas, vsFulltimeCMO } from "../../site";
 
 const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
-    { name: "Fractional CMO", url: "/fractional-cmo/" },
-    { name: "vs. Full-time CMO", url: "/fractional-cmo-vs-full-time-cmo/" }
+    { name: "Resources", url: "/resources/" },
+    { name: "Fractional CMO vs. full-time CMO", url: "/resources/fractional-cmo-vs-full-time-cmo/" }
   ]),
   buildFaqPageSchema([...vsFulltimeCMO.faq])
 ];
@@ -20,7 +20,7 @@ const tldr =
 <BaseLayout
   description="Fractional vs full-time CMO for post-PMF AI & B2B SaaS: cost, ramp, ownership, notice periods & when each model fits—senior fractional view."
   keywords="fractional CMO vs full-time CMO, CMO hire cost UK, interim marketing leadership, bridge CMO"
-  path="/fractional-cmo-vs-full-time-cmo/"
+  path="/resources/fractional-cmo-vs-full-time-cmo/"
   schema={schemas}
   stickyCta={false}
   title="Fractional CMO vs. Full-time CMO | Daniel Johnson"
@@ -101,7 +101,7 @@ const tldr =
           <p class="mt-4 leading-8 text-[color:var(--muted)]">
             Published fractional anchors: <strong class="text-[color:var(--ink)]">£7.5k/month</strong> (1 day/week) and{" "}
             <strong class="text-[color:var(--ink)]">£12k/month</strong> (deeper support) with a 3-month minimum — see{" "}
-            <a class="font-semibold text-[color:var(--accent)] underline underline-offset-4" href="/fractional-cmo-cost-uk/">
+            <a class="font-semibold text-[color:var(--accent)] underline underline-offset-4" href="/resources/fractional-cmo-cost-uk/">
               the UK cost page
             </a>{" "}
             and{" "}
@@ -205,7 +205,7 @@ const tldr =
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center space-y-4">
         <p class="text-base leading-8 text-[color:var(--muted)]">
-          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-agency/">Fractional CMO vs. agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="https://wescalestartups.com/services/fractional-cmo" rel="noreferrer" target="_blank">WSS Fractional CMO service</a>
+          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-agency/">Fractional CMO vs. agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="https://wescalestartups.com/services/fractional-cmo" rel="noreferrer" target="_blank">WSS Fractional CMO service</a>
         </p>
       </div>
     </div>

@@ -1,10 +1,27 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import AnswerEvidenceBlock from "../components/AnswerEvidenceBlock.astro";
 import FractionalCmoIntakeThenCalendly from "../components/FractionalCmoIntakeThenCalendly.astro";
+import RotatingTextBars from "../components/RotatingTextBars.astro";
 import SectionHeader from "../components/SectionHeader.astro";
-import { buildAggregateRatingSchema, buildBreadcrumbSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
-import { absoluteUrl } from "../lib/utils";
-import { ctas, icpFirmographics, roiFrames, siteConfig, whyDaniel } from "../site";
+import {
+  buildAggregateRatingSchema,
+  buildBreadcrumbSchema,
+  buildFaqPageSchema,
+  buildServiceSchema,
+  buildWebPageSchema
+} from "../lib/schema";
+import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
+import { ctas, fitSignals, homeServiceLadder, icpFirmographics, roiFrames, siteConfig, whyDaniel } from "../site";
+
+const caseStudyEntries = sortByFeaturedThenOrder(await getCollection("caseStudies"));
+const fractionalTestimonials = sortByFeaturedThenOrder(await getCollection("testimonials"))
+  .filter((t) => t.data.pageSection === "fractional-cmo" || t.data.category === "Fractional CMO")
+  .slice(0, 4);
+
+const sprintTier = homeServiceLadder[1];
+const fractionalTier = homeServiceLadder[2];
 
 const painPoints = [
   "The founder is still carrying too many revenue decisions.",
@@ -29,11 +46,10 @@ const modes = [
 ];
 
 const first30 = [
-  "Audit ICP, pipeline, funnel, CRM, acquisition channels, positioning, and current reporting.",
-  "Interview founder, sales, customer-facing team, and selected customers.",
-  "Build a constraint map: what's blocking pipeline, conversion, retention, or decision speed.",
-  "Agree the 90-day growth priorities and weekly operating rhythm.",
-  "Ship first fixes: homepage messaging, campaign brief, reporting view, or channel test depending on the bottleneck."
+  "Week 1–2: Full GTM audit — ICP, pipeline, funnel, CRM hygiene, live acquisition channels, positioning, and how reporting is read today. Founder, sales, and customer-facing interviews plus 3–5 customer conversations where possible.",
+  "Week 2–3: Constraint map — where pipeline, conversion, retention, or decision speed actually breaks (not where the team is busiest). Agree the 90-day priorities and the weekly operating rhythm: scorecard, owners, stop/scale/fix rules.",
+  "Week 3–4: First fixes in market — homepage or demo narrative tests, campaign or outbound brief, reporting view, or channel test — sequenced from the bottleneck, not from channel noise.",
+  "Ongoing: Weekly growth meeting, experiment backlog hygiene, and agency or contractor steering so work compounds instead of resetting every Monday."
 ];
 
 const plan = [
@@ -74,14 +90,9 @@ const pricing = [
   }
 ];
 
-const fit = [...icpFirmographics.fitIf];
+const fit = [...fitSignals.bestFor];
 
-const notFit = [
-  "Pre-revenue teams still searching for the problem.",
-  "Companies looking for a cheap ads agency.",
-  "Teams that want reports but won't make hard priority calls.",
-  "Founders who want growth delegated without giving access to customers, data, or decisions."
-];
+const notFit = [...fitSignals.notFor];
 
 const faq = [
   {
@@ -134,6 +145,12 @@ const schemas = [
       { name: "Fractional CMO", description: "3-month minimum. Embedded senior ownership 1 day a week.", price: "7500", billingIncrement: "per month" },
       { name: "Fractional CMO Plus", description: "Deeper operating support, agency management, faster execution.", price: "12000", billingIncrement: "per month" }
     ]
+  }),
+  buildWebPageSchema({
+    name: "Fractional CMO for Founder-Led AI & B2B SaaS Startups",
+    description:
+      "Embedded senior growth leadership for post-PMF founders who need predictable pipeline and GTM decision ownership.",
+    url: absoluteUrl("/fractional-cmo/")
   })
 ];
 ---
@@ -146,7 +163,7 @@ const schemas = [
   stickyCta={false}
   title="Fractional CMO for Founder-Led AI & B2B SaaS Startups | Daniel Johnson"
 >
-  <section class="hero-section section-space">
+  <section class="hero-section section-space conversion-hero">
     <div class="shell">
       <div class="reveal grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
         <div class="space-y-6">
@@ -154,7 +171,7 @@ const schemas = [
           <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
             Senior growth leadership before growth becomes a founder bottleneck.
           </h1>
-          <p class="hero-subcopy text-xl leading-9 md:text-2xl">
+          <p class="hero-subcopy conversion-subcopy text-xl leading-9 md:text-2xl">
             I embed with founder-led AI and B2B SaaS startups to build predictable pipeline, sharpen positioning, clean up reporting, and help the team decide what to scale, stop, or fix.
           </p>
 
@@ -164,14 +181,27 @@ const schemas = [
             20 minutes. No pitch. No deck. We diagnose the bottleneck and decide together whether working together makes sense — or I'll point you to the right operator, agency, or mentor if it doesn't.
           </div>
 
-          <div class="flex flex-wrap items-center gap-3 pt-2">
+          <div class="cta-row pt-2">
             <a class="button-accent" href="#book" data-cta="fractional-hero-primary">
               {ctas.primary.label} →
             </a>
-            <a class="button-link" href="#faq" data-cta="fractional-hero-faq">
+            <a class="button-secondary" href="#faq" data-cta="fractional-hero-faq">
               Read FAQs first →
             </a>
           </div>
+          <AnswerEvidenceBlock
+            title="Direct answer + proof"
+            answer="A fractional CMO is highest leverage when the bottleneck is senior GTM judgement, not channel capacity."
+            evidence={[
+              "Founders usually arrive with active channels but no stable decision system.",
+              "Weekly ownership and reporting cadence convert activity into scale/stop/fix decisions.",
+              "Bridge model (fractional first, full-time later) reduces mis-hire risk."
+            ]}
+            provenance={[
+              "Source set: published case studies and recurring growth-audit diagnosis patterns.",
+              "Cross-reference: /resources/fractional-cmo-vs-agency/ and /resources/fractional-cmo-vs-full-time-cmo/."
+            ]}
+          />
         </div>
         <aside class="card p-6 md:p-8">
           <p class="card-label">You're a fit if…</p>
@@ -199,6 +229,28 @@ const schemas = [
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
+        eyebrow="What I take off your plate"
+        title="Founder-bottleneck work that needs a senior owner — not another pair of hands."
+        intro="You stay on strategy and the calls only you should take. I carry the operating load that keeps GTM from stalling: priorities, sequencing, reporting, and honest kill/scale decisions."
+      />
+      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            "Weekly bottleneck read — what actually constrains pipeline this week",
+            "ICP, positioning, and narrative alignment across site, outbound, and sales",
+            "Experiment backlog with owners — fewer random tests, clearer learning",
+            "Channel and agency steering — scope, briefs, and accountability",
+            "Reporting the team actually uses — conversion, payback, stop/scale/fix",
+            "Hiring and vendor context — what role to hire, what to keep fractional"
+          ].map((item) => <article class="card p-5 text-sm font-semibold leading-6 tracking-[-0.02em]">{item}</article>)
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
         eyebrow="The pain"
         title="Your team is busy, but growth still doesn't feel repeatable."
         intro="The problem is rarely effort. It's unclear priorities, weak signal, and too many growth calls living in the founder's head."
@@ -206,6 +258,26 @@ const schemas = [
       <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         {painPoints.map((item) => <article class="card p-5 text-sm font-semibold leading-6 tracking-[-0.02em]">{item}</article>)}
       </div>
+      <div class="mt-8">
+        <RotatingTextBars
+          rows={[
+            ["Founder bottleneck", "Pipeline drift", "Positioning fog", "Channel noise", "Slow decisions", "Weak signal"],
+            ["Constraint map", "Weekly rhythm", "Sharper ICP", "Campaign briefs", "Conversion fixes", "Board-ready reporting"]
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="Related pages" title="Internal path for deeper evaluation" />
+      <ul class="mt-6 grid gap-2 text-sm leading-7 text-[color:var(--muted)]">
+        <li><a href="/resources/fractional-cmo-vs-agency/">Fractional CMO vs agency</a></li>
+        <li><a href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs full-time CMO</a></li>
+        <li><a href="/resources/faq/">Founder FAQ</a></li>
+        <li><a href="/case-studies/">Case studies with named outcomes</a></li>
+      </ul>
     </div>
   </section>
 
@@ -317,7 +389,7 @@ const schemas = [
     <div class="shell">
       <SectionHeader eyebrow="Why Daniel" title="Where a fractional CMO fits — and where the other five options don't." />
       <p class="reveal mt-4 text-center text-sm leading-7 text-[color:var(--muted)]">
-        Want a deeper read on the closest two? <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-agency/">Fractional CMO vs. Agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. Full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/writing/the-right-window-for-a-fractional-cmo/">The right window for a fractional CMO</a>
+        Want a deeper read on the closest two? <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-agency/">Fractional CMO vs. Agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. Full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/writing/the-right-window-for-a-fractional-cmo/">The right window for a fractional CMO</a>
       </p>
       <div class="mt-8 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
         <table class="w-full min-w-[820px] text-left text-sm">
@@ -352,7 +424,7 @@ const schemas = [
         intro="Three shapes. Pick the closest fit — we refine on the call. UK benchmark framing and what moves price: see the dedicated cost page."
       />
       <p class="reveal mt-4 text-center text-sm leading-7 text-[color:var(--muted)]">
-        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-cost-uk/" data-cta="fractional-pricing-cost-uk">
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-cost-uk/" data-cta="fractional-pricing-cost-uk">
           Fractional CMO cost (UK) — benchmarks & FAQ →
         </a>
       </p>
@@ -362,9 +434,9 @@ const schemas = [
           <article class:list={["card p-7", tier.primary && "ring-2 ring-[color:var(--accent)]"]}>
             <p class="card-label">{tier.primary ? "Core engagement" : "Option"}</p>
             <h2 class="mt-3 text-2xl font-extrabold tracking-[-0.05em]">{tier.name}</h2>
-            <div class="mt-4 flex items-baseline gap-1">
+            <div class="mt-4 flex flex-wrap items-baseline gap-2">
               <span class="text-3xl font-extrabold tracking-[-0.06em]">{tier.price}</span>
-              <span class="text-sm text-[color:var(--muted)]">{tier.cadence}</span>
+              <span class="text-sm text-[color:var(--muted)]">· {tier.cadence}</span>
             </div>
             <p class="mt-4 leading-7 text-[color:var(--muted)]">{tier.body}</p>
           </article>
@@ -401,18 +473,119 @@ const schemas = [
 
   <section class="section-space pt-0">
     <div class="shell">
-      <article class="card grid gap-8 p-7 md:grid-cols-[0.8fr_1fr] md:p-10">
-        <div>
-          <p class="card-label">Featured engagement</p>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-[-0.05em]">6× app downloads from a 2k/mo baseline.</h2>
+      <SectionHeader eyebrow="Case studies" title="Recent engagement shapes — bottleneck, approach, outcome." />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          caseStudyEntries.slice(0, 4).map((item) => (
+            <article class="card p-6 md:p-7">
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">{item.data.engagementMode}</span>
+                <span class="chip">{item.data.sector}</span>
+              </div>
+              <h2 class="mt-4 text-xl font-bold tracking-[-0.04em]">
+                <a class="underline-offset-4 hover:text-[color:var(--accent)]" href={`/case-studies/${item.id}/`}>
+                  {item.data.title}
+                </a>
+              </h2>
+              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{item.data.excerpt}</p>
+              <a class="link-arrow mt-5 inline-flex" href={`/case-studies/${item.id}/`}>
+                Read case study →
+              </a>
+            </article>
+          ))
+        }
+      </div>
+      <p class="reveal mt-8 text-center">
+        <a class="link-arrow" href="/case-studies/">All case studies →</a>
+      </p>
+    </div>
+  </section>
+
+  {
+    fractionalTestimonials.length > 0 && (
+      <section class="section-space pt-0">
+        <div class="shell">
+          <SectionHeader
+            eyebrow="Fractional CMO"
+            title="What clients say about embedded GTM work."
+            intro="Named feedback from fractional and advisory-shaped engagements — see /testimonials/ for the full set."
+          />
+          <div class="mt-8 grid gap-5 md:grid-cols-2">
+            {fractionalTestimonials.map((t) => (
+              <figure class="card p-6 md:p-7">
+                <p class="card-label text-[color:var(--accent)]">{t.data.outcomeMetric}</p>
+                <blockquote>
+                  <p class="mt-3 text-base font-medium leading-7">&ldquo;{t.data.quote}&rdquo;</p>
+                </blockquote>
+                <figcaption class="mt-4 border-t border-[color:var(--line)] pt-4 text-sm text-[color:var(--muted)]">
+                  <span class="font-semibold text-[color:var(--ink)]">{t.data.name}</span>
+                  {t.data.role ? ` · ${t.data.role}` : ""}
+                  {t.data.organisation ? ` · ${t.data.organisation}` : ""}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p class="reveal mt-6 text-center">
+            <a class="link-arrow" href="/testimonials/">
+              Full testimonials →
+            </a>
+          </p>
         </div>
-        <div class="space-y-4 text-[color:var(--muted)]">
-          <p><strong class="text-[color:var(--ink)]">Situation:</strong> Growth had activity but no clear acquisition system.</p>
-          <p><strong class="text-[color:var(--ink)]">Rebuild:</strong> Positioning, channel mix, landing-page flow, lifecycle messaging, and reporting.</p>
-          <p><strong class="text-[color:var(--ink)]">Outcome:</strong> Downloads grew from roughly 2k/month to 12k+/month over six months.</p>
-          <a class="button-link" href="/case-studies/fractional-cmo-seed-b2b-saas/">Read the case study →</a>
-        </div>
-      </article>
+      </section>
+    )
+  }
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Strategy Sprint vs Fractional CMO"
+        title="Same operator — different commitment shape."
+        intro="Most founders either need a fixed-scope sprint first, or already know they need embedded ownership. Here's how the two compare at a glance."
+      />
+      <div class="mt-8 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
+        <table class="w-full min-w-[640px] text-left text-sm">
+          <thead class="bg-[color:var(--surface-dim)]">
+            <tr>
+              <th class="p-4" />
+              <th class="p-4">{sprintTier.heading}</th>
+              <th class="p-4">{fractionalTier.heading}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Investment</td>
+              <td class="p-4 text-[color:var(--muted)]">
+                {sprintTier.price} · {sprintTier.cadence}
+              </td>
+              <td class="p-4 text-[color:var(--muted)]">
+                {fractionalTier.price} · {fractionalTier.cadence}
+              </td>
+            </tr>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Best for</td>
+              <td class="p-4 text-[color:var(--muted)]">{sprintTier.bestFor}</td>
+              <td class="p-4 text-[color:var(--muted)]">{fractionalTier.bestFor}</td>
+            </tr>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Outcome</td>
+              <td class="p-4 text-[color:var(--muted)]">{sprintTier.outcome}</td>
+              <td class="p-4 text-[color:var(--muted)]">{fractionalTier.outcome}</td>
+            </tr>
+            <tr class="border-t border-[color:var(--line)]">
+              <td class="p-4 font-semibold">Detail</td>
+              <td class="p-4 text-[color:var(--muted)]">{sprintTier.body}</td>
+              <td class="p-4 text-[color:var(--muted)]">{fractionalTier.body}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="reveal mt-6 text-center text-sm text-[color:var(--muted)]">
+        Not sure which fits? Start with a{" "}
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href="/growth-audit/">
+          20-min Growth Audit
+        </a>{" "}
+        — we'll name the bottleneck and the right shape.
+      </p>
     </div>
   </section>
 
@@ -420,9 +593,9 @@ const schemas = [
     <div class="shell">
       <div class="grid gap-8 lg:grid-cols-[0.72fr_1fr] lg:items-center">
         <div class="space-y-5">
-          <span class="service-label">Book a Growth Audit</span>
+          <span class="service-label">Next step</span>
           <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] md:text-5xl">
-            Bring the messy growth question. Leave with a clearer next step.
+            {ctas.primary.label}
           </h2>
           <p class="text-lg leading-8 text-[color:var(--muted)]">{siteConfig.bookingNote}</p>
         </div>

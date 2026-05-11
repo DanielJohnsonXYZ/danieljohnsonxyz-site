@@ -6,7 +6,6 @@ import { formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
 
 const articles = sortByFeaturedThenOrder(await getCollection("articles"));
-const [flagshipArticle, ...supportingArticles] = articles;
 const archive = sortByFeaturedThenOrder(await getCollection("media"));
 const primaryArchive = archive.filter((item) => ["Profile", "Interview", "Speaking", "Course"].includes(item.data.kind));
 const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item));
@@ -20,17 +19,71 @@ const suggestedInterviewFormats = [
   "Written Q&A",
   "Expert quote for articles"
 ];
+
+function haystack(a: (typeof articles)[0]) {
+  return `${a.data.title} ${a.data.description} ${a.data.tags.join(" ")}`.toLowerCase();
+}
+
+const essayBuckets: {
+  title: string;
+  intro: string;
+  test: (a: (typeof articles)[0]) => boolean;
+}[] = [
+  {
+    title: "Resources · Fractional CMO & pricing context",
+    intro: "When the model fits, commercial shape, and UK-facing pricing reads — aligned with the /resources/ hub.",
+    test: (a) => {
+      const h = haystack(a);
+      return h.includes("fractional") || h.includes("cmo") || h.includes("pricing");
+    }
+  },
+  {
+    title: "Resources · Growth systems & research",
+    intro: "Operating rhythm, customer research, and bottlenecks before you buy more traffic or hires.",
+    test: (a) => {
+      const h = haystack(a);
+      return (
+        h.includes("operating system") ||
+        h.includes("customer research") ||
+        h.includes("research before") ||
+        h.includes("growth-systems") ||
+        h.includes("mentor") ||
+        h.includes("479") ||
+        h.includes("noisy")
+      );
+    }
+  },
+  {
+    title: "Resources · AI-native GTM",
+    intro: "Practical AI in GTM workflows — speed without outsourcing judgement.",
+    test: (a) => {
+      const h = haystack(a);
+      return h.includes("ai-native") || h.includes(" ai ") || h.includes("genai");
+    }
+  }
+];
+
+const assigned = new Set<string>();
+const filledBuckets = essayBuckets.map((bucket) => {
+  const items = articles.filter((article) => {
+    if (assigned.has(article.id)) return false;
+    if (!bucket.test(article)) return false;
+    assigned.add(article.id);
+    return true;
+  });
+  return { ...bucket, items };
+});
+const uncategorisedEssays = articles.filter((article) => !assigned.has(article.id));
 ---
 
 <BaseLayout
-  description="Essays on AI-native GTM, growth systems & where generic startup advice misleads—with curated talks, profiles & long-form interviews from Daniel Johnson."
+  description="Read Daniel Johnson's essays on AI-native GTM, growth systems, and founder-led execution, plus a curated archive of interviews, profiles, and talks."
   keywords="Daniel Johnson essays, fractional CMO writing, AI GTM blog, startup growth systems"
-  mediaCta
   path="/writing/"
   stickyCta={false}
   title="Writing | Daniel Johnson"
 >
-  <section class="section-space">
+  <section class="section-space conversion-hero">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div class="reveal max-w-4xl space-y-6">
@@ -38,7 +91,7 @@ const suggestedInterviewFormats = [
           <h1 class="text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">
             Essays on AI-native GTM and growth systems.
           </h1>
-          <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+          <p class="conversion-subcopy max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
             Native essays by Daniel on AI-native GTM, fractional leadership, and operating-system thinking — plus a smaller
             curated archive of profiles, interviews, talks, and resources that show how the point of view travels.
           </p>
@@ -80,55 +133,89 @@ const suggestedInterviewFormats = [
         title="Native essays."
       />
 
-      <div class="reveal mt-8 flex flex-wrap gap-2" aria-label="Writing topics">
+      <div class="chip-row reveal mt-8" aria-label="Writing topics">
         {focusTags.map((tag) => <span class="chip">{tag}</span>)}
         {allTags.filter((tag) => !focusTags.includes(tag)).map((tag) => <span class="chip chip-quiet">{tag}</span>)}
       </div>
 
-      <article class="insights-flagship reveal card mt-10 p-6 md:p-8">
-        <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div>
-            <p class="card-label">Flagship essay</p>
-            <h2 class="mt-4 text-4xl font-extrabold tracking-[-0.06em] md:text-6xl">
-              <a href={`/writing/${flagshipArticle.id}/`}>{flagshipArticle.data.title}</a>
-            </h2>
-            <p class="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">{flagshipArticle.data.description}</p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-2">
-              <span class="chip">Essay</span>
-              <span class="chip">{formatDate(flagshipArticle.data.publishedAt)}</span>
-              {flagshipArticle.data.tags.map((tag) => <span class="chip">{tag}</span>)}
-            </div>
-            <a class="link-arrow mt-6" href={`/writing/${flagshipArticle.id}/`}>Read flagship essay</a>
-          </div>
-        </div>
-      </article>
+      <p class="reveal mt-8 text-sm text-[color:var(--muted)]">
+        Deep-dive guides and comparisons also live in the{" "}
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/">
+          resources hub
+        </a>
+        .
+      </p>
 
-      <div class="mt-5 grid gap-5 lg:grid-cols-2">
-        {
-          supportingArticles.map((article) => (
-            <article class="reveal card p-6 md:p-7">
-              <div class="flex flex-wrap gap-2">
-                <span class="chip">Essay</span>
-                <span class="chip">{formatDate(article.data.publishedAt)}</span>
+      {
+        filledBuckets.map(
+          (bucket) =>
+            bucket.items.length > 0 && (
+              <div class="mt-12">
+                <SectionHeader eyebrow="Essays" intro={bucket.intro} title={bucket.title} />
+                <div class="mt-8 grid gap-5 lg:grid-cols-2">
+                  {bucket.items.map((article) => (
+                    <article class="reveal card p-6 md:p-7">
+                      <div class="flex flex-wrap gap-2">
+                        <span class="chip">Essay</span>
+                        <span class="chip">{formatDate(article.data.publishedAt)}</span>
+                      </div>
+                      <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
+                        <a href={`/writing/${article.id}/`}>{article.data.title}</a>
+                      </h2>
+                      <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
+                      <div class="chip-row mt-5">
+                        {article.data.tags.map((tag) => (
+                          <span class="chip">{tag}</span>
+                        ))}
+                      </div>
+                      <div class="mt-6">
+                        <a class="link-arrow" href={`/writing/${article.id}/`}>
+                          Read essay
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
-              <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
-                <a href={`/writing/${article.id}/`}>{article.data.title}</a>
-              </h2>
-              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
-              <div class="mt-5 flex flex-wrap gap-2">
-                {article.data.tags.map((tag) => <span class="chip">{tag}</span>)}
-              </div>
-              <div class="mt-6">
-                <a class="link-arrow" href={`/writing/${article.id}/`}>
-                  Read essay
-                </a>
-              </div>
-            </article>
-          ))
-        }
-      </div>
+            )
+        )
+      }
+
+      {
+        uncategorisedEssays.length > 0 && (
+          <div class="mt-12">
+            <SectionHeader
+              eyebrow="Essays"
+              intro="Additional pieces that span multiple themes — still organised by tags on each card."
+              title="More essays."
+            />
+            <div class="mt-8 grid gap-5 lg:grid-cols-2">
+              {uncategorisedEssays.map((article) => (
+                <article class="reveal card p-6 md:p-7">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="chip">Essay</span>
+                    <span class="chip">{formatDate(article.data.publishedAt)}</span>
+                  </div>
+                  <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
+                    <a href={`/writing/${article.id}/`}>{article.data.title}</a>
+                  </h2>
+                  <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{article.data.excerpt}</p>
+                  <div class="chip-row mt-5">
+                    {article.data.tags.map((tag) => (
+                      <span class="chip">{tag}</span>
+                    ))}
+                  </div>
+                  <div class="mt-6">
+                    <a class="link-arrow" href={`/writing/${article.id}/`}>
+                      Read essay
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -200,7 +287,7 @@ const suggestedInterviewFormats = [
               Producers can start with the media kit. Founders with a live growth bottleneck can use the commercial route after the media context is clear.
             </p>
           </div>
-          <div class="flex flex-col gap-3">
+          <div class="cta-stack">
             <a class="button-accent" href="/media-kit/">Open media kit</a>
             <a class="button-secondary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
             <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes</a>

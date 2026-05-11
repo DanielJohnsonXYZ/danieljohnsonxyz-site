@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { ctas, proofStats, siteConfig } from "../site";
+
+const workSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Work with me", url: "/work-with-me/" }
+  ])
+];
+---
+
+<BaseLayout
+  title="Work with me | Daniel Johnson"
+  description="How Daniel works with post-PMF AI and B2B SaaS founders: Growth Audit, Strategy Sprint, Fractional CMO, Founder Office Hours, and speaking — with proof and clear next steps."
+  path="/work-with-me/"
+  schema={workSchema}
+>
+  <section class="section-space conversion-hero">
+    <div class="shell">
+      <p class="service-label">Work with me</p>
+      <h1 class="max-w-4xl text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">
+        Services that turn founder-dependent growth into a repeatable GTM system.
+      </h1>
+      <p class="conversion-subcopy mt-6 max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+        Start at the smallest commitment that answers your question — usually the free 20-minute Growth Audit — then move up to a Strategy Sprint or Fractional CMO if the shape fits.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="button-accent" href={ctas.primary.href} rel="noreferrer" target="_blank" data-cta="work-with-me-primary">
+          {ctas.primary.label} →
+        </a>
+        <a class="button-secondary" href="/growth-audit/" data-cta="work-with-me-audit-page">
+          {ctas.bookingFallback.label} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Approach"
+        title="Problem → Action → Result → System"
+        intro="Every engagement uses the same structure so you can see what changed, why it stuck, and what the team owns after."
+      />
+      <div class="mt-10 grid gap-8 lg:grid-cols-2">
+        <article class="card p-6 md:p-8">
+          <h2 class="text-xl font-bold tracking-[-0.04em]">Problem</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            What was breaking when we started — in plain language so founders recognise themselves.
+          </p>
+        </article>
+        <article class="card p-6 md:p-8">
+          <h2 class="text-xl font-bold tracking-[-0.04em]">Action</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            The specific interventions — not “improved positioning” but “rewrote the homepage to lead with ICP pain.”
+          </p>
+        </article>
+        <article class="card p-6 md:p-8">
+          <h2 class="text-xl font-bold tracking-[-0.04em]">Result</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            What moved in the window we measured — metrics where possible, qualitative outcomes where clients prefer anonymity.
+          </p>
+        </article>
+        <article class="card p-6 md:p-8">
+          <h2 class="text-xl font-bold tracking-[-0.04em]">System</h2>
+          <p class="mt-3 text-base leading-8 text-[color:var(--muted)]">
+            Artefacts, cadence, and reporting the team runs without a full-time CMO hire.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Outcomes"
+        title="Proof at a glance."
+        intro="Canonical numbers — same sources as the homepage and media kit."
+      />
+      <div class="hero-proof mt-10" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;">
+        <div>
+          <strong>{proofStats.revenueImpact}</strong>
+          <span>revenue generated</span>
+        </div>
+        <div>
+          <strong>{proofStats.mentorRating}/5</strong>
+          <span>GrowthMentor ({proofStats.mentorReviewCount} reviews)</span>
+        </div>
+        <div>
+          <strong>{proofStats.mentorSessions}</strong>
+          <span>sessions</span>
+        </div>
+        <div>
+          <strong>{proofStats.startupsAdvised}</strong>
+          <span>startups advised</span>
+        </div>
+        <div>
+          <strong>{proofStats.adSpend}</strong>
+          <span>ad spend managed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="Case studies" title="Read the full stories." intro="Stage, bottleneck, intervention, and timeline — anonymised where needed." />
+      <div class="mt-8 text-center">
+        <a class="button-accent" href="/case-studies/">View case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Testimonials"
+        title="What founders say."
+        intro="Mentoring, advisory, and deeper engagements — full page linked below."
+      />
+      <div class="mt-8 text-center">
+        <a class="button-accent" href="/testimonials/">Read testimonials →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">{ctas.primary.label}</p>
+      <h2 class="text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">See if this is the right fit.</h2>
+      <p class="mt-4 mx-auto max-w-2xl text-lg leading-8 text-white/72">{siteConfig.bookingNote}</p>
+      <p class="mt-3 text-sm text-white/55">{siteConfig.nextStartWindow}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a class="button-accent" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button-link-invert" href="/case-studies/">{ctas.caseStudies.label} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

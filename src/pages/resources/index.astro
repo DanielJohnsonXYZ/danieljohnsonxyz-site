@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { footerNavigation } from "../../site";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Resources", url: "/resources/" }
+]);
+
+const featured = footerNavigation.resources.filter((item) => item.href !== "/resources/");
+---
+
+<BaseLayout
+  description="Resources hub: FAQ, glossary, fractional CMO comparisons, UK pricing guide, and long-tail GTM references for founders."
+  path="/resources/"
+  schema={schema}
+  title="Resources | Daniel Johnson"
+>
+  <section class="section-space conversion-hero">
+    <div class="shell">
+      <span class="service-label">Resources</span>
+      <h1 class="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">
+        Guides, comparisons, and definitions for high-intent GTM questions.
+      </h1>
+      <p class="conversion-subcopy mt-6 max-w-3xl text-lg leading-9 text-[color:var(--muted)]">
+        SEO and bookmark pages — fractional CMO cost in the UK, vs agency, vs full-time CMO, six-option comparison, FAQ, and glossary. Same nav and proof as the rest of the site.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          featured.map((item) => (
+            <li>
+              <a class="card block h-full p-6 transition-colors hover:border-[color:var(--accent)]" href={item.href}>
+                <span class="card-label">Resource</span>
+                <span class="mt-3 block text-lg font-bold tracking-[-0.03em]">{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

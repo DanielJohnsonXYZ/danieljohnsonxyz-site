@@ -167,7 +167,7 @@ const pastAppearances = [
           <div class="grid gap-3 md:grid-cols-2">
             <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
               <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Email</p>
-              <p class="mt-1 font-medium text-[color:var(--ink)]">daniel@danieljohnson.xyz</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)]">{siteConfig.email}</p>
             </div>
             <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
               <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Website</p>
@@ -175,11 +175,11 @@ const pastAppearances = [
             </div>
             <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
               <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">LinkedIn</p>
-              <p class="mt-1 font-medium text-[color:var(--ink)]">linkedin.com/in/johnson144</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)] break-all">{siteConfig.linkedin.replace(/^https?:\/\//, "")}</p>
             </div>
             <div class="p-4 rounded-lg bg-[color:var(--surface-dim)]">
               <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Booking</p>
-              <p class="mt-1 font-medium text-[color:var(--ink)]">calendly.com/wescalestartups</p>
+              <p class="mt-1 font-medium text-[color:var(--ink)] break-all">{siteConfig.bookingUrl.replace(/^https?:\/\//, "")}</p>
             </div>
           </div>
         </div>
@@ -204,7 +204,9 @@ const pastAppearances = [
 
         <!-- Footer for print -->
         <div class="mt-8 pt-6 border-t border-[color:var(--line)] text-center">
-          <p class="text-xs text-[color:var(--subtle)]">Media kit last updated: May 2026 · {absoluteUrl("/media-kit-download/")}</p>
+          <p class="text-xs text-[color:var(--subtle)]">
+            {siteConfig.nextStartWindow} Media kit reference date: {siteConfig.lastUpdated} · {absoluteUrl("/media-kit-download/")}
+          </p>
         </div>
       </div>
     </div>

@@ -7,11 +7,11 @@ export const siteConfig = {
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
-  lastUpdated: "5 May 2026",
+  lastUpdated: "11 May 2026",
 
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
-  bookingUrl: "https://calendly.com/wescalestartups",
+  bookingUrl: "https://calendly.com/danieljohnson",
   bookingLabel: "Book a 20-min Growth Audit",
   bookingNote:
     "20 minutes. No pitch. We diagnose your biggest growth bottleneck and decide whether it makes sense to work together.",
@@ -19,13 +19,17 @@ export const siteConfig = {
   // Positioning — fractional is the primary lane; full-time is a supporting note
   // surfaced only in About / FAQ, not on the headline cards.
   primaryLane: "Fractional CMO / Growth Operator for post-PMF Seed–Series B AI & B2B SaaS startups.",
-  availability:
-    "2 Fractional CMO slots available this quarter. Next start window: May 2026.",
+  /** Capacity line — pair with `nextStartWindow` for urgency without stale months. */
+  availability: "2 Fractional CMO slots available this quarter.",
+  /** Single source for “start window” copy; update when calendars shift. */
+  nextStartWindow: "Next start window: June 2026.",
+  /** Shorter header button label (full offer copy stays on `bookingLabel`). */
+  navBookingLabel: "Book Growth Audit",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",
   phone: "+44 7918 665435",
-  location: "UK-based, currently in Asia. Serving US, UK, Europe, and APAC clients with US-friendly overlap.",
+  location: "UK-based, currently in Asia, working with UK, US, Europe and APAC clients with US-friendly overlap.",
   locationShort: "UK-based · US-friendly overlap",
   linkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
   growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
@@ -56,9 +60,6 @@ export const siteConfig = {
     "https://app.growthmentor.com/mentors/daniel-johnson",
     "https://mentorcruise.com/mentor/danieljohnson/",
     "https://www.crunchbase.com/person/daniel-johnson-2",
-    "https://www.malt.uk/profile/danieljohnsonxyz",
-    "https://pangea.app/profile/daniel-johnson",
-    "https://www.instagram.com/danieljohnsonxyz/",
     "https://www.youtube.com/@danieljohnson6000",
     "https://www.wescalestartups.com",
     "https://www.linkedin.com/company/wescalestartups",
@@ -132,6 +133,10 @@ export const singleIdea = {
 // homepage uses `metaDescription` for SERP length limits while the hero
 // subcopy is authored directly in `index.astro`.
 // ──────────────────────────────────────────────────────────────────────────
+/** Homepage hero — outcome line directly under the H1. */
+export const homepageHeroOutcome =
+  "I help post-PMF AI and B2B SaaS founders turn founder-dependent growth into a repeatable GTM system, with sharper positioning, clearer reporting, and senior growth leadership, without hiring a full-time CMO.";
+
 export const positioning = {
   buyer: "Seed to Series B AI and B2B SaaS founders",
   outcome: "predictable pipeline, sharper positioning, senior growth leadership",
@@ -183,6 +188,11 @@ export const ctas = {
     href: siteConfig.bookingUrl,
     hint: "Free · 20 minutes · No pitch"
   },
+  bookingFallback: {
+    label: "See what the audit covers",
+    href: "/growth-audit/",
+    hint: "2-minute overview before booking"
+  },
   /** Mid-page / method sections — same destination, varied copy (Growth Hub CTA ladder). */
   methodDeepDive: {
     label: "Talk through your growth system in 20 minutes",
@@ -195,14 +205,14 @@ export const ctas = {
     hint: "See real outcomes"
   },
   bottleneck: {
-    label: "Find Your Biggest Growth Bottleneck",
+    label: "Run the Bottleneck Diagnostic",
     href: "/#growth-diagnosis",
     hint: "Free · 2 minutes"
   },
   startHere: {
-    label: "Start here",
-    href: "/start-here/",
-    hint: "5-minute orientation"
+    label: "Run the Bottleneck Diagnostic",
+    href: "/#growth-diagnosis",
+    hint: "Free · instant, on-page result"
   },
   growthNote: {
     label: "Get the Growth Notes newsletter",
@@ -213,74 +223,49 @@ export const ctas = {
 
 export const navigation = [
   { href: "/start-here/", label: "Start here" },
-  { href: "/fractional-cmo/", label: "Fractional CMO" },
-  { href: "/case-studies/", label: "Results" },
+  { href: "/work-with-me/", label: "Work with me" },
+  { href: "/case-studies/", label: "Case studies" },
   { href: "/writing/", label: "Writing" },
   { href: "/speaking/", label: "Speaking" },
   { href: "/about/", label: "About" }
 ] as const;
 
+/** Primary nav dropdown — services only; compare/expertise/media live in footer + /resources/. */
+export const workWithMeNavItems = [
+  { href: "/start-here/", label: "Start here", description: "Five-minute orientation. Where to begin if it's your first visit." },
+  { href: "/growth-audit/", label: "20-min Growth Audit", description: "Free diagnostic call. Bottleneck read in 20 minutes." },
+  { href: "/strategy-sprint/", label: "Strategy Sprint", description: "From £6k. 2–4 weeks. Plan, artefacts, first wins." },
+  { href: "/fractional-cmo/", label: "Fractional CMO", description: "From £7.5k/mo. Embedded senior GTM leadership." },
+  { href: "/founder-office-hours/", label: "Founder Office Hours", description: "Focused GTM decisions and second-brain sessions." },
+  { href: "/speaking/", label: "Speaking", description: "Talks, workshops, and founder-cohort sessions." }
+] as const;
+
+/** @deprecated Use workWithMeNavItems + resourcesFooterExtras; kept only if any import still expects groups. */
 export const navigationGroups = [
   {
     label: "Work with me",
-    href: "/start-here/",
-    items: [
-      { href: "/start-here/", label: "Start here", description: "Five-minute orientation. Where to begin if it's your first visit." },
-      { href: "/growth-audit/", label: "20-min Growth Audit", description: "Free diagnostic call. Bottleneck read in 20 minutes." },
-      { href: "/strategy-sprint/", label: "Strategy Sprint", description: "From £6k. 2–4 weeks. Plan, artefacts, first wins." },
-      { href: "/fractional-cmo/", label: "Fractional CMO", description: "From £7.5k/mo. Embedded senior GTM leadership." },
-      { href: "/mentoring/", label: "Founder office hours", description: "Focused growth decisions and second-brain sessions." },
-      { href: "/speaking/", label: "Speaking", description: "Talks, workshops, and founder-cohort sessions." }
-    ]
-  },
-  {
-    label: "Compare",
-    href: "/fractional-cmo/",
-    items: [
-      { href: "/fractional-cmo-vs-agency/", label: "Fractional CMO vs. agency", description: "Senior judgement vs. junior execution. When each is right." },
-      { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO", description: "Cost, ramp, ownership, and notice-period maths." },
-      { href: "/compare-growth-options/", label: "All six options compared", description: "Agency, freelancer, junior, full-time, consultant, fractional CMO." }
-    ]
-  },
-  {
-    label: "Expertise",
-    href: "/gtm-systems/",
-    items: [
-      { href: "/gtm-systems/", label: "GTM systems", description: "ICP, positioning, channel strategy, operating cadence." },
-      { href: "/product-led-growth/", label: "Product-led growth", description: "Activation, onboarding, trial conversion, retention." },
-      { href: "/experimentation/", label: "Experimentation", description: "Hypotheses, prioritisation, decision rules, learning loops." },
-      { href: "/ai-native-workflows/", label: "AI-native workflows", description: "Research, messaging, briefs, reporting, and faster iteration." },
-      { href: "/revenue-operations/", label: "Revenue operations", description: "Funnel visibility, pipeline process, reporting cadence." }
-    ]
-  },
-  {
-    label: "Media",
-    href: "/media-kit/",
-    items: [
-      { href: "/media-kit/", label: "Media kit", description: "Bios, headshots, topics, proof, and producer assets." },
-      { href: "/podcast-guest/", label: "Podcast guest", description: "Book Daniel for AI-native GTM and growth-system interviews." },
-      { href: "/speaking/", label: "Speaking", description: "Talks, workshops, panels, and founder-cohort sessions." },
-      { href: "/writing/", label: "Writing", description: "Essays and practical growth notes." },
-      { href: "/now/", label: "Now", description: "Current work, availability, and focus." }
-    ]
+    href: "/work-with-me/",
+    items: [...workWithMeNavItems]
   }
 ] as const;
 
-/** Footer columns follow Notion hub: intent-based IA (Work with me → Learn → Proof → Company). */
+/** Footer columns: Work with me · Method · Proof · Resources · Company · Contact */
 export const footerNavigation = {
   workWithMe: [
+    { href: "/work-with-me/", label: "All services" },
     { href: "/growth-audit/", label: "Growth Audit" },
     { href: "/strategy-sprint/", label: "Strategy Sprint" },
     { href: "/fractional-cmo/", label: "Fractional CMO" },
-    { href: "/mentoring/", label: "Founder Office Hours" },
+    { href: "/founder-office-hours/", label: "Founder Office Hours" },
     { href: "/speaking/", label: "Speaking / workshops" }
   ],
-  learnTheMethod: [
+  method: [
     { href: "/gtm-systems/", label: "GTM systems" },
     { href: "/ai-native-workflows/", label: "AI-native workflows" },
     { href: "/experimentation/", label: "Experimentation" },
     { href: "/revenue-operations/", label: "Revenue operations" },
-    { href: "/product-led-growth/", label: "Product-led growth" }
+    { href: "/product-led-growth/", label: "Product-led growth" },
+    { href: "/founder-led-distribution/", label: "Founder-led distribution" }
   ],
   proof: [
     { href: "/case-studies/", label: "Case studies" },
@@ -292,18 +277,23 @@ export const footerNavigation = {
     { href: "/start-here/", label: "Start here" },
     { href: "/about/", label: "About" },
     { href: "/now/", label: "Now" },
-    { href: "/writing/", label: "Writing" },
-    { href: "/contact/", label: "Contact" }
+    { href: "/writing/", label: "Writing" }
   ],
   resources: [
-    { href: "/faq/", label: "FAQ" },
-    { href: "/glossary/", label: "Glossary" },
-    { href: "/compare-growth-options/", label: "Compare six growth options" },
-    { href: "/fractional-cmo-vs-agency/", label: "Fractional CMO vs. agency" },
-    { href: "/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO" },
+    { href: "/resources/", label: "Resources hub" },
+    { href: "/resources/faq/", label: "FAQ" },
+    { href: "/resources/glossary/", label: "Glossary" },
+    { href: "/resources/compare-growth-options/", label: "Compare six growth options" },
+    { href: "/resources/fractional-cmo-vs-agency/", label: "Fractional CMO vs. agency" },
+    { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO" },
+    { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK)" },
     { href: "/podcast-guest/", label: "Podcast guest" },
     { href: "/newsletter/", label: "Growth Notes" },
     { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" }
+  ],
+  contact: [
+    { href: `mailto:${siteConfig.email}`, label: "Email Daniel" },
+    { href: siteConfig.bookingUrl, label: "Book a 20-min Growth Audit" }
   ]
 } as const;
 
@@ -311,13 +301,10 @@ export const footerNavigation = {
 // footer signal isn't diluted in press / podcast / event-organiser
 // contexts. Source: Notion 353f99a79fdb81eba129f6ca1740cd48
 export const socialLinks = [
-  { href: siteConfig.growthMentor, label: "GrowthMentor" },
   { href: siteConfig.linkedin, label: "LinkedIn" },
+  { href: siteConfig.growthMentor, label: "GrowthMentor" },
   { href: siteConfig.youtube, label: "YouTube" },
-  { href: siteConfig.mentorCruise, label: "MentorCruise" },
-  { href: siteConfig.malt, label: "Malt" },
-  { href: siteConfig.pangea, label: "Pangea" },
-  { href: siteConfig.instagram, label: "Instagram" }
+  { href: siteConfig.mentorCruise, label: "MentorCruise" }
 ] as const;
 
 export const audienceBands = [
@@ -440,29 +427,31 @@ export const trustLogos = [
 ] as const;
 
 export const trustAffiliations = [
-  "Google for Startups mentor",
-  "UK Space Agency innovation talk",
-  "Techstars mentor"
+  "Google for Startups / Launchpad growth mentor",
+  "Cambridge Judge & Imperial — guest lecturer",
+  "Techstars mentor",
+  "UK Export Academy speaker",
+  "Nomad Summit — growth & GTM sessions"
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
 // £18M+ revenue is now the lead metric: it's the most concrete dollar-tangible
 // claim and what founders care about most. £6.8M+ ad spend moves to slot 4.
 export const proofBar = [
-  { icon: "💰", value: proofStats.revenueImpact, label: "client revenue generated", source: "/case-studies/" },
-  { icon: "⭐", value: `${proofStats.mentorRating} / 5`, label: `from ${proofStats.mentorReviewCount} reviews on GrowthMentor`, source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
-  { icon: "🚀", value: proofStats.startupsAdvised, label: "AI & SaaS startups advised" },
-  { icon: "📈", value: proofStats.adSpend, label: "ad spend managed" }
+  { value: proofStats.revenueImpact, label: "client revenue generated", source: "/case-studies/" },
+  { value: `${proofStats.mentorRating} / 5`, label: `from ${proofStats.mentorReviewCount} reviews on GrowthMentor`, source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
+  { value: proofStats.mentorSessions, label: "mentor sessions delivered", source: siteConfig.growthMentor },
+  { value: proofStats.startupsAdvised, label: "AI & B2B SaaS startups advised" },
+  { value: proofStats.adSpend, label: "ad spend managed" }
 ] as const;
 
 // Lifetime totals — one strip, lower on the homepage. Now used as a wider
 // "lifetime aggregate" line that complements the proof bar without duplicating
 // its specific metrics. £18M+ stays as the lead claim where it matters.
 export const lifetimeTotals = [
-  `${proofStats.mentorSessions} mentor sessions delivered`,
-  "20+ AI & B2B SaaS startups scaled",
   `${proofStats.founderRaiseSupport} helped founders raise`,
-  proofStats.founderExits
+  proofStats.founderExits,
+  "Post-PMF GTM across Seed–Series B AI & B2B SaaS"
 ] as const;
 
 export const aiWorkflowExamples = [
@@ -479,12 +468,52 @@ export const aiWorkflowExamples = [
     output: "Campaign angles"
   },
   {
-    input: "CRM data",
+    input: "CRM & funnel data",
     synthesis: "Pipeline diagnosis",
     decision: "What to stop, fix, or scale this week",
     output: "Weekly decision rhythm"
+  },
+  {
+    input: "Message & offer hypotheses",
+    synthesis: "Structured message tests",
+    decision: "Which promise lands with the ICP",
+    output: "Demo and sales narrative updates"
+  },
+  {
+    input: "Campaign & channel results",
+    synthesis: "Learning log",
+    decision: "What to scale vs kill",
+    output: "Budget and creative iteration"
+  },
+  {
+    input: "Weekly leadership questions",
+    synthesis: "Decision brief",
+    decision: "Founder-level trade-offs with evidence",
+    output: "Clear next actions for the team"
   }
 ] as const;
+
+/** After booking the Growth Audit — reused on home + /growth-audit/. */
+export const afterYouBookSteps = [
+  {
+    title: "We map the growth bottleneck.",
+    body: "A tight read on whether the constraint is ICP, channel, conversion, founder dependency, or reporting — not generic advice."
+  },
+  {
+    title: "I tell you what I would fix first.",
+    body: "Honest sequencing: what to stop, what to test, and what can wait — so you leave with a concrete next move."
+  },
+  {
+    title: "If useful, we scope what’s next.",
+    body: "Strategy Sprint, Fractional CMO, or something else entirely — including a clean “not a fit” redirect."
+  }
+] as const;
+
+export const growthAuditSampleOutput = {
+  leadIn: "Example of what founders leave with (anonymised):",
+  quote:
+    "Your issue is not traffic. It is conversion from demo booked to qualified opportunity. First fix: rewrite the demo page around ICP pain, add a qualification path, and stop sending all traffic to the same generic CTA."
+} as const;
 
 export const speakingVideos = [
   {
@@ -578,7 +607,7 @@ export const homeServiceLadder = [
   {
     tier: "Tier 2 · Plan",
     heading: "Strategy Sprint",
-    price: "From £6k",
+    price: "£6k fixed scope",
     cadence: "2–4 week engagement",
     body:
       "Diagnose, prioritise, and ship the first artefacts. ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.",
@@ -592,8 +621,8 @@ export const homeServiceLadder = [
   {
     tier: "Tier 3 · Embedded",
     heading: "Fractional CMO",
-    price: "From £7.5k",
-    cadence: "/ month · 3-month minimum",
+    price: "From £7.5k/mo",
+    cadence: "3-month minimum",
     body:
       "Embedded senior ownership 1–2 days a week. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Builds the system and then hands it off clean.",
     bestFor:
@@ -837,8 +866,7 @@ export const strategySprintPage = {
 
 // Short testimonial snippet used in the active footer and sticky CTA.
 export const footerTestimonial = {
-  quote:
-    "Daniel walked in, saw the whole system at once, and named the two levers that mattered. Inside 60 days we had a weekly rhythm and pipeline actually built to our ICP.",
+  quote: "Named the two levers that mattered; inside 60 days we had a weekly rhythm and pipeline built to our ICP.",
   name: "Christian A.",
   role: "Founder — AI Healthtech"
 } as const;

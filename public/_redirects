@@ -30,5 +30,25 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /advisory                 /fractional-cmo/  301
 /advisory/                /fractional-cmo/  301
 
+# IA migration (2026-05): resources hub, services rename, booking canonical
+/work                     /work-with-me/  301
+/work/                    /work-with-me/  301
+/mentoring                /founder-office-hours/  301
+/mentoring/               /founder-office-hours/  301
+/faq                      /resources/faq/  301
+/faq/                     /resources/faq/  301
+/glossary                 /resources/glossary/  301
+/glossary/                /resources/glossary/  301
+/fractional-cmo-cost-uk   /resources/fractional-cmo-cost-uk/  301
+/fractional-cmo-cost-uk/  /resources/fractional-cmo-cost-uk/  301
+/fractional-cmo-vs-agency   /resources/fractional-cmo-vs-agency/  301
+/fractional-cmo-vs-agency/  /resources/fractional-cmo-vs-agency/  301
+/fractional-cmo-vs-full-time-cmo   /resources/fractional-cmo-vs-full-time-cmo/  301
+/fractional-cmo-vs-full-time-cmo/  /resources/fractional-cmo-vs-full-time-cmo/  301
+/compare-growth-options   /resources/compare-growth-options/  301
+/compare-growth-options/  /resources/compare-growth-options/  301
+/book                     /growth-audit/  301
+/book/                    /growth-audit/  301
+
 # Serve 404.html with a real 404 status for unmatched routes
 /*  /404.html  404

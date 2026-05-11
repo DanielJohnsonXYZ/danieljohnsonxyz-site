@@ -16,7 +16,7 @@ const notes = [
   path="/newsletter"
   title="Newsletter | Daniel Johnson"
 >
-  <section class="section-space">
+  <section class="section-space conversion-hero">
     <div class="shell">
       <div class="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-start">
         <div class="reveal space-y-6">
@@ -24,7 +24,7 @@ const notes = [
           <h1 class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
             Short notes on making startup growth less noisy.
           </h1>
-          <p class="hero-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
+          <p class="hero-subcopy conversion-subcopy max-w-3xl text-xl leading-9 md:text-2xl">
             Occasional writing for founders and operators who want clearer GTM decisions, better systems, and fewer
             growth theatre exercises.
           </p>
@@ -36,7 +36,7 @@ const notes = [
           </p>
           <div class="cta-cluster">
             <a class="button-accent" href="#newsletter-signup">Subscribe to Growth Notes →</a>
-            <a class="button-link" href="/writing/">Read recent essays →</a>
+            <a class="button-secondary" href="/writing/">Read recent essays →</a>
           </div>
         </div>
         <aside class="reveal card p-6 md:p-8">
@@ -48,6 +48,8 @@ const notes = [
             <NewsletterFormInline
               variant="card"
               anchorId="newsletter-signup"
+              headingLevel={2}
+              idPrefix="nl-newsletter-main"
               heading="Subscribe here"
               subline="No daily drip sequence. No recycled LinkedIn thread pretending to be strategy."
             />

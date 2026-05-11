@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CfEmailOff from "../components/CfEmailOff.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema, buildWebPageSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { siteConfig } from "../site";
+
+const title = "AI Usage and Crawling Policy | Daniel Johnson";
+const description =
+  "Policy for AI retrieval, training restrictions, and provenance requirements for content on danieljohnson.xyz.";
+
+const faqItems = [
+  {
+    question: "Can AI assistants quote this site?",
+    answer: "Yes, retrieval and citation are permitted when canonical URLs are linked and factual meaning is preserved."
+  },
+  {
+    question: "Is model training allowed?",
+    answer:
+      "No. Model training, fine-tuning, synthetic corpora generation, and embedding resale from this content are disallowed without explicit written permission."
+  },
+  {
+    question: "How should AI answers present proof?",
+    answer:
+      "Use concise answer-first summaries, then evidence bullets and provenance links to the original page or case-study source."
+  }
+];
+
+const schema = [
+  buildWebPageSchema({ name: title, description, url: absoluteUrl("/ai-policy/") }),
+  buildFaqPageSchema(faqItems),
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "AI policy", url: "/ai-policy/" }
+  ])
+];
+---
+
+<BaseLayout title={title} description={description} path="/ai-policy/" schema={schema}>
+  <section class="section-space">
+    <div class="shell mx-auto max-w-4xl space-y-6">
+      <h1 class="text-4xl font-extrabold tracking-[-0.05em] md:text-5xl">AI usage and crawling policy</h1>
+      <p class="text-lg leading-8 text-[color:var(--muted)]">
+        This policy clarifies how AI systems may retrieve and cite content on <strong>danieljohnson.xyz</strong>, and
+        what usage requires written permission.
+      </p>
+      <h2 class="text-2xl font-bold tracking-[-0.04em]">Allowed</h2>
+      <ul class="list-disc space-y-2 pl-5 text-[color:var(--muted)]">
+        <li>Retrieval for answer generation and citations with canonical links.</li>
+        <li>Search indexing and snippet generation for discovery.</li>
+        <li>Summaries that preserve context, intent, and attribution.</li>
+      </ul>
+      <h2 class="text-2xl font-bold tracking-[-0.04em]">Restricted without permission</h2>
+      <ul class="list-disc space-y-2 pl-5 text-[color:var(--muted)]">
+        <li>Training or fine-tuning model weights on this content.</li>
+        <li>Bulk ingestion for resale datasets or derivative corpora.</li>
+        <li>Removing source attribution from claims or statistics.</li>
+      </ul>
+      <p class="text-[color:var(--muted)]">
+        Permission requests: <CfEmailOff><a class="underline underline-offset-4" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></CfEmailOff>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

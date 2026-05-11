@@ -1,14 +1,14 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
-import { buildBreadcrumbSchema, buildFaqPageSchema } from "../lib/schema";
-import { ctas, vsAgency } from "../site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "../../lib/schema";
+import { ctas, vsAgency } from "../../site";
 
 const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
-    { name: "Fractional CMO", url: "/fractional-cmo/" },
-    { name: "vs. Agency", url: "/fractional-cmo-vs-agency/" }
+    { name: "Resources", url: "/resources/" },
+    { name: "Fractional CMO vs. agency", url: "/resources/fractional-cmo-vs-agency/" }
   ]),
   buildFaqPageSchema([...vsAgency.faq])
 ];
@@ -20,7 +20,7 @@ const tldr =
 <BaseLayout
   description="Fractional CMO vs agency for post-PMF AI & B2B SaaS: when each wins, what budget actually buys, how they pair & the failure modes founders miss."
   keywords="fractional CMO vs marketing agency, senior GTM vs channel execution, startup agency comparison"
-  path="/fractional-cmo-vs-agency/"
+  path="/resources/fractional-cmo-vs-agency/"
   schema={schemas}
   stickyCta={false}
   title="Fractional CMO vs. Agency | Daniel Johnson"
@@ -102,7 +102,7 @@ const tldr =
           Often, you need both. <span class="hero-accent">Just not at the same level.</span>
         </h2>
         <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/72">
-          The fractional CMO sets priorities, channel rules, and reporting; the agency executes a specific channel inside that framework. The CMO runs the agency relationship instead of the founder. That's frequently the cleanest setup for £1m–£10m ARR teams.
+          The fractional CMO sets priorities, channel rules, and reporting; the agency executes a specific channel inside that framework. The CMO runs the agency relationship instead of the founder. That's frequently the cleanest setup for 1M–10M ARR teams.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="vs-agency-cta-primary">
@@ -134,7 +134,7 @@ const tldr =
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center space-y-4">
         <p class="text-base leading-8 text-[color:var(--muted)]">
-          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope and pricing</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="https://wescalestartups.com/fractional-cmo-vs-agency/" rel="noreferrer" target="_blank">WSS consultancy comparison</a>
+          Also worth reading: <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-cost-uk/">Fractional CMO cost (UK)</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/fractional-cmo/">Full Fractional CMO scope</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="https://wescalestartups.com/fractional-cmo-vs-agency/" rel="noreferrer" target="_blank">WSS consultancy comparison</a>
         </p>
       </div>
     </div>

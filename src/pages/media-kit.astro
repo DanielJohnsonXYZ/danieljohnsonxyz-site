@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CfEmailOff from "../components/CfEmailOff.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig, trustLogos } from "../site";
+import { proofStats, siteConfig, trustLogos } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -40,7 +41,11 @@ const fastFacts = [
   { label: "Best topics", value: "AI-native GTM, founder-led growth, startup positioning, product-led growth, growth operating systems" },
   { label: "Location", value: "UK-based, currently in Asia. Serving US, UK, Europe, APAC" },
   { label: "Available for", value: "Expert quotes, podcast guest spots, panels, keynotes, workshops, newsletter interviews" },
-  { label: "Track record", value: "20+ startups · £18M+ revenue generated · 4.93/5 from 220 GrowthMentor reviews" },
+  { label: "Start window", value: siteConfig.nextStartWindow.replace(/^Next start window:\s*/i, "") },
+  {
+    label: "Track record",
+    value: `${proofStats.startupsAdvised} startups · ${proofStats.revenueImpact} revenue generated · ${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} GrowthMentor reviews`
+  },
   { label: "Community", value: "Moderator, Online Geniuses (53,000+ member marketing Slack)" },
   { label: "Contact", value: siteConfig.email }
 ];
@@ -110,6 +115,7 @@ const recentQuoteAngles = [
       <p class="eyebrow">Media Kit</p>
       <h1>Assets and guidance for press, podcasts, and events.</h1>
       <p>Everything you need to introduce Daniel Johnson accurately — bio, headshots, logos, speaking topics, and positioning guidance.</p>
+      <p class="mt-3 max-w-2xl text-sm font-semibold text-[color:var(--ink)]">{siteConfig.nextStartWindow}</p>
       <p class="mt-4 max-w-2xl text-sm leading-7 text-[color:var(--muted)]">
         For <strong>company</strong> boilerplate, logos, and proof points, use the
         <a
@@ -209,7 +215,9 @@ const recentQuoteAngles = [
         </ul>
         <p class="mt-6 text-[color:var(--muted)] leading-7">
           For time-sensitive quotes, email{" "}
-          <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <CfEmailOff>
+            <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          </CfEmailOff>
           . Typical response: same day where possible.
         </p>
       </div>
@@ -337,7 +345,7 @@ const recentQuoteAngles = [
           <div class="card p-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
               <span class="font-semibold text-[color:var(--ink)]">GrowthMentor</span>
-              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Top-rated mentor · 4.93/5 · 220 reviews</span>
+              <span class="text-xs uppercase tracking-[0.12em] text-[color:var(--accent)]">Top-rated mentor · {proofStats.mentorRating}/5 · {proofStats.mentorReviewCount} reviews</span>
             </div>
             <a href={siteConfig.growthMentor} class="text-sm link-arrow" target="_blank" rel="noreferrer">View profile →</a>
           </div>
@@ -388,10 +396,6 @@ const recentQuoteAngles = [
         <div class="card p-5 border-l-4 border-[color:var(--accent)]">
           <p class="text-base leading-7 text-[color:var(--ink)]">"The clearest positioning session we've had. No theory, just what to change."</p>
           <p class="mt-2 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">Growth workshop attendee</p>
-        </div>
-        <div class="card p-5 border-l-4 border-[color:var(--accent)]">
-          <p class="text-base leading-7 text-[color:var(--ink)]">"Daniel walked in, saw the whole system at once, and named the two levers that mattered."</p>
-          <p class="mt-2 text-xs uppercase tracking-[0.12em] text-[color:var(--subtle)]">Christian A., Founder — AI Healthtech</p>
         </div>
       </div>
     </div>

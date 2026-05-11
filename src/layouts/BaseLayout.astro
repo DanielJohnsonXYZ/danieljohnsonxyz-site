@@ -3,6 +3,7 @@ import EasterEgg from "../components/EasterEgg.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import StickyCta from "../components/StickyCta.astro";
+import { buildPageTitle, normalizeMetaDescription } from "../lib/seo";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -46,6 +47,8 @@ const {
 
 const canonical = absoluteUrl(path);
 const imageUrl = absoluteUrl(ogImage);
+const pageTitle = buildPageTitle(title);
+const pageDescription = normalizeMetaDescription(description);
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
 const allSchemas = [
   buildPersonSchema(),
@@ -55,21 +58,7 @@ const allSchemas = [
 ].filter(Boolean);
 const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
 const bingSiteVerification = import.meta.env.PUBLIC_BING_MS_VALIDATE?.trim() ?? "";
-// Standard GTM bootstrap (immediate) — matches Tag Manager “Install” snippet so verification tools detect gtm.js.
-const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${siteConfig.gtmId}');`;
-const revealScript = `window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'page_context',
-  page_path: window.location.pathname,
-  page_title: document.title,
-  page_location: window.location.href
-});
-
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const uiRevealScript = `const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealObserver = prefersReducedMotion
   ? null
   : new IntersectionObserver((entries) => {
@@ -88,7 +77,35 @@ document.querySelectorAll('.reveal').forEach((element) => {
   }
 
   revealObserver.observe(element);
+});`;
+const analyticsScript = `window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  event: 'page_context',
+  page_path: window.location.pathname,
+  page_title: document.title,
+  page_location: window.location.href
 });
+
+(() => {
+  const AI_SOURCES = ['chatgpt', 'openai', 'perplexity', 'gemini', 'claude', 'copilot', 'you.com', 'phind'];
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = (params.get('utm_source') || '').toLowerCase();
+  const utmMedium = (params.get('utm_medium') || '').toLowerCase();
+  let referrerHost = '';
+  try {
+    referrerHost = document.referrer ? new URL(document.referrer).hostname.toLowerCase() : '';
+  } catch {}
+  const matchedSource = AI_SOURCES.find((source) => utmSource.includes(source) || referrerHost.includes(source));
+  if (!matchedSource && utmMedium !== 'ai' && utmMedium !== 'llm') return;
+  window.dataLayer.push({
+    event: 'ai_referral_session',
+    ai_source: matchedSource || utmSource || 'unknown',
+    ai_medium: utmMedium || 'referrer',
+    ai_referrer_host: referrerHost || 'none',
+    page_path: window.location.pathname,
+    page_location: window.location.href
+  });
+})();
 
 document.addEventListener('click', (event) => {
   const target = event.target;
@@ -119,6 +136,36 @@ document.addEventListener('submit', (event) => {
     page_path: window.location.pathname
   });
 });`;
+const gtmLoaderScript = `(() => {
+  const gtmId = '${siteConfig.gtmId}';
+  let loaded = false;
+  const loadGtm = () => {
+    if (loaded) return;
+    loaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    const firstScript = document.getElementsByTagName('script')[0];
+    if (!firstScript || !firstScript.parentNode) return;
+    const gtm = document.createElement('script');
+    gtm.async = true;
+    gtm.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(gtmId);
+    firstScript.parentNode.insertBefore(gtm, firstScript);
+  };
+
+  const schedule = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadGtm, { timeout: 2500 });
+      return;
+    }
+    window.setTimeout(loadGtm, 1800);
+  };
+
+  if (document.readyState === 'complete') {
+    schedule();
+  } else {
+    window.addEventListener('load', schedule, { once: true });
+  }
+})();`;
 ---
 
 <!doctype html>
@@ -127,12 +174,11 @@ document.addEventListener('submit', (event) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0b0c" />
-    <!-- Analytics: GTM + dataLayer — page_context; cta_click; resource_download_click; form_submit (not data-fc-intake-form — that emits fractional_cmo_intake_submit). CMP via GTM if needed. -->
-    <!-- Google Tag Manager — high in <head> per GTM install instructions. -->
-    <script is:inline set:html={gtmScript}></script>
-    <!-- End Google Tag Manager -->
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <!-- Analytics: dataLayer is initialized inline; GTM script is deferred until load/idle. -->
+    <script is:inline set:html={analyticsScript}></script>
+    <script is:inline set:html={gtmLoaderScript}></script>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content={metaRobots} />
     {bingSiteVerification ? <meta name="msvalidate.01" content={bingSiteVerification} /> : null}
@@ -141,7 +187,6 @@ document.addEventListener('submit', (event) => {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <!-- Performance hints -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <!-- Calendly is linked from multiple CTAs — preconnect so the booking page opens fast. -->
     <link rel="preconnect" href="https://calendly.com" crossorigin />
@@ -159,25 +204,25 @@ document.addEventListener('submit', (event) => {
 
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:alt" content={pageTitle} />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={siteConfig.twitterHandle} />
     <meta name="twitter:creator" content={siteConfig.twitterHandle} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={imageUrl} />
-    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:image:alt" content={pageTitle} />
 
     <!-- Hints for AI answer engines (GEO). Values kept in sync with site.ts + llms.txt. -->
-    <meta name="ai:summary" content={description} />
+    <meta name="ai:summary" content={pageDescription} />
     <meta name="ai:role" content="Fractional CMO & AI-Native Growth Operator" />
     <meta name="ai:serves" content="Seed to Series B AI and B2B SaaS founders" />
     <meta name="ai:contact" content={siteConfig.bookingUrl} />
@@ -219,6 +264,6 @@ document.addEventListener('submit', (event) => {
     <StickyCta enabled={stickyCta} />
 
     <EasterEgg />
-    <script is:inline set:html={revealScript}></script>
+    <script is:inline set:html={uiRevealScript}></script>
   </body>
 </html>

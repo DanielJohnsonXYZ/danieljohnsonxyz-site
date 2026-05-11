@@ -1,0 +1,31 @@
+---
+type Tone = "light" | "dark";
+
+interface Props {
+  tone?: Tone;
+  rows?: string[][];
+}
+
+const {
+  tone = "light",
+  rows = [
+    ["Positioning", "Pipeline", "Messaging", "Conversion", "Reporting", "Founder-led growth"],
+    ["Customer signal", "Acquisition tests", "Decision rhythm", "Proof library", "AI-native research", "GTM system"]
+  ]
+} = Astro.props;
+
+const doubledRows = rows.map((row) => [...row, ...row]);
+---
+
+<div class={`rotating-text-bars rotating-text-bars-${tone}`} aria-label="Growth system focus areas">
+  {doubledRows.map((row, rowIndex) => (
+    <div class={`rtb-track rtb-track-${rowIndex + 1}`}>
+      <div class="rtb-content">
+        {row.map((item, itemIndex) => (
+          <span class={`rtb-item rtb-item-${(itemIndex % 5) + 1}`}>{item}</span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
