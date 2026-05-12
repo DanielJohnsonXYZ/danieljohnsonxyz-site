@@ -4,7 +4,6 @@ import SectionHeader from "../components/SectionHeader.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
-import HeroEngagementCard from "../components/HeroEngagementCard.astro";
 import RotatingTextBars from "../components/RotatingTextBars.astro";
 import AnswerEvidenceBlock from "../components/AnswerEvidenceBlock.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -24,6 +23,7 @@ import {
   siteConfig,
   trustLogos
 } from "../site";
+import "../styles/hero-v3.css";
 
 // ─── Content data ───────────────────────────────────────────────────────
 const articles = (await getCollection("articles"))
@@ -34,11 +34,7 @@ const media = sortByFeaturedThenOrder(await getCollection("media"));
 const featuredMedia = media.slice(0, 4);
 
 const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials"));
-
-// Lead testimonial — strongest specific result.
 const leadTestimonial = testimonials.find((t) => t.data.name === "Christian A");
-
-// Two supporting testimonials with named attribution.
 const supportingTestimonials = [
   testimonials.find((t) => t.data.name === "Camiel Roex"),
   testimonials.find((t) => t.data.name === "Greg Weinstein")
@@ -53,11 +49,39 @@ const methodLayers = [
   { title: "Founder-led distribution", body: "Founder content pillars, proof library, content-to-pipeline loop.", href: "/founder-led-distribution/" },
   { title: "Reporting", body: "Growth scorecard, pipeline view, weekly stop / scale / fix notes.", href: "/revenue-operations/" }
 ];
-const layerCount = methodLayers.length;
 
-// Hero credential strip — external affiliations only.
+// Hero proof — pick the three most evocative numbers (compact ticker)
+const heroProofTicker = proofBar.slice(0, 3);
+
+// Hero credentials — just the four marquee affiliations
 const heroCredentialIds = new Set(["growthmentor", "cambridge-judge", "techstars", "imperial"]);
 const heroCredentialLogos = trustLogos.filter((item) => heroCredentialIds.has(item.id));
+
+// Hero engagement card — three rungs of the ladder, in one tap each
+const heroEngagementRows = [
+  {
+    step: "01",
+    title: "20-min Growth Audit",
+    sub: "Free call. Bottleneck read, honest fit, no pitch.",
+    href: "/growth-audit/",
+    cta: "hero-engage-audit"
+  },
+  {
+    step: "02",
+    title: "Strategy Sprint",
+    sub: "£6k fixed scope. Plan, artefacts, first wins in 2–4 weeks.",
+    href: "/strategy-sprint/",
+    cta: "hero-engage-sprint"
+  },
+  {
+    step: "03",
+    title: "Fractional CMO",
+    sub: "Senior growth leadership without a full-time hire.",
+    href: "/fractional-cmo/",
+    cta: "hero-engage-cmo",
+    recommended: true
+  }
+];
 
 // ─── Proof — real outcomes ───────────────────────────────────────────────
 const outcomeCards = [
@@ -196,66 +220,38 @@ const schemas = [
   schema={schemas}
   title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
 >
-  <!-- 1. Hero ─────────────────────────────────────────────────────────── -->
-  <section class="hero-section hero-section-compact section-space conversion-hero wss-hero-redesign" aria-labelledby="hero-heading">
+  <!-- ════════════════════════════════════════════════════════════════════
+       1 · HERO — confident, premium, focused
+       ════════════════════════════════════════════════════════════════════ -->
+  <section class="dj-hero" aria-labelledby="hero-heading">
     <div class="shell">
-      <div class="hero-home-grid">
-        <div class="hero-home-top reveal flex flex-col gap-5 lg:pt-1">
-          <span class="service-label">Fractional CMO · {singleIdea.short}</span>
+      <div class="dj-hero-layout">
+        <!-- Left column: text & CTA stack -->
+        <div class="dj-hero-content">
+          <span class="dj-hero-eyebrow">
+            <span class="dj-hero-eyebrow-dot" aria-hidden="true"></span>
+            <span>Fractional CMO · {singleIdea.short}</span>
+          </span>
 
-          <div class="space-y-4">
-            <h1 id="hero-heading" class="max-w-4xl text-5xl font-extrabold leading-[1.02] tracking-[-0.055em] text-balance md:text-[3.65rem] lg:text-[3.95rem] xl:text-[4.05rem]">
-              Your growth still depends on you. <span class="hero-accent">That&apos;s the bottleneck I fix.</span>
-            </h1>
-            <p class="hero-subcopy conversion-subcopy max-w-3xl text-lg font-medium leading-8 text-[color:var(--ink)] md:text-xl">
-              I help post-PMF startup founders — B2B SaaS, AI, and beyond — turn founder-dependent growth into a repeatable GTM system. Sharper positioning, predictable pipeline, senior growth leadership without the £150k full-time hire.
-            </p>
-          </div>
-        </div>
+          <h1 id="hero-heading" class="dj-hero-h1">
+            Your growth still depends on you.
+            <span class="dj-hero-h1-accent">That&rsquo;s the bottleneck I fix.</span>
+          </h1>
 
-        <div class="hero-home-photo reveal hero-founder-stack flex flex-col gap-5 lg:gap-6 lg:sticky lg:top-28">
-          <article class="hero-photo-card overflow-hidden">
-            <img
-              alt="Daniel Johnson, fractional CMO and AI-native growth operator"
-              class="aspect-[4/5] w-full object-cover object-top hero-portrait"
-              decoding="async"
-              fetchpriority="high"
-              height="960"
-              loading="eager"
-              src={siteConfig.headshot}
-              width="768"
-            />
-            <div class="credential-logos" aria-label="Selected external affiliations">
-              {
-                heroCredentialLogos.map((item) => (
-                  <span class="credential-logo">
-                    <img alt={item.alt} decoding="async" loading="lazy" src={item.src} />
-                  </span>
-                ))
-              }
-            </div>
-          </article>
-          <HeroEngagementCard />
-        </div>
-
-        <div class="hero-home-rest reveal flex flex-col gap-5">
-          <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
-            {icpFirmographics.oneLiner}
+          <p class="dj-hero-subcopy">
+            Senior GTM ownership for post-PMF AI &amp; B2B SaaS founders. <strong>Sharper positioning, predictable pipeline, a weekly operating rhythm</strong> — without committing to a £150k full-time CMO hire.
           </p>
 
-          <div class="hero-proof-bar hero-proof-bar--five" aria-label="Daniel's track record at a glance">
+          <div class="dj-hero-proof-row" aria-label="Daniel's track record at a glance">
             {
-              proofBar.map((item) => (
+              heroProofTicker.map((item) => (
                 <div>
                   <strong>
-                    <a
-                      class="text-[color:inherit] underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]"
-                      href={item.source}
-                      rel={item.source.startsWith("http") ? "noreferrer noopener" : undefined}
-                      target={item.source.startsWith("http") ? "_blank" : undefined}
-                    >
-                      {item.value}
-                    </a>
+                    {item.source.startsWith("http") ? (
+                      <a href={item.source} rel="noreferrer noopener" target="_blank">{item.value}</a>
+                    ) : (
+                      <a href={item.source}>{item.value}</a>
+                    )}
                   </strong>
                   <span>{item.label}</span>
                 </div>
@@ -263,42 +259,96 @@ const schemas = [
             }
           </div>
 
-          <div class="cta-cluster">
-            <div class="cta-row flex-wrap">
-              <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
-                {ctas.primary.label} →
-              </a>
-              <a class="button-secondary" href={ctas.bottleneck.href} data-cta="hero-bottleneck">
-                {ctas.bottleneck.label} →
-              </a>
-              <a class="button-link" href={ctas.caseStudies.href} data-cta="hero-case-studies">
-                {ctas.caseStudies.label} →
-              </a>
-            </div>
-            <p class="text-sm text-[color:var(--muted)]">
-              <a class="font-semibold underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]" href="/start-here/">
-                New here? Start here →
-              </a>
+          <div class="dj-hero-cta-row">
+            <a class="dj-hero-cta-primary" href={ctas.primary.href} data-cta="hero-primary">
+              <span>{ctas.primary.label}</span>
+              <span class="dj-arr" aria-hidden="true">→</span>
+            </a>
+            <a class="dj-hero-cta-secondary" href={ctas.caseStudies.href} data-cta="hero-case-studies">
+              <span>See case studies</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="dj-hero-cta-tertiary" href="/start-here/" data-cta="hero-start-here">
+              New here? Start here
+            </a>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <p class="dj-hero-availability">
+              <span class="dj-hero-availability-dot" aria-hidden="true"></span>
+              {siteConfig.availability}
             </p>
-            <p class="availability-line">{siteConfig.availability}</p>
+            <p class="dj-hero-icp">
+              <strong>Best fit:</strong> {icpFirmographics.oneLiner}
+            </p>
           </div>
         </div>
+
+        <!-- Right column: portrait, badge, credentials, engagement card -->
+        <aside class="dj-hero-side" aria-label="About Daniel">
+          <div class="dj-hero-portrait-frame">
+            <div class="dj-hero-portrait-inner">
+              <img
+                alt="Daniel Johnson, fractional CMO and AI-native growth operator"
+                decoding="async"
+                fetchpriority="high"
+                height="960"
+                loading="eager"
+                src={siteConfig.headshot}
+                width="768"
+              />
+              <span class="dj-hero-portrait-tag">Fractional CMO</span>
+              <span class="dj-hero-portrait-badge">
+                <span class="dj-hero-portrait-badge-dot" aria-hidden="true"></span>
+                Available · {siteConfig.availability.includes("2026") ? "2026" : "now"}
+              </span>
+            </div>
+          </div>
+
+          <div class="dj-hero-creds" aria-label="Selected external affiliations">
+            <p class="dj-hero-creds-label">Selected affiliations</p>
+            <div class="dj-hero-creds-logos">
+              {
+                heroCredentialLogos.map((item) => (
+                  <img alt={item.alt} decoding="async" loading="lazy" src={item.src} />
+                ))
+              }
+            </div>
+          </div>
+
+          <nav class="dj-hero-engagement" aria-label="Ways to work with Daniel">
+            <header class="dj-hero-engagement-head">
+              <p class="dj-hero-engagement-eyebrow">Ways to work together</p>
+              <p class="dj-hero-engagement-title">Pick the smallest commitment that answers your question.</p>
+            </header>
+            <ul class="dj-hero-engagement-rows" role="list">
+              {
+                heroEngagementRows.map((row) => (
+                  <li class:list={["dj-hero-engagement-row", row.recommended && "dj-hero-engagement-row--recommended"]}>
+                    <a class="dj-hero-engagement-link" href={row.href} data-cta={row.cta}>
+                      <span class="dj-hero-engagement-step" aria-hidden="true">{row.step}</span>
+                      <span class="dj-hero-engagement-body">
+                        <strong>{row.title}</strong>
+                        <small>{row.sub}</small>
+                      </span>
+                      <span class="dj-hero-engagement-arr" aria-hidden="true">→</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </aside>
       </div>
 
-      <div class="trust-strip trust-strip-large hero-trust-strip reveal" aria-label="Selected affiliations and platforms">
-        <p class="trust-strip-label">Selected affiliations</p>
-        <div class="trust-strip-logos">
+      <!-- Hairline + refined trust strip -->
+      <div class="dj-hero-hairline" aria-hidden="true"></div>
+      <div class="dj-trust-strip reveal" aria-label="Selected affiliations and platforms">
+        <p class="dj-trust-strip-label">Trusted by founders &amp; platforms</p>
+        <div class="dj-trust-strip-logos">
           {
             trustLogos.map((item) => (
-              <img
-                alt={item.alt}
-                class={`trust-logo trust-logo-${item.id} !h-10 !max-h-10 !w-auto !max-w-[10.5rem] shrink-0 !object-contain !grayscale contrast-[1.08] !opacity-90 !mix-blend-multiply`}
-                decoding="async"
-                height="40"
-                loading="lazy"
-                src={item.src}
-                width="160"
-              />
+              <img alt={item.alt} decoding="async" height="32" loading="lazy" src={item.src} width="160" />
             ))
           }
         </div>
@@ -306,31 +356,38 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 2. Problem statement ────────────────────────────────────────────── -->
-  <section class="section-space pt-0" aria-labelledby="problem-heading">
+  <!-- ════════════════════════════════════════════════════════════════════
+       2 · PROBLEM — pulled-quote framing
+       ════════════════════════════════════════════════════════════════════ -->
+  <section class="section-space" aria-labelledby="problem-heading">
     <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-6">
-        <h2 id="problem-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-6xl">
-          You've got traction. <span class="hero-accent">So why does growth still feel like guessing?</span>
-        </h2>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          Paying customers. Revenue line moving. A deck that holds up. But the acquisition engine? Plateaued. Founder-led sales that doesn't scale. No repeatable pipeline. A GTM stack that's three tools taped together.
-        </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          You don't need more tactics. You need a senior operator who can walk in, see the whole system at once, and tell you — with specifics — which two levers matter for your company right now.
-        </p>
+      <div class="reveal mx-auto max-w-4xl">
+        <div class="dj-problem">
+          <span class="dj-eyebrow">The bottleneck</span>
+          <h2 id="problem-heading" class="mt-4 dj-section-title">
+            You&rsquo;ve got traction. <span class="hero-accent">So why does growth still feel like guessing?</span>
+          </h2>
+          <p class="mt-5 dj-section-lede">
+            Paying customers. Revenue line moving. A deck that holds up. But the acquisition engine? Plateaued. Founder-led sales that doesn&rsquo;t scale. No repeatable pipeline. A GTM stack that&rsquo;s three tools taped together.
+          </p>
+          <p class="mt-4 dj-section-lede">
+            You don&rsquo;t need more tactics. You need a senior operator who can walk in, see the whole system at once, and tell you — with specifics — which two levers matter for your company right now.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. RotatingTextBars — visual divider ────────────────────────────── -->
+  <!-- 3 · Visual divider — rotating bars ─────────────────────────────── -->
   <div class="reveal overflow-hidden">
     <div class="shell">
       <RotatingTextBars />
     </div>
   </div>
 
-  <!-- 4. Buying ladder — Audit → Sprint → Fractional CMO ─────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       4 · BUYING LADDER — three ways in
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-8" id="services">
     <div class="shell">
       <SectionHeader
@@ -376,13 +433,15 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 5. Who this is for / not for ──────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       5 · FIT — best fit vs not a fit
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" aria-labelledby="fit-heading">
     <div class="shell">
       <SectionHeader
         eyebrow="Fit"
-        intro="I'd rather save us both a 20-minute call if we're not the right match."
-        title="Who this is for, and who it's not."
+        intro="I&rsquo;d rather save us both a 20-minute call if we&rsquo;re not the right match."
+        title="Who this is for, and who it&rsquo;s not."
       />
 
       <div class="mt-10 grid gap-5 md:grid-cols-2">
@@ -406,12 +465,14 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 6. Why me vs agency ─────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       6 · WHY ME vs agency
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" aria-labelledby="vs-heading">
     <div class="shell">
       <SectionHeader
         eyebrow="Why not an agency"
-        intro="You don't need another agency layer when the real problem is senior growth judgement."
+        intro="You don&rsquo;t need another agency layer when the real problem is senior growth judgement."
         title="Senior growth judgement, not junior execution."
       />
 
@@ -432,23 +493,25 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 7. The method ───────────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       7 · THE METHOD — dark section
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="dark-section section-space" aria-labelledby="method-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center">
-        <span class="eyebrow justify-center text-white/60">The method</span>
-        <h2 id="method-heading" class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-6xl">
-          I don't run campaigns. <span class="hero-accent">I build growth systems that run without you.</span>
+        <span class="dj-eyebrow justify-center" style="color: #c4b5fd;">The method</span>
+        <h2 id="method-heading" class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-6xl text-balance">
+          I don&rsquo;t run campaigns. <span class="hero-accent">I build growth systems that run without you.</span>
         </h2>
       </div>
 
       <div class="reveal mx-auto mt-10 max-w-3xl space-y-5 text-lg leading-8 text-white/72">
         <p>Most growth consultants arrive, ship a deck, and disappear. Not how I work.</p>
         <p>
-          Every engagement builds the same thing: a growth system. A repeatable architecture your team can run after I'm gone.
+          Every engagement builds the same thing: a growth system. A repeatable architecture your team can run after I&rsquo;m gone.
         </p>
         <p class="text-sm uppercase tracking-[0.16em] text-white/50">
-          {layerCount} layers, one loop
+          Six layers, one loop
         </p>
       </div>
 
@@ -474,7 +537,7 @@ const schemas = [
 
       <div class="reveal mt-10 text-center">
         <p class="text-base leading-8 text-white/68">
-          If "growth system" sounds vague, that's fine. I'll show you exactly what it looks like on a 20-minute audit.
+          If &ldquo;growth system&rdquo; sounds vague, that&rsquo;s fine. I&rsquo;ll show you exactly what it looks like on a 20-minute audit.
         </p>
         <div class="mt-6 flex justify-center">
           <a class="button-accent" href={ctas.primary.href} data-cta="method-primary">
@@ -485,7 +548,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 8. Hosted podcast ───────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       8 · HOSTED PODCAST
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" aria-labelledby="podcast-host-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-8 md:p-10">
@@ -518,11 +583,13 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 9. AI-native GTM ────────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       9 · AI-NATIVE GTM
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space" aria-labelledby="ai-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-5xl space-y-6">
-        <span class="eyebrow">How I work</span>
+        <span class="dj-eyebrow">How I work</span>
         <h2 id="ai-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
           What AI-native GTM means <span class="hero-accent">here.</span>
         </h2>
@@ -622,7 +689,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 10. Growth Diagnosis — moved lower ─────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       10 · GROWTH DIAGNOSIS
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" id="growth-diagnosis" aria-labelledby="diagnosis-heading">
     <div class="shell">
       <SectionHeader
@@ -634,7 +703,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 11. Image-led credibility ───────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       11 · IMAGE-LED CREDIBILITY
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -663,13 +734,13 @@ const schemas = [
         <p class="card-label text-center text-xs uppercase tracking-[0.16em] text-[color:var(--subtle)]">Recent attendee feedback</p>
         <div class="testimonial-strip mx-auto mt-3 max-w-3xl">
           <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
-            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> "Excellent presentation"
+            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> &ldquo;Excellent presentation&rdquo;
           </span>
           <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
-            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> "Very helpful"
+            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> &ldquo;Very helpful&rdquo;
           </span>
           <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
-            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> "Great succinct intro to scaling"
+            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> &ldquo;Great succinct intro to scaling&rdquo;
           </span>
         </div>
       </div>
@@ -698,7 +769,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 12. Proof — real outcomes ───────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       12 · PROOF — real outcomes (dark)
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="dark-section section-space" id="proof" aria-labelledby="proof-heading">
     <div class="shell">
       <SectionHeader
@@ -732,7 +805,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 13. Testimonials ────────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       13 · TESTIMONIALS
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space" aria-labelledby="testimonials-heading">
     <div class="shell">
       <SectionHeader
@@ -744,7 +819,7 @@ const schemas = [
       {leadTestimonial && (
         <blockquote class="reveal mt-10 card p-8 md:p-12 testimonial-lead">
           <p class="text-2xl font-semibold leading-10 tracking-[-0.04em] md:text-3xl">
-            "{leadTestimonial.data.quote}"
+            &ldquo;{leadTestimonial.data.quote}&rdquo;
           </p>
           <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
             <p class="font-semibold">{leadTestimonial.data.name}</p>
@@ -758,7 +833,7 @@ const schemas = [
           supportingTestimonials.map((item) => (
             <blockquote class="reveal card p-6 md:p-7">
               <p class="text-lg font-semibold leading-8 tracking-[-0.03em]">
-                "{item.data.quote}"
+                &ldquo;{item.data.quote}&rdquo;
               </p>
               <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
                 <p class="font-semibold">{item.data.name}</p>
@@ -783,17 +858,19 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 14. About preview ───────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       14 · ABOUT PREVIEW
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
-        <span class="eyebrow">About</span>
-        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">About Daniel.</h2>
+        <span class="dj-eyebrow">About</span>
+        <h2 class="dj-section-title">About Daniel.</h2>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
           10+ years in growth as a co-founder, embedded Head of Growth, and fractional CMO. 20+ AI and B2B SaaS startups advised. £6.8M+ paid spend managed, £18M+ revenue generated, £15M+ helped founders raise. Two exits on the founder side: one mental-health tech (eQuoo), one eCommerce.
         </p>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          I mentor founders through Google for Startups, Techstars, and GrowthMentor. I've lectured at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa. {siteConfig.location}
+          I mentor founders through Google for Startups, Techstars, and GrowthMentor. I&rsquo;ve lectured at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa. {siteConfig.location}
         </p>
         <p>
           <a class="link-arrow" href="/about/">Read more about Daniel →</a>
@@ -802,7 +879,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 15. Writing ─────────────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       15 · WRITING
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -835,7 +914,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 16. Answer evidence block — moved before FAQ ───────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       16 · ANSWER EVIDENCE — for AI / search engines
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" aria-label="Answer-first proof summary">
     <div class="shell">
       <AnswerEvidenceBlock
@@ -854,7 +935,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 17. FAQ ──────────────────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       17 · FAQ
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" id="faq" aria-labelledby="home-faq-heading">
     <div class="shell">
       <SectionHeader
@@ -889,7 +972,9 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 18. Final CTA ───────────────────────────────────────────────────── -->
+  <!-- ════════════════════════════════════════════════════════════════════
+       18 · FINAL CTA
+       ════════════════════════════════════════════════════════════════════ -->
   <section class="cta-gradient section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
@@ -898,7 +983,7 @@ const schemas = [
           {ctas.primary.label}.
         </h2>
         <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
-          20 minutes on your specific situation. No pitch, no deck, no trying-to-close. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.
+          20 minutes on your specific situation. No pitch, no deck, no trying-to-close. You&rsquo;ll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn&rsquo;t, I&rsquo;ll tell you what I&rsquo;d do instead.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="final-primary">
@@ -920,28 +1005,7 @@ const schemas = [
 </BaseLayout>
 
 <style>
-  /* ── Credential logo strip — consistent height alignment ─────────────── */
-  .credential-logos {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 0.875rem;
-    padding: 0.75rem 1rem;
-  }
-  .credential-logo {
-    display: flex;
-    align-items: center;
-  }
-  .credential-logo img {
-    height: 22px;
-    width: auto;
-    max-width: 100px;
-    object-fit: contain;
-  }
-
-  /* ── Buying ladder hover reveal ──────────────────────────────────────── */
-  /* Grid-template-rows trick: 0fr collapses inner div, 1fr expands it.    */
-  /* overflow:hidden on inner div prevents content showing outside grid.   */
+  /* ── Buying ladder hover reveal (kept from previous design) ─────────── */
   .ladder-reveal-details {
     display: grid;
     grid-template-rows: 0fr;
@@ -956,7 +1020,6 @@ const schemas = [
     grid-template-rows: 1fr;
     opacity: 1;
   }
-  /* Primary card (e.g. Audit) stays expanded by default */
   .ladder-card-primary .ladder-reveal-details {
     grid-template-rows: 1fr;
     opacity: 1;
