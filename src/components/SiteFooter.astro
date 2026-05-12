@@ -111,7 +111,6 @@ const { mediaCta = false } = Astro.props;
               ))
             }
           </ul>
-
         </div>
 
         <div class="space-y-4">
@@ -208,7 +207,7 @@ const { mediaCta = false } = Astro.props;
               </CfEmailOff>
             </div>
           </li>
-          {socialLinks.map((item) => (
+          {socialLinks.filter(item => item.label !== "GrowthMentor" && item.label !== "MentorCruise").map((item) => (
             <li><a class="hover:text-white" href={item.href} rel="noreferrer" target="_blank">{item.label}</a></li>
           ))}
         </ul>

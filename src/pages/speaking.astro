@@ -17,7 +17,7 @@ const speakingHighlights = [
 ];
 // Five named "Signature talks" — each is a bookable session organisers
 // can propose to their committee. Named talks make event briefing easier
-// and rank for specific topic searches. Source: Notion 353f99a79fdb81f0a60bec41f5e43ffc
+// and rank for specific topic searches.
 const signatureSessions = [
   {
     title: "What the Hell Is Growth?",
@@ -51,7 +51,7 @@ const organiserTakeaways = [
   "A speaker who can flex between executive-level strategy and hands-on startup detail."
 ];
 
-/** Notion 353f99a79fdb819aae61dfaf234b343e */
+/** Best audiences */
 const bestAudiences = [
   "Seed to Series B founders",
   "AI startup teams",
@@ -85,11 +85,14 @@ const eventPhotos = [
     src: "/images/shenzhen-seo-event-poster.webp",
     alt: "Shenzhen SEO & SaaS event poster featuring Daniel Johnson as speaker",
     caption: "Event poster — Shenzhen SEO & SaaS session"
+  },
+  {
+    src: "/images/cambridge-judge-business-school-960.webp",
+    alt: "Cambridge Judge Business School, one of Daniel Johnson's selected teaching and speaking affiliations",
+    caption: "Teaching at Cambridge Judge Business School"
   }
 ];
-// Formats — be explicit about every shape, including the higher-value
-// workshop and private formats organisers often assume aren't available.
-// Source: Notion 353f99a79fdb8165ab39c4ede9d7347f
+// Formats — explicit about every shape including higher-value workshop and private formats.
 const deliverables = [
   "30-minute keynote",
   "45-minute practical talk",
@@ -125,7 +128,7 @@ const speakingSchema = [
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="reveal space-y-6">
           <span class="service-label">Speaking / Workshops</span>
-          <!-- Speaker one-liner for organisers — Notion 353f99a79fdb81beb1f3c277f23c0e3f -->
+          <!-- Speaker one-liner for organisers -->
           <p class="max-w-3xl text-lg font-medium leading-snug text-balance text-[color:var(--foreground)] md:text-xl">
             Daniel Johnson speaks to founders, operators, and startup teams about AI-native GTM, founder-led
             growth, positioning, and how to build repeatable growth systems after product-market fit.
@@ -134,7 +137,7 @@ const speakingSchema = [
             Practical startup growth talks for rooms that need clarity, not hype.
           </h1>
           <p class="max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            I speak to founders, operators, students, and innovation teams about growth systems, GTM judgment,
+            I speak to founders, operators, and startup teams about growth systems, GTM judgment,
             experimentation, and the commercial work required to turn momentum into repeatability.
           </p>
           <ul class="scan-list max-w-3xl">
@@ -159,55 +162,68 @@ const speakingSchema = [
             <a class="button-link" href="/media-kit/">Media kit →</a>
           </div>
         </div>
-        <aside class="grid gap-5">
-          <div class="grid gap-5">
-            {
-              featuredVideos.map((video) => (
-                <article class="reveal video-panel">
-                  <div class="video-frame">
-                    <iframe
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowfullscreen
-                      loading="lazy"
-                      src={video.embed}
-                      title={video.title}
-                    />
-                  </div>
-                  <div class="video-panel-copy">
-                    <p class="card-label">{video.source}</p>
-                    <h2>{video.title}</h2>
-                    <p>{video.description}</p>
-                    <a class="link-arrow" href={video.href} rel="noreferrer" target="_blank">
-                      Watch on YouTube →
-                    </a>
-                  </div>
-                </article>
-              ))
-            }
-          </div>
+
+        <!-- Right column: hero video only — gallery below -->
+        <aside class="flex flex-col gap-5">
+          {
+            featuredVideos.slice(0, 1).map((video) => (
+              <article class="reveal video-panel">
+                <div class="video-frame">
+                  <iframe
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy"
+                    src={video.embed}
+                    title={video.title}
+                  />
+                </div>
+                <div class="video-panel-copy">
+                  <p class="card-label">{video.source}</p>
+                  <h2>{video.title}</h2>
+                  <p>{video.description}</p>
+                  <a class="link-arrow" href={video.href} rel="noreferrer" target="_blank">
+                    Watch on YouTube →
+                  </a>
+                </div>
+              </article>
+            ))
+          }
           <p class="reveal text-center text-sm text-[color:var(--muted)]">
             <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href={siteConfig.youtube} rel="noreferrer" target="_blank">
               More on Daniel&apos;s YouTube channel →
             </a>
           </p>
-          <div class="reveal card overflow-hidden p-4">
-            <img alt="Cambridge Judge Business School building" class="aspect-[4/3] w-full rounded-xl object-cover" height="720" loading="eager" src="/images/cambridge-judge-business-school-960.webp" width="960" />
-          </div>
-          <div class="reveal card p-6 md:p-8">
-            <p class="card-label">Formats</p>
-            <ul class="mt-6 space-y-4">
-              {
-                deliverables.map((item) => (
-                  <li class="flex gap-4 border-b border-[color:var(--line)] pb-4 text-base leading-7 last:border-b-0 last:pb-0">
-                    <span class="mt-2 size-2 shrink-0 rounded-full bg-[color:var(--line-strong)]"></span>
-                    <span>{item}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
         </aside>
       </div>
+
+      <!-- Video gallery — remaining featured videos -->
+      {featuredVideos.length > 1 && (
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {
+            featuredVideos.slice(1).map((video) => (
+              <article class="reveal video-panel">
+                <div class="video-frame">
+                  <iframe
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy"
+                    src={video.embed}
+                    title={video.title}
+                  />
+                </div>
+                <div class="video-panel-copy">
+                  <p class="card-label">{video.source}</p>
+                  <h2>{video.title}</h2>
+                  <p>{video.description}</p>
+                  <a class="link-arrow" href={video.href} rel="noreferrer" target="_blank">
+                    Watch on YouTube →
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      )}
 
       <div class="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         {
@@ -279,6 +295,27 @@ const speakingSchema = [
     </div>
   </section>
 
+  <!-- Session formats — moved out of hero aside into its own section -->
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Session formats"
+        intro="Every session can be shaped to fit your audience, programme, and time slot."
+        title="Ways we can work together."
+      />
+      <div class="mt-8 grid gap-3 sm:grid-cols-2">
+        {
+          deliverables.map((item) => (
+            <article class="reveal card p-5 flex items-start gap-4">
+              <span class="mt-2 size-2 shrink-0 rounded-full bg-[color:var(--accent)]" aria-hidden="true" />
+              <span class="text-base leading-7">{item}</span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -306,7 +343,7 @@ const speakingSchema = [
         intro="Visual proof from recent speaking engagements and founder events."
         title="Daniel on stage and in the room."
       />
-      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
           eventPhotos.map((item) => (
             <figure class="reveal card overflow-hidden">

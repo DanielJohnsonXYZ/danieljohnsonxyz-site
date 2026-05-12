@@ -13,11 +13,9 @@ import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import {
   agencyVsMe,
   aiWorkflowExamples,
-  afterYouBookSteps,
   ctas,
   fitSignals,
   homeServiceLadder,
-  homepageHeroOutcome,
   icpFirmographics,
   lifetimeTotals,
   positioning,
@@ -46,7 +44,7 @@ const supportingTestimonials = [
   testimonials.find((t) => t.data.name === "Greg Weinstein")
 ].filter(Boolean) as typeof testimonials;
 
-// ─── Method layers (one source of truth so the number never drifts) ─────
+// ─── Method layers ──────────────────────────────────────────────────────
 const methodLayers = [
   { title: "GTM systems", body: "ICP doc, positioning test results, weekly growth dashboard.", href: "/gtm-systems/" },
   { title: "Acquisition", body: "Channel test map, experiment backlog, paid and organic decision rules.", href: "/experimentation/" },
@@ -57,11 +55,11 @@ const methodLayers = [
 ];
 const layerCount = methodLayers.length;
 
-// Hero credential strip — external affiliations only (matches trust brief).
+// Hero credential strip — external affiliations only.
 const heroCredentialIds = new Set(["growthmentor", "cambridge-judge", "techstars", "imperial"]);
 const heroCredentialLogos = trustLogos.filter((item) => heroCredentialIds.has(item.id));
 
-// ─── Proof — real outcomes (four cards) ─────────────────────────────────
+// ─── Proof — real outcomes ───────────────────────────────────────────────
 const outcomeCards = [
   {
     metric: "6×",
@@ -110,7 +108,7 @@ const imageStoryCards = [
   }
 ];
 
-// ─── FAQ (homepage objections — matches hub brief; visible block + FAQPage schema) ─
+// ─── FAQ ─────────────────────────────────────────────────────────────────
 const homepageFaq: Array<{
   question: string;
   answer: string;
@@ -198,7 +196,7 @@ const schemas = [
   schema={schemas}
   title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
 >
-  <!-- 1. Hero — WSS redesign: pain-led subcopy, founder column + engagement ladder -->
+  <!-- 1. Hero ─────────────────────────────────────────────────────────── -->
   <section class="hero-section hero-section-compact section-space conversion-hero wss-hero-redesign" aria-labelledby="hero-heading">
     <div class="shell">
       <div class="hero-home-grid">
@@ -210,10 +208,7 @@ const schemas = [
               Your growth still depends on you. <span class="hero-accent">That&apos;s the bottleneck I fix.</span>
             </h1>
             <p class="hero-subcopy conversion-subcopy max-w-3xl text-lg font-medium leading-8 text-[color:var(--ink)] md:text-xl">
-              {homepageHeroOutcome}
-            </p>
-            <p class="max-w-3xl text-base leading-8 text-[color:var(--muted)] md:text-lg">
-              <strong class="font-semibold text-[color:var(--ink)]">Traction without a reliable engine:</strong> acquisition plateauing, founder-led sales that does not scale, and GTM that still routes through your calendar. I embed as fractional CMO to install positioning, pipeline discipline, and a weekly decision rhythm — without a £150k full-time hire.
+              I help post-PMF startup founders — B2B SaaS, AI, and beyond — turn founder-dependent growth into a repeatable GTM system. Sharper positioning, predictable pipeline, senior growth leadership without the £150k full-time hire.
             </p>
           </div>
         </div>
@@ -234,7 +229,7 @@ const schemas = [
               {
                 heroCredentialLogos.map((item) => (
                   <span class="credential-logo">
-                    <img alt={item.alt} decoding="async" height="24" loading="lazy" src={item.src} width="120" />
+                    <img alt={item.alt} decoding="async" loading="lazy" src={item.src} />
                   </span>
                 ))
               }
@@ -244,18 +239,9 @@ const schemas = [
         </div>
 
         <div class="hero-home-rest reveal flex flex-col gap-5">
-          <div class="space-y-4">
-            <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
-              {icpFirmographics.oneLiner}
-            </p>
-            <p class="max-w-3xl text-sm leading-7 text-[color:var(--muted)] md:text-base">
-              <strong class="font-semibold text-[color:var(--ink)]">We Scale Startups</strong> is the operator bench behind the same methodology — hire Daniel here for a personal engagement;{" "}
-              <a class="font-semibold underline decoration-[color:var(--border)] underline-offset-4 hover:text-[color:var(--accent)]" href={siteConfig.companyUrl} rel="noopener" target="_blank">
-                wescalestartups.com
-              </a>{" "}
-              for team-facing diagnosis, sprints, and broader bench work.
-            </p>
-          </div>
+          <p class="max-w-3xl text-sm font-medium leading-7 text-[color:var(--ink)] md:text-base">
+            {icpFirmographics.oneLiner}
+          </p>
 
           <div class="hero-proof-bar hero-proof-bar--five" aria-label="Daniel's track record at a glance">
             {
@@ -277,20 +263,6 @@ const schemas = [
             }
           </div>
 
-          <div class="rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-5 md:p-6">
-            <p class="card-label">After you book the Growth Audit</p>
-            <ul class="mt-3 grid gap-3 sm:grid-cols-3">
-              {
-                afterYouBookSteps.map((step) => (
-                  <li class="text-sm leading-6 text-[color:var(--muted)]">
-                    <strong class="font-semibold text-[color:var(--ink)]">{step.title}</strong>
-                    <span class="mt-1 block">{step.body}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-
           <div class="cta-cluster">
             <div class="cta-row flex-wrap">
               <a class="button-accent" href={ctas.primary.href} data-cta="hero-primary">
@@ -310,7 +282,6 @@ const schemas = [
             </p>
             <p class="availability-line">{siteConfig.availability}</p>
           </div>
-
         </div>
       </div>
 
@@ -332,32 +303,10 @@ const schemas = [
           }
         </div>
       </div>
-
-      <div class="reveal mt-8">
-        <RotatingTextBars />
-      </div>
     </div>
   </section>
 
-  <section class="section-space pt-0" aria-label="Answer-first proof summary">
-    <div class="shell">
-      <AnswerEvidenceBlock
-        title="Founder answer in 20 seconds"
-        answer="A fractional CMO is the right move when founder-led growth has become the bottleneck and you need senior GTM ownership before committing to a full-time CMO hire."
-        evidence={[
-          "Published pricing ladder and engagement shapes from free audit to embedded fractional CMO.",
-          "Cross-page methodology for diagnostics, weekly decisions, and transfer to team.",
-          "Named outcomes, case studies, and external proof surfaces (reviews, speaking, partner ecosystems)."
-        ]}
-        provenance={[
-          "Source: danieljohnson.xyz public pages, case studies, and service definitions.",
-          "Cross-entity reference: wescalestartups.com operational methodology."
-        ]}
-      />
-    </div>
-  </section>
-
-  <!-- 2. Problem statement — tighter copy (was 3 paragraphs, now 2) ──── -->
+  <!-- 2. Problem statement ────────────────────────────────────────────── -->
   <section class="section-space pt-0" aria-labelledby="problem-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
@@ -374,22 +323,15 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 5. Growth Diagnosis — interactive quiz ────────────────────────── -->
-  <section class="section-space pt-0" id="growth-diagnosis" aria-labelledby="diagnosis-heading">
+  <!-- 3. RotatingTextBars — visual divider ────────────────────────────── -->
+  <div class="reveal overflow-hidden">
     <div class="shell">
-      <SectionHeader
-        eyebrow="AI-assisted diagnosis · Free · 2 minutes"
-        intro="Five questions. Tailored output. A clearer read on which lever matters most before another campaign, hire, or AI workflow gets bolted on."
-        title="Find your biggest growth bottleneck."
-      />
-      <GrowthDiagnosis />
+      <RotatingTextBars />
     </div>
-  </section>
+  </div>
 
-  <!-- 4. Buying ladder — Audit → Sprint → Fractional CMO ──────────── -->
-  <!-- Was: Fractional CMO + Growth Advisory + Speaking (mixed shapes).  -->
-  <!-- Now: a clean 3-tier buying ladder with explicit price/scope.       -->
-  <section class="section-space pt-0" id="services">
+  <!-- 4. Buying ladder — Audit → Sprint → Fractional CMO ─────────────── -->
+  <section class="section-space pt-8" id="services">
     <div class="shell">
       <SectionHeader
         eyebrow="Three ways in"
@@ -397,9 +339,6 @@ const schemas = [
         title="Where do you want to start?"
       />
 
-      <!-- Visual ladder — numbered step badges + connecting line on desktop -->
-      <!-- so the progression reads as Audit -> Sprint -> Fractional CMO,    -->
-      <!-- not three side-by-side equal-weight cards.                         -->
       <div class="ladder-grid mt-10">
         {
           homeServiceLadder.map((tier, index) => (
@@ -414,14 +353,18 @@ const schemas = [
                 <span class="text-2xl font-extrabold tracking-[-0.06em]">{tier.price}</span>
                 <span class="text-sm text-[color:var(--muted)]">· {tier.cadence}</span>
               </div>
-              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{tier.body}</p>
-              <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm leading-6 text-[color:var(--muted)]">
-                <strong class="font-semibold text-[color:var(--ink)]">Best for:</strong> {tier.bestFor}
-              </p>
-              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
-                <strong class="font-semibold text-[color:var(--ink)]">Outcome:</strong> {tier.outcome}
-              </p>
-              <a class="link-arrow mt-6" href={tier.href}>{tier.cta} →</a>
+              <div class="ladder-reveal-details">
+                <div class="ladder-reveal-inner">
+                  <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{tier.body}</p>
+                  <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm leading-6 text-[color:var(--muted)]">
+                    <strong class="font-semibold text-[color:var(--ink)]">Best for:</strong> {tier.bestFor}
+                  </p>
+                  <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
+                    <strong class="font-semibold text-[color:var(--ink)]">Outcome:</strong> {tier.outcome}
+                  </p>
+                  <a class="link-arrow mt-6 block" href={tier.href}>{tier.cta} →</a>
+                </div>
+              </div>
             </article>
           ))
         }
@@ -463,7 +406,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 6. Why me vs agency ─────────────────────────────────────────── -->
+  <!-- 6. Why me vs agency ─────────────────────────────────────────────── -->
   <section class="section-space pt-0" aria-labelledby="vs-heading">
     <div class="shell">
       <SectionHeader
@@ -489,7 +432,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 7. The method — sharper anchor: campaigns vs. systems ───────── -->
+  <!-- 7. The method ───────────────────────────────────────────────────── -->
   <section class="dark-section section-space" aria-labelledby="method-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl text-center">
@@ -509,8 +452,6 @@ const schemas = [
         </p>
       </div>
 
-      <!-- System diagram — shows the loop visually so "growth system" -->
-      <!-- isn't just an abstract claim. -->
       <div class="reveal mt-12">
         <GrowthSystemDiagram />
       </div>
@@ -544,7 +485,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- Hosted podcast — below method / system section -->
+  <!-- 8. Hosted podcast ───────────────────────────────────────────────── -->
   <section class="section-space pt-0" aria-labelledby="podcast-host-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-8 md:p-10">
@@ -577,7 +518,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 8. What AI-native GTM means here (concrete homepage block) ───── -->
+  <!-- 9. AI-native GTM ────────────────────────────────────────────────── -->
   <section class="section-space" aria-labelledby="ai-heading">
     <div class="shell">
       <div class="reveal mx-auto max-w-5xl space-y-6">
@@ -681,7 +622,19 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 9. Image-led credibility ────────────────────────────────────── -->
+  <!-- 10. Growth Diagnosis — moved lower ─────────────────────────────── -->
+  <section class="section-space pt-0" id="growth-diagnosis" aria-labelledby="diagnosis-heading">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="AI-assisted diagnosis · Free · 2 minutes"
+        intro="Five questions. Tailored output. A clearer read on which lever matters most before another campaign, hire, or AI workflow gets bolted on."
+        title="Find your biggest growth bottleneck."
+      />
+      <GrowthDiagnosis />
+    </div>
+  </section>
+
+  <!-- 11. Image-led credibility ───────────────────────────────────────── -->
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -706,7 +659,6 @@ const schemas = [
         }
       </div>
 
-      <!-- Audience reaction snippets — lightweight social proof for speaking/workshop CTA -->
       <div class="mt-8 reveal">
         <p class="card-label text-center text-xs uppercase tracking-[0.16em] text-[color:var(--subtle)]">Recent attendee feedback</p>
         <div class="testimonial-strip mx-auto mt-3 max-w-3xl">
@@ -746,7 +698,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 10. Proof — real outcomes ──────────────────────────────────── -->
+  <!-- 12. Proof — real outcomes ───────────────────────────────────────── -->
   <section class="dark-section section-space" id="proof" aria-labelledby="proof-heading">
     <div class="shell">
       <SectionHeader
@@ -780,7 +732,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 11. Testimonials ─────────────────────────────────────────────── -->
+  <!-- 13. Testimonials ────────────────────────────────────────────────── -->
   <section class="section-space" aria-labelledby="testimonials-heading">
     <div class="shell">
       <SectionHeader
@@ -831,7 +783,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 12. About preview ────────────────────────────────────────────── -->
+  <!-- 14. About preview ───────────────────────────────────────────────── -->
   <section class="section-space pt-0">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
@@ -850,7 +802,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 13. Writing — soft conversions live alongside the essays ─────── -->
+  <!-- 15. Writing ─────────────────────────────────────────────────────── -->
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
@@ -875,8 +827,6 @@ const schemas = [
         }
       </div>
 
-      <!-- Soft conversion ladder — three lower-commitment entry points beneath -->
-      <!-- the essays so visitors who aren't ready to book have somewhere to go. -->
       <div class="cta-row reveal mt-8">
         <a class="button-accent" href="/writing/">Read all writing →</a>
         <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes →</a>
@@ -885,7 +835,26 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 14. FAQ — objections before the final CTA ─────────────────────── -->
+  <!-- 16. Answer evidence block — moved before FAQ ───────────────────── -->
+  <section class="section-space pt-0" aria-label="Answer-first proof summary">
+    <div class="shell">
+      <AnswerEvidenceBlock
+        title="Founder answer in 20 seconds"
+        answer="A fractional CMO is the right move when founder-led growth has become the bottleneck and you need senior GTM ownership before committing to a full-time CMO hire."
+        evidence={[
+          "Published pricing ladder and engagement shapes from free audit to embedded fractional CMO.",
+          "Cross-page methodology for diagnostics, weekly decisions, and transfer to team.",
+          "Named outcomes, case studies, and external proof surfaces (reviews, speaking, partner ecosystems)."
+        ]}
+        provenance={[
+          "Source: danieljohnson.xyz public pages, case studies, and service definitions.",
+          "Cross-entity reference: wescalestartups.com operational methodology."
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- 17. FAQ ──────────────────────────────────────────────────────────── -->
   <section class="section-space pt-0" id="faq" aria-labelledby="home-faq-heading">
     <div class="shell">
       <SectionHeader
@@ -920,7 +889,7 @@ const schemas = [
     </div>
   </section>
 
-  <!-- 15. Final CTA ───────────────────────────────────────────────── -->
+  <!-- 18. Final CTA ───────────────────────────────────────────────────── -->
   <section class="cta-gradient section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
@@ -949,3 +918,47 @@ const schemas = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* ── Credential logo strip — consistent height alignment ─────────────── */
+  .credential-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.875rem;
+    padding: 0.75rem 1rem;
+  }
+  .credential-logo {
+    display: flex;
+    align-items: center;
+  }
+  .credential-logo img {
+    height: 22px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+  }
+
+  /* ── Buying ladder hover reveal ──────────────────────────────────────── */
+  /* Grid-template-rows trick: 0fr collapses inner div, 1fr expands it.    */
+  /* overflow:hidden on inner div prevents content showing outside grid.   */
+  .ladder-reveal-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+  }
+  .ladder-reveal-inner {
+    overflow: hidden;
+  }
+  .ladder-card:hover .ladder-reveal-details,
+  .ladder-card:focus-within .ladder-reveal-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  /* Primary card (e.g. Audit) stays expanded by default */
+  .ladder-card-primary .ladder-reveal-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+</style>
