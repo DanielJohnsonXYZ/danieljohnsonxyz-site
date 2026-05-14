@@ -12,6 +12,7 @@ export const siteConfig = {
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
   bookingUrl: "https://calendly.com/danieljohnson",
+  bookingPageUrl: "/contact/#book-growth-audit",
   bookingLabel: "Book a 20-min Growth Audit",
   bookingNote:
     "20 minutes. No pitch. We diagnose your biggest growth bottleneck and decide whether it makes sense to work together.",
@@ -185,7 +186,7 @@ export const announcement = {
 export const ctas = {
   primary: {
     label: "Book a 20-min Growth Audit",
-    href: siteConfig.bookingUrl,
+    href: siteConfig.bookingPageUrl,
     hint: "Free · 20 minutes · No pitch"
   },
   bookingFallback: {
@@ -196,7 +197,7 @@ export const ctas = {
   /** Mid-page / method sections — same destination, varied copy (Growth Hub CTA ladder). */
   methodDeepDive: {
     label: "Talk through your growth system in 20 minutes",
-    href: siteConfig.bookingUrl,
+    href: siteConfig.bookingPageUrl,
     hint: "Free · 20 minutes · No pitch"
   },
   caseStudies: {

@@ -4,9 +4,10 @@ import CfEmailOff from "../components/CfEmailOff.astro";
 import { siteConfig, socialLinks } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
 
-const title = "Contact Daniel Johnson | AI-Native GTM & Growth Operator";
+const title = "Book Growth Audit | Contact Daniel Johnson";
 const description =
-  "Get in touch about fractional CMO, founder office hours, or speaking enquiries with Daniel Johnson.";
+  "Book a 20-minute Growth Audit with Daniel Johnson or get in touch about fractional CMO, founder office hours, or speaking enquiries.";
+const calendlyEmbedUrl = `${siteConfig.bookingUrl}?hide_gdpr_banner=1`;
 
 const breadcrumb = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
@@ -21,25 +22,28 @@ const breadcrumb = buildBreadcrumbSchema([
   title={title}
   schema={breadcrumb}
 >
-  <section class="section-space conversion-hero">
+  <section class="section-space conversion-hero contact-booking-page">
     <div class="shell">
-      <div class="reveal mx-auto max-w-3xl">
+      <div class="reveal mx-auto max-w-4xl">
         <span class="eyebrow">Contact</span>
-        <h1 class="mt-6 text-5xl font-extrabold tracking-[-0.06em] md:text-7xl">Get in touch.</h1>
+        <h1 class="mt-6 text-5xl font-extrabold tracking-[-0.06em] md:text-7xl">Book Growth Audit.</h1>
         <p class="conversion-subcopy mt-5 text-lg leading-8 text-[color:var(--muted)]">
-          The fastest way to start a conversation is a 20-minute Growth Audit. If that is not the right fit, an email works too.
+          Pick a time for the 20-minute Growth Audit below. If that is not the right fit, email works too.
         </p>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          <article class="card p-6">
-            <p class="card-label">Book a call</p>
-            <h2 class="mt-3 text-2xl font-bold tracking-[-0.04em]">{siteConfig.bookingLabel}</h2>
-            <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{siteConfig.bookingNote}</p>
-            <a class="button-primary mt-6 inline-flex" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">
-              {siteConfig.bookingLabel}
-            </a>
-          </article>
-
+        <div class="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
+          <section
+            id="book-growth-audit"
+            class="contact-calendly-panel overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)]"
+            aria-label="Book a 20-minute Growth Audit"
+          >
+            <iframe
+              title="Book a 20-minute Growth Audit with Daniel Johnson"
+              src={calendlyEmbedUrl}
+              class="contact-calendly-iframe"
+              loading="lazy"
+            ></iframe>
+          </section>
           <article class="card p-6">
             <p class="card-label">Email</p>
             <h2 class="mt-3 text-2xl font-bold tracking-[-0.04em]">Write direct</h2>
@@ -72,3 +76,24 @@ const breadcrumb = buildBreadcrumbSchema([
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .contact-calendly-panel {
+    min-height: min(720px, calc(100vh - 7rem));
+    scroll-margin-top: 7rem;
+  }
+
+  .contact-calendly-iframe {
+    display: block;
+    width: 100%;
+    min-height: min(720px, calc(100vh - 7rem));
+    border: 0;
+  }
+
+  @media (max-width: 47.9375rem) {
+    .contact-calendly-panel,
+    .contact-calendly-iframe {
+      min-height: 680px;
+    }
+  }
+</style>

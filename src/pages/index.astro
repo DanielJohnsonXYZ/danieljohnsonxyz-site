@@ -63,7 +63,7 @@ const heroEngagementRows = [
     step: "01",
     title: "20-min Growth Audit",
     sub: "Free call. Bottleneck read, honest fit, no pitch.",
-    href: "/growth-audit/",
+    href: siteConfig.bookingPageUrl,
     cta: "hero-engage-audit"
   },
   {
@@ -1005,23 +1005,13 @@ const schemas = [
 </BaseLayout>
 
 <style>
-  /* ── Buying ladder hover reveal (kept from previous design) ─────────── */
+  /* ── Buying ladder details stay visible so each tier is scannable. ─── */
   .ladder-reveal-details {
     display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+    grid-template-rows: 1fr;
+    opacity: 1;
   }
   .ladder-reveal-inner {
-    overflow: hidden;
-  }
-  .ladder-card:hover .ladder-reveal-details,
-  .ladder-card:focus-within .ladder-reveal-details {
-    grid-template-rows: 1fr;
-    opacity: 1;
-  }
-  .ladder-card-primary .ladder-reveal-details {
-    grid-template-rows: 1fr;
-    opacity: 1;
+    overflow: visible;
   }
 </style>
