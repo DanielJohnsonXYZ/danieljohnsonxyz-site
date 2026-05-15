@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import SectionHeader from "../components/SectionHeader.astro";
-import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
 import RotatingTextBars from "../components/RotatingTextBars.astro";
@@ -11,7 +10,6 @@ import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } fr
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
 import {
   agencyVsMe,
-  aiWorkflowExamples,
   ctas,
   fitSignals,
   homeServiceLadder,
@@ -239,7 +237,7 @@ const schemas = [
           </h1>
 
           <p class="dj-hero-subcopy">
-            Senior GTM ownership for post-PMF AI &amp; B2B SaaS founders. <strong>Sharper positioning, predictable pipeline, a weekly operating rhythm</strong> — without committing to a £150k full-time CMO hire.
+            I embed with B2B SaaS and AI founders as a fractional CMO — find the real constraint, build the growth system, hand it off to your team.
           </p>
 
           <div class="dj-hero-proof-row" aria-label="Daniel's track record at a glance">
@@ -268,9 +266,7 @@ const schemas = [
               <span>See case studies</span>
               <span aria-hidden="true">→</span>
             </a>
-            <a class="dj-hero-cta-tertiary" href="/start-here/" data-cta="hero-start-here">
-              New here? Start here
-            </a>
+
           </div>
 
           <div class="flex flex-col gap-2">
@@ -365,13 +361,16 @@ const schemas = [
         <div class="dj-problem">
           <span class="dj-eyebrow">The bottleneck</span>
           <h2 id="problem-heading" class="mt-4 dj-section-title">
-            You&rsquo;ve got traction. <span class="hero-accent">So why does growth still feel like guessing?</span>
+            You&rsquo;ve got traction. <span class="hero-accent">Growth still feels like guessing.</span>
           </h2>
           <p class="mt-5 dj-section-lede">
-            Paying customers. Revenue line moving. A deck that holds up. But the acquisition engine? Plateaued. Founder-led sales that doesn&rsquo;t scale. No repeatable pipeline. A GTM stack that&rsquo;s three tools taped together.
+            The product works. Revenue is moving. You&rsquo;ve got paying customers and a deck that holds up. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth call still routes through you &mdash; because nobody else has the full picture.
           </p>
           <p class="mt-4 dj-section-lede">
-            You don&rsquo;t need more tactics. You need a senior operator who can walk in, see the whole system at once, and tell you — with specifics — which two levers matter for your company right now.
+            The instinct is to add something: a new channel, an agency, another campaign. But that&rsquo;s rarely the problem. The problem is that the whole growth function still lives in your head, and there&rsquo;s no system running underneath it.
+          </p>
+          <p class="mt-4 dj-section-lede">
+            What you need isn&rsquo;t more activity. It&rsquo;s a senior operator who can walk in, see the whole machine at once, and tell you &mdash; with specifics &mdash; which one or two levers actually matter for your company right now. Then build the system to run those levers without you.
           </p>
         </div>
       </div>
@@ -548,163 +547,12 @@ const schemas = [
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       8 · HOSTED PODCAST
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0" aria-labelledby="podcast-host-heading">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-8 md:p-10">
-        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">Hosted by Daniel</p>
-        <h2 id="podcast-host-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.05em] text-balance md:text-4xl">
-          How Startups Win With AI
-        </h2>
-        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
-          A practical founder-facing podcast from We Scale Startups. Founders and operators share how they are using AI to grow faster, save time, and make sharper commercial decisions — without tool hype.
-        </p>
-        <ul class="mt-5 list-disc space-y-2 pl-5 text-base leading-7 text-[color:var(--muted)]">
-          <li>Watch or listen on the canonical show page.</li>
-          <li>Suggest a guest or apply if you have a concrete story listeners can reuse.</li>
-        </ul>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a class="button-accent" href={siteConfig.wssPodcastUrl} rel="noopener" target="_blank" data-cta="home-podcast-hub">
-            Open the podcast hub →
-          </a>
-          <a
-            class="button-link"
-            href={siteConfig.wssPodcastGuestApplyUrl}
-            rel="noopener"
-            target="_blank"
-            data-cta="home-podcast-guest"
-          >
-            Apply as a guest →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+
+
+
 
   <!-- ════════════════════════════════════════════════════════════════════
-       9 · AI-NATIVE GTM
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space" aria-labelledby="ai-heading">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-5xl space-y-6">
-        <span class="dj-eyebrow">How I work</span>
-        <h2 id="ai-heading" class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-5xl">
-          What AI-native GTM means <span class="hero-accent">here.</span>
-        </h2>
-        <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
-          AI should make GTM faster, not vaguer — with human judgement still owning ICP, budget, sequencing, and what ships.
-        </p>
-        <div class="grid gap-6 lg:grid-cols-2">
-          <div class="rounded-xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-6 md:p-7">
-            <p class="card-label text-[color:var(--muted)]">Before</p>
-            <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">Manual drag, fuzzy signal</h3>
-            <ul class="mt-4 space-y-2 text-sm leading-7 text-[color:var(--muted)]">
-              <li>Calls and CRM notes sit in silos — patterns are slow to see.</li>
-              <li>Research and drafts eat the week; decisions still default to the founder.</li>
-              <li>Reporting shows activity — not what to stop, fix, or scale this Monday.</li>
-            </ul>
-          </div>
-          <div class="rounded-xl border border-[color:var(--accent)]/35 bg-[color:var(--surface)] p-6 md:p-7 shadow-[var(--shadow-sm)]">
-            <p class="card-label">After</p>
-            <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">Compressed synthesis, sharper calls</h3>
-            <ul class="mt-4 space-y-2 text-sm leading-7 text-[color:var(--ink)]">
-              <li>Customer and competitor inputs become comparable signals, faster.</li>
-              <li>Message and funnel tests ship with a clear hypothesis and owner.</li>
-              <li>Weekly rhythm ties metrics to one bottleneck and the next experiment.</li>
-            </ul>
-          </div>
-        </div>
-        <div
-          class="rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 shadow-[var(--shadow-sm)] md:p-8"
-          aria-labelledby="ai-native-block-heading"
-        >
-          <p class="card-label">On engagements</p>
-          <h3 id="ai-native-block-heading" class="mt-3 text-2xl font-bold tracking-[-0.04em] text-balance md:text-3xl">
-            Not replacing judgement with automation — compressing the work that feeds decisions.
-          </h3>
-          <p class="mt-4 text-base leading-7 text-[color:var(--muted)] md:text-lg md:leading-8">
-            AI-native GTM does not mean replacing judgement with content automation. It means using AI to compress customer-call synthesis, competitor research, message testing, CRM diagnosis, campaign learning, and weekly decision-making, so founders and teams can make better commercial decisions faster.
-          </p>
-          <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {
-              aiWorkflowExamples.map((row) => (
-                <article class="rounded-lg border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-4 md:p-5">
-                  <p class="mono text-[0.65rem] uppercase tracking-[0.14em] text-[color:var(--subtle)]">Input → output</p>
-                  <p class="mt-2 text-sm font-semibold text-[color:var(--ink)]">{row.input}</p>
-                  <p class="mt-2 text-xs leading-6 text-[color:var(--muted)]">
-                    <span class="font-semibold text-[color:var(--ink)]">Synthesis:</span> {row.synthesis}
-                  </p>
-                  <p class="mt-1 text-xs leading-6 text-[color:var(--muted)]">
-                    <span class="font-semibold text-[color:var(--ink)]">Decision:</span> {row.decision}
-                  </p>
-                  <p class="mt-1 text-xs leading-6 text-[color:var(--muted)]">
-                    <span class="font-semibold text-[color:var(--accent)]">Ships as:</span> {row.output}
-                  </p>
-                </article>
-              ))
-            }
-          </div>
-          <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_minmax(0,17rem)] lg:gap-8">
-            <div>
-              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--subtle)]">Where AI speeds up the loop</p>
-              <ul class="mt-3 grid gap-2 sm:grid-cols-2">
-                {
-                  [
-                    "Customer-call synthesis",
-                    "Competitor research",
-                    "Message testing",
-                    "CRM diagnosis",
-                    "Campaign learning",
-                    "Weekly decision-making"
-                  ].map((label) => (
-                    <li class="flex items-start gap-2 text-sm leading-6 text-[color:var(--ink)] md:text-base">
-                      <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" aria-hidden="true" />
-                      {label}
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-            <aside
-              class="rounded-lg border border-[color:var(--line-strong)] bg-[color:var(--surface-dim)] p-4 md:p-5"
-              aria-label="Where human judgement stays central"
-            >
-              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[color:var(--accent)]">Human judgement stays central</p>
-              <ul class="mt-3 space-y-2 text-sm leading-6 text-[color:var(--muted)]">
-                <li>Which customer signal matters for the next bet</li>
-                <li>Channel mix, budget, and sequencing</li>
-                <li>What is strong enough to ship or test</li>
-                <li>Trade-offs and ownership the team will live with</li>
-              </ul>
-            </aside>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-x-6 gap-y-2">
-          <a class="link-arrow" href="/ai-native-workflows/">AI-native workflows on engagements →</a>
-          <a class="link-arrow" href="/writing/">Read: What AI-native GTM actually means →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       10 · GROWTH DIAGNOSIS
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0" id="growth-diagnosis" aria-labelledby="diagnosis-heading">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="AI-assisted diagnosis · Free · 2 minutes"
-        intro="Five questions. Tailored output. A clearer read on which lever matters most before another campaign, hire, or AI workflow gets bolted on."
-        title="Find your biggest growth bottleneck."
-      />
-      <GrowthDiagnosis />
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       11 · IMAGE-LED CREDIBILITY
+       9 · IMAGE-LED CREDIBILITY
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0">
     <div class="shell">
@@ -770,7 +618,7 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       12 · PROOF — real outcomes (dark)
+       10 · PROOF — real outcomes (dark)
        ════════════════════════════════════════════════════════════════════ -->
   <section class="dark-section section-space" id="proof" aria-labelledby="proof-heading">
     <div class="shell">
@@ -806,7 +654,7 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       13 · TESTIMONIALS
+       11 · TESTIMONIALS
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space" aria-labelledby="testimonials-heading">
     <div class="shell">
@@ -859,18 +707,21 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       14 · ABOUT PREVIEW
+       12 · ABOUT PREVIEW
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0">
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
         <span class="dj-eyebrow">About</span>
-        <h2 class="dj-section-title">About Daniel.</h2>
+        <h2 class="dj-section-title">I&rsquo;ve been the founder with a flat chart at 2am.</h2>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          10+ years in growth as a co-founder, embedded Head of Growth, and fractional CMO. 20+ AI and B2B SaaS startups advised. £6.8M+ paid spend managed, £18M+ revenue generated, £15M+ helped founders raise. Two exits on the founder side: one mental-health tech (eQuoo), one eCommerce.
+          My first company was eQuoo &mdash; evidence-based emotional fitness training. Good product. A go-to-market strategy that mostly amounted to hoping the right people would find us. They didn&rsquo;t, not fast enough. We navigated through it &mdash; two exits in that chapter &mdash; but the lesson crystallised: execution without a system isn&rsquo;t scrappy. It&rsquo;s expensive improvisation with a deadline.
         </p>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          I mentor founders through Google for Startups, Techstars, and GrowthMentor. I&rsquo;ve lectured at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa. {siteConfig.location}
+          After those early chapters I took in-house operating roles at Shoprocket and NAVA, and kept seeing the same pattern: functional products, founders personally owning every growth decision, and nothing compounding. We Scale Startups was built to fix that &mdash; not with a framework deck that gets filed after a workshop, but with a structured approach to positioning, pipeline, and growth decisions built across 20+ AI and B2B SaaS startups in 12 countries.
+        </p>
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          I&rsquo;ve mentored 479+ founders at a 4.97&thinsp;/&thinsp;5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.
         </p>
         <p>
           <a class="link-arrow" href="/about/">Read more about Daniel →</a>
@@ -880,7 +731,7 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       15 · WRITING
+       13 · WRITING
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0">
     <div class="shell">
@@ -915,7 +766,7 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       16 · ANSWER EVIDENCE — for AI / search engines
+       14 · ANSWER EVIDENCE — for AI / search engines
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" aria-label="Answer-first proof summary">
     <div class="shell">
@@ -936,7 +787,7 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       17 · FAQ
+       15 · FAQ
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space pt-0" id="faq" aria-labelledby="home-faq-heading">
     <div class="shell">
@@ -973,7 +824,7 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
-       18 · FINAL CTA
+       16 · FINAL CTA
        ════════════════════════════════════════════════════════════════════ -->
   <section class="cta-gradient section-space">
     <div class="shell">
