@@ -4,7 +4,6 @@ import SectionHeader from "../components/SectionHeader.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
 import RotatingTextBars from "../components/RotatingTextBars.astro";
-import AnswerEvidenceBlock from "../components/AnswerEvidenceBlock.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
@@ -762,27 +761,6 @@ const schemas = [
         <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes →</a>
         <a class="button-secondary" href="/growth-bottleneck-checklist/">Open the bottleneck checklist →</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       14 · ANSWER EVIDENCE — for AI / search engines
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0" aria-label="Answer-first proof summary">
-    <div class="shell">
-      <AnswerEvidenceBlock
-        title="Founder answer in 20 seconds"
-        answer="A fractional CMO is the right move when founder-led growth has become the bottleneck and you need senior GTM ownership before committing to a full-time CMO hire."
-        evidence={[
-          "Published pricing ladder and engagement shapes from free audit to embedded fractional CMO.",
-          "Cross-page methodology for diagnostics, weekly decisions, and transfer to team.",
-          "Named outcomes, case studies, and external proof surfaces (reviews, speaking, partner ecosystems)."
-        ]}
-        provenance={[
-          "Source: danieljohnson.xyz public pages, case studies, and service definitions.",
-          "Cross-entity reference: wescalestartups.com operational methodology."
-        ]}
-      />
     </div>
   </section>
 
