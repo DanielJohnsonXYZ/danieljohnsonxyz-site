@@ -249,3 +249,176 @@ footer.dark-section::before {
   background: rgba(124, 58, 237, 0.18);
   color: var(--ink);
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   Design upgrade — May 2026
+   Adds highlighter band utility, universal card-hover lift, and the
+   audience-router lane styles. Additive; doesn't touch any existing rule.
+   ────────────────────────────────────────────────────────────────────── */
+
+/* ─── Highlighter band utility ────────────────────────────────────────
+   For accenting a phrase without using gradient text. Use sparingly —
+   one highlight per heading at most. Pair with .hero-accent when you
+   want both colour AND highlight (it works).
+
+   <h2>You've got traction. <span class="hl">Growth still feels like guessing.</span></h2> */
+.hl {
+  background-image: linear-gradient(120deg, rgba(124, 58, 237, 0.16) 0%, rgba(124, 58, 237, 0.16) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.48em;
+  background-position: 0 86%;
+  padding: 0 0.08em;
+  border-radius: 2px;
+}
+
+.dark-section .hl,
+.cta-gradient .hl {
+  background-image: linear-gradient(120deg, rgba(124, 58, 237, 0.42) 0%, rgba(124, 58, 237, 0.42) 100%);
+  color: #fff;
+}
+
+/* ─── Universal card hover lift ───────────────────────────────────────
+   The existing .card has shadow + border + radius, but only .explore-card
+   gets the hover lift. Generalise it to every card (skips the dark
+   section, since cards in dark sections sit on a different surface).
+   .card-static opts out for cards that shouldn't lift. */
+.card:not(.card-static):not(.dark-section .card) {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:not(.card-static):not(.dark-section .card):hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl, 0 24px 64px rgba(9, 9, 11, 0.10));
+  border-color: rgba(124, 58, 237, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:not(.card-static):hover {
+    transform: none;
+  }
+}
+
+/* ─── Section divider with marker ─────────────────────────────────────
+   Optional <hr class="section-divider"> or a flex row with marker dots.
+   Use to separate top-level sections without harsh horizontal lines. */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: var(--max-shell, 1280px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  border: 0;
+  height: auto;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.section-divider-marker {
+  font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* ─── Audience router (homepage) ──────────────────────────────────────
+   Three-lane component sitting under the hero. Primary lane (founders)
+   gets the violet tint + border; the other two are neutral cards. */
+.audience-router-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .audience-router-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.audience-lane {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 2vw + 0.8rem, 2rem);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.audience-lane:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(124, 58, 237, 0.22);
+}
+
+.audience-lane--primary {
+  border-color: rgba(124, 58, 237, 0.32);
+  background:
+    linear-gradient(180deg, rgba(124, 58, 237, 0.05) 0%, var(--surface) 60%);
+}
+
+.audience-lane--primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 9rem;
+  height: 9rem;
+  background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.audience-lane-eyebrow {
+  font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.audience-lane h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+  color: var(--ink);
+}
+
+.audience-lane p {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
+.audience-lane .link-arrow {
+  margin-top: 0.35rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .audience-lane {
+    transition: none;
+  }
+  .audience-lane:hover {
+    transform: none;
+  }
+}

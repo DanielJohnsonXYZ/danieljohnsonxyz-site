@@ -1,0 +1,84 @@
+---
+/**
+ * AudienceRouter
+ *
+ * Sits under the homepage hero and routes the three non-overlapping
+ * audiences arriving at danieljohnson.xyz into their respective lanes:
+ *
+ *   1. Founders (primary commercial lane — highlighted)
+ *   2. Event organisers / workshop bookers
+ *   3. Podcast hosts, press, partners
+ *
+ * Founder lane carries the same audit CTA as the hero. The other two
+ * exit cleanly to their dedicated pages so non-founders don't bounce
+ * through founder copy.
+ */
+import { ctas, siteConfig } from "../site";
+
+const lanes = [
+  {
+    eyebrow: "For founders",
+    title: "You're a founder with a growth problem.",
+    body: "Pipeline is patchy, every important growth call still routes through you, and you're not sure whether to hire, agency it out, or rethink the plan. Start with a free 20-minute audit. No pitch, no deck.",
+    href: ctas.primary.href,
+    cta: "Start the audit",
+    primary: true,
+    track: "router-founders"
+  },
+  {
+    eyebrow: "For event organisers",
+    title: "You're booking a speaker or workshop lead.",
+    body: "I've spoken at Cambridge Judge, Imperial, Techstars, General Assembly, Nomad Summit, and the UK Space Agency. Talks are built around the decision the room needs to make next.",
+    href: "/speaking/",
+    cta: "See speaking & workshops",
+    primary: false,
+    track: "router-speaking"
+  },
+  {
+    eyebrow: "For podcasts & press",
+    title: "You're here for an interview or partnership.",
+    body: "Topics I'll go deep on: AI-native GTM, founder-led growth, why most first marketing hires fail, building a £50/month lead engine. Press kit, headshots, short and long bios in the media pack.",
+    href: "/media-kit/",
+    cta: "Media kit & podcast topics",
+    primary: false,
+    track: "router-media"
+  }
+];
+---
+
+<section class="section-space pt-8" aria-labelledby="audience-router-heading">
+  <div class="shell">
+    <div class="reveal mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="card-label text-[color:var(--accent)]">Who&rsquo;s visiting today</p>
+        <h2
+          id="audience-router-heading"
+          class="mt-2 text-3xl font-extrabold leading-[1.05] tracking-[-0.04em] text-[color:var(--ink)] md:text-4xl"
+        >
+          Three ways <span class="hl">people land here.</span>
+        </h2>
+      </div>
+      <p class="max-w-md text-base leading-7 text-[color:var(--muted)]">
+        Pick the lane that matches you. Founders take the highlighted route; the other two are for
+        event organisers, podcast hosts, and partners.
+      </p>
+    </div>
+
+    <div class="audience-router-grid">
+      {
+        lanes.map((lane) => (
+          <a
+            class:list={["audience-lane reveal", lane.primary && "audience-lane--primary"]}
+            data-cta={lane.track}
+            href={lane.href}
+          >
+            <span class="audience-lane-eyebrow">{lane.eyebrow}</span>
+            <h3>{lane.title}</h3>
+            <p>{lane.body}</p>
+            <span class="link-arrow">{lane.cta}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

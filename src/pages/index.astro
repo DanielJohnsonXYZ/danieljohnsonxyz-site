@@ -4,6 +4,7 @@ import SectionHeader from "../components/SectionHeader.astro";
 import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
 import RotatingTextBars from "../components/RotatingTextBars.astro";
+import AudienceRouter from "../components/AudienceRouter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
@@ -352,6 +353,11 @@ const schemas = [
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════════
+       1.5 · AUDIENCE ROUTER — three lanes for non-overlapping visitors
+       ════════════════════════════════════════════════════════════════════ -->
+  <AudienceRouter />
+
+  <!-- ════════════════════════════════════════════════════════════════════
        2 · PROBLEM — pulled-quote framing
        ════════════════════════════════════════════════════════════════════ -->
   <section class="section-space" aria-labelledby="problem-heading">
@@ -360,7 +366,7 @@ const schemas = [
         <div class="dj-problem">
           <span class="dj-eyebrow">The bottleneck</span>
           <h2 id="problem-heading" class="mt-4 dj-section-title">
-            You&rsquo;ve got traction. <span class="hero-accent">Growth still feels like guessing.</span>
+            You&rsquo;ve got traction. <span class="hero-accent">Growth still <span class="hl">feels like guessing.</span></span>
           </h2>
           <p class="mt-5 dj-section-lede">
             The product works. Revenue is moving. You&rsquo;ve got paying customers and a deck that holds up. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth call still routes through you &mdash; because nobody else has the full picture.
@@ -712,7 +718,7 @@ const schemas = [
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-6">
         <span class="dj-eyebrow">About</span>
-        <h2 class="dj-section-title">I&rsquo;ve been the founder with a flat chart at 2am.</h2>
+        <h2 class="dj-section-title">I&rsquo;ve been the founder with a <span class="hl">flat chart at 2am.</span></h2>
         <p class="text-lg leading-8 text-[color:var(--muted)]">
           My first company was eQuoo &mdash; evidence-based emotional fitness training. Good product. A go-to-market strategy that mostly amounted to hoping the right people would find us. They didn&rsquo;t, not fast enough. We navigated through it &mdash; two exits in that chapter &mdash; but the lesson crystallised: execution without a system isn&rsquo;t scrappy. It&rsquo;s expensive improvisation with a deadline.
         </p>
