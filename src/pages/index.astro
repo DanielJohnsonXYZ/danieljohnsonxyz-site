@@ -1,852 +1,1393 @@
 ---
-import { getCollection } from "astro:content";
-import SectionHeader from "../components/SectionHeader.astro";
-import GrowthSystemDiagram from "../components/GrowthSystemDiagram.astro";
-import CfEmailOff from "../components/CfEmailOff.astro";
-import RotatingTextBars from "../components/RotatingTextBars.astro";
-import AudienceRouter from "../components/AudienceRouter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
-import { absoluteUrl, sortByFeaturedThenOrder } from "../lib/utils";
-import {
-  agencyVsMe,
-  ctas,
-  fitSignals,
-  homeServiceLadder,
-  icpFirmographics,
-  lifetimeTotals,
-  positioning,
-  proofBar,
-  singleIdea,
-  siteConfig,
-  trustLogos
-} from "../site";
-import "../styles/hero-v3.css";
 
-// ─── Content data ───────────────────────────────────────────────────────
-const articles = (await getCollection("articles"))
-  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-  .slice(0, 3);
-
-const media = sortByFeaturedThenOrder(await getCollection("media"));
-const featuredMedia = media.slice(0, 4);
-
-const testimonials = sortByFeaturedThenOrder(await getCollection("testimonials"));
-const leadTestimonial = testimonials.find((t) => t.data.name === "Christian A");
-const supportingTestimonials = [
-  testimonials.find((t) => t.data.name === "Camiel Roex"),
-  testimonials.find((t) => t.data.name === "Greg Weinstein")
-].filter(Boolean) as typeof testimonials;
-
-// ─── Method layers ──────────────────────────────────────────────────────
-const methodLayers = [
-  { title: "GTM systems", body: "ICP doc, positioning test results, weekly growth dashboard.", href: "/gtm-systems/" },
-  { title: "Acquisition", body: "Channel test map, experiment backlog, paid and organic decision rules.", href: "/experimentation/" },
-  { title: "Conversion", body: "Homepage message tests, funnel notes, activation and demo-booking fixes.", href: "/product-led-growth/" },
-  { title: "AI-assisted research", body: "Customer-call synthesis, competitor teardown, message bank.", href: "/ai-native-workflows/" },
-  { title: "Founder-led distribution", body: "Founder content pillars, proof library, content-to-pipeline loop.", href: "/founder-led-distribution/" },
-  { title: "Reporting", body: "Growth scorecard, pipeline view, weekly stop / scale / fix notes.", href: "/revenue-operations/" }
-];
-
-// Hero proof — pick the three most evocative numbers (compact ticker)
-const heroProofTicker = proofBar.slice(0, 3);
-
-// Hero credentials — just the four marquee affiliations
-const heroCredentialIds = new Set(["growthmentor", "cambridge-judge", "techstars", "imperial"]);
-const heroCredentialLogos = trustLogos.filter((item) => heroCredentialIds.has(item.id));
-
-// Hero engagement card — three rungs of the ladder, in one tap each
-const heroEngagementRows = [
-  {
-    step: "01",
-    title: "20-min Growth Audit",
-    sub: "Free call. Bottleneck read, honest fit, no pitch.",
-    href: siteConfig.bookingPageUrl,
-    cta: "hero-engage-audit"
-  },
-  {
-    step: "02",
-    title: "Strategy Sprint",
-    sub: "£6k fixed scope. Plan, artefacts, first wins in 2–4 weeks.",
-    href: "/strategy-sprint/",
-    cta: "hero-engage-sprint"
-  },
-  {
-    step: "03",
-    title: "Fractional CMO",
-    sub: "Senior growth leadership without a full-time hire.",
-    href: "/fractional-cmo/",
-    cta: "hero-engage-cmo",
-    recommended: true
-  }
-];
-
-// ─── Proof — real outcomes ───────────────────────────────────────────────
-const outcomeCards = [
-  {
-    metric: "6×",
-    metricSuffix: "app downloads",
-    context: "2k → 12k+ monthly downloads in 6 months after acquisition and lifecycle rebuild.",
-    sector: "HealthTech · AI"
-  },
-  {
-    metric: "35%",
-    metricSuffix: "lower CAC",
-    context: "CAC down 35% in 8 weeks — segmentation, paid account structure, landing-page routing.",
-    sector: "Fintech · Crypto"
-  },
-  {
-    metric: "500+",
-    metricSuffix: "qualified signups",
-    context: "500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.",
-    sector: "Fintech · B2B SaaS"
-  },
-  {
-    metric: "21%",
-    metricSuffix: "less churn",
-    context: "Retention up 21% in 3 months. Targeted lifecycle and win-back messaging.",
-    sector: "eCommerce"
-  }
-];
-
-const imageStoryCards = [
-  {
-    eyebrow: "Speaking",
-    title: "Founder rooms, startup cohorts, practical commercial work.",
-    body: "Talks and workshops are built around the decision the room needs to make next, not a theatre of frameworks.",
-    href: "/speaking/",
-    cta: "See speaking assets",
-    image: "/images/cambridge-judge-business-school-960.webp",
-    alt: "Cambridge Judge Business School, one of Daniel Johnson's selected teaching and speaking affiliations"
-  },
-  {
-    eyebrow: "Operator mindset",
-    title: "Systems, instruments, judgment under uncertainty.",
-    body: "The same bias shows up in the work: define the signal, read the instruments, make the next decision before the system drifts.",
-    href: "/about/",
-    cta: "Read about Daniel",
-    image: "/images/daniel-aircraft.webp",
-    alt: "Daniel Johnson in a small aircraft, connecting systems thinking with growth operating work"
-  }
-];
-
-// ─── FAQ ─────────────────────────────────────────────────────────────────
-const homepageFaq: Array<{
-  question: string;
-  answer: string;
-  link?: { href: string; label: string };
-}> = [
-  {
-    question: "What does a fractional CMO actually do day-to-day?",
-    answer:
-      "Owns the weekly GTM rhythm: sharp ICP and positioning, channel and experiment priorities, reporting that drives scale/stop/fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings — not a monthly slide deck."
-  },
-  {
-    question: "How is this different from hiring a full-time CMO?",
-    answer:
-      "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
-    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time →" }
-  },
-  {
-    question: "What stage should my startup be at?",
-    answer:
-      "Post-PMF with real revenue and repeat buyers — typically Seed to Series B — where the constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product; the GTM system comes after that clarity.",
-    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "When each model fits →" }
-  },
-  {
-    question: "How quickly will I see results?",
-    answer:
-      "You should see sharper decisions and cleaner reporting within the first few weeks; meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I do not promise miracles — I promise a visible system and honest calls on what is working."
-  },
-  {
-    question: "What does it cost?",
-    answer:
-      "UK engagements typically start around £6k for a short strategy sprint, £7.5–12k/month for fractional CMO (3-month minimum), scoped to days per week and depth. The service page lists how the week runs; the UK cost page lists benchmark ranges and what moves price.",
-    link: { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK) →" }
-  },
-  {
-    question: "How do I know if this will work for my business?",
-    answer:
-      "If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 20-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong."
-  }
-];
-
-// ─── Structured data ────────────────────────────────────────────────────
-const schemas = [
-  buildFaqPageSchema(homepageFaq.map(({ question, answer }) => ({ question, answer }))),
-  buildAggregateRatingSchema(),
-  buildServiceSchema({
-    name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
-    description:
-      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire. Typical UK engagement range: £6,000 – £12,000/month.",
-    url: absoluteUrl("/fractional-cmo/"),
-    serviceType: "Fractional CMO",
-    offers: [
-      {
-        name: "20-min Growth Audit",
-        description: "Free 20-minute diagnostic call. Bottleneck read, fit decision, recommendation.",
-        price: "0",
-        billingIncrement: "per call"
-      },
-      {
-        name: "Strategy Sprint",
-        description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
-        price: "6000",
-        billingIncrement: "per engagement"
-      },
-      {
-        name: "Fractional CMO",
-        description: "3-month minimum. Embedded senior ownership 1 day a week.",
-        price: "7500",
-        billingIncrement: "per month"
-      },
-      {
-        name: "Fractional CMO Plus",
-        description: "Deeper operating support, agency management, faster execution.",
-        price: "12000",
-        billingIncrement: "per month"
-      }
-    ]
-  })
-];
+const homeSchemas = [buildServiceSchema(), buildAggregateRatingSchema(), buildFaqPageSchema()];
 ---
 
 <BaseLayout
-  description={positioning.metaDescription}
-  path="/"
-  preloadHeadshot
-  schema={schemas}
-  title="Fractional CMO for AI & B2B SaaS Startups | Daniel Johnson"
+  title="Fractional CMO for AI & B2B SaaS Startups"
+  description="Fractional CMO for Seed–Series B AI & B2B SaaS: predictable pipeline, sharper positioning, senior growth leadership — without a £150k full-time hire."
+  schema={homeSchemas}
+  preloadHeadshot={true}
+  lastUpdated={false}
 >
-  <!-- ════════════════════════════════════════════════════════════════════
-       1 · HERO — confident, premium, focused
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="dj-hero" aria-labelledby="hero-heading">
-    <div class="shell">
-      <div class="dj-hero-layout">
-        <!-- Left column: text & CTA stack -->
-        <div class="dj-hero-content">
-          <span class="dj-hero-eyebrow">
-            <span class="dj-hero-eyebrow-dot" aria-hidden="true"></span>
-            <span>Fractional CMO · {singleIdea.short}</span>
-          </span>
+  <!-- Google Fonts for v4 design system (Inter, Fraunces, JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@500&display=swap"
+    slot="head"
+  />
 
-          <h1 id="hero-heading" class="dj-hero-h1">
-            Your growth still depends on you.
-            <span class="dj-hero-h1-accent">That&rsquo;s the bottleneck I fix.</span>
-          </h1>
-
-          <p class="dj-hero-subcopy">
-            I embed with B2B SaaS and AI founders as a fractional CMO — find the real constraint, build the growth system, hand it off to your team.
-          </p>
-
-          <div class="dj-hero-proof-row" aria-label="Daniel's track record at a glance">
-            {
-              heroProofTicker.map((item) => (
-                <div>
-                  <strong>
-                    {item.source.startsWith("http") ? (
-                      <a href={item.source} rel="noreferrer noopener" target="_blank">{item.value}</a>
-                    ) : (
-                      <a href={item.source}>{item.value}</a>
-                    )}
-                  </strong>
-                  <span>{item.label}</span>
-                </div>
-              ))
-            }
-          </div>
-
-          <div class="dj-hero-cta-row">
-            <a class="dj-hero-cta-primary" href={ctas.primary.href} data-cta="hero-primary">
-              <span>{ctas.primary.label}</span>
-              <span class="dj-arr" aria-hidden="true">→</span>
-            </a>
-            <a class="dj-hero-cta-secondary" href={ctas.caseStudies.href} data-cta="hero-case-studies">
-              <span>See case studies</span>
-              <span aria-hidden="true">→</span>
-            </a>
-
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <p class="dj-hero-availability">
-              <span class="dj-hero-availability-dot" aria-hidden="true"></span>
-              {siteConfig.availability}
+  <div class="v4-home">
+    <!-- ===== Hero ===== -->
+    <section class="v4-hero" aria-label="Introduction">
+      <div class="v4-container">
+        <div class="v4-hero-grid">
+          <div class="reveal">
+            <span class="v4-eyebrow">Fractional CMO · Growth systems that run without you</span>
+            <h1 class="v4-h1">
+              Your growth still depends on you.
+              <span class="v4-accent">That's the <span class="v4-hl">bottleneck I fix.</span></span>
+            </h1>
+            <p class="v4-subhead v4-hero-sub">
+              I embed with B2B SaaS and AI founders as a fractional CMO. We find the real constraint,
+              build the growth system, and hand it off to your team.
             </p>
-            <p class="dj-hero-icp">
-              <strong>Best fit:</strong> {icpFirmographics.oneLiner}
-            </p>
+            <div class="v4-micro-proof">
+              <div class="v4-stat"><span class="v4-num">£18M+</span><span class="v4-stat-label">client revenue generated</span></div>
+              <div class="v4-stat"><span class="v4-num">4.97 / 5</span><span class="v4-stat-label">from 220 reviews on GrowthMentor</span></div>
+              <div class="v4-stat"><span class="v4-num">479+</span><span class="v4-stat-label">mentor sessions delivered</span></div>
+            </div>
+            <div class="v4-hero-ctas">
+              <a href="/contact/#book-growth-audit" class="v4-btn v4-btn-primary" data-cta="home-hero-audit">
+                Book a 20-min Growth Audit <span class="v4-arrow">→</span>
+              </a>
+              <a href="/case-studies/" class="v4-btn v4-btn-ghost" data-cta="home-hero-case-studies">
+                See case studies <span class="v4-arrow">→</span>
+              </a>
+            </div>
+            <div class="v4-availability-strip">2 Fractional CMO slots open this quarter · Next start window: June 2026</div>
           </div>
-        </div>
-
-        <!-- Right column: portrait, badge, credentials, engagement card -->
-        <aside class="dj-hero-side" aria-label="About Daniel">
-          <div class="dj-hero-portrait-frame">
-            <div class="dj-hero-portrait-inner">
+          <div class="v4-hero-photo reveal">
+            <div class="v4-hero-photo-bg">
               <img
+                src="/images/daniel-hero-cutout.webp"
                 alt="Daniel Johnson, fractional CMO and AI-native growth operator"
-                decoding="async"
-                fetchpriority="high"
-                height="960"
                 loading="eager"
-                src={siteConfig.headshot}
-                width="768"
+                fetchpriority="high"
               />
-              <span class="dj-hero-portrait-tag">Fractional CMO</span>
-              <span class="dj-hero-portrait-badge">
-                <span class="dj-hero-portrait-badge-dot" aria-hidden="true"></span>
-                Available · {siteConfig.availability.includes("2026") ? "2026" : "now"}
-              </span>
             </div>
+            <span class="v4-pill v4-pill-top">Fractional CMO</span>
+            <span class="v4-pill v4-pill-bot">Available · now</span>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="dj-hero-creds" aria-label="Selected external affiliations">
-            <p class="dj-hero-creds-label">Selected affiliations</p>
-            <div class="dj-hero-creds-logos">
-              {
-                heroCredentialLogos.map((item) => (
-                  <img alt={item.alt} decoding="async" loading="lazy" src={item.src} />
-                ))
-              }
-            </div>
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Three-lane audience router ===== -->
+    <section aria-label="Audience router">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">Who's visiting today</span>
+            <h2 class="v4-h2">Three ways <span class="v4-hl">people land here.</span></h2>
           </div>
+          <p class="v4-subhead">Pick the lane that matches you. Founders take the highlighted route; the other two are for event organisers, podcast hosts, and partners.</p>
+        </div>
+        <div class="v4-lanes">
+          <div class="v4-lane v4-lane-primary">
+            <div class="v4-lane-num">01 · For founders</div>
+            <h3 class="v4-h3">You're a founder with a growth problem.</h3>
+            <p>Pipeline is patchy, every important growth call still routes through you, and you're not sure whether to hire, agency it out, or rethink the plan. Start with a free 20-minute audit. No pitch, no deck.</p>
+            <a href="/contact/#book-growth-audit" class="v4-link-arrow" data-cta="home-router-founders">Start the audit</a>
+          </div>
+          <div class="v4-lane">
+            <div class="v4-lane-num">02 · For event organisers</div>
+            <h3 class="v4-h3">You're booking a speaker or workshop lead.</h3>
+            <p>I've spoken at Cambridge Judge, Imperial, Techstars, General Assembly, Nomad Summit, and the UK Space Agency. Talks are built around the decision the room needs to make next.</p>
+            <a href="/speaking/" class="v4-link-arrow" data-cta="home-router-speaking">See speaking &amp; workshops</a>
+          </div>
+          <div class="v4-lane">
+            <div class="v4-lane-num">03 · For podcasts &amp; press</div>
+            <h3 class="v4-h3">You're here for an interview or partnership.</h3>
+            <p>Topics I'll go deep on: AI-native GTM, founder-led growth, why most first marketing hires fail, building a £50/month lead engine. Press kit, headshots, short and long bios in the media pack.</p>
+            <a href="/media-kit/" class="v4-link-arrow" data-cta="home-router-media">Media kit &amp; podcast topics</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <nav class="dj-hero-engagement" aria-label="Ways to work with Daniel">
-            <header class="dj-hero-engagement-head">
-              <p class="dj-hero-engagement-eyebrow">Ways to work together</p>
-              <p class="dj-hero-engagement-title">Pick the smallest commitment that answers your question.</p>
-            </header>
-            <ul class="dj-hero-engagement-rows" role="list">
-              {
-                heroEngagementRows.map((row) => (
-                  <li class:list={["dj-hero-engagement-row", row.recommended && "dj-hero-engagement-row--recommended"]}>
-                    <a class="dj-hero-engagement-link" href={row.href} data-cta={row.cta}>
-                      <span class="dj-hero-engagement-step" aria-hidden="true">{row.step}</span>
-                      <span class="dj-hero-engagement-body">
-                        <strong>{row.title}</strong>
-                        <small>{row.sub}</small>
-                      </span>
-                      <span class="dj-hero-engagement-arr" aria-hidden="true">→</span>
-                    </a>
-                  </li>
-                ))
-              }
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Bottleneck ===== -->
+    <section aria-label="The bottleneck">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">The bottleneck</span>
+            <h2 class="v4-h2">You've got traction. <span class="v4-accent">Growth still <span class="v4-hl">feels like guessing.</span></span></h2>
+          </div>
+          <p class="v4-subhead">The real problem isn't usually the channel. It's that the whole growth function still lives in your head.</p>
+        </div>
+        <div class="v4-bottleneck-card">
+          <p>The product works. Revenue is moving. You've got paying customers and a deck that holds up in a room. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth decision still routes through you. Because nobody else has the full picture.</p>
+          <p>The instinct is to add something. A new channel, an agency, another campaign. That's almost never the actual problem. The problem is that the whole growth function lives in your head, and there's no system running underneath it.</p>
+          <p class="v4-point"><strong>The point:</strong> what you need isn't more activity. You need a senior operator who can walk in, see the whole machine at once, and tell you — with specifics — which one or two levers actually matter for your company right now. Then build the system to run those levers without you.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Marquee ===== -->
+    <div class="v4-marquee" aria-hidden="true">
+      <div class="v4-marquee-track">
+        <span class="v4-kw-1">POSITIONING</span><span>/</span>
+        <span class="v4-kw-2">PIPELINE</span><span>/</span>
+        <span class="v4-kw-4">MESSAGING</span><span>/</span>
+        <span class="v4-kw-3">CONVERSION</span><span>/</span>
+        <span class="v4-kw-5">REPORTING</span><span>/</span>
+        <span class="v4-kw-6">FOUNDER-LED GROWTH</span><span>/</span>
+        <span class="v4-kw-1">POSITIONING</span><span>/</span>
+        <span class="v4-kw-2">PIPELINE</span><span>/</span>
+        <span class="v4-kw-4">MESSAGING</span><span>/</span>
+        <span class="v4-kw-3">CONVERSION</span><span>/</span>
+        <span class="v4-kw-5">REPORTING</span><span>/</span>
+        <span class="v4-kw-6">FOUNDER-LED GROWTH</span><span>/</span>
+      </div>
+    </div>
+    <div class="v4-marquee" aria-hidden="true">
+      <div class="v4-marquee-track v4-marquee-reverse">
+        <span class="v4-kw-3">CUSTOMER SIGNAL</span><span>/</span>
+        <span class="v4-kw-4">ACQUISITION TESTS</span><span>/</span>
+        <span class="v4-kw-1">DECISION RHYTHM</span><span>/</span>
+        <span class="v4-kw-2">PROOF LIBRARY</span><span>/</span>
+        <span class="v4-kw-5">AI-NATIVE RESEARCH</span><span>/</span>
+        <span class="v4-kw-6">GTM SYSTEM</span><span>/</span>
+        <span class="v4-kw-3">CUSTOMER SIGNAL</span><span>/</span>
+        <span class="v4-kw-4">ACQUISITION TESTS</span><span>/</span>
+        <span class="v4-kw-1">DECISION RHYTHM</span><span>/</span>
+        <span class="v4-kw-2">PROOF LIBRARY</span><span>/</span>
+        <span class="v4-kw-5">AI-NATIVE RESEARCH</span><span>/</span>
+        <span class="v4-kw-6">GTM SYSTEM</span><span>/</span>
+      </div>
+    </div>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Ladder ===== -->
+    <section aria-label="Ways to work together">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">Ways to work together</span>
+            <h2 class="v4-h2">Pick the smallest commitment <span class="v4-accent">that answers your question.</span></h2>
+          </div>
+          <p class="v4-subhead">You can move up the ladder later. Most clients start with the audit.</p>
+        </div>
+        <div class="v4-ladder">
+          <div class="v4-step">
+            <div class="v4-step-num">01</div>
+            <span class="v4-tier">Entry · Free</span>
+            <h3 class="v4-h3">20-min Growth Audit</h3>
+            <div class="v4-price">Free</div>
+            <p class="v4-meta">20 minutes · No pitch · No deck</p>
+            <p class="v4-body">Bring the messy growth question. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.</p>
+            <p class="v4-detail"><span class="v4-lbl">Best for</span>Anyone unsure whether they need a fractional CMO, an agency, an internal hire, or just a sharper plan.</p>
+            <p class="v4-detail"><span class="v4-lbl">Outcome</span>A clearer read on the bottleneck and the most useful next step.</p>
+            <div class="v4-cta-row"><a href="/growth-audit/" class="v4-link-arrow" data-cta="home-ladder-audit">See what's covered</a></div>
+          </div>
+          <div class="v4-step">
+            <div class="v4-step-num">02</div>
+            <span class="v4-tier">Plan · From £6k</span>
+            <h3 class="v4-h3">Strategy Sprint</h3>
+            <div class="v4-price">£6k fixed scope</div>
+            <p class="v4-meta">2–4 week engagement</p>
+            <p class="v4-body">Diagnose, prioritise, and ship the first artefacts. ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.</p>
+            <p class="v4-detail"><span class="v4-lbl">Best for</span>Founders who need the plan, the operating rhythm, and the first wins before committing to ongoing work.</p>
+            <p class="v4-detail"><span class="v4-lbl">Outcome</span>A 90-day growth plan, the first artefacts, and a working operating rhythm.</p>
+            <div class="v4-cta-row"><a href="/strategy-sprint/" class="v4-link-arrow" data-cta="home-ladder-sprint">See Strategy Sprint scope</a></div>
+          </div>
+          <div class="v4-step v4-step-emphasis">
+            <div class="v4-step-num">03</div>
+            <span class="v4-tier">Embedded · Ongoing</span>
+            <h3 class="v4-h3">Fractional CMO</h3>
+            <div class="v4-price">From £7.5k/mo</div>
+            <p class="v4-meta">3-month minimum</p>
+            <p class="v4-body">Embedded senior ownership 1–2 days a week. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Build the system, then hand it off clean.</p>
+            <p class="v4-detail"><span class="v4-lbl">Best for</span>£1M–£10M ARR, founder-led, growth stuck, senior help needed before or alongside a £150k+ full-time CMO hire.</p>
+            <p class="v4-detail"><span class="v4-lbl">Outcome</span>Pipeline rhythm, sharper positioning, and a growth system the team can run after I'm gone.</p>
+            <div class="v4-cta-row"><a href="/fractional-cmo/" class="v4-link-arrow" data-cta="home-ladder-cmo">Explore Fractional CMO</a></div>
+          </div>
+        </div>
+        <p class="v4-ladder-footer">
+          Looking for <a href="/founder-office-hours/">founder office hours</a>,
+          <a href="/speaking/">speaking</a>, or workshops?
+          <a href="/work-with-me/" class="v4-link-arrow" data-cta="home-ladder-all">See all the ways we can work together</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Proof ===== -->
+    <section aria-label="Proof and case studies">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">Proof</span>
+            <h2 class="v4-h2">Real campaigns. Real numbers. <span class="v4-accent">Real attribution.</span></h2>
+          </div>
+          <p class="v4-subhead">The short list. Full case studies linked below.</p>
+        </div>
+        <div class="v4-metrics">
+          <div class="v4-metric">
+            <div class="v4-big">6×</div>
+            <div class="v4-top-label">App downloads</div>
+            <p class="v4-ctx">2k → 12k+ monthly downloads in six months after an acquisition and lifecycle rebuild.</p>
+            <span class="v4-tag">HealthTech · AI</span>
+          </div>
+          <div class="v4-metric">
+            <div class="v4-big">35%</div>
+            <div class="v4-top-label">Lower CAC</div>
+            <p class="v4-ctx">CAC down 35% in eight weeks. Segmentation, paid account structure, landing-page routing.</p>
+            <span class="v4-tag">Fintech · Crypto</span>
+          </div>
+          <div class="v4-metric">
+            <div class="v4-big">500+</div>
+            <div class="v4-top-label">Qualified signups</div>
+            <p class="v4-ctx">500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.</p>
+            <span class="v4-tag">Fintech · B2B SaaS</span>
+          </div>
+          <div class="v4-metric">
+            <div class="v4-big">21%</div>
+            <div class="v4-top-label">Less churn</div>
+            <p class="v4-ctx">Retention up 21% in three months. Targeted lifecycle and win-back messaging.</p>
+            <span class="v4-tag">eCommerce</span>
+          </div>
+        </div>
+        <div class="v4-quote-pulled">
+          <blockquote>Named the two levers that mattered. Inside 60 days we had a weekly rhythm and pipeline built to our ICP.</blockquote>
+          <cite>— Christian A., Founder, AI HealthTech</cite>
+        </div>
+        <div class="v4-attribution-row">
+          <div><strong>£15M+</strong> helped founders raise</div>
+          <div><strong>200+</strong> startups across four continents</div>
+          <div><strong>4.97 / 5</strong> · <strong>479+</strong> sessions</div>
+        </div>
+        <div class="v4-center-row">
+          <a href="/case-studies/" class="v4-link-arrow" data-cta="home-proof-case-studies">See full case studies</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Fit ===== -->
+    <section aria-label="Fit check">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">Fit</span>
+            <h2 class="v4-h2">Who this is for, <span class="v4-accent">and who it isn't.</span></h2>
+          </div>
+          <p class="v4-subhead">I'd rather save us both a 20-minute call if we're not the right match.</p>
+        </div>
+        <div class="v4-fit">
+          <div class="v4-fit-col v4-fit-yes">
+            <div class="v4-lbl-tag">Best fit</div>
+            <ul>
+              <li><span class="v4-icon">✓</span><span>£1M–£20M ARR B2B SaaS or AI, ~10–50 people, founder still running GTM</span></li>
+              <li><span class="v4-icon">✓</span><span>Seed to Series B, post-PMF, real customers, real revenue</span></li>
+              <li><span class="v4-icon">✓</span><span>Founder bottlenecked on growth decisions</span></li>
+              <li><span class="v4-icon">✓</span><span>Need senior operator judgement, not junior execution</span></li>
+              <li><span class="v4-icon">✓</span><span>Ready to invest in systems, not campaigns</span></li>
             </ul>
-          </nav>
-        </aside>
-      </div>
-
-      <!-- Hairline + refined trust strip -->
-      <div class="dj-hero-hairline" aria-hidden="true"></div>
-      <div class="dj-trust-strip reveal" aria-label="Selected affiliations and platforms">
-        <p class="dj-trust-strip-label">Trusted by founders &amp; platforms</p>
-        <div class="dj-trust-strip-logos">
-          {
-            trustLogos.map((item) => (
-              <img alt={item.alt} decoding="async" height="32" loading="lazy" src={item.src} width="160" />
-            ))
-          }
+          </div>
+          <div class="v4-fit-col v4-fit-no">
+            <div class="v4-lbl-tag">Not a fit</div>
+            <ul>
+              <li><span class="v4-icon">✕</span><span>Pre-PMF or pre-revenue, still searching for the problem</span></li>
+              <li><span class="v4-icon">✕</span><span>Looking for a cheap agency to run ads</span></li>
+              <li><span class="v4-icon">✕</span><span>Want a full-time FTE replaced at junior cost</span></li>
+              <li><span class="v4-icon">✕</span><span>Want vanity-metrics reporting, not revenue impact</span></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       1.5 · AUDIENCE ROUTER — three lanes for non-overlapping visitors
-       ════════════════════════════════════════════════════════════════════ -->
-  <AudienceRouter />
+    <!-- ===== Method (dark) ===== -->
+    <section class="v4-method-section" aria-label="The growth system method">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">The method</span>
+            <h2 class="v4-h2">I don't run campaigns. <span class="v4-accent">I build growth systems that run without you.</span></h2>
+          </div>
+          <p class="v4-subhead">Most growth consultants arrive, ship a deck, and disappear. Not how I work. Every engagement builds a repeatable architecture your team can run after I'm gone.</p>
+        </div>
+        <p class="v4-method-intro">Six layers, one loop. Customer signal feeds GTM systems, which feeds acquisition, which feeds conversion, which feeds founder-led distribution, which feeds reporting, which loops back into customer signal.</p>
+        <div class="v4-method-tiles">
+          <a href="/gtm-systems/" class="v4-method-tile">
+            <div class="v4-n">01</div><div class="v4-t">Customer signal</div><div class="v4-d">ICP, calls, signal</div>
+          </a>
+          <a href="/gtm-systems/" class="v4-method-tile">
+            <div class="v4-n">02</div><div class="v4-t">GTM systems</div><div class="v4-d">Positioning, cadence, dashboards</div>
+          </a>
+          <a href="/experimentation/" class="v4-method-tile">
+            <div class="v4-n">03</div><div class="v4-t">Acquisition</div><div class="v4-d">Channels, experiments, decision rules</div>
+          </a>
+          <a href="/product-led-growth/" class="v4-method-tile">
+            <div class="v4-n">04</div><div class="v4-t">Conversion</div><div class="v4-d">Funnel, activation, demo-booking fixes</div>
+          </a>
+          <a href="/founder-led-distribution/" class="v4-method-tile">
+            <div class="v4-n">05</div><div class="v4-t">Founder-led distribution</div><div class="v4-d">Voice, content, pipeline loop</div>
+          </a>
+          <a href="/revenue-operations/" class="v4-method-tile">
+            <div class="v4-n">06</div><div class="v4-t">Reporting</div><div class="v4-d">Scale, stop, fix</div>
+          </a>
+        </div>
+        <div class="v4-method-footer">
+          <p class="v4-method-text">If "growth system" sounds vague, that's the point. I'll show you exactly what it looks like on a 20-minute audit.</p>
+          <a href="/contact/#book-growth-audit" class="v4-btn v4-btn-primary" data-cta="home-method-audit">Book a 20-min Growth Audit <span class="v4-arrow">→</span></a>
+        </div>
+      </div>
+    </section>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       2 · PROBLEM — pulled-quote framing
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space" aria-labelledby="problem-heading">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl">
-        <div class="dj-problem">
-          <span class="dj-eyebrow">The bottleneck</span>
-          <h2 id="problem-heading" class="mt-4 dj-section-title">
-            You&rsquo;ve got traction. <span class="hero-accent">Growth still <span class="hl">feels like guessing.</span></span>
-          </h2>
-          <p class="mt-5 dj-section-lede">
-            The product works. Revenue is moving. You&rsquo;ve got paying customers and a deck that holds up. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth call still routes through you &mdash; because nobody else has the full picture.
-          </p>
-          <p class="mt-4 dj-section-lede">
-            The instinct is to add something: a new channel, an agency, another campaign. But that&rsquo;s rarely the problem. The problem is that the whole growth function still lives in your head, and there&rsquo;s no system running underneath it.
-          </p>
-          <p class="mt-4 dj-section-lede">
-            What you need isn&rsquo;t more activity. It&rsquo;s a senior operator who can walk in, see the whole machine at once, and tell you &mdash; with specifics &mdash; which one or two levers actually matter for your company right now. Then build the system to run those levers without you.
+    <!-- ===== Why not an agency ===== -->
+    <section aria-label="Why not an agency">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">Why not an agency</span>
+            <h2 class="v4-h2">Senior judgement, <span class="v4-accent">not junior execution.</span></h2>
+          </div>
+          <p class="v4-subhead">Most growth problems at this stage are senior judgement problems pretending to be execution problems.</p>
+        </div>
+        <div class="v4-compare">
+          <div class="v4-compare-col">
+            <div class="v4-lbl-tag">A typical agency</div>
+            <ul>
+              <li><span class="v4-icon">✕</span><span>Junior account managers execute the work</span></li>
+              <li><span class="v4-icon">✕</span><span>Long retainers, fixed scopes, slow handoffs</span></li>
+              <li><span class="v4-icon">✕</span><span>Vanity metrics in monthly reports</span></li>
+              <li><span class="v4-icon">✕</span><span>Brand-safe best practice, not contextual calls</span></li>
+              <li><span class="v4-icon">✕</span><span>Strategy and execution split across people</span></li>
+            </ul>
+          </div>
+          <div class="v4-compare-col v4-compare-win">
+            <div class="v4-lbl-tag">Working with me</div>
+            <ul>
+              <li><span class="v4-icon">✓</span><span>Senior operator in the seat — no junior layer</span></li>
+              <li><span class="v4-icon">✓</span><span>Embedded ownership of the growth function</span></li>
+              <li><span class="v4-icon">✓</span><span>Revenue-focused. Pipeline, conversion, payback.</span></li>
+              <li><span class="v4-icon">✓</span><span>Opinionated, contextual calls on your company</span></li>
+              <li><span class="v4-icon">✓</span><span>Build the system, then hand it off clean</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="v4-compare-footer">
+          <a href="/resources/compare-growth-options/" class="v4-link-arrow" data-cta="home-compare-six">Compare six growth options (agency, FTE, fractional, advisor, mentor, contractor)</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== About ===== -->
+    <section aria-label="About Daniel">
+      <div class="v4-container reveal">
+        <div class="v4-about-grid">
+          <div>
+            <span class="v4-eyebrow">About</span>
+            <h2 class="v4-h2">I've been the founder <span class="v4-accent">with a <span class="v4-hl">flat chart at 2am.</span></span></h2>
+            <p>My first company was eQuoo — evidence-based emotional fitness training. Good product. A go-to-market strategy that mostly amounted to hoping the right people would find us. They didn't, not fast enough. We navigated through it and got to two exits. The lesson stuck: execution without a system isn't scrappy. It's expensive improvisation with a deadline.</p>
+            <p>After that I ran in-house growth at Shoprocket and NAVA, and kept seeing the same pattern. Functional products, founders owning every growth decision, nothing compounding. We Scale Startups exists to fix that — with a structured approach to positioning, pipeline, and growth decisions, built across 20+ AI and B2B SaaS engagements at depth, and 200+ startups in total across healthtech, eCommerce, and AI infrastructure.</p>
+            <p>I've mentored 479+ founders at a 4.97 / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>
+            <a href="/about/" class="v4-link-arrow" data-cta="home-about-read">Read more about Daniel</a>
+          </div>
+          <div>
+            <img
+              src="/images/daniel-aircraft.webp"
+              alt="Daniel Johnson — operator mindset, systems thinking applied to growth"
+              loading="lazy"
+              class="v4-about-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Speaking & writing ===== -->
+    <section aria-label="Speaking and writing">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">Beyond the page</span>
+            <h2 class="v4-h2">Speaking, writing, and other ways <span class="v4-accent">to read the work.</span></h2>
+          </div>
+          <p class="v4-subhead">A few more ways to read the work before you book: rooms, essays, and the operator story behind the process.</p>
+        </div>
+        <div class="v4-sw">
+          <div class="v4-sw-card">
+            <img
+              src="/images/cambridge-judge-business-school-960.webp"
+              alt="Cambridge Judge Business School, where Daniel guest lectures"
+              loading="lazy"
+              class="v4-sw-img"
+            />
+            <div class="v4-body-pad">
+              <span class="v4-eyebrow">Speaking</span>
+              <h3 class="v4-h3">Founder rooms, startup cohorts, practical commercial work.</h3>
+              <p>Talks and workshops built around the decision the room needs to make next. Recent: Cambridge Judge, Imperial, Techstars, General Assembly, Nomad Summit 2026, UK Space Agency.</p>
+              <div class="v4-feedback-row">
+                <q>Excellent presentation.</q>
+                <q>Great succinct intro to scaling.</q>
+                <q>Very helpful.</q>
+              </div>
+              <a href="/speaking/" class="v4-link-arrow" data-cta="home-sw-speaking">See speaking topics &amp; media kit</a>
+            </div>
+          </div>
+          <div class="v4-sw-card">
+            <div class="v4-body-pad">
+              <span class="v4-eyebrow">Writing</span>
+              <h3 class="v4-h3">Essays on AI-native GTM, growth systems, and why most startup growth advice is wrong.</h3>
+              <div class="v4-essay">
+                <span class="v4-date">10 MAY 2026</span>
+                <a href="/writing/how-to-know-growth-depends-on-founder/" class="v4-essay-title">How to know growth depends on the founder: diagnostics before you restructure GTM</a>
+              </div>
+              <div class="v4-essay">
+                <span class="v4-date">09 MAY 2026</span>
+                <a href="/writing/first-90-days-fractional-cmo/" class="v4-essay-title">First 90 days of a fractional CMO: rhythm, deliverables, and what good looks like</a>
+              </div>
+              <div class="v4-essay">
+                <span class="v4-date">08 MAY 2026</span>
+                <a href="/writing/ai-native-gtm-systems/" class="v4-essay-title">AI-native GTM systems: where AI helps, where it hurts, and what to automate first</a>
+              </div>
+              <div class="v4-essay-links">
+                <a href="/writing/" class="v4-link-arrow" data-cta="home-sw-writing">Read all writing</a>
+                <a href="/newsletter/" class="v4-link-arrow" data-cta="home-sw-newsletter">Growth Notes</a>
+                <a href="/growth-bottleneck-checklist/" class="v4-link-arrow" data-cta="home-sw-checklist">Bottleneck checklist</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== FAQ ===== -->
+    <section aria-label="Frequently asked questions">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">FAQ</span>
+            <h2 class="v4-h2">Questions founders ask <span class="v4-accent">before a first call.</span></h2>
+          </div>
+          <p class="v4-subhead">Same topics covered on the audit, so you're not buying blind.</p>
+        </div>
+        <div class="v4-faq">
+          <details>
+            <summary>What does a fractional CMO actually do day-to-day?</summary>
+            <p class="v4-faq-answer">Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings. Not a monthly slide deck.</p>
+          </details>
+          <details open>
+            <summary>How is this different from hiring a full-time CMO?</summary>
+            <p class="v4-faq-answer">You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs. <a href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional vs full-time →</a></p>
+          </details>
+          <details>
+            <summary>What stage should my startup be at?</summary>
+            <p class="v4-faq-answer">Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first. <a href="/resources/fractional-cmo-vs-full-time-cmo/">When each model fits →</a></p>
+          </details>
+          <details>
+            <summary>How quickly will I see results?</summary>
+            <p class="v4-faq-answer">Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I don't promise miracles. I promise a visible system and honest calls on what's working.</p>
+          </details>
+          <details>
+            <summary>What does it cost?</summary>
+            <p class="v4-faq-answer">UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price. <a href="/resources/fractional-cmo-cost-uk/">Fractional CMO cost (UK) →</a></p>
+          </details>
+          <details>
+            <summary>How do I know if this will work for my business?</summary>
+            <p class="v4-faq-answer">If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 20-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Final CTA ===== -->
+    <section aria-label="Final call to action">
+      <div class="v4-container reveal">
+        <div class="v4-final-cta">
+          <span class="v4-eyebrow">Next step</span>
+          <h2 class="v4-h2">Book a <span class="v4-hl">20-min Growth Audit.</span></h2>
+          <p class="v4-final-lead">Twenty minutes on your specific situation. No pitch, no deck, no trying-to-close. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.</p>
+          <a href="/contact/#book-growth-audit" class="v4-btn v4-btn-primary" data-cta="home-final-audit">Book a 20-min Growth Audit <span class="v4-arrow">→</span></a>
+          <p class="v4-final-meta">
+            2 Fractional CMO slots open this quarter · Next start window: June 2026<br />
+            Prefer email first? <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>
           </p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 3 · Visual divider — rotating bars ─────────────────────────────── -->
-  <div class="reveal overflow-hidden">
-    <div class="shell">
-      <RotatingTextBars />
-    </div>
+    </section>
   </div>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       4 · BUYING LADDER — three ways in
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-8" id="services">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Three ways in"
-        intro="Pick the smallest commitment that answers the question. You can move up the ladder later."
-        title="Where do you want to start?"
-      />
-
-      <div class="ladder-grid mt-10">
-        {
-          homeServiceLadder.map((tier, index) => (
-            <article class:list={["ladder-card card p-6 md:p-8", tier.primary && "ladder-card-primary"]}>
-              <div class="ladder-step" aria-hidden="true">
-                <span class="ladder-step-num">0{index + 1}</span>
-                {index < homeServiceLadder.length - 1 && <span class="ladder-step-arrow">→</span>}
-              </div>
-              <p class="card-label mt-4">{tier.tier}</p>
-              <h3 class="mt-3 text-2xl font-extrabold tracking-[-0.05em]">{tier.heading}</h3>
-              <div class="mt-3 flex flex-wrap items-baseline gap-2">
-                <span class="text-2xl font-extrabold tracking-[-0.06em]">{tier.price}</span>
-                <span class="text-sm text-[color:var(--muted)]">· {tier.cadence}</span>
-              </div>
-              <div class="ladder-reveal-details">
-                <div class="ladder-reveal-inner">
-                  <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{tier.body}</p>
-                  <p class="mt-5 border-t border-[color:var(--line)] pt-4 text-sm leading-6 text-[color:var(--muted)]">
-                    <strong class="font-semibold text-[color:var(--ink)]">Best for:</strong> {tier.bestFor}
-                  </p>
-                  <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">
-                    <strong class="font-semibold text-[color:var(--ink)]">Outcome:</strong> {tier.outcome}
-                  </p>
-                  <a class="link-arrow mt-6 block" href={tier.href}>{tier.cta} →</a>
-                </div>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
-      <p class="reveal mt-8 text-center text-sm leading-7 text-[color:var(--muted)]">
-        Looking for <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/founder-office-hours/">founder office hours</a>, <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/speaking/">speaking, or workshops</a>? See <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/work-with-me/">all the ways we can work together</a>.
-      </p>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       5 · FIT — best fit vs not a fit
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0" aria-labelledby="fit-heading">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Fit"
-        intro="I&rsquo;d rather save us both a 20-minute call if we&rsquo;re not the right match."
-        title="Who this is for, and who it&rsquo;s not."
-      />
-
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label text-[color:var(--accent)]">Best fit</p>
-          <ul class="mt-4 space-y-3 text-base leading-8">
-            {fitSignals.bestFor.map((point) => (
-              <li class="fit-row fit-row-yes">{point}</li>
-            ))}
-          </ul>
-        </article>
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label">Not a fit</p>
-          <ul class="mt-4 space-y-3 text-base leading-8 text-[color:var(--muted)]">
-            {fitSignals.notFor.map((point) => (
-              <li class="fit-row fit-row-no">{point}</li>
-            ))}
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       6 · WHY ME vs agency
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0" aria-labelledby="vs-heading">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Why not an agency"
-        intro="You don&rsquo;t need another agency layer when the real problem is senior growth judgement."
-        title="Senior growth judgement, not junior execution."
-      />
-
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
-        <article class="reveal card p-6 md:p-8">
-          <p class="card-label">{agencyVsMe.agency.heading}</p>
-          <ul class="mt-4 space-y-3 text-base leading-8 text-[color:var(--muted)]">
-            {agencyVsMe.agency.points.map((point) => <li class="fit-row fit-row-no">{point}</li>)}
-          </ul>
-        </article>
-        <article class="reveal card p-6 md:p-8 card-accent-border">
-          <p class="card-label text-[color:var(--accent)]">{agencyVsMe.me.heading}</p>
-          <ul class="mt-4 space-y-3 text-base leading-8">
-            {agencyVsMe.me.points.map((point) => <li class="fit-row fit-row-yes">{point}</li>)}
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       7 · THE METHOD — dark section
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="dark-section section-space" aria-labelledby="method-heading">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-3xl text-center">
-        <span class="dj-eyebrow justify-center" style="color: #c4b5fd;">The method</span>
-        <h2 id="method-heading" class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-6xl text-balance">
-          I don&rsquo;t run campaigns. <span class="hero-accent">I build growth systems that run without you.</span>
-        </h2>
-      </div>
-
-      <div class="reveal mx-auto mt-10 max-w-3xl space-y-5 text-lg leading-8 text-white/72">
-        <p>Most growth consultants arrive, ship a deck, and disappear. Not how I work.</p>
-        <p>
-          Every engagement builds the same thing: a growth system. A repeatable architecture your team can run after I&rsquo;m gone.
-        </p>
-        <p class="text-sm uppercase tracking-[0.16em] text-white/50">
-          Six layers, one loop
-        </p>
-      </div>
-
-      <div class="reveal mt-12">
-        <GrowthSystemDiagram />
-      </div>
-
-      <p class="reveal mt-6 text-center text-sm uppercase tracking-[0.14em] text-white/45">
-        Each layer also exists as a deeper page — click below
-      </p>
-
-      <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {
-          methodLayers.map((layer, index) => (
-            <a class="reveal card p-6" href={layer.href}>
-              <p class="card-label text-white/55">0{index + 1}</p>
-              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em] text-white">{layer.title}</h3>
-              <p class="mt-3 text-sm leading-7 text-white/68">{layer.body}</p>
-            </a>
-          ))
-        }
-      </div>
-
-      <div class="reveal mt-10 text-center">
-        <p class="text-base leading-8 text-white/68">
-          If &ldquo;growth system&rdquo; sounds vague, that&rsquo;s fine. I&rsquo;ll show you exactly what it looks like on a 20-minute audit.
-        </p>
-        <div class="mt-6 flex justify-center">
-          <a class="button-accent" href={ctas.primary.href} data-cta="method-primary">
-            {ctas.primary.label} →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       9 · IMAGE-LED CREDIBILITY
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Beyond the deck"
-        intro="A few more ways to read the work before you book: rooms, interviews, current focus, and the operator story behind the process."
-        title="More signal, fewer claims."
-      />
-
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
-        {
-          imageStoryCards.map((card) => (
-            <article class="reveal image-story-card">
-              <img alt={card.alt} decoding="async" height="720" loading="lazy" src={card.image} width="960" />
-              <div>
-                <p class="card-label">{card.eyebrow}</p>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
-                <a class="link-arrow" href={card.href}>{card.cta} →</a>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="mt-8 reveal">
-        <p class="card-label text-center text-xs uppercase tracking-[0.16em] text-[color:var(--subtle)]">Recent attendee feedback</p>
-        <div class="testimonial-strip mx-auto mt-3 max-w-3xl">
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
-            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> &ldquo;Excellent presentation&rdquo;
-          </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
-            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> &ldquo;Very helpful&rdquo;
-          </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/70 px-3 py-1.5 text-xs font-medium text-[color:var(--muted)]">
-            <svg class="icon-marker" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.7 3.5 3.9.6-2.8 2.7.7 3.9L8 10.6 4.5 12.5l.7-3.9L2.4 5.9l3.9-.6L8 1.8Z" fill="currentColor"/></svg> &ldquo;Great succinct intro to scaling&rdquo;
-          </span>
-        </div>
-      </div>
-
-      <div class="resource-link-row mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        <a class="reveal media-link-card card p-5" href="/podcast-guest/">
-          <span class="card-label">Podcast archive</span>
-          <strong>Interviews and conversations</strong>
-          <small>AI-native GTM, founder-led growth, experimentation, and fractional leadership.</small>
-        </a>
-        <a class="reveal media-link-card card p-5" href="/now/">
-          <span class="card-label">Now</span>
-          <strong>Current work and availability</strong>
-          <small>The most current picture of what I am working on this month.</small>
-        </a>
-        {
-          featuredMedia.slice(0, 2).map((item) => (
-            <a class="reveal media-link-card card p-5" href={item.data.href} rel="noreferrer" target="_blank">
-              <span class="card-label">{item.data.source}</span>
-              <strong>{item.data.title}</strong>
-              <small>{item.data.description}</small>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       10 · PROOF — real outcomes (dark)
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="dark-section section-space" id="proof" aria-labelledby="proof-heading">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Proof"
-        intro="The short list. Full case studies linked below."
-        title="Real campaigns. Real numbers. Real attribution."
-      />
-
-      <div class="proof-card-grid mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {
-          outcomeCards.map((card) => (
-            <article class="reveal card p-6">
-              <p class="text-5xl font-extrabold tracking-[-0.07em] text-white">{card.metric}</p>
-              <p class="mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-white/65">{card.metricSuffix}</p>
-              <p class="mt-5 text-sm leading-7 text-white/70">{card.context}</p>
-              <p class="mt-5 border-t border-white/[0.08] pt-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/45">
-                {card.sector}
-              </p>
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="reveal mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-center text-sm font-semibold uppercase tracking-[0.12em] text-white/60">
-        {lifetimeTotals.map((item) => <span>{item}</span>)}
-      </div>
-
-      <div class="reveal mt-6 text-center">
-        <a class="link-arrow" href="/case-studies/">See full case studies →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       11 · TESTIMONIALS
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space" aria-labelledby="testimonials-heading">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Testimonials"
-        intro="Founder feedback from mentoring, advisory, and growth sessions."
-        title="What founders say."
-      />
-
-      {leadTestimonial && (
-        <blockquote class="reveal mt-10 card p-8 md:p-12 testimonial-lead">
-          <p class="text-2xl font-semibold leading-10 tracking-[-0.04em] md:text-3xl">
-            &ldquo;{leadTestimonial.data.quote}&rdquo;
-          </p>
-          <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
-            <p class="font-semibold">{leadTestimonial.data.name}</p>
-            <p class="text-[color:var(--muted)]">{leadTestimonial.data.role}{leadTestimonial.data.organisation ? ` · ${leadTestimonial.data.organisation}` : ""}</p>
-          </footer>
-        </blockquote>
-      )}
-
-      <div class="mt-5 grid gap-5 md:grid-cols-2">
-        {
-          supportingTestimonials.map((item) => (
-            <blockquote class="reveal card p-6 md:p-7">
-              <p class="text-lg font-semibold leading-8 tracking-[-0.03em]">
-                &ldquo;{item.data.quote}&rdquo;
-              </p>
-              <footer class="mt-6 border-t border-[color:var(--line)] pt-4 text-sm">
-                <p class="font-semibold">{item.data.name}</p>
-                <p class="text-[color:var(--muted)]">{item.data.role}{item.data.organisation ? ` · ${item.data.organisation}` : ""}</p>
-              </footer>
-            </blockquote>
-          ))
-        }
-      </div>
-
-      <div class="reveal mt-6 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center">
-        <a class="link-arrow" href="/testimonials/" data-cta="home-testimonials-page">
-          Named outcomes &amp; metrics — full testimonials page →
-        </a>
-        <span class="hidden text-[color:var(--subtle)] sm:inline" aria-hidden="true">
-          ·
-        </span>
-        <a class="link-arrow" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
-          GrowthMentor reviews →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       12 · ABOUT PREVIEW
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-4xl space-y-6">
-        <span class="dj-eyebrow">About</span>
-        <h2 class="dj-section-title">I&rsquo;ve been the founder with a <span class="hl">flat chart at 2am.</span></h2>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          My first company was eQuoo &mdash; evidence-based emotional fitness training. Good product. A go-to-market strategy that mostly amounted to hoping the right people would find us. They didn&rsquo;t, not fast enough. We navigated through it &mdash; two exits in that chapter &mdash; but the lesson crystallised: execution without a system isn&rsquo;t scrappy. It&rsquo;s expensive improvisation with a deadline.
-        </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          After those early chapters I took in-house operating roles at Shoprocket and NAVA, and kept seeing the same pattern: functional products, founders personally owning every growth decision, and nothing compounding. We Scale Startups was built to fix that &mdash; not with a framework deck that gets filed after a workshop, but with a structured approach to positioning, pipeline, and growth decisions built across 20+ AI and B2B SaaS startups in 12 countries.
-        </p>
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
-          I&rsquo;ve mentored 479+ founders at a 4.97&thinsp;/&thinsp;5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.
-        </p>
-        <p>
-          <a class="link-arrow" href="/about/">Read more about Daniel →</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       13 · WRITING
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Writing"
-        intro="Essays on AI-native GTM, growth systems, and why most startup growth advice is wrong."
-        title="Writing."
-      />
-
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        {
-          articles.map((article) => (
-            <article class="reveal card p-6 md:p-7">
-              <p class="card-label">
-                {article.data.publishedAt.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}
-                {article.data.readingTime ? ` · ${article.data.readingTime}` : ""}
-              </p>
-              <h3 class="mt-3 text-xl font-bold tracking-[-0.04em]">{article.data.title}</h3>
-              <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{article.data.description}</p>
-              <a class="link-arrow mt-5" href={`/writing/${article.id}/`}>Read essay →</a>
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="cta-row reveal mt-8">
-        <a class="button-accent" href="/writing/">Read all writing →</a>
-        <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes →</a>
-        <a class="button-secondary" href="/growth-bottleneck-checklist/">Open the bottleneck checklist →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       15 · FAQ
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="section-space pt-0" id="faq" aria-labelledby="home-faq-heading">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="FAQ"
-        title="Questions founders ask before a first call."
-        intro="Six practical answers on scope, stage, timing, cost, and fit — same topics we cover on the audit so you are not buying blind."
-      />
-      <div class="faq-stack mt-8 mx-auto max-w-3xl">
-        {
-          homepageFaq.map((item, index) => (
-            <details class="faq-item" open={index === 0}>
-              <summary>{item.question}</summary>
-              <p>
-                {item.answer}
-                {item.link && (
-                  <>
-                    {" "}
-                    <a
-                      class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]"
-                      href={item.link.href}
-                      data-cta={`home-faq-${index}`}
-                    >
-                      {item.link.label}
-                    </a>
-                  </>
-                )}
-              </p>
-            </details>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════════════════════
-       16 · FINAL CTA
-       ════════════════════════════════════════════════════════════════════ -->
-  <section class="cta-gradient section-space">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
-        <span class="eyebrow justify-center text-white/60">Next step</span>
-        <h2 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance text-white md:text-7xl">
-          {ctas.primary.label}.
-        </h2>
-        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
-          20 minutes on your specific situation. No pitch, no deck, no trying-to-close. You&rsquo;ll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn&rsquo;t, I&rsquo;ll tell you what I&rsquo;d do instead.
-        </p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={ctas.primary.href} data-cta="final-primary">
-            {ctas.primary.label} →
-          </a>
-          <a class="button-link-invert" href={ctas.caseStudies.href} data-cta="final-case-studies">
-            {ctas.caseStudies.label} →
-          </a>
-        </div>
-        <div class="text-sm text-white/60">
-          Prefer email first?{" "}
-          <CfEmailOff>
-            <a class="text-white underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-          </CfEmailOff>
-        </div>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
-<style>
-  /* ── Buying ladder details stay visible so each tier is scannable. ─── */
-  .ladder-reveal-details {
-    display: grid;
-    grid-template-rows: 1fr;
-    opacity: 1;
+<style is:global>
+  /* ============================================================
+     v4 homepage design system — scoped to .v4-home wrapper.
+     All custom selectors are prefixed with .v4- and rules live
+     inside .v4-home so they don't leak to other pages.
+     ============================================================ */
+  .v4-home {
+    --cream: #f6f1e8;
+    --cream-grid: #ece5d7;
+    --ink: #14141a;
+    --ink-soft: #3a3a45;
+    --muted: #6b6b76;
+    --line: #ddd6c7;
+    --line-soft: #ebe4d4;
+    --white: #ffffff;
+    --purple: #6b3aff;
+    --purple-deep: #5028e0;
+    --purple-soft: #ede6ff;
+    --purple-tint: #f5f1ff;
+    --highlight: rgba(107, 58, 255, 0.18);
+    --green: #16a34a;
+    --red: #dc2626;
+    --dark: #0a0a10;
+    --dark-2: #14141c;
+    --dark-3: #1e1e28;
+    --dark-line: #2a2a38;
+    --v4-max: 1280px;
+    --v4-radius: 20px;
+    --v4-radius-sm: 14px;
+    --v4-shadow-1: 0 1px 0 rgba(20, 16, 30, 0.04), 0 4px 24px rgba(20, 16, 30, 0.06);
+    --v4-shadow-2: 0 8px 16px rgba(20, 16, 30, 0.06), 0 24px 48px rgba(20, 16, 30, 0.08);
+    --v4-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    background: var(--cream);
+    background-image:
+      radial-gradient(circle at 20% 0%, rgba(107, 58, 255, 0.04) 0%, transparent 40%),
+      linear-gradient(to right, var(--cream-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--cream-grid) 1px, transparent 1px);
+    background-size: auto, 64px 64px, 64px 64px;
+    color: var(--ink);
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv02", "cv11";
   }
-  .ladder-reveal-inner {
-    overflow: visible;
+
+  .v4-home * { box-sizing: border-box; }
+
+  .v4-home a {
+    color: var(--purple);
+    text-decoration: none;
+    transition: color 0.18s var(--v4-ease);
+  }
+  .v4-home a:hover { text-decoration: underline; }
+  .v4-home ::selection { background: var(--highlight); color: var(--ink); }
+
+  /* === Typography === */
+  .v4-h1,
+  .v4-h2,
+  .v4-h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5em;
+    color: var(--ink);
+  }
+  .v4-h1 { font-size: clamp(2.8rem, 6.2vw, 5rem); font-weight: 600; }
+  .v4-h2 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); }
+  .v4-h3 { font-size: 1.4rem; }
+  .v4-home p { margin: 0 0 1em; }
+
+  /* === Layout === */
+  .v4-container {
+    max-width: var(--v4-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .v4-home section { padding: 6.5rem 0; position: relative; }
+  .v4-divider {
+    max-width: var(--v4-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .v4-divider-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--muted);
+  }
+  .v4-divider-line::before,
+  .v4-divider-line::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .v4-divider-line span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* === Atoms === */
+  .v4-hl {
+    position: relative;
+    display: inline;
+    color: var(--ink);
+    background-image: linear-gradient(120deg, var(--highlight) 0%, var(--highlight) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.45em;
+    background-position: 0 88%;
+    padding: 0 0.05em;
+  }
+  .v4-accent { color: var(--purple); }
+  .v4-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+  .v4-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 0 3px rgba(107, 58, 255, 0.18);
+    animation: v4Pulse 2.4s ease-out infinite;
+  }
+  @keyframes v4Pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(107, 58, 255, 0.18); }
+    50% { box-shadow: 0 0 0 6px rgba(107, 58, 255, 0.04); }
+  }
+
+  /* === Buttons === */
+  .v4-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    transition: transform 0.18s var(--v4-ease), background 0.18s var(--v4-ease),
+      box-shadow 0.18s var(--v4-ease);
+    will-change: transform;
+  }
+  .v4-btn-primary {
+    background: var(--purple);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(107, 58, 255, 0.3);
+  }
+  .v4-btn-primary:hover {
+    background: var(--purple-deep);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(107, 58, 255, 0.4);
+  }
+  .v4-btn-ghost {
+    background: var(--white);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .v4-btn-ghost:hover {
+    border-color: var(--ink);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .v4-btn .v4-arrow {
+    transition: transform 0.18s var(--v4-ease);
+    display: inline-block;
+  }
+  .v4-btn:hover .v4-arrow { transform: translateX(3px); }
+  .v4-link-arrow {
+    color: var(--purple);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .v4-link-arrow::after {
+    content: "→";
+    transition: transform 0.18s var(--v4-ease);
+  }
+  .v4-link-arrow:hover::after { transform: translateX(3px); }
+  .v4-link-arrow:hover { text-decoration: none; }
+
+  /* === Hero === */
+  .v4-hero { padding-top: 4rem; padding-bottom: 5rem; }
+  .v4-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .v4-h1 .v4-accent { color: var(--purple); }
+  .v4-hero-sub {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 38ch;
+    margin-bottom: 2.25rem;
+  }
+  .v4-micro-proof {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 0 2.25rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .v4-stat .v4-num {
+    font-family: "Fraunces", serif;
+    font-size: 1.95rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+    font-feature-settings: "tnum";
+  }
+  .v4-stat .v4-stat-label { font-size: 0.85rem; color: var(--muted); }
+  .v4-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+  .v4-availability-strip {
+    margin-top: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .v4-availability-strip::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.18);
+    animation: v4PulseGreen 2.4s ease-out infinite;
+  }
+  @keyframes v4PulseGreen {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.18); }
+    50% { box-shadow: 0 0 0 7px rgba(22, 163, 74, 0.05); }
+  }
+  .v4-hero-photo { position: relative; aspect-ratio: 1/1.05; }
+  .v4-hero-photo-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 40%, var(--purple-soft) 0%, var(--cream) 75%);
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .v4-hero-photo img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
+  }
+  .v4-pill {
+    position: absolute;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    box-shadow: var(--v4-shadow-1);
+  }
+  .v4-pill-top {
+    top: 1rem;
+    right: 1rem;
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+    font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+  }
+  .v4-pill-bot {
+    bottom: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .v4-pill-bot::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+  }
+  @media (max-width: 880px) {
+    .v4-hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .v4-hero-photo { max-width: 420px; margin: 0 auto; }
+    .v4-micro-proof { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* === Three-lane router === */
+  .v4-lanes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .v4-lane {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius);
+    padding: 2rem;
+    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease),
+      border-color 0.22s var(--v4-ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .v4-lane::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(107, 58, 255, 0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.22s var(--v4-ease);
+  }
+  .v4-lane:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--v4-shadow-2);
+    border-color: var(--purple);
+  }
+  .v4-lane:hover::before { opacity: 1; }
+  .v4-lane-primary { border-color: var(--purple); background: var(--purple-tint); }
+  .v4-lane-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--purple);
+    margin-bottom: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .v4-lane .v4-h3 { margin-bottom: 0.85rem; position: relative; }
+  .v4-lane p { color: var(--ink-soft); margin-bottom: 1.5rem; font-size: 0.97rem; position: relative; }
+  .v4-lane .v4-link-arrow { position: relative; }
+  @media (max-width: 880px) {
+    .v4-lanes { grid-template-columns: 1fr; }
+  }
+
+  /* === Split heading === */
+  .v4-split-head {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3rem;
+  }
+  .v4-subhead { color: var(--ink-soft); font-size: 1.08rem; margin-bottom: 0.5rem; }
+  @media (max-width: 880px) {
+    .v4-split-head { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  /* === Bottleneck === */
+  .v4-bottleneck-card {
+    background: var(--white);
+    border-radius: var(--v4-radius);
+    padding: 3.5rem;
+    max-width: 920px;
+    margin: 0 auto;
+    border-left: 4px solid var(--purple);
+    box-shadow: var(--v4-shadow-1);
+    position: relative;
+  }
+  .v4-bottleneck-card::before {
+    content: "\201C";
+    position: absolute;
+    top: 1rem;
+    right: 2.5rem;
+    font-family: "Fraunces", serif;
+    font-size: 7rem;
+    color: var(--purple-soft);
+    line-height: 0.8;
+    font-weight: 700;
+  }
+  .v4-bottleneck-card p { font-size: 1.1rem; color: var(--ink-soft); position: relative; }
+  .v4-point { color: var(--ink); }
+  .v4-point strong { color: var(--purple); font-family: "Fraunces", serif; font-weight: 700; }
+  @media (max-width: 720px) {
+    .v4-bottleneck-card { padding: 2rem; }
+  }
+
+  /* === Marquee === */
+  .v4-marquee {
+    padding: 1.25rem 0;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .v4-marquee-track {
+    display: inline-flex;
+    gap: 2rem;
+    padding-right: 2rem;
+    white-space: nowrap;
+    animation: v4Scroll 38s linear infinite;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .v4-marquee-reverse { animation-direction: reverse; }
+  @keyframes v4Scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .v4-kw-1 { color: var(--purple); }
+  .v4-kw-2 { color: #d97706; }
+  .v4-kw-3 { color: var(--green); }
+  .v4-kw-4 { color: #db2777; }
+  .v4-kw-5 { color: #0891b2; }
+  .v4-kw-6 { color: var(--ink); }
+
+  /* === Ladder === */
+  .v4-ladder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .v4-step {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease);
+  }
+  .v4-step:hover { transform: translateY(-3px); box-shadow: var(--v4-shadow-2); }
+  .v4-step-emphasis { background: var(--purple-tint); border-color: var(--purple); }
+  .v4-step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--purple-soft);
+    color: var(--purple);
+    display: grid;
+    place-items: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .v4-tier {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .v4-step .v4-h3 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+  .v4-price {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+  }
+  .v4-meta { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.2rem; }
+  .v4-body { color: var(--ink-soft); font-size: 0.97rem; margin-bottom: 1.25rem; }
+  .v4-detail { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+  .v4-lbl {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+  }
+  .v4-cta-row { margin-top: auto; padding-top: 1rem; }
+  .v4-ladder-footer { margin-top: 1.75rem; color: var(--ink-soft); font-size: 0.95rem; }
+  @media (max-width: 880px) {
+    .v4-ladder { grid-template-columns: 1fr; }
+  }
+
+  /* === Proof === */
+  .v4-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+  .v4-metric {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius);
+    padding: 1.75rem;
+    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease);
+  }
+  .v4-metric:hover { transform: translateY(-3px); box-shadow: var(--v4-shadow-2); }
+  .v4-big {
+    font-family: "Fraunces", serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.02em;
+  }
+  .v4-top-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .v4-ctx { font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 1rem; }
+  .v4-tag {
+    font-size: 0.78rem;
+    color: var(--purple);
+    font-weight: 500;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+    display: block;
+  }
+  .v4-quote-pulled {
+    max-width: 820px;
+    margin: 3rem auto 2.5rem;
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+  }
+  .v4-quote-pulled::before {
+    content: "\201C";
+    display: block;
+    font-family: "Fraunces", serif;
+    font-size: 4.5rem;
+    color: var(--purple-soft);
+    line-height: 0.5;
+    margin-bottom: 1rem;
+  }
+  .v4-quote-pulled blockquote {
+    font-family: "Fraunces", serif;
+    font-size: 1.75rem;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0 0 1.25rem;
+    font-weight: 500;
+  }
+  .v4-quote-pulled cite { font-style: normal; color: var(--ink-soft); font-size: 0.95rem; }
+  .v4-attribution-row {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+  .v4-attribution-row strong { color: var(--ink); }
+  .v4-center-row { text-align: center; margin-top: 2.5rem; }
+  @media (max-width: 880px) {
+    .v4-metrics { grid-template-columns: 1fr 1fr; }
+    .v4-quote-pulled blockquote { font-size: 1.3rem; }
+  }
+  @media (max-width: 520px) {
+    .v4-metrics { grid-template-columns: 1fr; }
+  }
+
+  /* === Fit === */
+  .v4-fit { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .v4-fit-col {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius);
+    padding: 2rem;
+  }
+  .v4-lbl-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.74rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+  }
+  .v4-fit-col ul,
+  .v4-compare-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .v4-fit-col li,
+  .v4-compare-col li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    padding: 0.85rem 0;
+    color: var(--ink-soft);
+  }
+  .v4-fit-col li + li,
+  .v4-compare-col li + li {
+    border-top: 1px solid var(--line-soft);
+  }
+  .v4-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .v4-fit-yes .v4-icon { background: rgba(22, 163, 74, 0.12); color: var(--green); }
+  .v4-fit-no .v4-icon { background: rgba(220, 38, 38, 0.1); color: var(--red); }
+  @media (max-width: 720px) {
+    .v4-fit { grid-template-columns: 1fr; }
+  }
+
+  /* === Method (dark) === */
+  .v4-method-section {
+    background: var(--dark);
+    color: #e5e5ec;
+    border-radius: 32px;
+    margin: 0 1.5rem;
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .v4-method-section::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(107, 58, 255, 0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .v4-method-section .v4-container { padding: 0 2.5rem; position: relative; }
+  .v4-method-section .v4-h2 { color: var(--white); }
+  .v4-method-section .v4-subhead { color: #a1a1ac; }
+  .v4-method-section .v4-eyebrow { color: #a1a1ac; }
+  .v4-method-section p { color: #c9c9d2; }
+  .v4-method-section .v4-hl {
+    color: var(--white);
+    background-image: linear-gradient(120deg, rgba(107, 58, 255, 0.4) 0%, rgba(107, 58, 255, 0.4) 100%);
+  }
+  .v4-method-intro { margin-top: 1rem; }
+  .v4-method-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .v4-method-tile {
+    background: var(--dark-2);
+    border: 1px solid var(--dark-line);
+    border-radius: var(--v4-radius-sm);
+    padding: 1.4rem 1.5rem;
+    transition: border-color 0.22s var(--v4-ease), transform 0.22s var(--v4-ease);
+    display: block;
+  }
+  .v4-method-tile:hover {
+    border-color: var(--purple);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+  .v4-method-tile .v4-n {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--purple);
+    font-size: 0.74rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.1em;
+  }
+  .v4-method-tile .v4-t {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+  }
+  .v4-method-tile .v4-d { font-size: 0.9rem; color: #9999a4; }
+  .v4-method-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--dark-line);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .v4-method-text { color: #c9c9d2; flex: 1; min-width: 280px; }
+  @media (max-width: 720px) {
+    .v4-method-tiles { grid-template-columns: 1fr; }
+    .v4-method-section { margin: 0; border-radius: 0; }
+    .v4-method-section .v4-container { padding: 0 1.5rem; }
+  }
+
+  /* === Comparison === */
+  .v4-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .v4-compare-col {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius);
+    padding: 2rem;
+  }
+  .v4-compare-win { border-color: var(--purple); background: var(--purple-tint); }
+  .v4-compare-win .v4-icon { background: var(--purple-soft); color: var(--purple); }
+  .v4-compare-col:not(.v4-compare-win) .v4-icon { background: rgba(220, 38, 38, 0.1); color: var(--red); }
+  .v4-compare-win li { color: var(--ink); }
+  .v4-compare-footer { margin-top: 2rem; font-size: 0.95rem; }
+  @media (max-width: 720px) {
+    .v4-compare { grid-template-columns: 1fr; }
+  }
+
+  /* === About === */
+  .v4-about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .v4-about-grid p { color: var(--ink-soft); font-size: 1.05rem; }
+  .v4-about-img { width: 100%; border-radius: var(--v4-radius); display: block; }
+  @media (max-width: 880px) {
+    .v4-about-grid { grid-template-columns: 1fr; }
+  }
+
+  /* === Speaking & Writing === */
+  .v4-sw { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .v4-sw-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius);
+    overflow: hidden;
+    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease);
+  }
+  .v4-sw-card:hover { transform: translateY(-3px); box-shadow: var(--v4-shadow-2); }
+  .v4-body-pad { padding: 2rem; }
+  .v4-sw-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+  .v4-sw-card .v4-h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+  .v4-sw-card p { color: var(--ink-soft); font-size: 0.97rem; }
+  .v4-feedback-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1.25rem 0 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--cream);
+    border-radius: var(--v4-radius-sm);
+  }
+  .v4-feedback-row q { color: var(--ink-soft); font-style: italic; font-size: 0.92rem; }
+  .v4-essay { padding: 1.1rem 0; border-bottom: 1px solid var(--line-soft); }
+  .v4-essay:first-of-type { padding-top: 0; }
+  .v4-essay:last-of-type { border-bottom: 0; }
+  .v4-date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.74rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .v4-essay-title {
+    display: block;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0.4rem 0 0;
+    font-size: 1.02rem;
+    line-height: 1.4;
+  }
+  .v4-essay-title:hover { color: var(--purple); text-decoration: none; }
+  .v4-essay-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 880px) {
+    .v4-sw { grid-template-columns: 1fr; }
+  }
+
+  /* === FAQ === */
+  .v4-faq { max-width: 880px; margin: 0 auto; }
+  .v4-faq details {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--v4-radius-sm);
+    padding: 1.3rem 1.6rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.22s var(--v4-ease);
+  }
+  .v4-faq details[open] { border-color: var(--purple); }
+  .v4-faq summary {
+    font-weight: 600;
+    font-size: 1.04rem;
+    list-style: none;
+    position: relative;
+    padding-right: 2.5rem;
+    color: var(--ink);
+  }
+  .v4-faq summary::-webkit-details-marker { display: none; }
+  .v4-faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--purple-soft);
+    color: var(--purple);
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: transform 0.22s var(--v4-ease);
+  }
+  .v4-faq details[open] summary::after { content: "−"; }
+  .v4-faq-answer { color: var(--ink-soft); margin-top: 1rem; font-size: 0.98rem; }
+
+  /* === Final CTA === */
+  .v4-final-cta { text-align: center; max-width: 720px; margin: 0 auto; }
+  .v4-final-cta .v4-h2 { margin-bottom: 1.25rem; }
+  .v4-final-lead { color: var(--ink-soft); margin-bottom: 2rem; font-size: 1.18rem; }
+  .v4-final-meta { font-size: 0.9rem; color: var(--muted); margin-top: 1.75rem; }
+  .v4-final-meta a { color: var(--purple); }
+
+  /* === Reveal animation — uses BaseLayout's .is-visible class === */
+  .v4-home .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--v4-ease), transform 0.7s var(--v4-ease);
+  }
+  .v4-home .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .v4-home .reveal,
+    .v4-home .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .v4-home *,
+    .v4-home *::before,
+    .v4-home *::after {
+      animation-duration: 0.001s !important;
+      transition-duration: 0.001s !important;
+    }
   }
 </style>
