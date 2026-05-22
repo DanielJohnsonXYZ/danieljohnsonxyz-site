@@ -1,9 +1,75 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
 
-const homeSchemas = [buildServiceSchema(), buildAggregateRatingSchema(), buildFaqPageSchema()];
+// FAQ items mirror the markup below so the FAQPage schema stays in sync.
+const homepageFaq = [
+  {
+    question: "What does a fractional CMO actually do day-to-day?",
+    answer: "Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings. Not a monthly slide deck."
+  },
+  {
+    question: "How is this different from hiring a full-time CMO?",
+    answer: "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs."
+  },
+  {
+    question: "What stage should my startup be at?",
+    answer: "Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first."
+  },
+  {
+    question: "How quickly will I see results?",
+    answer: "Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I don\u2019t promise miracles. I promise a visible system and honest calls on what\u2019s working."
+  },
+  {
+    question: "What does it cost?",
+    answer: "UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price."
+  },
+  {
+    question: "How do I know if this will work for my business?",
+    answer: "If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 20-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong."
+  }
+];
+
+const homeSchemas = [
+  buildServiceSchema({
+    name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
+    description:
+      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire. Typical UK engagement range: £6,000 – £12,000/month.",
+    url: absoluteUrl("/fractional-cmo/"),
+    serviceType: "Fractional CMO",
+    offers: [
+      {
+        name: "20-min Growth Audit",
+        description: "Free 20-minute diagnostic call. Bottleneck read, fit decision, recommendation.",
+        price: "0",
+        billingIncrement: "per call"
+      },
+      {
+        name: "Strategy Sprint",
+        description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
+        price: "6000",
+        billingIncrement: "per engagement"
+      },
+      {
+        name: "Fractional CMO",
+        description: "3-month minimum. Embedded senior ownership 1 day a week.",
+        price: "7500",
+        billingIncrement: "per month"
+      },
+      {
+        name: "Fractional CMO Plus",
+        description: "Deeper operating support, agency management, faster execution.",
+        price: "12000",
+        billingIncrement: "per month"
+      }
+    ]
+  }),
+  buildAggregateRatingSchema(),
+  buildFaqPageSchema(homepageFaq)
+];
 ---
+
 
 <BaseLayout
   title="Fractional CMO for AI & B2B SaaS Startups"
