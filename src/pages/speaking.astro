@@ -72,19 +72,19 @@ const presentationFeedback = [
 ];
 const eventPhotos = [
   {
-    src: "/images/nomad-summit-group.webp",
-    alt: "Daniel Johnson speaking at Nomad Summit — founder growth session",
-    caption: "Speaking on growth systems and positioning at Nomad Summit"
+    src: "/images/daniel-speaking-mic.webp",
+    alt: "Daniel Johnson presenting during a startup growth session",
+    caption: "Presenting a founder growth session"
   },
   {
-    src: "/images/daniel-presenting-slide.webp",
-    alt: "Daniel Johnson presenting a slide on SaaS and AI growth",
-    caption: "SaaS & AI growth session in Shenzhen"
+    src: "/images/daniel-speaking-stage-bw.webp",
+    alt: "Daniel Johnson speaking on stage",
+    caption: "On stage — growth systems and positioning"
   },
   {
-    src: "/images/shenzhen-seo-event-poster.webp",
-    alt: "Shenzhen SEO & SaaS event poster featuring Daniel Johnson as speaker",
-    caption: "Event poster — Shenzhen SEO & SaaS session"
+    src: "/images/daniel-speaking-circle.webp",
+    alt: "Daniel Johnson speaking with a microphone",
+    caption: "Founder Q&A — practical GTM decisions"
   },
   {
     src: "/images/cambridge-judge-business-school-960.webp",
@@ -118,6 +118,9 @@ const speakingSchema = [
 ---
 
 <BaseLayout
+  stickyCtaLabel="Enquire about speaking →"
+  stickyCtaHref={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}
+  stickyCtaHint="Talks · workshops · cohort sessions"
   description="Speaking with Daniel Johnson: talks, workshops, and training for founder, startup, and innovation audiences that need practical growth and GTM thinking."
   path="/speaking/"
   schema={speakingSchema}
@@ -240,7 +243,15 @@ const speakingSchema = [
         {
           trustLogos.map((item) => (
             <article class="reveal logo-card flex items-center justify-between gap-4 px-5 py-4">
-              <img alt={item.alt} class="h-10 w-auto max-w-[10rem] object-contain" height="48" loading="lazy" src={item.src} width="180" />
+              <img
+                alt={item.alt}
+                class="h-9 w-auto max-w-[9rem] object-contain opacity-80 grayscale"
+                height="48"
+                loading="lazy"
+                src={item.src}
+                width="180"
+                onerror="this.style.display='none'"
+              />
               <span class="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">{item.label}</span>
             </article>
           ))
@@ -347,7 +358,13 @@ const speakingSchema = [
         {
           eventPhotos.map((item) => (
             <figure class="reveal card overflow-hidden">
-              <img src={item.src} alt={item.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" />
+              <img
+                src={item.src}
+                alt={item.alt}
+                class="w-full aspect-[4/3] object-cover"
+                loading="lazy"
+                onerror="this.closest('figure').style.display='none'"
+              />
               <figcaption class="p-4 text-sm text-[color:var(--muted)]">{item.caption}</figcaption>
             </figure>
           ))

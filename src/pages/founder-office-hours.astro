@@ -12,6 +12,14 @@ const focusAreas = [
   "Accelerator or programme cohorts that need practical GTM judgement"
 ];
 
+const exampleSessions = [
+  "Review the pricing page before a relaunch",
+  "Choose between two ICPs ahead of a campaign",
+  "Prioritise next quarter's experiments",
+  "Sharpen founder LinkedIn and outbound messaging",
+  "Decide whether to hire, use an agency, or wait"
+];
+
 const sessionShapes = [
   {
     title: "One-off session",
@@ -58,6 +66,11 @@ const faq = [
     answer: "Most founder sessions are 45–60 minutes. Programme formats are scoped per cohort."
   },
   {
+    question: "What does it cost?",
+    answer:
+      "Sessions are priced by scope and format — a one-off founder session, a short sequence, and programme support are each quoted up front before anything is booked. Email with context and you'll get a clear price in the first reply. The 20-minute Growth Audit stays free."
+  },
+  {
     question: "How do I start?",
     answer:
       "If you’re unsure which shape fits, start with the free 20-minute Growth Audit. If you already know you want a working session, email with context and we’ll align format."
@@ -100,10 +113,27 @@ const schemas = [
         </div>
 
         <article class="reveal card p-6 md:p-8">
-          <p class="card-label">Best fit</p>
+          <p class="card-label">Growth Audit vs. Office Hours</p>
+          <dl class="mt-4 grid gap-3 text-sm leading-6 text-[color:var(--muted)]">
+            <div>
+              <dt class="font-semibold text-[color:var(--ink)]">20-min Growth Audit — free</dt>
+              <dd>Diagnoses the bottleneck and whether working together makes sense. Start here if you're unsure.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold text-[color:var(--ink)]">Office Hours — paid</dt>
+              <dd>A working session on one specific decision you already know you need to make.</dd>
+            </div>
+          </dl>
+          <p class="card-label mt-6">Best fit</p>
           <h2 class="mt-4 text-2xl font-extrabold tracking-[-0.05em]">When you want judgement, not a checklist.</h2>
           <ul class="mt-6 list-disc space-y-3 pl-5 text-base leading-7 text-[color:var(--muted)] marker:text-[color:var(--accent)]">
             {focusAreas.map((item) => (
+              <li class="pl-1">{item}</li>
+            ))}
+          </ul>
+          <p class="card-label mt-6">Example sessions</p>
+          <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-[color:var(--muted)] marker:text-[color:var(--accent)]">
+            {exampleSessions.map((item) => (
               <li class="pl-1">{item}</li>
             ))}
           </ul>

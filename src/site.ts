@@ -397,7 +397,7 @@ export const whyDaniel = [
     highlight: false
   },
   {
-    option: "Daniel (Fractional CMO)",
+    option: "Fractional CMO (Daniel's model)",
     cost: "£7.5–12k/month, 3-month minimum",
     owner: "Senior operator in the seat",
     problem: "Owns GTM priorities, reporting, and the team's weekly rhythm. Builds the system, then hands it off clean.",
@@ -726,7 +726,7 @@ export const vsFulltimeCMO = {
     "You can absorb 6 months of hiring + 12 months of ramp"
   ],
   bridge:
-    "Many founders use a fractional CMO as the bridge: 6–12 months of embedded leadership while they recruit, then the fractional CMO hands off the operating system to the new full-time hire. Cleaner than starting cold.",
+    "A fractional CMO is not a like-for-like replacement for a full-time executive — it's a different shape of help. Many founders use a fractional CMO as the bridge: 6–12 months of embedded leadership while they recruit, then the fractional CMO hands off the operating system to the new full-time hire. Cleaner than starting cold.",
   faq: [
     {
       question: "Is a fractional CMO cheaper in the UK?",

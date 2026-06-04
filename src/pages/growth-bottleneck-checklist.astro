@@ -80,7 +80,7 @@ const schemas = [
           <a class="button-accent" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
           <CfEmailOff>
             <a class="button-link" href={`mailto:${siteConfig.email}?subject=Send%20me%20the%20Growth%20Bottleneck%20Checklist`}>
-              Get the printable version →
+              Email me the printable checklist →
             </a>
           </CfEmailOff>
         </div>
@@ -102,6 +102,14 @@ const schemas = [
             </div>
           </article>
         ))}
+      </div>
+      <div class="reveal card-muted mt-8 p-6 md:p-8">
+        <p class="card-label">How to read your result</p>
+        <ul class="mt-4 grid gap-2 text-base leading-8 text-[color:var(--muted)]">
+          <li><strong class="text-[color:var(--ink)]">One area weak:</strong> fix that first — it's usually a focused 2–4 week job, not a re-org.</li>
+          <li><strong class="text-[color:var(--ink)]">Two areas weak:</strong> sequence them — pick the one closest to revenue and bring the other to a Growth Audit.</li>
+          <li><strong class="text-[color:var(--ink)]">Three or more weak:</strong> the constraint is the system, not a channel. That's exactly what the free 20-minute audit is for.</li>
+        </ul>
       </div>
     </div>
   </section>

@@ -7,9 +7,19 @@ interface Props {
   enabled?: boolean;
   /** The pixel threshold (scrollY) after which the bar appears. */
   revealAfter?: number;
+  /** Contextual override — e.g. "Enquire about speaking" on /speaking. */
+  label?: string;
+  href?: string;
+  hint?: string;
 }
 
-const { enabled = true, revealAfter = 640 } = Astro.props;
+const {
+  enabled = true,
+  revealAfter = 640,
+  label = `${ctas.primary.label} →`,
+  href = ctas.primary.href,
+  hint = "Free · 20 minutes · No pitch"
+} = Astro.props;
 ---
 
 {enabled && (
@@ -22,15 +32,15 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
     <div class="sticky-cta-inner">
       <div class="sticky-cta-copy">
         <span class="sticky-cta-availability">{siteConfig.availability}</span>
-        <span class="sticky-cta-hint">Free · 20 minutes · No pitch</span>
+        <span class="sticky-cta-hint">{hint}</span>
       </div>
       <div class="sticky-cta-actions">
         <a
           class="button-accent sticky-cta-primary"
-          href={ctas.primary.href}
+          href={href}
           data-cta="sticky-primary"
         >
-          {ctas.primary.label} →
+          {label}
         </a>
         <button
           class="sticky-cta-dismiss"
@@ -194,6 +204,9 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
       var shouldShow = window.scrollY > revealAfter && !overlapsSensitiveArea;
       bar.classList.toggle('is-visible', shouldShow);
       bar.toggleAttribute('inert', !shouldShow);
+      // Reserve space at the bottom of the page while the bar is shown so it
+      // never sits on top of body text or cards.
+      document.body.style.paddingBottom = shouldShow ? '5.5rem' : '';
     }
 
     var dismissBtn = bar.querySelector('.sticky-cta-dismiss');

@@ -21,6 +21,9 @@ interface Props {
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   /** Per-page override: set false to hide the sticky booking bar on pages that end in a full-width booking block. */
   stickyCta?: boolean;
+  stickyCtaLabel?: string;
+  stickyCtaHref?: string;
+  stickyCtaHint?: string;
   /** Switch shared header/footer CTAs from commercial booking to media-specific contact links. */
   mediaCta?: boolean;
   /** Opt in to preloading the hero headshot (homepage, about — pages where the image is above the fold). */
@@ -39,6 +42,9 @@ const {
   ogType = "website",
   schema = [],
   stickyCta = true,
+  stickyCtaLabel = undefined,
+  stickyCtaHref = undefined,
+  stickyCtaHint = undefined,
   mediaCta = false,
   preloadHeadshot = false,
   lastUpdated = siteConfig.lastUpdated,
@@ -211,7 +217,7 @@ const gtmLoaderScript = `(() => {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={pageTitle} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="en_GB" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={siteConfig.twitterHandle} />
@@ -264,7 +270,7 @@ const gtmLoaderScript = `(() => {
 
     <SiteFooter mediaCta={mediaCta} />
 
-    <StickyCta enabled={stickyCta} />
+    <StickyCta enabled={stickyCta} label={stickyCtaLabel} href={stickyCtaHref} hint={stickyCtaHint} />
 
     <EasterEgg />
     <script is:inline set:html={uiRevealScript}></script>

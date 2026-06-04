@@ -23,7 +23,7 @@ const sections = [
     items: [
       {
         question: "Who is this for?",
-        answer: "Founders of post-PMF AI and B2B SaaS startups, typically Seed to Series B (1M–10M ARR). Product-strong teams where growth has plateaued, founder-led sales is a bottleneck, or there's no senior GTM owner yet. UK-based, currently in Asia, serving US, UK, Europe, and APAC clients with US-friendly time-zone overlap."
+        answer: "Founders of post-PMF AI and B2B SaaS startups, typically Seed to Series B (£1m–£10m ARR). Product-strong teams where growth has plateaued, founder-led sales is a bottleneck, or there's no senior GTM owner yet. UK-based, currently in Asia, serving US, UK, Europe, and APAC clients with US-friendly time-zone overlap."
       },
       {
         question: "Who is this NOT for?",
@@ -159,6 +159,11 @@ const schemas = [
             Or read /start-here →
           </a>
         </div>
+        <nav class="flex flex-wrap items-center justify-center gap-2" aria-label="Jump to FAQ section">
+          {sections.map((section) => (
+            <a class="chip" href={`#faq-${section.eyebrow.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{section.eyebrow}</a>
+          ))}
+        </nav>
         <AnswerEvidenceBlock
           title="Direct answer + evidence"
           answer="For most post-PMF teams, the core decision is not channel selection first; it is who owns GTM judgement and weekly priorities."
@@ -177,7 +182,7 @@ const schemas = [
   </section>
 
   {sections.map((section, sectionIndex) => (
-    <section class={`section-space ${sectionIndex === 0 ? "" : "pt-0"}`}>
+    <section class={`section-space ${sectionIndex === 0 ? "" : "pt-0"}`} id={`faq-${section.eyebrow.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
       <div class="shell">
         <SectionHeader eyebrow={section.eyebrow} title={section.title} />
         <div class="faq-stack mt-8 mx-auto max-w-3xl">

@@ -223,13 +223,16 @@ const workDropdownImage = {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    transition: opacity 140ms ease, visibility 140ms ease;
+    /* Hide instantly (no fade-out) so a half-faded white "pill" never lingers
+       while the cursor moves between nav items; fade in only. */
+    transition: none;
   }
   .site-nav-menu:hover .site-nav-dropdown-with-image,
   .site-nav-menu:focus-within .site-nav-dropdown-with-image {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
+    transition: opacity 140ms ease;
   }
 
   .site-nav-dropdown-image {

@@ -105,6 +105,9 @@ const recentQuoteAngles = [
 ---
 
 <BaseLayout
+  stickyCtaLabel="Download media kit →"
+  stickyCtaHref="/media-kit-download/"
+  stickyCtaHint="Bio · headshots · topics · facts"
   title="Media Kit | Daniel Johnson"
   description="Official media kit for Daniel Johnson — bio, headshots, logos, speaking topics, and how to describe (and not describe) Daniel in press."
   path="/media-kit"
@@ -142,10 +145,10 @@ const recentQuoteAngles = [
         </p>
         <ul class="mt-6 grid gap-3 sm:grid-cols-2">
           <li>
-            <a class="button-accent block text-center" href="/images/daniel-headshot.webp" download> Download headshot (WebP) → </a>
+            <a class="button-accent block text-center" href="/images/daniel-headshot.webp" download> Download headshot (WebP · 960×1000) → </a>
           </li>
           <li>
-            <a class="button-accent block text-center" href="/images/daniel-headshot-640.webp" download> Download headshot (small) → </a>
+            <a class="button-accent block text-center" href="/images/daniel-headshot-640.webp" download> Download headshot (WebP · 640×800) → </a>
           </li>
         </ul>
         <div class="mt-6 grid gap-2 sm:grid-cols-2">
@@ -416,12 +419,12 @@ const recentQuoteAngles = [
       <div class="max-w-3xl grid gap-5 md:grid-cols-2">
         <a class="card p-6" href="/images/daniel-headshot.webp" download>
           <h3 class="font-bold">Daniel Headshot (WebP)</h3>
-          <p class="mt-2 text-sm text-[color:var(--muted)]">High-resolution headshot for press use.</p>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">High-resolution headshot for press use. WebP · 960×1000.</p>
           <span class="link-arrow mt-4">Download →</span>
         </a>
         <a class="card p-6" href="/images/daniel-headshot-640.webp" download>
           <h3 class="font-bold">Daniel Headshot (Small)</h3>
-          <p class="mt-2 text-sm text-[color:var(--muted)]">Smaller version for web and digital use.</p>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Smaller version for web and digital use. WebP · 640×800.</p>
           <span class="link-arrow mt-4">Download →</span>
         </a>
       </div>
@@ -447,16 +450,46 @@ const recentQuoteAngles = [
       btn.addEventListener("click", async () => {
         const text = btn.getAttribute("data-copy");
         if (!text) return;
+        const writeFallback = () => {
+          // execCommand fallback for older Safari / non-secure contexts
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return ok;
+        };
+        let copied = false;
         try {
           await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch {
+          try {
+            copied = writeFallback();
+          } catch {
+            copied = false;
+          }
+        }
+        if (copied) {
+          const original = btn.textContent;
+          btn.textContent = "Copied ✓";
+          btn.setAttribute("disabled", "");
+          window.setTimeout(() => {
+            btn.textContent = original;
+            btn.removeAttribute("disabled");
+          }, 2000);
           if (status) {
             status.textContent = "Copied to clipboard.";
             window.setTimeout(() => {
               if (status) status.textContent = "";
             }, 2500);
           }
-        } catch {
-          if (status) status.textContent = "Copy failed — select text manually or use the printable page.";
+        } else if (status) {
+          status.textContent = "Copy failed — select text manually or use the printable page.";
         }
       });
     });

@@ -48,7 +48,7 @@ const pathname = `/case-studies/${caseStudy.id}`;
             <article class="card-muted p-4">
               <p class="mono text-[0.68rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">Client</p>
               <p class="mt-2 text-base font-semibold tracking-[-0.03em] text-[color:var(--ink)]">
-                {caseStudy.data.client}{caseStudy.data.anonymised && " (anonymised)"}
+                {caseStudy.data.client}{caseStudy.data.anonymised && !/anonymis/i.test(caseStudy.data.client) && " (anonymised)"}
               </p>
             </article>
             <article class="card-muted p-4">

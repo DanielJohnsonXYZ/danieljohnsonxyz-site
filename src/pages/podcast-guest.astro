@@ -93,6 +93,9 @@ const schema = buildBreadcrumbSchema([
 ---
 
 <BaseLayout
+  stickyCtaLabel="Email Daniel about a podcast →"
+  stickyCtaHref={`mailto:${siteConfig.email}?subject=Podcast%20guest%20enquiry%20%E2%80%94%20Daniel%20Johnson`}
+  stickyCtaHint="Topics · sample questions · assets ready"
   description="Book Daniel Johnson as a podcast guest on AI-native GTM, founder-led growth, startup positioning, and repeatable growth systems."
   path="/podcast-guest"
   schema={schema}
@@ -213,14 +216,14 @@ const schema = buildBreadcrumbSchema([
       <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
         <article>
           <SectionHeader eyebrow="Sample questions" intro="Use these as-is or adapt them around your audience." title="Questions Daniel can answer well." />
-          <ol class="reveal card mt-8 grid gap-4 p-6 md:p-8">
+          <ul class="reveal card mt-8 grid list-none gap-4 p-6 md:p-8">
             {sampleQuestions.map((question, index) => (
               <li class="grid grid-cols-[2rem_1fr] gap-3 border-b border-[color:var(--line)] pb-4 text-base leading-8 last:border-b-0 last:pb-0">
                 <span class="flex size-8 items-center justify-center rounded-full bg-[color:var(--surface-dim)] text-xs font-bold text-[color:var(--muted)]">{index + 1}</span>
                 <span>{question}</span>
               </li>
             ))}
-          </ol>
+          </ul>
         </article>
         <aside class="reveal card p-6 md:p-8">
           <p class="card-label">Suggested host intro</p>

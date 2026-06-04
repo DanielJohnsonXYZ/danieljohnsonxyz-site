@@ -74,7 +74,7 @@ Three ways to engage, ordered by commitment. Founders are encouraged to start at
 
 ### Fractional CMO vs. Agency
 
-The agency executes a defined channel scope (paid, SEO, content, outbound) with an account manager and junior team; strategy still lives in the founder's head. The fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, team direction, agency relationship. No junior layer. Often the right setup for 1M–10M ARR teams is *both*: fractional CMO sets priorities and channel rules, the agency executes one channel inside that framework. Full comparison: ${siteConfig.siteUrl}/resources/fractional-cmo-vs-agency/.
+The agency executes a defined channel scope (paid, SEO, content, outbound) with an account manager and junior team; strategy still lives in the founder's head. The fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, team direction, agency relationship. No junior layer. Often the right setup for £1m–£10m ARR teams is *both*: fractional CMO sets priorities and channel rules, the agency executes one channel inside that framework. Full comparison: ${siteConfig.siteUrl}/resources/fractional-cmo-vs-agency/.
 
 ### Fractional CMO vs. Full-time CMO
 

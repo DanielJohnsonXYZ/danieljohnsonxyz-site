@@ -20,6 +20,11 @@ const suggestedInterviewFormats = [
   "Expert quote for articles"
 ];
 
+function readingTime(a: (typeof articles)[0]) {
+  const words = (a.body ?? "").split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / 220))} min read`;
+}
+
 function haystack(a: (typeof articles)[0]) {
   return `${a.data.title} ${a.data.description} ${a.data.tags.join(" ")}`.toLowerCase();
 }
@@ -158,6 +163,7 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
                       <div class="flex flex-wrap gap-2">
                         <span class="chip">Essay</span>
                         <span class="chip">{formatDate(article.data.publishedAt)}</span>
+                        <span class="chip">{readingTime(article)}</span>
                       </div>
                       <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
                         <a href={`/writing/${article.id}/`}>{article.data.title}</a>
@@ -195,6 +201,7 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
                   <div class="flex flex-wrap gap-2">
                     <span class="chip">Essay</span>
                     <span class="chip">{formatDate(article.data.publishedAt)}</span>
+                    <span class="chip">{readingTime(article)}</span>
                   </div>
                   <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">
                     <a href={`/writing/${article.id}/`}>{article.data.title}</a>

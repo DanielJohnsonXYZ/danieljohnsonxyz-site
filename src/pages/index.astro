@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
+import { icpFirmographics, siteConfig } from "../site";
 
 // FAQ items mirror the markup below so the FAQPage schema stays in sync.
 const homepageFaq = [
@@ -107,6 +108,9 @@ const homeSchemas = [
               <div class="v4-stat"><span class="v4-num">4.97 / 5</span><span class="v4-stat-label">from 220 reviews on GrowthMentor</span></div>
               <div class="v4-stat"><span class="v4-num">479+</span><span class="v4-stat-label">mentor sessions delivered</span></div>
             </div>
+            <p class="v4-hero-fit mt-4 text-sm leading-6 text-[color:var(--muted)]">
+              Best for post-PMF AI &amp; B2B SaaS — typically {icpFirmographics.arrBandUsd}, {icpFirmographics.headcountBand}, founder still running GTM.
+            </p>
             <div class="v4-hero-ctas">
               <a href="/contact/#book-growth-audit" class="v4-btn v4-btn-primary" data-cta="home-hero-audit">
                 Book a 20-min Growth Audit <span class="v4-arrow">→</span>
@@ -115,7 +119,7 @@ const homeSchemas = [
                 See case studies <span class="v4-arrow">→</span>
               </a>
             </div>
-            <div class="v4-availability-strip">2 Fractional CMO slots open this quarter · Next start window: June 2026</div>
+            <a class="v4-availability-strip" href="/now/" title="See current availability on the Now page">{siteConfig.availability.replace(/\.$/, "")} · {siteConfig.nextStartWindow.replace(/\.$/, "")}</a>
           </div>
           <div class="v4-hero-photo reveal">
             <div class="v4-hero-photo-bg">
@@ -831,6 +835,8 @@ const homeSchemas = [
     font-size: 0.92rem;
     color: var(--ink-soft);
   }
+  .v4-availability-strip { text-decoration: none; }
+  .v4-availability-strip:hover { text-decoration: underline; text-underline-offset: 3px; }
   .v4-availability-strip::before {
     content: "";
     width: 9px;
