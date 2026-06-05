@@ -17,12 +17,12 @@
   --shadow-xl: 0 32px 80px rgba(9, 9, 11, 0.12);
 
   /* Section rhythm — fluid clamp tokens replace the two-step 3rem/4.5rem. */
-  --space-section: clamp(3rem, 6vw + 1rem, 6rem);
-  --space-section-tight: clamp(2rem, 4vw + 1rem, 4rem);
+  --space-section: clamp(2.75rem, 4vw + 1rem, 4.5rem);
+  --space-section-tight: clamp(1.75rem, 3vw + 1rem, 3rem);
 
   /* Type scale — small fluid jumps for hero/title sizes without rewriting components. */
-  --fs-display: clamp(2.5rem, 4.4vw + 1rem, 4.5rem);
-  --fs-h2: clamp(1.875rem, 2.4vw + 1rem, 3rem);
+  --fs-display: clamp(2.4rem, 3vw + 1rem, 3.5rem);
+  --fs-h2: clamp(1.7rem, 1.8vw + 1rem, 2.4rem);
   --fs-lede: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
 
   /* Reading width — used for prose and long-form copy. */
@@ -420,5 +420,72 @@ footer.dark-section::before {
   }
   .audience-lane:hover {
     transform: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Formatting pass — June 2026
+   Site-wide title scale and rhythm correction. Page H1s rendered at
+   72px+ (md:text-7xl) and homepage headings at 80/54px, with 6.5rem
+   double section padding creating large dead bands between sections.
+   Additive overrides, same pattern as the rest of this file.
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Inner-page hero H1s (and the one CTA H2) — step 7xl down to ~56px,
+   and the 48px base down to 36px so mobile titles stop dominating. */
+:is(h1, h2).text-5xl {
+  font-size: 2.25rem;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+@media (min-width: 768px) {
+  :is(h1, h2).md\:text-7xl {
+    font-size: 3.5rem;
+    line-height: 1.06;
+  }
+}
+
+/* Long-form titles (essays, case studies) read better one step smaller. */
+@media (min-width: 768px) {
+  .article-hero h1.md\:text-7xl,
+  h1.font-semibold.md\:text-7xl {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+}
+
+/* Homepage (v4) — bring the display scale down and tighten the
+   section rhythm so consecutive sections stop stacking ~13rem of gap. */
+.v4-home .v4-h1 {
+  font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+}
+
+.v4-home .v4-h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+}
+
+body .v4-home section {
+  padding: clamp(3.5rem, 5vw, 4.75rem) 0;
+}
+
+/* Prose lists — Tailwind preflight strips list-style and it was never
+   restored, so bullets/numbers were invisible in essays. */
+.prose-wrap ul {
+  list-style: disc;
+}
+
+.prose-wrap ol {
+  list-style: decimal;
+}
+
+/* Remaining oversized one-off headings. */
+.social-panel h2 {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+}
+
+@media (max-width: 900px) {
+  .conversion-hero h1 {
+    font-size: clamp(2rem, 8vw, 2.6rem);
   }
 }
