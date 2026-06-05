@@ -479,6 +479,15 @@ body .v4-home section {
   list-style: decimal;
 }
 
+/* Utility/legal page H1s (privacy, terms, 404) use md:text-6xl directly —
+   bring them in line with the rest of the page-title scale. */
+@media (min-width: 768px) {
+  h1.md\:text-6xl {
+    font-size: 3.25rem;
+    line-height: 1.06;
+  }
+}
+
 /* Remaining oversized one-off headings. */
 .social-panel h2 {
   font-size: clamp(1.9rem, 3vw, 2.6rem);
