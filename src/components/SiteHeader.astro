@@ -383,6 +383,14 @@ const workDropdownImage = {
     font: inherit;
   }
 
+  /* Active dropdown trigger: restore the dark pill — the transparent
+     background above otherwise outranks .site-nav-link-active and leaves
+     white text on the white nav rail. */
+  .site-nav-menu-trigger.site-nav-link-active {
+    background: var(--ink);
+    color: #fff;
+  }
+
   .site-nav-caret {
     display: inline-block;
     margin-top: 1px;
