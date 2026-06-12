@@ -918,5 +918,7 @@ const mauticNewsletterFormId =
 export const mauticNewsletter = {
   baseUrl: mauticBase,
   formId: mauticNewsletterFormId,
-  submitUrl: `${mauticBase}/form/submit/${mauticNewsletterFormId}`
+  // Mautic's submit route is /form/submit?formId={id} (query string, not path).
+  // The path form /form/submit/{id} 404s.
+  submitUrl: `${mauticBase}/form/submit?formId=${mauticNewsletterFormId}`
 } as const;
