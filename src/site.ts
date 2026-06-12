@@ -222,23 +222,34 @@ export const ctas = {
   }
 } as const;
 
+/**
+ * Primary nav IA (v5): Start here · Work with me ▾ · Proof ▾ · Writing · About.
+ * "Speaking" lives inside Work with me; case studies/testimonials group under Proof —
+ * no more duplicate top-level entries.
+ */
 export const navigation = [
   { href: "/start-here/", label: "Start here" },
   { href: "/work-with-me/", label: "Work with me" },
-  { href: "/case-studies/", label: "Case studies" },
+  { href: "/case-studies/", label: "Proof" },
   { href: "/writing/", label: "Writing" },
-  { href: "/speaking/", label: "Speaking" },
   { href: "/about/", label: "About" }
 ] as const;
 
-/** Primary nav dropdown — services only; compare/expertise/media live in footer + /resources/. */
+/** Primary nav dropdown — productised services in ladder order (Diagnose → Plan → Build → Advise). */
 export const workWithMeNavItems = [
-  { href: "/start-here/", label: "Start here", description: "Five-minute orientation. Where to begin if it's your first visit." },
-  { href: "/growth-audit/", label: "20-min Growth Audit", description: "Free diagnostic call. Bottleneck read in 20 minutes." },
-  { href: "/strategy-sprint/", label: "Strategy Sprint", description: "From £6k. 2–4 weeks. Plan, artefacts, first wins." },
-  { href: "/fractional-cmo/", label: "Fractional CMO", description: "From £7.5k/mo. Embedded senior GTM leadership." },
-  { href: "/founder-office-hours/", label: "Founder Office Hours", description: "Focused GTM decisions and second-brain sessions." },
-  { href: "/speaking/", label: "Speaking", description: "Talks, workshops, and founder-cohort sessions." }
+  { href: "/growth-audit/", label: "20-min Growth Audit", description: "Diagnose · Free. Bottleneck read in 20 minutes, no pitch." },
+  { href: "/strategy-sprint/", label: "Strategy Sprint", description: "Plan · From £6k. 2–4 weeks. Plan, artefacts, first wins." },
+  { href: "/fractional-cmo/", label: "Fractional CMO", description: "Build · From £7.5k/mo. Embedded senior GTM leadership." },
+  { href: "/founder-office-hours/", label: "Founder Office Hours", description: "Advise · Focused GTM decisions and second-brain sessions." },
+  { href: "/speaking/", label: "Speaking & workshops", description: "Talks, workshops, and founder-cohort sessions." }
+] as const;
+
+/** Proof dropdown — evidence grouped in one place. */
+export const proofNavItems = [
+  { href: "/case-studies/", label: "Case studies", description: "Before/after evidence with real numbers and attribution." },
+  { href: "/testimonials/", label: "Testimonials", description: "4.97/5 from 220 reviews · 479+ mentor sessions." },
+  { href: "/proof/", label: "Proof in numbers", description: "The full metrics library, verifiable sources linked." },
+  { href: "/media-kit/", label: "Media kit", description: "Bios, headshots, talks — for press and podcast hosts." }
 ] as const;
 
 /** @deprecated Use workWithMeNavItems + resourcesFooterExtras; kept only if any import still expects groups. */

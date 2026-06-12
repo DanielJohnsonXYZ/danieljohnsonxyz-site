@@ -45,19 +45,19 @@ const maxOutcome = Math.max(...outcomeBars.map((item) => item.value));
         <div class="impact-journey-plot outline-grid mt-8">
           <div class="impact-journey-axis">Scope of work widening</div>
           <svg aria-hidden="true" class="impact-journey-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d={journeyArea} fill="rgba(124, 58, 237, 0.1)"></path>
+            <path d={journeyArea} fill="rgba(85, 35, 240, 0.1)"></path>
             <path d={journeyLine} fill="none" stroke="url(#journey-gradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
             <defs>
               <linearGradient id="journey-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
-                <stop offset="0%" stop-color="#7c3aed"></stop>
+                <stop offset="0%" stop-color="#5523f0"></stop>
                 <stop offset="100%" stop-color="#2563eb"></stop>
               </linearGradient>
             </defs>
             {
               journeyPoints.map((point) => (
                 <>
-                  <circle cx={point.x} cy={point.y} fill="white" r="3.3" stroke="#7c3aed" stroke-width="1.2"></circle>
-                  <circle cx={point.x} cy={point.y} fill="#7c3aed" r="1.2"></circle>
+                  <circle cx={point.x} cy={point.y} fill="white" r="3.3" stroke="#5523f0" stroke-width="1.2"></circle>
+                  <circle cx={point.x} cy={point.y} fill="#5523f0" r="1.2"></circle>
                 </>
               ))
             }
