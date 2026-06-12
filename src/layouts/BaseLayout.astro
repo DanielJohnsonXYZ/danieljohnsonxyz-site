@@ -74,7 +74,7 @@ const revealObserver = prefersReducedMotion
           revealObserver?.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 10% 0px' });
 
 document.querySelectorAll('.reveal').forEach((element) => {
   if (!revealObserver) {
@@ -83,7 +83,14 @@ document.querySelectorAll('.reveal').forEach((element) => {
   }
 
   revealObserver.observe(element);
-});`;
+});
+
+// Safety net: if the observer never fires (old browsers, odd viewports), reveal everything.
+window.setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.is-visible)').forEach((element) => {
+    element.classList.add('is-visible');
+  });
+}, 2500);`;
 const analyticsScript = `window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   event: 'page_context',
@@ -180,6 +187,8 @@ const gtmLoaderScript = `(() => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0b0c" />
+    <!-- JS flag: lets CSS gate hidden/animated states so content stays visible without JS. -->
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <!-- Analytics: dataLayer is initialized inline; GTM script is deferred until load/idle. -->
     <script is:inline set:html={analyticsScript}></script>
     <script is:inline set:html={gtmLoaderScript}></script>

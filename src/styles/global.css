@@ -9,7 +9,7 @@
   --surface-dim: #f4f4f5;
   --ink: #09090b;
   --muted: #4b5563;
-  --subtle: #71717a;
+  --subtle: #5d5d66; /* AA on light backgrounds (was #71717a) */
   --line: rgba(9, 9, 11, 0.07);
   --line-strong: rgba(9, 9, 11, 0.13);
   --accent: #7c3aed;

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/home-v4.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { icpFirmographics, siteConfig } from "../site";
@@ -137,94 +138,69 @@ const homeSchemas = [
       </div>
     </section>
 
-    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
-
-    <!-- ===== Three-lane audience router ===== -->
-    <section aria-label="Audience router">
-      <div class="v4-container reveal">
-        <div class="v4-split-head">
-          <div>
-            <span class="v4-eyebrow">Who's visiting today</span>
-            <h2 class="v4-h2">Three ways <span class="v4-hl">people land here.</span></h2>
-          </div>
-          <p class="v4-subhead">Pick the lane that matches you. Founders take the highlighted route; the other two are for event organisers, podcast hosts, and partners.</p>
-        </div>
-        <div class="v4-lanes">
-          <div class="v4-lane v4-lane-primary">
-            <div class="v4-lane-num">01 · For founders</div>
-            <h3 class="v4-h3">You're a founder with a growth problem.</h3>
-            <p>Pipeline is patchy, every important growth call still routes through you, and you're not sure whether to hire, agency it out, or rethink the plan. Start with a free 20-minute audit. No pitch, no deck.</p>
-            <a href="/contact/#book-growth-audit" class="v4-link-arrow" data-cta="home-router-founders">Start the audit</a>
-          </div>
-          <div class="v4-lane">
-            <div class="v4-lane-num">02 · For event organisers</div>
-            <h3 class="v4-h3">You're booking a speaker or workshop lead.</h3>
-            <p>I've spoken at Cambridge Judge, Imperial, Techstars, General Assembly, Nomad Summit, and the UK Space Agency. Talks are built around the decision the room needs to make next.</p>
-            <a href="/speaking/" class="v4-link-arrow" data-cta="home-router-speaking">See speaking &amp; workshops</a>
-          </div>
-          <div class="v4-lane">
-            <div class="v4-lane-num">03 · For podcasts &amp; press</div>
-            <h3 class="v4-h3">You're here for an interview or partnership.</h3>
-            <p>Topics I'll go deep on: AI-native GTM, founder-led growth, why most first marketing hires fail, building a £50/month lead engine. Press kit, headshots, short and long bios in the media pack.</p>
-            <a href="/media-kit/" class="v4-link-arrow" data-cta="home-router-media">Media kit &amp; podcast topics</a>
-          </div>
-        </div>
+    <!-- ===== Alt paths (organisers / press) ===== -->
+    <div class="v4-altpaths reveal" aria-label="Also here for speaking or press">
+      <div class="v4-container">
+        <p>
+          Not a founder? <a href="/speaking/" class="v4-link-arrow" data-cta="home-router-speaking">Booking a speaker or workshop</a>
+          <span class="v4-altpaths-sep">·</span>
+          <a href="/media-kit/" class="v4-link-arrow" data-cta="home-router-media">Podcast &amp; press media kit</a>
+        </p>
       </div>
-    </section>
+    </div>
 
     <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
 
-    <!-- ===== Bottleneck ===== -->
-    <section aria-label="The bottleneck">
+    <!-- ===== Proof ===== -->
+    <section aria-label="Proof and case studies">
       <div class="v4-container reveal">
         <div class="v4-split-head">
           <div>
-            <span class="v4-eyebrow">The bottleneck</span>
-            <h2 class="v4-h2">You've got traction. <span class="v4-accent">Growth still <span class="v4-hl">feels like guessing.</span></span></h2>
+            <span class="v4-eyebrow">Proof</span>
+            <h2 class="v4-h2">Real campaigns. Real numbers. <span class="v4-accent">Real attribution.</span></h2>
           </div>
-          <p class="v4-subhead">The real problem isn't usually the channel. It's that the whole growth function still lives in your head.</p>
+          <p class="v4-subhead">The short list. Full case studies linked below.</p>
         </div>
-        <div class="v4-bottleneck-card">
-          <p>The product works. Revenue is moving. You've got paying customers and a deck that holds up in a room. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth decision still routes through you. Because nobody else has the full picture.</p>
-          <p>The instinct is to add something. A new channel, an agency, another campaign. That's almost never the actual problem. The problem is that the whole growth function lives in your head, and there's no system running underneath it.</p>
-          <p class="v4-point"><strong>The point:</strong> what you need isn't more activity. You need a senior operator who can walk in, see the whole machine at once, and tell you — with specifics — which one or two levers actually matter for your company right now. Then build the system to run those levers without you.</p>
+        <div class="v4-metrics">
+          <div class="v4-metric">
+            <div class="v4-big">6×</div>
+            <div class="v4-top-label">App downloads</div>
+            <p class="v4-ctx">2k → 12k+ monthly downloads in six months after an acquisition and lifecycle rebuild.</p>
+            <span class="v4-tag">HealthTech · AI</span>
+          </div>
+          <div class="v4-metric">
+            <div class="v4-big">35%</div>
+            <div class="v4-top-label">Lower CAC</div>
+            <p class="v4-ctx">CAC down 35% in eight weeks. Segmentation, paid account structure, landing-page routing.</p>
+            <span class="v4-tag">Fintech · Crypto</span>
+          </div>
+          <div class="v4-metric">
+            <div class="v4-big">500+</div>
+            <div class="v4-top-label">Qualified signups</div>
+            <p class="v4-ctx">500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.</p>
+            <span class="v4-tag">Fintech · B2B SaaS</span>
+          </div>
+          <div class="v4-metric">
+            <div class="v4-big">21%</div>
+            <div class="v4-top-label">Less churn</div>
+            <p class="v4-ctx">Retention up 21% in three months. Targeted lifecycle and win-back messaging.</p>
+            <span class="v4-tag">eCommerce</span>
+          </div>
+        </div>
+        <div class="v4-quote-pulled">
+          <blockquote>Named the two levers that mattered. Inside 60 days we had a weekly rhythm and pipeline built to our ICP.</blockquote>
+          <cite>— Christian A., Founder, AI HealthTech</cite>
+        </div>
+        <div class="v4-attribution-row">
+          <div><strong>£15M+</strong> helped founders raise</div>
+          <div><strong>200+</strong> startups across four continents</div>
+          <div><strong>4.97 / 5</strong> · <strong>479+</strong> sessions</div>
+        </div>
+        <div class="v4-center-row">
+          <a href="/case-studies/" class="v4-link-arrow" data-cta="home-proof-case-studies">See full case studies</a>
         </div>
       </div>
     </section>
-
-    <!-- ===== Marquee ===== -->
-    <div class="v4-marquee" aria-hidden="true">
-      <div class="v4-marquee-track">
-        <span class="v4-kw-1">POSITIONING</span><span>/</span>
-        <span class="v4-kw-2">PIPELINE</span><span>/</span>
-        <span class="v4-kw-4">MESSAGING</span><span>/</span>
-        <span class="v4-kw-3">CONVERSION</span><span>/</span>
-        <span class="v4-kw-5">REPORTING</span><span>/</span>
-        <span class="v4-kw-6">FOUNDER-LED GROWTH</span><span>/</span>
-        <span class="v4-kw-1">POSITIONING</span><span>/</span>
-        <span class="v4-kw-2">PIPELINE</span><span>/</span>
-        <span class="v4-kw-4">MESSAGING</span><span>/</span>
-        <span class="v4-kw-3">CONVERSION</span><span>/</span>
-        <span class="v4-kw-5">REPORTING</span><span>/</span>
-        <span class="v4-kw-6">FOUNDER-LED GROWTH</span><span>/</span>
-      </div>
-    </div>
-    <div class="v4-marquee" aria-hidden="true">
-      <div class="v4-marquee-track v4-marquee-reverse">
-        <span class="v4-kw-3">CUSTOMER SIGNAL</span><span>/</span>
-        <span class="v4-kw-4">ACQUISITION TESTS</span><span>/</span>
-        <span class="v4-kw-1">DECISION RHYTHM</span><span>/</span>
-        <span class="v4-kw-2">PROOF LIBRARY</span><span>/</span>
-        <span class="v4-kw-5">AI-NATIVE RESEARCH</span><span>/</span>
-        <span class="v4-kw-6">GTM SYSTEM</span><span>/</span>
-        <span class="v4-kw-3">CUSTOMER SIGNAL</span><span>/</span>
-        <span class="v4-kw-4">ACQUISITION TESTS</span><span>/</span>
-        <span class="v4-kw-1">DECISION RHYTHM</span><span>/</span>
-        <span class="v4-kw-2">PROOF LIBRARY</span><span>/</span>
-        <span class="v4-kw-5">AI-NATIVE RESEARCH</span><span>/</span>
-        <span class="v4-kw-6">GTM SYSTEM</span><span>/</span>
-      </div>
-    </div>
 
     <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
 
@@ -283,59 +259,6 @@ const homeSchemas = [
 
     <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
 
-    <!-- ===== Proof ===== -->
-    <section aria-label="Proof and case studies">
-      <div class="v4-container reveal">
-        <div class="v4-split-head">
-          <div>
-            <span class="v4-eyebrow">Proof</span>
-            <h2 class="v4-h2">Real campaigns. Real numbers. <span class="v4-accent">Real attribution.</span></h2>
-          </div>
-          <p class="v4-subhead">The short list. Full case studies linked below.</p>
-        </div>
-        <div class="v4-metrics">
-          <div class="v4-metric">
-            <div class="v4-big">6×</div>
-            <div class="v4-top-label">App downloads</div>
-            <p class="v4-ctx">2k → 12k+ monthly downloads in six months after an acquisition and lifecycle rebuild.</p>
-            <span class="v4-tag">HealthTech · AI</span>
-          </div>
-          <div class="v4-metric">
-            <div class="v4-big">35%</div>
-            <div class="v4-top-label">Lower CAC</div>
-            <p class="v4-ctx">CAC down 35% in eight weeks. Segmentation, paid account structure, landing-page routing.</p>
-            <span class="v4-tag">Fintech · Crypto</span>
-          </div>
-          <div class="v4-metric">
-            <div class="v4-big">500+</div>
-            <div class="v4-top-label">Qualified signups</div>
-            <p class="v4-ctx">500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.</p>
-            <span class="v4-tag">Fintech · B2B SaaS</span>
-          </div>
-          <div class="v4-metric">
-            <div class="v4-big">21%</div>
-            <div class="v4-top-label">Less churn</div>
-            <p class="v4-ctx">Retention up 21% in three months. Targeted lifecycle and win-back messaging.</p>
-            <span class="v4-tag">eCommerce</span>
-          </div>
-        </div>
-        <div class="v4-quote-pulled">
-          <blockquote>Named the two levers that mattered. Inside 60 days we had a weekly rhythm and pipeline built to our ICP.</blockquote>
-          <cite>— Christian A., Founder, AI HealthTech</cite>
-        </div>
-        <div class="v4-attribution-row">
-          <div><strong>£15M+</strong> helped founders raise</div>
-          <div><strong>200+</strong> startups across four continents</div>
-          <div><strong>4.97 / 5</strong> · <strong>479+</strong> sessions</div>
-        </div>
-        <div class="v4-center-row">
-          <a href="/case-studies/" class="v4-link-arrow" data-cta="home-proof-case-studies">See full case studies</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
-
     <!-- ===== Fit ===== -->
     <section aria-label="Fit check">
       <div class="v4-container reveal">
@@ -366,6 +289,29 @@ const homeSchemas = [
               <li><span class="v4-icon">✕</span><span>Want vanity-metrics reporting, not revenue impact</span></li>
             </ul>
           </div>
+        </div>
+        <p class="v4-compare-footer">
+          <a href="/resources/compare-growth-options/" class="v4-link-arrow" data-cta="home-compare-six">Compare six growth options (agency, FTE, fractional, advisor, mentor, contractor)</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="v4-divider"><div class="v4-divider-line"><span>* * *</span></div></div>
+
+    <!-- ===== Bottleneck ===== -->
+    <section aria-label="The bottleneck">
+      <div class="v4-container reveal">
+        <div class="v4-split-head">
+          <div>
+            <span class="v4-eyebrow">The bottleneck</span>
+            <h2 class="v4-h2">You've got traction. <span class="v4-accent">Growth still <span class="v4-hl">feels like guessing.</span></span></h2>
+          </div>
+          <p class="v4-subhead">The real problem isn't usually the channel. It's that the whole growth function still lives in your head.</p>
+        </div>
+        <div class="v4-bottleneck-card">
+          <p>The product works. Revenue is moving. You've got paying customers and a deck that holds up in a room. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth decision still routes through you. Because nobody else has the full picture.</p>
+          <p>The instinct is to add something. A new channel, an agency, another campaign. That's almost never the actual problem. The problem is that the whole growth function lives in your head, and there's no system running underneath it.</p>
+          <p class="v4-point"><strong>The point:</strong> what you need isn't more activity. You need a senior operator who can walk in, see the whole machine at once, and tell you — with specifics — which one or two levers actually matter for your company right now. Then build the system to run those levers without you.</p>
         </div>
       </div>
     </section>
@@ -403,46 +349,8 @@ const homeSchemas = [
         </div>
         <div class="v4-method-footer">
           <p class="v4-method-text">If "growth system" sounds vague, that's the point. I'll show you exactly what it looks like on a 20-minute audit.</p>
-          <a href="/contact/#book-growth-audit" class="v4-btn v4-btn-primary" data-cta="home-method-audit">Book a 20-min Growth Audit <span class="v4-arrow">→</span></a>
+          <a href="/growth-audit/" class="v4-link-arrow" data-cta="home-method-audit">See what a 20-min audit covers</a>
         </div>
-      </div>
-    </section>
-
-    <!-- ===== Why not an agency ===== -->
-    <section aria-label="Why not an agency">
-      <div class="v4-container reveal">
-        <div class="v4-split-head">
-          <div>
-            <span class="v4-eyebrow">Why not an agency</span>
-            <h2 class="v4-h2">Senior judgement, <span class="v4-accent">not junior execution.</span></h2>
-          </div>
-          <p class="v4-subhead">Most growth problems at this stage are senior judgement problems pretending to be execution problems.</p>
-        </div>
-        <div class="v4-compare">
-          <div class="v4-compare-col">
-            <div class="v4-lbl-tag">A typical agency</div>
-            <ul>
-              <li><span class="v4-icon">✕</span><span>Junior account managers execute the work</span></li>
-              <li><span class="v4-icon">✕</span><span>Long retainers, fixed scopes, slow handoffs</span></li>
-              <li><span class="v4-icon">✕</span><span>Vanity metrics in monthly reports</span></li>
-              <li><span class="v4-icon">✕</span><span>Brand-safe best practice, not contextual calls</span></li>
-              <li><span class="v4-icon">✕</span><span>Strategy and execution split across people</span></li>
-            </ul>
-          </div>
-          <div class="v4-compare-col v4-compare-win">
-            <div class="v4-lbl-tag">Working with me</div>
-            <ul>
-              <li><span class="v4-icon">✓</span><span>Senior operator in the seat — no junior layer</span></li>
-              <li><span class="v4-icon">✓</span><span>Embedded ownership of the growth function</span></li>
-              <li><span class="v4-icon">✓</span><span>Revenue-focused. Pipeline, conversion, payback.</span></li>
-              <li><span class="v4-icon">✓</span><span>Opinionated, contextual calls on your company</span></li>
-              <li><span class="v4-icon">✓</span><span>Build the system, then hand it off clean</span></li>
-            </ul>
-          </div>
-        </div>
-        <p class="v4-compare-footer">
-          <a href="/resources/compare-growth-options/" class="v4-link-arrow" data-cta="home-compare-six">Compare six growth options (agency, FTE, fractional, advisor, mentor, contractor)</a>
-        </p>
       </div>
     </section>
 
@@ -463,8 +371,11 @@ const homeSchemas = [
           <div>
             <img
               src="/images/daniel-aircraft.webp"
+              srcset="/images/daniel-aircraft-640.webp 640w, /images/daniel-aircraft.webp 1280w"
+              sizes="(max-width: 900px) 100vw, 40vw"
               alt="Daniel Johnson — operator mindset, systems thinking applied to growth"
               loading="lazy"
+              decoding="async"
               class="v4-about-img"
             />
           </div>
@@ -488,8 +399,11 @@ const homeSchemas = [
           <div class="v4-sw-card">
             <img
               src="/images/cambridge-judge-business-school-960.webp"
+              srcset="/images/cambridge-judge-business-school-640.webp 640w, /images/cambridge-judge-business-school-960.webp 960w"
+              sizes="(max-width: 900px) 100vw, 50vw"
               alt="Cambridge Judge Business School, where Daniel guest lectures"
               loading="lazy"
+              decoding="async"
               class="v4-sw-img"
             />
             <div class="v4-body-pad">
@@ -591,875 +505,3 @@ const homeSchemas = [
     </section>
   </div>
 </BaseLayout>
-
-<style is:global>
-  /* ============================================================
-     v4 homepage design system — scoped to .v4-home wrapper.
-     All custom selectors are prefixed with .v4- and rules live
-     inside .v4-home so they don't leak to other pages.
-     ============================================================ */
-  .v4-home {
-    --cream: #f6f1e8;
-    --cream-grid: #ece5d7;
-    --ink: #14141a;
-    --ink-soft: #3a3a45;
-    --muted: #6b6b76;
-    --line: #ddd6c7;
-    --line-soft: #ebe4d4;
-    --white: #ffffff;
-    --purple: #6b3aff;
-    --purple-deep: #5028e0;
-    --purple-soft: #ede6ff;
-    --purple-tint: #f5f1ff;
-    --highlight: rgba(107, 58, 255, 0.18);
-    --green: #16a34a;
-    --red: #dc2626;
-    --dark: #0a0a10;
-    --dark-2: #14141c;
-    --dark-3: #1e1e28;
-    --dark-line: #2a2a38;
-    --v4-max: 1280px;
-    --v4-radius: 20px;
-    --v4-radius-sm: 14px;
-    --v4-shadow-1: 0 1px 0 rgba(20, 16, 30, 0.04), 0 4px 24px rgba(20, 16, 30, 0.06);
-    --v4-shadow-2: 0 8px 16px rgba(20, 16, 30, 0.06), 0 24px 48px rgba(20, 16, 30, 0.08);
-    --v4-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-
-    background: var(--cream);
-    background-image:
-      radial-gradient(circle at 20% 0%, rgba(107, 58, 255, 0.04) 0%, transparent 40%),
-      linear-gradient(to right, var(--cream-grid) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--cream-grid) 1px, transparent 1px);
-    background-size: auto, 64px 64px, 64px 64px;
-    color: var(--ink);
-    font-family: "Inter", -apple-system, system-ui, sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    font-feature-settings: "ss01", "cv02", "cv11";
-  }
-
-  .v4-home * { box-sizing: border-box; }
-
-  .v4-home a {
-    color: var(--purple);
-    text-decoration: none;
-    transition: color 0.18s var(--v4-ease);
-  }
-  .v4-home a:hover { text-decoration: underline; }
-  .v4-home ::selection { background: var(--highlight); color: var(--ink); }
-
-  /* === Typography === */
-  .v4-h1,
-  .v4-h2,
-  .v4-h3 {
-    font-family: "Fraunces", Georgia, serif;
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.5em;
-    color: var(--ink);
-  }
-  .v4-h1 { font-size: clamp(2.8rem, 6.2vw, 5rem); font-weight: 600; }
-  .v4-h2 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); }
-  .v4-h3 { font-size: 1.4rem; }
-  .v4-home p { margin: 0 0 1em; }
-
-  /* === Layout === */
-  .v4-container {
-    max-width: var(--v4-max);
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  .v4-home section { padding: 6.5rem 0; position: relative; }
-  .v4-divider {
-    max-width: var(--v4-max);
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  .v4-divider-line {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: var(--muted);
-  }
-  .v4-divider-line::before,
-  .v4-divider-line::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-  .v4-divider-line span {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  /* === Atoms === */
-  .v4-hl {
-    position: relative;
-    display: inline;
-    color: var(--ink);
-    background-image: linear-gradient(120deg, var(--highlight) 0%, var(--highlight) 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 0.45em;
-    background-position: 0 88%;
-    padding: 0 0.05em;
-  }
-  .v4-accent { color: var(--purple); }
-  .v4-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 1.5rem;
-  }
-  .v4-eyebrow::before {
-    content: "";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--purple);
-    box-shadow: 0 0 0 3px rgba(107, 58, 255, 0.18);
-    animation: v4Pulse 2.4s ease-out infinite;
-  }
-  @keyframes v4Pulse {
-    0%, 100% { box-shadow: 0 0 0 3px rgba(107, 58, 255, 0.18); }
-    50% { box-shadow: 0 0 0 6px rgba(107, 58, 255, 0.04); }
-  }
-
-  /* === Buttons === */
-  .v4-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.95rem 1.5rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.98rem;
-    transition: transform 0.18s var(--v4-ease), background 0.18s var(--v4-ease),
-      box-shadow 0.18s var(--v4-ease);
-    will-change: transform;
-  }
-  .v4-btn-primary {
-    background: var(--purple);
-    color: var(--white);
-    box-shadow: 0 4px 14px rgba(107, 58, 255, 0.3);
-  }
-  .v4-btn-primary:hover {
-    background: var(--purple-deep);
-    text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(107, 58, 255, 0.4);
-  }
-  .v4-btn-ghost {
-    background: var(--white);
-    color: var(--ink);
-    border: 1px solid var(--line);
-  }
-  .v4-btn-ghost:hover {
-    border-color: var(--ink);
-    text-decoration: none;
-    transform: translateY(-1px);
-  }
-  .v4-btn .v4-arrow {
-    transition: transform 0.18s var(--v4-ease);
-    display: inline-block;
-  }
-  .v4-btn:hover .v4-arrow { transform: translateX(3px); }
-  .v4-link-arrow {
-    color: var(--purple);
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-  .v4-link-arrow::after {
-    content: "→";
-    transition: transform 0.18s var(--v4-ease);
-  }
-  .v4-link-arrow:hover::after { transform: translateX(3px); }
-  .v4-link-arrow:hover { text-decoration: none; }
-
-  /* === Hero === */
-  .v4-hero { padding-top: 4rem; padding-bottom: 5rem; }
-  .v4-hero-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .v4-h1 .v4-accent { color: var(--purple); }
-  .v4-hero-sub {
-    font-size: 1.2rem;
-    color: var(--ink-soft);
-    max-width: 38ch;
-    margin-bottom: 2.25rem;
-  }
-  .v4-micro-proof {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding: 1.5rem 0 2.25rem;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .v4-stat .v4-num {
-    font-family: "Fraunces", serif;
-    font-size: 1.95rem;
-    font-weight: 700;
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.35rem;
-    font-feature-settings: "tnum";
-  }
-  .v4-stat .v4-stat-label { font-size: 0.85rem; color: var(--muted); }
-  .v4-hero-ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    margin-top: 2rem;
-  }
-  .v4-availability-strip {
-    margin-top: 1.75rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.92rem;
-    color: var(--ink-soft);
-  }
-  .v4-availability-strip { text-decoration: none; }
-  .v4-availability-strip:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .v4-availability-strip::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.18);
-    animation: v4PulseGreen 2.4s ease-out infinite;
-  }
-  @keyframes v4PulseGreen {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.18); }
-    50% { box-shadow: 0 0 0 7px rgba(22, 163, 74, 0.05); }
-  }
-  .v4-hero-photo { position: relative; aspect-ratio: 1/1.05; }
-  .v4-hero-photo-bg {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 40%, var(--purple-soft) 0%, var(--cream) 75%);
-    border-radius: 24px;
-    border: 1px solid var(--line);
-    overflow: hidden;
-  }
-  .v4-hero-photo img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: bottom;
-  }
-  .v4-pill {
-    position: absolute;
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    background: var(--white);
-    border: 1px solid var(--line);
-    box-shadow: var(--v4-shadow-1);
-  }
-  .v4-pill-top {
-    top: 1rem;
-    right: 1rem;
-    background: var(--ink);
-    color: var(--white);
-    border-color: var(--ink);
-    font-family: "JetBrains Mono", monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.75rem;
-  }
-  .v4-pill-bot {
-    bottom: 1rem;
-    left: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .v4-pill-bot::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
-  }
-  @media (max-width: 880px) {
-    .v4-hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .v4-hero-photo { max-width: 420px; margin: 0 auto; }
-    .v4-micro-proof { grid-template-columns: 1fr 1fr; }
-  }
-
-  /* === Three-lane router === */
-  .v4-lanes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
-  .v4-lane {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius);
-    padding: 2rem;
-    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease),
-      border-color 0.22s var(--v4-ease);
-    position: relative;
-    overflow: hidden;
-  }
-  .v4-lane::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top right, rgba(107, 58, 255, 0.06) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.22s var(--v4-ease);
-  }
-  .v4-lane:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--v4-shadow-2);
-    border-color: var(--purple);
-  }
-  .v4-lane:hover::before { opacity: 1; }
-  .v4-lane-primary { border-color: var(--purple); background: var(--purple-tint); }
-  .v4-lane-num {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
-    color: var(--purple);
-    margin-bottom: 1rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .v4-lane .v4-h3 { margin-bottom: 0.85rem; position: relative; }
-  .v4-lane p { color: var(--ink-soft); margin-bottom: 1.5rem; font-size: 0.97rem; position: relative; }
-  .v4-lane .v4-link-arrow { position: relative; }
-  @media (max-width: 880px) {
-    .v4-lanes { grid-template-columns: 1fr; }
-  }
-
-  /* === Split heading === */
-  .v4-split-head {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
-    align-items: end;
-    margin-bottom: 3rem;
-  }
-  .v4-subhead { color: var(--ink-soft); font-size: 1.08rem; margin-bottom: 0.5rem; }
-  @media (max-width: 880px) {
-    .v4-split-head { grid-template-columns: 1fr; gap: 1rem; }
-  }
-
-  /* === Bottleneck === */
-  .v4-bottleneck-card {
-    background: var(--white);
-    border-radius: var(--v4-radius);
-    padding: 3.5rem;
-    max-width: 920px;
-    margin: 0 auto;
-    border-left: 4px solid var(--purple);
-    box-shadow: var(--v4-shadow-1);
-    position: relative;
-  }
-  .v4-bottleneck-card::before {
-    content: "\201C";
-    position: absolute;
-    top: 1rem;
-    right: 2.5rem;
-    font-family: "Fraunces", serif;
-    font-size: 7rem;
-    color: var(--purple-soft);
-    line-height: 0.8;
-    font-weight: 700;
-  }
-  .v4-bottleneck-card p { font-size: 1.1rem; color: var(--ink-soft); position: relative; }
-  .v4-point { color: var(--ink); }
-  .v4-point strong { color: var(--purple); font-family: "Fraunces", serif; font-weight: 700; }
-  @media (max-width: 720px) {
-    .v4-bottleneck-card { padding: 2rem; }
-  }
-
-  /* === Marquee === */
-  .v4-marquee {
-    padding: 1.25rem 0;
-    overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  }
-  .v4-marquee-track {
-    display: inline-flex;
-    gap: 2rem;
-    padding-right: 2rem;
-    white-space: nowrap;
-    animation: v4Scroll 38s linear infinite;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 600;
-  }
-  .v4-marquee-reverse { animation-direction: reverse; }
-  @keyframes v4Scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .v4-kw-1 { color: var(--purple); }
-  .v4-kw-2 { color: #d97706; }
-  .v4-kw-3 { color: var(--green); }
-  .v4-kw-4 { color: #db2777; }
-  .v4-kw-5 { color: #0891b2; }
-  .v4-kw-6 { color: var(--ink); }
-
-  /* === Ladder === */
-  .v4-ladder {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .v4-step {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease);
-  }
-  .v4-step:hover { transform: translateY(-3px); box-shadow: var(--v4-shadow-2); }
-  .v4-step-emphasis { background: var(--purple-tint); border-color: var(--purple); }
-  .v4-step-num {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--purple-soft);
-    color: var(--purple);
-    display: grid;
-    place-items: center;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-  .v4-tier {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.6rem;
-    display: block;
-  }
-  .v4-step .v4-h3 { font-size: 1.6rem; margin-bottom: 0.4rem; }
-  .v4-price {
-    font-family: "Fraunces", serif;
-    font-weight: 600;
-    font-size: 1.4rem;
-    margin-bottom: 0.2rem;
-  }
-  .v4-meta { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.2rem; }
-  .v4-body { color: var(--ink-soft); font-size: 0.97rem; margin-bottom: 1.25rem; }
-  .v4-detail { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
-  .v4-lbl {
-    display: block;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.25rem;
-  }
-  .v4-cta-row { margin-top: auto; padding-top: 1rem; }
-  .v4-ladder-footer { margin-top: 1.75rem; color: var(--ink-soft); font-size: 0.95rem; }
-  @media (max-width: 880px) {
-    .v4-ladder { grid-template-columns: 1fr; }
-  }
-
-  /* === Proof === */
-  .v4-metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
-    margin-bottom: 3rem;
-  }
-  .v4-metric {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius);
-    padding: 1.75rem;
-    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease);
-  }
-  .v4-metric:hover { transform: translateY(-3px); box-shadow: var(--v4-shadow-2); }
-  .v4-big {
-    font-family: "Fraunces", serif;
-    font-size: 3.2rem;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-    font-feature-settings: "tnum";
-    letter-spacing: -0.02em;
-  }
-  .v4-top-label {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.74rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-  .v4-ctx { font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 1rem; }
-  .v4-tag {
-    font-size: 0.78rem;
-    color: var(--purple);
-    font-weight: 500;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--line);
-    display: block;
-  }
-  .v4-quote-pulled {
-    max-width: 820px;
-    margin: 3rem auto 2.5rem;
-    text-align: center;
-    padding: 0 1rem;
-    position: relative;
-  }
-  .v4-quote-pulled::before {
-    content: "\201C";
-    display: block;
-    font-family: "Fraunces", serif;
-    font-size: 4.5rem;
-    color: var(--purple-soft);
-    line-height: 0.5;
-    margin-bottom: 1rem;
-  }
-  .v4-quote-pulled blockquote {
-    font-family: "Fraunces", serif;
-    font-size: 1.75rem;
-    line-height: 1.35;
-    color: var(--ink);
-    margin: 0 0 1.25rem;
-    font-weight: 500;
-  }
-  .v4-quote-pulled cite { font-style: normal; color: var(--ink-soft); font-size: 0.95rem; }
-  .v4-attribution-row {
-    display: flex;
-    gap: 3rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
-    color: var(--ink-soft);
-    font-size: 0.97rem;
-  }
-  .v4-attribution-row strong { color: var(--ink); }
-  .v4-center-row { text-align: center; margin-top: 2.5rem; }
-  @media (max-width: 880px) {
-    .v4-metrics { grid-template-columns: 1fr 1fr; }
-    .v4-quote-pulled blockquote { font-size: 1.3rem; }
-  }
-  @media (max-width: 520px) {
-    .v4-metrics { grid-template-columns: 1fr; }
-  }
-
-  /* === Fit === */
-  .v4-fit { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .v4-fit-col {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius);
-    padding: 2rem;
-  }
-  .v4-lbl-tag {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.74rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1.25rem;
-  }
-  .v4-fit-col ul,
-  .v4-compare-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .v4-fit-col li,
-  .v4-compare-col li {
-    display: flex;
-    gap: 0.8rem;
-    align-items: flex-start;
-    padding: 0.85rem 0;
-    color: var(--ink-soft);
-  }
-  .v4-fit-col li + li,
-  .v4-compare-col li + li {
-    border-top: 1px solid var(--line-soft);
-  }
-  .v4-icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .v4-fit-yes .v4-icon { background: rgba(22, 163, 74, 0.12); color: var(--green); }
-  .v4-fit-no .v4-icon { background: rgba(220, 38, 38, 0.1); color: var(--red); }
-  @media (max-width: 720px) {
-    .v4-fit { grid-template-columns: 1fr; }
-  }
-
-  /* === Method (dark) === */
-  .v4-method-section {
-    background: var(--dark);
-    color: #e5e5ec;
-    border-radius: 32px;
-    margin: 0 1.5rem;
-    padding: 5rem 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .v4-method-section::before {
-    content: "";
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(107, 58, 255, 0.18) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .v4-method-section .v4-container { padding: 0 2.5rem; position: relative; }
-  .v4-method-section .v4-h2 { color: var(--white); }
-  .v4-method-section .v4-subhead { color: #a1a1ac; }
-  .v4-method-section .v4-eyebrow { color: #a1a1ac; }
-  .v4-method-section p { color: #c9c9d2; }
-  .v4-method-section .v4-hl {
-    color: var(--white);
-    background-image: linear-gradient(120deg, rgba(107, 58, 255, 0.4) 0%, rgba(107, 58, 255, 0.4) 100%);
-  }
-  .v4-method-intro { margin-top: 1rem; }
-  .v4-method-tiles {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 3rem;
-  }
-  .v4-method-tile {
-    background: var(--dark-2);
-    border: 1px solid var(--dark-line);
-    border-radius: var(--v4-radius-sm);
-    padding: 1.4rem 1.5rem;
-    transition: border-color 0.22s var(--v4-ease), transform 0.22s var(--v4-ease);
-    display: block;
-  }
-  .v4-method-tile:hover {
-    border-color: var(--purple);
-    text-decoration: none;
-    transform: translateY(-2px);
-  }
-  .v4-method-tile .v4-n {
-    font-family: "JetBrains Mono", monospace;
-    color: var(--purple);
-    font-size: 0.74rem;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.1em;
-  }
-  .v4-method-tile .v4-t {
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-    font-size: 1.05rem;
-  }
-  .v4-method-tile .v4-d { font-size: 0.9rem; color: #9999a4; }
-  .v4-method-footer {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--dark-line);
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .v4-method-text { color: #c9c9d2; flex: 1; min-width: 280px; }
-  @media (max-width: 720px) {
-    .v4-method-tiles { grid-template-columns: 1fr; }
-    .v4-method-section { margin: 0; border-radius: 0; }
-    .v4-method-section .v4-container { padding: 0 1.5rem; }
-  }
-
-  /* === Comparison === */
-  .v4-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .v4-compare-col {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius);
-    padding: 2rem;
-  }
-  .v4-compare-win { border-color: var(--purple); background: var(--purple-tint); }
-  .v4-compare-win .v4-icon { background: var(--purple-soft); color: var(--purple); }
-  .v4-compare-col:not(.v4-compare-win) .v4-icon { background: rgba(220, 38, 38, 0.1); color: var(--red); }
-  .v4-compare-win li { color: var(--ink); }
-  .v4-compare-footer { margin-top: 2rem; font-size: 0.95rem; }
-  @media (max-width: 720px) {
-    .v4-compare { grid-template-columns: 1fr; }
-  }
-
-  /* === About === */
-  .v4-about-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 3.5rem;
-    align-items: center;
-  }
-  .v4-about-grid p { color: var(--ink-soft); font-size: 1.05rem; }
-  .v4-about-img { width: 100%; border-radius: var(--v4-radius); display: block; }
-  @media (max-width: 880px) {
-    .v4-about-grid { grid-template-columns: 1fr; }
-  }
-
-  /* === Speaking & Writing === */
-  .v4-sw { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-  .v4-sw-card {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius);
-    overflow: hidden;
-    transition: transform 0.22s var(--v4-ease), box-shadow 0.22s var(--v4-ease);
-  }
-  .v4-sw-card:hover { transform: translateY(-3px); box-shadow: var(--v4-shadow-2); }
-  .v4-body-pad { padding: 2rem; }
-  .v4-sw-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
-  .v4-sw-card .v4-h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-  .v4-sw-card p { color: var(--ink-soft); font-size: 0.97rem; }
-  .v4-feedback-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 1.25rem 0 1.5rem;
-    padding: 1rem 1.25rem;
-    background: var(--cream);
-    border-radius: var(--v4-radius-sm);
-  }
-  .v4-feedback-row q { color: var(--ink-soft); font-style: italic; font-size: 0.92rem; }
-  .v4-essay { padding: 1.1rem 0; border-bottom: 1px solid var(--line-soft); }
-  .v4-essay:first-of-type { padding-top: 0; }
-  .v4-essay:last-of-type { border-bottom: 0; }
-  .v4-date {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.74rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-  .v4-essay-title {
-    display: block;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0.4rem 0 0;
-    font-size: 1.02rem;
-    line-height: 1.4;
-  }
-  .v4-essay-title:hover { color: var(--purple); text-decoration: none; }
-  .v4-essay-links {
-    margin-top: 1.5rem;
-    display: flex;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    font-size: 0.95rem;
-  }
-  @media (max-width: 880px) {
-    .v4-sw { grid-template-columns: 1fr; }
-  }
-
-  /* === FAQ === */
-  .v4-faq { max-width: 880px; margin: 0 auto; }
-  .v4-faq details {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--v4-radius-sm);
-    padding: 1.3rem 1.6rem;
-    margin-bottom: 0.75rem;
-    cursor: pointer;
-    transition: border-color 0.22s var(--v4-ease);
-  }
-  .v4-faq details[open] { border-color: var(--purple); }
-  .v4-faq summary {
-    font-weight: 600;
-    font-size: 1.04rem;
-    list-style: none;
-    position: relative;
-    padding-right: 2.5rem;
-    color: var(--ink);
-  }
-  .v4-faq summary::-webkit-details-marker { display: none; }
-  .v4-faq summary::after {
-    content: "+";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--purple-soft);
-    color: var(--purple);
-    display: grid;
-    place-items: center;
-    font-size: 1.2rem;
-    font-weight: 500;
-    transition: transform 0.22s var(--v4-ease);
-  }
-  .v4-faq details[open] summary::after { content: "−"; }
-  .v4-faq-answer { color: var(--ink-soft); margin-top: 1rem; font-size: 0.98rem; }
-
-  /* === Final CTA === */
-  .v4-final-cta { text-align: center; max-width: 720px; margin: 0 auto; }
-  .v4-final-cta .v4-h2 { margin-bottom: 1.25rem; }
-  .v4-final-lead { color: var(--ink-soft); margin-bottom: 2rem; font-size: 1.18rem; }
-  .v4-final-meta { font-size: 0.9rem; color: var(--muted); margin-top: 1.75rem; }
-  .v4-final-meta a { color: var(--purple); }
-
-  /* === Reveal animation — uses BaseLayout's .is-visible class === */
-  .v4-home .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.7s var(--v4-ease), transform 0.7s var(--v4-ease);
-  }
-  .v4-home .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .v4-home .reveal,
-    .v4-home .reveal.is-visible {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-    .v4-home *,
-    .v4-home *::before,
-    .v4-home *::after {
-      animation-duration: 0.001s !important;
-      transition-duration: 0.001s !important;
-    }
-  }
-</style>
