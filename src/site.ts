@@ -158,7 +158,7 @@ export const icpFirmographics = {
   headcountBand: "~10–50 people",
   /** One-line supplement for hero / about (USD band + headcount). */
   oneLiner:
-    "Typical clients are B2B SaaS or AI with $2M–$20M ARR, ~10–50 people, and the founder still owning weekly GTM decisions.",
+    "Typical clients are B2B SaaS or AI at roughly $2M–$20M ARR (or the equivalent stage in your market), ~10–50 people, and the founder still owning weekly GTM decisions.",
   /** “You’re a fit if…” bullets — /fractional-cmo and mirrored on home/about. */
   fitIf: [
     "B2B SaaS or AI product with repeat revenue",
