@@ -498,3 +498,11 @@ body .v4-home section {
     font-size: clamp(2rem, 8vw, 2.6rem);
   }
 }
+
+/* Audit fix (2026-06): primary CTA rendered purple-on-purple — a link-colour
+   rule overrode .v5-btn-primary's white text, making "Book a 20-min Growth Audit"
+   invisible. A primary button is always on --electric, so its text must be white. */
+.v5-btn-primary {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
