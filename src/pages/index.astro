@@ -10,7 +10,8 @@ import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } fr
 import { absoluteUrl } from "../lib/utils";
 import { icpFirmographics, siteConfig } from "../site";
 
-// FAQ items mirror the markup below so the FAQPage schema stays in sync.
+// FAQ items drive both the FAQPage schema and the visible markup below, so the
+// two can't drift. `answer` is the schema text; `link` renders only in the page.
 const homepageFaq = [
   {
     question: "What does a fractional CMO actually do day-to-day?",
@@ -18,11 +19,14 @@ const homepageFaq = [
   },
   {
     question: "How is this different from hiring a full-time CMO?",
-    answer: "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs."
+    answer: "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
+    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time" },
+    open: true
   },
   {
     question: "What stage should my startup be at?",
-    answer: "Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first."
+    answer: "Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first.",
+    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "When each model fits" }
   },
   {
     question: "How quickly will I see results?",
@@ -30,7 +34,8 @@ const homepageFaq = [
   },
   {
     question: "What does it cost?",
-    answer: "UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price."
+    answer: "UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price.",
+    link: { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK)" }
   },
   {
     question: "How do I know if this will work for my business?",
@@ -519,30 +524,15 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           <p class="v5-subhead">Same topics covered on the audit, so you're not buying blind.</p>
         </div>
         <div class="v5-faq">
-          <details>
-            <summary>What does a fractional CMO actually do day-to-day?</summary>
-            <p class="v5-faq-answer">Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings. Not a monthly slide deck.</p>
-          </details>
-          <details open>
-            <summary>How is this different from hiring a full-time CMO?</summary>
-            <p class="v5-faq-answer">You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs. <a href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional vs full-time →</a></p>
-          </details>
-          <details>
-            <summary>What stage should my startup be at?</summary>
-            <p class="v5-faq-answer">Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first. <a href="/resources/fractional-cmo-vs-full-time-cmo/">When each model fits →</a></p>
-          </details>
-          <details>
-            <summary>How quickly will I see results?</summary>
-            <p class="v5-faq-answer">Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I don't promise miracles. I promise a visible system and honest calls on what's working.</p>
-          </details>
-          <details>
-            <summary>What does it cost?</summary>
-            <p class="v5-faq-answer">UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price. <a href="/resources/fractional-cmo-cost-uk/">Fractional CMO cost (UK) →</a></p>
-          </details>
-          <details>
-            <summary>How do I know if this will work for my business?</summary>
-            <p class="v5-faq-answer">If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 20-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong.</p>
-          </details>
+          {homepageFaq.map((item) => (
+            <details open={item.open}>
+              <summary>{item.question}</summary>
+              <p class="v5-faq-answer">
+                {item.answer}
+                {item.link && <> <a href={item.link.href}>{item.link.label} →</a></>}
+              </p>
+            </details>
+          ))}
         </div>
       </div>
     </section>

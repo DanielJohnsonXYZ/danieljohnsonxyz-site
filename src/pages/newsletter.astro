@@ -1,7 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import NewsletterFormInline from "../components/NewsletterFormInline.astro";
+import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
 import { ctas, siteConfig } from "../site";
+
+const newsletterDescription =
+  "Subscribe to Daniel Johnson's occasional growth notes on AI-native GTM, fractional CMO work, founder-led growth, and repeatable startup growth systems.";
+
+const newsletterSchema = [
+  buildWebPageSchema({ name: "Newsletter", description: newsletterDescription, url: absoluteUrl("/newsletter/") }),
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Newsletter", url: "/newsletter/" }
+  ])
+];
 
 const notes = [
   "How to decide whether your bottleneck is ICP, channel, conversion, or cadence.",
@@ -12,8 +25,9 @@ const notes = [
 ---
 
 <BaseLayout
-  description="Subscribe to Daniel Johnson's occasional growth notes on AI-native GTM, fractional CMO work, founder-led growth, and repeatable startup growth systems."
-  path="/newsletter"
+  description={newsletterDescription}
+  path="/newsletter/"
+  schema={newsletterSchema}
   title="Newsletter | Daniel Johnson"
 >
   <section class="section-space conversion-hero">

@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { buildBreadcrumbSchema, buildFaqPageSchema } from "../../lib/schema";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { absoluteUrl } from "../../lib/utils";
 import { ctas } from "../../site";
+
+const termSlug = (term: string) => term.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 /**
  * Glossary page — definitional content for LLM retrieval and topical
@@ -75,18 +78,24 @@ const terms = [
   }
 ];
 
-const faqItems = terms.map((t) => ({
-  question: `What is ${t.term.toLowerCase()}?`,
-  answer: t.long
-}));
-
 const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Resources", url: "/resources/" },
     { name: "Glossary", url: "/resources/glossary/" }
   ]),
-  buildFaqPageSchema(faqItems)
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    name: "Growth & fractional CMO glossary",
+    url: absoluteUrl("/resources/glossary/"),
+    hasDefinedTerm: terms.map((t) => ({
+      "@type": "DefinedTerm",
+      name: t.term,
+      description: t.long,
+      url: absoluteUrl(`/resources/glossary/#${termSlug(t.term)}`)
+    }))
+  }
 ];
 ---
 
@@ -94,7 +103,7 @@ const schemas = [
   description="Definitions of the terms used across danieljohnson.xyz — fractional CMO, growth operating system, founder-led growth, AI-native GTM, and more."
   path="/resources/glossary/"
   schema={schemas}
-  title="Glossary — fractional CMO, growth operating system, AI-native GTM | Daniel Johnson"
+  title="Glossary — Fractional CMO & Growth Terms | Daniel Johnson"
 >
   <section class="hero-section section-space">
     <div class="shell">

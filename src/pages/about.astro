@@ -1,7 +1,27 @@
 ---
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { entityGraph, icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
+
+const aboutDescription =
+  "About Daniel Johnson—fractional CMO & senior GTM operator for founder-led AI & B2B SaaS: founder-side, in-house, advisory & public teaching path.";
+
+const aboutSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: "About Daniel Johnson",
+    description: aboutDescription,
+    url: absoluteUrl("/about/"),
+    mainEntity: { "@id": entityGraph.danielPerson }
+  },
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About", url: "/about/" }
+  ])
+];
 
 const proofTiles = [
   { value: "10+ yrs", label: "Founder, operator, and advisor work" },
@@ -62,11 +82,12 @@ const principles = [
 ---
 
 <BaseLayout
-  description="About Daniel Johnson—fractional CMO & senior GTM operator for founder-led AI & B2B SaaS: founder-side, in-house, advisory & public teaching path."
+  description={aboutDescription}
   keywords="Daniel Johnson bio, fractional CMO background, GTM operator, startup advisor, We Scale Startups founder"
   path="/about/"
   preloadHeadshot
-  title="About Daniel Johnson | Fractional CMO & GTM Operator"
+  schema={aboutSchema}
+  title="About | Fractional CMO & GTM Operator"
 >
   <section class="section-space">
     <div class="shell">

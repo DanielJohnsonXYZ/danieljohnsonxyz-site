@@ -24,7 +24,7 @@ const pathname = `/case-studies/${caseStudy.id}`;
   ogType="article"
   path={pathname}
   schema={buildCaseStudySchema(caseStudy, pathname)}
-  title={caseStudy.data.title}
+  title={caseStudy.data.seoTitle ?? caseStudy.data.title}
 >
   <section class="section-space">
     <div class="shell">

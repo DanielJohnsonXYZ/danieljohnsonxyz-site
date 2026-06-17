@@ -55,7 +55,15 @@ export function buildPersonSchema() {
       "Experimentation and hypothesis design",
       "AI-native GTM workflows"
     ],
-    sameAs: siteConfig.sameAs
+    sameAs: siteConfig.sameAs,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: proofStats.mentorRating,
+      bestRating: "5",
+      worstRating: "1",
+      reviewCount: proofStats.mentorReviewCount,
+      url: siteConfig.growthMentorReviews
+    }
   };
 }
 
@@ -129,6 +137,7 @@ export function buildArticleSchema(article: CollectionEntry<"articles">, pathnam
     "@type": "Article",
     headline: article.data.title,
     description: article.data.description,
+    abstract: article.data.tldr,
     datePublished: article.data.publishedAt.toISOString(),
     dateModified: (article.data.updatedAt ?? article.data.publishedAt).toISOString(),
     author: {

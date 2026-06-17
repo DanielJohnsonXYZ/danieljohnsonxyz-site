@@ -2,8 +2,24 @@
 import { getCollection } from "astro:content";
 import SectionHeader from "../../components/SectionHeader.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { absoluteUrl, formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
+
+const writingSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Writing",
+    description:
+      "Essays on AI-native GTM, growth systems, and founder-led execution, plus a curated archive of interviews, profiles, and talks.",
+    url: absoluteUrl("/writing/")
+  },
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Writing", url: "/writing/" }
+  ])
+];
 
 const articles = sortByFeaturedThenOrder(await getCollection("articles"));
 const archive = sortByFeaturedThenOrder(await getCollection("media"));
@@ -85,6 +101,7 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
   description="Read Daniel Johnson's essays on AI-native GTM, growth systems, and founder-led execution, plus a curated archive of interviews, profiles, and talks."
   keywords="Daniel Johnson essays, fractional CMO writing, AI GTM blog, startup growth systems"
   path="/writing/"
+  schema={writingSchema}
   stickyCta={false}
   title="Writing | Daniel Johnson"
 >

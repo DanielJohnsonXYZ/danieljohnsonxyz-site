@@ -1,6 +1,23 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { absoluteUrl } from "../../lib/utils";
 import { ctas } from "../../site";
+
+const methodSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Method",
+    description:
+      "The operating method behind the work: GTM systems, AI-native workflows, experimentation, revenue operations, product-led growth, and founder-led distribution.",
+    url: absoluteUrl("/method/")
+  },
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Method", url: "/method/" }
+  ])
+];
 
 const methods = [
   { href: "/gtm-systems/", label: "GTM systems", description: "ICP, positioning, and channel architecture — the system the rest plugs into." },
@@ -16,6 +33,7 @@ const methods = [
   title="Method | Daniel Johnson"
   description="The operating method behind the work: GTM systems, AI-native workflows, experimentation, revenue operations, product-led growth, and founder-led distribution."
   path="/method/"
+  schema={methodSchema}
 >
   <section class="section-space">
     <div class="shell">
