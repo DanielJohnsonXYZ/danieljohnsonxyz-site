@@ -231,6 +231,7 @@ export const navigation = [
   { href: "/start-here/", label: "Start here" },
   { href: "/work-with-me/", label: "Work with me" },
   { href: "/case-studies/", label: "Proof" },
+  { href: "/method/", label: "Method" },
   { href: "/writing/", label: "Writing" },
   { href: "/about/", label: "About" }
 ] as const;

@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { ctas } from "../../site";
+
+const methods = [
+  { href: "/gtm-systems/", label: "GTM systems", description: "ICP, positioning, and channel architecture — the system the rest plugs into." },
+  { href: "/ai-native-workflows/", label: "AI-native workflows", description: "Practical AI inside the growth function — research, content, and ops that compound." },
+  { href: "/experimentation/", label: "Experimentation", description: "A weekly test cadence and decision rules so the team learns fast and scales what works." },
+  { href: "/revenue-operations/", label: "Revenue operations", description: "Reporting, attribution, and the weekly growth meeting that keeps decisions honest." },
+  { href: "/product-led-growth/", label: "Product-led growth", description: "Activation, onboarding, and in-product growth loops that lower CAC." },
+  { href: "/founder-led-distribution/", label: "Founder-led distribution", description: "Turning the founder's reach into a repeatable, transferable channel." }
+];
+---
+
+<BaseLayout
+  title="Method | Daniel Johnson"
+  description="The operating method behind the work: GTM systems, AI-native workflows, experimentation, revenue operations, product-led growth, and founder-led distribution."
+  path="/method/"
+>
+  <section class="section-space">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Method"
+        title="How the growth system actually works."
+        intro="Six layers that turn founder-dependent growth into a repeatable, transferable system. Each one is a working playbook, not a buzzword."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {methods.map((m) => (
+          <a class="card p-6 transition-colors hover:border-[color:var(--accent)]" href={m.href}>
+            <h2 class="text-xl font-bold tracking-[-0.04em]">{m.label}</h2>
+            <p class="mt-3 text-sm leading-7 text-[color:var(--muted)]">{m.description}</p>
+            <span class="link-arrow mt-5 inline-block">Explore</span>
+          </a>
+        ))}
+      </div>
+      <div class="mt-12 flex flex-wrap gap-3">
+        <a class="button-accent" href={ctas.primary.href} data-cta="method-primary">{ctas.primary.label}</a>
+        <a class="button-secondary" href="/work-with-me/" data-cta="method-services">See the engagements</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
