@@ -56,6 +56,15 @@ const schema = [
         <li>Bulk ingestion for resale datasets or derivative corpora.</li>
         <li>Removing source attribution from claims or statistics.</li>
       </ul>
+      <h2 class="text-2xl font-bold tracking-[-0.04em]">Common questions</h2>
+      <div class="space-y-3">
+        {faqItems.map((item) => (
+          <details class="rounded-xl border border-[color:var(--line)] p-4">
+            <summary class="cursor-pointer font-semibold">{item.question}</summary>
+            <p class="mt-2 text-[color:var(--muted)]">{item.answer}</p>
+          </details>
+        ))}
+      </div>
       <p class="text-[color:var(--muted)]">
         Permission requests: <CfEmailOff><a class="underline underline-offset-4" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></CfEmailOff>
       </p>

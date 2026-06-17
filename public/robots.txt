@@ -3,23 +3,38 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-# Retrieval / answer engines (allowed with attribution)
+# Answer / retrieval engines — allowed (citation with attribution)
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: GPTBot
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: ClaudeBot
+User-agent: Perplexity-User
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-# Training / bulk dataset bots (disallowed)
+User-agent: Applebot-Extended
+Allow: /
+
+# Bulk training / dataset scrapers — disallowed
 User-agent: CCBot
 Disallow: /
 
@@ -30,4 +45,8 @@ User-agent: Amazonbot
 Disallow: /
 
 Sitemap: https://danieljohnson.xyz/sitemap.xml
+
+# LLM-friendly summary for AI crawlers (llmstxt.org)
+# https://danieljohnson.xyz/llms.txt
+
 Host: danieljohnson.xyz
