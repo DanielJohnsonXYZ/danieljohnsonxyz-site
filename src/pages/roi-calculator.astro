@@ -150,7 +150,6 @@ const schemas = [
               type="button"
               id="calculate-btn"
               class="button-accent w-full"
-              onclick="calculateROI()"
             >
               Calculate ROI →
             </button>
@@ -341,6 +340,8 @@ const schemas = [
     inputs.forEach(input => {
       input.addEventListener('input', calculateROI);
     });
+    // Recalculate on explicit button press (replaces inline onclick handler).
+    document.getElementById('calculate-btn')?.addEventListener('click', calculateROI);
     // Initial calculation
     calculateROI();
   });

@@ -60,7 +60,7 @@ const pastAppearances = [
             Everything you need to introduce Daniel Johnson in press, podcasts, and events — available as a printable page or PDF.
           </p>
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <button class="button-accent" onclick="window.print()">
+            <button class="button-accent" id="print-kit-btn">
               Print / Save as PDF →
             </button>
             <a class="button-link" href="/media-kit/">
@@ -280,3 +280,8 @@ const pastAppearances = [
     }
   }
 </style>
+
+<script>
+  // Wire the print button without an inline onclick handler (CSP-friendly).
+  document.getElementById("print-kit-btn")?.addEventListener("click", () => window.print());
+</script>
