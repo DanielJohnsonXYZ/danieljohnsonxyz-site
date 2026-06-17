@@ -1,8 +1,7 @@
 ---
-import CfEmailOff from "../components/CfEmailOff.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildFaqPageSchema, buildHowToSchema } from "../lib/schema";
-import { ctas, siteConfig } from "../site";
+import { ctas } from "../site";
 
 const bottlenecks = [
   {
@@ -78,11 +77,9 @@ const schemas = [
         </p>
         <div class="cta-cluster">
           <a class="button-accent" href={ctas.bottleneck.href}>{ctas.bottleneck.label} →</a>
-          <CfEmailOff>
-            <a class="button-link" href={`mailto:${siteConfig.email}?subject=Send%20me%20the%20Growth%20Bottleneck%20Checklist`}>
-              Email me the printable checklist →
-            </a>
-          </CfEmailOff>
+          <a class="button-link" href="/growth-bottleneck-checklist.pdf" download>
+            Download the printable checklist →
+          </a>
         </div>
       </div>
     </div>
