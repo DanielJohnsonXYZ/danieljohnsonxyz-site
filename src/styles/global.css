@@ -1,3 +1,7 @@
+/* Self-hosted type system (replaces the render-blocking Google Fonts <link>). */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "tailwindcss";
 
@@ -34,7 +38,7 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -42,7 +46,7 @@ body {
 /* v5 type system: serif display headings site-wide (matches the homepage). */
 h1,
 h2 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
   letter-spacing: -0.02em !important;
   font-weight: 650;
 }
@@ -2301,7 +2305,7 @@ summary::-webkit-details-marker {
 
 .ladder-step-arrow {
   display: none;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter Variable", "Inter", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: rgba(85, 35, 240, 0.45);
