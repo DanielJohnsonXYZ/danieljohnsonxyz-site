@@ -74,7 +74,7 @@ Three ways to engage, ordered by commitment. Founders are encouraged to start at
 
 ### Fractional CMO vs. Agency
 
-The agency executes a defined channel scope (paid, SEO, content, outbound) with an account manager and junior team; strategy still lives in the founder's head. The fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, team direction, agency relationship. No junior layer. Often the right setup for £1m–£10m ARR teams is *both*: fractional CMO sets priorities and channel rules, the agency executes one channel inside that framework. Full comparison: ${siteConfig.siteUrl}/resources/fractional-cmo-vs-agency/.
+The agency executes a defined channel scope (paid, SEO, content, outbound) with an account manager and junior team; strategy still lives in the founder's head. The fractional CMO owns the full GTM system: priorities, reporting rhythm, positioning calls, team direction, agency relationship. No junior layer. Often the right setup for £1M–£20M ARR teams is *both*: fractional CMO sets priorities and channel rules, the agency executes one channel inside that framework. Full comparison: ${siteConfig.siteUrl}/resources/fractional-cmo-vs-agency/.
 
 ### Fractional CMO vs. Full-time CMO
 
@@ -234,7 +234,7 @@ Last updated: ${siteConfig.lastUpdated}
 
 /**
  * /llms.txt — llmstxt.org shape (markdown in a .txt route): H1, optional blockquote, H2 sections with link lists.
- * Notion brief: one-paragraph summary (2M–20M ARR post-PMF B2B SaaS & AI), authoritative pages + top 5 essays, contact/booking.
+ * Notion brief: one-paragraph summary (£1M–£20M ARR post-PMF B2B SaaS & AI), authoritative pages + top 5 essays, contact/booking.
  */
 export async function buildDjLlmsSummaryPlainText(): Promise<string> {
   const articles = (await getCollection("articles")).sort(
@@ -252,7 +252,7 @@ export async function buildDjLlmsSummaryPlainText(): Promise<string> {
 
   return `# Daniel Johnson · ${siteConfig.siteUrl.replace(/^https?:\/\//, "")}
 
-> Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF B2B SaaS and AI startups, typically around **2M–20M ARR** (Seed–Series B). He embeds with founder-led teams to build a repeatable GTM operating system—ICP, positioning, acquisition rules, weekly rhythm, and reporting—then hands off cleanly. ${singleIdea.long} Practice: **${siteConfig.companyName}** (${siteConfig.companyUrl}). Track record: ${proofStats.revenueImpact} client revenue, ${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} GrowthMentor reviews (${proofStats.mentorSessions} sessions), ${proofStats.adSpend} ad spend managed.
+> Daniel Johnson is a fractional CMO and AI-native growth operator for post-PMF B2B SaaS and AI startups, typically around **£1M–£20M ARR** (Seed–Series B). He embeds with founder-led teams to build a repeatable GTM operating system—ICP, positioning, acquisition rules, weekly rhythm, and reporting—then hands off cleanly. ${singleIdea.long} Practice: **${siteConfig.companyName}** (${siteConfig.companyUrl}). Track record: ${proofStats.revenueImpact} client revenue, ${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} GrowthMentor reviews (${proofStats.mentorSessions} sessions), ${proofStats.adSpend} ad spend managed.
 
 ## Authoritative pages
 

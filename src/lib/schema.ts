@@ -23,8 +23,7 @@ export function buildPersonSchema() {
     telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "London",
-      addressCountry: "United Kingdom"
+      addressCountry: "GB"
     },
     worksFor: {
       "@id": entityGraph.wssOrganization
