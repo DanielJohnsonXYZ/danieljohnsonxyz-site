@@ -228,32 +228,6 @@ export function buildTalkSchema(talk: CollectionEntry<"talks">) {
   };
 }
 
-export function buildVideoSchema(video: {
-  title: string;
-  description: string;
-  thumbnail: string;
-  href: string;
-  embed: string;
-  source: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: video.title,
-    description: video.description,
-    thumbnailUrl: video.thumbnail,
-    url: video.href,
-    embedUrl: video.embed,
-    publisher: {
-      "@type": "Organization",
-      name: video.source
-    },
-    about: {
-      "@id": entityGraph.danielPerson
-    }
-  };
-}
-
 /**
  * Service schema — helps Google surface the Fractional CMO page as a service
  * offering with price and audience, and gives AI engines a structured
