@@ -1,8 +1,10 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import CfEmailOff from "../components/CfEmailOff.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import speakingMicImg from "../assets/images/daniel-speaking-mic.webp";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
 import { proofStats, siteConfig, siteImages, trustAffiliations, trustLogos } from "../site";
@@ -124,7 +126,7 @@ const schema = buildBreadcrumbSchema([
           </div>
         </div>
         <aside class="reveal card p-5 md:p-6">
-          <img alt={siteImages.speakingMic.alt} class="aspect-[4/3] w-full rounded-xl object-cover object-top" height={siteImages.speakingMic.height} loading="eager" src={siteImages.speakingMic.src} width={siteImages.speakingMic.width} />
+          <Image alt={siteImages.speakingMic.alt} class="aspect-[4/3] w-full rounded-xl object-cover object-top" loading="eager" src={speakingMicImg} widths={[540, 1080]} sizes="(max-width: 1024px) 100vw, 40vw" />
           <div class="mt-5 grid gap-3 sm:grid-cols-2">
             {proof.map((item) => (
               <article class="card-muted p-4">
