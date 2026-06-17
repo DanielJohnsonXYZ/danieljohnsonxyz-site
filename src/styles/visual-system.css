@@ -506,3 +506,24 @@ body .v4-home section {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
+
+/* .page-hero — used by /proof, /results, /media-kit, /growth-bottleneck-review.
+   These were ported with a WSS hero class that has no styles in this repo, so the
+   <h1> fell back to 16px. Give it the site's hero scale (eyebrow/lede are global). */
+.page-hero { padding-top: 3.5rem; padding-bottom: 1.5rem; }
+.page-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  margin-top: 0.6rem;
+  text-wrap: balance;
+}
+.page-hero .lede,
+.page-hero .hero-copy {
+  margin-top: 1.1rem;
+  max-width: 62ch;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
