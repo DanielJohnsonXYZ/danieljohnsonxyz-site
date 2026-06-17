@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SectionHeader from "../../components/SectionHeader.astro";
 import { ctas } from "../../site";
 
 const methods = [
@@ -20,11 +19,9 @@ const methods = [
 >
   <section class="section-space">
     <div class="shell">
-      <SectionHeader
-        eyebrow="Method"
-        title="How the growth system actually works."
-        intro="Six layers that turn founder-dependent growth into a repeatable, transferable system. Each one is a working playbook, not a buzzword."
-      />
+      <p class="service-label">Method</p>
+      <h1 class="mt-4 text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">How the growth system actually works.</h1>
+      <p class="conversion-subcopy mt-6 max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">Six layers that turn founder-dependent growth into a repeatable, transferable system. Each one is a working playbook, not a buzzword.</p>
       <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {methods.map((m) => (
           <a class="card p-6 transition-colors hover:border-[color:var(--accent)]" href={m.href}>
