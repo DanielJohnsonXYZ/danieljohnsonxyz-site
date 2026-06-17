@@ -21,33 +21,55 @@ import { ctas } from "../site";
   (() => {
     const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
     let idx = 0;
+    const egg = document.getElementById("easter-egg");
+    const closeBtn = document.getElementById("easter-egg-close");
+    let lastFocused: Element | null = null;
+
+    const focusables = () =>
+      egg ? Array.from(egg.querySelectorAll<HTMLElement>("button, a[href]")) : [];
+
+    function open() {
+      if (!egg) return;
+      lastFocused = document.activeElement;
+      egg.classList.add("is-visible");
+      egg.removeAttribute("aria-hidden");
+      closeBtn?.focus();
+    }
+
+    function close() {
+      if (!egg) return;
+      egg.classList.remove("is-visible");
+      egg.setAttribute("aria-hidden", "true");
+      if (lastFocused instanceof HTMLElement) lastFocused.focus();
+    }
+
     document.addEventListener("keydown", (e) => {
       const expected = KONAMI[idx];
       const ok = idx < 8 ? e.key === expected : e.key.toLowerCase() === expected;
       if (ok) {
         idx++;
-        if (idx === KONAMI.length) {
-          idx = 0;
-          const egg = document.getElementById("easter-egg");
-          if (egg) {
-            egg.classList.add("is-visible");
-            egg.removeAttribute("aria-hidden");
-          }
-        }
+        if (idx === KONAMI.length) { idx = 0; open(); }
       } else {
         idx = 0;
       }
     });
-    document.getElementById('easter-egg-close')?.addEventListener('click', () => {
-      const egg = document.getElementById('easter-egg');
-      if (egg) { egg.classList.remove('is-visible'); egg.setAttribute('aria-hidden', 'true'); }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const egg = document.getElementById('easter-egg');
-        if (egg?.classList.contains('is-visible')) {
-          egg.classList.remove('is-visible'); egg.setAttribute('aria-hidden', 'true');
-        }
+
+    closeBtn?.addEventListener("click", close);
+
+    // Trap focus inside the open dialog; Escape closes it.
+    egg?.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") { close(); return; }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     });
   })();
