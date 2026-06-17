@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import outdoorPortrait from "../assets/images/daniel-outdoor-portrait.webp";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { entityGraph, icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
@@ -114,7 +116,7 @@ const principles = [
         </div>
 
         <aside class="reveal card overflow-hidden">
-          <img alt={siteImages.outdoorPortrait.alt} class="aspect-[4/3] w-full object-cover object-top" height={siteImages.outdoorPortrait.height} src={siteImages.outdoorPortrait.src} width={siteImages.outdoorPortrait.width} />
+          <Image src={outdoorPortrait} widths={[600, 1200]} sizes="(max-width: 1024px) 100vw, 40vw" alt={siteImages.outdoorPortrait.alt} class="aspect-[4/3] w-full object-cover object-top" loading="lazy" />
           <div class="p-6 md:p-8">
             <p class="card-label">The short version</p>
             <p class="mt-3 text-base leading-8">
