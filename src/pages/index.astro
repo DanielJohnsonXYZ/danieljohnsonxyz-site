@@ -1,6 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
+import heroCutout from "../assets/images/daniel-hero-cutout.webp";
+import danielAircraft from "../assets/images/daniel-aircraft.webp";
+import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960.webp";
 import "../styles/home-v5.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
@@ -138,8 +142,10 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           </div>
           <div class="v5-hero-photo reveal" data-hero-photo>
             <div class="v5-hero-photo-bg">
-              <img
-                src="/images/daniel-hero-cutout.webp"
+              <Image
+                src={heroCutout}
+                widths={[420, 760]}
+                sizes="(max-width: 480px) 90vw, 420px"
                 alt="Daniel Johnson, fractional CMO and AI-native growth operator"
                 loading="eager"
                 fetchpriority="high"
@@ -424,9 +430,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <a href="/about/" class="v5-link-arrow" data-cta="home-about-read">Read more about Daniel</a>
           </div>
           <div>
-            <img
-              src="/images/daniel-aircraft.webp"
-              srcset="/images/daniel-aircraft-640.webp 640w, /images/daniel-aircraft.webp 1280w"
+            <Image
+              src={danielAircraft}
+              widths={[640, 960]}
               sizes="(max-width: 900px) 100vw, 40vw"
               alt="Daniel Johnson — operator mindset, systems thinking applied to growth"
               loading="lazy"
@@ -452,9 +458,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         </div>
         <div class="v5-sw">
           <div class="v5-sw-card">
-            <img
-              src="/images/cambridge-judge-business-school-960.webp"
-              srcset="/images/cambridge-judge-business-school-640.webp 640w, /images/cambridge-judge-business-school-960.webp 960w"
+            <Image
+              src={cambridgeJudge}
+              widths={[640, 960]}
               sizes="(max-width: 900px) 100vw, 50vw"
               alt="Cambridge Judge Business School, where Daniel guest lectures"
               loading="lazy"
