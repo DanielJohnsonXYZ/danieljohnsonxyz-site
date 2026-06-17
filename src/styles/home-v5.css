@@ -13,7 +13,9 @@
   --line: #ded6c6;
   --line-soft: #ece5d6;
   --white: #ffffff;
-  --electric: #5523f0;
+  /* Single source of truth for the brand purple (global :root --accent). The
+     scoped v5 neutrals below stay intentionally distinct for the cream theme. */
+  --electric: var(--accent);
   --electric-deep: #3f12d4;
   --electric-soft: #e9e2ff;
   --electric-tint: #f4f0ff;
