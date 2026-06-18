@@ -87,12 +87,18 @@ export async function onRequest(context) {
   const headers = new Headers(response.headers);
   headers.set("Cache-Control", "no-store, max-age=0, must-revalidate");
 
-  // Report-only rollout: enforce nothing yet (the enforced CSP with 'unsafe-inline' stays in
-  // public/_headers), but surface violations of the hardened policy in the browser console so
-  // it can be verified before flipping it to enforced.
-  const hashes = await inlineScriptHashes(body);
-  const reportOnlyCsp = [buildScriptSrc(hashes), ...CSP_BASE_DIRECTIVES].join("; ");
-  headers.set("Content-Security-Policy-Report-Only", reportOnlyCsp);
+  // Enforce the hardened, hash-based CSP, generated per page from its actual inline scripts.
+  // Verified clean via a report-only rollout first (zero violations across a full page load,
+  // GTM included), so dropping 'unsafe-inline' is safe. The static CSP in public/_headers (which
+  // keeps 'unsafe-inline') stays as a resilience fallback: if hashing ever throws, the page is
+  // served with that policy still in place rather than breaking.
+  try {
+    const hashes = await inlineScriptHashes(body);
+    const csp = [buildScriptSrc(hashes), ...CSP_BASE_DIRECTIVES].join("; ");
+    headers.set("Content-Security-Policy", csp);
+  } catch {
+    // Leave the enforced CSP inherited from public/_headers in place.
+  }
 
   return new Response(body, {
     status: response.status,
