@@ -42,7 +42,7 @@ const pastAppearances = [
 ---
 
 <BaseLayout
-  title="Media Kit Download — Bio, Headshots & Speaking Topics"
+  title="Media Kit — Bio, Headshots & Topics"
   description="Download the Daniel Johnson media kit — official bio, headshot, speaking topics, past appearances, and contact information for press and podcasts."
   keywords="Daniel Johnson media kit, press kit, speaker bio, podcast guest, headshot download"
   path="/media-kit-download/"
@@ -60,7 +60,7 @@ const pastAppearances = [
             Everything you need to introduce Daniel Johnson in press, podcasts, and events — available as a printable page or PDF.
           </p>
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <button class="button-accent" onclick="window.print()">
+            <button class="button-accent" id="print-kit-btn">
               Print / Save as PDF →
             </button>
             <a class="button-link" href="/media-kit/">
@@ -98,7 +98,7 @@ const pastAppearances = [
           <h3 class="text-xl font-bold tracking-[-0.04em] mb-4 pb-2 border-b border-[color:var(--line)]">Biography</h3>
           <div class="grid gap-6 md:grid-cols-[200px_1fr]">
             <div class="print:block hidden">
-              <img src="/images/daniel-headshot.webp" alt="Daniel Johnson headshot" class="rounded-xl w-full" />
+              <img src="/images/daniel-headshot.webp" alt="Daniel Johnson headshot" width="960" height="1000" class="rounded-xl w-full" />
             </div>
             <div class="space-y-4 text-[color:var(--ink)] leading-7">
               <p><strong>Short bio (1 line):</strong><br/>
@@ -280,3 +280,8 @@ const pastAppearances = [
     }
   }
 </style>
+
+<script>
+  // Wire the print button without an inline onclick handler (CSP-friendly).
+  document.getElementById("print-kit-btn")?.addEventListener("click", () => window.print());
+</script>

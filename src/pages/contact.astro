@@ -4,14 +4,14 @@ import CfEmailOff from "../components/CfEmailOff.astro";
 import { siteConfig, socialLinks } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
 
-const title = "Book a Growth Audit | Contact Daniel Johnson";
+const title = "Book a Growth Audit | Contact";
 const description =
   "Book a 20-minute Growth Audit with Daniel Johnson or get in touch about fractional CMO, founder office hours, or speaking enquiries.";
 const calendlyEmbedUrl = `${siteConfig.bookingUrl}?hide_gdpr_banner=1`;
 
 const breadcrumb = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
-  { name: "Contact", url: "/contact" }
+  { name: "Contact", url: "/contact/" }
 ]);
 ---
 

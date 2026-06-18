@@ -1,8 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import CfEmailOff from "../components/CfEmailOff.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import speakingMicImg from "../assets/images/daniel-speaking-mic.webp";
+import speakingStageBwImg from "../assets/images/daniel-speaking-stage-bw.webp";
+import speakingCircleImg from "../assets/images/daniel-speaking-circle.webp";
+import cambridgeJudgeImg from "../assets/images/cambridge-judge-business-school-960.webp";
 import { buildBreadcrumbSchema, buildTalkSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
 import { proofStats, siteConfig, socialLinks, speakingVideos, trustLogos } from "../site";
@@ -72,22 +77,22 @@ const presentationFeedback = [
 ];
 const eventPhotos = [
   {
-    src: "/images/daniel-speaking-mic.webp",
+    src: speakingMicImg,
     alt: "Daniel Johnson presenting during a startup growth session",
     caption: "Presenting a founder growth session"
   },
   {
-    src: "/images/daniel-speaking-stage-bw.webp",
+    src: speakingStageBwImg,
     alt: "Daniel Johnson speaking on stage",
     caption: "On stage — growth systems and positioning"
   },
   {
-    src: "/images/daniel-speaking-circle.webp",
+    src: speakingCircleImg,
     alt: "Daniel Johnson speaking with a microphone",
     caption: "Founder Q&A — practical GTM decisions"
   },
   {
-    src: "/images/cambridge-judge-business-school-960.webp",
+    src: cambridgeJudgeImg,
     alt: "Cambridge Judge Business School, one of Daniel Johnson's selected teaching and speaking affiliations",
     caption: "Teaching at Cambridge Judge Business School"
   }
@@ -246,11 +251,11 @@ const speakingSchema = [
               <img
                 alt={item.alt}
                 class="h-9 w-auto max-w-[9rem] object-contain opacity-80 grayscale"
+                data-hide-on-error
                 height="48"
                 loading="lazy"
                 src={item.src}
                 width="180"
-                onerror="this.style.display='none'"
               />
               <span class="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)]">{item.label}</span>
             </article>
@@ -371,12 +376,13 @@ const speakingSchema = [
         {
           eventPhotos.map((item) => (
             <figure class="reveal card overflow-hidden">
-              <img
+              <Image
                 src={item.src}
+                widths={[320, 640]}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 alt={item.alt}
                 class="w-full aspect-[4/3] object-cover"
                 loading="lazy"
-                onerror="this.closest('figure').style.display='none'"
               />
               <figcaption class="p-4 text-sm text-[color:var(--muted)]">{item.caption}</figcaption>
             </figure>
@@ -490,3 +496,12 @@ const speakingSchema = [
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Hide trust logos that fail to load, without an inline onerror handler (CSP-friendly).
+  document.querySelectorAll<HTMLImageElement>("img[data-hide-on-error]").forEach((img) => {
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+    });
+  });
+</script>

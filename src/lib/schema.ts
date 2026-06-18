@@ -23,8 +23,7 @@ export function buildPersonSchema() {
     telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "London",
-      addressCountry: "United Kingdom"
+      addressCountry: "GB"
     },
     worksFor: {
       "@id": entityGraph.wssOrganization
@@ -55,7 +54,15 @@ export function buildPersonSchema() {
       "Experimentation and hypothesis design",
       "AI-native GTM workflows"
     ],
-    sameAs: siteConfig.sameAs
+    sameAs: siteConfig.sameAs,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: proofStats.mentorRating,
+      bestRating: "5",
+      worstRating: "1",
+      reviewCount: proofStats.mentorReviewCount,
+      url: siteConfig.growthMentorReviews
+    }
   };
 }
 
@@ -129,6 +136,7 @@ export function buildArticleSchema(article: CollectionEntry<"articles">, pathnam
     "@type": "Article",
     headline: article.data.title,
     description: article.data.description,
+    abstract: article.data.tldr,
     datePublished: article.data.publishedAt.toISOString(),
     dateModified: (article.data.updatedAt ?? article.data.publishedAt).toISOString(),
     author: {
@@ -225,32 +233,6 @@ export function buildTalkSchema(talk: CollectionEntry<"talks">) {
       name: talk.data.location
     },
     url: talk.data.url ?? absoluteUrl("/speaking")
-  };
-}
-
-export function buildVideoSchema(video: {
-  title: string;
-  description: string;
-  thumbnail: string;
-  href: string;
-  embed: string;
-  source: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: video.title,
-    description: video.description,
-    thumbnailUrl: video.thumbnail,
-    url: video.href,
-    embedUrl: video.embed,
-    publisher: {
-      "@type": "Organization",
-      name: video.source
-    },
-    about: {
-      "@id": entityGraph.danielPerson
-    }
   };
 }
 

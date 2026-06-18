@@ -1,12 +1,17 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
+import heroCutout from "../assets/images/daniel-hero-cutout.webp";
+import danielAircraft from "../assets/images/daniel-aircraft.webp";
+import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960.webp";
 import "../styles/home-v5.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { icpFirmographics, siteConfig } from "../site";
 
-// FAQ items mirror the markup below so the FAQPage schema stays in sync.
+// FAQ items drive both the FAQPage schema and the visible markup below, so the
+// two can't drift. `answer` is the schema text; `link` renders only in the page.
 const homepageFaq = [
   {
     question: "What does a fractional CMO actually do day-to-day?",
@@ -14,11 +19,14 @@ const homepageFaq = [
   },
   {
     question: "How is this different from hiring a full-time CMO?",
-    answer: "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs."
+    answer: "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
+    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time" },
+    open: true
   },
   {
     question: "What stage should my startup be at?",
-    answer: "Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first."
+    answer: "Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first.",
+    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "When each model fits" }
   },
   {
     question: "How quickly will I see results?",
@@ -26,7 +34,8 @@ const homepageFaq = [
   },
   {
     question: "What does it cost?",
-    answer: "UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price."
+    answer: "UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price.",
+    link: { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK)" }
   },
   {
     question: "How do I know if this will work for my business?",
@@ -90,7 +99,6 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
   title="Fractional CMO for AI & B2B SaaS Startups"
   description="Fractional CMO for Seed–Series B AI & B2B SaaS: predictable pipeline, sharper positioning, senior growth leadership — without a £150k full-time hire."
   schema={homeSchemas}
-  preloadHeadshot={true}
   lastUpdated={false}
 >
   <div class="v5-home">
@@ -124,7 +132,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
               </div>
             </div>
             <p class="v5-hero-fit">
-              Best for post-PMF AI &amp; B2B SaaS — typically {icpFirmographics.arrBandUsd}, {icpFirmographics.headcountBand}, founder still running GTM.
+              Best for post-PMF AI &amp; B2B SaaS — typically {icpFirmographics.arrBand}, {icpFirmographics.headcountBand}, founder still running GTM.
             </p>
             <div class="v5-hero-ctas">
               <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary" data-cta="home-hero-audit">
@@ -138,8 +146,10 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           </div>
           <div class="v5-hero-photo reveal" data-hero-photo>
             <div class="v5-hero-photo-bg">
-              <img
-                src="/images/daniel-hero-cutout.webp"
+              <Image
+                src={heroCutout}
+                widths={[420, 760]}
+                sizes="(max-width: 480px) 90vw, 420px"
                 alt="Daniel Johnson, fractional CMO and AI-native growth operator"
                 loading="eager"
                 fetchpriority="high"
@@ -258,7 +268,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
     <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
 
     <!-- ===== Proof ===== -->
-    <section aria-label="Proof and case studies">
+    <section id="proof" aria-label="Proof and case studies">
       <div class="v5-container reveal">
         <div class="v5-split-head">
           <div>
@@ -424,9 +434,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <a href="/about/" class="v5-link-arrow" data-cta="home-about-read">Read more about Daniel</a>
           </div>
           <div>
-            <img
-              src="/images/daniel-aircraft.webp"
-              srcset="/images/daniel-aircraft-640.webp 640w, /images/daniel-aircraft.webp 1280w"
+            <Image
+              src={danielAircraft}
+              widths={[640, 960]}
               sizes="(max-width: 900px) 100vw, 40vw"
               alt="Daniel Johnson — operator mindset, systems thinking applied to growth"
               loading="lazy"
@@ -452,9 +462,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         </div>
         <div class="v5-sw">
           <div class="v5-sw-card">
-            <img
-              src="/images/cambridge-judge-business-school-960.webp"
-              srcset="/images/cambridge-judge-business-school-640.webp 640w, /images/cambridge-judge-business-school-960.webp 960w"
+            <Image
+              src={cambridgeJudge}
+              widths={[640, 960]}
               sizes="(max-width: 900px) 100vw, 50vw"
               alt="Cambridge Judge Business School, where Daniel guest lectures"
               loading="lazy"
@@ -513,30 +523,15 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           <p class="v5-subhead">Same topics covered on the audit, so you're not buying blind.</p>
         </div>
         <div class="v5-faq">
-          <details>
-            <summary>What does a fractional CMO actually do day-to-day?</summary>
-            <p class="v5-faq-answer">Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings. Not a monthly slide deck.</p>
-          </details>
-          <details open>
-            <summary>How is this different from hiring a full-time CMO?</summary>
-            <p class="v5-faq-answer">You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs. <a href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional vs full-time →</a></p>
-          </details>
-          <details>
-            <summary>What stage should my startup be at?</summary>
-            <p class="v5-faq-answer">Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first. <a href="/resources/fractional-cmo-vs-full-time-cmo/">When each model fits →</a></p>
-          </details>
-          <details>
-            <summary>How quickly will I see results?</summary>
-            <p class="v5-faq-answer">Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I don't promise miracles. I promise a visible system and honest calls on what's working.</p>
-          </details>
-          <details>
-            <summary>What does it cost?</summary>
-            <p class="v5-faq-answer">UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price. <a href="/resources/fractional-cmo-cost-uk/">Fractional CMO cost (UK) →</a></p>
-          </details>
-          <details>
-            <summary>How do I know if this will work for my business?</summary>
-            <p class="v5-faq-answer">If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 20-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong.</p>
-          </details>
+          {homepageFaq.map((item) => (
+            <details open={item.open}>
+              <summary>{item.question}</summary>
+              <p class="v5-faq-answer">
+                {item.answer}
+                {item.link && <> <a href={item.link.href}>{item.link.label} →</a></>}
+              </p>
+            </details>
+          ))}
         </div>
       </div>
     </section>

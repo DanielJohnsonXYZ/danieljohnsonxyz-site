@@ -5,6 +5,8 @@ const articles = defineCollection({
   loader: glob({ base: "./src/content/articles", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
+    /** Optional shorter title for the <title>/SERP when the editorial H1 is long. */
+    seoTitle: z.string().optional(),
     description: z.string(),
     excerpt: z.string(),
     tldr: z.string(),
@@ -65,6 +67,8 @@ const caseStudies = defineCollection({
   loader: glob({ base: "./src/content/case-studies", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
+    /** Optional shorter title for the <title>/SERP when the editorial H1 is long. */
+    seoTitle: z.string().optional(),
     description: z.string(),
     excerpt: z.string(),
     publishedAt: z.date(),

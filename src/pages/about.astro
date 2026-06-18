@@ -1,7 +1,29 @@
 ---
+import { Image } from "astro:assets";
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
+import outdoorPortrait from "../assets/images/daniel-outdoor-portrait.webp";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { entityGraph, icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
+
+const aboutDescription =
+  "About Daniel Johnson—fractional CMO & senior GTM operator for founder-led AI & B2B SaaS: founder-side, in-house, advisory & public teaching path.";
+
+const aboutSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: "About Daniel Johnson",
+    description: aboutDescription,
+    url: absoluteUrl("/about/"),
+    mainEntity: { "@id": entityGraph.danielPerson }
+  },
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About", url: "/about/" }
+  ])
+];
 
 const proofTiles = [
   { value: "10+ yrs", label: "Founder, operator, and advisor work" },
@@ -40,7 +62,7 @@ const timeline = [
   {
     year: "2024 → now",
     title: "Current focus: founder-led GTM systems",
-    body: "Post-PMF B2B SaaS and AI startups at 2M–20M ARR, typically 10-50 people, with a functional product but inconsistent GTM: sharper customer insight, message-market fit, prioritisation, creative testing, and a repeatable growth cadence.",
+    body: "Post-PMF B2B SaaS and AI startups at £1M–£20M ARR, typically 10-50 people, with a functional product but inconsistent GTM: sharper customer insight, message-market fit, prioritisation, creative testing, and a repeatable growth cadence.",
     ongoing: true
   }
 ];
@@ -62,11 +84,11 @@ const principles = [
 ---
 
 <BaseLayout
-  description="About Daniel Johnson—fractional CMO & senior GTM operator for founder-led AI & B2B SaaS: founder-side, in-house, advisory & public teaching path."
+  description={aboutDescription}
   keywords="Daniel Johnson bio, fractional CMO background, GTM operator, startup advisor, We Scale Startups founder"
   path="/about/"
-  preloadHeadshot
-  title="About Daniel Johnson | Fractional CMO & GTM Operator"
+  schema={aboutSchema}
+  title="About | Fractional CMO & GTM Operator"
 >
   <section class="section-space">
     <div class="shell">
@@ -93,7 +115,7 @@ const principles = [
         </div>
 
         <aside class="reveal card overflow-hidden">
-          <img alt={siteImages.outdoorPortrait.alt} class="aspect-[4/3] w-full object-cover object-top" height={siteImages.outdoorPortrait.height} src={siteImages.outdoorPortrait.src} width={siteImages.outdoorPortrait.width} />
+          <Image src={outdoorPortrait} widths={[600, 1200]} sizes="(max-width: 1024px) 100vw, 40vw" alt={siteImages.outdoorPortrait.alt} class="aspect-[4/3] w-full object-cover object-top" loading="lazy" />
           <div class="p-6 md:p-8">
             <p class="card-label">The short version</p>
             <p class="mt-3 text-base leading-8">
@@ -200,7 +222,7 @@ const principles = [
               If this sounds like your current situation.
             </h2>
             <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              The fit is strongest with B2B SaaS or AI teams at 2M–20M ARR, 10–50 people, where the founder is still making most of the weekly GTM calls and growth feels more reactive than designed. The Fractional CMO page breaks down scope, 30/60/90-day priorities, and where to start. For named founders and specific outcomes, the{" "}
+              The fit is strongest with B2B SaaS or AI teams at £1M–£20M ARR, 10–50 people, where the founder is still making most of the weekly GTM calls and growth feels more reactive than designed. The Fractional CMO page breaks down scope, 30/60/90-day priorities, and where to start. For named founders and specific outcomes, the{" "}
               <a class="font-semibold text-[color:var(--accent)] underline underline-offset-4 hover:text-[color:var(--ink)]" href="/testimonials/">
                 testimonials page
               </a>{" "}

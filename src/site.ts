@@ -7,7 +7,9 @@ export const siteConfig = {
   siteUrl: "https://danieljohnson.xyz",
   canonicalHost: "danieljohnson.xyz",
   redirectHost: "danieljohnsonx.xyz",
-  lastUpdated: "11 May 2026",
+  // Derived from the build/deploy date so the site-wide "last updated" signal is
+  // never stale (was a hand-maintained string that drifted weeks behind).
+  lastUpdated: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }),
 
   // Primary booking CTA rotates across the site (hero, mid-page, footer).
   // The label that wins in reviews/tests should become the default here.
@@ -154,15 +156,18 @@ export const positioning = {
 
 /** Firmographic ICP — explicit bands for self-qualification (growth hub brief). */
 export const icpFirmographics = {
-  arrBandUsd: "$2M–$20M ARR",
+  // ⚠️ CONFIRM (business): canonical ARR band, unified from three prior variants
+  // ($2M–$20M / £1m–£10m / £1M–£20M) to the homepage-hero value. Change here to
+  // re-flow the whole site.
+  arrBand: "£1M–£20M ARR",
   headcountBand: "~10–50 people",
-  /** One-line supplement for hero / about (USD band + headcount). */
+  /** One-line supplement for hero / about (band + headcount). */
   oneLiner:
-    "Typical clients are B2B SaaS or AI at roughly $2M–$20M ARR (or the equivalent stage in your market), ~10–50 people, and the founder still owning weekly GTM decisions.",
+    "Typical clients are B2B SaaS or AI at roughly £1M–£20M ARR (or the equivalent stage in your market), ~10–50 people, and the founder still owning weekly GTM decisions.",
   /** “You’re a fit if…” bullets — /fractional-cmo and mirrored on home/about. */
   fitIf: [
     "B2B SaaS or AI product with repeat revenue",
-    "$2M–$20M ARR (or the same stage of traction in your market)",
+    "£1M–£20M ARR (or the same stage of traction in your market)",
     "Hired or actively considering your first serious marketing leadership",
     "Founder still owns GTM priorities week to week",
     "~6–18 months to your next funding round or profitability milestone"
@@ -329,7 +334,7 @@ export const audienceBands = [
 // Who this is for / not for — used on homepage to qualify leads early.
 export const fitSignals = {
   bestFor: [
-    `${icpFirmographics.arrBandUsd} B2B SaaS or AI · ${icpFirmographics.headcountBand} · founder-led GTM`,
+    `${icpFirmographics.arrBand} B2B SaaS or AI · ${icpFirmographics.headcountBand} · founder-led GTM`,
     "Seed to Series B, post-PMF",
     "Real traction — founders already have paying customers",
     "Founder bottlenecked on growth decisions",
@@ -639,7 +644,7 @@ export const homeServiceLadder = [
     body:
       "Embedded senior ownership 1–2 days a week. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Builds the system and then hands it off clean.",
     bestFor:
-      "£1m–£10m ARR, founder-led, growth stuck, senior help needed before or alongside a £150k+ full-time CMO hire.",
+      "£1M–£20M ARR, founder-led, growth stuck, senior help needed before or alongside a £150k+ full-time CMO hire.",
     outcome: "Pipeline rhythm, sharper positioning, and a growth system the team can run after I'm gone.",
     href: "/fractional-cmo/",
     cta: "Explore Fractional CMO",
@@ -691,7 +696,7 @@ export const vsAgency = {
     {
       question: "Can I do both — fractional CMO and an agency?",
       answer:
-        "Often yes. The fractional CMO sets priorities, channel rules, and reporting; the agency executes a specific channel inside that framework. The CMO runs the agency relationship instead of the founder. That's frequently the cleanest setup for £1m–£10m ARR teams."
+        "Often yes. The fractional CMO sets priorities, channel rules, and reporting; the agency executes a specific channel inside that framework. The CMO runs the agency relationship instead of the founder. That's frequently the cleanest setup for £1M–£20M ARR teams."
     },
     {
       question: "Is a fractional CMO more expensive than an agency?",
@@ -724,7 +729,7 @@ export const vsFulltimeCMO = {
     { dimension: "When it's right", fractional: "Pre-£10m ARR, growth stuck, no senior owner yet", fulltime: "Post-£10m ARR, growth proven, ready to scale a marketing org", winner: null }
   ],
   whenFractional: [
-    "£1m–£10m ARR or clear post-PMF traction",
+    "£1M–£20M ARR or clear post-PMF traction",
     "Founder still carrying revenue decisions",
     "You need senior judgement now, but a 6-month hire cycle is too slow",
     "You're not yet sure what shape the full-time CMO role should take",

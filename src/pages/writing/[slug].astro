@@ -25,7 +25,7 @@ const pathname = `/writing/${article.id}`;
   path={pathname}
   schema={buildArticleSchema(article, pathname)}
   lastUpdated={false}
-  title={article.data.title}
+  title={article.data.seoTitle ?? article.data.title}
 >
   <section class="section-space">
     <div class="shell">
@@ -37,6 +37,7 @@ const pathname = `/writing/${article.id}`;
           <p class="max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">{article.data.description}</p>
           <div class="flex flex-wrap gap-2">
             <span class="chip">{formatDate(article.data.publishedAt)}</span>
+            {article.data.updatedAt && <span class="chip">Updated {formatDate(article.data.updatedAt)}</span>}
             <span class="chip">By Daniel Johnson</span>
             {article.data.tags.map((tag) => <span class="chip">{tag}</span>)}
           </div>

@@ -53,11 +53,35 @@ interface Props {
   bookCtaHref?: string;
   /** Optional softer third CTA in the final band (checklist, download, etc.). */
   finalSoftCta?: { href: string; label: string };
+  /**
+   * Optional per-section heading overrides. Each defaults to the shared text
+   * below, so pages that omit them are unchanged. Set a unique, keyword-led
+   * heading per expertise page so no two method pages share section headings.
+   */
+  problemHeading?: string;
+  causeHeading?: string;
+  diagnoseHeading?: string;
+  fixHeading?: string;
+  deliverablesHeading?: string;
+  whoHeading?: string;
+  mistakesHeading?: string;
+  faqHeading?: string;
+  finalHeading?: string;
 }
 
 const props = Astro.props as Props;
 const bookLabel = props.bookCtaLabel ?? ctas.primary.label;
 const bookHref = props.bookCtaHref ?? ctas.primary.href;
+
+const problemHeading = props.problemHeading ?? "If you recognise three of these, this page is for you.";
+const causeHeading = props.causeHeading ?? "The root cause is rarely what the team thinks it is.";
+const diagnoseHeading = props.diagnoseHeading ?? "A focused diagnostic, not a six-week consultancy review.";
+const fixHeading = props.fixHeading ?? "Build the system, then transfer it.";
+const deliverablesHeading = props.deliverablesHeading ?? "What you actually leave with.";
+const whoHeading = props.whoHeading ?? "Best fit if any of these apply.";
+const mistakesHeading = props.mistakesHeading ?? "What teams get wrong before they call.";
+const faqHeading = props.faqHeading ?? "Common questions before booking.";
+const finalHeading = props.finalHeading ?? "Diagnose this in 20 minutes.";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -105,7 +129,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">What this problem looks like</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">If you recognise three of these, this page is for you.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{problemHeading}</h2>
         <ul class="exp-signals">
           {props.problemSignals.map((s) => <li>{s}</li>)}
         </ul>
@@ -118,7 +142,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">Why it usually happens</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">The root cause is rarely what the team thinks it is.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{causeHeading}</h2>
         <div class="exp-cause-grid">
           {props.rootCauses.map((c, i) => (
             <article class="exp-cause-card">
@@ -136,7 +160,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="eyebrow text-white/55">How I diagnose it</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15] text-white">A focused diagnostic, not a six-week consultancy review.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15] text-white">{diagnoseHeading}</h2>
         <ol class="exp-steps">
           {props.diagnoseSteps.map((s, i) => (
             <li><span class="exp-step-num">{String(i + 1).padStart(2, "0")}</span><span class="exp-step-body">{s}</span></li>
@@ -151,7 +175,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">How I fix it</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">Build the system, then transfer it.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{fixHeading}</h2>
         <ol class="exp-steps exp-steps-light">
           {props.fixActions.map((s, i) => (
             <li><span class="exp-step-num">{String(i + 1).padStart(2, "0")}</span><span class="exp-step-body">{s}</span></li>
@@ -166,7 +190,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">Example deliverables</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">What you actually leave with.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{deliverablesHeading}</h2>
         <div class="exp-deliv-grid">
           {props.deliverables.map((d, i) => (
             <article class="exp-deliv-card">
@@ -203,7 +227,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">Who this is for</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">Best fit if any of these apply.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{whoHeading}</h2>
         <ul class="exp-signals">
           {props.whoFor.map((s) => <li>{s}</li>)}
         </ul>
@@ -216,7 +240,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">Common mistakes</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">What teams get wrong before they call.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{mistakesHeading}</h2>
         <ul class="exp-mistakes">
           {props.commonMistakes.map((m) => <li>{m}</li>)}
         </ul>
@@ -229,7 +253,7 @@ const faqSchema = {
     <div class="shell">
       <div class="reveal mx-auto max-w-4xl space-y-5">
         <p class="card-label">FAQ</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">Common questions before booking.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.04em] leading-[1.15]">{faqHeading}</h2>
         <div class="exp-faq-grid">
           {props.faqs.map((f) => (
             <details class="exp-faq-item">
@@ -248,7 +272,7 @@ const faqSchema = {
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
         <span class="eyebrow justify-center text-white/60">Next step</span>
         <h2 class="text-4xl md:text-6xl font-extrabold tracking-[-0.06em] leading-[1.05] text-white">
-          Diagnose this in 20 minutes.
+          {finalHeading}
         </h2>
         <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
           Bring the current state of your {props.subjectLabel ?? props.eyebrow.toLowerCase()}. We'll diagnose the constraint and decide if working together makes sense — or where else to go if it doesn't.

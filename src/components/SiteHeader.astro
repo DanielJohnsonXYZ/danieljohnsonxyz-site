@@ -71,7 +71,7 @@ const workDropdownImage = {
                         workWithMeActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
                       ]}
                       aria-current={workWithMeActive ? "page" : undefined}
-                      aria-haspopup="menu"
+                      aria-haspopup="true"
                       aria-expanded="false"
                       data-nav-trigger
                     >
@@ -112,7 +112,7 @@ const workDropdownImage = {
                         proofActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
                       ]}
                       aria-current={proofActive ? "page" : undefined}
-                      aria-haspopup="menu"
+                      aria-haspopup="true"
                       aria-expanded="false"
                       data-nav-trigger
                     >
@@ -428,6 +428,11 @@ const workDropdownImage = {
         const isOpen = trigger.getAttribute("aria-expanded") === "true";
         closeAllExcept(menu);
         trigger.setAttribute("aria-expanded", isOpen ? "false" : "true");
+        // Keyboard activation (Enter/Space) reports detail === 0 — on open,
+        // move focus into the menu so keyboard users land on the first link.
+        if (!isOpen && event.detail === 0) {
+          menu.querySelector<HTMLAnchorElement>(".site-nav-dropdown a")?.focus();
+        }
       });
 
       menu.addEventListener("mouseleave", () => {

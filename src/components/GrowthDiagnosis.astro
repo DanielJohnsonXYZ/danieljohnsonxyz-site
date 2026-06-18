@@ -180,7 +180,7 @@ const resultsJson = JSON.stringify(results);
       ))
     }
 
-    <div class="gd-result" data-gd-result hidden>
+    <div class="gd-result" data-gd-result hidden tabindex="-1" aria-live="polite">
       <p class="card-label text-[color:var(--accent)]">Your diagnosis</p>
       <h3 class="mt-3 text-3xl font-extrabold tracking-[-0.05em] md:text-4xl" data-gd-result-title>
         Diagnosis
@@ -299,6 +299,8 @@ const resultsJson = JSON.stringify(results);
       if (progressBar) progressBar.style.width = "100%";
       if (stepLabel) stepLabel.textContent = "Your diagnosis";
       resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Move focus into the revealed result so keyboard/SR users land on it.
+      if (resultEl instanceof HTMLElement) resultEl.focus();
     }
 
     root.addEventListener("click", function (e) {

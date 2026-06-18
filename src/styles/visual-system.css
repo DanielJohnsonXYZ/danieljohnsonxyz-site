@@ -457,17 +457,8 @@ footer.dark-section::before {
 
 /* Homepage (v4) — bring the display scale down and tighten the
    section rhythm so consecutive sections stop stacking ~13rem of gap. */
-.v4-home .v4-h1 {
-  font-size: clamp(2.4rem, 4.6vw, 3.6rem);
-}
 
-.v4-home .v4-h2 {
-  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-}
 
-body .v4-home section {
-  padding: clamp(3.5rem, 5vw, 4.75rem) 0;
-}
 
 /* Prose lists — Tailwind preflight strips list-style and it was never
    restored, so bullets/numbers were invisible in essays. */

@@ -13,7 +13,9 @@
   --line: #ded6c6;
   --line-soft: #ece5d6;
   --white: #ffffff;
-  --electric: #5523f0;
+  /* Single source of truth for the brand purple (global :root --accent). The
+     scoped v5 neutrals below stay intentionally distinct for the cream theme. */
+  --electric: var(--accent);
   --electric-deep: #3f12d4;
   --electric-soft: #e9e2ff;
   --electric-tint: #f4f0ff;
@@ -35,7 +37,7 @@
     linear-gradient(to bottom, var(--paper-grid) 1px, transparent 1px);
   background-size: auto, auto, 72px 72px, 72px 72px;
   color: var(--ink);
-  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  font-family: "Inter Variable", "Inter", -apple-system, system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +57,7 @@
 
 /* === Typography === */
 .v5-h1, .v5-h2, .v5-h3 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.02em;
@@ -75,7 +77,7 @@
 .v5-divider-line::before,
 .v5-divider-line::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .v5-divider-line span {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -97,7 +99,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -211,7 +213,7 @@
   border-bottom: 1px solid var(--line);
 }
 .v5-stat .v5-num {
-  font-family: "Fraunces", serif;
+  font-family: "Fraunces Variable", "Fraunces", serif;
   font-size: 1.95rem;
   font-weight: 700;
   display: block;
@@ -277,7 +279,7 @@
   background: var(--ink);
   color: var(--white);
   border-color: var(--ink);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.75rem;
@@ -300,7 +302,7 @@
 /* === Alt paths strip === */
 .v5-altpaths { padding: 0.75rem 0 0.25rem; }
 .v5-altpaths p {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -338,7 +340,7 @@
 .v5-marquee-reverse .v5-marquee-track { animation-direction: reverse; animation-duration: 44s; }
 .v5-marquee:hover .v5-marquee-track { animation-play-state: paused; }
 .v5-marquee-item {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -380,7 +382,7 @@
   position: absolute;
   top: 1rem;
   right: 2.5rem;
-  font-family: "Fraunces", serif;
+  font-family: "Fraunces Variable", "Fraunces", serif;
   font-size: 7rem;
   color: var(--electric-soft);
   line-height: 0.8;
@@ -388,7 +390,7 @@
 }
 .v5-bottleneck-card p { font-size: 1.1rem; color: var(--ink-soft); position: relative; }
 .v5-point { color: var(--ink); }
-.v5-point strong { color: var(--electric); font-family: "Fraunces", serif; font-weight: 700; }
+.v5-point strong { color: var(--electric); font-family: "Fraunces Variable", "Fraunces", serif; font-weight: 700; }
 @media (max-width: 720px) { .v5-bottleneck-card { padding: 2rem; } }
 
 /* === Diagnosis wrap (interactive quiz) === */
@@ -426,7 +428,7 @@
   transition: stroke 0.25s var(--v5-ease), fill 0.25s var(--v5-ease), r 0.25s var(--v5-ease);
 }
 .v5-engine-node text {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 13px;
   fill: var(--muted);
   text-anchor: middle;
@@ -437,14 +439,14 @@
 .v5-engine-node.is-active circle { stroke: var(--electric); fill: var(--electric-tint); }
 .v5-engine-node.is-active text { fill: var(--electric); font-weight: 700; }
 .v5-engine-core text {
-  font-family: "Fraunces", serif;
+  font-family: "Fraunces Variable", "Fraunces", serif;
   font-size: 19px;
   font-weight: 700;
   fill: var(--ink);
   text-anchor: middle;
 }
 .v5-engine-core .v5-engine-core-sub {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 9.5px;
   font-weight: 400;
   fill: var(--muted);
@@ -466,7 +468,7 @@
 }
 .v5-engine-item:hover { text-decoration: none; }
 .v5-engine-item .v5-n {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   color: var(--muted);
   font-size: 0.74rem;
   letter-spacing: 0.1em;
@@ -518,7 +520,7 @@
 }
 .v5-metric:hover { transform: translateY(-4px); box-shadow: var(--v5-shadow-2); border-color: var(--electric); }
 .v5-big {
-  font-family: "Fraunces", serif;
+  font-family: "Fraunces Variable", "Fraunces", serif;
   font-size: 3.2rem;
   font-weight: 700;
   color: var(--ink);
@@ -529,7 +531,7 @@
   letter-spacing: -0.02em;
 }
 .v5-top-label {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -555,14 +557,14 @@
 .v5-quote-pulled::before {
   content: "\201C";
   display: block;
-  font-family: "Fraunces", serif;
+  font-family: "Fraunces Variable", "Fraunces", serif;
   font-size: 4.5rem;
   color: var(--electric-soft);
   line-height: 0.5;
   margin-bottom: 1rem;
 }
 .v5-quote-pulled blockquote {
-  font-family: "Fraunces", serif;
+  font-family: "Fraunces Variable", "Fraunces", serif;
   font-size: 1.75rem;
   line-height: 1.35;
   color: var(--ink);
@@ -612,7 +614,7 @@
   left: 1.6rem;
   background: var(--electric);
   color: var(--white);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -628,13 +630,13 @@
   color: var(--electric);
   display: grid;
   place-items: center;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.82rem;
   font-weight: 600;
   margin-bottom: 1.4rem;
 }
 .v5-tier {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.68rem;
   color: var(--muted);
   text-transform: uppercase;
@@ -643,13 +645,13 @@
   display: block;
 }
 .v5-step .v5-h3 { font-size: 1.45rem; margin-bottom: 0.4rem; }
-.v5-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 0.2rem; }
+.v5-price { font-family: "Fraunces Variable", "Fraunces", serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 0.2rem; }
 .v5-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.1rem; }
 .v5-body { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 1.2rem; }
 .v5-detail { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
 .v5-lbl {
   display: block;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.66rem;
   color: var(--muted);
   text-transform: uppercase;
@@ -670,7 +672,7 @@
   padding: 2rem;
 }
 .v5-lbl-tag {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.74rem;
   color: var(--muted);
   text-transform: uppercase;
@@ -741,7 +743,7 @@
 .v5-essay:first-of-type { padding-top: 0; }
 .v5-essay:last-of-type { border-bottom: 0; }
 .v5-date {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
   font-size: 0.74rem;
   color: var(--muted);
   letter-spacing: 0.08em;

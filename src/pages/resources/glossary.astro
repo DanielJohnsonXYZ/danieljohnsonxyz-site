@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { buildBreadcrumbSchema, buildFaqPageSchema } from "../../lib/schema";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { absoluteUrl } from "../../lib/utils";
 import { ctas } from "../../site";
+
+const termSlug = (term: string) => term.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 /**
  * Glossary page — definitional content for LLM retrieval and topical
@@ -17,7 +20,7 @@ const terms = [
   {
     term: "Fractional CMO",
     short: "An embedded senior GTM operator who runs a company's growth function part-time, on a 3- to 12-month engagement.",
-    long: "A fractional CMO embeds with a company 1–2 days a week, owns GTM priorities, reporting rhythm, and team direction, and builds an operating system the team can run after the engagement ends. Different from a consultant (who advises but doesn't own execution), a full-time CMO (permanent, and substantially more expensive once salary, equity, on-costs, and ramp are included), or an agency (which executes a defined channel scope without owning the strategy). Best fit: post-PMF AI and B2B SaaS startups, £1m–£10m ARR, where the founder is still carrying revenue decisions.",
+    long: "A fractional CMO embeds with a company 1–2 days a week, owns GTM priorities, reporting rhythm, and team direction, and builds an operating system the team can run after the engagement ends. Different from a consultant (who advises but doesn't own execution), a full-time CMO (permanent, and substantially more expensive once salary, equity, on-costs, and ramp are included), or an agency (which executes a defined channel scope without owning the strategy). Best fit: post-PMF AI and B2B SaaS startups, £1M–£20M ARR, where the founder is still carrying revenue decisions.",
     relatedHref: "/fractional-cmo/"
   },
   {
@@ -75,18 +78,24 @@ const terms = [
   }
 ];
 
-const faqItems = terms.map((t) => ({
-  question: `What is ${t.term.toLowerCase()}?`,
-  answer: t.long
-}));
-
 const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Resources", url: "/resources/" },
     { name: "Glossary", url: "/resources/glossary/" }
   ]),
-  buildFaqPageSchema(faqItems)
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    name: "Growth & fractional CMO glossary",
+    url: absoluteUrl("/resources/glossary/"),
+    hasDefinedTerm: terms.map((t) => ({
+      "@type": "DefinedTerm",
+      name: t.term,
+      description: t.long,
+      url: absoluteUrl(`/resources/glossary/#${termSlug(t.term)}`)
+    }))
+  }
 ];
 ---
 
@@ -94,7 +103,7 @@ const schemas = [
   description="Definitions of the terms used across danieljohnson.xyz — fractional CMO, growth operating system, founder-led growth, AI-native GTM, and more."
   path="/resources/glossary/"
   schema={schemas}
-  title="Glossary — fractional CMO, growth operating system, AI-native GTM | Daniel Johnson"
+  title="Glossary — Fractional CMO & Growth Terms | Daniel Johnson"
 >
   <section class="hero-section section-space">
     <div class="shell">

@@ -3,7 +3,8 @@ import { getCollection } from "astro:content";
 import CfEmailOff from "../../components/CfEmailOff.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { absoluteUrl, formatDate, sortByFeaturedThenOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
 
 const caseStudies = sortByFeaturedThenOrder(await getCollection("caseStudies"));
@@ -13,11 +14,27 @@ const modes = [...new Set(caseStudies.map((c) => c.data.engagementMode))].sort()
 const tagSet = new Set<string>();
 caseStudies.forEach((c) => c.data.tags.forEach((t) => tagSet.add(t)));
 const filterTags = [...tagSet].sort((a, b) => a.localeCompare(b));
+
+const caseStudiesSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Case studies",
+    description:
+      "Fractional CMO case studies for post-PMF AI and B2B SaaS companies, with bottlenecks, interventions, and measurable outcomes.",
+    url: absoluteUrl("/case-studies/")
+  },
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Case studies", url: "/case-studies/" }
+  ])
+];
 ---
 
 <BaseLayout
   description="Explore Daniel Johnson's fractional CMO case studies for post-PMF AI and B2B SaaS companies, with bottlenecks, interventions, and measurable outcomes."
   path="/case-studies/"
+  schema={caseStudiesSchema}
   title="Case studies | Fractional CMO engagements"
 >
   <section class="section-space conversion-hero">
