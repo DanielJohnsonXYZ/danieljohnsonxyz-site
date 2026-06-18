@@ -6,7 +6,7 @@ const CSP_BASE_DIRECTIVES = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://*.calendly.com https://comms.wescalestartups.com",
+  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://*.calendly.com https://comms.wescalestartups.com",
   "frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com",
   "base-uri 'self'",
   "form-action 'self' mailto: https://comms.wescalestartups.com",
@@ -41,16 +41,19 @@ async function inlineScriptHashes(html) {
   return [...hashes];
 }
 
-// Hardened script-src: `'strict-dynamic'` lets the hashed GTM bootstrap inject gtm.js (and GTM
-// load GA4/DoubleClick) by trust propagation. There are no external first-party scripts for it
-// to break. `'self'` + the GTM host stay as a CSP-Level-2 fallback for browsers that ignore
-// `'strict-dynamic'`. `'unsafe-inline'` is intentionally absent.
+// Hardened script-src: inline scripts are allowed by sha256 hash; external scripts by host
+// allowlist. `'strict-dynamic'` is deliberately NOT used — it makes browsers ignore the host
+// allowlist, which would block the Cloudflare Web Analytics beacon (a parser-inserted external
+// script injected at the edge after this middleware runs). The GTM bootstrap (hashed) loads
+// gtm.js from googletagmanager.com, which then loads GA4 from the same host. `'unsafe-inline'`
+// is intentionally absent.
+const SCRIPT_HOSTS = [
+  "https://www.googletagmanager.com",
+  "https://www.google-analytics.com",
+  "https://static.cloudflareinsights.com"
+];
 function buildScriptSrc(hashes) {
-  return [
-    "script-src 'self' 'strict-dynamic'",
-    ...hashes,
-    "https://www.googletagmanager.com"
-  ].join(" ");
+  return ["script-src 'self'", ...hashes, ...SCRIPT_HOSTS].join(" ");
 }
 
 export async function onRequest(context) {
