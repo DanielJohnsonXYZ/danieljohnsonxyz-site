@@ -6,6 +6,17 @@ on:
   pull_request:
     branches: [main, master]
 
+# Least privilege: the build only needs to read the repo. Overrides the
+# default broad GITHUB_TOKEN scopes granted to workflow runs.
+permissions:
+  contents: read
+
+# Cancel superseded runs on the same ref so a force-push or rapid pushes
+# don't pile up redundant CI.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -25,3 +36,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      # Advisory only: surfaces known-vulnerable dependencies without blocking
+      # deploys on transitive advisories that have no upstream fix yet.
+      - name: Audit dependencies (advisory)
+        run: npm audit --audit-level=high --omit=dev
+        continue-on-error: true
