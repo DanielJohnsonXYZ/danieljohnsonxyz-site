@@ -1,22 +1,57 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
-import { buildBreadcrumbSchema } from "../../lib/schema";
+import { buildBreadcrumbSchema, buildFaqPageSchema, buildWebPageSchema } from "../../lib/schema";
+import { absoluteUrl } from "../../lib/utils";
 import { ctas, siteConfig, whyDaniel } from "../../site";
 
-const schema = buildBreadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "Resources", url: "/resources/" },
-  { name: "Compare growth options", url: "/resources/compare-growth-options/" }
-]);
+const path = "/resources/compare-growth-options/";
+
+const faq = [
+  {
+    question: "What's the cheapest way to get senior marketing help for a startup?",
+    answer:
+      "Cheapest upfront rarely means cheapest outcome. A freelancer or junior hire has the lowest monthly cost but leaves strategy and prioritisation on the founder. A fractional CMO costs more per month than a freelancer but less than a full-time hire in year one — and it's the option that removes the founder as the growth bottleneck instead of adding another person to manage."
+  },
+  {
+    question: "Should a startup hire an agency or a fractional CMO?",
+    answer:
+      "Choose an agency when strategy is already clear and you need execution capacity in a specific channel. Choose a fractional CMO when the bottleneck is senior judgement — nobody owns GTM priorities, positioning, and reporting week to week. Many post-PMF teams run both: a fractional CMO sets the system and an agency executes inside it."
+  },
+  {
+    question: "Is a fractional CMO worth it compared with a full-time CMO?",
+    answer:
+      "For most post-PMF companies under ~£10M ARR, usually yes. You get senior operating judgement in days rather than a 6-month hire plus 12-month ramp, at lower first-year cash cost and lower risk. A full-time CMO makes more sense once growth is proven and the marketing org is large enough to justify a permanent executive."
+  },
+  {
+    question: "When does a freelancer or junior marketer make more sense?",
+    answer:
+      "When the work is genuinely single-channel and well-defined (e.g. paid media or SEO content) and someone senior already sets direction. If the founder is still the de facto CMO, adding a junior or freelancer usually deepens the bottleneck rather than fixing it."
+  }
+];
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Resources", url: "/resources/" },
+    { name: "Compare growth options", url: path }
+  ]),
+  buildWebPageSchema({
+    name: "Compare 6 ways to get GTM help: agency, freelancer, CMO or fractional",
+    description:
+      "Compare agency, freelancer, junior marketer, full-time CMO, consultant, and fractional CMO — cost, ownership, and failure mode for post-PMF B2B SaaS and AI startups.",
+    url: absoluteUrl(path)
+  }),
+  buildFaqPageSchema(faq)
+];
 ---
 
 <BaseLayout
   description="Compare agency, freelancer, junior marketer, full-time CMO, consultant, and fractional CMO — typical cost, who owns the work, and the failure mode for post-PMF B2B SaaS and AI startups."
   keywords="fractional CMO vs agency, vs full-time CMO, startup marketing options, growth hire comparison"
-  path="/resources/compare-growth-options/"
+  path={path}
   schema={schema}
-  title="Compare your growth options | Daniel Johnson"
+  title="Fractional CMO vs Agency, Freelancer & Full-Time CMO: 6 Options Compared"
 >
   <section class="hero-section section-space">
     <div class="shell">
@@ -83,6 +118,20 @@ const schema = buildBreadcrumbSchema([
           >fractional CMO page</a>{" "}
         — this comparison is excerpted from the same decision framework.
       </p>
+    </div>
+  </section>
+
+  <section class="section-space pt-0" aria-labelledby="compare-faq-heading">
+    <div class="shell">
+      <SectionHeader eyebrow="FAQ" title="Questions founders ask when choosing." />
+      <div class="faq-stack mt-8 mx-auto max-w-3xl">
+        {faq.map((item, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 

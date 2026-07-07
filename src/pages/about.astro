@@ -1,7 +1,24 @@
 ---
 import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildPersonSchema, buildWebPageSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
 import { icpFirmographics, proofStats, siteConfig, siteImages } from "../site";
+
+const path = "/about/";
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About", url: path }
+  ]),
+  buildWebPageSchema({
+    name: "About Daniel Johnson — Fractional CMO & GTM Operator",
+    description:
+      "Daniel Johnson is a fractional CMO and senior GTM operator for founder-led AI and B2B SaaS: founder-side, in-house, advisory, and public teaching background.",
+    url: absoluteUrl(path)
+  }),
+  buildPersonSchema()
+];
 
 const proofTiles = [
   { value: "10+ yrs", label: "Founder, operator, and advisor work" },
@@ -64,8 +81,9 @@ const principles = [
 <BaseLayout
   description="About Daniel Johnson—fractional CMO & senior GTM operator for founder-led AI & B2B SaaS: founder-side, in-house, advisory & public teaching path."
   keywords="Daniel Johnson bio, fractional CMO background, GTM operator, startup advisor, We Scale Startups founder"
-  path="/about/"
+  path={path}
   preloadHeadshot
+  schema={schema}
   title="About Daniel Johnson | Fractional CMO & GTM Operator"
 >
   <section class="section-space">
@@ -205,6 +223,13 @@ const principles = [
                 testimonials page
               </a>{" "}
               has the evidence.
+            </p>
+            <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
+              Weighing the options? See how a fractional CMO compares to an{" "}
+              <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-agency/">agency</a>{" "}
+              or a{" "}
+              <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-full-time-cmo/">full-time CMO</a>, or{" "}
+              <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/compare-growth-options/">compare all six growth options</a>.
             </p>
           </div>
           <div class="flex flex-col gap-3">
