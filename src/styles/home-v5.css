@@ -71,7 +71,7 @@
 
 /* === Layout === */
 .v5-container { max-width: var(--v5-max); margin: 0 auto; padding: 0 1.5rem; }
-.v5-home section { padding: 6.5rem 0; position: relative; }
+.v5-home section { padding: clamp(3rem, 5vw, 4.5rem) 0; position: relative; }
 .v5-divider { max-width: var(--v5-max); margin: 0 auto; padding: 0 1.5rem; }
 .v5-divider-line { display: flex; align-items: center; gap: 1rem; color: var(--muted); }
 .v5-divider-line::before,
@@ -327,7 +327,7 @@
   background: color-mix(in srgb, var(--white) 55%, transparent);
   overflow: hidden;
   padding: 0.85rem 0;
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
 }
 .v5-marquee + .v5-marquee { margin-top: 0; border-top: 0; }
 .v5-marquee-track {

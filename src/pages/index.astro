@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BrandBar from "../components/BrandBar.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
 import heroCutout from "../assets/images/daniel-hero-cutout.webp";
 import danielAircraft from "../assets/images/daniel-aircraft.webp";
@@ -8,33 +9,33 @@ import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960
 import "../styles/home-v5.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
-import { icpFirmographics, siteConfig } from "../site";
+import { icpFirmographics } from "../site";
 
 // FAQ items drive both the FAQPage schema and the visible markup below, so the
 // two can't drift. `answer` is the schema text; `link` renders only in the page.
 const homepageFaq = [
   {
     question: "What does a fractional CMO actually do day-to-day?",
-    answer: "Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings. Not a monthly slide deck."
+    answer: "Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings rather than a monthly slide deck."
   },
   {
     question: "How is this different from hiring a full-time CMO?",
-    answer: "You buy a slice of senior time with a clear scope — usually one to two days a week — instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
+    answer: "You buy a slice of senior time with a clear scope, usually one to two days a week, instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
     link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time" },
     open: true
   },
   {
     question: "What stage should my startup be at?",
-    answer: "Post-PMF with real revenue and repeat buyers. Typically Seed to Series B. The constraint is execution and ownership, not finding the problem. Pre-revenue teams should stay focused on customers and product first.",
+    answer: "Post-PMF with real revenue and repeat buyers, typically Seed to Series B. At that stage the constraint is execution and ownership. Pre-revenue teams should stay focused on customers and product first.",
     link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "When each model fits" }
   },
   {
     question: "How quickly will I see results?",
-    answer: "Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. I don’t promise miracles. I promise a visible system and honest calls on what’s working."
+    answer: "Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. No miracles promised, just a visible system and honest calls on what’s working."
   },
   {
     question: "What does it cost?",
-    answer: "UK engagements typically start around £6k for a Strategy Sprint and £7.5–12k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price.",
+    answer: "UK engagements typically start around £4k for a Strategy Sprint and £5–8k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price.",
     link: { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK)" }
   },
   {
@@ -47,7 +48,7 @@ const homeSchemas = [
   buildServiceSchema({
     name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
     description:
-      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire. Typical UK engagement range: £6,000 – £12,000/month.",
+      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline and sharper positioning without a £150k+ full-time hire. Typical UK engagement range: £5,000–£8,000/month.",
     url: absoluteUrl("/fractional-cmo/"),
     serviceType: "Fractional CMO",
     offers: [
@@ -60,19 +61,19 @@ const homeSchemas = [
       {
         name: "Strategy Sprint",
         description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
-        price: "6000",
+        price: "4000",
         billingIncrement: "per engagement"
       },
       {
         name: "Fractional CMO",
         description: "3-month minimum. Embedded senior ownership 1 day a week.",
-        price: "7500",
+        price: "5000",
         billingIncrement: "per month"
       },
       {
         name: "Fractional CMO Plus",
         description: "Deeper operating support, agency management, faster execution.",
-        price: "12000",
+        price: "8000",
         billingIncrement: "per month"
       }
     ]
@@ -97,7 +98,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
 
 <BaseLayout
   title="Fractional CMO for AI & B2B SaaS Startups"
-  description="Fractional CMO for Seed–Series B AI & B2B SaaS: predictable pipeline, sharper positioning, senior growth leadership — without a £150k full-time hire."
+  description="Fractional CMO for Seed–Series B AI & B2B SaaS startups. Predictable pipeline, sharper positioning and senior growth leadership without a £150k full-time hire."
   schema={homeSchemas}
   lastUpdated={false}
 >
@@ -110,39 +111,23 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           <div class="reveal">
             <span class="v5-eyebrow">Fractional CMO · Seed–Series B AI &amp; B2B SaaS</span>
             <h1 class="v5-h1">
-              I build the growth engine your startup is missing —
+              I build the growth engine your startup is missing,
               <span class="v5-accent">then hand your team <span class="v5-hl">the keys.</span></span>
             </h1>
             <p class="v5-subhead v5-hero-sub">
-              I embed with B2B SaaS and AI founders as a fractional CMO. We find the real constraint,
-              build the system that fixes it, and transfer it to your team — clean.
-            </p>
-            <div class="v5-micro-proof">
-              <div class="v5-stat">
-                <span class="v5-num" data-countup data-target="18" data-prefix="£" data-suffix="M+">£18M+</span>
-                <span class="v5-stat-label">client revenue generated</span>
-              </div>
-              <div class="v5-stat">
-                <span class="v5-num" data-countup data-target="4.97" data-decimals="2" data-suffix=" / 5">4.97 / 5</span>
-                <span class="v5-stat-label">from 220 reviews on GrowthMentor</span>
-              </div>
-              <div class="v5-stat">
-                <span class="v5-num" data-countup data-target="479" data-suffix="+">479+</span>
-                <span class="v5-stat-label">mentor sessions delivered</span>
-              </div>
-            </div>
-            <p class="v5-hero-fit">
-              Best for post-PMF AI &amp; B2B SaaS — typically {icpFirmographics.arrBand}, {icpFirmographics.headcountBand}, founder still running GTM.
+              I embed with post-PMF B2B SaaS and AI teams as a fractional CMO, find the real constraint, and build the system your team keeps running after I leave.
             </p>
             <div class="v5-hero-ctas">
               <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary" data-cta="home-hero-audit">
-                Book a 20-min Growth Audit <span class="v5-arrow">→</span>
+                Book a 20-min Growth Audit
               </a>
-              <a href="/case-studies/" class="v5-btn v5-btn-ghost" data-cta="home-hero-case-studies">
-                See case studies <span class="v5-arrow">→</span>
+              <a href="/case-studies/" class="v5-link-arrow" data-cta="home-hero-case-studies">
+                See case studies
               </a>
             </div>
-            <a class="v5-availability-strip" href="/now/" title="See current availability on the Now page">{siteConfig.availability.replace(/\.$/, "")} · {siteConfig.nextStartWindow.replace(/\.$/, "")}</a>
+            <p class="v5-hero-fit">
+              £18M+ in client revenue · 4.97 / 5 from 220 reviews on GrowthMentor · Best fit: {icpFirmographics.arrBand}, {icpFirmographics.headcountBand}, founder still running GTM
+            </p>
           </div>
           <div class="v5-hero-photo reveal" data-hero-photo>
             <div class="v5-hero-photo-bg">
@@ -161,6 +146,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         </div>
       </div>
     </section>
+
+    <!-- ===== Brand bar ===== -->
+    <BrandBar />
 
     <!-- ===== Alt paths (organisers / press) ===== -->
     <div class="v5-altpaths reveal" aria-label="Also here for speaking or press">
@@ -193,21 +181,35 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <span class="v5-eyebrow">The bottleneck</span>
             <h2 class="v5-h2">You've got traction. <span class="v5-accent">Growth still <span class="v5-hl">feels like guessing.</span></span></h2>
           </div>
-          <p class="v5-subhead">The real problem isn't usually the channel. It's that the whole growth function still lives in your head.</p>
+          <p class="v5-subhead">Usually the channel is fine. The whole growth function still lives in your head, and nothing compounds without you.</p>
         </div>
         <div class="v5-bottleneck-card">
-          <p>The product works. Revenue is moving. You've got paying customers and a deck that holds up in a room. But the acquisition engine has plateaued, pipeline arrives in bursts and then goes quiet, and every important growth decision still routes through you. Because nobody else has the full picture.</p>
-          <p>The instinct is to add something. A new channel, an agency, another campaign. That's almost never the actual problem. The problem is that the whole growth function lives in your head, and there's no system running underneath it.</p>
-          <p class="v5-point"><strong>The point:</strong> what you need isn't more activity. You need a senior operator who can walk in, see the whole machine at once, and tell you — with specifics — which one or two levers actually matter for your company right now. Then build the system to run those levers without you.</p>
+          <p>The product works and revenue is moving. You've got paying customers and a deck that holds up in a room. And yet:</p>
+          <ul class="v5-symptoms" role="list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l4-6 4 3 5-8 5 5" /><path d="M3 21h18" /></svg>
+              <span>Acquisition has plateaued, and pipeline arrives in bursts before going quiet again.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7" r="3.5" /><path d="M5.5 21c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5" /></svg>
+              <span>Every important growth decision still routes through you, because nobody else has the full picture.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6" /><path d="M12 15v6" /><circle cx="12" cy="12" r="2.5" /><path d="M5 5l4 4" /><path d="M15 15l4 4" /></svg>
+              <span>Campaigns ship, but nothing connects them, so nothing compounds.</span>
+            </li>
+          </ul>
+          <p>The instinct is to add something, usually a new channel or an agency. That rarely helps, because the actual issue is that there's no system running underneath any of it.</p>
+          <p class="v5-point"><strong>The point:</strong> more activity won't fix this. A senior operator who can see the whole machine at once can tell you, with specifics, which one or two levers matter for your company right now, then build the system that runs those levers without you.</p>
         </div>
       </div>
       <div class="v5-container">
-        <div class="v5-split-head" style="margin-top: 4rem; margin-bottom: 0;">
+        <div class="v5-split-head" style="margin-top: 3rem; margin-bottom: 0;">
           <div class="reveal">
             <span class="v5-eyebrow">Free · 2 minutes · On-page result</span>
             <h2 class="v5-h2">Not sure which lever is yours? <span class="v5-accent">Run the diagnostic.</span></h2>
           </div>
-          <p class="v5-subhead reveal">Five questions. Four bottleneck profiles. A personalised read on where your growth is actually stuck — instantly, on this page.</p>
+          <p class="v5-subhead reveal">Five questions, then a personalised read on where your growth is actually stuck, right here on the page.</p>
         </div>
         <div class="v5-diagnosis-wrap">
           <GrowthDiagnosis />
@@ -223,9 +225,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">The engine</span>
-            <h2 class="v5-h2">I don't run campaigns. <span class="v5-accent">I build engines that <span class="v5-hl">run without you.</span></span></h2>
+            <h2 class="v5-h2">I build growth engines <span class="v5-accent">that <span class="v5-hl">run without you.</span></span></h2>
           </div>
-          <p class="v5-subhead">Six layers, one loop. Customer signal feeds GTM systems, which feeds acquisition, conversion, founder-led distribution, and reporting — which loops straight back into signal.</p>
+          <p class="v5-subhead">Six layers, one loop. Customer signal feeds GTM systems, which feeds acquisition, conversion, founder-led distribution, and reporting, which loops straight back into signal.</p>
         </div>
         <div class="v5-engine-grid" data-engine>
           <div class="v5-engine-visual" aria-hidden="true">
@@ -259,7 +261,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           </div>
         </div>
         <div class="v5-engine-footer">
-          <p class="v5-engine-text">If "growth engine" sounds abstract, that's the point of the audit. I'll show you exactly what it looks like for your company — in 20 minutes.</p>
+          <p class="v5-engine-text">If "growth engine" sounds abstract, that's the point of the audit. I'll show you what it looks like for your company in 20 minutes.</p>
           <a href="/growth-audit/" class="v5-link-arrow" data-cta="home-method-audit">See what a 20-min audit covers</a>
         </div>
       </div>
@@ -273,7 +275,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">Proof</span>
-            <h2 class="v5-h2">Real campaigns. Real numbers. <span class="v5-accent">Real attribution.</span></h2>
+            <h2 class="v5-h2">Numbers from real campaigns, <span class="v5-accent">with the attribution to back them.</span></h2>
           </div>
           <p class="v5-subhead">The short list. Full case studies linked below.</p>
         </div>
@@ -313,6 +315,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           <div><strong>4.97 / 5</strong> · <strong>479+</strong> sessions</div>
         </div>
         <div class="v5-center-row">
+          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-ghost" data-cta="home-proof-audit">Book a 20-min Growth Audit</a>
           <a href="/case-studies/" class="v5-link-arrow" data-cta="home-proof-case-studies">See full case studies</a>
         </div>
       </div>
@@ -326,9 +329,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">Ways to work together</span>
-            <h2 class="v5-h2">Diagnose. Plan. Build. <span class="v5-accent">Pick your entry point.</span></h2>
+            <h2 class="v5-h2">Four ways in. <span class="v5-accent">Pick your entry point.</span></h2>
           </div>
-          <p class="v5-subhead">Four productised ways in, smallest commitment first. You can move up the ladder later — most clients start with the audit.</p>
+          <p class="v5-subhead">Smallest commitment first. Most clients start with the audit and move up the ladder later.</p>
         </div>
         <div class="v5-ladder">
           <div class="v5-step">
@@ -337,26 +340,26 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <h3 class="v5-h3">20-min Growth Audit</h3>
             <div class="v5-price">Free</div>
             <p class="v5-meta">20 minutes · No pitch · No deck</p>
-            <p class="v5-body">Bring the messy growth question. We name the bottleneck together and decide whether working together makes sense — or where else to go if it doesn't.</p>
+            <p class="v5-body">Bring the messy growth question. We name the bottleneck together and decide whether working together makes sense, or where else to go if it doesn't.</p>
             <p class="v5-detail"><span class="v5-lbl">Outcome</span>A clear read on the bottleneck and the most useful next step.</p>
             <div class="v5-cta-row"><a href="/growth-audit/" class="v5-link-arrow" data-cta="home-ladder-audit">See what's covered</a></div>
           </div>
           <div class="v5-step">
             <div class="v5-step-num">02</div>
-            <span class="v5-tier">Plan · From £6k</span>
+            <span class="v5-tier">Plan · From £4k</span>
             <h3 class="v5-h3">Strategy Sprint</h3>
-            <div class="v5-price">£6k fixed scope</div>
+            <div class="v5-price">£4k fixed scope</div>
             <p class="v5-meta">2–4 week engagement</p>
             <p class="v5-body">Diagnose, prioritise, ship the first artefacts: ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.</p>
             <p class="v5-detail"><span class="v5-lbl">Outcome</span>A 90-day growth plan, the first artefacts, and a working operating rhythm.</p>
             <div class="v5-cta-row"><a href="/strategy-sprint/" class="v5-link-arrow" data-cta="home-ladder-sprint">See Strategy Sprint scope</a></div>
           </div>
           <div class="v5-step v5-step-emphasis">
-            <span class="v5-step-flag">Most popular · 2 slots left</span>
+            <span class="v5-step-flag">Most popular</span>
             <div class="v5-step-num">03</div>
-            <span class="v5-tier">Build · From £7.5k/mo</span>
+            <span class="v5-tier">Build · From £5k/mo</span>
             <h3 class="v5-h3">Fractional CMO</h3>
-            <div class="v5-price">From £7.5k/mo</div>
+            <div class="v5-price">From £5k/mo</div>
             <p class="v5-meta">1–2 days a week · 3-month minimum</p>
             <p class="v5-body">Embedded senior ownership of the growth function. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Build the engine, hand it off clean.</p>
             <p class="v5-detail"><span class="v5-lbl">Outcome</span>Pipeline rhythm, sharper positioning, and an engine the team runs after I'm gone.</p>
@@ -368,7 +371,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <h3 class="v5-h3">Founder Office Hours</h3>
             <div class="v5-price">Flexible</div>
             <p class="v5-meta">Focused 1:1 working sessions</p>
-            <p class="v5-body">A senior second brain for specific GTM decisions: pricing, positioning, hiring calls, channel bets. No retainer, no ramp — just the decision, made well.</p>
+            <p class="v5-body">A senior second brain for specific GTM decisions: pricing, positioning, hiring calls, channel bets. No retainer and no ramp, just the decision made well.</p>
             <p class="v5-detail"><span class="v5-lbl">Outcome</span>A confident call on the decision in front of you, with the reasoning.</p>
             <div class="v5-cta-row"><a href="/founder-office-hours/" class="v5-link-arrow" data-cta="home-ladder-office-hours">See Office Hours</a></div>
           </div>
@@ -428,8 +431,8 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
           <div>
             <span class="v5-eyebrow">About</span>
             <h2 class="v5-h2">I've been the founder <span class="v5-accent">with a <span class="v5-hl">flat chart at 2am.</span></span></h2>
-            <p>My first company was eQuoo — evidence-based emotional fitness training. Good product. A go-to-market strategy that mostly amounted to hoping the right people would find us. They didn't, not fast enough. We navigated through it and got to two exits. The lesson stuck: execution without a system isn't scrappy. It's expensive improvisation with a deadline.</p>
-            <p>After that I ran in-house growth at Shoprocket and NAVA, and kept seeing the same pattern. Functional products, founders owning every growth decision, nothing compounding. We Scale Startups exists to fix that — with a structured approach to positioning, pipeline, and growth decisions, built across 20+ AI and B2B SaaS engagements at depth, and 200+ startups in total across healthtech, eCommerce, and AI infrastructure.</p>
+            <p>My first company was eQuoo, evidence-based emotional fitness training. The product was good, but the go-to-market mostly amounted to hoping the right people would find us, and they didn't find us fast enough. We navigated through it and got to two exits. The lesson stuck: execution without a system is expensive improvisation with a deadline.</p>
+            <p>After that I ran in-house growth at Shoprocket and NAVA, and kept seeing the same pattern: functional products, founders owning every growth decision, nothing compounding. We Scale Startups exists to fix that, with a structured approach to positioning, pipeline, and growth decisions built across 20+ AI and B2B SaaS engagements at depth, and 200+ startups in total across healthtech, eCommerce, and AI infrastructure.</p>
             <p>I've mentored 479+ founders at a 4.97 / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>
             <a href="/about/" class="v5-link-arrow" data-cta="home-about-read">Read more about Daniel</a>
           </div>
@@ -438,7 +441,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
               src={danielAircraft}
               widths={[640, 960]}
               sizes="(max-width: 900px) 100vw, 40vw"
-              alt="Daniel Johnson — operator mindset, systems thinking applied to growth"
+              alt="Daniel Johnson, operator mindset, systems thinking applied to growth"
               loading="lazy"
               decoding="async"
               class="v5-about-img"
@@ -458,7 +461,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <span class="v5-eyebrow">Beyond the page</span>
             <h2 class="v5-h2">Speaking, writing, and other ways <span class="v5-accent">to read the work.</span></h2>
           </div>
-          <p class="v5-subhead">A few more ways to read the work before you book: rooms, essays, and the operator story behind the process.</p>
+          <p class="v5-subhead">Talks and essays, if you want a feel for how I think before you book anything.</p>
         </div>
         <div class="v5-sw">
           <div class="v5-sw-card">
@@ -528,7 +531,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
               <summary>{item.question}</summary>
               <p class="v5-faq-answer">
                 {item.answer}
-                {item.link && <> <a href={item.link.href}>{item.link.label} →</a></>}
+                {item.link && <> <a href={item.link.href}>{item.link.label}</a></>}
               </p>
             </details>
           ))}
@@ -544,16 +547,57 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-final-cta">
           <span class="v5-eyebrow">Next step</span>
           <h2 class="v5-h2">Book a <span class="v5-hl">20-min Growth Audit.</span></h2>
-          <p class="v5-final-lead">Twenty minutes on your specific situation. No pitch, no deck, no trying-to-close. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.</p>
+          <p class="v5-final-lead">Twenty minutes on your specific situation, with no pitch and no deck. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.</p>
           <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary" data-cta="home-final-audit">Book a 20-min Growth Audit <span class="v5-arrow">→</span></a>
           <p class="v5-final-meta">
-            2 Fractional CMO slots open this quarter · Next start window: June 2026<br />
             Prefer email first? <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>
           </p>
         </div>
       </div>
     </section>
   </div>
+
+  <style>
+    /* Symptom cards inside the bottleneck section (page-scoped). */
+    .v5-symptoms {
+      list-style: none;
+      margin: 1.75rem 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.9rem;
+    }
+    .v5-symptoms li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 1rem 1.1rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+    .v5-symptoms svg {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      margin-top: 0.1rem;
+      color: var(--electric);
+    }
+    @media (max-width: 860px) {
+      .v5-symptoms { grid-template-columns: 1fr; }
+    }
+    /* Keep the two proof-row actions on one comfortable line. */
+    .v5-center-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+  </style>
 
   <script>
     // ── Homepage kinetics: count-up stats, engine loop sync, hero parallax ──

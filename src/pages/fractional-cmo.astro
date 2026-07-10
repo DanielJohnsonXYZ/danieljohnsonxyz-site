@@ -35,7 +35,7 @@ const deliverables = [
   ["GTM clarity", "ICP, positioning, category narrative, customer pain map, and offer tests."],
   ["Acquisition system", "Channel map, experiment backlog, landing-page tests, campaign briefs, budget decisions."],
   ["Operating rhythm", "Weekly growth meeting, decision notes, owner map, stop / scale / fix rules."],
-  ["Decision support", "Hiring, agency, tooling, pricing, investor narrative — senior context on the calls that matter."],
+  ["Decision support", "Senior context on hiring, agency, tooling, pricing, and investor narrative calls."],
   ["Reporting", "Pipeline dashboard, funnel reads, payback notes, a board-ready growth summary."]
 ];
 
@@ -46,9 +46,9 @@ const modes = [
 ];
 
 const first30 = [
-  "Week 1–2: Full GTM audit — ICP, pipeline, funnel, CRM hygiene, live acquisition channels, positioning, and how reporting is read today. Founder, sales, and customer-facing interviews plus 3–5 customer conversations where possible.",
-  "Week 2–3: Constraint map — where pipeline, conversion, retention, or decision speed actually breaks (not where the team is busiest). Agree the 90-day priorities and the weekly operating rhythm: scorecard, owners, stop/scale/fix rules.",
-  "Week 3–4: First fixes in market — homepage or demo narrative tests, campaign or outbound brief, reporting view, or channel test — sequenced from the bottleneck, not from channel noise.",
+  "Week 1–2: Full GTM audit covering ICP, pipeline, funnel, CRM hygiene, live acquisition channels, positioning, and how reporting is read today. Founder, sales, and customer-facing interviews plus 3–5 customer conversations where possible.",
+  "Week 2–3: Constraint map showing where pipeline, conversion, retention, or decision speed actually breaks (not where the team is busiest). Agree the 90-day priorities and the weekly operating rhythm: scorecard, owners, stop/scale/fix rules.",
+  "Week 3–4: First fixes in market, whether that's homepage or demo narrative tests, a campaign or outbound brief, a reporting view, or a channel test, sequenced from the bottleneck rather than from channel noise.",
   "Ongoing: Weekly growth meeting, experiment backlog hygiene, and agency or contractor steering so work compounds instead of resetting every Monday."
 ];
 
@@ -69,21 +69,21 @@ const week = [
 const pricing = [
   {
     name: "Strategy Sprint",
-    price: "From £6k",
+    price: "From £4k",
     cadence: "2–4 week engagement",
     body: "Diagnose the bottleneck, set 90-day priorities, ship the first artefacts.",
     primary: false
   },
   {
     name: "Fractional CMO",
-    price: "From £7.5k",
+    price: "From £5k",
     cadence: "/ month · 3-month minimum",
     body: "Embedded senior ownership 1 day a week. GTM priorities, reporting, weekly rhythm.",
     primary: true
   },
   {
     name: "Fractional CMO Plus",
-    price: "From £12k",
+    price: "From £8k",
     cadence: "/ month · 3-month minimum",
     body: "Deeper operating support, agency management, and faster execution. Best when the team needs ~2 days a week of senior ownership.",
     primary: false
@@ -103,7 +103,7 @@ const faq = [
   {
     question: "How is this different from hiring an agency or a junior marketer?",
     answer:
-      "Agencies execute a defined channel scope — paid, SEO, content. They don't own the full GTM system or make senior calls. Junior marketers need your direction, so you stay the CMO. A fractional CMO gives you senior operator judgement, embedded ownership, and a system the team can run after."
+      "Agencies execute a defined channel scope such as paid, SEO, or content. They don't own the full GTM system or make senior calls. Junior marketers need your direction, so you stay the CMO. A fractional CMO gives you senior operator judgement, embedded ownership, and a system the team can run after."
   },
   {
     question: "How long does an engagement last?",
@@ -118,12 +118,12 @@ const faq = [
   {
     question: "What happens on the first call?",
     answer:
-      "20 minutes. No pitch. We map the current growth bottleneck, your stage, the team around you, what's already been tried, and whether fractional CMO support is the right shape. If it's not, you'll leave with a clearer next step anyway."
+      "A 20-minute call with no pitch. We map the current growth bottleneck, your stage, the team around you, what's already been tried, and whether fractional CMO support is the right shape. If it's not, you'll leave with a clearer next step anyway."
   },
   {
     question: "What does AI-assisted GTM mean here?",
     answer:
-      "AI speeds up customer research synthesis, competitor reviews, message tests, content workflows, and reporting. It doesn't replace judgement. It reduces manual drag so senior decisions happen faster."
+      "AI speeds up customer research synthesis, competitor reviews, message tests, content workflows, and reporting. It doesn't replace judgement; it reduces the manual drag so senior decisions happen faster."
   }
 ];
 
@@ -137,13 +137,13 @@ const schemas = [
   buildServiceSchema({
     name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
     description:
-      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, senior growth judgement — without a £150k+ full-time hire.",
+      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline, sharper positioning, and senior growth judgement without a £150k+ full-time hire.",
     url: absoluteUrl("/fractional-cmo/"),
     serviceType: "Fractional CMO",
     offers: [
-      { name: "Strategy Sprint", description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.", price: "6000", billingIncrement: "per engagement" },
-      { name: "Fractional CMO", description: "3-month minimum. Embedded senior ownership 1 day a week.", price: "7500", billingIncrement: "per month" },
-      { name: "Fractional CMO Plus", description: "Deeper operating support, agency management, faster execution.", price: "12000", billingIncrement: "per month" }
+      { name: "Strategy Sprint", description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.", price: "4000", billingIncrement: "per engagement" },
+      { name: "Fractional CMO", description: "3-month minimum. Embedded senior ownership 1 day a week.", price: "5000", billingIncrement: "per month" },
+      { name: "Fractional CMO Plus", description: "Deeper operating support, agency management, faster execution.", price: "8000", billingIncrement: "per month" }
     ]
   }),
   buildWebPageSchema({
@@ -156,7 +156,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="Fractional CMO for Seed–Series B AI & B2B SaaS founders: embedded senior leadership on pipeline, positioning & GTM—without the £150k full-time hire."
+  description="Fractional CMO for Seed–Series B AI & B2B SaaS founders: embedded senior leadership on pipeline, positioning and GTM, without the £150k full-time hire."
   keywords="fractional CMO UK, AI startup GTM, B2B SaaS marketing leadership, Seed Series B growth operator, embedded CMO"
   path="/fractional-cmo/"
   schema={schemas}
@@ -178,7 +178,7 @@ const schemas = [
           <!-- Booking trust copy surfaced EARLY so objections to "book a call" get answered before scroll. -->
           <div class="rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-4 text-sm leading-6 text-[color:var(--muted)]">
             <strong class="block font-semibold text-[color:var(--ink)]">What happens on the first call</strong>
-            20 minutes. No pitch. No deck. We diagnose the bottleneck and decide together whether working together makes sense — or I'll point you to the right operator, agency, or mentor if it doesn't.
+            A 20-minute call, no pitch and no deck. We diagnose the bottleneck and decide together whether working together makes sense, or I'll point you to the right operator, agency, or mentor if it doesn't.
           </div>
 
           <div class="cta-row pt-2">
@@ -230,18 +230,18 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="What I take off your plate"
-        title="Founder-bottleneck work that needs a senior owner — not another pair of hands."
+        title="Founder-bottleneck work that needs a senior owner rather than another pair of hands."
         intro="You stay on strategy and the calls only you should take. I carry the operating load that keeps GTM from stalling: priorities, sequencing, reporting, and honest kill/scale decisions."
       />
       <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {
           [
-            "Weekly bottleneck read — what actually constrains pipeline this week",
+            "Weekly bottleneck read: what actually constrains pipeline this week",
             "ICP, positioning, and narrative alignment across site, outbound, and sales",
-            "Experiment backlog with owners — fewer random tests, clearer learning",
-            "Channel and agency steering — scope, briefs, and accountability",
-            "Reporting the team actually uses — conversion, payback, stop/scale/fix",
-            "Hiring and vendor context — what role to hire, what to keep fractional"
+            "Experiment backlog with owners: fewer random tests, clearer learning",
+            "Channel and agency steering: scope, briefs, and accountability",
+            "Reporting the team actually uses: conversion, payback, stop/scale/fix",
+            "Hiring and vendor context: what role to hire, what to keep fractional"
           ].map((item) => <article class="card p-5 text-sm font-semibold leading-6 tracking-[-0.02em]">{item}</article>)
         }
       </div>
@@ -253,7 +253,7 @@ const schemas = [
       <SectionHeader
         eyebrow="The pain"
         title="Your team is busy, but growth still doesn't feel repeatable."
-        intro="The problem is rarely effort. It's unclear priorities, weak signal, and too many growth calls living in the founder's head."
+        intro="The problem is rarely effort. More often it's unclear priorities, weak signal, and too many growth calls living in the founder's head."
       />
       <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         {painPoints.map((item) => <article class="card p-5 text-sm font-semibold leading-6 tracking-[-0.02em]">{item}</article>)}
@@ -353,7 +353,7 @@ const schemas = [
 
   <section class="section-space pt-0">
     <div class="shell">
-      <SectionHeader eyebrow="Sample week" title="Enough structure to move fast. Enough space to make good decisions." />
+      <SectionHeader eyebrow="Sample week" title="Enough structure to move fast, with enough space to make good decisions." />
       <div class="mt-8 overflow-hidden rounded-[1.5rem] border border-[color:var(--line)] bg-white">
         {week.map(([day, body]) => (
           <div class="grid gap-3 border-b border-[color:var(--line)] p-5 last:border-b-0 md:grid-cols-[9rem_1fr]">
@@ -371,7 +371,7 @@ const schemas = [
       <SectionHeader
         eyebrow="FAQ"
         title="Questions founders ask before a first call."
-        intro="Answers to the six questions that come up most. The first is open by default — scroll down to book, or keep reading."
+        intro="Answers to the six questions that come up most. The first is open by default; scroll down to book, or keep reading."
       />
       <div class="faq-stack mt-8 mx-auto max-w-3xl">
         {faq.map((item, index) => (
@@ -387,7 +387,7 @@ const schemas = [
   <!-- Wide comparison: agency vs freelancer vs junior vs full-time vs consultant vs Daniel -->
   <section class="section-space pt-0" id="why-daniel" aria-labelledby="why-daniel-heading">
     <div class="shell">
-      <SectionHeader eyebrow="Why Daniel" title="Where a fractional CMO fits — and where the other five options don't." />
+      <SectionHeader eyebrow="Why Daniel" title="Where a fractional CMO fits, and where the other five options don't." />
       <p class="reveal mt-4 text-center text-sm leading-7 text-[color:var(--muted)]">
         Want a deeper read on the closest two? <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-agency/">Fractional CMO vs. Agency</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-full-time-cmo/">Fractional CMO vs. Full-time CMO</a> · <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/writing/the-right-window-for-a-fractional-cmo/">The right window for a fractional CMO</a>
       </p>
@@ -421,11 +421,11 @@ const schemas = [
       <SectionHeader
         eyebrow="Pricing"
         title="Clear starting points before scope gets specific."
-        intro="Three shapes. Pick the closest fit — we refine on the call. UK benchmark framing and what moves price: see the dedicated cost page."
+        intro="Three shapes. Pick the closest fit and we refine on the call. For UK benchmark framing and what moves price, see the dedicated cost page."
       />
       <p class="reveal mt-4 text-center text-sm leading-7 text-[color:var(--muted)]">
         <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-cost-uk/" data-cta="fractional-pricing-cost-uk">
-          Fractional CMO cost (UK) — benchmarks & FAQ →
+          Fractional CMO cost (UK): benchmarks & FAQ →
         </a>
       </p>
 
@@ -473,7 +473,7 @@ const schemas = [
 
   <section class="section-space pt-0">
     <div class="shell">
-      <SectionHeader eyebrow="Case studies" title="Recent engagement shapes — bottleneck, approach, outcome." />
+      <SectionHeader eyebrow="Case studies" title="Recent engagement shapes: bottleneck, approach, outcome." />
       <div class="mt-10 grid gap-5 md:grid-cols-2">
         {
           caseStudyEntries.slice(0, 4).map((item) => (
@@ -508,7 +508,7 @@ const schemas = [
           <SectionHeader
             eyebrow="Fractional CMO"
             title="What clients say about embedded GTM work."
-            intro="Named feedback from fractional and advisory-shaped engagements — see /testimonials/ for the full set."
+            intro="Named feedback from fractional and advisory-shaped engagements; see /testimonials/ for the full set."
           />
           <div class="mt-8 grid gap-5 md:grid-cols-2">
             {fractionalTestimonials.map((t) => (
@@ -539,7 +539,7 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="Strategy Sprint vs Fractional CMO"
-        title="Same operator — different commitment shape."
+        title="Same operator, different commitment shape."
         intro="Most founders either need a fixed-scope sprint first, or already know they need embedded ownership. Here's how the two compare at a glance."
       />
       <div class="mt-8 overflow-x-auto rounded-[1.5rem] border border-[color:var(--line)] bg-white">
@@ -584,7 +584,7 @@ const schemas = [
         <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href="/growth-audit/">
           20-min Growth Audit
         </a>{" "}
-        — we'll name the bottleneck and the right shape.
+        and we'll name the bottleneck and the right shape.
       </p>
     </div>
   </section>

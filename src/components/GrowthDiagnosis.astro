@@ -27,7 +27,7 @@ const questions: Question[] = [
     id: "q1",
     prompt: "Where does most of today's revenue actually come from?",
     answers: [
-      { label: "Inbound or founder's network — one-off, hard to predict", bottleneck: "founder" },
+      { label: "Inbound or founder's network: one-off, hard to predict", bottleneck: "founder" },
       { label: "Paid channels, but payback is unclear", bottleneck: "channels" },
       { label: "A mix of channels, but nothing is repeatable yet", bottleneck: "channels" },
       { label: "One channel that worked, now flattening out", bottleneck: "channels" }
@@ -40,14 +40,14 @@ const questions: Question[] = [
       { label: "Too many drop off before converting", bottleneck: "rhythm" },
       { label: "They convert but churn quickly afterwards", bottleneck: "rhythm" },
       { label: "They stall because the message doesn't match what they need", bottleneck: "positioning" },
-      { label: "The funnel mostly works — we just don't have enough traffic in it", bottleneck: "channels" }
+      { label: "The funnel mostly works; we just don't have enough traffic in it", bottleneck: "channels" }
     ]
   },
   {
     id: "q3",
     prompt: "How clearly can the team describe who you're for, in one sentence?",
     answers: [
-      { label: "Not clearly — the ICP is still loose", bottleneck: "positioning" },
+      { label: "Not clearly: the ICP is still loose", bottleneck: "positioning" },
       { label: "Clearly on a call, not on the website", bottleneck: "positioning" },
       { label: "Clearly, but the value prop doesn't land with that ICP", bottleneck: "positioning" },
       { label: "Pretty clearly, but we're targeting too many segments at once", bottleneck: "positioning" }
@@ -57,8 +57,8 @@ const questions: Question[] = [
     id: "q4",
     prompt: "Who closes most deals?",
     answers: [
-      { label: "The founder. Personally. On every call.", bottleneck: "founder" },
-      { label: "The founder plus a junior rep — still founder-dependent", bottleneck: "founder" },
+      { label: "The founder, personally, on every call", bottleneck: "founder" },
+      { label: "The founder plus a junior rep, so still founder-dependent", bottleneck: "founder" },
       { label: "A small sales team, but pipeline is thin", bottleneck: "channels" },
       { label: "Self-serve, but conversion to paid is weak", bottleneck: "rhythm" }
     ]
@@ -79,20 +79,20 @@ const results: Record<BottleneckKey, ResultCopy> = {
   positioning: {
     title: "Your primary bottleneck looks like positioning.",
     summary:
-      "You told us the story buyers hear doesn't line up with how you win on calls, or the ICP is still fuzzy. That usually shows up before channel scale — more spend won't fix a message-market gap.",
+      "You told us the story buyers hear doesn't line up with how you win on calls, or the ICP is still fuzzy. That usually shows up before channel scale; more spend won't fix a message-market gap.",
     body:
-      "The product and market are real, but the site, deck, and outbound story don't consistently carry the same sharp problem frame. That's the positioning bottleneck: not lack of effort, lack of a single narrative buyers can repeat.",
+      "The product and market are real, but the site, deck, and outbound story don't consistently carry the same sharp problem frame. That's the positioning bottleneck: the effort is there, but there's no single narrative buyers can repeat.",
     recommendation:
-      "Tighten ICP and positioning first — one sentence on who it's for, what category you're in, and what you replace. Then align homepage, demo, and top-of-funnel copy before you add channel complexity.",
+      "Tighten ICP and positioning first: one sentence on who it's for, what category you're in, and what you replace. Then align homepage, demo, and top-of-funnel copy before you add channel complexity.",
     nextHref: "/gtm-systems/",
     nextLabel: "See how GTM systems frame ICP and positioning"
   },
   founder: {
     title: "Your primary bottleneck looks like founder dependency.",
     summary:
-      "Revenue still moves when you're in the room — calendar, narrative, and decisions route through you. That's workable until it caps growth; the next step is to systemise what only you know.",
+      "Revenue still moves when you're in the room: calendar, narrative, and decisions route through you. That's workable until it caps growth; the next step is to systemise what only you know.",
     body:
-      "Founder-led sales often works until it doesn't: every important call, exception, and rewrite still depends on you. The risk isn't laziness — it's that the motion never becomes a playbook the team can run.",
+      "Founder-led sales often works until it doesn't: every important call, exception, and rewrite still depends on you. The risk is that the motion never becomes a playbook the team can run.",
     recommendation:
       "Run a short, fixed-scope sprint: document the winning motion, prioritise the first artefacts (ICP, narrative, weekly rhythm), and ship one handoff that doesn't need you on every thread.",
     nextHref: "/strategy-sprint/",
@@ -101,11 +101,11 @@ const results: Record<BottleneckKey, ResultCopy> = {
   rhythm: {
     title: "Your primary bottleneck looks like decision rhythm and conversion mechanics.",
     summary:
-      "Activity is happening, but the funnel or weekly decisions aren't producing a reliable growth number — leaks between steps, or reviews that don't change what ships.",
+      "Activity is happening, but the funnel or weekly decisions aren't producing a reliable growth number: leaks between steps, or reviews that don't change what ships.",
     body:
       "This is the 'decision rhythm' constraint: either transitions in the funnel are untested, or the team doesn't have a weekly cadence that turns data into scale/stop/fix calls.",
     recommendation:
-      "Stand up a simple operating cadence — scorecard, experiment backlog, and explicit owners — and instrument the two weakest funnel transitions before widening the channel mix.",
+      "Stand up a simple operating cadence (scorecard, experiment backlog, and explicit owners) and instrument the two weakest funnel transitions before widening the channel mix.",
     nextHref: "/revenue-operations/",
     nextLabel: "See revenue operations and the weekly cadence"
   },
@@ -206,7 +206,7 @@ const resultsJson = JSON.stringify(results);
         </button>
       </div>
       <p class="mt-2 text-xs text-[color:var(--muted)]">
-        <a class="underline underline-offset-2" href="/newsletter/">Get Growth Notes</a> — one more way to follow the
+        <a class="underline underline-offset-2" href="/newsletter/">Get Growth Notes</a>, one more way to follow the
         system thinking without booking.
       </p>
       <p class="mt-4 text-xs text-[color:var(--muted)]">No data stored. Your answers never leave your browser.</p>

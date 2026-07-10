@@ -2,55 +2,42 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import { buildBreadcrumbSchema, buildHowToSchema } from "../lib/schema";
-import { ctas, singleIdea, siteConfig } from "../site";
+import { afterYouBookSteps, siteConfig } from "../site";
 
-// Stage-based reading paths. The three left columns of the table map to the
-// three primary buyer states; each one routes to the page most likely to
-// answer that founder's next question.
-const paths = [
+// One branch per buyer situation. Each card has exactly one CTA so a
+// first-time visitor can read top to bottom and leave with a single next step.
+const situations = [
   {
-    stage: "Pre-PMF or pre-revenue",
-    you: "Still searching for the problem. Some signal, no repeatable customer.",
-    nextStep: "I'm probably not the right operator yet. Spend the time on customer research and product, not GTM.",
-    cta: "Read: Customer research before you buy more traffic",
-    href: "/writing/do-customer-research-before-you-buy-more-traffic/"
+    label: "Not sure what's broken",
+    you: "Growth has slowed and you can't confidently name the constraint. You want a senior read before spending anything.",
+    next: "Start with the free 20-minute Growth Audit. We diagnose the bottleneck together and agree the next move, whatever that turns out to be.",
+    cta: "Book a free Growth Audit",
+    href: siteConfig.bookingUrl,
+    external: true
   },
   {
-    stage: "Post-PMF, founder still selling",
-    you: "Paying customers, real demand, but pipeline arrives in bursts and the founder owns every revenue call.",
-    nextStep: "Start with a 20-min Growth Audit. We diagnose the bottleneck and decide together whether a Strategy Sprint or fractional engagement makes sense.",
-    cta: "Book a 20-min Growth Audit",
-    href: siteConfig.bookingUrl
+    label: "Know the problem, need a plan",
+    you: "You can name the constraint and want a costed plan, with the first experiments shipped in 2–4 weeks.",
+    next: "The Strategy Sprint gives you the plan, the artefacts, and the first wins on the board.",
+    cta: "See the Strategy Sprint",
+    href: "/strategy-sprint/",
+    external: false
   },
   {
-    stage: "Post-PMF, scaling, growth plateaued",
-    you: "£1M–£20M ARR, a team in place, growth slowing or stalling. Founder is the bottleneck on GTM decisions.",
-    nextStep: "This is the core fit. Read the Fractional CMO scope, then book the audit.",
-    cta: "See Fractional CMO scope",
-    href: "/fractional-cmo/"
-  }
-];
-
-const readFirst = [
-  {
-    title: "Fractional CMO — scope, pricing, FAQs",
-    body: "Engagement modes, the first 30/60/90 days, sample week, full pricing, and the agency vs. freelancer vs. junior vs. full-time vs. consultant comparison.",
-    href: "/fractional-cmo/"
+    label: "Need ongoing senior ownership",
+    you: "You need embedded GTM leadership: someone inside the team running the cadence, the dashboard, and the decisions.",
+    next: "The Fractional CMO engagement puts me in the team, building a growth system your people keep after I leave.",
+    cta: "See the Fractional CMO scope",
+    href: "/fractional-cmo/",
+    external: false
   },
   {
-    title: "Case studies — real campaigns, real numbers",
-    body: "Anonymised engagement write-ups: the bottleneck, the approach, the outcome. Includes the 6× downloads, 35% lower CAC, 500+ qualified signups, and 21% churn-reduction work.",
-    href: "/case-studies/"
-  },
-  {
-    title: "Writing — how I think about growth",
-    body: "Essays on AI-native GTM, growth systems vs. campaigns, and the operator's view of post-PMF scaling.",
-    href: "/writing/"
-  },
-  {
-    title: "Growth bottleneck checklist",
-    body: "Free download. Walks through ICP, channel, conversion, founder-led sales, and RevOps constraints in one page.",
-    href: "/growth-bottleneck-checklist/"
+    label: "Just need a decision made",
+    you: "One recurring GTM question and no appetite for a long engagement. You want a senior second brain on call.",
+    next: "Founder Office Hours are focused working sessions with no ongoing commitment.",
+    cta: "See Founder Office Hours",
+    href: "/founder-office-hours/",
+    external: false
   }
 ];
 
@@ -61,11 +48,12 @@ const schemas = [
   ]),
   buildHowToSchema({
     name: "How to start with Daniel Johnson's fractional CMO site",
-    description: "Choose the right first page based on company stage, then read the offer, case evidence, writing, or checklist before booking a growth audit.",
+    description:
+      "Pick the situation that matches yours, follow the single next step for that branch, and know what happens after you book.",
     url: "/start-here/",
-    steps: paths.map((item) => ({
-      name: item.stage,
-      text: `${item.you} ${item.nextStep}`,
+    steps: situations.map((item) => ({
+      name: item.label,
+      text: `${item.you} ${item.next}`,
       url: item.href
     }))
   })
@@ -73,7 +61,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="Start here: a five-minute tour of Daniel Johnson's work—the right page by stage, proof to read first & whether fractional CMO is your next lever."
+  description="Start here: a two-minute decision path to the right way to work with Daniel Johnson, from a free Growth Audit to Strategy Sprint, Fractional CMO or Office Hours."
   keywords="Daniel Johnson start here, fractional CMO fit, post-PMF founder orientation, growth audit vs sprint"
   path="/start-here/"
   schema={schemas}
@@ -82,12 +70,12 @@ const schemas = [
   <section class="hero-section section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
-        <span class="service-label justify-center">Start here · 5-minute orientation</span>
+        <span class="service-label justify-center">Start here · 2-minute orientation</span>
         <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
-          {singleIdea.long}
+          Find the right next step in two minutes.
         </h1>
         <p class="hero-subcopy text-lg leading-8 md:text-xl">
-          This page is for first-time visitors. Five minutes here will tell you whether I'm the right operator for your company, and what to read first if I am.
+          Four ways to work with me, one decision path. Check the fit below, pick the situation that sounds like yours, and follow the single next step.
         </p>
       </div>
     </div>
@@ -96,77 +84,70 @@ const schemas = [
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
-        eyebrow="What this site is for"
-        title="A working public record of how I run growth."
-        intro="It's not a brochure. It's the playbook, the pricing, the case work, and the FAQs founders ask before a first call — written so you can self-educate before deciding."
+        eyebrow="Who this is for"
+        title="Post-PMF founders with a growth plateau."
+        intro="I work with Seed to Series B AI and B2B SaaS founders, roughly £1M–£20M ARR, who have paying customers and real demand but whose growth has slowed or still depends on the founder."
       />
+      <p class="reveal mx-auto mt-6 max-w-3xl text-base leading-8 text-[color:var(--muted)]">
+        If you're pre-PMF or pre-revenue, I'm probably not the right operator yet. Spend the time on customer research and product rather than GTM, starting with
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/writing/do-customer-research-before-you-buy-more-traffic/">Do customer research before you buy more traffic</a>.
+      </p>
     </div>
   </section>
 
-  <section class="section-space pt-0" aria-labelledby="paths-heading">
+  <section class="section-space pt-0" aria-labelledby="situations-heading">
     <div class="shell">
       <SectionHeader
-        eyebrow="Three reading paths"
-        title="Pick the one that sounds like you."
-        intro="The right next step depends on where you are. Three honest reads — including one where I tell you not to hire me yet."
+        eyebrow="Pick your situation"
+        title="Four situations, one next step each."
+        intro="Each branch has a single next step. If none of them fit, the Growth Audit is the safe default: it costs nothing and ends with a recommendation either way."
       />
 
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
         {
-          paths.map((path) => (
+          situations.map((item) => (
             <article class="reveal card p-6 md:p-7">
-              <p class="card-label">{path.stage}</p>
-              <p class="mt-4 text-base leading-8 font-semibold tracking-[-0.02em]">{path.you}</p>
-              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{path.nextStep}</p>
-              <a class="link-arrow mt-6" href={path.href} data-cta={`start-here-${path.stage}`}>
-                {path.cta} →
+              <p class="card-label">{item.label}</p>
+              <p class="mt-4 text-base leading-8 font-semibold tracking-[-0.02em]">{item.you}</p>
+              <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{item.next}</p>
+              <a
+                class="link-arrow mt-6"
+                href={item.href}
+                data-cta={`start-here-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                rel={item.external ? "noreferrer" : undefined}
+                target={item.external ? "_blank" : undefined}
+              >
+                {item.cta} →
               </a>
             </article>
           ))
         }
       </div>
+
+      <p class="reveal mx-auto mt-8 max-w-3xl text-center text-sm leading-7 text-[color:var(--muted)]">
+        Want evidence before you pick? The <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/proof/">proof page</a> has the numbers and sources, and the <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/case-studies/">case studies</a> show the work in full.
+      </p>
     </div>
   </section>
 
-  <section class="section-space pt-0">
+  <section class="dark-section section-space">
     <div class="shell">
-      <SectionHeader
-        eyebrow="If you're going to read four things"
-        title="The four pages that answer the most questions."
-      />
-
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <div class="reveal mx-auto max-w-3xl text-center">
+        <span class="eyebrow justify-center text-white/60">What happens after you book</span>
+        <h2 class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-white md:text-5xl">
+          Twenty minutes, no pitch.
+        </h2>
+      </div>
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
         {
-          readFirst.map((item) => (
-            <a class="reveal card p-6 md:p-7" href={item.href}>
-              <h3 class="text-xl font-bold tracking-[-0.04em]">{item.title}</h3>
-              <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
-              <span class="link-arrow mt-5">Read</span>
-            </a>
+          afterYouBookSteps.map((step, i) => (
+            <article class="reveal">
+              <p class="mono text-sm text-white/50">{String(i + 1).padStart(2, "0")}</p>
+              <h3 class="mt-3 text-lg font-bold tracking-[-0.03em] text-white">{step.title}</h3>
+              <p class="mt-3 text-base leading-7 text-white/72">{step.body}</p>
+            </article>
           ))
         }
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-gradient section-space">
-    <div class="shell">
-      <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
-        <span class="eyebrow justify-center text-white/60">Next step</span>
-        <h2 class="text-4xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance text-white md:text-6xl">
-          Still useful? Book a 20-min Growth Audit.
-        </h2>
-        <p class="mx-auto max-w-2xl text-lg leading-8 text-white/72">
-          20 minutes. No pitch. No deck. We diagnose the bottleneck and decide together whether working together makes sense — or where else to go if it doesn't.
-        </p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a class="button-accent" href={ctas.primary.href} data-cta="start-here-final-primary">
-            {ctas.primary.label} →
-          </a>
-          <a class="button-link-invert" href={ctas.caseStudies.href} data-cta="start-here-final-case-studies">
-            {ctas.caseStudies.label} →
-          </a>
-        </div>
       </div>
     </div>
   </section>

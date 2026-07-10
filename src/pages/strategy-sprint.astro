@@ -22,7 +22,7 @@ const schemas = [
       {
         name: "Strategy Sprint",
         description: "2–4 week fixed-scope engagement. Diagnosis, 90-day priorities, first artefacts shipped.",
-        price: "6000",
+        price: "4000",
         billingIncrement: "per engagement"
       }
     ]
@@ -31,12 +31,12 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="2–4 week Strategy Sprint with Daniel Johnson: diagnose, prioritise & ship artefacts—ICP, positioning, 90-day plan & first live growth test (£6k)."
-  keywords="strategy sprint startup, fixed scope GTM, 90-day growth plan, ICP positioning sprint, £6k growth engagement"
+  description="2–4 week Strategy Sprint with Daniel Johnson: diagnose, prioritise and ship artefacts, including ICP, positioning, a 90-day plan and the first live growth test (£4k)."
+  keywords="strategy sprint startup, fixed scope GTM, 90-day growth plan, ICP positioning sprint, £4k growth engagement"
   path="/strategy-sprint/"
   schema={schemas}
   stickyCta={false}
-  title="Strategy Sprint — 2–4 weeks, from £6k | Daniel Johnson"
+  title="Strategy Sprint: 2–4 weeks, from £4k | Daniel Johnson"
 >
   <section class="hero-section section-space">
     <div class="shell">
@@ -53,7 +53,7 @@ const schemas = [
             <span class="text-3xl font-extrabold tracking-[-0.06em]">{strategySprintPage.price}</span>
             <span class="text-sm text-[color:var(--muted)]">· {strategySprintPage.cadence}</span>
           </div>
-          <p class="max-w-xl text-sm leading-7 text-[color:var(--muted)]">That's the <strong>fixed total</strong> for the standard sprint — not a monthly retainer, a deposit, or a per-deliverable rate. Scope and any add-ons are agreed in writing before we start, so the number you see is the number you pay.</p>
+          <p class="max-w-xl text-sm leading-7 text-[color:var(--muted)]">That's the <strong>fixed total</strong> for the standard sprint, not a monthly retainer, a deposit, or a per-deliverable rate. Scope and any add-ons are agreed in writing before we start, so the number you see is the number you pay.</p>
           <div class="flex flex-wrap items-center gap-3 pt-2">
             <a class="button-accent" href={ctas.primary.href} data-cta="sprint-hero-primary">
               {ctas.primary.label} →
@@ -77,8 +77,8 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="Week by week"
-        title="Diagnose. Prioritise. Ship."
-        intro="Three phases, fixed scope. The work compounds — week 3 builds on week 1's diagnosis."
+        title="Diagnose, prioritise, ship."
+        intro="Three phases, fixed scope. The work compounds: week 3 builds on week 1's diagnosis."
       />
       <div class="mt-10 grid gap-5 md:grid-cols-3">
         {strategySprintPage.weeks.map((week, index) => (
@@ -98,7 +98,7 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="What you walk away with"
-        title="Six concrete deliverables. One operating system."
+        title="Six concrete deliverables that add up to one operating system."
       />
       <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {strategySprintPage.deliverables.map((item) => (

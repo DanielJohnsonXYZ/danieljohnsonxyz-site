@@ -1,0 +1,104 @@
+---
+/**
+ * BrandBar — quiet credibility logo strip.
+ * Zero-config: <BrandBar /> renders a muted label and a single row of
+ * greyscale logos (wraps on mobile). Optional `label` prop overrides the
+ * default heading. Self-contained; no other props, no exports.
+ */
+interface Props {
+  label?: string;
+}
+
+const { label = "Taught, mentored and worked with teams at" } = Astro.props;
+
+const logos = [
+  { src: "/images/logos/cambridge.webp", alt: "University of Cambridge" },
+  { src: "/images/logos/imperial.png", alt: "Imperial College London" },
+  { src: "/images/logos/techstars.png", alt: "Techstars" },
+  { src: "/images/logos/google.webp", alt: "Google" },
+  { src: "/images/logos/uk-space-agency.png", alt: "UK Space Agency" },
+  { src: "/images/logos/general-assembly.png", alt: "General Assembly" }
+];
+---
+
+<div class="brand-bar" role="group" aria-label="Organisations Daniel has taught, mentored and worked with">
+  <p class="brand-bar-label">{label}</p>
+  <ul class="brand-bar-row">
+    {
+      logos.map((logo) => (
+        <li>
+          <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" height="28" />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .brand-bar {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .brand-bar-label {
+    margin: 0;
+    color: var(--subtle, #5d5d66);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .brand-bar-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem 2.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .brand-bar-row li {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-bar-row img {
+    display: block;
+    height: 28px;
+    width: auto;
+    max-width: 8.5rem;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    transition: filter 200ms ease, opacity 200ms ease;
+  }
+
+  .brand-bar-row li:hover img,
+  .brand-bar-row li:focus-within img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 520px) {
+    .brand-bar-row {
+      gap: 0.9rem 1.5rem;
+    }
+
+    .brand-bar-row img {
+      height: 24px;
+      max-width: 7rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-bar-row img {
+      transition: none;
+    }
+  }
+</style>

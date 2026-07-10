@@ -8,7 +8,7 @@ const faq = [
   {
     question: "What do UK fractional CMO engagements typically cost?",
     answer:
-      "Daniel’s public anchors are a £6k Strategy Sprint (2–4 weeks), £7.5k/month for embedded Fractional CMO (1 day/week, 3-month minimum), and £12k/month for Fractional CMO Plus (~2 days/week). Final scope depends on days per week, reporting depth, and how many channels need senior ownership."
+      "Daniel’s public anchors are a £4k Strategy Sprint (2–4 weeks), £5k/month for embedded Fractional CMO (1 day/week, 3-month minimum), and £8k/month for Fractional CMO Plus (~2 days/week). Final scope depends on days per week, reporting depth, and how many channels need senior ownership."
   },
   {
     question: "What moves the price up or down?",
@@ -18,12 +18,12 @@ const faq = [
   {
     question: "How does a monthly retainer relate to a quoted day rate?",
     answer:
-      "Useful fractional work is priced as embedded days per week with clear scope — not ad-hoc hours. If you reverse-engineer £7.5k/month for roughly one day a week, you get a blended four-figure GBP day equivalent before VAT, but quoting day rate without rhythm, channels-in-scope, and reporting depth is what creates mismatched expectations. The Growth Audit aligns those inputs before a retainer is final."
+      "Useful fractional work is priced as embedded days per week with clear scope, not ad-hoc hours. If you reverse-engineer £5k/month for roughly one day a week, you get a blended four-figure GBP day equivalent before VAT (roughly £156/hour at ~32 hours a month), but quoting day rate without rhythm, channels-in-scope, and reporting depth is what creates mismatched expectations. The Growth Audit aligns those inputs before a retainer is final."
   },
   {
     question: "When is a Strategy Sprint enough without a retainer?",
     answer:
-      "When leadership needs diagnosis, a 90-day priority stack, and first artefacts or tests — and already has a credible internal owner for weekly execution after the sprint. If nobody will run the cadence, learning stalls and the sprint becomes a deck. For engagement-shape trade-offs, see Compare six growth options on this site."
+      "When leadership needs diagnosis, a 90-day priority stack, and first artefacts or tests, and already has a credible internal owner for weekly execution after the sprint. If nobody will run the cadence, learning stalls and the sprint becomes a deck. For engagement-shape trade-offs, see Compare six growth options on this site."
   },
   {
     question: "How does that compare to a full-time UK CMO?",
@@ -33,7 +33,7 @@ const faq = [
   {
     question: "How does it compare to a marketing agency retainer?",
     answer:
-      "Agency retainers often land in a similar monthly band for execution-heavy scopes, but the job is different: agencies run channels; a fractional CMO owns cross-channel priorities, narrative, and the weekly decision rhythm. Many post-PMF teams use both — fractional sets the system, the agency executes one channel inside it. See Fractional CMO vs agency."
+      "Agency retainers often land in a similar monthly band for execution-heavy scopes, but the job is different: agencies run channels; a fractional CMO owns cross-channel priorities, narrative, and the weekly decision rhythm. Many post-PMF teams use both, with fractional setting the system and the agency executing one channel inside it. See Fractional CMO vs agency."
   },
   {
     question: "Is VAT included?",
@@ -59,34 +59,34 @@ const schemas = [
 const anchors = [
   {
     title: "Strategy Sprint",
-    range: "From £6,000",
+    range: "From £4,000",
     body: "Two to four weeks. Diagnosis, 90-day priorities, first artefacts, and the first tests in motion. Best when you need clarity and momentum before a retainer."
   },
   {
     title: "Fractional CMO",
-    range: "From £7,500 / month",
+    range: "From £5,000 / month",
     body: "One day a week of embedded senior ownership, 3-month minimum. Weekly rhythm, reporting, acquisition and positioning decisions, team and agency context."
   },
   {
     title: "Fractional CMO Plus",
-    range: "From £12,000 / month",
+    range: "From £8,000 / month",
     body: "Roughly two days a week. For teams that need faster execution, heavier agency management, or more parallel channel work while keeping one senior owner."
   }
 ];
 
 const ukBands = [
   {
-    title: "£6k sprint band",
+    title: "£4k sprint band",
     expect:
       "Fixed window, heavy diagnosis, prioritised 90-day plan, first credible tests or artefacts. Not a substitute for an internal owner if you need ongoing weekly leadership."
   },
   {
-    title: "≈£7.5k / month band",
+    title: "≈£5k / month band",
     expect:
       "One embedded day a week: weekly steering, clearer narrative and channel bets, reporting discipline, agency or junior marketer direction. Best when complexity is real but not every function needs daily executive cover."
   },
   {
-    title: "≈£12k / month band",
+    title: "≈£8k / month band",
     expect:
       "Roughly two days a week: faster iteration, heavier stakeholder surface, multi-channel or international complexity, more parallel experiments while keeping a single senior owner accountable."
   }
@@ -109,7 +109,7 @@ const ukBands = [
           What a UK fractional CMO <span class="hero-accent">actually costs</span>
         </h1>
         <p class="hero-subcopy mx-auto max-w-2xl text-lg leading-8 md:text-xl">
-          Public anchors for sprint and retainer work, what changes the number, and how that compares to a full-time hire — so finance and founders can sanity-check the decision before a call.
+          Public anchors for sprint and retainer work, what changes the number, and how that compares to a full-time hire, so finance and founders can sanity-check the decision before a call.
         </p>
         <div class="flex flex-wrap justify-center gap-3 pt-2">
           <a class="button-accent" href="/growth-audit/" data-cta="cost-uk-primary">
@@ -128,7 +128,7 @@ const ukBands = [
       <SectionHeader
         eyebrow="Benchmarks"
         title="Three shapes founders actually buy."
-        intro="These are the same anchors as the Fractional CMO service page — repeated here for search and finance reviewers who land on cost-first queries."
+        intro="These are the same anchors as the Fractional CMO service page, repeated here for search and finance reviewers who land on cost-first queries."
       />
       <div class="mt-10 grid gap-4 md:grid-cols-3">
         {anchors.map((tier) => (
@@ -164,11 +164,11 @@ const ukBands = [
         <ul class="mt-6 space-y-3 text-base leading-7 text-[color:var(--muted)]">
           <li>
             <strong class="text-[color:var(--ink)]">Full-time CMO/VP Marketing:</strong> all-in employer cost often lands meaningfully above £120k base once bonus,
-            pension, tools, and recruiter fees are included — before ramp.
+            pension, tools, and recruiter fees are included, before ramp.
           </li>
           <li>
             <strong class="text-[color:var(--ink)]">Agency retainers:</strong> many specialist B2B agencies sit in a wide £6k–£20k/month band depending on channel depth
-            and account team seniority — execution-first, not executive GTM ownership.
+            and account team seniority. That buys execution, not executive GTM ownership.
           </li>
           <li>
             <strong class="text-[color:var(--ink)]">Senior independents:</strong> day rates vary by urgency, sector, and scope; credible operators are rarely “cheap per hour”
@@ -179,12 +179,12 @@ const ukBands = [
       <article class="card-muted p-6 md:p-8">
         <p class="card-label">Monthly retainer vs day-rate framing</p>
         <p class="mt-4 leading-7 text-[color:var(--muted)]">
-          Retainers should reflect a <strong class="text-[color:var(--ink)]">weekly rhythm and decision surface</strong> — not a laundry list of tasks billed as fractional
+          Retainers should reflect a <strong class="text-[color:var(--ink)]">weekly rhythm and decision surface</strong>, not a laundry list of tasks billed as fractional
           hours. Day-rate quotes can be useful for finance models, but without “days per week + what is in scope,” they mislead both sides.
         </p>
         <p class="mt-4 leading-7 text-[color:var(--muted)]">
           If you are modelling cash flow, assume a <strong class="text-[color:var(--ink)]">3-month minimum</strong> on ongoing fractional work alongside any sprint you run first.
-          VAT may apply depending on entity and place of supply — confirm on the call, not in a blog footnote.
+          VAT may apply depending on entity and place of supply; confirm on the call, not in a blog footnote.
         </p>
         <p class="mt-4 text-sm leading-6 text-[color:var(--muted)]">
           Essay with wider pricing context:{" "}
@@ -226,13 +226,13 @@ const ukBands = [
     <div class="shell">
       <SectionHeader
         eyebrow="Comparison"
-        title="Fractional vs agency vs full-time — different jobs, different invoices."
-        intro="The right choice is usually a function of whether you need executive GTM ownership, channel execution, or a permanent internal executive layer — not which line item looks smallest in isolation."
+        title="Fractional vs agency vs full-time: different jobs, different invoices."
+        intro="The right choice is usually a function of whether you need executive GTM ownership, channel execution, or a permanent internal executive layer, not which line item looks smallest in isolation."
       />
       <div class="mt-10 grid gap-4 lg:grid-cols-3">
         <article class="card p-7">
           <p class="card-label">Fractional CMO</p>
-          <p class="mt-3 text-sm font-semibold text-[color:var(--accent)]">From £7.5k–£12k / month (public anchors)</p>
+          <p class="mt-3 text-sm font-semibold text-[color:var(--accent)]">From £5–8k / month (public anchors)</p>
           <p class="mt-4 leading-7 text-[color:var(--muted)]">
             Owns priorities, narrative, weekly rhythm, and team/agency direction in a part-time embedded cadence. Best when complexity is real but a full-time exec hire is premature.
           </p>
@@ -254,7 +254,7 @@ const ukBands = [
           <p class="card-label">Full-time CMO</p>
           <p class="mt-3 text-sm font-semibold text-[color:var(--accent)]">Typically £120–£180k+ base (UK)</p>
           <p class="mt-4 leading-7 text-[color:var(--muted)]">
-            Right when you need always-on executive leadership and internal headcount. Higher TCO, longer ramp, and a longer commitment — often preceded by fractional work to stabilise the system.
+            Right when you need always-on executive leadership and internal headcount. Higher TCO, longer ramp, and a longer commitment, often preceded by fractional work to stabilise the system.
           </p>
           <a class="mt-4 inline-block font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-vs-full-time-cmo/">
             Fractional vs full-time →
@@ -272,7 +272,7 @@ const ukBands = [
 
   <section class="section-space pt-0">
     <div class="shell">
-      <SectionHeader eyebrow="Expectations" title="What you should expect at each public anchor." intro="Bands describe judgement and cadence — not vanity deliverable counts." />
+      <SectionHeader eyebrow="Expectations" title="What you should expect at each public anchor." intro="Bands describe judgement and cadence, not vanity deliverable counts." />
       <div class="mt-10 grid gap-4 md:grid-cols-3">
         {ukBands.map((band) => (
           <article class="card-muted p-6">
@@ -305,7 +305,7 @@ const ukBands = [
           <p class="card-label">Next step</p>
           <h2 class="mt-3 text-3xl font-extrabold tracking-[-0.05em]">Sanity-check the number against your pipeline.</h2>
           <p class="mt-3 text-[color:var(--muted)]">
-            Use the ROI calculator, then book a 20-minute Growth Audit if you want a direct read on fit — no pitch deck, no obligation.
+            Use the ROI calculator, then book a 20-minute Growth Audit if you want a direct read on fit. No pitch deck, no obligation.
           </p>
         </div>
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center">

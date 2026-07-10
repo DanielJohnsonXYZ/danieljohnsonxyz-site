@@ -10,7 +10,7 @@ interface Props {
 const { mediaCta = false } = Astro.props;
 ---
 
-<footer class="dark-section pb-10 pt-20">
+<footer class="dark-section pb-10 pt-14">
   <div class="shell">
     <!-- Active footer: testimonial pull-quote + proof strip so the footer does conversion work, not just navigation. -->
     <div class="mb-8 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-end">
@@ -48,14 +48,6 @@ const { mediaCta = false } = Astro.props;
               ? "For podcasts, press, speaking, panels, workshops, and newsletter interviews, email Daniel directly or use the producer-ready media kit."
               : "20 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense."}
           </p>
-          {!mediaCta && (
-            <div class="max-w-md space-y-2">
-              <p class="rounded-full border border-white/20 bg-white/[0.03] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/80">
-                {siteConfig.availability}
-              </p>
-              <p class="text-xs font-medium leading-relaxed text-white/65">{siteConfig.nextStartWindow}</p>
-            </div>
-          )}
           <div class="flex flex-wrap gap-3">
             {mediaCta ? (
               <>
@@ -176,7 +168,7 @@ const { mediaCta = false } = Astro.props;
           <NewsletterFormInline
             variant="strip"
             tone="dark"
-            heading="Growth Notes — practical founder-led GTM, one email at a time."
+            heading="Growth Notes, practical founder-led GTM, one email at a time."
             subline="Same list as the newsletter page. Unsubscribe anytime."
             idPrefix="nl-footer"
           />

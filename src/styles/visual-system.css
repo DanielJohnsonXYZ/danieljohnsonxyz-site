@@ -16,9 +16,10 @@
   --shadow-xs: 0 1px 2px rgba(9, 9, 11, 0.04);
   --shadow-xl: 0 32px 80px rgba(9, 9, 11, 0.12);
 
-  /* Section rhythm — fluid clamp tokens replace the two-step 3rem/4.5rem. */
-  --space-section: clamp(2.75rem, 4vw + 1rem, 4.5rem);
-  --space-section-tight: clamp(1.75rem, 3vw + 1rem, 3rem);
+  /* Section rhythm — fluid clamp tokens replace the two-step 3rem/4.5rem.
+     Reduced ~30% (June 2026) so consecutive sections sit closer together. */
+  --space-section: clamp(2rem, 2.8vw + 0.7rem, 3.2rem);
+  --space-section-tight: clamp(1.25rem, 2vw + 0.7rem, 2.1rem);
 
   /* Type scale — small fluid jumps for hero/title sizes without rewriting components. */
   --fs-display: clamp(2.4rem, 3vw + 1rem, 3.5rem);
@@ -166,16 +167,19 @@ body {
   box-shadow: var(--shadow-xs);
 }
 
-/* ─── Header dock — slightly stronger glass ──────────────────────── */
+/* ─── Header dock — quiet glass that sits on the page ────────────────
+   At rest: near-invisible chrome (hairline border, whisper of shadow).
+   Scrolled: slightly more opaque + a soft lift so it reads as floating. */
 .site-nav-dock {
-  background: rgba(255, 255, 255, 0.78);
-  border-color: rgba(9, 9, 11, 0.08);
-  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(9, 9, 11, 0.07);
+  box-shadow: 0 1px 2px rgba(9, 9, 11, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: background 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
 
 /* Header dock active link — keep the current pill but soften the shadow. */
 .site-nav-link-active {
-  box-shadow: 0 6px 16px rgba(9, 9, 11, 0.18);
+  box-shadow: 0 4px 12px rgba(9, 9, 11, 0.14);
 }
 
 /* ─── Footer — top divider line for crisper section transition ──── */

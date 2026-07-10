@@ -52,7 +52,7 @@ const essayBuckets: {
 }[] = [
   {
     title: "Resources · Fractional CMO & pricing context",
-    intro: "When the model fits, commercial shape, and UK-facing pricing reads — aligned with the /resources/ hub.",
+    intro: "When the model fits, commercial shape, and UK-facing pricing reads, aligned with the /resources/ hub.",
     test: (a) => {
       const h = haystack(a);
       return h.includes("fractional") || h.includes("cmo") || h.includes("pricing");
@@ -76,7 +76,7 @@ const essayBuckets: {
   },
   {
     title: "Resources · AI-native GTM",
-    intro: "Practical AI in GTM workflows — speed without outsourcing judgement.",
+    intro: "Practical AI in GTM workflows: speed without outsourcing judgement.",
     test: (a) => {
       const h = haystack(a);
       return h.includes("ai-native") || h.includes(" ai ") || h.includes("genai");
@@ -114,7 +114,7 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
             Essays on AI-native GTM and growth systems.
           </h1>
           <p class="conversion-subcopy max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            Native essays by Daniel on AI-native GTM, fractional leadership, and operating-system thinking — plus a smaller
+            Native essays by Daniel on AI-native GTM, fractional leadership, and operating-system thinking, plus a smaller
             curated archive of profiles, interviews, talks, and resources that show how the point of view travels.
           </p>
           <p class="max-w-3xl text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">
@@ -170,7 +170,7 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
 
       <div class="reveal mt-12 rounded-2xl border border-[color:var(--line)] p-6 md:p-8">
         <p class="card-label">New here? Start with these three.</p>
-        <p class="mt-2 text-sm text-[color:var(--muted)]">The fastest way into how Daniel thinks about growth — then browse by topic below.</p>
+        <p class="mt-2 text-sm text-[color:var(--muted)]">The fastest way into how Daniel thinks about growth, then browse by topic below.</p>
         <div class="mt-6 grid gap-5 lg:grid-cols-3">
           {articles.slice(0, 3).map((article) => (
             <article class="card-muted p-5">
@@ -224,7 +224,7 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
           <div class="mt-12">
             <SectionHeader
               eyebrow="Essays"
-              intro="Additional pieces that span multiple themes — still organised by tags on each card."
+              intro="Additional pieces that span multiple themes, still organised by tags on each card."
               title="More essays."
             />
             <div class="mt-8 grid gap-5 lg:grid-cols-2">

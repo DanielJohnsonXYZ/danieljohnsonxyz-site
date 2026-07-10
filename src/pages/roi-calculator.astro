@@ -19,7 +19,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="Calculate your potential ROI from hiring a Fractional CMO. See how much additional revenue a £7,500/month engagement could generate for your startup."
+  description="Calculate your potential ROI from hiring a Fractional CMO. See how much additional revenue a £5,000/month engagement could generate for your startup."
   keywords="fractional CMO ROI calculator, marketing ROI calculator UK, fractional CMO cost vs return, startup growth calculator"
   path="/roi-calculator/"
   schema={schemas}
@@ -34,7 +34,7 @@ const schemas = [
             What could a Fractional CMO be worth to you?
           </h1>
           <p class="hero-subcopy text-xl leading-9 md:text-2xl">
-            Plug in your numbers and see the potential annual gain from embedding senior GTM leadership at £7,500/month.
+            Plug in your numbers and see the potential annual gain from embedding senior GTM leadership at £5,000/month.
           </p>
           <div class="flex flex-wrap items-center gap-3 pt-2">
             <a class="button-accent" href="/growth-bottleneck-review/" data-cta="roi-book-diagnostic">
@@ -49,7 +49,7 @@ const schemas = [
           <p class="card-label">Why this matters</p>
           <ul class="mt-5 scan-list">
             <li>Most startups leave 15–30% revenue on the table</li>
-            <li>A Fractional CMO costs ~£90k/year</li>
+            <li>A Fractional CMO costs ~£60k/year</li>
             <li>One positioning fix can pay for the year</li>
             <li>Build a system that runs without you</li>
           </ul>
@@ -115,14 +115,14 @@ const schemas = [
                   type="number"
                   id="cmo-cost"
                   name="cmo-cost"
-                  value="7500"
+                  value="5000"
                   min="0"
                   step="500"
                   class="w-full rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] py-3 pl-8 pr-4 text-lg font-semibold tracking-[-0.02em] focus:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/20"
                   aria-describedby="cmo-cost-hint"
                 />
               </div>
-              <p id="cmo-cost-hint" class="mt-1 text-xs text-[color:var(--subtle)]">Per month (default £7,500)</p>
+              <p id="cmo-cost-hint" class="mt-1 text-xs text-[color:var(--subtle)]">Per month (default £5,000)</p>
             </div>
 
             <div>
@@ -196,7 +196,7 @@ const schemas = [
 
             <div class="mt-8 rounded-xl bg-[color:var(--accent)]/10 p-5">
               <p class="text-sm leading-6 text-[color:var(--ink)]">
-                <strong>Note:</strong> This is a simplified model. Real outcomes depend on your ICP clarity, channel mix, team capacity, and how quickly we can ship fixes. The first 30 days are diagnostic — we'll know the real levers by day 30.
+                <strong>Note:</strong> This is a simplified model. Real outcomes depend on your ICP clarity, channel mix, team capacity, and how quickly we can ship fixes. The first 30 days are diagnostic, so we'll know the real levers by day 30.
               </p>
             </div>
           </div>
@@ -204,13 +204,13 @@ const schemas = [
           <div id="empty-state" class="card p-8 md:p-10 text-center">
             <div class="text-4xl mb-4" aria-hidden="true">📊</div>
             <p class="text-lg font-semibold text-[color:var(--ink)]">Enter your numbers to see your potential ROI</p>
-            <p class="mt-2 text-sm text-[color:var(--muted)]">The calculator updates live as you type — or click Calculate.</p>
+            <p class="mt-2 text-sm text-[color:var(--muted)]">The calculator updates live as you type, or click Calculate.</p>
           </div>
 
           <a href="/growth-bottleneck-review/" class="card p-6 flex items-center justify-between group hover:ring-2 hover:ring-[color:var(--accent)] transition-all">
             <div>
               <p class="font-bold text-lg tracking-[-0.03em]">Ready to dig deeper?</p>
-              <p class="mt-1 text-sm text-[color:var(--muted)]">Book a free 20-min diagnostic — no pitch, just clarity.</p>
+              <p class="mt-1 text-sm text-[color:var(--muted)]">Book a free 20-min diagnostic with no pitch.</p>
             </div>
             <span class="link-arrow text-lg"></span>
           </a>
@@ -223,7 +223,7 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="How it works"
-        title="The math behind the calculator."
+        title="The maths behind the calculator."
         intro="A simple model to show why fractional leadership often pays for itself within months."
       />
       <div class="mt-8 grid gap-4 md:grid-cols-3 max-w-4xl mx-auto">
@@ -244,7 +244,7 @@ const schemas = [
         </article>
       </div>
       <p class="mt-6 max-w-3xl mx-auto text-center text-sm leading-7 text-[color:var(--muted)]">
-        <strong>Assumptions:</strong> the model uses the improvement % and revenue you enter, held flat across 12 months, against the fractional rate shown — no compounding and no ramp-up curve. It's a directional estimate to frame the decision, not a forecast or a guarantee; pick a conservative improvement % and treat the output as a ceiling-of-plausibility, not a promise.
+        <strong>Assumptions:</strong> the model uses the improvement % and revenue you enter, held flat across 12 months, against the fractional rate shown, with no compounding and no ramp-up curve. It's a directional estimate to frame the decision rather than a forecast or a guarantee, so pick a conservative improvement % and read the output as an upper bound.
       </p>
     </div>
   </section>
@@ -310,7 +310,7 @@ const schemas = [
 
   function calculateROI() {
     const revenue = inputNum("revenue", 0);
-    const cmoCost = inputNum("cmo-cost", 7500);
+    const cmoCost = inputNum("cmo-cost", 5000);
     const improvement = inputNum("improvement", 20);
 
     const additionalMonthly = revenue * (improvement / 100);
