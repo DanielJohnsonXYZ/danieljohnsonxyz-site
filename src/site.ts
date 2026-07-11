@@ -244,7 +244,7 @@ export const navigation = [
 /** Primary nav dropdown — productised services in ladder order (Diagnose → Plan → Build → Advise). */
 export const workWithMeNavItems = [
   { href: "/growth-audit/", label: "20-min Growth Audit", description: "Diagnose · Free. Bottleneck read in 20 minutes, no pitch." },
-  { href: "/strategy-sprint/", label: "Strategy Sprint", description: "Plan · From £4k. 2–4 weeks. Plan, artefacts, first wins." },
+  { href: "/strategy-sprint/", label: "Strategy Sprint", description: "Plan · From £6k. 2–4 weeks. Plan, artefacts, first wins." },
   { href: "/fractional-cmo/", label: "Fractional CMO", description: "Build · From £5k/mo. Embedded senior GTM leadership." },
   { href: "/founder-office-hours/", label: "Founder Office Hours", description: "Advise · Focused GTM decisions and second-brain sessions." },
   { href: "/speaking/", label: "Speaking & workshops", description: "Talks, workshops, and founder-cohort sessions." }
@@ -415,7 +415,7 @@ export const whyDaniel = [
   },
   {
     option: "Fractional CMO (Daniel's model)",
-    cost: "£5–8k/month, 3-month minimum",
+    cost: "£5–7.5k/month, 3-month minimum",
     owner: "Senior operator in the seat",
     problem: "Owns GTM priorities, reporting, and the team's weekly rhythm. Builds the system, then hands it off clean.",
     highlight: true
@@ -603,7 +603,7 @@ export const speakingVideos = [
 
 // ──────────────────────────────────────────────────────────────────────────
 // Home-page service ladder — a CLEAN buying ladder, not a service-shape mix.
-// Audit (free entry) → Sprint (£4k, fixed scope) → Fractional CMO (embedded).
+// Audit (free entry) → Sprint (£6k, fixed scope) → Fractional CMO (embedded).
 // Speaking and Office Hours move below the ladder as a "secondary" mention so
 // the home page reads like a buying journey, not a menu of unrelated services.
 // ──────────────────────────────────────────────────────────────────────────
@@ -625,7 +625,7 @@ export const homeServiceLadder = [
   {
     tier: "Tier 2 · Plan",
     heading: "Strategy Sprint",
-    price: "£4k fixed scope",
+    price: "£6k fixed scope",
     cadence: "2–4 week engagement",
     body:
       "Diagnose, prioritise, and ship the first artefacts. ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.",
@@ -673,7 +673,7 @@ const vsAgencyRows: VsAgencyRow[] = [
   { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix", winner: "fractional" },
   { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company", winner: "fractional" },
   { dimension: "Speed", agency: "Slower: agreed scope, change orders", fractional: "Faster: embedded operator, no handoffs", winner: "fractional" },
-  { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£5–8k/month, 3-month minimum", winner: null },
+  { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£5–7.5k/month, 3-month minimum", winner: null },
   { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement", winner: null }
 ];
 
@@ -701,7 +701,7 @@ export const vsAgency = {
     {
       question: "Is a fractional CMO more expensive than an agency?",
       answer:
-        "The monthly ranges overlap: £5–8k for a fractional CMO, £6–20k for a typical agency. But you're buying different things. The agency runs a channel; the fractional CMO runs the system. Most agency engagements still need someone senior to direct them, and that's the role the fractional CMO fills."
+        "The monthly ranges overlap: £5–7.5k for a fractional CMO, £6–20k for a typical agency. But you're buying different things. The agency runs a channel; the fractional CMO runs the system. Most agency engagements still need someone senior to direct them, and that's the role the fractional CMO fills."
     },
     {
       question: "How long does a fractional CMO engagement run?",
@@ -719,7 +719,7 @@ export const vsAgency = {
 export const vsFulltimeCMO = {
   title: "Fractional CMO vs. Full-time CMO",
   rows: [
-    { dimension: "All-in cost", fractional: "£5–8k/month (~£60–96k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs", winner: "fractional" },
+    { dimension: "All-in cost", fractional: "£5–7.5k/month (~£60–90k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs", winner: "fractional" },
     { dimension: "Time to start", fractional: "Days", fulltime: "6 months to hire, 12 months to ramp", winner: "fractional" },
     { dimension: "Commitment", fractional: "3-month minimum, rolling thereafter", fulltime: "Permanent, 3-month notice on either side", winner: "fractional" },
     { dimension: "Risk if it doesn't fit", fractional: "Low: end the engagement, no severance", fulltime: "High: recruitment fee, equity dilution, 3-month notice", winner: "fractional" },
@@ -810,11 +810,11 @@ export const growthAuditPage = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// /strategy-sprint page data — £4k, 2–4 week fixed-scope engagement.
+// /strategy-sprint page data — £6k, 2–4 week fixed-scope engagement.
 // Lower commitment than full Fractional CMO; higher than the audit.
 // ──────────────────────────────────────────────────────────────────────────
 export const strategySprintPage = {
-  price: "From £4,000",
+  price: "From £6,000",
   cadence: "2–4 weeks · Fixed scope",
   oneLiner:
     "Diagnose the bottleneck, set 90-day priorities, ship the first artefacts. The plan and the operating rhythm before you commit to ongoing work.",

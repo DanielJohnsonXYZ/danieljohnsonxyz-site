@@ -11,6 +11,8 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 # Booking shortlink → primary Growth Audit page
 /book-a-call              /growth-audit/  301
 /book-a-call/             /growth-audit/  301
+/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups /writing/what-is-a-fractional-cmo/ 301
+/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups/ /writing/what-is-a-fractional-cmo/ 301
 
 /podcast-appearances      /podcast-guest/  301
 /podcast-appearances/     /podcast-guest/  301
