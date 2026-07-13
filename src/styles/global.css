@@ -528,30 +528,99 @@ button.chip.case-chip-active {
 }
 
 /* ─── Nav ─── */
+.site-header {
+  padding-top: 0.65rem;
+  padding-inline: 0;
+}
+
+.site-header-shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 0;
+}
+
+@media (max-width: 80rem) {
+  .site-header {
+    padding-inline: 0.75rem;
+  }
+}
+
 .site-nav-dock {
   border: 1px solid rgba(9, 9, 11, 0.07);
-  border-radius: 2rem;
+  border-radius: 1.35rem;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 1px 2px rgba(9, 9, 11, 0.04), 0 10px 30px -12px rgba(9, 9, 11, 0.1);
   backdrop-filter: blur(20px) saturate(140%);
+  padding: 0.55rem 1.5rem;
 }
 
-.brand-mark {
-  display: flex;
-  width: 2.25rem;
-  height: 2.25rem;
+.site-nav-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
-  border-radius: 0.7rem;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: -0.06em;
-  color: white;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+}
+
+.site-nav-brand {
+  justify-self: start;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-nav-links {
+  justify-self: center;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.site-nav-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .site-nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.site-nav-cta {
+  min-height: 2.35rem !important;
+  padding: 0.45rem 1.05rem !important;
+  font-size: 0.8125rem !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+}
+
+.site-nav-menu-btn {
+  min-height: 2.35rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+}
+
+.brand-mark {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: -0.04em;
+  color: white;
 }
 
 .site-nav-link:hover,
@@ -2497,9 +2566,13 @@ h3,
 }
 
 .site-header-scrolled .site-nav-dock {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 1px 2px rgba(9, 9, 11, 0.04), 0 12px 32px -10px rgba(9, 9, 11, 0.14);
   border-color: rgba(9, 9, 11, 0.1);
+}
+
+.site-header-scrolled {
+  padding-top: 0.45rem;
 }
 
 .site-nav-dropdown-image-cta {
@@ -2548,6 +2621,11 @@ footer .shell {
   padding-block: var(--space-conversion-y);
 }
 
+/* New footer controls its own vertical rhythm. */
+footer.site-footer .shell {
+  padding-block: 0;
+}
+
 footer blockquote,
 .testimonial-lead {
   box-shadow: var(--shadow-sm);
@@ -2559,7 +2637,13 @@ footer blockquote,
   }
 
   .site-nav-dock {
-    padding-inline: 1rem;
+    padding-inline: 0.9rem;
+    padding-block: 0.35rem;
+  }
+
+  .site-nav-bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 2.5rem;
   }
 
   .hero-proof-bar {
@@ -2569,5 +2653,9 @@ footer blockquote,
   .cta-gradient .shell,
   footer .shell {
     padding-block: clamp(1.5rem, 5vw, 2.2rem);
+  }
+
+  footer.site-footer .shell {
+    padding-block: 0;
   }
 }

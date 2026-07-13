@@ -91,9 +91,6 @@ const engineNodes = [
   { href: "/founder-led-distribution/", n: "05", t: "Founder-led distribution", d: "Voice, content, pipeline loop", x: 95.5, y: 355 },
   { href: "/revenue-operations/", n: "06", t: "Reporting", d: "Scale, stop, fix", x: 95.5, y: 165 }
 ];
-
-const marqueeA = ["Positioning", "Pipeline", "Messaging", "Conversion", "Reporting", "Founder-led growth"];
-const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Proof library", "AI-native research", "GTM system"];
 ---
 
 <BaseLayout
@@ -112,7 +109,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
             <span class="v5-eyebrow">Fractional CMO · Seed–Series B AI &amp; B2B SaaS</span>
             <h1 class="v5-h1">
               I build the growth engine your startup is missing,
-              <span class="v5-accent">then hand your team <span class="v5-hl">the keys.</span></span>
+              then hand your team <span class="v5-hl">the keys.</span>
             </h1>
             <p class="v5-subhead v5-hero-sub">
               I embed with post-PMF B2B SaaS and AI teams as a fractional CMO, find the real constraint, and build the system your team keeps running after I leave.
@@ -125,9 +122,9 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
                 See case studies
               </a>
             </div>
-            <p class="v5-hero-fit">
+            <div class="v5-hero-fit">
               £18M+ in client revenue · 4.97 / 5 from 220 reviews on GrowthMentor · Best fit: {icpFirmographics.arrBand}, {icpFirmographics.headcountBand}, founder still running GTM
-            </p>
+            </div>
           </div>
           <div class="v5-hero-photo reveal" data-hero-photo>
             <div class="v5-hero-photo-bg">
@@ -140,7 +137,6 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
                 fetchpriority="high"
               />
             </div>
-            <span class="v5-pill v5-pill-top">Fractional CMO</span>
             <span class="v5-pill v5-pill-bot">Available · now</span>
           </div>
         </div>
@@ -161,41 +157,26 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
       </div>
     </div>
 
-    <!-- ===== Kinetic ribbon ===== -->
-    <div class="v5-marquee" aria-hidden="true">
-      <div class="v5-marquee-track">
-        {[...marqueeA, ...marqueeA].map((item) => <span class="v5-marquee-item">{item}</span>)}
-      </div>
-    </div>
-    <div class="v5-marquee v5-marquee-reverse" aria-hidden="true">
-      <div class="v5-marquee-track">
-        {[...marqueeB, ...marqueeB].map((item) => <span class="v5-marquee-item">{item}</span>)}
-      </div>
-    </div>
-
     <!-- ===== Bottleneck + interactive diagnosis ===== -->
     <section aria-label="The bottleneck">
       <div class="v5-container reveal">
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">The bottleneck</span>
-            <h2 class="v5-h2">You've got traction. <span class="v5-accent">Growth still <span class="v5-hl">feels like guessing.</span></span></h2>
+            <h2 class="v5-h2">You've got traction. Growth still <span class="v5-hl">feels like guessing.</span></h2>
           </div>
           <p class="v5-subhead">Usually the channel is fine. The whole growth function still lives in your head, and nothing compounds without you.</p>
         </div>
-        <div class="v5-bottleneck-card">
+        <div class="v5-bottleneck-block">
           <p>The product works and revenue is moving. You've got paying customers and a deck that holds up in a room. And yet:</p>
           <ul class="v5-symptoms" role="list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l4-6 4 3 5-8 5 5" /><path d="M3 21h18" /></svg>
               <span>Acquisition has plateaued, and pipeline arrives in bursts before going quiet again.</span>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7" r="3.5" /><path d="M5.5 21c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5" /></svg>
               <span>Every important growth decision still routes through you, because nobody else has the full picture.</span>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6" /><path d="M12 15v6" /><circle cx="12" cy="12" r="2.5" /><path d="M5 5l4 4" /><path d="M15 15l4 4" /></svg>
               <span>Campaigns ship, but nothing connects them, so nothing compounds.</span>
             </li>
           </ul>
@@ -207,7 +188,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head" style="margin-top: 3rem; margin-bottom: 0;">
           <div class="reveal">
             <span class="v5-eyebrow">Free · 2 minutes · On-page result</span>
-            <h2 class="v5-h2">Not sure which lever is yours? <span class="v5-accent">Run the diagnostic.</span></h2>
+            <h2 class="v5-h2">Not sure which lever is yours? Run the diagnostic.</h2>
           </div>
           <p class="v5-subhead reveal">Five questions, then a personalised read on where your growth is actually stuck, right here on the page.</p>
         </div>
@@ -225,7 +206,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">The engine</span>
-            <h2 class="v5-h2">I build growth engines <span class="v5-accent">that <span class="v5-hl">run without you.</span></span></h2>
+            <h2 class="v5-h2">I build growth engines that <span class="v5-hl">run without you.</span></h2>
           </div>
           <p class="v5-subhead">Six layers, one loop. Customer signal feeds GTM systems, which feeds acquisition, conversion, founder-led distribution, and reporting, which loops straight back into signal.</p>
         </div>
@@ -275,7 +256,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">Proof</span>
-            <h2 class="v5-h2">Numbers from real campaigns, <span class="v5-accent">with the attribution to back them.</span></h2>
+            <h2 class="v5-h2">Numbers from real campaigns, with the attribution to back them.</h2>
           </div>
           <p class="v5-subhead">The short list. Full case studies linked below.</p>
         </div>
@@ -329,7 +310,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">Ways to work together</span>
-            <h2 class="v5-h2">Four ways in. <span class="v5-accent">Pick your entry point.</span></h2>
+            <h2 class="v5-h2">Four ways in. <span class="v5-hl">Pick your entry point.</span></h2>
           </div>
           <p class="v5-subhead">Smallest commitment first. Most clients start with the audit and move up the ladder later.</p>
         </div>
@@ -391,7 +372,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">Fit</span>
-            <h2 class="v5-h2">Who this is for, <span class="v5-accent">and who it isn't.</span></h2>
+            <h2 class="v5-h2">Who this is for, and who it isn't.</h2>
           </div>
           <p class="v5-subhead">I'd rather save us both a 20-minute call if we're not the right match.</p>
         </div>
@@ -430,7 +411,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-about-grid">
           <div>
             <span class="v5-eyebrow">About</span>
-            <h2 class="v5-h2">I've been the founder <span class="v5-accent">with a <span class="v5-hl">flat chart at 2am.</span></span></h2>
+            <h2 class="v5-h2">I've been the founder with a <span class="v5-hl">flat chart at 2am.</span></h2>
             <p>My first company was eQuoo, evidence-based emotional fitness training. The product was good, but the go-to-market mostly amounted to hoping the right people would find us, and they didn't find us fast enough. We navigated through it and got to two exits. The lesson stuck: execution without a system is expensive improvisation with a deadline.</p>
             <p>After that I ran in-house growth at Shoprocket and NAVA, and kept seeing the same pattern: functional products, founders owning every growth decision, nothing compounding. We Scale Startups exists to fix that, with a structured approach to positioning, pipeline, and growth decisions built across 20+ AI and B2B SaaS engagements at depth, and 200+ startups in total across healthtech, eCommerce, and AI infrastructure.</p>
             <p>I've mentored 479+ founders at a 4.97 / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>
@@ -459,7 +440,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">Beyond the page</span>
-            <h2 class="v5-h2">Speaking, writing, and other ways <span class="v5-accent">to read the work.</span></h2>
+            <h2 class="v5-h2">Speaking, writing, and other ways to read the work.</h2>
           </div>
           <p class="v5-subhead">Talks and essays, if you want a feel for how I think before you book anything.</p>
         </div>
@@ -521,7 +502,7 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
         <div class="v5-split-head">
           <div>
             <span class="v5-eyebrow">FAQ</span>
-            <h2 class="v5-h2">Questions founders ask <span class="v5-accent">before a first call.</span></h2>
+            <h2 class="v5-h2">Questions founders ask before a first call.</h2>
           </div>
           <p class="v5-subhead">Same topics covered on the audit, so you're not buying blind.</p>
         </div>
@@ -558,36 +539,28 @@ const marqueeB = ["Customer signal", "Acquisition tests", "Decision rhythm", "Pr
   </div>
 
   <style>
-    /* Symptom cards inside the bottleneck section (page-scoped). */
+    /* Symptom list inside the bottleneck section (page-scoped). */
     .v5-symptoms {
       list-style: none;
       margin: 1.75rem 0;
       padding: 0;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.9rem;
+      gap: 0;
+      border-top: 1px solid var(--line);
     }
     .v5-symptoms li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.7rem;
-      padding: 1rem 1.1rem;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      font-size: 0.95rem;
-      line-height: 1.5;
+      display: block;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 1.02rem;
+      line-height: 1.55;
       color: var(--ink-soft);
     }
-    .v5-symptoms svg {
-      width: 22px;
-      height: 22px;
-      flex: none;
-      margin-top: 0.1rem;
+    .v5-symptoms li::before {
+      content: "—";
       color: var(--electric);
-    }
-    @media (max-width: 860px) {
-      .v5-symptoms { grid-template-columns: 1fr; }
+      margin-right: 0.65rem;
+      font-weight: 600;
     }
     /* Keep the two proof-row actions on one comfortable line. */
     .v5-center-row {

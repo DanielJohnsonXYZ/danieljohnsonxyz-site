@@ -48,16 +48,16 @@ const workDropdownImage = {
   )
 }
 
-<header id="site-header" class="sticky top-0 z-50 px-4 pt-3">
-  <div class="shell">
-    <div class="site-nav-dock px-5 py-2.5">
-      <div class="flex items-center justify-between gap-4">
-        <a class="group flex min-w-0 shrink items-center gap-3" href="/">
+<header id="site-header" class="site-header sticky top-0 z-50">
+  <div class="site-header-shell">
+    <div class="site-nav-dock">
+      <div class="site-nav-bar">
+        <a class="site-nav-brand group flex min-w-0 items-center gap-2.5" href="/">
           <span class="brand-mark">DJ</span>
           <span class="truncate text-sm font-semibold tracking-[-0.02em]">Daniel Johnson</span>
         </a>
 
-        <nav aria-label="Primary" class="hidden items-center gap-0.5 xl:flex xl:gap-1">
+        <nav aria-label="Primary" class="site-nav-links hidden xl:flex">
           {
             navigation.map((item) => {
               if (item.label === "Work with me") {
@@ -66,7 +66,7 @@ const workDropdownImage = {
                     <button
                       type="button"
                       class:list={[
-                        "site-nav-link site-nav-menu-trigger rounded-full px-3 py-2 text-sm font-medium inline-flex items-center gap-1 xl:px-4",
+                        "site-nav-link site-nav-menu-trigger",
                         workWithMeActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
                       ]}
                       aria-current={workWithMeActive ? "page" : undefined}
@@ -107,7 +107,7 @@ const workDropdownImage = {
                     <button
                       type="button"
                       class:list={[
-                        "site-nav-link site-nav-menu-trigger rounded-full px-3 py-2 text-sm font-medium inline-flex items-center gap-1 xl:px-4",
+                        "site-nav-link site-nav-menu-trigger",
                         proofActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
                       ]}
                       aria-current={proofActive ? "page" : undefined}
@@ -137,7 +137,7 @@ const workDropdownImage = {
               return (
                 <a
                   class:list={[
-                    "site-nav-link rounded-full px-3 py-2 text-sm font-medium xl:px-4",
+                    "site-nav-link",
                     isActive ? "site-nav-link-active text-white" : "text-[color:var(--muted)] hover:text-[color:var(--ink)]"
                   ]}
                   aria-current={isActive ? "page" : undefined}
@@ -150,123 +150,132 @@ const workDropdownImage = {
           }
         </nav>
 
-        <div class="hidden xl:block">
-          {mediaCta ? (
-            <CfEmailOff>
-              <a class="button-primary" href={headerCta.href} data-cta="header-media">
-                {headerCta.label}
-              </a>
-            </CfEmailOff>
-          ) : (
-            <a class="button-primary" href={headerCta.href} data-cta="header-primary">
-              {headerCta.label}
-            </a>
-          )}
-        </div>
-
-        <details class="group relative xl:hidden">
-          <summary class="button-secondary cursor-pointer list-none px-4 py-2" aria-label="Open menu">
-            Menu
-          </summary>
-          <div class="mobile-nav-panel absolute right-0 top-[calc(100%+0.75rem)] max-h-[min(32rem,85vh)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto p-3">
-            <nav aria-label="Mobile" class="flex flex-col gap-1">
-              {
-                navigation.map((item) => {
-                  if (item.label === "Work with me") {
-                    return (
-                      <details class="mobile-nav-group" open={workWithMeActive}>
-                        <summary class="mobile-nav-group-label">Work with me</summary>
-                        <div class="mobile-nav-group-links">
-                          <a
-                            class:list={[
-                              "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                              active === normalise(workWithMeHref) ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
-                            ]}
-                            href={workWithMeHref}
-                          >
-                            Overview
-                          </a>
-                          {workWithMeNavItems.map((sub) => (
-                            <a
-                              class:list={[
-                                "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                                normalise(sub.href) === active ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
-                              ]}
-                              aria-current={normalise(sub.href) === active ? "page" : undefined}
-                              href={sub.href}
-                            >
-                              {sub.label}
-                            </a>
-                          ))}
-                        </div>
-                      </details>
-                    );
-                  }
-                  if (item.label === "Proof") {
-                    return (
-                      <details class="mobile-nav-group" open={proofActive}>
-                        <summary class="mobile-nav-group-label">Proof</summary>
-                        <div class="mobile-nav-group-links">
-                          {proofNavItems.map((sub) => (
-                            <a
-                              class:list={[
-                                "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                                normalise(sub.href) === active ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
-                              ]}
-                              aria-current={normalise(sub.href) === active ? "page" : undefined}
-                              href={sub.href}
-                            >
-                              {sub.label}
-                            </a>
-                          ))}
-                        </div>
-                      </details>
-                    );
-                  }
-                  const isActive = normalise(item.href) === active;
-                  return (
-                    <a
-                      class:list={[
-                        "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                        isActive ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
-                      ]}
-                      aria-current={isActive ? "page" : undefined}
-                      href={item.href}
-                    >
-                      {item.label}
-                    </a>
-                  );
-                })
-              }
-              {mediaCta ? (
-                <CfEmailOff>
-                  <a class="button-primary mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-media">
-                    {headerCta.label}
-                  </a>
-                </CfEmailOff>
-              ) : (
-                <a class="button-primary mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-primary">
+        <div class="site-nav-actions">
+          <div class="hidden xl:block">
+            {mediaCta ? (
+              <CfEmailOff>
+                <a class="button-primary site-nav-cta" href={headerCta.href} data-cta="header-media">
                   {headerCta.label}
                 </a>
-              )}
-              {mediaCta ? (
-                <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href="/media-kit/">
-                  Download media kit →
-                </a>
-              ) : (
-                <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href={ctas.bookingFallback.href}>
-                  {ctas.bookingFallback.label} →
-                </a>
-              )}
-            </nav>
+              </CfEmailOff>
+            ) : (
+              <a class="button-primary site-nav-cta" href={headerCta.href} data-cta="header-primary">
+                {headerCta.label}
+              </a>
+            )}
           </div>
-        </details>
+
+          <details class="group relative xl:hidden">
+            <summary class="button-secondary site-nav-menu-btn cursor-pointer list-none" aria-label="Open menu">
+              Menu
+            </summary>
+            <div class="mobile-nav-panel absolute right-0 top-[calc(100%+0.75rem)] max-h-[min(32rem,85vh)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto p-3">
+              <nav aria-label="Mobile" class="flex flex-col gap-1">
+                {
+                  navigation.map((item) => {
+                    if (item.label === "Work with me") {
+                      return (
+                        <details class="mobile-nav-group" open={workWithMeActive}>
+                          <summary class="mobile-nav-group-label">Work with me</summary>
+                          <div class="mobile-nav-group-links">
+                            <a
+                              class:list={[
+                                "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+                                active === normalise(workWithMeHref) ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
+                              ]}
+                              href={workWithMeHref}
+                            >
+                              Overview
+                            </a>
+                            {workWithMeNavItems.map((sub) => (
+                              <a
+                                class:list={[
+                                  "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+                                  normalise(sub.href) === active ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
+                                ]}
+                                aria-current={normalise(sub.href) === active ? "page" : undefined}
+                                href={sub.href}
+                              >
+                                {sub.label}
+                              </a>
+                            ))}
+                          </div>
+                        </details>
+                      );
+                    }
+                    if (item.label === "Proof") {
+                      return (
+                        <details class="mobile-nav-group" open={proofActive}>
+                          <summary class="mobile-nav-group-label">Proof</summary>
+                          <div class="mobile-nav-group-links">
+                            {proofNavItems.map((sub) => (
+                              <a
+                                class:list={[
+                                  "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+                                  normalise(sub.href) === active ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
+                                ]}
+                                aria-current={normalise(sub.href) === active ? "page" : undefined}
+                                href={sub.href}
+                              >
+                                {sub.label}
+                              </a>
+                            ))}
+                          </div>
+                        </details>
+                      );
+                    }
+                    const isActive = normalise(item.href) === active;
+                    return (
+                      <a
+                        class:list={[
+                          "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+                          isActive ? "site-nav-link-active text-white" : "text-[color:var(--ink)] hover:bg-[color:var(--surface-dim)]"
+                        ]}
+                        aria-current={isActive ? "page" : undefined}
+                        href={item.href}
+                      >
+                        {item.label}
+                      </a>
+                    );
+                  })
+                }
+                {mediaCta ? (
+                  <CfEmailOff>
+                    <a class="button-primary mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-media">
+                      {headerCta.label}
+                    </a>
+                  </CfEmailOff>
+                ) : (
+                  <a class="button-primary mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-primary">
+                    {headerCta.label}
+                  </a>
+                )}
+                {mediaCta ? (
+                  <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href="/media-kit/">
+                    Download media kit →
+                  </a>
+                ) : (
+                  <a class="text-center text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--muted)] mt-2 py-2" href={ctas.bookingFallback.href}>
+                    {ctas.bookingFallback.label} →
+                  </a>
+                )}
+              </nav>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
 <style>
+  .site-header-shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 0 !important;
+  }
+
   /* Simple single-column dropdown (no feature image) — used by "Proof". */
   .site-nav-dropdown-simple {
     grid-template-columns: 1fr !important;

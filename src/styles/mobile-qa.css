@@ -3,13 +3,13 @@
    menu, CTA, form, proof, and footer surfaces usable on narrow screens. */
 
 @media (max-width: 1023px) {
-  header.sticky {
+  header.site-header.sticky {
     padding-inline: 0.75rem;
-    padding-top: 0.75rem;
+    padding-top: 0.6rem;
   }
 
   .site-nav-dock {
-    border-radius: 1.25rem;
+    border-radius: 1.15rem;
   }
 
   .mobile-nav-panel {

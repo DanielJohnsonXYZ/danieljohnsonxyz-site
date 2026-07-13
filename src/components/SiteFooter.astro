@@ -8,51 +8,82 @@ interface Props {
 }
 
 const { mediaCta = false } = Astro.props;
+
+const socialVisible = socialLinks.filter(
+  (item) => item.label !== "GrowthMentor" && item.label !== "MentorCruise"
+);
+
+const navColumns = [
+  { title: "Work with me", items: footerNavigation.workWithMe },
+  { title: "Method", items: footerNavigation.method },
+  { title: "Proof", items: footerNavigation.proof },
+  { title: "Company", items: footerNavigation.company },
+  {
+    title: "Contact",
+    items: [
+      ...footerNavigation.contact,
+      { href: "/contact/", label: "Contact page →" }
+    ]
+  }
+] as const;
 ---
 
-<footer class="dark-section pb-10 pt-14">
-  <div class="shell">
-    <!-- Active footer: testimonial pull-quote + proof strip so the footer does conversion work, not just navigation. -->
-    <div class="mb-8 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-end">
-      <blockquote class="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 md:p-8">
-        <p class="text-lg font-semibold leading-8 tracking-[-0.03em] text-white/90 md:text-xl">
-          "{footerTestimonial.quote}"
-        </p>
-        <footer class="mt-4 flex items-center justify-between text-sm">
+<footer class="site-footer dark-section">
+  <div class="shell site-footer-shell">
+    <!-- Social proof -->
+    <div class="site-footer-proof">
+      <blockquote class="site-footer-quote">
+        <p>"{footerTestimonial.quote}"</p>
+        <footer>
           <div>
-            <p class="font-semibold text-white">{footerTestimonial.name}</p>
-            <p class="text-white/65">{footerTestimonial.role}</p>
+            <strong>{footerTestimonial.name}</strong>
+            <span>{footerTestimonial.role}</span>
           </div>
-          <a class="text-xs font-semibold uppercase tracking-[0.14em] text-white/60 hover:text-white" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
+          <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
             More reviews →
           </a>
         </footer>
       </blockquote>
 
-      <aside class="flex flex-col gap-3 text-right md:items-end">
-        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Top-rated mentor</p>
-        <p class="text-5xl font-extrabold tracking-[-0.06em] text-white">{proofStats.mentorRating}<span class="text-2xl text-white/50">/5</span></p>
-        <p class="text-sm text-white/65">from {proofStats.mentorReviewCount} reviews · {proofStats.mentorSessions} sessions</p>
+      <aside class="site-footer-rating" aria-label="GrowthMentor rating">
+        <p class="site-footer-kicker">Top-rated mentor</p>
+        <p class="site-footer-score">
+          {proofStats.mentorRating}<span>/5</span>
+        </p>
+        <p class="site-footer-meta">
+          from {proofStats.mentorReviewCount} reviews · {proofStats.mentorSessions} sessions
+        </p>
       </aside>
     </div>
 
-    <div class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 md:p-12">
-      <div class="grid gap-10 lg:grid-cols-7">
-        <div class="flex flex-col gap-6 lg:col-span-2">
-          <span class="eyebrow">Start a conversation</span>
-          <h2 class="text-3xl font-bold tracking-[-0.05em] text-white md:text-4xl">
-            {mediaCta ? "Invite Daniel, request a quote, or get the media kit." : `${ctas.primary.label}.`}
-          </h2>
-          <p class="max-w-md text-base leading-7 text-white/65">
-            {mediaCta
+    <!-- CTA + navigation -->
+    <div class="site-footer-main">
+      <div class="site-footer-cta">
+        <p class="site-footer-kicker">Start a conversation</p>
+        <h2>
+          {
+            mediaCta
+              ? "Invite Daniel, request a quote, or get the media kit."
+              : `${ctas.primary.label}.`
+          }
+        </h2>
+        <p>
+          {
+            mediaCta
               ? "For podcasts, press, speaking, panels, workshops, and newsletter interviews, email Daniel directly or use the producer-ready media kit."
-              : "20 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense."}
-          </p>
-          <div class="flex flex-wrap gap-3">
-            {mediaCta ? (
+              : "20 minutes, no pitch. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense."
+          }
+        </p>
+        <div class="site-footer-actions">
+          {
+            mediaCta ? (
               <>
                 <CfEmailOff>
-                  <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`} data-cta="footer-media-email">
+                  <a
+                    class="button-accent"
+                    href={`mailto:${siteConfig.email}?subject=Media%20request%20for%20Daniel%20Johnson`}
+                    data-cta="footer-media-email"
+                  >
                     Email Daniel →
                   </a>
                 </CfEmailOff>
@@ -72,151 +103,424 @@ const { mediaCta = false } = Astro.props;
                   {ctas.bookingFallback.label} →
                 </a>
               </>
-            )}
-          </div>
-          <p class="text-xs text-white/65">{siteConfig.location}</p>
+            )
+          }
         </div>
+        <p class="site-footer-location">{siteConfig.location}</p>
+      </div>
 
-        <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Work with me</p>
-          <ul class="space-y-3">
-            {
-              footerNavigation.workWithMe.map((item) => (
-                <li>
-                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+      <nav class="site-footer-nav" aria-label="Footer">
+        {
+          navColumns.map((column) => (
+            <div class="site-footer-col">
+              <p class="site-footer-kicker">{column.title}</p>
+              <ul>
+                {column.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      {...(item.href.startsWith("http") ? { rel: "noreferrer", target: "_blank" } : {})}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </nav>
+    </div>
 
-        <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Method</p>
-          <ul class="space-y-3">
-            {
-              footerNavigation.method.map((item) => (
-                <li>
-                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+    <!-- Newsletter -->
+    <div class="site-footer-newsletter">
+      <NewsletterFormInline
+        variant="strip"
+        tone="dark"
+        heading="Growth Notes, practical founder-led GTM, one email at a time."
+        subline="Same list as the newsletter page. Unsubscribe anytime."
+        idPrefix="nl-footer"
+      />
+      <p class="site-footer-newsletter-link">
+        <a href="/newsletter/">About the newsletter →</a>
+      </p>
+    </div>
 
-        <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Proof</p>
-          <ul class="space-y-3">
-            {
-              footerNavigation.proof.map((item) => (
-                <li>
-                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Company</p>
-          <ul class="space-y-3">
-            {
-              footerNavigation.company.map((item) => (
-                <li>
-                  <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href={item.href}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="space-y-4">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Contact</p>
-          <ul class="space-y-3">
-            {
-              footerNavigation.contact.map((item) => (
-                <li>
-                  <a
-                    class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0"
-                    href={item.href}
-                    {...(item.href.startsWith("http") ? { rel: "noreferrer", target: "_blank" } : {})}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
+    <!-- Resources -->
+    <nav class="site-footer-resources" aria-label="Resources and comparisons">
+      <p class="site-footer-kicker">Resources</p>
+      <ul>
+        {
+          footerNavigation.resources.map((item) => (
             <li>
-              <a class="block min-h-[44px] py-2 text-sm font-medium text-white/75 hover:text-white sm:min-h-0" href="/contact/">
-                Contact page →
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Bottom bar -->
+    <div class="site-footer-bottom">
+      <p>&copy; {new Date().getFullYear()} {siteConfig.name}. Practical growth for post-PMF founders.</p>
+      <ul class="site-footer-social">
+        <li>
+          <CfEmailOff>
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          </CfEmailOff>
+        </li>
+        {
+          socialVisible.map((item) => (
+            <li>
+              <a href={item.href} rel="noreferrer" target="_blank">
+                {item.label}
               </a>
             </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Newsletter — full-width strip so the form gets room to breathe. -->
-      <div class="mt-10 border-t border-white/[0.06] pt-8">
-        <div class="max-w-2xl">
-          <NewsletterFormInline
-            variant="strip"
-            tone="dark"
-            heading="Growth Notes, practical founder-led GTM, one email at a time."
-            subline="Same list as the newsletter page. Unsubscribe anytime."
-            idPrefix="nl-footer"
-          />
-          <p class="mt-3 text-xs text-white/50">
-            <a class="font-semibold text-white/70 hover:text-white" href="/newsletter/">About the newsletter →</a>
-          </p>
-        </div>
-      </div>
-
-      <nav aria-label="Resources and comparisons" class="mt-10 border-t border-white/[0.06] pt-6">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/65">Resources</p>
-        <ul class="flex flex-wrap gap-x-5 gap-y-3 text-sm text-white/60">
-          {
-            footerNavigation.resources.map((item) => (
-              <li>
-                <a class="inline-flex min-h-[44px] items-center font-medium text-white/75 hover:text-white" href={item.href}>
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+          ))
+        }
+      </ul>
+      <nav aria-label="Legal" class="site-footer-legal">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/ai-policy/">AI policy</a>
+        <span>{siteConfig.canonicalHost}</span>
       </nav>
-
-      <div class="mt-10 grid gap-4 border-t border-white/[0.06] pt-6 text-sm text-white/50 md:grid-cols-[1.2fr_0.8fr]">
-        <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <li>
-            <div>
-              <CfEmailOff>
-                <a class="hover:text-white" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-              </CfEmailOff>
-            </div>
-          </li>
-          {socialLinks.filter(item => item.label !== "GrowthMentor" && item.label !== "MentorCruise").map((item) => (
-            <li><a class="hover:text-white" href={item.href} rel="noreferrer" target="_blank">{item.label}</a></li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="mt-8 border-t border-white/[0.06] pt-6 flex flex-col gap-3 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
-        <p>&copy; {new Date().getFullYear()} {siteConfig.name}. Practical growth for post-PMF founders.</p>
-        <nav aria-label="Legal" class="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.12em]">
-          <a class="hover:text-white/80" href="/privacy/">Privacy</a>
-          <a class="hover:text-white/80" href="/terms/">Terms</a>
-          <a class="hover:text-white/80" href="/ai-policy/">AI policy</a>
-          <span class="font-semibold">{siteConfig.canonicalHost}</span>
-        </nav>
-      </div>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(2.25rem, 4vw, 3.25rem) 1.75rem;
+  }
+
+  .site-footer-shell {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 2.5vw, 2rem);
+  }
+
+  .site-footer-kicker {
+    margin: 0;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Proof band */
+  .site-footer-proof {
+    display: grid;
+    gap: 1.5rem;
+    padding-bottom: clamp(1.5rem, 3vw, 2rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media (min-width: 768px) {
+    .site-footer-proof {
+      grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.7fr);
+      align-items: end;
+      gap: 2.5rem;
+    }
+  }
+
+  .site-footer-quote {
+    margin: 0;
+  }
+
+  .site-footer-quote > p {
+    margin: 0;
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.025em;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .site-footer-quote > footer {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .site-footer-quote strong {
+    display: block;
+    color: #fff;
+    font-weight: 650;
+  }
+
+  .site-footer-quote span {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .site-footer-quote a {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+  }
+
+  .site-footer-quote a:hover {
+    color: #fff;
+  }
+
+  .site-footer-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  @media (min-width: 768px) {
+    .site-footer-rating {
+      text-align: right;
+      align-items: flex-end;
+    }
+  }
+
+  .site-footer-score {
+    margin: 0;
+    font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
+    font-size: clamp(2.25rem, 4vw, 2.85rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: #fff;
+  }
+
+  .site-footer-score span {
+    font-size: 0.45em;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .site-footer-meta {
+    margin: 0;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Main CTA + nav */
+  .site-footer-main {
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    .site-footer-main {
+      grid-template-columns: minmax(16rem, 0.95fr) minmax(0, 1.55fr);
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .site-footer-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 28rem;
+  }
+
+  .site-footer-cta h2 {
+    margin: 0;
+    font-size: clamp(1.45rem, 2.1vw, 1.85rem);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  .site-footer-cta > p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .site-footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.25rem;
+  }
+
+  .site-footer-location {
+    margin: 0.65rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .site-footer-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-footer-nav {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-footer-nav {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.25rem 1rem;
+    }
+  }
+
+  .site-footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-width: 0;
+  }
+
+  .site-footer-col ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .site-footer-col a {
+    display: block;
+    padding-block: 0.28rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .site-footer-col a:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 639px) {
+    .site-footer-col a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding-block: 0.55rem;
+    }
+  }
+
+  /* Newsletter */
+  .site-footer-newsletter {
+    padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-footer-newsletter-link {
+    margin: 0.75rem 0 0;
+    font-size: 0.78rem;
+  }
+
+  .site-footer-newsletter-link a {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+  }
+
+  .site-footer-newsletter-link a:hover {
+    color: #fff;
+  }
+
+  /* Resources */
+  .site-footer-resources {
+    padding-top: clamp(1.1rem, 2vw, 1.5rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-footer-resources .site-footer-kicker {
+    margin-bottom: 0.75rem;
+  }
+
+  .site-footer-resources ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.15rem;
+  }
+
+  .site-footer-resources a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.62);
+    text-decoration: none;
+  }
+
+  .site-footer-resources a:hover {
+    color: #fff;
+  }
+
+  /* Bottom bar */
+  .site-footer-bottom {
+    display: grid;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.48);
+  }
+
+  @media (min-width: 900px) {
+    .site-footer-bottom {
+      grid-template-columns: 1.2fr auto auto;
+      align-items: center;
+      gap: 1.25rem 2rem;
+    }
+  }
+
+  .site-footer-bottom > p {
+    margin: 0;
+  }
+
+  .site-footer-social,
+  .site-footer-legal {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1rem;
+  }
+
+  .site-footer-social a,
+  .site-footer-legal a {
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+  }
+
+  .site-footer-social a:hover,
+  .site-footer-legal a:hover {
+    color: #fff;
+  }
+
+  .site-footer-legal {
+    font-size: 0.7rem;
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .site-footer-legal span {
+    color: rgba(255, 255, 255, 0.38);
+  }
+</style>
