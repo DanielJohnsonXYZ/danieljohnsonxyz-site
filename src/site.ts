@@ -221,9 +221,9 @@ export const ctas = {
     hint: "Free · instant, on-page result"
   },
   growthNote: {
-    label: "Get the Growth Notes newsletter",
-    href: "/newsletter/",
-    hint: "Occasional, no fluff"
+    label: "Subscribe to Growth Notes",
+    href: "/newsletter/#newsletter-signup",
+    hint: "Practical founder-led GTM, one email at a time."
   }
 } as const;
 
