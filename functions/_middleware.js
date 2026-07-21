@@ -6,7 +6,8 @@ const CSP_BASE_DIRECTIVES = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://*.calendly.com https://comms.wescalestartups.com",
+  // GA4 collect hosts (legacy + analytics.google.com) + Clarity + Calendly + Mautic + CF Insights
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://www.clarity.ms https://*.clarity.ms https://cloudflareinsights.com https://*.calendly.com https://comms.wescalestartups.com",
   "frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com",
   "base-uri 'self'",
   "form-action 'self' mailto: https://comms.wescalestartups.com",
@@ -50,7 +51,9 @@ async function inlineScriptHashes(html) {
 const SCRIPT_HOSTS = [
   "https://www.googletagmanager.com",
   "https://www.google-analytics.com",
-  "https://static.cloudflareinsights.com"
+  "https://static.cloudflareinsights.com",
+  "https://www.clarity.ms",
+  "https://scripts.clarity.ms"
 ];
 function buildScriptSrc(hashes) {
   return ["script-src 'self'", ...hashes, ...SCRIPT_HOSTS].join(" ");

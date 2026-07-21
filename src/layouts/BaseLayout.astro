@@ -24,6 +24,8 @@ interface Props {
   stickyCtaLabel?: string;
   stickyCtaHref?: string;
   stickyCtaHint?: string;
+  /** Homepage: avoid duplicating the closing audit H2 in the footer. */
+  footerCtaCompact?: boolean;
   /** Switch shared header/footer CTAs from commercial booking to media-specific contact links. */
   mediaCta?: boolean;
   lastUpdated?: string | false;
@@ -43,6 +45,7 @@ const {
   stickyCtaLabel = undefined,
   stickyCtaHref = undefined,
   stickyCtaHint = undefined,
+  footerCtaCompact = false,
   mediaCta = false,
   lastUpdated = siteConfig.lastUpdated,
   metaRobots = "index,follow,max-image-preview:large"
@@ -201,7 +204,7 @@ const gtmLoaderScript = `(() => {
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- Type system (Fraunces · Inter · JetBrains Mono) is self-hosted via
+    <!-- Type system (Fraunces · Source Sans 3 · JetBrains Mono) is self-hosted via
          @fontsource in global.css — no render-blocking external font request. -->
     <!-- Calendly is linked from multiple CTAs — preconnect so the booking page opens fast. -->
     <link rel="preconnect" href="https://calendly.com" crossorigin />
@@ -269,9 +272,9 @@ const gtmLoaderScript = `(() => {
       )}
     </main>
 
-    <SiteFooter mediaCta={mediaCta} />
+    <SiteFooter mediaCta={mediaCta} compactCta={footerCtaCompact} />
 
-    <StickyCta enabled={stickyCta} label={stickyCtaLabel} href={stickyCtaHref} hint={stickyCtaHint} />
+    <StickyCta enabled={stickyCta} label={stickyCtaLabel} href={stickyCtaHref} hint={stickyCtaHint} revealAfter={footerCtaCompact ? 3200 : undefined} />
 
     <EasterEgg />
     <script is:inline set:html={uiRevealScript}></script>

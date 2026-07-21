@@ -5,9 +5,11 @@ import { ctas, footerNavigation, footerTestimonial, proofStats, siteConfig, soci
 
 interface Props {
   mediaCta?: boolean;
+  /** When true (homepage), avoid duplicating the final audit H2 already on the page. */
+  compactCta?: boolean;
 }
 
-const { mediaCta = false } = Astro.props;
+const { mediaCta = false, compactCta = false } = Astro.props;
 
 const socialVisible = socialLinks.filter(
   (item) => item.label !== "GrowthMentor" && item.label !== "MentorCruise"
@@ -64,7 +66,9 @@ const navColumns = [
           {
             mediaCta
               ? "Invite Daniel, request a quote, or get the media kit."
-              : `${ctas.primary.label}.`
+              : compactCta
+                ? "Questions, speaking, or press — get in touch."
+                : `${ctas.primary.label}.`
           }
         </h2>
         <p>

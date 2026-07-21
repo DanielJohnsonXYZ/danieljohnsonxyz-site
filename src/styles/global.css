@@ -1,30 +1,31 @@
 /* Self-hosted type system (replaces the render-blocking Google Fonts <link>). */
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/source-sans-3";
 @import "@fontsource-variable/fraunces";
 @import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "tailwindcss";
 
-/* ─── v5 palette — warm paper + electric violet, shared with the homepage ─── */
+/* ─── Operator field notes — cool stone + deep teal, shared with homepage ─── */
 :root {
-  --bg: #f7f3ec;
+  --bg: #f1f2f0;
   --surface: #ffffff;
-  --surface-dim: #f1ece1;
-  --ink: #15141b;
-  --muted: #4b5563;
-  --subtle: #5d5d66; /* AA on light backgrounds (was #71717a) */
-  --line: rgba(40, 32, 12, 0.1);
-  --line-strong: rgba(40, 32, 12, 0.18);
-  --accent: #5523f0;
-  --accent-soft: rgba(85, 35, 240, 0.08);
-  --accent-glow: rgba(85, 35, 240, 0.3);
-  --gradient-start: #5523f0;
-  --gradient-end: #2563eb;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.08);
-  --radius: 1rem;
-  --radius-lg: 1.5rem;
+  --surface-dim: #e6e8e5;
+  --ink: #14161a;
+  --muted: #4a4f57;
+  --subtle: #5a5f68; /* AA on light backgrounds */
+  --line: rgba(20, 22, 26, 0.1);
+  --line-strong: rgba(20, 22, 26, 0.18);
+  --accent: #0d5c63;
+  --accent-soft: rgba(13, 92, 99, 0.09);
+  --accent-glow: transparent;
+  --gradient-start: #0d5c63;
+  --gradient-end: #1a5f7a;
+  --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.05);
+  --shadow-md: 0 8px 24px rgba(20, 22, 26, 0.07);
+  --shadow-lg: 0 20px 48px rgba(20, 22, 26, 0.09);
+  --radius: 0.5rem; /* 8px — flat operator chrome, not pill */
+  --radius-lg: 0.5rem;
+  --radius-control: 0.5rem;
 }
 
 html {
@@ -38,12 +39,12 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  font-family: "Source Sans 3 Variable", "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
-/* v5 type system: serif display headings site-wide (matches the homepage). */
+/* Display headings: restrained serif (Fraunces) site-wide. */
 h1,
 h2 {
   font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
@@ -51,7 +52,7 @@ h2 {
   font-weight: 650;
 }
 
-/* Subtle top gradient wash — no grid overlay */
+/* Quiet atmospheric wash — cool, no purple haze */
 body::before {
   position: fixed;
   inset: 0;
@@ -59,12 +60,12 @@ body::before {
   pointer-events: none;
   content: "";
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(85, 35, 240, 0.06), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(37, 99, 235, 0.04), transparent);
+    radial-gradient(ellipse 70% 45% at 50% -18%, rgba(13, 92, 99, 0.05), transparent),
+    radial-gradient(ellipse 50% 35% at 88% 8%, rgba(20, 22, 26, 0.03), transparent);
 }
 
 ::selection {
-  background: rgba(85, 35, 240, 0.15);
+  background: rgba(13, 92, 99, 0.16);
   color: var(--ink);
 }
 
@@ -143,7 +144,7 @@ a, button, summary {
   content: "/";
 }
 
-.rtb-item-1 { color: #5523f0; }
+.rtb-item-1 { color: #0d5c63; }
 .rtb-item-2 { color: #0891b2; }
 .rtb-item-3 { color: #dc2626; }
 .rtb-item-4 { color: #0f766e; }
@@ -261,7 +262,7 @@ a, button, summary {
 }
 
 .explore-card:hover {
-  border-color: rgba(85, 35, 240, 0.26);
+  border-color: rgba(13, 92, 99, 0.26);
   transform: translateY(-2px);
 }
 
@@ -329,7 +330,7 @@ a, button, summary {
   height: 1px;
   margin-bottom: 2rem;
   content: "";
-  background: linear-gradient(90deg, var(--line-strong) 0%, rgba(85, 35, 240, 0.2) 45%, transparent 100%);
+  background: linear-gradient(90deg, var(--line-strong) 0%, rgba(13, 92, 99, 0.2) 45%, transparent 100%);
 }
 
 .section-head-grid {
@@ -337,22 +338,24 @@ a, button, summary {
   gap: 1.5rem;
 }
 
-/* ─── Buttons — sharp, confident ─── */
+/* ─── Buttons — flat operator chrome (8px), no glow ─── */
 .button-primary {
-  @apply inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold tracking-[-0.01em];
+  @apply inline-flex items-center justify-center px-6 py-3.5 text-sm font-semibold tracking-[-0.01em];
+  border-radius: var(--radius-control);
   background: var(--ink);
   color: white;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
 }
 
 .button-primary:hover,
 .button-primary:focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 12px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-sm);
 }
 
 .button-secondary {
-  @apply inline-flex items-center justify-center rounded-full border px-6 py-3.5 text-sm font-semibold tracking-[-0.01em];
+  @apply inline-flex items-center justify-center border px-6 py-3.5 text-sm font-semibold tracking-[-0.01em];
+  border-radius: var(--radius-control);
   border-color: var(--line-strong);
   background: transparent;
   color: var(--ink);
@@ -365,23 +368,25 @@ a, button, summary {
   background: var(--accent-soft);
 }
 
-/* Gradient accent button — for hero CTA */
+/* Solid accent button — for hero CTA (no purple glow) */
 .button-accent {
-  @apply inline-flex items-center justify-center rounded-full px-7 py-4 text-sm font-semibold tracking-[-0.01em];
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  @apply inline-flex items-center justify-center px-7 py-4 text-sm font-semibold tracking-[-0.01em];
+  border-radius: var(--radius-control);
+  background: var(--accent);
   color: white;
-  box-shadow: 0 4px 16px rgba(85, 35, 240, 0.3), 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .button-accent:hover,
 .button-accent:focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 8px 28px rgba(85, 35, 240, 0.4), 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: color-mix(in srgb, var(--accent) 88%, black);
+  box-shadow: none;
 }
 
 .link-arrow {
   @apply inline-flex items-center gap-2 text-sm font-semibold;
-  color: #5b21b6;
+  color: #0a4a50;
 }
 
 .link-arrow:hover,
@@ -409,8 +414,8 @@ a, button, summary {
 .chip-active,
 .chip:hover,
 .chip:focus-visible {
-  border-color: rgba(85, 35, 240, 0.3);
-  background: rgba(85, 35, 240, 0.08);
+  border-color: rgba(13, 92, 99, 0.3);
+  background: rgba(13, 92, 99, 0.08);
   color: var(--accent);
 }
 
@@ -422,8 +427,8 @@ a, button, summary {
 }
 
 button.chip.case-chip-active {
-  border-color: rgba(85, 35, 240, 0.45);
-  background: rgba(85, 35, 240, 0.12);
+  border-color: rgba(13, 92, 99, 0.45);
+  background: rgba(13, 92, 99, 0.12);
   color: var(--accent);
 }
 
@@ -477,7 +482,7 @@ button.chip.case-chip-active {
   border: 1px solid var(--line);
   border-left: 4px solid var(--accent);
   border-radius: var(--radius);
-  background: linear-gradient(135deg, rgba(85, 35, 240, 0.08), rgba(20, 184, 166, 0.06)), var(--surface);
+  background: linear-gradient(135deg, rgba(13, 92, 99, 0.08), rgba(20, 184, 166, 0.06)), var(--surface);
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
 }
@@ -693,7 +698,7 @@ button.chip.case-chip-active {
   min-height: 11rem;
   padding: 1rem;
   background:
-    radial-gradient(circle at 20% 20%, rgba(85, 35, 240, 0.16), transparent 36%),
+    radial-gradient(circle at 20% 20%, rgba(13, 92, 99, 0.16), transparent 36%),
     var(--surface);
   color: var(--ink);
 }
@@ -830,7 +835,7 @@ button.chip.case-chip-active {
   /* not overflow:hidden — that creates a scrollport and breaks position:sticky on the portrait column */
   overflow: visible;
   background:
-    radial-gradient(circle at 80% 0, rgba(85, 35, 240, 0.08), transparent 30rem),
+    radial-gradient(circle at 80% 0, rgba(13, 92, 99, 0.08), transparent 30rem),
     radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.06), transparent 20rem),
     linear-gradient(180deg, #fafaf9 0%, #f3f0eb 100%);
 }
@@ -865,9 +870,9 @@ button.chip.case-chip-active {
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 0.85rem;
-  border: 1px solid rgba(85, 35, 240, 0.22);
+  border: 1px solid rgba(13, 92, 99, 0.22);
   border-radius: 999px;
-  background: rgba(85, 35, 240, 0.08);
+  background: rgba(13, 92, 99, 0.08);
   color: var(--accent);
   font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
   font-size: 0.72rem;
@@ -972,7 +977,7 @@ button.chip.case-chip-active {
 .hero-authority-panel {
   padding: 1.35rem;
   background:
-    linear-gradient(135deg, rgba(85, 35, 240, 0.08), transparent 46%),
+    linear-gradient(135deg, rgba(13, 92, 99, 0.08), transparent 46%),
     var(--surface);
 }
 
@@ -1009,7 +1014,7 @@ button.chip.case-chip-active {
   flex-direction: column;
   justify-content: flex-end;
   background:
-    radial-gradient(circle at 15% 0%, rgba(85, 35, 240, 0.26), transparent 25rem),
+    radial-gradient(circle at 15% 0%, rgba(13, 92, 99, 0.26), transparent 25rem),
     rgba(255, 255, 255, 0.04);
 }
 
@@ -1230,7 +1235,7 @@ button.chip.case-chip-active {
 
 .insights-flagship {
   background:
-    radial-gradient(circle at 80% 0%, rgba(85, 35, 240, 0.12), transparent 18rem),
+    radial-gradient(circle at 80% 0%, rgba(13, 92, 99, 0.12), transparent 18rem),
     var(--surface);
 }
 
@@ -1250,7 +1255,7 @@ button.chip.case-chip-active {
 
 .archive-mini-link:hover {
   transform: translateY(-1px);
-  border-color: rgba(85, 35, 240, 0.3);
+  border-color: rgba(13, 92, 99, 0.3);
   background: var(--surface);
 }
 
@@ -1407,9 +1412,9 @@ button.chip.case-chip-active {
 }
 
 .explore-card-primary {
-  border-color: rgba(85, 35, 240, 0.3);
+  border-color: rgba(13, 92, 99, 0.3);
   background:
-    linear-gradient(135deg, rgba(85, 35, 240, 0.11), rgba(255, 255, 255, 0.82) 40%),
+    linear-gradient(135deg, rgba(13, 92, 99, 0.11), rgba(255, 255, 255, 0.82) 40%),
     var(--surface);
 }
 
@@ -1511,7 +1516,7 @@ button.chip.case-chip-active {
 
 .profile-row:hover {
   transform: translateY(-1px);
-  border-color: rgba(85, 35, 240, 0.35);
+  border-color: rgba(13, 92, 99, 0.35);
   background: rgba(255, 255, 255, 0.07);
 }
 
@@ -1568,7 +1573,7 @@ button.chip.case-chip-active {
 .video-example-card:hover,
 .video-example-card:focus-visible {
   transform: translateY(-3px);
-  border-color: rgba(85, 35, 240, 0.32);
+  border-color: rgba(13, 92, 99, 0.32);
   box-shadow: var(--shadow-md);
 }
 
@@ -1616,7 +1621,7 @@ button.chip.case-chip-active {
   border-radius: 50%;
   content: "";
   transform: translateX(-50%);
-  background: rgba(85, 35, 240, 0.22);
+  background: rgba(13, 92, 99, 0.22);
   filter: blur(80px);
   pointer-events: none;
 }
@@ -2039,7 +2044,7 @@ summary::-webkit-details-marker {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background:
-    radial-gradient(circle at 88% 12%, rgba(85, 35, 240, 0.12), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(13, 92, 99, 0.12), transparent 28%),
     #fff;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   box-shadow: var(--shadow-sm);
@@ -2321,23 +2326,23 @@ summary::-webkit-details-marker {
 }
 
 .ladder-card-primary {
-  border-color: rgba(85, 35, 240, 0.45);
+  border-color: rgba(13, 92, 99, 0.45);
   box-shadow:
-    0 0 0 1px rgba(85, 35, 240, 0.18) inset,
-    0 24px 48px -28px rgba(85, 35, 240, 0.45);
+    0 0 0 1px rgba(13, 92, 99, 0.18) inset,
+    0 24px 48px -28px rgba(13, 92, 99, 0.45);
   background:
-    linear-gradient(135deg, rgba(85, 35, 240, 0.14), rgba(255, 255, 255, 0.85) 45%),
+    linear-gradient(135deg, rgba(13, 92, 99, 0.14), rgba(255, 255, 255, 0.85) 45%),
     var(--surface);
 }
 
 .ladder-card:hover,
 .ladder-card:focus-visible {
-  border-color: rgba(85, 35, 240, 0.36);
+  border-color: rgba(13, 92, 99, 0.36);
   box-shadow: var(--shadow-md);
 }
 
 .ladder-card:focus-visible {
-  outline: 3px solid rgba(85, 35, 240, 0.28);
+  outline: 3px solid rgba(13, 92, 99, 0.28);
   outline-offset: 4px;
 }
 
@@ -2355,8 +2360,8 @@ summary::-webkit-details-marker {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 999px;
-  background: rgba(85, 35, 240, 0.1);
-  border: 1px solid rgba(85, 35, 240, 0.28);
+  background: rgba(13, 92, 99, 0.1);
+  border: 1px solid rgba(13, 92, 99, 0.28);
   color: var(--accent);
   font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
   font-size: 0.85rem;
@@ -2368,15 +2373,15 @@ summary::-webkit-details-marker {
   background: var(--accent);
   border-color: var(--accent);
   color: white;
-  box-shadow: 0 8px 18px -8px rgba(85, 35, 240, 0.55);
+  box-shadow: 0 8px 18px -8px rgba(13, 92, 99, 0.55);
 }
 
 .ladder-step-arrow {
   display: none;
-  font-family: "Inter Variable", "Inter", sans-serif;
+  font-family: "Source Sans 3 Variable", "Source Sans 3", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: rgba(85, 35, 240, 0.45);
+  color: rgba(13, 92, 99, 0.45);
   user-select: none;
   /* Position the arrow as a connector between cards on desktop */
   position: absolute;
@@ -2415,7 +2420,7 @@ summary::-webkit-details-marker {
    ────────────────────────────────────────────────────────────────────── */
 .compare-winner-cell {
   position: relative;
-  background: rgba(85, 35, 240, 0.06);
+  background: rgba(13, 92, 99, 0.06);
   color: var(--ink);
   font-weight: 600;
   box-shadow: inset 3px 0 0 var(--accent);
@@ -2433,13 +2438,13 @@ summary::-webkit-details-marker {
     position: relative;
     /* Visible scrollbar so the swipe is discoverable */
     scrollbar-width: thin;
-    scrollbar-color: rgba(85, 35, 240, 0.4) transparent;
+    scrollbar-color: rgba(13, 92, 99, 0.4) transparent;
   }
   .overflow-x-auto:has(table[class*="min-w-"])::-webkit-scrollbar {
     height: 8px;
   }
   .overflow-x-auto:has(table[class*="min-w-"])::-webkit-scrollbar-thumb {
-    background: rgba(85, 35, 240, 0.45);
+    background: rgba(13, 92, 99, 0.45);
     border-radius: 4px;
   }
   .overflow-x-auto:has(table[class*="min-w-"])::after {
@@ -2452,7 +2457,7 @@ summary::-webkit-details-marker {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
-    background: rgba(85, 35, 240, 0.05);
+    background: rgba(13, 92, 99, 0.05);
   }
 }
 
@@ -2466,8 +2471,8 @@ summary::-webkit-details-marker {
 :root {
   --text-measure: 68ch;
   --space-conversion-y: clamp(1.75rem, 3.5vw, 3.2rem);
-  --accent-strong: #6d28d9;
-  --accent-ink: #4c1d95;
+  --accent-strong: #0a4a50;
+  --accent-ink: #083d42;
   --focus-ring-strong: 0 0 0 3px rgba(109, 40, 217, 0.34);
 }
 

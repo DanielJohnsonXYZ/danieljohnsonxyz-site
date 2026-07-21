@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BrandBar from "../components/BrandBar.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
-import heroCutout from "../assets/images/daniel-hero-cutout.webp";
+import heroPortrait from "../assets/images/daniel-outdoor-portrait.webp";
 import danielAircraft from "../assets/images/daniel-aircraft.webp";
 import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960.webp";
 import "../styles/home-v5.css";
@@ -98,21 +98,25 @@ const engineNodes = [
   description="Fractional CMO for Seed–Series B AI & B2B SaaS startups. Predictable pipeline, sharper positioning and senior growth leadership without a £150k full-time hire."
   schema={homeSchemas}
   lastUpdated={false}
+  stickyCta={true}
+  footerCtaCompact={true}
 >
   <div class="v5-home">
     <!-- ===== Hero ===== -->
     <section class="v5-hero" aria-label="Introduction">
-      <div class="v5-orb" data-hero-orb aria-hidden="true"></div>
       <div class="v5-container">
         <div class="v5-hero-grid">
-          <div class="reveal">
-            <span class="v5-eyebrow">Fractional CMO · Seed–Series B AI &amp; B2B SaaS</span>
+          <div class="v5-hero-copy reveal">
+            <p class="v5-brand-lockup">
+              <span>Fractional CMO · Seed–Series B</span>
+              Daniel Johnson
+            </p>
             <h1 class="v5-h1">
-              I build the growth engine your startup is missing,
-              then hand your team <span class="v5-hl">the keys.</span>
+              <span class="v5-h1-desktop">I build the growth engine your startup is missing, then hand your team <span class="v5-hl">the keys.</span></span>
+              <span class="v5-h1-mobile">I build the growth engine, then hand your team <span class="v5-hl">the keys.</span></span>
             </h1>
             <p class="v5-subhead v5-hero-sub">
-              I embed with post-PMF B2B SaaS and AI teams as a fractional CMO, find the real constraint, and build the system your team keeps running after I leave.
+              Embedded fractional CMO for post-PMF B2B SaaS and AI teams: find the real constraint, build the system your team keeps running.
             </p>
             <div class="v5-hero-ctas">
               <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary" data-cta="home-hero-audit">
@@ -122,22 +126,27 @@ const engineNodes = [
                 See case studies
               </a>
             </div>
-            <div class="v5-hero-fit">
-              £18M+ in client revenue · 4.97 / 5 from 220 reviews on GrowthMentor · Best fit: {icpFirmographics.arrBand}, {icpFirmographics.headcountBand}, founder still running GTM
-            </div>
+            <p class="v5-hero-proof-line">
+              £18M+ client revenue · 4.97 / 5 on GrowthMentor · Best fit: {icpFirmographics.arrBand}, founder-led GTM
+            </p>
+            <ul class="v5-hero-proof-chips" aria-label="Quick proof">
+              <li>£18M+ client revenue</li>
+              <li>4.97 / 5 · GrowthMentor</li>
+              <li>{icpFirmographics.arrBand} · founder-led GTM</li>
+            </ul>
           </div>
           <div class="v5-hero-photo reveal" data-hero-photo>
             <div class="v5-hero-photo-bg">
               <Image
-                src={heroCutout}
-                widths={[420, 760]}
-                sizes="(max-width: 480px) 90vw, 420px"
+                src={heroPortrait}
+                widths={[640, 960, 1280]}
+                sizes="(max-width: 880px) 100vw, 48vw"
                 alt="Daniel Johnson, fractional CMO and AI-native growth operator"
                 loading="eager"
                 fetchpriority="high"
               />
+              <div class="v5-hero-photo-scrim" aria-hidden="true"></div>
             </div>
-            <span class="v5-pill v5-pill-bot">Available · now</span>
           </div>
         </div>
       </div>
@@ -147,7 +156,7 @@ const engineNodes = [
     <BrandBar />
 
     <!-- ===== Alt paths (organisers / press) ===== -->
-    <div class="v5-altpaths reveal" aria-label="Also here for speaking or press">
+    <div class="v5-altpaths v5-section-tight reveal" aria-label="Also here for speaking or press">
       <div class="v5-container">
         <p>
           Not a founder? <a href="/speaking/" class="v5-link-arrow" data-cta="home-router-speaking">Booking a speaker or workshop</a>
@@ -160,11 +169,9 @@ const engineNodes = [
     <!-- ===== Bottleneck + interactive diagnosis ===== -->
     <section aria-label="The bottleneck">
       <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">The bottleneck</span>
-            <h2 class="v5-h2">You've got traction. Growth still <span class="v5-hl">feels like guessing.</span></h2>
-          </div>
+        <div class="v5-head-stack">
+          <span class="v5-eyebrow">The bottleneck</span>
+          <h2 class="v5-h2">You've got traction. Growth still <span class="v5-hl">feels like guessing.</span></h2>
           <p class="v5-subhead">Usually the channel is fine. The whole growth function still lives in your head, and nothing compounds without you.</p>
         </div>
         <div class="v5-bottleneck-block">
@@ -185,20 +192,16 @@ const engineNodes = [
         </div>
       </div>
       <div class="v5-container">
-        <div class="v5-split-head" style="margin-top: 3rem; margin-bottom: 0;">
-          <div class="reveal">
-            <span class="v5-eyebrow">Free · 2 minutes · On-page result</span>
-            <h2 class="v5-h2">Not sure which lever is yours? Run the diagnostic.</h2>
-          </div>
-          <p class="v5-subhead reveal">Five questions, then a personalised read on where your growth is actually stuck, right here on the page.</p>
+        <div class="v5-head-center reveal" style="margin-top: 3rem;">
+          <span class="v5-eyebrow">Free · 2 minutes · On-page result</span>
+          <h2 class="v5-h2">Not sure which lever is yours? Run the diagnostic.</h2>
+          <p class="v5-subhead">Five questions, then a personalised read on where your growth is actually stuck, right here on the page.</p>
         </div>
         <div class="v5-diagnosis-wrap">
           <GrowthDiagnosis />
         </div>
       </div>
     </section>
-
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
 
     <!-- ===== The engine (interactive) ===== -->
     <section aria-label="The growth engine method">
@@ -248,16 +251,12 @@ const engineNodes = [
       </div>
     </section>
 
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
-
     <!-- ===== Proof ===== -->
-    <section id="proof" aria-label="Proof and case studies">
+    <section id="proof" class="v5-section-proof" aria-label="Proof and case studies">
       <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">Proof</span>
-            <h2 class="v5-h2">Numbers from real campaigns, with the attribution to back them.</h2>
-          </div>
+        <div class="v5-head-center">
+          <span class="v5-eyebrow">Proof</span>
+          <h2 class="v5-h2">Numbers from real campaigns, with the attribution to back them.</h2>
           <p class="v5-subhead">The short list. Full case studies linked below.</p>
         </div>
         <div class="v5-metrics">
@@ -302,17 +301,13 @@ const engineNodes = [
       </div>
     </section>
 
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
-
     <!-- ===== Productised services ===== -->
     <section aria-label="Ways to work together">
       <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">Ways to work together</span>
-            <h2 class="v5-h2">Four ways in. <span class="v5-hl">Pick your entry point.</span></h2>
-          </div>
-          <p class="v5-subhead">Smallest commitment first. Most clients start with the audit and move up the ladder later.</p>
+        <div class="v5-head-stack">
+          <span class="v5-eyebrow">Ways to work together</span>
+          <h2 class="v5-h2">A clear ladder. <span class="v5-hl">Start where it fits.</span></h2>
+          <p class="v5-subhead">Smallest commitment first. Most clients start with the audit and move up later.</p>
         </div>
         <div class="v5-ladder">
           <div class="v5-step">
@@ -321,8 +316,10 @@ const engineNodes = [
             <h3 class="v5-h3">20-min Growth Audit</h3>
             <div class="v5-price">Free</div>
             <p class="v5-meta">20 minutes · No pitch · No deck</p>
-            <p class="v5-body">Bring the messy growth question. We name the bottleneck together and decide whether working together makes sense, or where else to go if it doesn't.</p>
-            <p class="v5-detail"><span class="v5-lbl">Outcome</span>A clear read on the bottleneck and the most useful next step.</p>
+            <div class="v5-step-copy">
+              <p class="v5-body">Bring the messy growth question. We name the bottleneck together and decide whether working together makes sense, or where else to go if it doesn't.</p>
+              <p class="v5-detail"><span class="v5-lbl">Outcome</span>A clear read on the bottleneck and the most useful next step.</p>
+            </div>
             <div class="v5-cta-row"><a href="/growth-audit/" class="v5-link-arrow" data-cta="home-ladder-audit">See what's covered</a></div>
           </div>
           <div class="v5-step">
@@ -331,8 +328,10 @@ const engineNodes = [
             <h3 class="v5-h3">Strategy Sprint</h3>
             <div class="v5-price">£6k fixed scope</div>
             <p class="v5-meta">2–4 week engagement</p>
-            <p class="v5-body">Diagnose, prioritise, ship the first artefacts: ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.</p>
-            <p class="v5-detail"><span class="v5-lbl">Outcome</span>A 90-day growth plan, the first artefacts, and a working operating rhythm.</p>
+            <div class="v5-step-copy">
+              <p class="v5-body">Diagnose, prioritise, ship the first artefacts: ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.</p>
+              <p class="v5-detail"><span class="v5-lbl">Outcome</span>A 90-day growth plan, the first artefacts, and a working operating rhythm.</p>
+            </div>
             <div class="v5-cta-row"><a href="/strategy-sprint/" class="v5-link-arrow" data-cta="home-ladder-sprint">See Strategy Sprint scope</a></div>
           </div>
           <div class="v5-step v5-step-emphasis">
@@ -342,18 +341,22 @@ const engineNodes = [
             <h3 class="v5-h3">Fractional CMO</h3>
             <div class="v5-price">From £5k/mo</div>
             <p class="v5-meta">1–2 days a week · 3-month minimum</p>
-            <p class="v5-body">Embedded senior ownership of the growth function. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Build the engine, hand it off clean.</p>
-            <p class="v5-detail"><span class="v5-lbl">Outcome</span>Pipeline rhythm, sharper positioning, and an engine the team runs after I'm gone.</p>
+            <div class="v5-step-copy">
+              <p class="v5-body">Embedded senior ownership of the growth function. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Build the engine, hand it off clean.</p>
+              <p class="v5-detail"><span class="v5-lbl">Outcome</span>Pipeline rhythm, sharper positioning, and an engine the team runs after I'm gone.</p>
+            </div>
             <div class="v5-cta-row"><a href="/fractional-cmo/" class="v5-link-arrow" data-cta="home-ladder-cmo">Explore Fractional CMO</a></div>
           </div>
-          <div class="v5-step">
+          <div class="v5-step v5-step-secondary">
             <div class="v5-step-num">04</div>
             <span class="v5-tier">Advise · Per session</span>
             <h3 class="v5-h3">Founder Office Hours</h3>
             <div class="v5-price">Flexible</div>
             <p class="v5-meta">Focused 1:1 working sessions</p>
-            <p class="v5-body">A senior second brain for specific GTM decisions: pricing, positioning, hiring calls, channel bets. No retainer and no ramp, just the decision made well.</p>
-            <p class="v5-detail"><span class="v5-lbl">Outcome</span>A confident call on the decision in front of you, with the reasoning.</p>
+            <div class="v5-step-copy">
+              <p class="v5-body">A senior second brain for specific GTM decisions: pricing, positioning, hiring calls, channel bets. No retainer and no ramp, just the decision made well.</p>
+              <p class="v5-detail"><span class="v5-lbl">Outcome</span>A confident call on the decision in front of you, with the reasoning.</p>
+            </div>
             <div class="v5-cta-row"><a href="/founder-office-hours/" class="v5-link-arrow" data-cta="home-ladder-office-hours">See Office Hours</a></div>
           </div>
         </div>
@@ -363,8 +366,6 @@ const engineNodes = [
         </p>
       </div>
     </section>
-
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
 
     <!-- ===== Fit ===== -->
     <section aria-label="Fit check">
@@ -403,8 +404,6 @@ const engineNodes = [
       </div>
     </section>
 
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
-
     <!-- ===== About ===== -->
     <section aria-label="About Daniel">
       <div class="v5-container reveal">
@@ -432,16 +431,12 @@ const engineNodes = [
       </div>
     </section>
 
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
-
     <!-- ===== Speaking & writing ===== -->
     <section aria-label="Speaking and writing">
       <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">Beyond the page</span>
-            <h2 class="v5-h2">Speaking, writing, and other ways to read the work.</h2>
-          </div>
+        <div class="v5-head-stack">
+          <span class="v5-eyebrow">Beyond the page</span>
+          <h2 class="v5-h2">Speaking, writing, and other ways to read the work.</h2>
           <p class="v5-subhead">Talks and essays, if you want a feel for how I think before you book anything.</p>
         </div>
         <div class="v5-sw">
@@ -494,16 +489,12 @@ const engineNodes = [
       </div>
     </section>
 
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
-
     <!-- ===== FAQ ===== -->
     <section aria-label="Frequently asked questions">
       <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">FAQ</span>
-            <h2 class="v5-h2">Questions founders ask before a first call.</h2>
-          </div>
+        <div class="v5-head-center">
+          <span class="v5-eyebrow">FAQ</span>
+          <h2 class="v5-h2">Questions founders ask before a first call.</h2>
           <p class="v5-subhead">Same topics covered on the audit, so you're not buying blind.</p>
         </div>
         <div class="v5-faq">
@@ -519,8 +510,6 @@ const engineNodes = [
         </div>
       </div>
     </section>
-
-    <div class="v5-divider"><div class="v5-divider-line"><span>* * *</span></div></div>
 
     <!-- ===== Final CTA ===== -->
     <section aria-label="Final call to action">
@@ -573,40 +562,37 @@ const engineNodes = [
   </style>
 
   <script>
-    // ── Homepage kinetics: count-up stats, engine loop sync, hero parallax ──
+    // ── Homepage kinetics: proof fade-in, engine loop sync ──
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Count-up numbers when they scroll into view.
-    const formatValue = (el: HTMLElement, value: number) => {
+    // Proof metrics: keep final values in the DOM always (no tween that flashes wrong mid-scroll numbers).
+    // Animate opacity only when they enter view.
+    const countEls = document.querySelectorAll<HTMLElement>("[data-countup]");
+    countEls.forEach((el) => {
+      const target = Number(el.dataset.target || 0);
       const decimals = Number(el.dataset.decimals || 0);
       const prefix = el.dataset.prefix || "";
       const suffix = el.dataset.suffix || "";
-      el.textContent = `${prefix}${value.toFixed(decimals)}${suffix}`;
-    };
-
-    const countEls = document.querySelectorAll<HTMLElement>("[data-countup]");
-    if (reduceMotion || !("IntersectionObserver" in window)) {
-      countEls.forEach((el) => formatValue(el, Number(el.dataset.target || 0)));
-    } else {
+      el.textContent = `${prefix}${target.toFixed(decimals)}${suffix}`;
+      el.setAttribute("aria-label", el.textContent);
+    });
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      countEls.forEach((el) => {
+        el.style.opacity = "0.35";
+        el.style.transform = "translateY(6px)";
+        el.style.transition = "opacity 0.55s var(--v5-ease, ease), transform 0.55s var(--v5-ease, ease)";
+      });
       const countObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             const el = entry.target as HTMLElement;
             countObserver.unobserve(el);
-            const target = Number(el.dataset.target || 0);
-            const duration = 1200;
-            const start = performance.now();
-            const tick = (now: number) => {
-              const progress = Math.min((now - start) / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 3);
-              formatValue(el, target * eased);
-              if (progress < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
           });
         },
-        { threshold: 0.5 }
+        { threshold: 0.35 }
       );
       countEls.forEach((el) => countObserver.observe(el));
     }
@@ -638,32 +624,6 @@ const engineNodes = [
           if (!paused) setActive((active + 1) % items.length);
         }, 2600);
       }
-    }
-
-    // Hero: cursor-reactive orb + gentle photo parallax (fine pointers only).
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
-    const hero = document.querySelector<HTMLElement>(".v5-hero");
-    const orb = document.querySelector<HTMLElement>("[data-hero-orb]");
-    const photo = document.querySelector<HTMLElement>("[data-hero-photo]");
-    if (hero && orb && finePointer && !reduceMotion) {
-      let targetX = 0, targetY = 0, x = 0, y = 0, raf = 0;
-      const render = () => {
-        x += (targetX - x) * 0.08;
-        y += (targetY - y) * 0.08;
-        orb.style.transform = `translate(${x}px, ${y}px)`;
-        if (photo) photo.style.transform = `translate(${x * -0.018}px, ${y * -0.018}px)`;
-        if (Math.abs(targetX - x) > 0.2 || Math.abs(targetY - y) > 0.2) {
-          raf = requestAnimationFrame(render);
-        } else {
-          raf = 0;
-        }
-      };
-      hero.addEventListener("mousemove", (event) => {
-        const rect = hero.getBoundingClientRect();
-        targetX = event.clientX - rect.left - rect.width * 0.55;
-        targetY = (event.clientY - rect.top - rect.height * 0.45) * 0.6;
-        if (!raf) raf = requestAnimationFrame(render);
-      });
     }
   </script>
 </BaseLayout>
