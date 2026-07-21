@@ -52,9 +52,12 @@ const workDropdownImage = {
   <div class="site-header-shell">
     <div class="site-nav-dock">
       <div class="site-nav-bar">
-        <a class="site-nav-brand group flex min-w-0 items-center gap-2.5" href="/">
+        <a class="site-nav-brand group flex min-w-0 items-center gap-3" href="/">
           <span class="brand-mark">DJ</span>
-          <span class="truncate text-sm font-semibold tracking-[-0.02em]">Daniel Johnson</span>
+          <span class="site-nav-brand-copy">
+            <span class="site-nav-brand-name">Daniel Johnson</span>
+            <span class="site-nav-brand-role">Fractional CMO · AI &amp; B2B SaaS</span>
+          </span>
         </a>
 
         <nav aria-label="Primary" class="site-nav-links hidden xl:flex">
@@ -155,19 +158,24 @@ const workDropdownImage = {
             {mediaCta ? (
               <CfEmailOff>
                 <a class="button-primary site-nav-cta" href={headerCta.href} data-cta="header-media">
-                  {headerCta.label}
+                  <span>{headerCta.label}</span>
+                  <span class="site-nav-cta-arrow" aria-hidden="true">↗</span>
                 </a>
               </CfEmailOff>
             ) : (
               <a class="button-primary site-nav-cta" href={headerCta.href} data-cta="header-primary">
-                {headerCta.label}
+                <span>{headerCta.label}</span>
+                <span class="site-nav-cta-arrow" aria-hidden="true">↗</span>
               </a>
             )}
           </div>
 
           <details class="group relative xl:hidden">
             <summary class="button-secondary site-nav-menu-btn cursor-pointer list-none" aria-label="Open menu">
-              Menu
+              <span>Menu</span>
+              <svg class="site-nav-menu-icon" width="16" height="12" viewBox="0 0 16 12" aria-hidden="true">
+                <path d="M1 2h14M1 10h14" />
+              </svg>
             </summary>
             <div class="mobile-nav-panel absolute right-0 top-[calc(100%+0.75rem)] max-h-[min(32rem,85vh)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto p-3">
               <nav aria-label="Mobile" class="flex flex-col gap-1">
@@ -241,12 +249,12 @@ const workDropdownImage = {
                 }
                 {mediaCta ? (
                   <CfEmailOff>
-                    <a class="button-primary mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-media">
+                    <a class="button-primary site-nav-mobile-cta mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-media">
                       {headerCta.label}
                     </a>
                   </CfEmailOff>
                 ) : (
-                  <a class="button-primary mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-primary">
+                  <a class="button-primary site-nav-mobile-cta mt-2 min-h-[44px] justify-center" href={headerCta.href} data-cta="header-mobile-primary">
                     {headerCta.label}
                   </a>
                 )}
@@ -273,7 +281,6 @@ const workDropdownImage = {
     margin-inline: auto;
     width: 100%;
     max-width: 80rem;
-    padding-inline: 0 !important;
   }
 
   /* Simple single-column dropdown (no feature image) — used by "Proof". */
@@ -391,12 +398,11 @@ const workDropdownImage = {
     font: inherit;
   }
 
-  /* Active dropdown trigger: restore the dark pill — the transparent
-     background above otherwise outranks .site-nav-link-active and leaves
-     white text on the white nav rail. */
+  /* Keep active dropdown triggers in the same quiet violet treatment as the
+     rest of the navigation. */
   .site-nav-menu-trigger.site-nav-link-active {
-    background: var(--ink);
-    color: #fff;
+    background: transparent;
+    color: var(--accent);
   }
 
   .site-nav-caret {

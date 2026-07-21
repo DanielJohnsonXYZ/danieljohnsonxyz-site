@@ -4,12 +4,11 @@
 
 @media (max-width: 1023px) {
   header.site-header.sticky {
-    padding-inline: 0.75rem;
-    padding-top: 0.6rem;
+    padding: 0;
   }
 
   .site-nav-dock {
-    border-radius: 1.15rem;
+    border-radius: 0;
   }
 
   .mobile-nav-panel {
