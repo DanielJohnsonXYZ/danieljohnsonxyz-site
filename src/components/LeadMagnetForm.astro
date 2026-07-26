@@ -1,0 +1,111 @@
+---
+import { mauticNewsletter } from "../site";
+
+interface Props {
+  formId: string;
+  heading: string;
+  subline: string;
+  buttonLabel: string;
+  idPrefix: string;
+}
+
+const { formId, heading, subline, buttonLabel, idPrefix } = Astro.props;
+const emailId = `${idPrefix}-email`;
+const submitUrl = `${mauticNewsletter.baseUrl}/form/submit?formId=${encodeURIComponent(formId)}`;
+---
+
+<section class="lead-form" aria-labelledby={`${idPrefix}-title`}>
+  <div>
+    <p class="lead-form-kicker">Free workbook + guide</p>
+    <h2 id={`${idPrefix}-title`}>{heading}</h2>
+    <p>{subline}</p>
+  </div>
+  <form
+    id={idPrefix}
+    class="lead-form-fields"
+    action={submitUrl}
+    method="post"
+    accept-charset="UTF-8"
+    data-cta={`${idPrefix}-submit`}
+  >
+    <input type="hidden" name="mauticform[formId]" value={formId} />
+    <label for={emailId} class="sr-only">Work email address</label>
+    <input
+      id={emailId}
+      type="email"
+      name="mauticform[email]"
+      placeholder="you@company.com"
+      autocomplete="email"
+      inputmode="email"
+      required
+    />
+    <button class="button-accent" type="submit">{buttonLabel}</button>
+  </form>
+  <p class="lead-form-fine">Includes a five-email implementation series over 16 days. Unsubscribe any time.</p>
+</section>
+
+<style>
+  .lead-form {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  }
+  .lead-form-kicker {
+    margin: 0 0 0.45rem;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .lead-form h2 {
+    margin: 0;
+    max-width: 48rem;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+  .lead-form > div > p:last-child,
+  .lead-form-fine {
+    color: var(--muted);
+  }
+  .lead-form > div > p:last-child { margin: 0.75rem 0 0; max-width: 47rem; line-height: 1.7; }
+  .lead-form-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    max-width: 46rem;
+  }
+  .lead-form-fields input[type="email"] {
+    flex: 1 1 250px;
+    min-width: 0;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 1rem;
+  }
+  .lead-form-fields input[type="email"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .lead-form-fine { margin: 0; font-size: 0.78rem; }
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+  @media (max-width: 560px) {
+    .lead-form-fields,
+    .lead-form-fields input,
+    .lead-form-fields button { width: 100%; }
+  }
+</style>
