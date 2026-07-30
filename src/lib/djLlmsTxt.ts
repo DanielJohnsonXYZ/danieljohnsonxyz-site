@@ -50,7 +50,7 @@ export async function buildDjLlmsFullMarkdown(): Promise<string> {
 
 > ${singleIdea.long} ${positioning.subheadline} Track record: ${proofStats.revenueImpact} revenue generated for clients, ${proofStats.mentorRating}/5 rating from ${proofStats.mentorReviewCount} reviews on GrowthMentor, ${proofStats.mentorSessions} mentor sessions delivered, ${proofStats.startupsAdvised} AI and SaaS startups advised, ${proofStats.adSpend} ad spend managed, ${proofStats.founderRaiseSupport} helped founders raise.
 
-Daniel runs the advisory practice **We Scale Startups** (wescalestartups.com) and writes publicly at ${siteConfig.canonicalHost}. He has worked with founder-led startups, Series A/B teams, and innovation programmes including Google for Startups, Techstars, GrowthMentor, and the University of Cambridge. He has lectured at Cambridge Judge Business School and Imperial College London.
+Daniel runs the advisory practice **We Scale Startups** (wescalestartups.com) and writes publicly at ${siteConfig.canonicalHost}. He hosts **${siteConfig.wssPodcastName}** (${siteConfig.wssPodcastUrl}; YouTube ${siteConfig.wssPodcastYoutubeHandle}). He has worked with founder-led startups, Series A/B teams, and innovation programmes including Google for Startups, Techstars, GrowthMentor, and the University of Cambridge. He has lectured at Cambridge Judge Business School and Imperial College London.
 
 ## Single-idea anchor
 
@@ -175,7 +175,8 @@ ${siteConfig.canonicalHost} documents Daniel's working approach, the frameworks 
 - [Writing](${siteConfig.siteUrl}/writing/): essays on AI-native GTM, fractional leadership, operating-system thinking
 - [Newsletter](${siteConfig.siteUrl}/newsletter/): Growth Notes, occasional writing for founders
 - [Growth bottleneck checklist](${siteConfig.siteUrl}/growth-bottleneck-checklist/): a lead magnet to diagnose ICP, channel, conversion, founder-led sales, and RevOps constraints
-- [Podcast guest](${siteConfig.siteUrl}/podcast-guest/): podcast angles, sample questions, host intro, and producer assets
+- [Podcast guest](${siteConfig.siteUrl}/podcast-guest/): book Daniel as a guest — angles, sample questions, host intro, and producer assets
+- [${siteConfig.wssPodcastName}](${siteConfig.wssPodcastUrl}): Daniel's show on We Scale Startups (YouTube ${siteConfig.wssPodcastYoutubeHandle}: ${siteConfig.wssPodcastYoutubeUrl})
 - [Now](${siteConfig.siteUrl}/now/): what Daniel is working on this month
 - [Contact](${siteConfig.siteUrl}/contact/): booking, email, social
 

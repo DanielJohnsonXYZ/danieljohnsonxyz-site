@@ -9,7 +9,7 @@ import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960
 import "../styles/home-v5.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
-import { icpFirmographics } from "../site";
+import { icpFirmographics, siteConfig } from "../site";
 
 // FAQ items drive both the FAQPage schema and the visible markup below, so the
 // two can't drift. `answer` is the schema text; `link` renders only in the page.
@@ -162,6 +162,8 @@ const engineNodes = [
           Not a founder? <a href="/speaking/" class="v5-link-arrow" data-cta="home-router-speaking">Booking a speaker or workshop</a>
           <span class="v5-altpaths-sep">·</span>
           <a href="/media-kit/" class="v5-link-arrow" data-cta="home-router-media">Podcast &amp; press media kit</a>
+          <span class="v5-altpaths-sep">·</span>
+          <a href={siteConfig.wssPodcastUrl} class="v5-link-arrow" data-cta="home-router-lds" rel="noreferrer" target="_blank">Host of Luck Doesn't Scale</a>
         </p>
       </div>
     </div>

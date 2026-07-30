@@ -46,9 +46,12 @@ export const siteConfig = {
   youtubeUploadsEmbed: "https://www.youtube.com/embed/9CR19_PiuGs?rel=0",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
-  /** Canonical WSS podcast hub (How Startups Win With AI). */
+  /** Canonical WSS podcast hub (Luck Doesn't Scale). */
+  wssPodcastName: "Luck Doesn't Scale",
   wssPodcastUrl: "https://wescalestartups.com/podcast",
   wssPodcastGuestApplyUrl: "https://wescalestartups.com/podcast-guest-application",
+  wssPodcastYoutubeUrl: "https://www.youtube.com/@wescalestartups",
+  wssPodcastYoutubeHandle: "@wescalestartups",
   /**
    * Google Tag Manager — production container for danieljohnson.xyz only.
    * Do not use the We Scale Startups site container (GTM-TV6C7GS).
@@ -64,6 +67,7 @@ export const siteConfig = {
     "https://mentorcruise.com/mentor/danieljohnson/",
     "https://www.crunchbase.com/person/daniel-johnson-2",
     "https://www.youtube.com/@danieljohnson6000",
+    "https://www.youtube.com/@wescalestartups",
     "https://www.wescalestartups.com",
     "https://www.linkedin.com/company/wescalestartups",
     "https://wescalestartups.com/podcast",
@@ -306,6 +310,7 @@ export const footerNavigation = {
     { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional CMO vs. full-time CMO" },
     { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK)" },
     { href: "/podcast-guest/", label: "Podcast guest" },
+    { href: siteConfig.wssPodcastUrl, label: "Luck Doesn't Scale" },
     { href: "/newsletter/", label: "Growth Notes" },
     { href: "/growth-bottleneck-checklist/", label: "Growth bottleneck checklist" }
   ],
@@ -537,19 +542,19 @@ export const speakingVideos = [
   {
     id: "9CR19_PiuGs",
     title: "Daniel Johnson Introduction",
-    source: "How Startups Win With AI",
+    source: "Luck Doesn't Scale",
     description: "A quick intro to Daniel's growth operator background and current point of view."
   },
   {
     id: "B_GVNYU_StM",
     title: "What The Hell is Growth",
-    source: "How Startups Win With AI",
+    source: "Luck Doesn't Scale",
     description: "An actionable guide to growth marketing for startup founders."
   },
   {
     id: "p5Q7PuUNHtc",
     title: "How to Use AI for Product Market Fit",
-    source: "How Startups Win With AI",
+    source: "Luck Doesn't Scale",
     description: "A practical view on using AI to sharpen product-market fit and startup growth."
   },
   {

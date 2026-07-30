@@ -61,6 +61,7 @@ const quickFacts = [
   ["Name", "Daniel Johnson"],
   ["Role", "Fractional CMO and GTM operator"],
   ["Company", "Founder, We Scale Startups"],
+  ["Hosts", siteConfig.wssPodcastName],
   ["Location / time zone", siteConfig.location],
   ["Best topics", "AI GTM, B2B SaaS growth, founder-led growth, repeatable GTM systems"],
   ["Email", siteConfig.email],
@@ -86,7 +87,7 @@ const assets = [
 ];
 
 const hostIntro =
-  "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor. Today we are talking about AI-native GTM, founder-led growth, and how startups build growth systems instead of chasing one-off hacks.";
+  `Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups, host of ${siteConfig.wssPodcastName}, and mentors founders through Google for Startups, Techstars, and GrowthMentor. Today we are talking about AI-native GTM, founder-led growth, and how startups build growth systems instead of chasing one-off hacks.`;
 
 const schema = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
@@ -124,6 +125,12 @@ const schema = buildBreadcrumbSchema([
             </CfEmailOff>
             <a class="button-secondary" href="/media-kit/">Download media kit</a>
           </div>
+          <p class="pt-2 text-sm leading-7 text-[color:var(--muted)]">
+            Host of{" "}
+            <a class="underline decoration-[color:var(--accent)]/40 underline-offset-4" href={siteConfig.wssPodcastUrl} rel="noreferrer" target="_blank">{siteConfig.wssPodcastName}</a>
+            {" "}on We Scale Startups ·{" "}
+            <a class="underline decoration-[color:var(--accent)]/40 underline-offset-4" href={siteConfig.wssPodcastYoutubeUrl} rel="noreferrer" target="_blank">YouTube {siteConfig.wssPodcastYoutubeHandle}</a>
+          </p>
         </div>
         <aside class="reveal card p-5 md:p-6">
           <Image alt={siteImages.speakingMic.alt} class="aspect-[4/3] w-full rounded-xl object-cover object-top" loading="eager" src={speakingMicImg} widths={[540, 1080]} sizes="(max-width: 1024px) 100vw, 40vw" />
@@ -149,6 +156,27 @@ const schema = buildBreadcrumbSchema([
             <span class="text-sm font-semibold leading-6 text-[color:var(--ink)]">{item}</span>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal card p-6 md:p-8 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10">
+        <div>
+          <span class="service-label">Daniel's show</span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-[-0.05em] md:text-4xl">
+            Host of {siteConfig.wssPodcastName}
+          </h2>
+          <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">
+            Separate from booking Daniel as a guest: he hosts {siteConfig.wssPodcastName} on We Scale Startups, an ongoing look at how AI is rewriting the startup growth playbook.
+          </p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3 lg:mt-0 lg:justify-end">
+          <a class="button-accent" href={siteConfig.wssPodcastUrl} rel="noreferrer" target="_blank">Show page →</a>
+          <a class="button-secondary" href={siteConfig.wssPodcastYoutubeUrl} rel="noreferrer" target="_blank">YouTube {siteConfig.wssPodcastYoutubeHandle}</a>
+          <a class="button-secondary" href={siteConfig.wssPodcastGuestApplyUrl} rel="noreferrer" target="_blank">Apply as a guest on his show</a>
+        </div>
       </div>
     </div>
   </section>
