@@ -1,12 +1,11 @@
 ---
-// NewsletterFormInline.astro — inline Growth Notes capture; posts to Mautic.
+// NewsletterFormInline.astro — Growth Notes capture via Customer.io (/api/forms).
 //
-// Form id and base URL: src/site.ts → mauticNewsletter (env:
-// PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID).
+// Form id: src/site.ts → customerIoNewsletter (PUBLIC_CUSTOMER_IO_FORM_ID).
 //
 // Variants: `variant` = "strip" (compact) or "card" (full block).
 
-import { mauticNewsletter } from "../site";
+import { customerIoNewsletter } from "../site";
 
 interface Props {
   variant?: "strip" | "card";
@@ -30,7 +29,7 @@ const {
   idPrefix
 } = Astro.props;
 
-const { submitUrl, formId } = mauticNewsletter;
+const { submitUrl, formId } = customerIoNewsletter;
 const formIdSuffix = idPrefix ?? `nl-${variant}-${tone}`;
 const headingId = `${formIdSuffix}-title`;
 const emailId = `${formIdSuffix}-email`;
@@ -54,15 +53,18 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h3";
       method="post"
       accept-charset="UTF-8"
       data-cta="newsletter-inline-submit"
+      data-cio-source-form
     >
-      <input type="hidden" name="mauticform[formId]" value={formId} />
+      <input type="hidden" name="form_id" value={formId} />
+      <input type="hidden" name="source_type" value="newsletter" />
+      <input type="hidden" name="source_page" value="" data-source-page />
       <label class="nl-label" for={emailId}>
         <span class="sr-only">Email address</span>
         <input
           id={emailId}
           class="nl-input"
           type="email"
-          name="mauticform[email]"
+          name="email"
           required
           placeholder="you@company.com"
           autocomplete="email"
@@ -73,8 +75,65 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h3";
         Subscribe →
       </button>
     </form>
+    <p class="nl-status" data-signup-status hidden></p>
   </div>
 </section>
+
+<script is:inline>
+  document.querySelectorAll("form[data-cio-source-form]").forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+    if (form.dataset.cioBound) return;
+    form.dataset.cioBound = "1";
+
+    const pageField = form.querySelector("[data-source-page]");
+    if (pageField instanceof HTMLInputElement) {
+      pageField.value = window.location.href;
+    }
+
+    const status = form.parentElement?.querySelector("[data-signup-status]");
+    const button = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const email = (data.get("email") || "").toString().trim();
+      if (!email) return;
+
+      if (button instanceof HTMLButtonElement) button.disabled = true;
+      if (status instanceof HTMLElement) {
+        status.hidden = false;
+        status.textContent = "Subscribing…";
+      }
+
+      try {
+        const res = await fetch(form.action || "/api/forms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            email,
+            form_id: (data.get("form_id") || "").toString(),
+            source_type: (data.get("source_type") || "newsletter").toString(),
+            source_page: (data.get("source_page") || window.location.href).toString()
+          })
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (res.ok && payload.ok) {
+          form.reset();
+          if (pageField instanceof HTMLInputElement) pageField.value = window.location.href;
+          if (status instanceof HTMLElement) status.textContent = "You're in. Check your inbox.";
+        } else if (status instanceof HTMLElement) {
+          status.textContent = "Something went wrong — try again in a moment.";
+        }
+      } catch (_) {
+        if (status instanceof HTMLElement) {
+          status.textContent = "Something went wrong — try again in a moment.";
+        }
+      } finally {
+        if (button instanceof HTMLButtonElement) button.disabled = false;
+      }
+    });
+  });
+</script>
 
 <style>
   .nl-form {
@@ -179,6 +238,12 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h3";
     }
   }
 
+  .nl-status {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
   /* Dark footer / band */
   .nl-form--dark {
     background: rgba(255, 255, 255, 0.06);
@@ -201,6 +266,9 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h3";
   }
   .nl-form--dark .nl-input::placeholder {
     color: rgba(255, 255, 255, 0.45);
+  }
+  .nl-form--dark .nl-status {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .sr-only {

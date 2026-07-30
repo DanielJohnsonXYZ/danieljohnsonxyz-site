@@ -910,26 +910,18 @@ export const principleCards = [
 ] as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// Mautic — Growth Notes signup (replaces Listmonk). Set real values in
-// Cloudflare Pages → Environment variables, or edit the fallbacks below.
-// PUBLIC_MAUTIC_BASE_URL — no trailing slash, e.g. https://comms.wescalestartups.com
-// PUBLIC_MAUTIC_NEWSLETTER_FORM_ID — numeric id from Mautic → Forms
-// CONFIRM before relying on production: default formId below is a placeholder; match
-// the real form in Mautic and set env per Pages project (DJ vs WSS may differ).
+// Customer.io — Growth Notes signup (replaces Mautic / comms.wescalestartups.com).
+// Browser posts to same-origin /api/forms; Pages Function forwards to
+// Customer.io Track Forms API with CUSTOMER_IO_SITE_ID + CUSTOMER_IO_TRACK_API_KEY.
+// PUBLIC_CUSTOMER_IO_FORM_ID — arbitrary form id string (creates a Forms connection).
 // ──────────────────────────────────────────────────────────────────────────
-const mauticBaseRaw =
-  (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||
-  "https://comms.wescalestartups.com";
-const mauticBase = mauticBaseRaw.replace(/\/$/, "");
-const mauticNewsletterFormId =
-  (typeof import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID === "string" &&
-    import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID.trim()) ||
-  "2";
+const customerIoFormId =
+  (typeof import.meta.env.PUBLIC_CUSTOMER_IO_FORM_ID === "string" &&
+    import.meta.env.PUBLIC_CUSTOMER_IO_FORM_ID.trim()) ||
+  "dj-newsletter";
 
-export const mauticNewsletter = {
-  baseUrl: mauticBase,
-  formId: mauticNewsletterFormId,
-  // Mautic's submit route is /form/submit?formId={id} (query string, not path).
-  // The path form /form/submit/{id} 404s.
-  submitUrl: `${mauticBase}/form/submit?formId=${mauticNewsletterFormId}`
+export const customerIoNewsletter = {
+  formId: customerIoFormId,
+  /** Same-origin proxy — never call track.customer.io from the browser. */
+  submitUrl: "/api/forms"
 } as const;

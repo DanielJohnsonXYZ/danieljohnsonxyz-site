@@ -1,17 +1,26 @@
 ---
-import { mauticNewsletter } from "../site";
+import { customerIoNewsletter } from "../site";
 
 interface Props {
+  /** Customer.io form id (Integrations → Forms). */
   formId: string;
   heading: string;
   subline: string;
   buttonLabel: string;
   idPrefix: string;
+  leadMagnet?: string;
 }
 
-const { formId, heading, subline, buttonLabel, idPrefix } = Astro.props;
+const {
+  formId,
+  heading,
+  subline,
+  buttonLabel,
+  idPrefix,
+  leadMagnet = ""
+} = Astro.props;
 const emailId = `${idPrefix}-email`;
-const submitUrl = `${mauticNewsletter.baseUrl}/form/submit?formId=${encodeURIComponent(formId)}`;
+const submitUrl = customerIoNewsletter.submitUrl;
 ---
 
 <section class="lead-form" aria-labelledby={`${idPrefix}-title`}>
@@ -27,13 +36,17 @@ const submitUrl = `${mauticNewsletter.baseUrl}/form/submit?formId=${encodeURICom
     method="post"
     accept-charset="UTF-8"
     data-cta={`${idPrefix}-submit`}
+    data-cio-lead-form
   >
-    <input type="hidden" name="mauticform[formId]" value={formId} />
+    <input type="hidden" name="form_id" value={formId} />
+    <input type="hidden" name="source_type" value="lead_magnet" />
+    <input type="hidden" name="source_page" value="" data-source-page />
+    <input type="hidden" name="lead_magnet" value={leadMagnet || formId} />
     <label for={emailId} class="sr-only">Work email address</label>
     <input
       id={emailId}
       type="email"
-      name="mauticform[email]"
+      name="email"
       placeholder="you@company.com"
       autocomplete="email"
       inputmode="email"
@@ -41,8 +54,64 @@ const submitUrl = `${mauticNewsletter.baseUrl}/form/submit?formId=${encodeURICom
     />
     <button class="button-accent" type="submit">{buttonLabel}</button>
   </form>
-  <p class="lead-form-fine">Includes a five-email implementation series over 16 days. Unsubscribe any time.</p>
+  <p class="lead-form-fine" data-signup-status>Includes a five-email implementation series over 16 days. Unsubscribe any time.</p>
 </section>
+
+<script is:inline>
+  document.querySelectorAll("form[data-cio-lead-form]").forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+    if (form.dataset.cioBound) return;
+    form.dataset.cioBound = "1";
+
+    const pageField = form.querySelector("[data-source-page]");
+    if (pageField instanceof HTMLInputElement) {
+      pageField.value = window.location.href;
+    }
+
+    const status = form.parentElement?.querySelector("[data-signup-status]");
+    const button = form.querySelector('button[type="submit"]');
+    const defaultFine = status?.textContent || "";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const email = (data.get("email") || "").toString().trim();
+      if (!email) return;
+
+      if (button instanceof HTMLButtonElement) button.disabled = true;
+      if (status) status.textContent = "Subscribing…";
+
+      try {
+        const res = await fetch(form.action || "/api/forms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            email,
+            form_id: (data.get("form_id") || "").toString(),
+            source_type: (data.get("source_type") || "lead_magnet").toString(),
+            source_page: (data.get("source_page") || window.location.href).toString(),
+            lead_magnet: (data.get("lead_magnet") || "").toString()
+          })
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (res.ok && payload.ok) {
+          form.reset();
+          if (pageField instanceof HTMLInputElement) pageField.value = window.location.href;
+          if (status) status.textContent = "You're in. Check your inbox.";
+        } else if (status) {
+          status.textContent = "Something went wrong — try again in a moment.";
+        }
+      } catch (_) {
+        if (status) status.textContent = "Something went wrong — try again in a moment.";
+      } finally {
+        if (button instanceof HTMLButtonElement) button.disabled = false;
+        if (status && status.textContent === "Subscribing…") {
+          status.textContent = defaultFine;
+        }
+      }
+    });
+  });
+</script>
 
 <style>
   .lead-form {
