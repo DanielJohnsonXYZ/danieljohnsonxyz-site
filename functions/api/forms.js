@@ -22,12 +22,20 @@
 const MAX_ATTR = 1000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/** Hostnames allowed to submit. Extend via FORMS_ALLOWED_ORIGINS. */
+/**
+ * Hostnames allowed to submit. Extend via FORMS_ALLOWED_ORIGINS.
+ *
+ * wescalestartups.com is included because it shares the Customer.io
+ * workspace: if anything over there ever posts here, silently 403ing it would
+ * be worse than allowing an origin Daniel already owns.
+ */
 const DEFAULT_ALLOWED_HOSTS = [
   "danieljohnson.xyz",
   "www.danieljohnson.xyz",
   "danieljohnsonx.xyz",
   "www.danieljohnsonx.xyz",
+  "wescalestartups.com",
+  "www.wescalestartups.com",
   "localhost",
   "127.0.0.1"
 ];
