@@ -14,6 +14,11 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups /writing/what-is-a-fractional-cmo/ 301
 /the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups/ /writing/what-is-a-fractional-cmo/ 301
 
+# /press/ folded into /media-appearances/ (2026-07-31): the two were separate
+# pages covering the same ground. Its entries moved into the media collection.
+/press                    /media-appearances/  301
+/press/                   /media-appearances/  301
+
 /podcast-appearances      /podcast-guest/  301
 /podcast-appearances/     /podcast-guest/  301
 
