@@ -1154,12 +1154,17 @@
     grid-row: auto;
   }
 }
+/* The headline was capped at the same 36rem as the subhead, which broke
+   "Not sure which lever is yours? Run the diagnostic." onto three cramped
+   lines with wide dead margins. The block is wider now and the subhead
+   keeps its own narrower measure, so only the body copy is constrained. */
 .v5-head-center {
   text-align: center;
-  max-width: 36rem;
+  max-width: 46rem;
   margin: 0 auto 2.25rem;
 }
-.v5-head-center .v5-subhead { margin: 0.65rem auto 0; max-width: 34ch; }
+.v5-head-center .v5-h2 { text-wrap: balance; }
+.v5-head-center .v5-subhead { margin: 0.85rem auto 0; max-width: 40ch; }
 
 /* Homepage: reserve space so sticky CTA never covers proof/offers copy */
 .v5-home #proof,

@@ -259,7 +259,7 @@ export const proofNavItems = [
   { href: "/case-studies/", label: "Case studies", description: "Before/after evidence with real numbers and attribution." },
   { href: "/testimonials/", label: "Testimonials", description: "4.97/5 from 220 reviews · 479+ mentor sessions." },
   { href: "/proof/", label: "Proof in numbers", description: "The full metrics library, verifiable sources linked." },
-  { href: "/press/", label: "Press & coverage", description: "Talks, mentoring affiliations, podcasts and citations." },
+  { href: "/media-appearances/", label: "Press & media", description: "Talks, mentoring affiliations, podcasts and citations." },
   { href: "/media-kit/", label: "Media kit", description: "Bios, headshots and talks for press and podcast hosts." }
 ] as const;
 
@@ -301,7 +301,6 @@ export const footerNavigation = {
     { href: "/testimonials/", label: "Testimonials" },
     { href: "/media-kit/", label: "Media kit" },
     { href: "/speaking/", label: "Speaking" },
-    { href: "/press/", label: "Press & coverage" },
     { href: "/media-appearances/", label: "Media appearances" }
   ],
   company: [

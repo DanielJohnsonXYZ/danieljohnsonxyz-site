@@ -14,10 +14,35 @@ const profiles = media.filter((item) => item.data.kind === "Profile");
 const courses = media.filter((item) => item.data.kind === "Course");
 const speaking = media.filter((item) => item.data.kind === "Speaking");
 
-const schema = buildBreadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "Media Appearances", url: "/media-appearances/" }
-]);
+// ItemList of every appearance. Carried over from /press/ when that page was
+// folded into this one — it's one of the shapes answer engines cite for
+// "where has X been interviewed / quoted", and this page is now the only
+// place the full archive lives. Built from the collection rather than a
+// hardcoded array, so new entries are covered automatically.
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Media appearances and press archive — Daniel Johnson",
+  itemListElement: media.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: item.data.title,
+      url: item.data.href,
+      datePublished: item.data.yearLabel,
+      publisher: { "@type": "Organization", name: item.data.source }
+    }
+  }))
+};
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Media Appearances", url: "/media-appearances/" }
+  ]),
+  itemListSchema
+];
 ---
 
 <BaseLayout
