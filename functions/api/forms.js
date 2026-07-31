@@ -66,6 +66,12 @@ export async function onRequestPost(context) {
     return json(400, { ok: false, error: "Invalid request body" });
   }
 
+  // Honeypot: a hidden field real people never fill in. Bots that fill every
+  // input get a 200 so they don't learn to retry, but nothing is forwarded.
+  if (clip(payload.company_website, 200)) {
+    return json(200, { ok: true, form_id: "discarded" });
+  }
+
   const email = clip(payload.email || payload.Email, 320);
   if (!email || !EMAIL_RE.test(email)) {
     return json(400, { ok: false, error: "Valid email required" });
@@ -101,10 +107,15 @@ export async function onRequestPost(context) {
     "utm_medium",
     "utm_campaign",
     "first_name",
-    "name"
+    "name",
+    // Enquiry + intake fields (contact form, fractional CMO intake).
+    "company",
+    "stage",
+    "bottleneck",
+    "message"
   ];
   for (const key of passThrough) {
-    const v = clip(payload[key]);
+    const v = clip(payload[key], key === "message" ? 4000 : MAX_ATTR);
     if (v) data[key] = v;
   }
 

@@ -1,10 +1,15 @@
 ---
-import { siteConfig } from "../site";
+import { customerIoContact, siteConfig } from "../site";
 
 const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
 ---
 
-<div class="fc-intake-root card overflow-hidden" data-fc-intake-root data-calendly-base={calendlyEmbedBase}>
+<div
+  class="fc-intake-root card overflow-hidden"
+  data-fc-intake-root
+  data-calendly-base={calendlyEmbedBase}
+  data-form-id={customerIoContact.formId}
+>
   <div class="fc-intake-panel" data-fc-intake-panel>
     <p class="fc-intake-lead">
       One minute to share context, then pick a time. Same 20-minute call: no pitch, no deck.
@@ -164,6 +169,27 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
       } catch {
         /* ignore */
       }
+
+      // Capture the lead server-side before handing off to Calendly. Plenty of
+      // people fill this in and then never pick a slot; without this the whole
+      // enquiry was lost. Fire-and-forget so the calendar never waits on it.
+      void fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        keepalive: true,
+        body: JSON.stringify({
+          email,
+          name,
+          company,
+          stage,
+          bottleneck,
+          form_id: root instanceof HTMLElement ? root.dataset.formId || "" : "",
+          source_type: "fractional_cmo_intake",
+          source_page: window.location.href
+        })
+      }).catch(() => {
+        /* the Calendly booking is still the primary path */
+      });
 
       iframe.setAttribute("src", buildCalendlySrc(name, email));
       panelIntake?.classList.add("hidden");
