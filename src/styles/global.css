@@ -5,8 +5,21 @@
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "tailwindcss";
 
-/* ─── Operator field notes — cool stone + deep teal, shared with homepage ─── */
+/* ─── Operator field notes — cool stone + one accent, shared with homepage ─── */
+
+/*
+ * THE ACCENT LIVES HERE AND NOWHERE ELSE.
+ *
+ * Every tint, border, glow, gradient and highlight across the site derives
+ * from these three lines. To re-colour the whole site, change them and
+ * nothing else — `--accent-rgb` must be the same colour as `--accent`, as a
+ * space-separated triplet, so alpha variants can be mixed from it.
+ */
 :root {
+  --accent: #04452c;          /* British racing green */
+  --accent-rgb: 4 69 44;
+  --accent-far: #0a5f6b;      /* second gradient stop — a shade along the hue */
+
   --bg: #f1f2f0;
   --surface: #ffffff;
   --surface-dim: #e6e8e5;
@@ -15,11 +28,13 @@
   --subtle: #5a5f68; /* AA on light backgrounds */
   --line: rgba(20, 22, 26, 0.1);
   --line-strong: rgba(20, 22, 26, 0.18);
-  --accent: #0d5c63;
-  --accent-soft: rgba(13, 92, 99, 0.09);
+
+  /* Derived — do not hardcode these anywhere else. */
+  --accent-deep: color-mix(in srgb, var(--accent) 82%, black);
+  --accent-soft: rgb(var(--accent-rgb) / 0.09);
   --accent-glow: transparent;
-  --gradient-start: #0d5c63;
-  --gradient-end: #1a5f7a;
+  --gradient-start: var(--accent);
+  --gradient-end: var(--accent-far);
   --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.05);
   --shadow-md: 0 8px 24px rgba(20, 22, 26, 0.07);
   --shadow-lg: 0 20px 48px rgba(20, 22, 26, 0.09);
@@ -60,12 +75,12 @@ body::before {
   pointer-events: none;
   content: "";
   background:
-    radial-gradient(ellipse 70% 45% at 50% -18%, rgba(13, 92, 99, 0.05), transparent),
+    radial-gradient(ellipse 70% 45% at 50% -18%, rgb(var(--accent-rgb) / 0.05), transparent),
     radial-gradient(ellipse 50% 35% at 88% 8%, rgba(20, 22, 26, 0.03), transparent);
 }
 
 ::selection {
-  background: rgba(13, 92, 99, 0.16);
+  background: rgb(var(--accent-rgb) / 0.16);
   color: var(--ink);
 }
 
@@ -144,10 +159,10 @@ a, button, summary {
   content: "/";
 }
 
-.rtb-item-1 { color: #0d5c63; }
+.rtb-item-1 { color: var(--accent); }
 .rtb-item-2 { color: #0891b2; }
 .rtb-item-3 { color: #dc2626; }
-.rtb-item-4 { color: #0f766e; }
+.rtb-item-4 { color: var(--accent-far); }
 .rtb-item-5 { color: #ca8a04; }
 
 .rotating-text-bars-dark .rtb-track {
@@ -262,7 +277,7 @@ a, button, summary {
 }
 
 .explore-card:hover {
-  border-color: rgba(13, 92, 99, 0.26);
+  border-color: rgb(var(--accent-rgb) / 0.26);
   transform: translateY(-2px);
 }
 
@@ -330,7 +345,7 @@ a, button, summary {
   height: 1px;
   margin-bottom: 2rem;
   content: "";
-  background: linear-gradient(90deg, var(--line-strong) 0%, rgba(13, 92, 99, 0.2) 45%, transparent 100%);
+  background: linear-gradient(90deg, var(--line-strong) 0%, rgb(var(--accent-rgb) / 0.2) 45%, transparent 100%);
 }
 
 .section-head-grid {
@@ -386,7 +401,7 @@ a, button, summary {
 
 .link-arrow {
   @apply inline-flex items-center gap-2 text-sm font-semibold;
-  color: #0a4a50;
+  color: var(--accent-deep);
 }
 
 .link-arrow:hover,
@@ -414,8 +429,8 @@ a, button, summary {
 .chip-active,
 .chip:hover,
 .chip:focus-visible {
-  border-color: rgba(13, 92, 99, 0.3);
-  background: rgba(13, 92, 99, 0.08);
+  border-color: rgb(var(--accent-rgb) / 0.3);
+  background: rgb(var(--accent-rgb) / 0.08);
   color: var(--accent);
 }
 
@@ -427,8 +442,8 @@ a, button, summary {
 }
 
 button.chip.case-chip-active {
-  border-color: rgba(13, 92, 99, 0.45);
-  background: rgba(13, 92, 99, 0.12);
+  border-color: rgb(var(--accent-rgb) / 0.45);
+  background: rgb(var(--accent-rgb) / 0.12);
   color: var(--accent);
 }
 
@@ -482,7 +497,7 @@ button.chip.case-chip-active {
   border: 1px solid var(--line);
   border-left: 4px solid var(--accent);
   border-radius: var(--radius);
-  background: linear-gradient(135deg, rgba(13, 92, 99, 0.08), rgba(20, 184, 166, 0.06)), var(--surface);
+  background: linear-gradient(135deg, rgb(var(--accent-rgb) / 0.08), color-mix(in srgb, var(--accent-far) 8%, transparent)), var(--surface);
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
 }
@@ -795,7 +810,7 @@ button.chip.case-chip-active {
   min-height: 11rem;
   padding: 1rem;
   background:
-    radial-gradient(circle at 20% 20%, rgba(13, 92, 99, 0.16), transparent 36%),
+    radial-gradient(circle at 20% 20%, rgb(var(--accent-rgb) / 0.16), transparent 36%),
     var(--surface);
   color: var(--ink);
 }
@@ -932,7 +947,7 @@ button.chip.case-chip-active {
   /* not overflow:hidden — that creates a scrollport and breaks position:sticky on the portrait column */
   overflow: visible;
   background:
-    radial-gradient(circle at 80% 0, rgba(13, 92, 99, 0.08), transparent 30rem),
+    radial-gradient(circle at 80% 0, rgb(var(--accent-rgb) / 0.08), transparent 30rem),
     radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.06), transparent 20rem),
     linear-gradient(180deg, #fafaf9 0%, #f3f0eb 100%);
 }
@@ -967,9 +982,9 @@ button.chip.case-chip-active {
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 0.85rem;
-  border: 1px solid rgba(13, 92, 99, 0.22);
+  border: 1px solid rgb(var(--accent-rgb) / 0.22);
   border-radius: 999px;
-  background: rgba(13, 92, 99, 0.08);
+  background: rgb(var(--accent-rgb) / 0.08);
   color: var(--accent);
   font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
   font-size: 0.72rem;
@@ -1074,7 +1089,7 @@ button.chip.case-chip-active {
 .hero-authority-panel {
   padding: 1.35rem;
   background:
-    linear-gradient(135deg, rgba(13, 92, 99, 0.08), transparent 46%),
+    linear-gradient(135deg, rgb(var(--accent-rgb) / 0.08), transparent 46%),
     var(--surface);
 }
 
@@ -1111,7 +1126,7 @@ button.chip.case-chip-active {
   flex-direction: column;
   justify-content: flex-end;
   background:
-    radial-gradient(circle at 15% 0%, rgba(13, 92, 99, 0.26), transparent 25rem),
+    radial-gradient(circle at 15% 0%, rgb(var(--accent-rgb) / 0.26), transparent 25rem),
     rgba(255, 255, 255, 0.04);
 }
 
@@ -1332,7 +1347,7 @@ button.chip.case-chip-active {
 
 .insights-flagship {
   background:
-    radial-gradient(circle at 80% 0%, rgba(13, 92, 99, 0.12), transparent 18rem),
+    radial-gradient(circle at 80% 0%, rgb(var(--accent-rgb) / 0.12), transparent 18rem),
     var(--surface);
 }
 
@@ -1352,7 +1367,7 @@ button.chip.case-chip-active {
 
 .archive-mini-link:hover {
   transform: translateY(-1px);
-  border-color: rgba(13, 92, 99, 0.3);
+  border-color: rgb(var(--accent-rgb) / 0.3);
   background: var(--surface);
 }
 
@@ -1509,9 +1524,9 @@ button.chip.case-chip-active {
 }
 
 .explore-card-primary {
-  border-color: rgba(13, 92, 99, 0.3);
+  border-color: rgb(var(--accent-rgb) / 0.3);
   background:
-    linear-gradient(135deg, rgba(13, 92, 99, 0.11), rgba(255, 255, 255, 0.82) 40%),
+    linear-gradient(135deg, rgb(var(--accent-rgb) / 0.11), rgba(255, 255, 255, 0.82) 40%),
     var(--surface);
 }
 
@@ -1613,7 +1628,7 @@ button.chip.case-chip-active {
 
 .profile-row:hover {
   transform: translateY(-1px);
-  border-color: rgba(13, 92, 99, 0.35);
+  border-color: rgb(var(--accent-rgb) / 0.35);
   background: rgba(255, 255, 255, 0.07);
 }
 
@@ -1670,7 +1685,7 @@ button.chip.case-chip-active {
 .video-example-card:hover,
 .video-example-card:focus-visible {
   transform: translateY(-3px);
-  border-color: rgba(13, 92, 99, 0.32);
+  border-color: rgb(var(--accent-rgb) / 0.32);
   box-shadow: var(--shadow-md);
 }
 
@@ -1718,7 +1733,7 @@ button.chip.case-chip-active {
   border-radius: 50%;
   content: "";
   transform: translateX(-50%);
-  background: rgba(13, 92, 99, 0.22);
+  background: rgb(var(--accent-rgb) / 0.22);
   filter: blur(80px);
   pointer-events: none;
 }
@@ -2141,7 +2156,7 @@ summary::-webkit-details-marker {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background:
-    radial-gradient(circle at 88% 12%, rgba(13, 92, 99, 0.12), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgb(var(--accent-rgb) / 0.12), transparent 28%),
     #fff;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   box-shadow: var(--shadow-sm);
@@ -2423,23 +2438,23 @@ summary::-webkit-details-marker {
 }
 
 .ladder-card-primary {
-  border-color: rgba(13, 92, 99, 0.45);
+  border-color: rgb(var(--accent-rgb) / 0.45);
   box-shadow:
-    0 0 0 1px rgba(13, 92, 99, 0.18) inset,
-    0 24px 48px -28px rgba(13, 92, 99, 0.45);
+    0 0 0 1px rgb(var(--accent-rgb) / 0.18) inset,
+    0 24px 48px -28px rgb(var(--accent-rgb) / 0.45);
   background:
-    linear-gradient(135deg, rgba(13, 92, 99, 0.14), rgba(255, 255, 255, 0.85) 45%),
+    linear-gradient(135deg, rgb(var(--accent-rgb) / 0.14), rgba(255, 255, 255, 0.85) 45%),
     var(--surface);
 }
 
 .ladder-card:hover,
 .ladder-card:focus-visible {
-  border-color: rgba(13, 92, 99, 0.36);
+  border-color: rgb(var(--accent-rgb) / 0.36);
   box-shadow: var(--shadow-md);
 }
 
 .ladder-card:focus-visible {
-  outline: 3px solid rgba(13, 92, 99, 0.28);
+  outline: 3px solid rgb(var(--accent-rgb) / 0.28);
   outline-offset: 4px;
 }
 
@@ -2457,8 +2472,8 @@ summary::-webkit-details-marker {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 999px;
-  background: rgba(13, 92, 99, 0.1);
-  border: 1px solid rgba(13, 92, 99, 0.28);
+  background: rgb(var(--accent-rgb) / 0.1);
+  border: 1px solid rgb(var(--accent-rgb) / 0.28);
   color: var(--accent);
   font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
   font-size: 0.85rem;
@@ -2470,7 +2485,7 @@ summary::-webkit-details-marker {
   background: var(--accent);
   border-color: var(--accent);
   color: white;
-  box-shadow: 0 8px 18px -8px rgba(13, 92, 99, 0.55);
+  box-shadow: 0 8px 18px -8px rgb(var(--accent-rgb) / 0.55);
 }
 
 .ladder-step-arrow {
@@ -2478,7 +2493,7 @@ summary::-webkit-details-marker {
   font-family: "Source Sans 3 Variable", "Source Sans 3", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: rgba(13, 92, 99, 0.45);
+  color: rgb(var(--accent-rgb) / 0.45);
   user-select: none;
   /* Position the arrow as a connector between cards on desktop */
   position: absolute;
@@ -2517,7 +2532,7 @@ summary::-webkit-details-marker {
    ────────────────────────────────────────────────────────────────────── */
 .compare-winner-cell {
   position: relative;
-  background: rgba(13, 92, 99, 0.06);
+  background: rgb(var(--accent-rgb) / 0.06);
   color: var(--ink);
   font-weight: 600;
   box-shadow: inset 3px 0 0 var(--accent);
@@ -2535,13 +2550,13 @@ summary::-webkit-details-marker {
     position: relative;
     /* Visible scrollbar so the swipe is discoverable */
     scrollbar-width: thin;
-    scrollbar-color: rgba(13, 92, 99, 0.4) transparent;
+    scrollbar-color: rgb(var(--accent-rgb) / 0.4) transparent;
   }
   .overflow-x-auto:has(table[class*="min-w-"])::-webkit-scrollbar {
     height: 8px;
   }
   .overflow-x-auto:has(table[class*="min-w-"])::-webkit-scrollbar-thumb {
-    background: rgba(13, 92, 99, 0.45);
+    background: rgb(var(--accent-rgb) / 0.45);
     border-radius: 4px;
   }
   .overflow-x-auto:has(table[class*="min-w-"])::after {
@@ -2554,7 +2569,7 @@ summary::-webkit-details-marker {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
-    background: rgba(13, 92, 99, 0.05);
+    background: rgb(var(--accent-rgb) / 0.05);
   }
 }
 
@@ -2568,7 +2583,7 @@ summary::-webkit-details-marker {
 :root {
   --text-measure: 68ch;
   --space-conversion-y: clamp(1.75rem, 3.5vw, 3.2rem);
-  --accent-strong: #0a4a50;
+  --accent-strong: var(--accent-deep);
   --accent-ink: #083d42;
   --focus-ring-strong: 0 0 0 3px rgba(109, 40, 217, 0.34);
 }

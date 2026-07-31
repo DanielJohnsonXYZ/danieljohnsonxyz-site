@@ -30,7 +30,7 @@
   --measure: 65ch;
 
   /* Focus ring — single source of truth for keyboard outlines. */
-  --focus-ring: 0 0 0 3px rgba(13, 92, 99, 0.32);
+  --focus-ring: 0 0 0 3px rgb(var(--accent-rgb) / 0.32);
 }
 
 /* ─── Global focus-visible ring ───────────────────────────────────────
@@ -112,7 +112,7 @@ body {
 
 /* ─── Section headers — softer, longer divider gradient ──────────── */
 .section-head::before {
-  background: linear-gradient(90deg, var(--line-strong) 0%, rgba(13, 92, 99, 0.22) 35%, transparent 80%);
+  background: linear-gradient(90deg, var(--line-strong) 0%, rgb(var(--accent-rgb) / 0.22) 35%, transparent 80%);
   margin-bottom: clamp(1.5rem, 2vw + 1rem, 2.5rem);
 }
 
@@ -138,7 +138,7 @@ body {
 .prose-wrap a:not(.button-primary):not(.button-secondary):not(.button-accent):not(.button-link):not(.link-arrow) {
   color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: rgba(13, 92, 99, 0.35);
+  text-decoration-color: rgb(var(--accent-rgb) / 0.35);
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1.5px;
   transition: text-decoration-color 160ms ease, color 160ms ease;
@@ -193,7 +193,7 @@ footer.dark-section::before {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(13, 92, 99, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgb(var(--accent-rgb) / 0.4), transparent);
   pointer-events: none;
 }
 
@@ -248,7 +248,7 @@ footer.dark-section::before {
 
 /* ─── Selection — subtler tint over the hero gradient wash ──────── */
 ::selection {
-  background: rgba(13, 92, 99, 0.18);
+  background: rgb(var(--accent-rgb) / 0.18);
   color: var(--ink);
 }
 
@@ -265,7 +265,7 @@ footer.dark-section::before {
 
    <h2>You've got traction. <span class="hl">Growth still feels like guessing.</span></h2> */
 .hl {
-  background-image: linear-gradient(120deg, rgba(13, 92, 99, 0.16) 0%, rgba(13, 92, 99, 0.16) 100%);
+  background-image: linear-gradient(120deg, rgb(var(--accent-rgb) / 0.16) 0%, rgb(var(--accent-rgb) / 0.16) 100%);
   background-repeat: no-repeat;
   background-size: 100% 0.48em;
   background-position: 0 86%;
@@ -275,7 +275,7 @@ footer.dark-section::before {
 
 .dark-section .hl,
 .cta-gradient .hl {
-  background-image: linear-gradient(120deg, rgba(13, 92, 99, 0.42) 0%, rgba(13, 92, 99, 0.42) 100%);
+  background-image: linear-gradient(120deg, rgb(var(--accent-rgb) / 0.42) 0%, rgb(var(--accent-rgb) / 0.42) 100%);
   color: #fff;
 }
 
@@ -293,7 +293,7 @@ footer.dark-section::before {
 .card:not(.card-static):not(.dark-section .card):hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-xl, 0 24px 64px rgba(9, 9, 11, 0.10));
-  border-color: rgba(13, 92, 99, 0.22);
+  border-color: rgb(var(--accent-rgb) / 0.22);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -366,13 +366,13 @@ footer.dark-section::before {
 .audience-lane:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(13, 92, 99, 0.22);
+  border-color: rgb(var(--accent-rgb) / 0.22);
 }
 
 .audience-lane--primary {
-  border-color: rgba(13, 92, 99, 0.32);
+  border-color: rgb(var(--accent-rgb) / 0.32);
   background:
-    linear-gradient(180deg, rgba(13, 92, 99, 0.05) 0%, var(--surface) 60%);
+    linear-gradient(180deg, rgb(var(--accent-rgb) / 0.05) 0%, var(--surface) 60%);
 }
 
 .audience-lane--primary::after {
@@ -382,7 +382,7 @@ footer.dark-section::before {
   right: 0;
   width: 9rem;
   height: 9rem;
-  background: radial-gradient(circle at top right, rgba(13, 92, 99, 0.10) 0%, transparent 65%);
+  background: radial-gradient(circle at top right, rgb(var(--accent-rgb) / 0.10) 0%, transparent 65%);
   pointer-events: none;
 }
 
