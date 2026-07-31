@@ -13,11 +13,12 @@
   --line: #d5d8d4;
   --line-soft: #e6e8e5;
   --white: #ffffff;
+  /* All four derive from --accent in global.css. Never hardcode a shade here. */
   --electric: var(--accent);
-  --electric-deep: #0a4a50;
-  --electric-soft: #d9ecee;
-  --electric-tint: #eef6f6;
-  --highlight: rgba(13, 92, 99, 0.14);
+  --electric-deep: var(--accent-deep);
+  --electric-soft: color-mix(in srgb, var(--accent) 16%, white);
+  --electric-tint: color-mix(in srgb, var(--accent) 7%, white);
+  --highlight: rgb(var(--accent-rgb) / 0.14);
   --green: #16a34a;
   --red: #dc2626;
   --v5-max: 1280px;
@@ -168,7 +169,7 @@
   flex-direction: column;
   min-height: min(88svh, 55rem);
   background:
-    radial-gradient(118% 88% at 84% 4%, rgba(13, 92, 99, 0.14) 0%, transparent 56%),
+    radial-gradient(118% 88% at 84% 4%, rgb(var(--accent-rgb) / 0.14) 0%, transparent 56%),
     radial-gradient(86% 68% at 4% 2%, rgba(255, 228, 190, 0.46) 0%, transparent 58%),
     linear-gradient(166deg, #fcfcfb 0%, #f3f4f2 44%, #e7eae8 100%);
 }
@@ -207,7 +208,7 @@
   aspect-ratio: 1;
   right: -12rem;
   top: -16rem;
-  background: radial-gradient(circle, rgba(13, 92, 99, 0.22) 0%, transparent 68%);
+  background: radial-gradient(circle, rgb(var(--accent-rgb) / 0.22) 0%, transparent 68%);
 }
 /* Filmic grain — keeps the large flat gradients from banding. */
 .v5-hero-grain {
@@ -306,9 +307,9 @@
   padding: 1.02rem 1.7rem;
   font-size: 1.01rem;
   border-radius: 0.625rem;
-  box-shadow: 0 12px 28px -10px rgba(13, 92, 99, 0.55);
+  box-shadow: 0 12px 28px -10px rgb(var(--accent-rgb) / 0.55);
 }
-.v5-btn-lg:hover { box-shadow: 0 16px 34px -10px rgba(13, 92, 99, 0.6); }
+.v5-btn-lg:hover { box-shadow: 0 16px 34px -10px rgb(var(--accent-rgb) / 0.6); }
 .v5-hero .v5-hero-note {
   margin: clamp(1.35rem, 2.8vh, 1.85rem) 0 0;
   font-size: 0.86rem;
@@ -338,8 +339,8 @@
   width: min(31rem, 96%);
   background: radial-gradient(
     circle at 50% 46%,
-    rgba(13, 92, 99, 0.2) 0%,
-    rgba(13, 92, 99, 0.08) 44%,
+    rgb(var(--accent-rgb) / 0.2) 0%,
+    rgb(var(--accent-rgb) / 0.08) 44%,
     transparent 70%
   );
   filter: blur(4px);
@@ -347,12 +348,12 @@
 .v5-hero-ring {
   bottom: 7%;
   width: min(26rem, 80%);
-  border: 1px solid rgba(13, 92, 99, 0.2);
+  border: 1px solid rgb(var(--accent-rgb) / 0.2);
 }
 .v5-hero-ring-outer {
   bottom: 1%;
   width: min(32rem, 99%);
-  border-color: rgba(13, 92, 99, 0.11);
+  border-color: rgb(var(--accent-rgb) / 0.11);
 }
 .v5-hero-portrait {
   position: relative;
@@ -1065,7 +1066,7 @@
   border: 1px solid var(--line);
   border-radius: 1.25rem;
   background:
-    radial-gradient(88% 120% at 50% 0%, rgba(13, 92, 99, 0.11) 0%, transparent 62%),
+    radial-gradient(88% 120% at 50% 0%, rgb(var(--accent-rgb) / 0.11) 0%, transparent 62%),
     radial-gradient(60% 90% at 8% 100%, rgba(255, 214, 150, 0.22) 0%, transparent 70%),
     linear-gradient(180deg, #fcfcfb 0%, #f1f3f1 100%);
   box-shadow: 0 26px 60px -32px rgba(20, 22, 26, 0.4);
@@ -1090,7 +1091,7 @@
 /* === Section rhythm variation (break template fatigue) === */
 .v5-section-tight { padding-block: clamp(1.75rem, 3vw, 2.5rem) !important; }
 .v5-section-proof {
-  background: color-mix(in srgb, var(--ink) 94%, #0d5c63);
+  background: color-mix(in srgb, var(--ink) 94%, var(--accent));
   color: #f3f4f2;
   padding-block: clamp(2.75rem, 5vw, 4rem) !important;
 }

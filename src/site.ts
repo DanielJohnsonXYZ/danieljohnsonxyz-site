@@ -27,7 +27,7 @@ export const siteConfig = {
   /** Single source for “start window” copy; update when calendars shift. */
   nextStartWindow: "Next start window: June 2026.",
   /** Shorter header button label (full offer copy stays on `bookingLabel`). */
-  navBookingLabel: "Say Hi!",
+  navBookingLabel: "Contact us",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",
@@ -194,7 +194,10 @@ export const announcement = {
 // ──────────────────────────────────────────────────────────────────────────
 export const ctas = {
   primary: {
-    label: "Book a 20-min Growth Audit",
+    // Deliberately generic: the button names the action, and the hint carries
+    // the specifics. "Book a 20-min Growth Audit" asked people to commit to a
+    // named product before they knew what it was.
+    label: "Contact us",
     href: siteConfig.bookingPageUrl,
     hint: "Free · 20 minutes · No pitch"
   },
@@ -324,7 +327,9 @@ export const footerNavigation = {
   ],
   contact: [
     { href: `mailto:${siteConfig.email}`, label: "Email Daniel" },
-    { href: siteConfig.bookingUrl, label: "Book a 20-min Growth Audit" }
+    // Points at /contact/ rather than straight to Calendly so the message form
+    // is reachable for anyone who can't or won't use the calendar embed.
+    { href: siteConfig.bookingPageUrl, label: "Contact us" }
   ]
 } as const;
 
@@ -931,5 +936,20 @@ const customerIoFormId =
 export const customerIoNewsletter = {
   formId: customerIoFormId,
   /** Same-origin proxy — never call track.customer.io from the browser. */
+  submitUrl: "/api/forms"
+} as const;
+
+/**
+ * Enquiry capture — /contact message form and the /fractional-cmo intake.
+ * Separate Customer.io form id so enquiries don't land in the newsletter
+ * connection (and can trigger their own notification campaign).
+ */
+const customerIoContactFormId =
+  (typeof import.meta.env.PUBLIC_CUSTOMER_IO_CONTACT_FORM_ID === "string" &&
+    import.meta.env.PUBLIC_CUSTOMER_IO_CONTACT_FORM_ID.trim()) ||
+  "dj-contact";
+
+export const customerIoContact = {
+  formId: customerIoContactFormId,
   submitUrl: "/api/forms"
 } as const;

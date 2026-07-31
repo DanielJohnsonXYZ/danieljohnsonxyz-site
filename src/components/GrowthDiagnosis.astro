@@ -132,8 +132,7 @@ const resultsJson = JSON.stringify(results);
   class="growth-diagnosis reveal mt-10"
   data-questions={questionsJson}
   data-results={resultsJson}
-  data-calendly-href={ctas.primary.href}
-  data-calendly-label={ctas.primary.label}
+  data-contact-href={ctas.primary.href}
 >
   <div class="card p-6 md:p-10">
     <div class="gd-progress" aria-hidden="true">
@@ -192,14 +191,11 @@ const resultsJson = JSON.stringify(results);
         <p class="mt-3 text-base leading-8" data-gd-result-reco></p>
       </div>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a class="button-accent" href="/growth-audit/" data-cta="diagnosis-primary-audit">
-          Book a 20-min Growth Audit →
+        <a class="button-accent" href={ctas.primary.href} data-cta="diagnosis-primary-contact" data-gd-cta>
+          Contact us →
         </a>
         <a class="button-secondary" href="/gtm-systems/" data-cta="diagnosis-next-step" data-gd-next-step>
           Next step →
-        </a>
-        <a class="button-link" href={ctas.primary.href} data-cta="diagnosis-calendly-direct" data-gd-cta>
-          Or grab a Calendly slot directly →
         </a>
         <button type="button" class="button-link" data-gd-restart>
           Retake the diagnosis
@@ -222,8 +218,7 @@ const resultsJson = JSON.stringify(results);
     const questions = JSON.parse(root.dataset.questions || "[]");
     const results = JSON.parse(root.dataset.results || "{}");
     const total = questions.length;
-    const calendlyHref = root.dataset.calendlyHref || "";
-    const calendlyLabel = (root.dataset.calendlyLabel || "Book directly") + " →";
+    const contactHref = root.dataset.contactHref || "";
 
     const steps = Array.from(root.querySelectorAll("[data-gd-step]"));
     const resultEl = root.querySelector("[data-gd-result]");
@@ -287,11 +282,12 @@ const resultsJson = JSON.stringify(results);
         nextLink.setAttribute("data-cta", "diagnosis-next-" + winner);
       }
 
+      // Keep the label as authored ("Contact us"); only tag the click so we can
+      // see which diagnosis outcome the contact came from.
       const cta = root.querySelector("[data-gd-cta]");
-      if (cta && calendlyHref) {
-        cta.setAttribute("href", calendlyHref);
-        cta.textContent = calendlyLabel;
-        cta.setAttribute("data-cta", "diagnosis-calendly-" + winner);
+      if (cta && contactHref) {
+        cta.setAttribute("href", contactHref);
+        cta.setAttribute("data-cta", "diagnosis-contact-" + winner);
       }
 
       steps.forEach((s) => (s.hidden = true));

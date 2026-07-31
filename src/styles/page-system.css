@@ -11,7 +11,7 @@
   /* Hero light recipe — shared with .v5-hero so the homepage and the
      inner pages are lit from the same two sources. */
   --lit-warm: rgba(255, 226, 186, 0.5);
-  --lit-teal: rgba(13, 92, 99, 0.13);
+  --lit-teal: rgb(var(--accent-rgb) / 0.13);
   --lit-rule: rgba(20, 22, 26, 0.045);
   --lit-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.42'/></svg>");
 
@@ -282,7 +282,7 @@ h3[class*="text-3xl"] {
 .rtb-item-1 { color: var(--accent); }
 .rtb-item-2 { color: #3f6f74; }
 .rtb-item-3 { color: var(--ink); }
-.rtb-item-4 { color: #0a4a50; }
+.rtb-item-4 { color: var(--accent-deep); }
 .rtb-item-5 { color: #5f7275; }
 
 .rotating-text-bars-dark .rtb-item-1 { color: #9fd0d4; }
