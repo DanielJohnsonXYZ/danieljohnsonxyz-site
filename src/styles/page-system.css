@@ -1,0 +1,185 @@
+/* ============================================================
+   Page system — light cinematic pass.
+
+   Extends the treatment built for the homepage hero to every other
+   page, and tightens the shared rhythm those pages are built from.
+   Additive and loaded last, so it overrides global.css and
+   visual-system.css without either needing to be rewritten.
+   ============================================================ */
+
+:root {
+  /* Hero light recipe — shared with .v5-hero so the homepage and the
+     inner pages are lit from the same two sources. */
+  --lit-warm: rgba(255, 226, 186, 0.5);
+  --lit-teal: rgba(13, 92, 99, 0.13);
+  --lit-rule: rgba(20, 22, 26, 0.045);
+  --lit-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.42'/></svg>");
+
+  /* More generous section rhythm. The previous scale topped out at
+     ~2.85rem, which ran sections into each other on wide viewports. */
+  --space-section: clamp(2.4rem, 3.2vw + 0.85rem, 3.9rem);
+  --space-section-tight: clamp(1.4rem, 2vw + 0.6rem, 2.2rem);
+}
+
+/* ── Cinematic page hero ──────────────────────────────────────────
+   Targets the first <section> of every page, so no page markup has to
+   change. Two deliberate exclusions fall out of the selector for free:
+
+   - The homepage opts out, because its top-level child is
+     <div class="v5-home">, not a <section> — it keeps .v5-hero.
+   - BaseLayout's "last updated" <section> is always last in the slot,
+     so :first-of-type still resolves to the real hero.
+
+   Layer order in `background` is top-most first: vignette, teal fill,
+   warm key, base wash. */
+.site-main > section:first-of-type {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(2.75rem, 5vw, 4.5rem) clamp(2.25rem, 4vw, 3.5rem);
+  background:
+    radial-gradient(122% 104% at 50% 28%, transparent 56%, rgba(20, 22, 26, 0.075) 100%),
+    radial-gradient(102% 126% at 86% -14%, var(--lit-teal) 0%, transparent 54%),
+    radial-gradient(74% 96% at 2% -8%, var(--lit-warm) 0%, transparent 56%),
+    linear-gradient(168deg, #fcfcfb 0%, #f5f6f4 46%, #eceeec 100%);
+}
+
+/* Rule grid, masked so it dissolves toward the edges instead of
+   tiling flat to the boundary. */
+.site-main > section:first-of-type::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--lit-rule) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--lit-rule) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(106% 86% at 42% 16%, #000 14%, transparent 74%);
+  mask-image: radial-gradient(106% 86% at 42% 16%, #000 14%, transparent 74%);
+}
+
+/* Film grain — stops the large soft gradients banding on wide screens. */
+.site-main > section:first-of-type::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.26;
+  mix-blend-mode: multiply;
+  background-image: var(--lit-grain);
+}
+
+/* Dark heroes (if a page ever opens on one) keep their own surface. */
+.site-main > section:first-of-type.dark-section {
+  background: var(--ink);
+}
+.site-main > section:first-of-type.dark-section::before,
+.site-main > section:first-of-type.dark-section::after {
+  display: none;
+}
+
+/* ── Hero typography ──────────────────────────────────────────────
+   Page H1s were set with Tailwind steps (text-5xl / md:text-7xl) and
+   then walked back by three separate override blocks in
+   visual-system.css. One fluid scale replaces the whole stack.
+
+   No margin is set here on purpose: these pages space their hero stack
+   with Tailwind's space-y-*, which in v4 is a margin on the children.
+   Setting one would outspecify it and collapse the headline/lede gap. */
+.site-main > section:first-of-type h1 {
+  font-size: clamp(2.15rem, 3.3vw + 0.4rem, 3.15rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+/* Long-form titles (essays, case studies) sit a step down — they run
+   much longer than a marketing page headline. */
+.article-hero h1,
+.site-main > section:first-of-type h1.font-semibold {
+  font-size: clamp(2.05rem, 2.9vw + 0.5rem, 3.05rem);
+  letter-spacing: -0.03em;
+}
+
+.site-main > section:first-of-type .hero-subcopy,
+.site-main > section:first-of-type .lede,
+.site-main > section:first-of-type .conversion-subcopy {
+  font-size: clamp(1.06rem, 0.45vw + 0.96rem, 1.24rem);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 54ch;
+}
+
+/* ── Eyebrow labels ───────────────────────────────────────────────
+   Match the homepage's mono + accent-dot treatment so the label reads
+   as the same component across the site. */
+.service-label,
+.page-hero .eyebrow,
+.site-main > section:first-of-type .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.71rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+.service-label::before,
+.page-hero .eyebrow::before,
+.site-main > section:first-of-type .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Cards ────────────────────────────────────────────────────────
+   Softer surface and a lighter resting shadow, so grids of cards stop
+   reading as a wall of heavy boxes. The hover lift stays. */
+.card {
+  border-radius: var(--radius-xl, 2rem);
+  box-shadow: var(--shadow-xs, 0 1px 2px rgba(9, 9, 11, 0.04));
+  background: linear-gradient(180deg, #fff 0%, var(--surface) 100%);
+}
+
+.card:not(.card-static):not(.dark-section .card):hover {
+  box-shadow: 0 20px 46px -22px rgba(9, 9, 11, 0.22);
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: var(--radius-lg, 1.5rem);
+  }
+}
+
+/* ── Section headers ──────────────────────────────────────────────
+   Give the shared .section-head the same measured scale as the
+   homepage's headers. */
+.section-title {
+  font-size: clamp(1.8rem, 2.1vw + 0.9rem, 2.65rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+/* ── First-section reveal ─────────────────────────────────────────
+   Above-the-fold content shouldn't wait on an IntersectionObserver.
+   BaseLayout adds .is-visible on intersect; heroes get it immediately. */
+@media (prefers-reduced-motion: no-preference) {
+  .site-main > section:first-of-type .reveal {
+    animation: pageHeroIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+@keyframes pageHeroIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
