@@ -96,14 +96,6 @@
   text-wrap: balance;
 }
 
-/* Long-form titles (essays, case studies) sit a step down — they run
-   much longer than a marketing page headline. */
-.article-hero h1,
-.site-main > section:first-of-type h1.font-semibold {
-  font-size: clamp(2.05rem, 2.9vw + 0.5rem, 3.05rem);
-  letter-spacing: -0.03em;
-}
-
 .site-main > section:first-of-type .hero-subcopy,
 .site-main > section:first-of-type .lede,
 .site-main > section:first-of-type .conversion-subcopy {
@@ -123,7 +115,7 @@
   align-items: center;
   gap: 0.6rem;
   font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.71rem;
+  font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -168,6 +160,104 @@
   font-size: clamp(1.8rem, 2.1vw + 0.9rem, 2.65rem);
   line-height: 1.06;
   letter-spacing: -0.035em;
+}
+
+/* ============================================================
+   CENTRALISED PRIMITIVES
+
+   The pages were each hand-tuned, so the same element was written a
+   different way on nearly every page: 16 H1 variants, 51 H2 variants,
+   3 competing small-caps label classes, and 10 card paddings.
+
+   Rather than rewrite 46 files, these rules normalise the *rendered*
+   result. A page can still say `text-5xl md:text-7xl` — it just lands
+   on the one shared scale. New pages inherit the system automatically,
+   however their markup is written.
+
+   Change a value here and it changes everywhere. See docs/DESIGN.md.
+   ============================================================ */
+
+:root {
+  --title-page: clamp(2.15rem, 3.3vw + 0.4rem, 3.15rem);   /* page H1 */
+  --title-section: clamp(1.8rem, 2.1vw + 0.9rem, 2.65rem); /* section H2 */
+  --title-sub: clamp(1.15rem, 0.6vw + 1rem, 1.45rem);      /* card / sub H3 */
+  --card-pad: clamp(1.4rem, 1.1vw + 1.05rem, 2rem);
+}
+
+/* ── One page-title scale ─────────────────────────────────────────
+   Matches any H1 written with a display utility, whichever step the
+   page happened to pick. */
+h1[class*="text-4xl"],
+h1[class*="text-5xl"],
+h1[class*="text-6xl"],
+h1[class*="text-7xl"] {
+  font-size: var(--title-page);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+/* ── One section-title scale ──────────────────────────────────────
+   Deliberately scoped to H2s carrying a *display* utility. Small H2s
+   used as card titles (text-lg / text-xl) are left alone — they are a
+   different component, not an inconsistency. */
+h2[class*="text-4xl"],
+h2[class*="text-5xl"],
+h2[class*="text-6xl"],
+h2[class*="text-7xl"],
+h2.section-title {
+  font-size: var(--title-section);
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+h3[class*="text-2xl"],
+h3[class*="text-3xl"] {
+  font-size: var(--title-sub);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 650;
+}
+
+/* ── One small-caps label ─────────────────────────────────────────
+   card-label, eyebrow and service-label were three takes on the same
+   thing. Unify the type; only hero-level labels get the accent dot
+   (that rule lives in the hero block above). */
+.card-label,
+.eyebrow,
+.service-label {
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* ── One card padding ─────────────────────────────────────────────
+   Replaces the p-4/5/6/7/8 + md:p-6/7/8/10/12 spread with one fluid
+   value, so a card is the same object wherever it appears. */
+.card {
+  padding: var(--card-pad);
+}
+
+/* Cards that only wrap an image shouldn't gain inner padding. */
+.card.card-flush,
+.card:has(> img:only-child) {
+  padding: 0;
+}
+
+/* ── One reading measure ──────────────────────────────────────────
+   Long-form body copy caps at a comfortable line length regardless of
+   which max-w-* the page used. Layout containers are untouched. */
+.prose-wrap,
+.prose-wrap p,
+.lede,
+.hero-subcopy {
+  max-width: min(100%, var(--measure, 65ch));
 }
 
 /* ── First-section reveal ─────────────────────────────────────────
