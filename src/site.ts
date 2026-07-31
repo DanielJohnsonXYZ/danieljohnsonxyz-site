@@ -259,6 +259,7 @@ export const proofNavItems = [
   { href: "/case-studies/", label: "Case studies", description: "Before/after evidence with real numbers and attribution." },
   { href: "/testimonials/", label: "Testimonials", description: "4.97/5 from 220 reviews · 479+ mentor sessions." },
   { href: "/proof/", label: "Proof in numbers", description: "The full metrics library, verifiable sources linked." },
+  { href: "/press/", label: "Press & coverage", description: "Talks, mentoring affiliations, podcasts and citations." },
   { href: "/media-kit/", label: "Media kit", description: "Bios, headshots and talks for press and podcast hosts." }
 ] as const;
 
@@ -289,11 +290,19 @@ export const footerNavigation = {
     { href: "/product-led-growth/", label: "Product-led growth" },
     { href: "/founder-led-distribution/", label: "Founder-led distribution" }
   ],
+  // /proof/, /results/, /press/ and /media-appearances/ were in the sitemap but
+  // had no internal links anywhere on the site, so search engines were told they
+  // existed and then found nothing pointing at them. Listing them here makes them
+  // reachable and crawlable.
   proof: [
     { href: "/case-studies/", label: "Case studies" },
+    { href: "/results/", label: "Results" },
+    { href: "/proof/", label: "Proof in numbers" },
     { href: "/testimonials/", label: "Testimonials" },
     { href: "/media-kit/", label: "Media kit" },
-    { href: "/speaking/", label: "Speaking" }
+    { href: "/speaking/", label: "Speaking" },
+    { href: "/press/", label: "Press & coverage" },
+    { href: "/media-appearances/", label: "Media appearances" }
   ],
   company: [
     { href: "/start-here/", label: "Start here" },

@@ -252,13 +252,44 @@ h3[class*="text-3xl"] {
 
 /* ── One reading measure ──────────────────────────────────────────
    Long-form body copy caps at a comfortable line length regardless of
-   which max-w-* the page used. Layout containers are untouched. */
+   which max-w-* the page used. Layout containers are untouched.
+
+   .prose-wrap is centred in its column. Both templates that use it
+   (writing/[slug], case-studies/[...slug]) sit it inside a wider
+   max-w-4xl alongside full-width TL;DR and CTA blocks; left-aligned it
+   read as misaligned against them rather than as a deliberate measure.
+
+   The cap is on the container only — capping each <p> as well would
+   double-constrain nested content like list items and blockquotes. */
 .prose-wrap,
-.prose-wrap p,
 .lede,
 .hero-subcopy {
   max-width: min(100%, var(--measure, 65ch));
 }
+
+.prose-wrap {
+  margin-inline: auto;
+}
+
+/* ── Rotating text bars — one hue, varied by value ────────────────
+   These cycled through five unrelated hues (teal, cyan, red, green,
+   yellow), and the dark variant added purple and pink left over from an
+   older palette. That breaks the one-accent rule the rest of the site
+   follows, and red/yellow in particular read as error and warning.
+
+   The items still need to differ so the marquee has rhythm, so they now
+   vary by depth within the teal-to-ink ramp rather than by hue. */
+.rtb-item-1 { color: var(--accent); }
+.rtb-item-2 { color: #3f6f74; }
+.rtb-item-3 { color: var(--ink); }
+.rtb-item-4 { color: #0a4a50; }
+.rtb-item-5 { color: #5f7275; }
+
+.rotating-text-bars-dark .rtb-item-1 { color: #9fd0d4; }
+.rotating-text-bars-dark .rtb-item-2 { color: #cfd8d6; }
+.rotating-text-bars-dark .rtb-item-3 { color: #f3f4f2; }
+.rotating-text-bars-dark .rtb-item-4 { color: #7eb8bc; }
+.rotating-text-bars-dark .rtb-item-5 { color: #94a3a2; }
 
 /* ── First-section reveal ─────────────────────────────────────────
    Above-the-fold content shouldn't wait on an IntersectionObserver.
