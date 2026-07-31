@@ -27,7 +27,7 @@ export const siteConfig = {
   /** Single source for “start window” copy; update when calendars shift. */
   nextStartWindow: "Next start window: June 2026.",
   /** Shorter header button label (full offer copy stays on `bookingLabel`). */
-  navBookingLabel: "Say Hi!",
+  navBookingLabel: "Contact us",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",

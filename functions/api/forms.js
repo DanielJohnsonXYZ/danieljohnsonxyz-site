@@ -10,10 +10,68 @@
  *   CUSTOMER_IO_TRACK_API_KEY
  *   CUSTOMER_IO_REGION          — "eu" (default; shared WSS workspace) or "us"
  *   CUSTOMER_IO_FORM_ID         — default form id when body omits form_id
+ *   FORMS_ALLOWED_ORIGINS       — optional, comma-separated extra hostnames
+ *
+ * This endpoint was being scraped and used to inject contacts straight into
+ * Customer.io: bots POST JSON here directly, never touching the HTML form, so
+ * a hidden honeypot field alone doesn't see them. Requests must therefore
+ * carry an Origin (or Referer) belonging to this site — browsers always send
+ * one on a same-origin POST, and the bots don't.
  */
 
 const MAX_ATTR = 1000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Hostnames allowed to submit. Extend via FORMS_ALLOWED_ORIGINS. */
+const DEFAULT_ALLOWED_HOSTS = [
+  "danieljohnson.xyz",
+  "www.danieljohnson.xyz",
+  "danieljohnsonx.xyz",
+  "www.danieljohnsonx.xyz",
+  "localhost",
+  "127.0.0.1"
+];
+
+/**
+ * source_type drives Customer.io automation triggers, so it's an enum rather
+ * than free text — otherwise anything posting here can invent its own
+ * segmentation values.
+ */
+const ALLOWED_SOURCE_TYPES = new Set([
+  "newsletter",
+  "lead_magnet",
+  "contact_enquiry",
+  "contact-form",
+  "fractional_cmo_intake"
+]);
+
+function hostOf(value) {
+  if (!value) return "";
+  try {
+    return new URL(value).hostname.toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+/**
+ * Same-origin check. Browsers include Origin on every POST, so a missing
+ * Origin *and* Referer means the caller isn't a browser on this site.
+ */
+function isAllowedOrigin(request, env) {
+  const host =
+    hostOf(request.headers.get("Origin")) || hostOf(request.headers.get("Referer"));
+  if (!host) return false;
+
+  const extra = (env.FORMS_ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+
+  if (DEFAULT_ALLOWED_HOSTS.includes(host) || extra.includes(host)) return true;
+  // Cloudflare Pages preview deployments for this project.
+  return host.endsWith(".pages.dev");
+}
 
 function json(status, body) {
   return new Response(JSON.stringify(body), {
@@ -59,6 +117,20 @@ async function readPayload(request) {
 }
 
 export async function onRequestPost(context) {
+  const env = context.env || {};
+
+  if (!isAllowedOrigin(context.request, env)) {
+    console.warn(
+      "Rejected cross-origin form submission",
+      JSON.stringify({
+        origin: context.request.headers.get("Origin") || null,
+        referer: context.request.headers.get("Referer") || null,
+        ip: context.request.headers.get("CF-Connecting-IP") || null
+      })
+    );
+    return json(403, { ok: false, error: "Forbidden" });
+  }
+
   let payload;
   try {
     payload = await readPayload(context.request);
@@ -77,7 +149,12 @@ export async function onRequestPost(context) {
     return json(400, { ok: false, error: "Valid email required" });
   }
 
-  const env = context.env || {};
+  const sourceType = clip(payload.source_type, 60);
+  if (sourceType && !ALLOWED_SOURCE_TYPES.has(sourceType)) {
+    console.warn("Rejected unknown source_type", sourceType);
+    return json(400, { ok: false, error: "Unknown source_type" });
+  }
+
   const siteId = (env.CUSTOMER_IO_SITE_ID || "").trim();
   const apiKey = (
     env.CUSTOMER_IO_TRACK_API_KEY ||

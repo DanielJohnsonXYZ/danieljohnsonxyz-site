@@ -85,7 +85,9 @@ const breadcrumb = buildBreadcrumbSchema([
 
           <form class="contact-form mt-6" data-contact-form novalidate>
             <input type="hidden" name="form_id" value={contactFormId} />
-            <input type="hidden" name="source_type" value="contact" />
+            {/* Matches the trigger on the "WSS — Welcome: Enquiry" automation in
+                Customer.io — do not rename without updating that campaign. */}
+            <input type="hidden" name="source_type" value="contact_enquiry" />
             <input type="hidden" name="source_page" value="" data-source-page />
             <p class="contact-hp" aria-hidden="true">
               <label for="contact-company-website">Company website</label>
@@ -131,8 +133,8 @@ const breadcrumb = buildBreadcrumbSchema([
                 Send message →
               </button>
               <p class="contact-fine">
-                No newsletter signup, no sequence. Prefer email?
-                <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+                I reply personally. You'll also get a short follow-up series, unsubscribe in one click.
+                Prefer email? <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
               </p>
             </div>
           </form>
@@ -217,7 +219,7 @@ const breadcrumb = buildBreadcrumbSchema([
               name,
               message,
               form_id: String(fd.get("form_id") || ""),
-              source_type: String(fd.get("source_type") || "contact"),
+              source_type: String(fd.get("source_type") || "contact_enquiry"),
               source_page: String(fd.get("source_page") || window.location.href),
               company: String(fd.get("company") || ""),
               stage: String(fd.get("stage") || ""),
