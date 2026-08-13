@@ -17,6 +17,8 @@ interface Props {
   anchorId?: string;
   headingLevel?: 2 | 3;
   idPrefix?: string;
+  /** Submit label. Default keeps the short form used in the footer/strips. */
+  buttonLabel?: string;
 }
 
 const {
@@ -26,7 +28,8 @@ const {
   subline = "Occasional, with no daily drip, and unsubscribe in one click.",
   anchorId,
   headingLevel = 3,
-  idPrefix
+  idPrefix,
+  buttonLabel = "Subscribe →"
 } = Astro.props;
 
 const { submitUrl, formId } = customerIoNewsletter;
@@ -72,7 +75,7 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h3";
         />
       </label>
       <button class="nl-submit button-accent" type="submit">
-        Subscribe →
+        {buttonLabel}
       </button>
     </form>
     <p class="nl-status" data-signup-status hidden></p>
@@ -121,6 +124,8 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h3";
           form.reset();
           if (pageField instanceof HTMLInputElement) pageField.value = window.location.href;
           if (status instanceof HTMLElement) status.textContent = "You're in. Check your inbox.";
+          // Lets the newsletter popup retire itself for anyone who has signed up.
+          document.dispatchEvent(new CustomEvent("newsletter:subscribed"));
         } else if (status instanceof HTMLElement) {
           status.textContent = "Something went wrong — try again in a moment.";
         }
