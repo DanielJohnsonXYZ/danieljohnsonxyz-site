@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BrandBar from "../components/BrandBar.astro";
 import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
+import NewsletterFormInline from "../components/NewsletterFormInline.astro";
+import WhatsAppCta from "../components/WhatsAppCta.astro";
 import heroCutout from "../assets/images/daniel-hero-cutout.webp";
 import danielAircraft from "../assets/images/daniel-aircraft.webp";
 import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960.webp";
@@ -192,6 +194,34 @@ const engineNodes = [
         </p>
       </div>
     </div>
+
+    <!-- ===== Newsletter + WhatsApp community ===== -->
+    <section aria-label="Stay in the loop">
+      <div class="v5-container reveal">
+        <div class="v5-head-stack">
+          <span class="v5-eyebrow">Stay in the loop</span>
+          <h2 class="v5-h2">Two ways to keep the conversation going.</h2>
+          <p class="v5-subhead">Read the thinking between calls, or talk it through with other founders working the same growth problems.</p>
+        </div>
+        <div class="v5-cta-duo">
+          <NewsletterFormInline
+            variant="card"
+            tone="light"
+            heading="Growth Notes: practical notes on founder-led growth, sent when there's something worth saying."
+            subline="No daily drip. Unsubscribe in one click."
+            idPrefix="nl-home-intro"
+          />
+          <div class="v5-whatsapp-card">
+            <p class="v5-whatsapp-eyebrow">Founder community</p>
+            <h3>Trade notes with other founders in the WhatsApp group.</h3>
+            <p class="v5-whatsapp-sub">A small, active group working through positioning, pipeline, and GTM calls in real time. No pitching, no noise, just people figuring this out too.</p>
+            <!-- v5-btn-primary, not button-accent: the homepage's own primary
+                 button style, which keeps white label text under `.v5-home a`. -->
+            <WhatsAppCta variant="button" buttonClass="v5-btn v5-btn-primary" dataCta="home-intro-whatsapp" />
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ===== The engine (interactive) ===== -->
     <section aria-label="The growth engine method">
@@ -577,6 +607,60 @@ const engineNodes = [
       align-items: center;
       justify-content: center;
       gap: 1.25rem;
+    }
+
+    /* Newsletter + WhatsApp intro section */
+    .v5-cta-duo {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (min-width: 900px) {
+      .v5-cta-duo {
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+      }
+    }
+    .v5-whatsapp-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1.5rem 1.75rem;
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      background: var(--surface-dim);
+    }
+    .v5-whatsapp-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0;
+    }
+    .v5-whatsapp-card h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.45;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    @media (min-width: 768px) {
+      .v5-whatsapp-card h3 {
+        font-size: 1.35rem;
+      }
+    }
+    .v5-whatsapp-sub {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .v5-whatsapp-card :global(.whatsapp-cta-btn) {
+      align-self: flex-start;
+      margin-top: 0.25rem;
+      color: var(--white);
     }
   </style>
 
