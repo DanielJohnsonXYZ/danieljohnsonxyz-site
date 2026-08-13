@@ -23,10 +23,10 @@ const {
 } = Astro.props;
 
 // The primary CTA defaults to Growth Notes signup, but some pages override it
-// (e.g. a booking link). Only show the secondary newsletter icon when the
-// primary CTA is pointing somewhere else, so we don't show two links to the
-// same destination.
-const showNewsletterIcon = href !== ctas.growthNote.href;
+// (e.g. a booking link). Only add the secondary newsletter button when the
+// primary CTA points somewhere else, so we don't show two links to the same
+// destination.
+const showNewsletterLink = href !== ctas.growthNote.href;
 ---
 
 {enabled && (
@@ -40,6 +40,13 @@ const showNewsletterIcon = href !== ctas.growthNote.href;
       <div class="sticky-cta-copy">
         <span class="sticky-cta-hint">{hint}</span>
       </div>
+      <button
+        class="sticky-cta-dismiss"
+        type="button"
+        aria-label="Dismiss newsletter banner"
+      >
+        ×
+      </button>
       <div class="sticky-cta-actions">
         <a
           class="button-accent sticky-cta-primary"
@@ -48,29 +55,25 @@ const showNewsletterIcon = href !== ctas.growthNote.href;
         >
           {label}
         </a>
-        <div class="sticky-cta-secondary" aria-label="More ways to connect">
-          {showNewsletterIcon && (
-            <a
-              class="sticky-cta-icon-btn"
-              href={ctas.growthNote.href}
-              data-cta="sticky-secondary-newsletter"
-              aria-label={ctas.growthNote.label}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                <path d="m3 7 9 6 9-6"></path>
-              </svg>
-            </a>
-          )}
-          <WhatsAppCta variant="icon" dataCta="sticky-secondary-whatsapp" label="Join the WhatsApp group" />
-        </div>
-        <button
-          class="sticky-cta-dismiss"
-          type="button"
-          aria-label="Dismiss newsletter banner"
-        >
-          ×
-        </button>
+        {showNewsletterLink && (
+          <a
+            class="sticky-cta-ghost"
+            href={ctas.growthNote.href}
+            data-cta="sticky-secondary-newsletter"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="m3 7 9 6 9-6"></path>
+            </svg>
+            {ctas.growthNote.label}
+          </a>
+        )}
+        <WhatsAppCta
+          variant="button"
+          buttonClass="sticky-cta-ghost"
+          label="Join the WhatsApp group"
+          dataCta="sticky-secondary-whatsapp"
+        />
       </div>
     </div>
   </div>
@@ -103,13 +106,20 @@ const showNewsletterIcon = href !== ctas.growthNote.href;
     display: none;
   }
 
+  /* Two rows: the hint (with the dismiss control) above a row of labelled
+     CTAs, so both the newsletter and the WhatsApp group read as real,
+     clickable offers rather than mystery icons. */
   .sticky-cta-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "copy dismiss"
+      "actions actions";
     align-items: center;
-    gap: 0.65rem;
-    width: min(560px, 100%);
-    padding: 0.5rem 0.55rem 0.5rem 1.1rem;
-    border-radius: 0.5rem;
+    gap: 0.55rem 0.65rem;
+    width: min(640px, 100%);
+    padding: 0.7rem 0.7rem 0.75rem 1rem;
+    border-radius: 0.75rem;
     background: color-mix(in srgb, var(--ink) 94%, transparent);
     color: #fff;
     box-shadow: 0 10px 28px -16px color-mix(in srgb, var(--ink) 55%, transparent);
@@ -117,11 +127,11 @@ const showNewsletterIcon = href !== ctas.growthNote.href;
   }
 
   .sticky-cta-copy {
+    grid-area: copy;
     display: flex;
     align-items: center;
     line-height: 1.35;
     min-width: 0;
-    flex: 1;
   }
 
   .sticky-cta-hint {
@@ -132,55 +142,55 @@ const showNewsletterIcon = href !== ctas.growthNote.href;
   }
 
   .sticky-cta-actions {
+    grid-area: actions;
     display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    flex-shrink: 0;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 0.4rem;
   }
 
-  .sticky-cta-primary {
-    min-height: 0;
-    padding-block: 0.45rem;
-    padding-inline: 0.9rem;
-    font-size: 0.82rem;
-    white-space: nowrap;
-  }
-
-  /* Secondary, compact icon-only links — newsletter + WhatsApp community.
-     Deliberately smaller and lower-contrast than the primary CTA so the
-     booking/newsletter primary action keeps top billing. */
-  .sticky-cta-secondary {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    flex-shrink: 0;
-  }
-
-  .sticky-cta-icon-btn {
+  .sticky-cta-primary,
+  .sticky-cta-ghost {
+    flex: 1 1 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.9rem;
-    height: 1.9rem;
-    border-radius: 999px;
-    border: 1px solid color-mix(in srgb, #fff 18%, transparent);
-    background: transparent;
-    color: #fff;
-    transition: background 150ms ease;
+    gap: 0.45rem;
+    min-height: 2.25rem;
+    min-width: 0;
+    padding-block: 0.45rem;
+    padding-inline: 0.9rem;
+    border-radius: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: center;
   }
 
-  .sticky-cta-icon-btn:hover,
-  .sticky-cta-icon-btn:focus-visible {
-    background: color-mix(in srgb, #fff 14%, transparent);
+  /* Secondary CTAs carry their label and icon — outlined rather than solid so
+     the primary action still leads, but they read as buttons, not decoration. */
+  .sticky-cta-ghost {
+    border: 1px solid color-mix(in srgb, #fff 32%, transparent);
+    background: color-mix(in srgb, #fff 8%, transparent);
+    color: #fff;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+
+  .sticky-cta-ghost:hover,
+  .sticky-cta-ghost:focus-visible {
+    background: color-mix(in srgb, #fff 18%, transparent);
+    border-color: color-mix(in srgb, #fff 55%, transparent);
     outline: none;
   }
 
-  .sticky-cta-icon-btn svg {
+  .sticky-cta-ghost svg {
     width: 1rem;
     height: 1rem;
+    flex-shrink: 0;
   }
 
   .sticky-cta-dismiss {
+    grid-area: dismiss;
+    flex-shrink: 0;
     width: 1.9rem;
     height: 1.9rem;
     border-radius: 999px;
@@ -204,37 +214,19 @@ const showNewsletterIcon = href !== ctas.growthNote.href;
       bottom: 0.75rem;
     }
     .sticky-cta-inner {
-      align-items: stretch;
-      flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.5rem;
       padding: 0.7rem;
       border-radius: 1.25rem;
-    }
-    .sticky-cta-copy {
-      justify-content: center;
-      padding-inline: 0.5rem;
-      text-align: center;
     }
     .sticky-cta-hint {
       font-size: 0.74rem;
       line-height: 1.4;
     }
-    .sticky-cta-actions {
-      width: 100%;
-      flex-wrap: wrap;
-      justify-content: center;
-      row-gap: 0.5rem;
-    }
-    .sticky-cta-primary {
+    /* One CTA per row below 520px — full-width targets beat a cramped row. */
+    .sticky-cta-primary,
+    .sticky-cta-ghost {
       flex: 1 1 100%;
-      justify-content: center;
       min-height: 2.5rem;
-    }
-    .sticky-cta-secondary {
-      flex: 0 0 auto;
-    }
-    .sticky-cta-dismiss {
-      flex: 0 0 1.9rem;
     }
   }
 
