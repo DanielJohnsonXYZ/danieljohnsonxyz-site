@@ -1,5 +1,6 @@
 ---
 import { ctas } from "../site";
+import WhatsAppCta from "./WhatsAppCta.astro";
 
 interface Props {
   /** If true, renders the sticky bar at all. Set false on pages that already
@@ -20,6 +21,12 @@ const {
   href = ctas.growthNote.href,
   hint = ctas.growthNote.hint
 } = Astro.props;
+
+// The primary CTA defaults to Growth Notes signup, but some pages override it
+// (e.g. a booking link). Only show the secondary newsletter icon when the
+// primary CTA is pointing somewhere else, so we don't show two links to the
+// same destination.
+const showNewsletterIcon = href !== ctas.growthNote.href;
 ---
 
 {enabled && (
@@ -41,6 +48,22 @@ const {
         >
           {label}
         </a>
+        <div class="sticky-cta-secondary" aria-label="More ways to connect">
+          {showNewsletterIcon && (
+            <a
+              class="sticky-cta-icon-btn"
+              href={ctas.growthNote.href}
+              data-cta="sticky-secondary-newsletter"
+              aria-label={ctas.growthNote.label}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m3 7 9 6 9-6"></path>
+              </svg>
+            </a>
+          )}
+          <WhatsAppCta variant="icon" dataCta="sticky-secondary-whatsapp" label="Join the WhatsApp group" />
+        </div>
         <button
           class="sticky-cta-dismiss"
           type="button"
@@ -123,6 +146,40 @@ const {
     white-space: nowrap;
   }
 
+  /* Secondary, compact icon-only links — newsletter + WhatsApp community.
+     Deliberately smaller and lower-contrast than the primary CTA so the
+     booking/newsletter primary action keeps top billing. */
+  .sticky-cta-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .sticky-cta-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, #fff 18%, transparent);
+    background: transparent;
+    color: #fff;
+    transition: background 150ms ease;
+  }
+
+  .sticky-cta-icon-btn:hover,
+  .sticky-cta-icon-btn:focus-visible {
+    background: color-mix(in srgb, #fff 14%, transparent);
+    outline: none;
+  }
+
+  .sticky-cta-icon-btn svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
   .sticky-cta-dismiss {
     width: 1.9rem;
     height: 1.9rem;
@@ -164,11 +221,17 @@ const {
     }
     .sticky-cta-actions {
       width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 0.5rem;
     }
     .sticky-cta-primary {
-      flex: 1;
+      flex: 1 1 100%;
       justify-content: center;
       min-height: 2.5rem;
+    }
+    .sticky-cta-secondary {
+      flex: 0 0 auto;
     }
     .sticky-cta-dismiss {
       flex: 0 0 1.9rem;
