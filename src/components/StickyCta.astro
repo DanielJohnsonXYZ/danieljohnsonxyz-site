@@ -22,11 +22,12 @@ const {
   hint = ctas.growthNote.hint
 } = Astro.props;
 
-// The primary CTA defaults to Growth Notes signup, but some pages override it
-// (e.g. a booking link). Only add the secondary newsletter button when the
-// primary CTA points somewhere else, so we don't show two links to the same
-// destination.
-const showNewsletterLink = href !== ctas.growthNote.href;
+// The bar always ends in an equal-weight pair: newsletter | WhatsApp group.
+// Some pages override the CTA with something else (a speaking enquiry, a
+// download); that override rides above the pair on its own row. When the page
+// CTA *is* the newsletter — the default — the pair carries it, so we never
+// show two links to the same destination.
+const showPageCta = href !== ctas.growthNote.href;
 ---
 
 {enabled && (
@@ -48,18 +49,20 @@ const showNewsletterLink = href !== ctas.growthNote.href;
         ×
       </button>
       <div class="sticky-cta-actions">
-        <a
-          class="button-accent sticky-cta-primary"
-          href={href}
-          data-cta="sticky-newsletter"
-        >
-          {label}
-        </a>
-        {showNewsletterLink && (
+        {showPageCta && (
           <a
-            class="sticky-cta-ghost"
+            class="sticky-cta-btn sticky-cta-lead"
+            href={href}
+            data-cta="sticky-page-cta"
+          >
+            {label}
+          </a>
+        )}
+        <div class="sticky-cta-duo">
+          <a
+            class="sticky-cta-btn sticky-cta-btn-newsletter"
             href={ctas.growthNote.href}
-            data-cta="sticky-secondary-newsletter"
+            data-cta="sticky-newsletter"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <rect x="3" y="5" width="18" height="14" rx="2"></rect>
@@ -67,13 +70,13 @@ const showNewsletterLink = href !== ctas.growthNote.href;
             </svg>
             {ctas.growthNote.label}
           </a>
-        )}
-        <WhatsAppCta
-          variant="button"
-          buttonClass="sticky-cta-ghost"
-          label="Join the WhatsApp group"
-          dataCta="sticky-secondary-whatsapp"
-        />
+          <WhatsAppCta
+            variant="button"
+            buttonClass="sticky-cta-btn sticky-cta-btn-whatsapp"
+            label="Join the WhatsApp group"
+            dataCta="sticky-whatsapp"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -144,48 +147,78 @@ const showNewsletterLink = href !== ctas.growthNote.href;
   .sticky-cta-actions {
     grid-area: actions;
     display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 0.4rem;
   }
 
-  .sticky-cta-primary,
-  .sticky-cta-ghost {
-    flex: 1 1 auto;
+  /* The newsletter and the group get identical space and identical weight —
+     neither is the junior partner. */
+  .sticky-cta-duo {
+    display: flex;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+
+  .sticky-cta-duo > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .sticky-cta-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.45rem;
-    min-height: 2.25rem;
-    min-width: 0;
-    padding-block: 0.45rem;
-    padding-inline: 0.9rem;
+    min-height: 2.4rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.85rem;
     border-radius: 0.5rem;
     font-size: 0.82rem;
     font-weight: 600;
+    line-height: 1.25;
     text-align: center;
-  }
-
-  /* Secondary CTAs carry their label and icon — outlined rather than solid so
-     the primary action still leads, but they read as buttons, not decoration. */
-  .sticky-cta-ghost {
-    border: 1px solid color-mix(in srgb, #fff 32%, transparent);
-    background: color-mix(in srgb, #fff 8%, transparent);
-    color: #fff;
     transition: background 150ms ease, border-color 150ms ease;
   }
 
-  .sticky-cta-ghost:hover,
-  .sticky-cta-ghost:focus-visible {
-    background: color-mix(in srgb, #fff 18%, transparent);
-    border-color: color-mix(in srgb, #fff 55%, transparent);
-    outline: none;
-  }
-
-  .sticky-cta-ghost svg {
+  .sticky-cta-btn svg {
     width: 1rem;
     height: 1rem;
     flex-shrink: 0;
+  }
+
+  /* Identical treatment for both halves — same size, same colour, same
+     weight. Anything else makes one of them the junior partner. Solid white
+     on the near-black bar is the highest-contrast option available. */
+  .sticky-cta-btn-newsletter,
+  .sticky-cta-btn-whatsapp {
+    border: 1px solid #fff;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .sticky-cta-btn-newsletter:hover,
+  .sticky-cta-btn-newsletter:focus-visible,
+  .sticky-cta-btn-whatsapp:hover,
+  .sticky-cta-btn-whatsapp:focus-visible {
+    background: color-mix(in srgb, #fff 88%, var(--ink));
+    border-color: color-mix(in srgb, #fff 88%, var(--ink));
+    outline: none;
+  }
+
+  /* Page-specific CTA (speaking enquiry, media kit) rides above the pair,
+     in the brand accent so it still leads where a page has one. */
+  .sticky-cta-lead {
+    width: 100%;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .sticky-cta-lead:hover,
+  .sticky-cta-lead:focus-visible {
+    background: color-mix(in srgb, var(--accent) 85%, white);
+    border-color: color-mix(in srgb, var(--accent) 85%, white);
+    outline: none;
   }
 
   .sticky-cta-dismiss {
@@ -222,11 +255,13 @@ const showNewsletterLink = href !== ctas.growthNote.href;
       font-size: 0.74rem;
       line-height: 1.4;
     }
-    /* One CTA per row below 520px — full-width targets beat a cramped row. */
-    .sticky-cta-primary,
-    .sticky-cta-ghost {
-      flex: 1 1 100%;
-      min-height: 2.5rem;
+    /* Stacked below 520px — still equal-sized, just full-width targets
+       rather than two cramped columns. */
+    .sticky-cta-duo {
+      flex-direction: column;
+    }
+    .sticky-cta-btn {
+      min-height: 2.6rem;
     }
   }
 
