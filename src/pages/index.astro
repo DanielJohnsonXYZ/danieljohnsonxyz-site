@@ -655,9 +655,15 @@ const engineNodes = [
       line-height: 1.55;
       color: var(--muted);
     }
+    /* .v5-home a sets a link colour that outranks .button-accent's own white
+       text (same trap that made .v5-btn-primary invisible — see the 2026-06
+       audit fix in visual-system.css). This button always sits on the solid
+       accent fill, so restore the white it was meant to have. */
     .v5-whatsapp-card :global(.whatsapp-cta-btn) {
       align-self: flex-start;
       margin-top: 0.25rem;
+      color: #fff;
+      -webkit-text-fill-color: #fff;
     }
   </style>
 
