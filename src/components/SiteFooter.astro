@@ -1,6 +1,7 @@
 ---
 import CfEmailOff from "./CfEmailOff.astro";
 import NewsletterFormInline from "./NewsletterFormInline.astro";
+import WhatsAppCta from "./WhatsAppCta.astro";
 import { ctas, footerNavigation, footerTestimonial, proofStats, siteConfig, socialLinks } from "../site";
 
 interface Props {
@@ -136,18 +137,29 @@ const navColumns = [
       </nav>
     </div>
 
-    <!-- Newsletter -->
+    <!-- Newsletter + WhatsApp community -->
     <div class="site-footer-newsletter">
-      <NewsletterFormInline
-        variant="strip"
-        tone="dark"
-        heading="Growth Notes, practical founder-led GTM, one email at a time."
-        subline="Same list as the newsletter page. Unsubscribe anytime."
-        idPrefix="nl-footer"
-      />
-      <p class="site-footer-newsletter-link">
-        <a href="/newsletter/">About the newsletter →</a>
-      </p>
+      <div class="site-footer-newsletter-grid">
+        <div>
+          <NewsletterFormInline
+            variant="strip"
+            tone="dark"
+            heading="Growth Notes, practical founder-led GTM, one email at a time."
+            subline="Same list as the newsletter page. Unsubscribe anytime."
+            idPrefix="nl-footer"
+          />
+          <p class="site-footer-newsletter-link">
+            <a href="/newsletter/">About the newsletter →</a>
+          </p>
+        </div>
+        <div class="site-footer-whatsapp">
+          <p class="site-footer-kicker">Founder community</p>
+          <p class="site-footer-whatsapp-copy">
+            Prefer real-time? A small group of founders trading GTM notes, no pitching, no noise.
+          </p>
+          <WhatsAppCta variant="button" buttonClass="button-secondary" label="Join the WhatsApp group" dataCta="footer-whatsapp" />
+        </div>
+      </div>
     </div>
 
     <!-- Resources -->
@@ -419,10 +431,22 @@ const navColumns = [
     }
   }
 
-  /* Newsletter */
+  /* Newsletter + WhatsApp */
   .site-footer-newsletter {
     padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-footer-newsletter-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 900px) {
+    .site-footer-newsletter-grid {
+      grid-template-columns: minmax(0, 1.6fr) minmax(14rem, 0.9fr);
+      align-items: start;
+    }
   }
 
   .site-footer-newsletter-link {
@@ -438,6 +462,24 @@ const navColumns = [
 
   .site-footer-newsletter-link a:hover {
     color: #fff;
+  }
+
+  .site-footer-whatsapp {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1.5rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .site-footer-whatsapp-copy {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.62);
   }
 
   /* Resources */

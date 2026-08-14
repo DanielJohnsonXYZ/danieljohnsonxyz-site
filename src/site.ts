@@ -46,6 +46,9 @@ export const siteConfig = {
   youtubeUploadsEmbed: "https://www.youtube.com/embed/9CR19_PiuGs?rel=0",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
+  /** Founder WhatsApp community (Growing Pains) — same group linked from wescalestartups.com. */
+  whatsappCommunityUrl: "https://chat.whatsapp.com/EcodIBMP93TCl82pTHjEbn?s=cl&p=i&ilr=4",
+  whatsappCommunityLabel: "Join the WhatsApp group",
   /** Canonical WSS podcast hub (Luck Doesn't Scale). */
   wssPodcastName: "Luck Doesn't Scale",
   wssPodcastUrl: "https://wescalestartups.com/podcast",

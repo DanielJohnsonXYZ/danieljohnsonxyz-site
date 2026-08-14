@@ -1,5 +1,6 @@
 ---
 import EasterEgg from "../components/EasterEgg.astro";
+import NewsletterPopup from "../components/NewsletterPopup.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import StickyCta from "../components/StickyCta.astro";
@@ -25,6 +26,9 @@ interface Props {
   stickyCtaLabel?: string;
   stickyCtaHref?: string;
   stickyCtaHint?: string;
+  /** Per-page override for the Growth Notes popup. Defaults off where the page
+   *  is already the signup (/newsletter/) or is a conversion step. */
+  newsletterPopup?: boolean;
   /** Homepage: avoid duplicating the closing audit H2 in the footer. */
   footerCtaCompact?: boolean;
   /** Switch shared header/footer CTAs from commercial booking to media-specific contact links. */
@@ -46,11 +50,18 @@ const {
   stickyCtaLabel = undefined,
   stickyCtaHref = undefined,
   stickyCtaHint = undefined,
+  newsletterPopup: newsletterPopupProp = undefined,
   footerCtaCompact = false,
   mediaCta = false,
   lastUpdated = siteConfig.lastUpdated,
   metaRobots = "index,follow,max-image-preview:large"
 } = Astro.props;
+
+// Don't interrupt readers who are already on the signup page, mid-download, or
+// on a thank-you step — everywhere else the popup is on by default.
+const popupSuppressedPaths = ["/newsletter/", "/contact/", "/growth-bottleneck-checklist/", "/media-kit-download/"];
+const newsletterPopup =
+  newsletterPopupProp ?? !popupSuppressedPaths.some((suppressed) => path === suppressed);
 
 const canonical = absoluteUrl(path);
 const imageUrl = absoluteUrl(ogImage);
@@ -276,6 +287,8 @@ const gtmLoaderScript = `(() => {
     <SiteFooter mediaCta={mediaCta} compactCta={footerCtaCompact} />
 
     <StickyCta enabled={stickyCta} label={stickyCtaLabel} href={stickyCtaHref} hint={stickyCtaHint} revealAfter={footerCtaCompact ? 3200 : undefined} />
+
+    <NewsletterPopup enabled={newsletterPopup} />
 
     <EasterEgg />
     <script is:inline set:html={uiRevealScript}></script>
