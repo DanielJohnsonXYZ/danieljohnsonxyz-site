@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const sitePath = new URL("../src/site.ts", import.meta.url);
 const layoutPath = new URL("../src/layouts/BaseLayout.astro", import.meta.url);
+const homePath = new URL("../src/pages/index.astro", import.meta.url);
 const aboutPath = new URL("../src/pages/about.astro", import.meta.url);
 const faqPath = new URL("../src/pages/resources/faq.astro", import.meta.url);
 const mediaKitPath = new URL("../src/pages/media-kit.astro", import.meta.url);
@@ -76,6 +77,49 @@ const layoutResult = await replaceInFile(layoutPath, [
   {
     from: "  lastUpdated = siteConfig.lastUpdated,",
     to: "  lastUpdated = false,"
+  }
+]);
+
+const homeResult = await replaceInFile(homePath, [
+  {
+    from: 'import { icpFirmographics, siteConfig } from "../site";',
+    to: 'import { icpFirmographics, proofStats, siteConfig } from "../site";'
+  },
+  {
+    from: "              Contact us",
+    to: "              {siteConfig.navBookingLabel}"
+  },
+  {
+    from: "          <dd>£18M+</dd>",
+    to: "          <dd>{proofStats.revenueImpact}</dd>"
+  },
+  {
+    from: "          <dd>4.97 / 5</dd>",
+    to: "          <dd>{proofStats.mentorRating} / 5</dd>"
+  },
+  {
+    from: "          <dd>479+</dd>",
+    to: "          <dd>{proofStats.mentorSessions}</dd>"
+  },
+  {
+    from: "          <dd>200+</dd>",
+    to: "          <dd>{proofStats.startupsAdvised}</dd>"
+  },
+  {
+    from: '<div><strong>£15M+</strong> helped founders raise</div>',
+    to: '<div><strong>{proofStats.founderRaiseSupport}</strong> helped founders raise</div>'
+  },
+  {
+    from: '<div><strong>200+</strong> startups across four continents</div>',
+    to: '<div><strong>{proofStats.startupsAdvised}</strong> startups across four continents</div>'
+  },
+  {
+    from: '<div><strong>4.97 / 5</strong> · <strong>479+</strong> sessions</div>',
+    to: '<div><strong>{proofStats.mentorRating} / 5</strong> · <strong>{proofStats.mentorSessions}</strong> sessions</div>'
+  },
+  {
+    from: '>Contact us</a>',
+    to: '>{siteConfig.navBookingLabel}</a>'
   }
 ]);
 
@@ -163,6 +207,9 @@ for (const phrase of expectedSiteCopy) {
 }
 
 const stalePageChecks = [
+  [homeResult, "4.97 / 5", "home"],
+  [homeResult, "479+", "home"],
+  [homeResult, ">Contact us</a>", "home"],
   [aboutResult, "splitting time between the UK and Southeast Asia", "about"],
   [faqResult, "currently in Asia", "FAQ"],
   [faqResult, "between 1M and 10M ARR", "FAQ"],
@@ -182,5 +229,5 @@ if (layoutResult.content.includes("  lastUpdated = siteConfig.lastUpdated,")) {
 }
 
 console.log(
-  `Normalized production source: ${siteResult.changed} site, ${layoutResult.changed} layout, ${aboutResult.changed} about, ${faqResult.changed} FAQ, ${mediaKitResult.changed} media-kit, ${contactResult.changed} contact replacement(s).`
+  `Normalized production source: ${siteResult.changed} site, ${layoutResult.changed} layout, ${homeResult.changed} home, ${aboutResult.changed} about, ${faqResult.changed} FAQ, ${mediaKitResult.changed} media-kit, ${contactResult.changed} contact replacement(s).`
 );
