@@ -1,0 +1,112 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+type Check = { title: string; body: string };
+type Related = { href: string; label: string };
+type Proof = { metric: string; title: string; body: string };
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  symptoms: string[];
+  diagnosis: string;
+  checks: Check[];
+  nextSteps: string[];
+  proof: Proof;
+  related: Related[];
+};
+
+const { eyebrow, title, intro, symptoms, diagnosis, checks, nextSteps, proof, related } = Astro.props as Props;
+---
+
+<section class="hero-section section-space conversion-hero">
+  <div class="shell">
+    <div class="reveal mx-auto max-w-4xl space-y-6">
+      <span class="service-label">{eyebrow}</span>
+      <h1 class="text-5xl font-extrabold leading-[1.04] tracking-[-0.06em] text-balance md:text-7xl">{title}</h1>
+      <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">{intro}</p>
+      <div class="flex flex-wrap gap-3">
+        <a class="button-accent" href="/growth-audit/">Talk it through with me</a>
+        <a class="button-secondary" href="#check-first">See what I'd check first</a>
+      </div>
+      <p class="text-sm leading-7 text-[color:var(--muted)]">Free 20-minute Growth Audit. No pitch.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-space pt-0">
+  <div class="shell">
+    <SectionHeader eyebrow="Does this sound familiar?" title="A few signs you're dealing with this problem." />
+    <ul class="mt-8 grid gap-4 md:grid-cols-2">
+      {symptoms.map((item) => (
+        <li class="card p-5 text-base leading-7">{item}</li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="section-space pt-0" id="check-first">
+  <div class="shell">
+    <SectionHeader eyebrow="What I'd check first" title={diagnosis} />
+    <div class="mt-8 grid gap-5 md:grid-cols-2">
+      {checks.map((item, index) => (
+        <article class="card p-6 md:p-7">
+          <p class="card-label">0{index + 1}</p>
+          <h2 class="mt-3 text-xl font-bold tracking-[-0.04em]">{item.title}</h2>
+          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="dark-section section-space">
+  <div class="shell">
+    <SectionHeader eyebrow="What I'd do next" title="Keep it small enough to learn from." />
+    <ol class="mt-8 grid gap-5 md:grid-cols-2">
+      {nextSteps.map((item, index) => (
+        <li class="card p-6 text-base leading-7 text-white">
+          <span class="mono mr-3 text-sm text-white/50">{String(index + 1).padStart(2, "0")}</span>
+          {item}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="section-space">
+  <div class="shell">
+    <div class="reveal grid gap-6 rounded-[1.35rem] border border-[color:var(--line)] bg-[color:var(--surface)] p-7 md:grid-cols-[12rem_1fr] md:items-center md:p-9">
+      <div>
+        <p class="card-label">Related result</p>
+        <p class="mt-3 text-5xl font-extrabold tracking-[-0.07em]">{proof.metric}</p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold tracking-[-0.04em]">{proof.title}</h2>
+        <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">{proof.body}</p>
+        <a class="link-arrow mt-4" href="/case-studies/">See the case studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-space pt-0">
+  <div class="shell">
+    <SectionHeader eyebrow="Keep reading" title="Useful next pages." />
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {related.map((item) => (
+        <a class="card block p-5 font-semibold" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="cta-gradient section-space">
+  <div class="shell text-center">
+    <p class="eyebrow justify-center text-white/60">Got this problem now?</p>
+    <h2 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">Bring me the messy version.</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/72">Give me 20 minutes. We'll work out what looks most likely to be wrong and what I'd do next.</p>
+    <a class="button-accent mt-6 inline-flex" href="/growth-audit/">See the Growth Audit</a>
+  </div>
+</section>
