@@ -1,0 +1,290 @@
+---
+import CfEmailOff from "../../components/CfEmailOff.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { siteConfig } from "../../site";
+
+const years = [
+  {
+    year: "2026",
+    items: [
+      {
+        date: "21 Jul 2026",
+        organisation: "Google for Startups · Mentors Monthly",
+        title: "How Mentors Can Help Startups Build Marketing Visibility in the AI Era",
+        format: "Mentor workshop"
+      },
+      {
+        date: "27 May 2026",
+        organisation: "UK Department for Business & Trade",
+        title: "Building a Team and Founder-Led Growth: From First Hire to First Advocates",
+        format: "Founder webinar"
+      },
+      {
+        date: "20 May 2026",
+        organisation: "UK Department for Business & Trade",
+        title: "Ideas to Reality: Validating Your Product and Finding Market Fit",
+        format: "Founder workshop"
+      },
+      {
+        date: "7 Apr 2026",
+        organisation: "Foundervine · Immerse Catalyst",
+        title: "Marketing for Growth: Expanding Sales and Revenue",
+        format: "Masterclass"
+      },
+      {
+        date: "Mar 2026",
+        organisation: "Shenzhen SaaS & AI founder event",
+        title: "Building a Growth System Tied to Revenue",
+        format: "Conference talk"
+      },
+      {
+        date: "Mar 2026",
+        organisation: "Shenzhen SaaS & AI founder event",
+        title: "Founder-Led Distribution Playbook",
+        format: "Conference talk"
+      },
+      {
+        date: "Jan 2026",
+        organisation: "Nomad Summit · Chiang Mai",
+        title: "What Two Exits and Too Many Failures Taught Me About Growing Successful Companies",
+        format: "Conference talk"
+      }
+    ]
+  },
+  {
+    year: "2025",
+    items: [
+      {
+        date: "9 Dec 2025",
+        organisation: "UK Department for Business & Trade",
+        title: "From Seed to Scale: A Founder's Journey to Successful Exit and Predictable Growth",
+        format: "Webinar"
+      },
+      {
+        date: "13 Nov 2025",
+        organisation: "UK Department for Business & Trade",
+        title: "Business Success Starts With You / In Conversation With",
+        format: "Recorded conversation"
+      },
+      {
+        date: "24 Feb 2025",
+        organisation: "CHSI Stitches · NEC Birmingham",
+        title: "From Art to Cart: Converting Creativity Into Sales Through Digital Marketing",
+        format: "Conference seminar"
+      },
+      {
+        date: "24 Apr 2025",
+        organisation: "Online Geniuses",
+        title: "Q&A with Jay Baer",
+        format: "Panel / moderation"
+      },
+      {
+        date: "3 Apr 2025",
+        organisation: "Online Geniuses",
+        title: "Expert webinar with Dr Andrew Muir Wood",
+        format: "Panel / moderation"
+      }
+    ]
+  },
+  {
+    year: "2024",
+    items: [
+      {
+        date: "15 Oct 2024",
+        organisation: "Foundervine · Immerse",
+        title: "Marketing for Growth: Expanding Sales and Revenue",
+        format: "Masterclass"
+      },
+      {
+        date: "31 Jan 2024",
+        organisation: "Mayple",
+        title: "Game Changing Talent: How to Hire the Best Marketers",
+        format: "Webinar / expert session"
+      }
+    ]
+  },
+  {
+    year: "2023",
+    items: [
+      {
+        date: "31 Mar 2023",
+        organisation: "GrowthMentor / We Scale Startups",
+        title: "What The Hell Is Growth? An Actionable Guide to Growth Marketing for Startups",
+        format: "Live workshop"
+      },
+      {
+        date: "2 Feb 2023",
+        organisation: "MEST Africa",
+        title: "How to Use Growth Hacking to Grow Business Revenue for African Startups",
+        format: "Workshop"
+      }
+    ]
+  },
+  {
+    year: "2021",
+    items: [
+      {
+        date: "27 Oct 2021",
+        organisation: "Qualcomm + Techstars Taiwan",
+        title: "Going Global: Europe",
+        format: "Startup Series talk"
+      },
+      {
+        date: "22 Jul 2021",
+        organisation: "We Scale Startups",
+        title: "Growth Marketing Experimentation Masterclass",
+        format: "90-minute masterclass"
+      },
+      {
+        date: "2 Jun 2021",
+        organisation: "Imperial College London",
+        title: "Turning Ideas Into Startups That Can Scale",
+        format: "MSc founder workshop"
+      }
+    ]
+  },
+  {
+    year: "2020",
+    items: [
+      {
+        date: "Nov 2020",
+        organisation: "General Assembly Middle East",
+        title: "Data-Driven Marketing",
+        format: "Talk / training"
+      },
+      {
+        date: "2020",
+        organisation: "Royal College of Veterinary Surgeons",
+        title: "Turning Your Ideas Into Reality",
+        format: "Recorded talk / Q&A"
+      }
+    ]
+  }
+];
+
+const recurring = [
+  {
+    organisation: "Google Launchpad / Google for Startups",
+    title: "Data-Driven Growth Marketing & Startup Validation",
+    note: "Recurring workshops and mentoring across UK, Poland, Ukraine, Nigeria, Romania and remote cohorts. Historical site records the series as 2019–present."
+  },
+  {
+    organisation: "Cambridge Judge Business School",
+    title: "Startup Growth and Marketing for Postgraduate Founders",
+    note: "Founder-led GTM, experimentation and growth strategy. The exact historical session date is not preserved in the current records."
+  },
+  {
+    organisation: "UK Space Agency",
+    title: "Making Money From Your Invention / Making Money From Innovation",
+    note: "Historical speaking record. The exact session date is not preserved in the current records."
+  },
+  {
+    organisation: "Growth Velocity · Dubai",
+    title: "Growth Hacking Crash Course",
+    note: "Historical professional speaking record."
+  },
+  {
+    organisation: "Hyper Apps · London",
+    title: "Beginner's Guide to Growth Marketing",
+    note: "Historical professional speaking record."
+  }
+];
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Speaking", url: "/speaking/" },
+  { name: "Speaking archive", url: "/speaking/archive/" }
+]);
+---
+
+<BaseLayout
+  stickyCtaLabel="Ask about speaking availability →"
+  stickyCtaHref={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}
+  stickyCtaHint="Conferences · accelerators · universities · teams"
+  description="Chronological speaking archive for Daniel Johnson, including startup growth talks, founder workshops, accelerator sessions and university programmes."
+  path="/speaking/archive/"
+  schema={schema}
+  title="Speaking Archive | Daniel Johnson"
+>
+  <section class="section-space">
+    <div class="shell">
+      <div class="max-w-4xl">
+        <span class="service-label">Speaking archive</span>
+        <h1 class="mt-6 text-5xl font-bold tracking-[-0.06em] text-balance md:text-7xl">Talks, workshops and founder sessions.</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
+          A chronological record of delivered speaking engagements I can substantiate from event pages, archived site records,
+          calendar history and organiser correspondence. Recurring programmes with incomplete historical dates are listed separately.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a class="button-secondary" href="/speaking/">← Back to speaking</a>
+          <CfEmailOff>
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Book Daniel to speak →</a>
+          </CfEmailOff>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell space-y-14">
+      {years.map((group) => (
+        <section aria-labelledby={`year-${group.year}`} class="grid gap-6 lg:grid-cols-[11rem_1fr]">
+          <div>
+            <h2 id={`year-${group.year}`} class="sticky top-24 text-4xl font-bold tracking-[-0.05em]">{group.year}</h2>
+          </div>
+          <div class="grid gap-4">
+            {group.items.map((item) => (
+              <article class="reveal card p-6 md:p-7">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <p class="card-label">{item.organisation}</p>
+                  <span class="text-xs font-semibold text-[color:var(--muted)]">{item.date}</span>
+                  <span class="text-xs font-semibold text-[color:var(--muted)]">{item.format}</span>
+                </div>
+                <h3 class="mt-4 text-2xl font-bold tracking-[-0.04em] text-balance">{item.title}</h3>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader
+        eyebrow="Earlier and recurring"
+        intro="These engagements are supported by historical speaking records, but the exact delivery date is not always preserved."
+        title="Programmes and rooms that pre-date the clean archive."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {recurring.map((item) => (
+          <article class="reveal card p-6 md:p-7">
+            <p class="card-label">{item.organisation}</p>
+            <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em]">{item.title}</h2>
+            <p class="mt-4 leading-7 text-[color:var(--muted)]">{item.note}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <div class="reveal rounded-[2rem] border border-[color:var(--line)] bg-[color:var(--ink)] p-7 text-white md:p-10 lg:p-12">
+        <p class="text-sm font-bold uppercase tracking-[0.14em] text-white/60">Planning an event?</p>
+        <h2 class="mt-4 max-w-4xl text-4xl font-bold tracking-[-0.055em] text-balance md:text-6xl">The archive is proof. The session should still be designed around your room.</h2>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-white/70">
+          Send the audience, format and problem you want the session to solve. I&apos;ll recommend the strongest angle rather than forcing a stock keynote into the agenda.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <CfEmailOff>
+            <a class="button-accent" href={`mailto:${siteConfig.email}?subject=Speaking%20enquiry%20for%20Daniel%20Johnson`}>Ask about speaking availability →</a>
+          </CfEmailOff>
+          <a class="button-secondary border-white/20 text-white hover:bg-white/10" href="/media-kit/">Speaker kit →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
