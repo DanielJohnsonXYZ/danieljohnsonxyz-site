@@ -43,6 +43,22 @@ const siteResult = await replaceInFile(sitePath, [
     to: 'startupsAdvised: "200+",'
   },
   {
+    from: 'mentorSessions: "479+",',
+    to: 'mentorSessions: "405",'
+  },
+  {
+    from: 'mentorRating: "4.97",',
+    to: 'mentorRating: "4.94",'
+  },
+  {
+    from: 'mentorReviewCount: "220",',
+    to: 'mentorReviewCount: "225",'
+  },
+  {
+    from: 'description: "4.97/5 from 220 reviews · 479+ mentor sessions."',
+    to: 'description: "4.94/5 from 225 reviews · 405 GrowthMentor sessions."'
+  },
+  {
     from: 'message: "Fractional CMO engagements open for Q2 2026.",',
     to: 'message: "Fractional CMO engagements: ask about current availability.",'
   },
@@ -64,7 +80,10 @@ const forbiddenSiteCopy = [
   "Next start window: June 2026.",
   'navBookingLabel: "Contact us"',
   'message: "Fractional CMO engagements open for Q2 2026."',
-  'startupsAdvised: "20+"'
+  'startupsAdvised: "20+"',
+  'mentorSessions: "479+"',
+  'mentorRating: "4.97"',
+  'mentorReviewCount: "220"'
 ];
 
 for (const phrase of forbiddenSiteCopy) {
@@ -73,12 +92,18 @@ for (const phrase of forbiddenSiteCopy) {
   }
 }
 
-if (!siteResult.content.includes('navBookingLabel: "Talk to Daniel"')) {
-  throw new Error("Expected personal-brand navigation CTA was not found.");
-}
+const expectedSiteCopy = [
+  'navBookingLabel: "Talk to Daniel"',
+  'startupsAdvised: "200+"',
+  'mentorSessions: "405"',
+  'mentorRating: "4.94"',
+  'mentorReviewCount: "225"'
+];
 
-if (!siteResult.content.includes('startupsAdvised: "200+"')) {
-  throw new Error("Expected 200+ startups proof stat was not found.");
+for (const phrase of expectedSiteCopy) {
+  if (!siteResult.content.includes(phrase)) {
+    throw new Error(`Expected normalized site copy was not found: ${phrase}`);
+  }
 }
 
 if (layoutResult.content.includes("  lastUpdated = siteConfig.lastUpdated,")) {
