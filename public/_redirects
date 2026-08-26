@@ -14,22 +14,19 @@ https://www.danieljohnson.xyz/*  https://danieljohnson.xyz/:splat  301
 /the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups /writing/what-is-a-fractional-cmo/ 301
 /the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups/ /writing/what-is-a-fractional-cmo/ 301
 
-# /press/ folded into /media-appearances/ (2026-07-31): the two were separate
-# pages covering the same ground. Its entries moved into the media collection.
+# Legacy media URLs now consolidate on the media appearances proof page.
 /press                    /media-appearances/  301
 /press/                   /media-appearances/  301
+/podcast-appearances      /media-appearances/  301
+/podcast-appearances/     /media-appearances/  301
+/press-and-media          /media-appearances/  301
+/press-and-media/         /media-appearances/  301
 
-/podcast-appearances      /podcast-guest/  301
-/podcast-appearances/     /podcast-guest/  301
-
-# Legacy speaking URL — Notion 353f99a79fdb81b4978dfab2b0a7d454
+# Legacy speaking URL, Notion 353f99a79fdb81b4978dfab2b0a7d454
 /speaking-and-training     /speaking/  301
 /speaking-and-training/    /speaking/  301
-
 /topics-and-talks         /speaking/  301
 /topics-and-talks/        /speaking/  301
-/press-and-media          /speaking/  301
-/press-and-media/         /speaking/  301
 /book-daniel-to-speak     /speaking/  301
 /book-daniel-to-speak/    /speaking/  301
 /not-a-fit                /fractional-cmo/  301
