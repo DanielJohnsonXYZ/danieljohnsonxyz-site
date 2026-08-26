@@ -8,38 +8,38 @@ import { afterYouBookSteps, siteConfig } from "../site";
 // first-time visitor can read top to bottom and leave with a single next step.
 const situations = [
   {
-    label: "Not sure what's broken",
-    you: "Growth has slowed and you can't confidently name the constraint. You want a senior read before spending anything.",
-    next: "Start with the free 20-minute Growth Audit. We diagnose the bottleneck together and agree the next move, whatever that turns out to be.",
-    cta: "Book a free Growth Audit",
-    href: siteConfig.bookingUrl,
-    external: true
-  },
-  {
-    label: "Know the problem, need a plan",
-    you: "You can name the constraint and want a costed plan, with the first experiments shipped in 2–4 weeks.",
-    next: "The Strategy Sprint gives you the plan, the artefacts, and the first wins on the board.",
-    cta: "See the Strategy Sprint",
-    href: "/strategy-sprint/",
+    label: "Leads are inconsistent",
+    you: "Some weeks are good. Some are dead. Too much of the pipeline still comes from referrals, founder outreach or one channel that keeps changing.",
+    next: "On the Growth Audit, we'll look at where new pipeline is actually coming from, what has already been tried, and whether the problem is volume, conversion or focus.",
+    cta: "Start with the Growth Audit",
+    href: "/growth-audit/",
     external: false
   },
   {
-    label: "Need ongoing senior ownership",
-    you: "You need embedded GTM leadership: someone inside the team running the cadence, the dashboard, and the decisions.",
-    next: "The Fractional CMO engagement puts me in the team, building a growth system your people keep after I leave.",
-    cta: "See the Fractional CMO scope",
-    href: "/fractional-cmo/",
+    label: "People don't really get the product",
+    you: "It makes sense when you explain it on a call, but the website, ads or outbound are doing a worse job.",
+    next: "We'll compare how customers describe the problem with how you are selling it now and work out whether positioning is the thing holding you back.",
+    cta: "Start with the Growth Audit",
+    href: "/growth-audit/",
     external: false
   },
   {
-    label: "Just need a decision made",
-    you: "One recurring GTM question and no appetite for a long engagement. You want a senior second brain on call.",
-    next: "Founder Office Hours are focused working sessions with no ongoing commitment.",
-    cta: "See Founder Office Hours",
-    href: "/founder-office-hours/",
+    label: "You've tried loads of marketing",
+    you: "Paid, content, outbound, partnerships. Some things worked for a bit, but nothing feels reliable and nobody is sure what deserves more budget.",
+    next: "We'll go through the evidence you already have and decide what to keep, stop or test next.",
+    cta: "Start with the Growth Audit",
+    href: "/growth-audit/",
+    external: false
+  },
+  {
+    label: "Growth still depends on the founder",
+    you: "The team can execute, but the important decisions, context and judgement still come back to you.",
+    next: "We'll work out which decisions should stay with you, which ones should move into the team, and whether you actually need senior growth ownership.",
+    cta: "Start with the Growth Audit",
+    href: "/growth-audit/",
     external: false
   }
-];
+]
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -70,12 +70,12 @@ const schemas = [
   <section class="hero-section section-space">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
-        <span class="service-label justify-center">Start here · 2-minute orientation</span>
+        <span class="service-label justify-center">Start here · 2 minutes</span>
         <h1 class="text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-balance md:text-7xl">
-          Find the right next step in two minutes.
+          What's actually going wrong?
         </h1>
         <p class="hero-subcopy text-lg leading-8 md:text-xl">
-          Four ways to work with me, one decision path. Check the fit below, pick the situation that sounds like yours, and follow the single next step.
+          Pick the problem that sounds closest to yours. You don't need to know whether you need a consultant, an agency or a hire before we have worked out what's wrong.
         </p>
       </div>
     </div>
@@ -98,9 +98,9 @@ const schemas = [
   <section class="section-space pt-0" aria-labelledby="situations-heading">
     <div class="shell">
       <SectionHeader
-        eyebrow="Pick your situation"
-        title="Four situations, one next step each."
-        intro="Each branch has a single next step. If none of them fit, the Growth Audit is the safe default: it costs nothing and ends with a recommendation either way."
+        eyebrow="What sounds closest?"
+        title="Start with the problem, not the service."
+        intro="Choose the one that feels most familiar. The first step is the same: a free 20-minute Growth Audit to work out what is actually holding growth back."
       />
 
       <div class="mt-10 grid gap-5 md:grid-cols-2">
