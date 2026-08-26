@@ -53,9 +53,11 @@ const internalLinks = [];
 
 const staleCopyChecks = [
   "currently in Asia",
+  "Currently splitting time between the UK and Southeast Asia",
   "Next start window: June 2026.",
   "Next start window: May 2026.",
-  "Fractional CMO engagements open for Q2 2026."
+  "Fractional CMO engagements open for Q2 2026.",
+  "between 1M and 10M ARR"
 ];
 
 for (const file of htmlFiles) {
