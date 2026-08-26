@@ -425,6 +425,51 @@ h3[class*="text-3xl"] {
   background: #fff;
 }
 
+
+/* Dark and green sections need a light CTA so the action is obvious. */
+.dark-section .button-accent,
+.dark-section .button-primary,
+.cta-gradient .button-accent,
+.cta-gradient .button-primary {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: #f7f5ef;
+  color: #0d1b14;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.dark-section .button-accent:hover,
+.dark-section .button-accent:focus-visible,
+.dark-section .button-primary:hover,
+.dark-section .button-primary:focus-visible,
+.cta-gradient .button-accent:hover,
+.cta-gradient .button-accent:focus-visible,
+.cta-gradient .button-primary:hover,
+.cta-gradient .button-primary:focus-visible {
+  background: #ffffff;
+  color: #062f20;
+  border-color: #ffffff;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+.dark-section .button-secondary,
+.cta-gradient .button-secondary,
+.button-secondary-dark {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: transparent;
+  color: #ffffff;
+}
+
+.dark-section .button-secondary:hover,
+.dark-section .button-secondary:focus-visible,
+.cta-gradient .button-secondary:hover,
+.cta-gradient .button-secondary:focus-visible,
+.button-secondary-dark:hover,
+.button-secondary-dark:focus-visible {
+  border-color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
 .button-link,
 .link-arrow {
   color: var(--accent);
