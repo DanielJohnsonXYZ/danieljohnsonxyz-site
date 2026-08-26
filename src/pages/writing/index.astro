@@ -22,19 +22,8 @@ const writingSchema = [
 ];
 
 const articles = sortByFeaturedThenOrder(await getCollection("articles"));
-const archive = sortByFeaturedThenOrder(await getCollection("media"));
-const primaryArchive = archive.filter((item) => ["Profile", "Interview", "Speaking", "Course"].includes(item.data.kind));
-const secondaryArchive = archive.filter((item) => !primaryArchive.includes(item));
 const focusTags = ["GTM", "AI", "Founder Growth", "Fractional CMO", "Pipeline"];
 const allTags = [...new Set(articles.flatMap((article) => article.data.tags))];
-const suggestedInterviewFormats = [
-  "30-minute podcast interview",
-  "45-minute founder growth teardown",
-  "60-minute keynote",
-  "Panel guest",
-  "Written Q&A",
-  "Expert quote for articles"
-];
 
 function readingTime(a: (typeof articles)[0]) {
   const words = (a.body ?? "").split(/\s+/).filter(Boolean).length;
@@ -111,14 +100,10 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
         <div class="reveal max-w-4xl space-y-6">
           <span class="service-label">Writing</span>
           <h1 class="text-5xl font-semibold tracking-[-0.07em] text-balance md:text-7xl">
-            Essays on AI-native GTM and growth systems.
+            Writing about the growth problems I keep seeing.
           </h1>
           <p class="conversion-subcopy max-w-3xl text-lg leading-9 text-[color:var(--muted)] md:text-xl">
-            Native essays by Daniel on AI-native GTM, fractional leadership, and operating-system thinking, plus a smaller
-            curated archive of profiles, interviews, talks, and resources that show how the point of view travels.
-          </p>
-          <p class="max-w-3xl text-sm font-semibold uppercase tracking-[0.12em] text-[color:var(--subtle)]">
-            These essays are useful starting points for interviews, quotes, and podcast conversations.
+            Most of these come from the same problems I see in founder calls: inconsistent pipeline, unclear positioning, too many channels, and growth decisions that still sit with the founder.
           </p>
         </div>
 
@@ -126,16 +111,12 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
           <p class="card-label">Where to start</p>
           <div class="mt-6 grid gap-4">
             <article class="card-muted p-4">
-              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Sizing me up</p>
-              <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Start with the flagship essay, then the <a class="highlight-text" href="/testimonials/">reviews from 479+ mentor sessions</a>.</p>
+              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Trying to work out if I know my stuff</p>
+              <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Start with the first three pieces below, then read the <a class="highlight-text" href="/testimonials/">founder and GrowthMentor reviews</a>.</p>
             </article>
             <article class="card-muted p-4">
               <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Stuck on a growth problem</p>
               <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">Read by bottleneck: operating system, customer research, or fractional leadership.</p>
-            </article>
-            <article class="card-muted p-4">
-              <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Booking me for media</p>
-              <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">The <a class="highlight-text" href="/media-kit/">media kit</a> has bios, headshots, topics, and producer assets.</p>
             </article>
             <article class="card-muted p-4">
               <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Want the next one</p>
@@ -258,78 +239,23 @@ const uncategorisedEssays = articles.filter((article) => !assigned.has(article.i
     </div>
   </section>
 
-  <section class="archive-section section-space" id="archive">
-    <div class="shell">
-      <SectionHeader
-        eyebrow="Curated Archive"
-        intro="Useful external material from Daniel's wider footprint. This is deliberately smaller than a blog archive."
-        title="Profiles, interviews, talks, and resources."
-      />
-
-      <div class="mt-10 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-        <div class="grid gap-5">
-          {
-            primaryArchive.map((item) => (
-              <article class="reveal card archive-card p-6 md:p-7">
-                <div class="flex flex-wrap gap-2">
-                  <span class="chip">{item.data.kind}</span>
-                  <span class="chip">{item.data.source}</span>
-                  <span class="chip">{item.data.yearLabel}</span>
-                </div>
-                <h2 class="mt-5 text-2xl font-semibold tracking-[-0.04em]">{item.data.title}</h2>
-                <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">{item.data.description}</p>
-                <a class="link-arrow mt-6" href={item.data.href} rel="noreferrer" target="_blank">Open source</a>
-              </article>
-            ))
-          }
-        </div>
-        <aside class="reveal card p-6 md:p-7">
-          <p class="card-label">Secondary archive</p>
-          <div class="mt-5 grid gap-4">
-            {
-              secondaryArchive.map((item) => (
-                <a class="archive-mini-link" href={item.data.href} rel="noreferrer" target="_blank">
-                  <span>{item.data.title}</span>
-                  <small>{item.data.source} / {item.data.yearLabel}</small>
-                </a>
-              ))
-            }
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
   <section class="section-space pt-0">
     <div class="shell">
-      <div class="reveal card mb-6 p-6 md:p-8">
-        <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div>
-            <p class="card-label">Suggested interview formats</p>
-            <h2 class="mt-3 text-3xl font-bold tracking-[-0.05em] md:text-4xl">Send this to your producer.</h2>
-            <p class="mt-4 text-base leading-8 text-[color:var(--muted)]">Writing proves the thinking; the media kit turns it into a clean briefing pack.</p>
-          </div>
-          <div class="grid gap-3 sm:grid-cols-2">
-            {suggestedInterviewFormats.map((item) => <span class="card-muted p-4 text-sm font-bold">{item}</span>)}
-            <a class="button-secondary sm:col-span-2" href="/media-kit/">Open Daniel's media kit</a>
-          </div>
-        </div>
-      </div>
       <div class="reveal card px-6 py-8 md:px-10 md:py-10">
         <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div class="space-y-4">
-            <span class="eyebrow">Use the thinking</span>
+            <span class="eyebrow">Got a live growth problem?</span>
             <h2 class="text-4xl font-bold tracking-[-0.05em] md:text-5xl">
-              For interviews, quotes, or a deeper commercial conversation.
+              Bring me the messy version.
             </h2>
             <p class="max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              Producers can start with the media kit. Founders with a live growth bottleneck can use the commercial route after the media context is clear.
+              If you've got customers but growth is stuck, book the free 20-minute Growth Audit. If you're just here to learn, Growth Notes is the better option.
             </p>
           </div>
           <div class="cta-stack">
-            <a class="button-accent" href="/media-kit/">Open media kit</a>
-            <a class="button-secondary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+            <a class="button-accent" href="/growth-audit/">See the Growth Audit</a>
             <a class="button-secondary" href="/newsletter/">Subscribe to Growth Notes</a>
+            <a class="button-secondary" href="/media-kit/">Looking for media assets?</a>
           </div>
         </div>
       </div>
