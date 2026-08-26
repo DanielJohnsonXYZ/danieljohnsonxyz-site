@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/commit-normalized-source.yml
+      - ops/normalize-site-source.mjs
 
 permissions:
   contents: write
