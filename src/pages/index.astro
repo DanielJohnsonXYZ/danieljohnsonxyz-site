@@ -11,7 +11,7 @@ import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960
 import "../styles/home-v5.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
-import { icpFirmographics, siteConfig } from "../site";
+import { icpFirmographics, proofStats, siteConfig } from "../site";
 
 // FAQ items drive both the FAQPage schema and the visible markup below, so the
 // two can't drift. `answer` is the schema text; `link` renders only in the page.
@@ -131,7 +131,7 @@ const engineNodes = [
           </p>
           <div class="v5-hero-ctas">
             <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary v5-btn-lg" data-cta="home-hero-audit">
-              Contact us
+              {siteConfig.navBookingLabel}
               <span class="v5-arrow" aria-hidden="true">→</span>
             </a>
             <a href="/case-studies/" class="v5-link-arrow" data-cta="home-hero-case-studies">
@@ -161,19 +161,19 @@ const engineNodes = [
 
       <dl class="v5-hero-stats" aria-label="Track record at a glance">
         <div class="v5-hero-stat">
-          <dd>£18M+</dd>
+          <dd>{proofStats.revenueImpact}</dd>
           <dt>Client revenue</dt>
         </div>
         <div class="v5-hero-stat">
-          <dd>4.97 / 5</dd>
+          <dd>{proofStats.mentorRating} / 5</dd>
           <dt>GrowthMentor rating</dt>
         </div>
         <div class="v5-hero-stat">
-          <dd>479+</dd>
+          <dd>{proofStats.mentorSessions}</dd>
           <dt>Mentor sessions</dt>
         </div>
         <div class="v5-hero-stat">
-          <dd>200+</dd>
+          <dd>{proofStats.startupsAdvised}</dd>
           <dt>Startups advised</dt>
         </div>
       </dl>
@@ -355,12 +355,12 @@ const engineNodes = [
           <cite>— Christian A., Founder, AI HealthTech</cite>
         </div>
         <div class="v5-attribution-row">
-          <div><strong>£15M+</strong> helped founders raise</div>
-          <div><strong>200+</strong> startups across four continents</div>
-          <div><strong>4.97 / 5</strong> · <strong>479+</strong> sessions</div>
+          <div><strong>{proofStats.founderRaiseSupport}</strong> helped founders raise</div>
+          <div><strong>{proofStats.startupsAdvised}</strong> startups across four continents</div>
+          <div><strong>{proofStats.mentorRating} / 5</strong> · <strong>{proofStats.mentorSessions}</strong> sessions</div>
         </div>
         <div class="v5-center-row">
-          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-ghost" data-cta="home-proof-audit">Contact us</a>
+          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-ghost" data-cta="home-proof-audit">{siteConfig.navBookingLabel}</a>
           <a href="/case-studies/" class="v5-link-arrow" data-cta="home-proof-case-studies">See full case studies</a>
         </div>
       </div>
@@ -485,7 +485,7 @@ const engineNodes = [
             <h2 class="v5-h2">I've been the founder with a <span class="v5-hl">flat chart at 2am.</span></h2>
             <p>My first company was eQuoo, evidence-based emotional fitness training. The product was good, but the go-to-market mostly amounted to hoping the right people would find us, and they didn't find us fast enough. We navigated through it and got to two exits. The lesson stuck: execution without a system is expensive improvisation with a deadline.</p>
             <p>After that I ran in-house growth at Shoprocket and NAVA, and kept seeing the same pattern: functional products, founders owning every growth decision, nothing compounding. We Scale Startups exists to fix that. The approach to positioning, pipeline, and growth decisions was built over 20+ deep AI and B2B SaaS engagements, and sharpened across 200+ startups in healthtech, eCommerce, and AI infrastructure.</p>
-            <p>I've mentored 479+ founders at a 4.97 / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>
+            <p>I've completed {proofStats.mentorSessions} GrowthMentor sessions at a {proofStats.mentorRating} / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>
             <a href="/about/" class="v5-link-arrow" data-cta="home-about-read">Read more about Daniel</a>
           </div>
           <div>
@@ -590,7 +590,7 @@ const engineNodes = [
           <span class="v5-eyebrow">Next step</span>
           <h2 class="v5-h2">Tell me where growth is <span class="v5-hl">actually stuck.</span></h2>
           <p class="v5-final-lead">Twenty minutes on your specific situation, with no pitch and no deck. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.</p>
-          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary v5-btn-lg" data-cta="home-final-audit">Contact us <span class="v5-arrow">→</span></a>
+          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary v5-btn-lg" data-cta="home-final-audit">{siteConfig.navBookingLabel} <span class="v5-arrow">→</span></a>
           <p class="v5-final-meta">
             Prefer email first? <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>
           </p>

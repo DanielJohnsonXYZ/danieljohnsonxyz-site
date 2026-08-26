@@ -87,7 +87,7 @@ const breadcrumb = buildBreadcrumbSchema([
             <input type="hidden" name="form_id" value={contactFormId} />
             {/* Matches the trigger on the "WSS — Welcome: Enquiry" automation in
                 Customer.io — do not rename without updating that campaign. */}
-            <input type="hidden" name="source_type" value="contact_enquiry" />
+            <input type="hidden" name="source_type" value="contact-form" />
             <input type="hidden" name="source_page" value="" data-source-page />
             <p class="contact-hp" aria-hidden="true">
               <label for="contact-company-website">Company website</label>
@@ -133,7 +133,7 @@ const breadcrumb = buildBreadcrumbSchema([
                 Send message →
               </button>
               <p class="contact-fine">
-                I reply personally. You'll also get a short follow-up series, unsubscribe in one click.
+                I reply personally. Your details are used to respond to this enquiry, not to subscribe you to Growth Notes.
                 Prefer email? <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
               </p>
             </div>
@@ -219,7 +219,7 @@ const breadcrumb = buildBreadcrumbSchema([
               name,
               message,
               form_id: String(fd.get("form_id") || ""),
-              source_type: String(fd.get("source_type") || "contact_enquiry"),
+              source_type: String(fd.get("source_type") || "contact-form"),
               source_page: String(fd.get("source_page") || window.location.href),
               company: String(fd.get("company") || ""),
               stage: String(fd.get("stage") || ""),

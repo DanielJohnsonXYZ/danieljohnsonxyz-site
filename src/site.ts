@@ -23,16 +23,16 @@ export const siteConfig = {
   // surfaced only in About / FAQ, not on the headline cards.
   primaryLane: "Fractional CMO / Growth Operator for post-PMF Seed–Series B AI & B2B SaaS startups.",
   /** Capacity line — pair with `nextStartWindow` so months never go stale. */
-  availability: "Taking on a small number of fractional engagements. Next start window: June 2026.",
+  availability: "Taking on a small number of fractional engagements. Ask about the next available start window.",
   /** Single source for “start window” copy; update when calendars shift. */
-  nextStartWindow: "Next start window: June 2026.",
+  nextStartWindow: "Ask about the next available start window.",
   /** Shorter header button label (full offer copy stays on `bookingLabel`). */
-  navBookingLabel: "Contact us",
+  navBookingLabel: "Talk to Daniel",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",
   phone: "+44 7918 665435",
-  location: "UK-based, currently in Asia, working with UK, US, Europe and APAC clients with US-friendly overlap.",
+  location: "UK-based, working with UK, US, Europe and APAC clients with US-friendly overlap.",
   locationShort: "UK-based · US-friendly overlap",
   linkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
   growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
@@ -120,10 +120,10 @@ export const siteImages = {
 export const proofStats = {
   revenueImpact: "£18M+",
   adSpend: "£6.8M+",
-  startupsAdvised: "20+",
-  mentorSessions: "479+",
-  mentorRating: "4.97",
-  mentorReviewCount: "220",
+  startupsAdvised: "200+",
+  mentorSessions: "405",
+  mentorRating: "4.94",
+  mentorReviewCount: "225",
   founderRaiseSupport: "£15M+",
   founderExits: "Founder-side exit experience, including eQuoo (mental-health tech)"
 } as const;
@@ -187,7 +187,7 @@ export const icpFirmographics = {
 // ──────────────────────────────────────────────────────────────────────────
 export const announcement = {
   enabled: false,
-  message: "Fractional CMO engagements open for Q2 2026.",
+  message: "Fractional CMO engagements: ask about current availability.",
   ctaLabel: "See how I work",
   ctaHref: "/fractional-cmo/"
 } as const;
@@ -200,7 +200,7 @@ export const ctas = {
     // Deliberately generic: the button names the action, and the hint carries
     // the specifics. "Book a 20-min Growth Audit" asked people to commit to a
     // named product before they knew what it was.
-    label: "Contact us",
+    label: "Talk to Daniel",
     href: siteConfig.bookingPageUrl,
     hint: "Free · 20 minutes · No pitch"
   },
@@ -263,7 +263,7 @@ export const workWithMeNavItems = [
 /** Proof dropdown — evidence grouped in one place. */
 export const proofNavItems = [
   { href: "/case-studies/", label: "Case studies", description: "Before/after evidence with real numbers and attribution." },
-  { href: "/testimonials/", label: "Testimonials", description: "4.97/5 from 220 reviews · 479+ mentor sessions." },
+  { href: "/testimonials/", label: "Testimonials", description: "4.94/5 from 225 reviews · 405 GrowthMentor sessions." },
   { href: "/proof/", label: "Proof in numbers", description: "The full metrics library, verifiable sources linked." },
   { href: "/media-appearances/", label: "Press & media", description: "Talks, mentoring affiliations, podcasts and citations." },
   { href: "/media-kit/", label: "Media kit", description: "Bios, headshots and talks for press and podcast hosts." }
