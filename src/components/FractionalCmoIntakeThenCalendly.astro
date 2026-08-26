@@ -12,7 +12,7 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
 >
   <div class="fc-intake-panel" data-fc-intake-panel>
     <p class="fc-intake-lead">
-      One minute to share context, then pick a time. Same 20-minute call: no pitch, no deck.
+      Give me a minute of context first, then pick a time. It helps me use the 20 minutes properly.
     </p>
     <form class="fc-intake-form" data-fc-intake-form novalidate>
       <div class="fc-field">
@@ -58,16 +58,27 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
         <label class="fc-label" for="fc-stage">Rough stage</label>
         <select id="fc-stage" class="fc-input fc-select" name="stage" required>
           <option value="" disabled selected>Select one</option>
-          <option value="Post-PMF, under 1M ARR">Post-PMF, under 1M ARR</option>
-          <option value="1M–5M ARR">1M–5M ARR</option>
-          <option value="5M–10M ARR">5M–10M ARR</option>
-          <option value="10M+ ARR">10M+ ARR</option>
+          <option value="Post-PMF, under £1M ARR">Post-PMF, under £1M ARR</option>
+          <option value="£1M–£5M ARR">£1M–£5M ARR</option>
+          <option value="£5M–£20M ARR">£5M–£20M ARR</option>
+          <option value="£20M+ ARR">£20M+ ARR</option>
           <option value="Prefer not to say">Prefer not to say</option>
         </select>
       </div>
       <div class="fc-field">
+        <label class="fc-label" for="fc-problem">Which sounds closest?</label>
+        <select id="fc-problem" class="fc-input fc-select" name="problem_type" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="Leads are inconsistent">Leads are inconsistent</option>
+          <option value="People don't really get the product">People don't really get the product</option>
+          <option value="We've tried loads of marketing">We've tried loads of marketing</option>
+          <option value="Growth still depends on the founder">Growth still depends on the founder</option>
+          <option value="Something else">Something else</option>
+        </select>
+      </div>
+      <div class="fc-field">
         <label class="fc-label" for="fc-bottleneck">
-          Biggest bottleneck <span class="fc-optional">(optional)</span>
+          What have you tried, and why now? <span class="fc-optional">(optional)</span>
         </label>
         <textarea
           id="fc-bottleneck"
@@ -75,7 +86,7 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
           name="bottleneck"
           rows="2"
           maxlength="500"
-          placeholder="e.g. Pipeline inconsistency, positioning, founder-led sales…"
+          placeholder="A couple of lines is plenty."
         ></textarea>
       </div>
       <p class="fc-error" data-fc-error hidden aria-live="polite"></p>
@@ -144,10 +155,12 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
       const email = String(fd.get("email") || "").trim();
       const company = String(fd.get("company") || "").trim();
       const stage = String(fd.get("stage") || "").trim();
-      const bottleneck = String(fd.get("bottleneck") || "").trim();
+      const problemType = String(fd.get("problem_type") || "").trim();
+      const context = String(fd.get("bottleneck") || "").trim();
+      const bottleneck = [problemType, context].filter(Boolean).join(" | ");
 
-      if (!name || !email || !company || !stage) {
-        showError("Please fill in name, email, company, and stage.");
+      if (!name || !email || !company || !stage || !problemType) {
+        showError("Please add your name, email, company, stage, and the problem that sounds closest.");
         return;
       }
 
@@ -157,14 +170,15 @@ const calendlyEmbedBase = `${siteConfig.bookingUrl.replace(/\/$/, "")}`;
           event: "fractional_cmo_intake_submit",
           fc_company: company,
           fc_stage: stage,
-          fc_has_bottleneck_note: bottleneck.length > 0
+          fc_problem_type: problemType,
+          fc_has_bottleneck_note: context.length > 0
         });
       }
 
       try {
         sessionStorage.setItem(
           "fc_intake",
-          JSON.stringify({ company, stage, bottleneck, ts: Date.now() })
+          JSON.stringify({ company, stage, problemType, context, ts: Date.now() })
         );
       } catch {
         /* ignore */
