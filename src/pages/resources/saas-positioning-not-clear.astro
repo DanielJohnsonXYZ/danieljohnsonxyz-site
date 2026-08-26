@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PainGuidePage from "../../components/PainGuidePage.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Resources", url: "/resources/" },
+  { name: "SaaS positioning isn't clear", url: "/resources/saas-positioning-not-clear/" }
+]);
+---
+
+<BaseLayout
+  title="People don't understand what your SaaS does | Daniel Johnson"
+  description="A practical positioning diagnostic for B2B SaaS teams whose product makes sense on sales calls but not on the website, ads or outbound."
+  keywords="SaaS positioning, B2B SaaS messaging, SaaS value proposition, people don't understand product"
+  path="/resources/saas-positioning-not-clear/"
+  schema={schema}
+>
+  <PainGuidePage
+    eyebrow="Positioning and messaging"
+    title="The product makes sense when you explain it. The website doesn't."
+    intro="This usually shows up as a website problem, an ad problem or a lead-quality problem. Sometimes it is. Sometimes the company simply hasn't made a clear choice about who the product is for and why that person should care."
+    symptoms={[
+      "Different people on the team explain the product differently.",
+      "The homepage needs a lot of words before the value becomes clear.",
+      "Prospects understand the product much better after a founder-led demo.",
+      "Messaging keeps changing because nobody knows which version is right."
+    ]}
+    diagnosis="Start with what good customers already understand, say and buy."
+    checks={[
+      { title: "Who gets it fastest?", body: "Look at the customers who understood the value with the least explanation. What job, situation or pain did they already recognise?" },
+      { title: "What words do customers use?", body: "Pull language from sales calls, onboarding, support and reviews. Compare it with the language on the site." },
+      { title: "What are you making them understand first?", body: "If the homepage starts with how the product works, try starting with the problem the buyer already knows they have." },
+      { title: "What are you willing to leave out?", body: "Clear positioning usually means choosing a main buyer and use case. Trying to speak to everyone makes the page harder for the right person to recognise." }
+    ]}
+    nextSteps={[
+      "Pick the customer and use case with the strongest evidence.",
+      "Rewrite the first screen around the problem that buyer already knows.",
+      "Use the same core promise in the website, outbound and sales deck.",
+      "Test whether qualified prospects understand it faster before doing a full redesign."
+    ]}
+    proof={{
+      metric: "6×",
+      title: "More monthly app downloads",
+      body: "A HealthTech engagement went from roughly 2k to 12k+ monthly downloads after acquisition and lifecycle work was rebuilt around the actual customer journey."
+    }}
+    related={[
+      { href: "/writing/do-customer-research-before-you-buy-more-traffic/", label: "Do customer research before you buy more traffic" },
+      { href: "/case-studies/", label: "Case studies" },
+      { href: "/strategy-sprint/", label: "Strategy Sprint" }
+    ]}
+  />
+</BaseLayout>
