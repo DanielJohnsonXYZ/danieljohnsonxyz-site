@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://danieljohnson.xyz",
   trailingSlash: "always",
+  compressHTML: true,
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()]
@@ -17,4 +18,4 @@ export default defineConfig({
     }
   }
 });
-// build cache-bust 2026-05-01T05:17:51Z
+// build cache-bust 2026-08-26T18:30:00Z
