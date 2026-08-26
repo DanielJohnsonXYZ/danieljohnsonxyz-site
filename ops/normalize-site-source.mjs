@@ -118,8 +118,16 @@ const homeResult = await replaceInFile(homePath, [
     to: '<div><strong>{proofStats.mentorRating} / 5</strong> · <strong>{proofStats.mentorSessions}</strong> sessions</div>'
   },
   {
+    from: "            <p>I've mentored 479+ founders at a 4.97 / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>",
+    to: "            <p>I've completed {proofStats.mentorSessions} GrowthMentor sessions at a {proofStats.mentorRating} / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>"
+  },
+  {
     from: '>Contact us</a>',
     to: '>{siteConfig.navBookingLabel}</a>'
+  },
+  {
+    from: '>Contact us <span class="v5-arrow">→</span></a>',
+    to: '>{siteConfig.navBookingLabel} <span class="v5-arrow">→</span></a>'
   }
 ]);
 
@@ -209,7 +217,7 @@ for (const phrase of expectedSiteCopy) {
 const stalePageChecks = [
   [homeResult, "4.97 / 5", "home"],
   [homeResult, "479+", "home"],
-  [homeResult, ">Contact us</a>", "home"],
+  [homeResult, "Contact us", "home"],
   [aboutResult, "splitting time between the UK and Southeast Asia", "about"],
   [faqResult, "currently in Asia", "FAQ"],
   [faqResult, "between 1M and 10M ARR", "FAQ"],
