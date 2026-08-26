@@ -4,13 +4,12 @@ import { absoluteUrl } from "../lib/utils";
 
 export const prerender = true;
 
-const today = () => new Date().toISOString().slice(0, 10);
-
-function urlNode(path: string, lastmod: string = today()) {
+function urlNode(path: string, lastmod?: string) {
   const hasFileExt = /\.[a-z0-9]+$/i.test(path);
   const withSlash =
     path === "/" ? "/" : path.endsWith("/") ? path : hasFileExt ? path : `${path}/`;
-  return `<url><loc>${absoluteUrl(withSlash)}</loc><lastmod>${lastmod}</lastmod></url>`;
+  const lastmodNode = lastmod ? `<lastmod>${lastmod}</lastmod>` : "";
+  return `<url><loc>${absoluteUrl(withSlash)}</loc>${lastmodNode}</url>`;
 }
 
 export const GET: APIRoute = async () => {
