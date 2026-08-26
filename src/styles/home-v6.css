@@ -546,7 +546,7 @@
   font-size: 0.92rem;
   line-height: 1.5;
 }
-.h6-case:nth-child(3) p { color: rgba(255, 255, 255, 0.72); }
+.h6-case:nth-child(3) p { color: rgba(255, 255, 255, 0.82); }
 
 .h6-proof-quote {
   display: grid;
@@ -571,7 +571,7 @@
 }
 
 .h6-proof-quote cite {
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.74);
   font-size: 0.85rem;
   font-style: normal;
   line-height: 1.45;
@@ -697,7 +697,7 @@
   color: var(--h6-muted);
   line-height: 1.55;
 }
-.h6-work-card-featured > p { color: rgba(255, 255, 255, 0.72); }
+.h6-work-card-featured > p { color: rgba(255, 255, 255, 0.8); }
 
 .h6-work-outcome {
   margin-top: auto;
@@ -884,7 +884,7 @@
 
 .h6-final-card .h6-eyebrow { color: #a7d7bd; }
 .h6-final-card .h6-h2 { position: relative; z-index: 1; max-width: 12ch; color: #fff; }
-.h6-final-card .h6-kicker { position: relative; z-index: 1; margin-top: 1.4rem; color: rgba(255, 255, 255, 0.7); }
+.h6-final-card .h6-kicker { position: relative; z-index: 1; margin-top: 1.4rem; color: rgba(255, 255, 255, 0.8); }
 .h6-final-actions {
   position: relative;
   z-index: 1;
