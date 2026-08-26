@@ -134,8 +134,8 @@ export const proofStats = {
 // /start-here, and the opening line of /llms.txt for AI search engines.
 // ──────────────────────────────────────────────────────────────────────────
 export const singleIdea = {
-  short: "Growth systems that run without you.",
-  long: "I don't run campaigns. I build growth systems that run without you."
+  short: "Growth that doesn't need you in every decision.",
+  long: "I help founders get growth out of their heads and into the team."
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -635,10 +635,10 @@ export const homeServiceLadder = [
     price: "Free",
     cadence: "20 minutes · No pitch · No deck",
     body:
-      "Bring the messy growth question. We diagnose the bottleneck and decide whether working together makes sense, or where else to go if it doesn't.",
+      "Bring the messy growth question. We'll work out what looks most likely to be going wrong and what I would do next.",
     bestFor:
       "Anyone unsure whether they need a fractional CMO, an agency, an internal hire, or just a sharper plan.",
-    outcome: "A clearer read on the bottleneck and the most useful next step.",
+    outcome: "A clearer idea of what's going wrong and what to do next.",
     href: "/growth-audit/",
     cta: "See what's covered",
     primary: false
@@ -649,10 +649,10 @@ export const homeServiceLadder = [
     price: "£6k fixed scope",
     cadence: "2–4 week engagement",
     body:
-      "Diagnose, prioritise, and ship the first artefacts. ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.",
+      "Work out what's holding growth back, choose the next 90 days of work, and get the first important pieces live.",
     bestFor:
       "Founders who need the plan, the operating rhythm, and the first wins before committing to ongoing work.",
-    outcome: "A 90-day growth plan, the first artefacts, and a working operating rhythm.",
+    outcome: "A 90-day plan, clear owners, useful reporting and the first work live.",
     href: "/strategy-sprint/",
     cta: "See Strategy Sprint scope",
     primary: false
@@ -663,10 +663,10 @@ export const homeServiceLadder = [
     price: "From £5k/mo",
     cadence: "3-month minimum",
     body:
-      "Embedded senior ownership 1–2 days a week. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Builds the system and then hands it off clean.",
+      "Senior growth ownership 1–2 days a week. I help make the calls on priorities, reporting, messaging, channels, hiring and agencies, then move more of that into the team.",
     bestFor:
       "£1M–£20M ARR, founder-led, growth stuck, senior help needed before or alongside a £150k+ full-time CMO hire.",
-    outcome: "Pipeline rhythm, sharper positioning, and a growth system the team can run after I'm gone.",
+    outcome: "Clearer pipeline, better decisions and a team that needs less founder input.",
     href: "/fractional-cmo/",
     cta: "Explore Fractional CMO",
     primary: true
@@ -795,16 +795,16 @@ export const vsFulltimeCMO = {
 // ──────────────────────────────────────────────────────────────────────────
 export const growthAuditPage = {
   agenda: [
-    { title: "Bottleneck read", body: "Where's the constraint right now: ICP, channel, conversion, founder-led sales, or reporting?" },
-    { title: "Stage check", body: "Where the company actually is on the post-PMF curve, and what that means for what to fix next." },
-    { title: "Honest fit call", body: "Is a fractional CMO the right shape? Or an agency, freelancer, internal hire, or just sharper focus?" },
-    { title: "Next step", body: "A clear recommendation. If we're a fit, the engagement shape that makes sense. If not, who to talk to instead." }
+    { title: "What's going wrong?", body: "Where growth seems to be getting stuck: who you're selling to, messaging, pipeline, conversion, founder-led sales or the numbers." },
+    { title: "What have you tried?", body: "What you've already spent time or money on, what happened, and what that tells us." },
+    { title: "Do you actually need me?", body: "Whether this needs a senior operator, an agency, a freelancer, an internal hire or just a clearer decision." },
+    { title: "What next?", body: "The next thing I would do. If working together makes sense, we'll talk about the right shape. If it doesn't, I'll say so." }
   ],
   bring: [
     "Your stage and current ARR or signal",
-    "Top 1–2 growth questions you actually want answered",
-    "What you've tried that didn't work",
-    "Anything you're considering: a hire, an agency, a re-org, a campaign"
+    "The one or two growth questions you actually want answered",
+    "What you've tried already",
+    "Why you're looking at this now"
   ],
   notForYou: [
     "If you're pre-revenue and pre-PMF, that's customer research time, not GTM time",
@@ -838,7 +838,7 @@ export const strategySprintPage = {
   price: "From £6,000",
   cadence: "2–4 weeks · Fixed scope",
   oneLiner:
-    "Diagnose the bottleneck, set 90-day priorities, ship the first artefacts. The plan and the operating rhythm before you commit to ongoing work.",
+    "Work out what's holding growth back, decide what the next 90 days should look like, and get the first important work live.",
   weeks: [
     {
       week: "Week 1 — Diagnose",
@@ -912,16 +912,16 @@ export const footerTestimonial = {
 
 export const principleCards = [
   {
-    title: "Growth is an operating system",
-    body: "I help teams replace one-off campaigns with a system for prioritising, learning, and compounding what works."
+    title: "Start with the problem",
+    body: "Before adding another campaign, work out what's actually stopping growth."
   },
   {
-    title: "Evidence beats noise",
-    body: "Customer research, instrumentation, and experiment design sit before channel scaling, not after it."
+    title: "Use evidence, not guesses",
+    body: "Customer calls, pipeline data and real tests should decide where time and money go next."
   },
   {
-    title: "Clarity creates speed",
-    body: "The real unlock is usually sharper positioning, cleaner decision-making, and a team that knows what to test next."
+    title: "Make the next decision easier",
+    body: "Good growth work should leave the team clearer about what to do, what to stop and who owns the call."
   }
 ] as const;
 
