@@ -2,6 +2,9 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const sitePath = new URL("../src/site.ts", import.meta.url);
 const layoutPath = new URL("../src/layouts/BaseLayout.astro", import.meta.url);
+const aboutPath = new URL("../src/pages/about.astro", import.meta.url);
+const faqPath = new URL("../src/pages/resources/faq.astro", import.meta.url);
+const mediaKitPath = new URL("../src/pages/media-kit.astro", import.meta.url);
 
 async function replaceInFile(path, replacements) {
   let content = await readFile(path, "utf8");
@@ -75,6 +78,43 @@ const layoutResult = await replaceInFile(layoutPath, [
   }
 ]);
 
+const aboutResult = await replaceInFile(aboutPath, [
+  {
+    from: '{ value: proofStats.startupsAdvised, label: "AI and SaaS startups advised" },',
+    to: '{ value: "20+", label: "Deep AI and SaaS engagements" },'
+  },
+  {
+    from: "Currently splitting time between the UK and Southeast Asia, working with teams across Europe, the US, and APAC.",
+    to: "UK-based, working with teams across Europe, the US, and APAC."
+  },
+  {
+    from: "Currently splitting time between the UK and Southeast Asia.",
+    to: "UK-based, working across the UK, US, Europe, and APAC."
+  }
+]);
+
+const faqResult = await replaceInFile(faqPath, [
+  {
+    from: "UK-based, currently in Asia, serving US, UK, Europe, and APAC clients with US-friendly time-zone overlap.",
+    to: "UK-based, serving US, UK, Europe, and APAC clients with US-friendly time-zone overlap."
+  },
+  {
+    from: "Most engagements are with companies between 1M and 10M ARR.",
+    to: "Most engagements are with companies between £1M and £20M ARR."
+  }
+]);
+
+const mediaKitResult = await replaceInFile(mediaKitPath, [
+  {
+    from: 'value: "UK-based, currently in Asia. Serving US, UK, Europe, APAC"',
+    to: 'value: "UK-based, serving US, UK, Europe, and APAC"'
+  },
+  {
+    from: 'value: "20+ startups, £18M+ revenue generated"',
+    to: 'value: "20+ deep engagements, £18M+ revenue generated"'
+  }
+]);
+
 const forbiddenSiteCopy = [
   "currently in Asia",
   "Next start window: June 2026.",
@@ -106,10 +146,23 @@ for (const phrase of expectedSiteCopy) {
   }
 }
 
+const stalePageChecks = [
+  [aboutResult, "splitting time between the UK and Southeast Asia", "about"],
+  [faqResult, "currently in Asia", "FAQ"],
+  [faqResult, "between 1M and 10M ARR", "FAQ"],
+  [mediaKitResult, "currently in Asia", "media kit"]
+];
+
+for (const [result, phrase, label] of stalePageChecks) {
+  if (result.content.includes(phrase)) {
+    throw new Error(`Stale ${label} copy remains after normalization: ${phrase}`);
+  }
+}
+
 if (layoutResult.content.includes("  lastUpdated = siteConfig.lastUpdated,")) {
   throw new Error("BaseLayout still derives page freshness from the deployment date.");
 }
 
 console.log(
-  `Normalized site source for production build, ${siteResult.changed} site.ts replacement(s), ${layoutResult.changed} BaseLayout replacement(s).`
+  `Normalized production source: ${siteResult.changed} site, ${layoutResult.changed} layout, ${aboutResult.changed} about, ${faqResult.changed} FAQ, ${mediaKitResult.changed} media-kit replacement(s).`
 );
