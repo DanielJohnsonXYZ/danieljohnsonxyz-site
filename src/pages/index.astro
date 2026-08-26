@@ -2,47 +2,33 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BrandBar from "../components/BrandBar.astro";
-import GrowthDiagnosis from "../components/GrowthDiagnosis.astro";
-import NewsletterFormInline from "../components/NewsletterFormInline.astro";
-import WhatsAppCta from "../components/WhatsAppCta.astro";
 import heroCutout from "../assets/images/daniel-hero-cutout.webp";
 import danielAircraft from "../assets/images/daniel-aircraft.webp";
-import cambridgeJudge from "../assets/images/cambridge-judge-business-school-960.webp";
-import "../styles/home-v5.css";
+import "../styles/home-v6.css";
 import { buildAggregateRatingSchema, buildFaqPageSchema, buildServiceSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { icpFirmographics, proofStats, siteConfig } from "../site";
 
-// FAQ items drive both the FAQPage schema and the visible markup below, so the
-// two can't drift. `answer` is the schema text; `link` renders only in the page.
 const homepageFaq = [
   {
-    question: "What does a fractional CMO actually do day-to-day?",
-    answer: "Owns the weekly GTM rhythm. Sharp ICP and positioning, channel and experiment priorities, reporting that drives scale-stop-fix decisions, and the handoffs between founder, sales, and any agencies. It is operator work in your Slack and meetings rather than a monthly slide deck."
-  },
-  {
-    question: "How is this different from hiring a full-time CMO?",
-    answer: "You buy a slice of senior time with a clear scope, usually one to two days a week, instead of a £120–180k+ base, equity, and a six-month ramp before the system shows up. Most teams use fractional to install the operating system, then hire full-time into something that already runs.",
-    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "Fractional vs full-time" },
+    question: "What stage should my startup be at?",
+    answer: "Post-PMF with real customers and repeat revenue, usually Seed to Series B. The best fit is roughly £1M–£20M ARR, a small team, and a founder who is still making too many weekly growth decisions.",
+    link: { href: "/fractional-cmo/", label: "See the full fit criteria" },
     open: true
   },
   {
-    question: "What stage should my startup be at?",
-    answer: "Post-PMF with real revenue and repeat buyers, typically Seed to Series B. At that stage the constraint is execution and ownership. Pre-revenue teams should stay focused on customers and product first.",
-    link: { href: "/resources/fractional-cmo-vs-full-time-cmo/", label: "When each model fits" }
+    question: "How is this different from an agency or a full-time CMO?",
+    answer: "An agency usually owns a channel. A full-time CMO owns the whole function but comes with a full-time cost and hiring cycle. I sit in the middle: senior ownership across positioning, pipeline, reporting, team and agencies, for one or two days a week while the system is being built.",
+    link: { href: "/resources/compare-growth-options/", label: "Compare the options" }
   },
   {
-    question: "How quickly will I see results?",
-    answer: "Sharper decisions and cleaner reporting within the first few weeks. Meaningful pipeline and conversion movement usually shows in 30–90 days depending on sales cycle length and how fast tests ship. No miracles promised, just a visible system and honest calls on what’s working."
+    question: "Do you execute, or only advise?",
+    answer: "I do the senior operator work required to get the system running: analysis, positioning, priorities, dashboards, experiment design, briefs, hiring and agency decisions, and the first critical artefacts. I am not a junior execution team and I do not sell a pile of campaign hours."
   },
   {
     question: "What does it cost?",
-    answer: "UK engagements typically start around £6k for a Strategy Sprint and £5–7.5k/month for fractional CMO (three-month minimum), scoped to days per week and depth. The service page lists how the week runs. The UK cost page lists benchmark ranges and what moves price.",
-    link: { href: "/resources/fractional-cmo-cost-uk/", label: "Fractional CMO cost (UK)" }
-  },
-  {
-    question: "How do I know if this will work for my business?",
-    answer: "If growth still depends on you reading every dashboard and approving every message, and the team does not share one constraint map, the model fits. The 20-minute audit is deliberately designed to name the bottleneck and say no when the shape of help is wrong."
+    answer: "The 20-minute Growth Audit is free. Strategy Sprints start at £6k. Fractional CMO engagements typically start at £5k per month, usually for a three-month minimum, depending on days per week and how much operating support is needed.",
+    link: { href: "/resources/fractional-cmo-cost-uk/", label: "See UK pricing benchmarks" }
   }
 ];
 
@@ -50,7 +36,7 @@ const homeSchemas = [
   buildServiceSchema({
     name: "Fractional CMO for Seed to Series B AI & B2B SaaS",
     description:
-      "Embedded senior GTM leadership for post-PMF AI and B2B SaaS startups. Predictable pipeline and sharper positioning without a £150k+ full-time hire. Typical UK engagement range: £5,000–£7,500/month.",
+      "Embedded senior growth leadership for post-PMF AI and B2B SaaS startups. Build a growth system the team can run without the founder becoming the bottleneck.",
     url: absoluteUrl("/fractional-cmo/"),
     serviceType: "Fractional CMO",
     offers: [
@@ -68,14 +54,8 @@ const homeSchemas = [
       },
       {
         name: "Fractional CMO",
-        description: "3-month minimum. Embedded senior ownership 1 day a week.",
+        description: "Embedded senior growth ownership, usually one to two days a week.",
         price: "5000",
-        billingIncrement: "per month"
-      },
-      {
-        name: "Fractional CMO Plus",
-        description: "Deeper operating support, agency management, faster execution.",
-        price: "7500",
         billingIncrement: "per month"
       }
     ]
@@ -84,653 +64,422 @@ const homeSchemas = [
   buildFaqPageSchema(homepageFaq)
 ];
 
-// Engine — six layers, one loop. Node geometry for the SVG (center 260, r 190).
-const engineNodes = [
-  { href: "/gtm-systems/", n: "01", t: "Customer signal", d: "ICP, calls, signal", x: 260, y: 70 },
-  { href: "/gtm-systems/", n: "02", t: "GTM systems", d: "Positioning, cadence, dashboards", x: 424.5, y: 165 },
-  { href: "/experimentation/", n: "03", t: "Acquisition", d: "Channels, experiments, decision rules", x: 424.5, y: 355 },
-  { href: "/product-led-growth/", n: "04", t: "Conversion", d: "Funnel, activation, demo-booking fixes", x: 260, y: 450 },
-  { href: "/founder-led-distribution/", n: "05", t: "Founder-led distribution", d: "Voice, content, pipeline loop", x: 95.5, y: 355 },
-  { href: "/revenue-operations/", n: "06", t: "Reporting", d: "Scale, stop, fix", x: 95.5, y: 165 }
+const problemCards = [
+  {
+    title: "No shared signal",
+    copy: "ICP, positioning and channel calls still change depending on who is in the room. The team is busy, but it is not working from one view of the customer."
+  },
+  {
+    title: "Activity without a system",
+    copy: "Campaigns ship, agencies report and dashboards multiply. The same problems keep coming back because nothing connects the work into a repeatable operating rhythm."
+  },
+  {
+    title: "You are still the router",
+    copy: "Every important growth decision needs founder context. Pace drops the moment you step out because the logic still lives in your head."
+  }
+];
+
+const methodSteps = [
+  {
+    title: "Find the constraint",
+    copy: "Customer calls, pipeline, funnel economics and current bets. We identify the one problem limiting growth now, not a list of twenty possible improvements."
+  },
+  {
+    title: "Make the call",
+    copy: "Choose the ICP, positioning, channel and priorities. Cut work that is not helping and make the trade-offs explicit."
+  },
+  {
+    title: "Install the rhythm",
+    copy: "Weekly decisions, one dashboard, clear experiments, ownership and handoffs. The growth function becomes visible instead of living in Slack threads and founder memory."
+  },
+  {
+    title: "Transfer ownership",
+    copy: "Coach the team, document the logic, make the right hire or agency calls, and hand over a system that keeps running after I leave."
+  }
+];
+
+const proofCases = [
+  {
+    sector: "HealthTech · AI",
+    metric: "6×",
+    title: "Monthly app downloads",
+    copy: "2k → 12k+ monthly downloads in six months after rebuilding acquisition and lifecycle around the real customer journey."
+  },
+  {
+    sector: "Fintech · Crypto",
+    metric: "35%",
+    title: "Lower CAC in eight weeks",
+    copy: "Segmentation, paid account structure and landing-page routing cut acquisition cost while keeping the team focused on the same ICP."
+  },
+  {
+    sector: "eCommerce",
+    metric: "21%",
+    title: "Less churn in three months",
+    copy: "Lifecycle and win-back messaging improved retention without relying on another acquisition channel to hide the leak."
+  }
+];
+
+const goodFit = [
+  `${icpFirmographics.arrBand} B2B SaaS or AI with repeat revenue`,
+  "Seed to Series B, post-PMF, with real customers and a real sales motion",
+  "Founder still owns too many weekly growth decisions",
+  "You need senior judgement across the whole system, not another channel specialist"
+];
+
+const notFit = [
+  "Pre-revenue or still searching for product-market fit",
+  "You mainly need hands to run ads, post content or build landing pages",
+  "You want more reporting without changing how decisions get made",
+  "There is no appetite to stop low-value work or change ownership"
+];
+
+const workOptions = [
+  {
+    label: "Start here",
+    title: "20-min Growth Audit",
+    price: "Free · 20 minutes",
+    copy: "Bring the messy growth question. We name the bottleneck and decide whether working together makes sense. No deck and no pitch.",
+    outcome: "A clearer read on the problem and the most useful next step.",
+    href: "/growth-audit/",
+    cta: "See what the audit covers"
+  },
+  {
+    label: "Short project",
+    title: "Strategy Sprint",
+    price: "From £6k · 2–4 weeks",
+    copy: "Diagnose, prioritise and ship the first critical artefacts: ICP, positioning, 90-day priorities, dashboard and first live test.",
+    outcome: "A focused 90-day plan and a working growth rhythm.",
+    href: "/strategy-sprint/",
+    cta: "See the Sprint scope"
+  },
+  {
+    label: "Core engagement",
+    title: "Fractional CMO",
+    price: "From £5k/mo · 1–2 days a week",
+    copy: "Embedded senior ownership across positioning, pipeline, reporting, team and agencies. I build the function with you, then hand it over cleanly.",
+    outcome: "A growth system your team can run without you becoming the bottleneck.",
+    href: "/fractional-cmo/",
+    cta: "Explore Fractional CMO",
+    featured: true
+  }
+];
+
+const credentials = [
+  { title: "Founder + operator", text: "Founder-side exit experience, then in-house startup growth roles." },
+  { title: "Mentor", text: `${proofStats.mentorSessions} GrowthMentor sessions · ${proofStats.mentorRating}/5.` },
+  { title: "Teacher", text: "Cambridge Judge, Imperial College London and Google startup workshops." },
+  { title: "Scale", text: `${proofStats.startupsAdvised} startups advised · ${proofStats.revenueImpact} client revenue impact.` }
 ];
 ---
 
 <BaseLayout
   title="Fractional CMO for AI & B2B SaaS Startups"
-  description="Fractional CMO for Seed–Series B AI & B2B SaaS startups. Predictable pipeline, sharper positioning and senior growth leadership without a £150k full-time hire."
+  description="Fractional CMO for Seed–Series B AI & B2B SaaS startups. Build a growth system your team can run without founder-dependent growth."
   schema={homeSchemas}
   lastUpdated={false}
   stickyCta={true}
   footerCtaCompact={true}
+  newsletterPopup={false}
 >
-  <div class="v5-home">
-    <!-- ===== Hero ===== -->
-    <section class="v5-hero" aria-label="Introduction">
-      <!-- Atmosphere: layered light, fading rule grid, film grain. Purely decorative. -->
-      <div class="v5-hero-atmos" aria-hidden="true">
-        <div class="v5-hero-lines"></div>
-        <div class="v5-hero-glow v5-hero-glow-warm"></div>
-        <div class="v5-hero-glow v5-hero-glow-teal"></div>
-        <div class="v5-hero-grain"></div>
-        <div class="v5-hero-vignette"></div>
-      </div>
-
-      <div class="v5-hero-inner">
-        <div class="v5-hero-copy">
-          <p class="v5-hero-badge">
-            <span class="v5-hero-dot" aria-hidden="true"></span>
-            <strong>Daniel Johnson</strong>
-            <span class="v5-hero-badge-sep" aria-hidden="true">·</span>
-            <span>Fractional CMO · Seed–Series B</span>
-          </p>
-          <h1 class="v5-hero-title">
-            I build the growth engine your startup is missing, then hand your team <em class="v5-hl">the keys.</em>
-          </h1>
-          <p class="v5-hero-lede">
-            Embedded fractional CMO for post-PMF B2B SaaS and AI teams. I build the growth foundation under your traction, then scale it with you until your team can run it without me.
-          </p>
-          <div class="v5-hero-ctas">
-            <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary v5-btn-lg" data-cta="home-hero-audit">
-              {siteConfig.navBookingLabel}
-              <span class="v5-arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="/case-studies/" class="v5-link-arrow" data-cta="home-hero-case-studies">
-              See case studies
-            </a>
+  <main class="home-v6">
+    <!-- Hero: answer who, what, why, and next step before anything else. -->
+    <section class="h6-hero" aria-label="Introduction">
+      <div class="h6-container">
+        <div class="h6-hero-grid">
+          <div class="h6-hero-copy">
+            <span class="h6-eyebrow">Fractional CMO · AI &amp; B2B SaaS</span>
+            <h1 class="h6-title">Make growth stop <em>depending on you.</em></h1>
+            <p class="h6-hero-lead">
+              I work inside post-PMF AI and B2B SaaS teams to fix positioning, pipeline and the operating rhythm behind them, then hand the system to your team.
+            </p>
+            <div class="h6-hero-actions">
+              <a href="/contact/#book-growth-audit" class="h6-button h6-button-primary" data-cta="home-hero-talk">
+                {siteConfig.navBookingLabel} <span aria-hidden="true">→</span>
+              </a>
+              <a href="#proof" class="h6-button h6-button-secondary" data-cta="home-hero-proof">See the proof</a>
+            </div>
+            <div class="h6-fitline" aria-label="Best fit">
+              <span class="h6-fit-chip">Post-PMF</span>
+              <span class="h6-fit-chip">Seed–Series B</span>
+              <span class="h6-fit-chip">{icpFirmographics.arrBand}</span>
+              <span class="h6-fit-chip">Founder-led growth</span>
+            </div>
           </div>
-          <p class="v5-hero-note">
-            Best fit: {icpFirmographics.arrBand}, founder-led GTM · First call is 20 minutes, free, no pitch
-          </p>
+
+          <div class="h6-hero-visual" aria-label="Daniel Johnson and selected proof points">
+            <Image
+              class="h6-hero-portrait"
+              src={heroCutout}
+              widths={[440, 660, 880]}
+              sizes="(max-width: 860px) 82vw, 32rem"
+              alt="Daniel Johnson, fractional CMO and startup growth operator"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div class="h6-proof-float h6-proof-float-a">
+              <strong>{proofStats.revenueImpact}</strong>
+              <span>client revenue impact</span>
+            </div>
+            <div class="h6-proof-float h6-proof-float-b">
+              <strong>{proofStats.mentorRating} / 5</strong>
+              <span>{proofStats.mentorReviewCount} GrowthMentor reviews</span>
+            </div>
+            <div class="h6-proof-note">{proofStats.startupsAdvised} startups advised · {proofStats.mentorSessions} mentor sessions</div>
+          </div>
         </div>
 
-        <div class="v5-hero-figure">
-          <div class="v5-hero-plate" aria-hidden="true"></div>
-          <div class="v5-hero-ring" aria-hidden="true"></div>
-          <div class="v5-hero-ring v5-hero-ring-outer" aria-hidden="true"></div>
-          <Image
-            class="v5-hero-portrait"
-            src={heroCutout}
-            widths={[440, 660, 880]}
-            sizes="(max-width: 900px) 74vw, 31rem"
-            alt="Daniel Johnson, fractional CMO and AI-native growth operator"
-            loading="eager"
-            fetchpriority="high"
-          />
+        <div class="h6-trust reveal">
+          <BrandBar label="Taught, mentored and worked with teams at" />
         </div>
       </div>
-
-      <dl class="v5-hero-stats" aria-label="Track record at a glance">
-        <div class="v5-hero-stat">
-          <dd>{proofStats.revenueImpact}</dd>
-          <dt>Client revenue</dt>
-        </div>
-        <div class="v5-hero-stat">
-          <dd>{proofStats.mentorRating} / 5</dd>
-          <dt>GrowthMentor rating</dt>
-        </div>
-        <div class="v5-hero-stat">
-          <dd>{proofStats.mentorSessions}</dd>
-          <dt>Mentor sessions</dt>
-        </div>
-        <div class="v5-hero-stat">
-          <dd>{proofStats.startupsAdvised}</dd>
-          <dt>Startups advised</dt>
-        </div>
-      </dl>
     </section>
 
-    <!-- ===== Brand bar ===== -->
-    <BrandBar />
+    <!-- Problem: qualify the pain before explaining the method. -->
+    <section class="h6-section h6-problem" aria-label="When Daniel is useful">
+      <div class="h6-container reveal">
+        <div class="h6-head">
+          <div>
+            <span class="h6-eyebrow">When I’m useful</span>
+            <h2 class="h6-h2">You do not need more marketing activity.</h2>
+          </div>
+          <p class="h6-kicker">
+            You need a growth function that can make good decisions without everything routing back through the founder.
+          </p>
+        </div>
 
-    <!-- ===== Alt paths (organisers / press) ===== -->
-    <div class="v5-altpaths v5-section-tight reveal" aria-label="Also here for speaking or press">
-      <div class="v5-container">
-        <p>
-          Here for something else? <a href="/speaking/" class="v5-link-arrow" data-cta="home-router-speaking">Book a speaker or workshop</a>
-          <span class="v5-altpaths-sep">·</span>
-          <a href="/media-kit/" class="v5-link-arrow" data-cta="home-router-media">Podcast &amp; press media kit</a>
-          <span class="v5-altpaths-sep">·</span>
-          <a href={siteConfig.wssPodcastUrl} class="v5-link-arrow" data-cta="home-router-lds" rel="noreferrer" target="_blank">Host of Luck Doesn't Scale</a>
+        <div class="h6-problem-grid">
+          {problemCards.map((item, index) => (
+            <article class="h6-problem-card">
+              <span class="h6-card-n">0{index + 1}</span>
+              <h3 class="h6-h3">{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="h6-problem-point">
+          <span class="h6-point-mark" aria-hidden="true">✓</span>
+          <p><strong>That is the problem I fix.</strong> I do not add another campaign to the pile. I make the growth function capable of making the next good decision without you.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Method: simple sequence, not a complicated framework diagram. -->
+    <section class="h6-section h6-method" aria-label="How Daniel works">
+      <div class="h6-container reveal">
+        <div class="h6-head">
+          <div>
+            <span class="h6-eyebrow">How I work</span>
+            <h2 class="h6-h2">From founder-dependent to team-owned in four moves.</h2>
+          </div>
+          <p class="h6-kicker">
+            The work changes by company. The sequence does not: find the constraint, make the call, install the rhythm, transfer ownership.
+          </p>
+        </div>
+
+        <div class="h6-method-steps">
+          {methodSteps.map((item, index) => (
+            <article class="h6-method-step">
+              <span class="h6-card-n">0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="h6-method-footer">
+          <p>The goal is not to make me indispensable. It is to make the system work without me.</p>
+          <a href="/method/" class="h6-text-link" data-cta="home-method">See the full method</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof: outcomes before service packaging. -->
+    <section id="proof" class="h6-section h6-proof" aria-label="Proof and case studies">
+      <div class="h6-container reveal">
+        <div class="h6-head">
+          <div>
+            <span class="h6-eyebrow">Proof</span>
+            <h2 class="h6-h2">A few outcomes. Not a wall of logos.</h2>
+          </div>
+          <p class="h6-kicker">
+            Across {proofStats.adSpend} in managed spend, {proofStats.revenueImpact} in client revenue impact and {proofStats.startupsAdvised} startups advised, these are the kinds of numbers I care about.
+          </p>
+        </div>
+
+        <div class="h6-proof-grid">
+          {proofCases.map((item) => (
+            <article class="h6-case">
+              <div class="h6-case-topline"><span>{item.sector}</span><span>Case result</span></div>
+              <div class="h6-case-metric">{item.metric}</div>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="h6-proof-quote">
+          <blockquote>“Named the two levers that mattered. Inside 60 days we had a weekly rhythm and pipeline built to our ICP.”</blockquote>
+          <cite>Christian A.<br />Founder, AI HealthTech</cite>
+        </div>
+
+        <div class="h6-proof-actions">
+          <a href="/case-studies/" class="h6-button h6-button-primary" data-cta="home-proof-cases">Read the case studies</a>
+          <a href="/testimonials/" class="h6-text-link" data-cta="home-proof-testimonials">See client and mentor reviews</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fit: let the wrong buyer leave before pricing. -->
+    <section class="h6-section h6-fit" aria-label="Fit check">
+      <div class="h6-container reveal">
+        <div class="h6-fit-shell">
+          <div class="h6-fit-copy">
+            <span class="h6-eyebrow">Fit</span>
+            <h2 class="h6-h2">This works best when the product already works.</h2>
+            <p class="h6-kicker">
+              If the product is still the question, stay close to customers and product. If growth is the bottleneck, that is where I become useful.
+            </p>
+          </div>
+
+          <div class="h6-fit-columns">
+            <div class="h6-fit-card h6-fit-card-good">
+              <h3>Probably a fit</h3>
+              <ul>
+                {goodFit.map((item) => (
+                  <li><span class="h6-fit-icon">✓</span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div class="h6-fit-card h6-fit-card-not">
+              <h3>Probably not yet</h3>
+              <ul>
+                {notFit.map((item) => (
+                  <li><span class="h6-fit-icon">×</span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial options: only the three paths that matter for this buyer. -->
+    <section class="h6-section h6-work" aria-label="Ways to work together">
+      <div class="h6-container reveal">
+        <div class="h6-head">
+          <div>
+            <span class="h6-eyebrow">Ways to work together</span>
+            <h2 class="h6-h2">Start small. Add depth only when it earns its place.</h2>
+          </div>
+          <p class="h6-kicker">
+            You do not need to decide on a retainer from a website. Start with the smallest useful intervention and move up only if the problem needs it.
+          </p>
+        </div>
+
+        <div class="h6-work-grid">
+          {workOptions.map((item) => (
+            <article class:list={["h6-work-card", item.featured && "h6-work-card-featured"]}>
+              <span class="h6-work-label">{item.label}</span>
+              <h3>{item.title}</h3>
+              <div class="h6-work-price">{item.price}</div>
+              <p>{item.copy}</p>
+              <div class="h6-work-outcome">
+                <small>Outcome</small>
+                <strong>{item.outcome}</strong>
+              </div>
+              <a href={item.href} class="h6-text-link" data-cta={`home-work-${item.title.toLowerCase().replaceAll(" ", "-")}`}>{item.cta}</a>
+            </article>
+          ))}
+        </div>
+
+        <p class="h6-work-foot">
+          Need a focused second opinion rather than an engagement? <a href="/founder-office-hours/">Founder Office Hours</a> is the lighter option.
         </p>
       </div>
-    </div>
+    </section>
 
-    <!-- ===== Newsletter + WhatsApp community ===== -->
-    <section aria-label="Stay in the loop">
-      <div class="v5-container reveal">
-        <div class="v5-head-stack">
-          <span class="v5-eyebrow">Stay in the loop</span>
-          <h2 class="v5-h2">Two ways to keep the conversation going.</h2>
-          <p class="v5-subhead">Read the thinking between calls, or talk it through with other founders working the same growth problems.</p>
-        </div>
-        <div class="v5-cta-duo">
-          <NewsletterFormInline
-            variant="card"
-            tone="light"
-            heading="Growth Notes: practical notes on founder-led growth, sent when there's something worth saying."
-            subline="No daily drip. Unsubscribe in one click."
-            idPrefix="nl-home-intro"
-          />
-          <div class="v5-whatsapp-card">
-            <p class="v5-whatsapp-eyebrow">Founder community</p>
-            <h3>Trade notes with other founders in the WhatsApp group.</h3>
-            <p class="v5-whatsapp-sub">A small, active group working through positioning, pipeline, and GTM calls in real time. No pitching, no noise, just people figuring this out too.</p>
-            <!-- v5-btn-primary, not button-accent: the homepage's own primary
-                 button style, which keeps white label text under `.v5-home a`. -->
-            <WhatsAppCta variant="button" buttonClass="v5-btn v5-btn-primary" dataCta="home-intro-whatsapp" />
+    <!-- About: enough humanity and credibility, without turning home into an autobiography. -->
+    <section class="h6-section h6-about" aria-label="About Daniel">
+      <div class="h6-container reveal">
+        <div class="h6-about-grid">
+          <div class="h6-about-image-wrap">
+            <Image
+              class="h6-about-image"
+              src={danielAircraft}
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 860px) 100vw, 42vw"
+              alt="Daniel Johnson, startup founder and growth operator"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="h6-about-copy">
+            <span class="h6-eyebrow">Why me</span>
+            <h2 class="h6-h2">I have been on both sides of the growth problem.</h2>
+            <p>
+              I started as a founder, then ran growth in-house at startups, then built We Scale Startups around the same recurring problem: good products with growth trapped in the founder’s head.
+            </p>
+            <p>
+              Today I work as the senior operator between founder, marketing, sales and agencies. The job is to make the commercial logic clear, build the rhythm around it, and leave the team stronger than I found it.
+            </p>
+
+            <div class="h6-credentials" aria-label="Selected experience">
+              {credentials.map((item) => (
+                <div class="h6-credential">
+                  <strong>{item.title}</strong>
+                  <span>{item.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <a href="/about/" class="h6-text-link" data-cta="home-about">Read the longer story</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== The engine (interactive) ===== -->
-    <section aria-label="The growth engine method">
-      <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">The engine</span>
-            <h2 class="v5-h2">Here's the whole machine, <span class="v5-hl">layer by layer.</span></h2>
+    <!-- FAQ: only objections that materially affect the buying decision. -->
+    <section class="h6-section h6-faq" aria-label="Frequently asked questions">
+      <div class="h6-container reveal">
+        <div class="h6-faq-shell">
+          <div class="h6-faq-copy">
+            <span class="h6-eyebrow">FAQ</span>
+            <h2 class="h6-h2">The questions worth answering before a call.</h2>
+            <p class="h6-kicker">Everything else is easier to answer once I understand the actual company.</p>
           </div>
-          <p class="v5-subhead">Six layers, one loop. Customer signal feeds the GTM systems, which drive acquisition, conversion and founder-led distribution, which feed the reporting, which loops straight back into signal.</p>
-        </div>
-        <div class="v5-engine-grid" data-engine>
-          <div class="v5-engine-visual" aria-hidden="true">
-            <svg class="v5-engine-svg" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
-              <circle class="v5-engine-ring" cx="260" cy="260" r="190" />
-              <circle class="v5-engine-sweep" cx="260" cy="260" r="190" transform="rotate(-90 260 260)" />
-              {engineNodes.map((node, i) => (
-                <g class="v5-engine-node" data-engine-node={i.toString()}>
-                  <circle cx={node.x} cy={node.y} r="26" />
-                  <text x={node.x} y={node.y}>{node.n}</text>
-                </g>
-              ))}
-              <g class="v5-engine-core">
-                <text x="260" y="250">The growth</text>
-                <text x="260" y="276">engine</text>
-                <text class="v5-engine-core-sub" x="260" y="304">ONE LOOP · SIX LAYERS</text>
-              </g>
-            </svg>
-          </div>
-          <div class="v5-engine-list">
-            {engineNodes.map((node, i) => (
-              <a href={node.href} class="v5-engine-item" data-engine-item={i.toString()}>
-                <span class="v5-n">{node.n}</span>
-                <span>
-                  <span class="v5-t">{node.t}</span>
-                  <span class="v5-d">{node.d}</span>
-                </span>
-                <span class="v5-go">→</span>
-              </a>
+
+          <div class="h6-faq-list">
+            {homepageFaq.map((item) => (
+              <details open={item.open}>
+                <summary>{item.question}</summary>
+                <p class="h6-faq-answer">
+                  {item.answer}
+                  {item.link && <> <a href={item.link.href}>{item.link.label}</a></>}
+                </p>
+              </details>
             ))}
           </div>
         </div>
-        <div class="v5-engine-footer">
-          <p class="v5-engine-text">If "growth engine" sounds abstract, that's the point of the first call. I'll show you what it looks like for your company in 20 minutes.</p>
-          <a href="/growth-audit/" class="v5-link-arrow" data-cta="home-method-audit">See what the first 20 minutes covers</a>
-        </div>
       </div>
     </section>
 
-    <!-- ===== Bottleneck + interactive diagnosis ===== -->
-    <section aria-label="The bottleneck">
-      <div class="v5-container reveal">
-        <div class="v5-head-stack">
-          <span class="v5-eyebrow">The bottleneck</span>
-          <h2 class="v5-h2">You already did the hard part. So why does growth still feel like <span class="v5-hl">a coin flip?</span></h2>
-          <p class="v5-subhead">The channel is rarely the problem. The growth function still lives in your head, so nothing compounds when you step out of the room.</p>
-        </div>
-        <div class="v5-bottleneck-block">
-          <div class="v5-bottleneck-lead">
-            <p>The product works and revenue is moving. You have paying customers and a deck that holds up in a room. And still, three things keep happening.</p>
-            <p>The instinct is to add something: a new channel, an agency, another hire. It rarely helps, because there is no system running underneath any of it for the new thing to plug into.</p>
-          </div>
-          <ol class="v5-symptoms" role="list">
-            <li>
-              <span class="v5-symptom-n">01</span>
-              <span class="v5-symptom-t">Pipeline arrives in bursts</span>
-              <span class="v5-symptom-d">Acquisition has plateaued, and pipeline arrives in bursts before going quiet again.</span>
-            </li>
-            <li>
-              <span class="v5-symptom-n">02</span>
-              <span class="v5-symptom-t">Every call routes through you</span>
-              <span class="v5-symptom-d">Every important growth decision still routes through you, because nobody else has the full picture.</span>
-            </li>
-            <li>
-              <span class="v5-symptom-n">03</span>
-              <span class="v5-symptom-t">Nothing compounds</span>
-              <span class="v5-symptom-d">Campaigns ship, but nothing connects them, so nothing compounds.</span>
-            </li>
-          </ol>
-        </div>
-        <p class="v5-point"><strong>The point:</strong> more activity won't fix this. What moves the number is a senior operator who can see the whole machine at once, name the one or two levers that matter for your company right now, and build the system that keeps pulling them without you.</p>
-      </div>
-      <div class="v5-container">
-        <div class="v5-head-center reveal" style="margin-top: 3rem;">
-          <span class="v5-eyebrow">Free · 2 minutes · On-page result</span>
-          <h2 class="v5-h2">Not sure which lever is yours? <span class="v5-hl">Find out in two minutes.</span></h2>
-          <p class="v5-subhead">Five questions, then a straight read on where your growth is actually stuck. No email, no download, answer on the page.</p>
-        </div>
-        <div class="v5-diagnosis-wrap">
-          <GrowthDiagnosis />
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Proof ===== -->
-    <section id="proof" class="v5-section-proof" aria-label="Proof and case studies">
-      <div class="v5-container reveal">
-        <div class="v5-head-center">
-          <span class="v5-eyebrow">Proof</span>
-          <h2 class="v5-h2">Numbers from real campaigns, with the attribution to back them.</h2>
-          <p class="v5-subhead">The short list. Full case studies linked below.</p>
-        </div>
-        <div class="v5-metrics">
-          <div class="v5-metric">
-            <div class="v5-big" data-countup data-target="6" data-suffix="×">6×</div>
-            <div class="v5-top-label">App downloads</div>
-            <p class="v5-ctx">2k → 12k+ monthly downloads in six months after an acquisition and lifecycle rebuild.</p>
-            <span class="v5-tag">HealthTech · AI</span>
-          </div>
-          <div class="v5-metric">
-            <div class="v5-big" data-countup data-target="35" data-suffix="%">35%</div>
-            <div class="v5-top-label">Lower CAC</div>
-            <p class="v5-ctx">CAC down 35% in eight weeks. Segmentation, paid account structure, landing-page routing.</p>
-            <span class="v5-tag">Fintech · Crypto</span>
-          </div>
-          <div class="v5-metric">
-            <div class="v5-big" data-countup data-target="500" data-suffix="+">500+</div>
-            <div class="v5-top-label">Qualified signups</div>
-            <p class="v5-ctx">500+ qualified signups from a single campaign at 8.6% CTR. US B2B fintech.</p>
-            <span class="v5-tag">Fintech · B2B SaaS</span>
-          </div>
-          <div class="v5-metric">
-            <div class="v5-big" data-countup data-target="21" data-suffix="%">21%</div>
-            <div class="v5-top-label">Less churn</div>
-            <p class="v5-ctx">Retention up 21% in three months. Targeted lifecycle and win-back messaging.</p>
-            <span class="v5-tag">eCommerce</span>
-          </div>
-        </div>
-        <div class="v5-quote-pulled">
-          <blockquote>Named the two levers that mattered. Inside 60 days we had a weekly rhythm and pipeline built to our ICP.</blockquote>
-          <cite>— Christian A., Founder, AI HealthTech</cite>
-        </div>
-        <div class="v5-attribution-row">
-          <div><strong>{proofStats.founderRaiseSupport}</strong> helped founders raise</div>
-          <div><strong>{proofStats.startupsAdvised}</strong> startups across four continents</div>
-          <div><strong>{proofStats.mentorRating} / 5</strong> · <strong>{proofStats.mentorSessions}</strong> sessions</div>
-        </div>
-        <div class="v5-center-row">
-          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-ghost" data-cta="home-proof-audit">{siteConfig.navBookingLabel}</a>
-          <a href="/case-studies/" class="v5-link-arrow" data-cta="home-proof-case-studies">See full case studies</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Productised services ===== -->
-    <section aria-label="Ways to work together">
-      <div class="v5-container reveal">
-        <div class="v5-head-stack">
-          <span class="v5-eyebrow">Ways to work together</span>
-          <h2 class="v5-h2">Four ways in. <span class="v5-hl">Start with the smallest.</span></h2>
-          <p class="v5-subhead">Three steps up, from a free 20-minute call to embedded ownership of the whole growth function, plus one-off sessions when you just need a decision made well. Most founders start at the top and only move on when it's earned.</p>
-        </div>
-        <div class="v5-ladder">
-          <div class="v5-step">
-            <div class="v5-step-num">01</div>
-            <div class="v5-step-head">
-              <span class="v5-tier">Diagnose · Free</span>
-              <h3 class="v5-h3">20-min Growth Audit</h3>
-              <div class="v5-price">Free</div>
-              <p class="v5-meta">20 minutes · No pitch · No deck</p>
-            </div>
-            <div class="v5-step-copy">
-              <p class="v5-body">Bring the messy growth question. We name the bottleneck between us and decide whether working together makes sense, or where else to send you if it doesn't.</p>
-              <p class="v5-detail"><span class="v5-lbl">Outcome</span>A clear read on the bottleneck and the most useful next step.</p>
-              <div class="v5-cta-row"><a href="/growth-audit/" class="v5-link-arrow" data-cta="home-ladder-audit">See what's covered</a></div>
-            </div>
-          </div>
-          <div class="v5-step">
-            <div class="v5-step-num">02</div>
-            <div class="v5-step-head">
-              <span class="v5-tier">Plan · From £6k</span>
-              <h3 class="v5-h3">Strategy Sprint</h3>
-              <div class="v5-price">£6k fixed scope</div>
-              <p class="v5-meta">2–4 week engagement</p>
-            </div>
-            <div class="v5-step-copy">
-              <p class="v5-body">Diagnose, prioritise, ship the first artefacts: ICP, positioning, 90-day priorities, weekly dashboard, first acquisition or conversion test live.</p>
-              <p class="v5-detail"><span class="v5-lbl">Outcome</span>A 90-day growth plan, the first artefacts, and a working operating rhythm.</p>
-              <div class="v5-cta-row"><a href="/strategy-sprint/" class="v5-link-arrow" data-cta="home-ladder-sprint">See Strategy Sprint scope</a></div>
-            </div>
-          </div>
-          <div class="v5-step v5-step-emphasis">
-            <div class="v5-step-num">03</div>
-            <div class="v5-step-head">
-              <span class="v5-tier">Build · From £5k/mo</span>
-              <h3 class="v5-h3">Fractional CMO <span class="v5-step-flag">Most popular</span></h3>
-              <div class="v5-price">From £5k/mo</div>
-              <p class="v5-meta">1–2 days a week · 3-month minimum</p>
-            </div>
-            <div class="v5-step-copy">
-              <p class="v5-body">Embedded senior ownership of the growth function. GTM priorities, reporting, weekly rhythm, hiring and agency calls. Build the engine, hand it off clean.</p>
-              <p class="v5-detail"><span class="v5-lbl">Outcome</span>Pipeline rhythm, sharper positioning, and an engine the team runs after I'm gone.</p>
-              <div class="v5-cta-row"><a href="/fractional-cmo/" class="v5-link-arrow" data-cta="home-ladder-cmo">Explore Fractional CMO</a></div>
-            </div>
-          </div>
-          <div class="v5-step v5-step-secondary">
-            <div class="v5-step-num">04</div>
-            <div class="v5-step-head">
-              <span class="v5-tier">Advise · Per session</span>
-              <h3 class="v5-h3">Founder Office Hours</h3>
-              <div class="v5-price">Flexible</div>
-              <p class="v5-meta">Focused 1:1 working sessions</p>
-            </div>
-            <div class="v5-step-copy">
-              <p class="v5-body">A senior second brain for specific GTM decisions: pricing, positioning, hiring calls, channel bets. No retainer and no ramp, just the decision made well.</p>
-              <p class="v5-detail"><span class="v5-lbl">Outcome</span>A confident call on the decision in front of you, with the reasoning.</p>
-              <div class="v5-cta-row"><a href="/founder-office-hours/" class="v5-link-arrow" data-cta="home-ladder-office-hours">See Office Hours</a></div>
-            </div>
-          </div>
-        </div>
-        <p class="v5-ladder-footer">
-          After a talk or a workshop instead? <a href="/speaking/">Speaking and workshops live here</a>, and
-          <a href="/work-with-me/" class="v5-link-arrow" data-cta="home-ladder-all">the full list of ways to work together is here</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- ===== Fit ===== -->
-    <section aria-label="Fit check">
-      <div class="v5-container reveal">
-        <div class="v5-split-head">
-          <div>
-            <span class="v5-eyebrow">Fit</span>
-            <h2 class="v5-h2">Who this is for, and who it isn't.</h2>
-          </div>
-          <p class="v5-subhead">I'd rather save us both a 20-minute call if we're not the right match.</p>
-        </div>
-        <div class="v5-fit">
-          <div class="v5-fit-col v5-fit-yes">
-            <div class="v5-lbl-tag">Best fit</div>
-            <ul>
-              <li><span class="v5-icon">✓</span><span>£1M–£20M ARR B2B SaaS or AI, ~10–50 people, founder still running GTM</span></li>
-              <li><span class="v5-icon">✓</span><span>Seed to Series B, post-PMF, real customers, real revenue</span></li>
-              <li><span class="v5-icon">✓</span><span>Founder bottlenecked on growth decisions</span></li>
-              <li><span class="v5-icon">✓</span><span>Need senior operator judgement, not junior execution</span></li>
-              <li><span class="v5-icon">✓</span><span>Ready to invest in systems, not campaigns</span></li>
-            </ul>
-          </div>
-          <div class="v5-fit-col v5-fit-no">
-            <div class="v5-lbl-tag">Not a fit</div>
-            <ul>
-              <li><span class="v5-icon">✕</span><span>Pre-PMF or pre-revenue, still searching for the problem</span></li>
-              <li><span class="v5-icon">✕</span><span>Looking for a cheap agency to run ads</span></li>
-              <li><span class="v5-icon">✕</span><span>Want a full-time hire's output at a junior's price</span></li>
-              <li><span class="v5-icon">✕</span><span>Want vanity-metrics reporting, not revenue impact</span></li>
-            </ul>
-          </div>
-        </div>
-        <p class="v5-compare-footer">
-          <a href="/resources/compare-growth-options/" class="v5-link-arrow" data-cta="home-compare-six">Compare six growth options (agency, FTE, fractional, advisor, mentor, contractor)</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- ===== About ===== -->
-    <section aria-label="About Daniel">
-      <div class="v5-container reveal">
-        <div class="v5-about-grid">
-          <div>
-            <span class="v5-eyebrow">About</span>
-            <h2 class="v5-h2">I've been the founder with a <span class="v5-hl">flat chart at 2am.</span></h2>
-            <p>My first company was eQuoo, evidence-based emotional fitness training. The product was good, but the go-to-market mostly amounted to hoping the right people would find us, and they didn't find us fast enough. We navigated through it and got to two exits. The lesson stuck: execution without a system is expensive improvisation with a deadline.</p>
-            <p>After that I ran in-house growth at Shoprocket and NAVA, and kept seeing the same pattern: functional products, founders owning every growth decision, nothing compounding. We Scale Startups exists to fix that. The approach to positioning, pipeline, and growth decisions was built over 20+ deep AI and B2B SaaS engagements, and sharpened across 200+ startups in healthtech, eCommerce, and AI infrastructure.</p>
-            <p>I've completed {proofStats.mentorSessions} GrowthMentor sessions at a {proofStats.mentorRating} / 5 rating, taught at Cambridge Judge Business School and Imperial College London, and delivered Google Launchpad workshops across the UK, Europe, and Africa.</p>
-            <a href="/about/" class="v5-link-arrow" data-cta="home-about-read">Read more about Daniel</a>
-          </div>
-          <div>
-            <Image
-              src={danielAircraft}
-              widths={[640, 960]}
-              sizes="(max-width: 900px) 100vw, 40vw"
-              alt="Daniel Johnson, operator mindset, systems thinking applied to growth"
-              loading="lazy"
-              decoding="async"
-              class="v5-about-img"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Speaking & writing ===== -->
-    <section aria-label="Speaking and writing">
-      <div class="v5-container reveal">
-        <div class="v5-head-stack">
-          <span class="v5-eyebrow">Beyond the page</span>
-          <h2 class="v5-h2">Want to see the thinking <span class="v5-hl">before you commit?</span></h2>
-          <p class="v5-subhead">Talks, workshops, and essays. Nothing to book, nothing to sign up for.</p>
-        </div>
-        <div class="v5-sw">
-          <div class="v5-sw-card">
-            <Image
-              src={cambridgeJudge}
-              widths={[640, 960]}
-              sizes="(max-width: 900px) 100vw, 50vw"
-              alt="Cambridge Judge Business School, where Daniel guest lectures"
-              loading="lazy"
-              decoding="async"
-              class="v5-sw-img"
-            />
-            <div class="v5-body-pad">
-              <span class="v5-eyebrow">Speaking</span>
-              <h3 class="v5-h3">Founder rooms, startup cohorts, practical commercial work.</h3>
-              <p>Talks and workshops built around the decision the room needs to make next. Recent: Cambridge Judge, Imperial, Techstars, General Assembly, Nomad Summit 2026, UK Space Agency.</p>
-              <div class="v5-feedback-row">
-                <q>Excellent presentation.</q>
-                <q>Great succinct intro to scaling.</q>
-                <q>Very helpful.</q>
-              </div>
-              <a href="/speaking/" class="v5-link-arrow" data-cta="home-sw-speaking">See speaking topics &amp; media kit</a>
-            </div>
-          </div>
-          <div class="v5-sw-card">
-            <div class="v5-body-pad">
-              <span class="v5-eyebrow">Writing</span>
-              <h3 class="v5-h3">Essays on AI-native GTM, growth systems, and why most startup growth advice is wrong.</h3>
-              <div class="v5-essay">
-                <span class="v5-date">10 MAY 2026</span>
-                <a href="/writing/how-to-know-growth-depends-on-founder/" class="v5-essay-title">How to know growth depends on the founder: diagnostics before you restructure GTM</a>
-              </div>
-              <div class="v5-essay">
-                <span class="v5-date">09 MAY 2026</span>
-                <a href="/writing/first-90-days-fractional-cmo/" class="v5-essay-title">First 90 days of a fractional CMO: rhythm, deliverables, and what good looks like</a>
-              </div>
-              <div class="v5-essay">
-                <span class="v5-date">08 MAY 2026</span>
-                <a href="/writing/ai-native-gtm-systems/" class="v5-essay-title">AI-native GTM systems: where AI helps, where it hurts, and what to automate first</a>
-              </div>
-              <div class="v5-essay-links">
-                <a href="/writing/" class="v5-link-arrow" data-cta="home-sw-writing">Read all writing</a>
-                <a href="/newsletter/" class="v5-link-arrow" data-cta="home-sw-newsletter">Growth Notes</a>
-                <a href="/growth-bottleneck-checklist/" class="v5-link-arrow" data-cta="home-sw-checklist">Bottleneck checklist</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section aria-label="Frequently asked questions">
-      <div class="v5-container reveal">
-        <div class="v5-head-center">
-          <span class="v5-eyebrow">FAQ</span>
-          <h2 class="v5-h2">Questions founders ask before a first call.</h2>
-          <p class="v5-subhead">The same ground we'd cover live, so you're not buying blind.</p>
-        </div>
-        <div class="v5-faq">
-          {homepageFaq.map((item) => (
-            <details open={item.open}>
-              <summary>{item.question}</summary>
-              <p class="v5-faq-answer">
-                {item.answer}
-                {item.link && <> <a href={item.link.href}>{item.link.label}</a></>}
-              </p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Final CTA ===== -->
-    <section aria-label="Final call to action">
-      <div class="v5-container reveal">
-        <div class="v5-final-cta">
-          <span class="v5-eyebrow">Next step</span>
-          <h2 class="v5-h2">Tell me where growth is <span class="v5-hl">actually stuck.</span></h2>
-          <p class="v5-final-lead">Twenty minutes on your specific situation, with no pitch and no deck. You'll leave with a clearer read on your biggest growth bottleneck and whether working together makes sense. If it doesn't, I'll tell you what I'd do instead.</p>
-          <a href="/contact/#book-growth-audit" class="v5-btn v5-btn-primary v5-btn-lg" data-cta="home-final-audit">{siteConfig.navBookingLabel} <span class="v5-arrow">→</span></a>
-          <p class="v5-final-meta">
-            Prefer email first? <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>
+    <!-- Final CTA -->
+    <section class="h6-final" aria-label="Final call to action">
+      <div class="h6-container reveal">
+        <div class="h6-final-card">
+          <span class="h6-eyebrow">Next step</span>
+          <h2 class="h6-h2">Bring me the messy growth question.</h2>
+          <p class="h6-kicker">
+            Twenty minutes on your actual situation. No deck and no pitch. We will name the bottleneck, decide what I would do next, and work out whether I am the right person to help.
           </p>
+          <div class="h6-final-actions">
+            <a href="/contact/#book-growth-audit" class="h6-button h6-button-dark" data-cta="home-final-talk">{siteConfig.navBookingLabel} <span aria-hidden="true">→</span></a>
+            <span class="h6-final-email">Prefer email? <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></span>
+          </div>
         </div>
       </div>
     </section>
-  </div>
-
-  <style>
-    /* Keep the two proof-row actions on one comfortable line. */
-    .v5-center-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-    }
-
-    /* Newsletter + WhatsApp intro section */
-    .v5-cta-duo {
-      display: grid;
-      gap: 1.25rem;
-      margin-top: 2rem;
-    }
-    @media (min-width: 900px) {
-      .v5-cta-duo {
-        grid-template-columns: 1fr 1fr;
-        align-items: stretch;
-      }
-    }
-    .v5-whatsapp-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      padding: 1.5rem 1.75rem;
-      border: 1px solid var(--line);
-      border-radius: 1.25rem;
-      background: var(--surface-dim);
-    }
-    .v5-whatsapp-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0;
-    }
-    .v5-whatsapp-card h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      line-height: 1.45;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-    @media (min-width: 768px) {
-      .v5-whatsapp-card h3 {
-        font-size: 1.35rem;
-      }
-    }
-    .v5-whatsapp-sub {
-      margin: 0;
-      font-size: 0.85rem;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-    /* Pin the CTA to the bottom so it lines up with the signup form's own
-       button instead of leaving dead space under a shorter card. */
-    .v5-whatsapp-card :global(.whatsapp-cta-btn) {
-      align-self: flex-start;
-      margin-top: auto;
-      padding-top: 0.9rem;
-      padding-bottom: 0.9rem;
-      color: var(--white);
-    }
-  </style>
-
-  <script>
-    // ── Homepage kinetics: proof fade-in, engine loop sync ──
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Proof metrics: keep final values in the DOM always (no tween that flashes wrong mid-scroll numbers).
-    // Animate opacity only when they enter view.
-    const countEls = document.querySelectorAll<HTMLElement>("[data-countup]");
-    countEls.forEach((el) => {
-      const target = Number(el.dataset.target || 0);
-      const decimals = Number(el.dataset.decimals || 0);
-      const prefix = el.dataset.prefix || "";
-      const suffix = el.dataset.suffix || "";
-      el.textContent = `${prefix}${target.toFixed(decimals)}${suffix}`;
-      el.setAttribute("aria-label", el.textContent);
-    });
-    if (!reduceMotion && "IntersectionObserver" in window) {
-      countEls.forEach((el) => {
-        el.style.opacity = "0.35";
-        el.style.transform = "translateY(6px)";
-        el.style.transition = "opacity 0.55s var(--v5-ease, ease), transform 0.55s var(--v5-ease, ease)";
-      });
-      const countObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const el = entry.target as HTMLElement;
-            countObserver.unobserve(el);
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-          });
-        },
-        { threshold: 0.35 }
-      );
-      countEls.forEach((el) => countObserver.observe(el));
-    }
-
-    // Engine: auto-cycle the active layer; hovering or focusing a row takes over.
-    const engine = document.querySelector("[data-engine]");
-    if (engine) {
-      const items = engine.querySelectorAll<HTMLElement>("[data-engine-item]");
-      const nodes = engine.querySelectorAll<SVGGElement>("[data-engine-node]");
-      let active = 0;
-      let paused = false;
-
-      const setActive = (index: number) => {
-        active = index;
-        items.forEach((item, i) => item.classList.toggle("is-active", i === index));
-        nodes.forEach((node, i) => node.classList.toggle("is-active", i === index));
-      };
-
-      items.forEach((item, i) => {
-        item.addEventListener("mouseenter", () => { paused = true; setActive(i); });
-        item.addEventListener("focus", () => { paused = true; setActive(i); });
-        item.addEventListener("mouseleave", () => { paused = false; });
-        item.addEventListener("blur", () => { paused = false; });
-      });
-
-      setActive(0);
-      if (!reduceMotion) {
-        window.setInterval(() => {
-          if (!paused) setActive((active + 1) % items.length);
-        }, 2600);
-      }
-    }
-  </script>
+  </main>
 </BaseLayout>
