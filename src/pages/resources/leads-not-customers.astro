@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PainGuidePage from "../../components/PainGuidePage.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Resources", url: "/resources/" },
+  { name: "Leads but not enough customers", url: "/resources/leads-not-customers/" }
+]);
+---
+
+<BaseLayout
+  title="Getting leads but not enough customers? | Daniel Johnson"
+  description="A practical diagnostic for B2B SaaS teams getting leads, signups or demos without enough paying customers."
+  keywords="B2B SaaS leads not converting, SaaS signups not converting, demo conversion, SaaS customer acquisition"
+  path="/resources/leads-not-customers/"
+  schema={schema}
+>
+  <PainGuidePage
+    eyebrow="Leads are coming in. Revenue isn't following."
+    title="You're getting leads. Too few become customers."
+    intro="More traffic is tempting because it feels like progress. Before you spend more, work out whether the problem is who you're attracting, what you're saying, what happens after the click, or what happens in sales."
+    symptoms={[
+      "Signups or demos are growing, but paid conversion is flat.",
+      "Sales calls go well only when the founder explains the product.",
+      "A lot of leads look interested but were never likely to buy.",
+      "The team keeps asking for more traffic because nobody agrees where conversion is breaking."
+    ]}
+    diagnosis="Follow the last 20 real opportunities, not the top-line traffic number."
+    checks={[
+      { title: "Who actually converted?", body: "Split the last 20 won and lost opportunities by company type, source, use case and buyer. Look for the segment that behaves differently." },
+      { title: "Where did the promise change?", body: "Compare the ad, post or outbound message with the landing page and the first sales conversation. A lead shouldn't have to relearn what you're selling at every step." },
+      { title: "Was this a bad lead or a bad journey?", body: "Separate people who were never a fit from people who were a fit but dropped. Those are two different problems." },
+      { title: "What happens after interest?", body: "Check response time, follow-up, demo structure, trial activation and the point where someone has to make a decision. Plenty of funnels leak after the form." }
+    ]}
+    nextSteps={[
+      "Choose the segment with the clearest buying signal and stop treating every lead as equal.",
+      "Make the first promise consistent from acquisition through to sales.",
+      "Fix one conversion break before adding more traffic.",
+      "Measure what happened to qualified opportunities, not just form fills."
+    ]}
+    proof={{
+      metric: "35%",
+      title: "Lower CAC in eight weeks",
+      body: "Segmentation, paid account structure and landing-page routing cut acquisition cost by 35% in a fintech engagement."
+    }}
+    related={[
+      { href: "/writing/do-customer-research-before-you-buy-more-traffic/", label: "Do customer research before you buy more traffic" },
+      { href: "/growth-audit/", label: "20-minute Growth Audit" },
+      { href: "/case-studies/", label: "Case studies" }
+    ]}
+  />
+</BaseLayout>
