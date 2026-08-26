@@ -66,16 +66,20 @@ const homeSchemas = [
 
 const problemCards = [
   {
-    title: "No shared signal",
-    copy: "ICP, positioning and channel calls still change depending on who is in the room. The team is busy, but it is not working from one view of the customer."
+    title: "Leads are inconsistent",
+    copy: "Some weeks are good. Some are dead. Too much of the pipeline still depends on referrals, founder outreach or one channel behaving itself."
   },
   {
-    title: "Activity without a system",
-    copy: "Campaigns ship, agencies report and dashboards multiply. The same problems keep coming back because nothing connects the work into a repeatable operating rhythm."
+    title: "People don't get what you do",
+    copy: "The product makes sense when you explain it on a call. Your website, ads or outbound are not doing the same job."
   },
   {
-    title: "You are still the router",
-    copy: "Every important growth decision needs founder context. Pace drops the moment you step out because the logic still lives in your head."
+    title: "You've tried loads of marketing",
+    copy: "Paid, content, outbound, partnerships. Some things worked for a bit. Nobody is completely sure what deserves more money or attention."
+  },
+  {
+    title: "Growth still depends on you",
+    copy: "The team can do the work, but the important decisions and context still come back to the founder."
   }
 ];
 
@@ -190,7 +194,7 @@ const credentials = [
             <span class="h6-eyebrow">Fractional CMO · AI &amp; B2B SaaS</span>
             <h1 class="h6-title">Make growth stop <em>depending on you.</em></h1>
             <p class="h6-hero-lead">
-              I work inside post-PMF AI and B2B SaaS teams to fix positioning, pipeline and the operating rhythm behind them, then hand the system to your team.
+              You've got customers. Maybe leads come in bursts, people don't understand the product quickly enough, or every important growth decision still comes back to you. I help work out what's getting in the way, fix it, and get the team running it without you in everything.
             </p>
             <div class="h6-hero-actions">
               <a href="/contact/#book-growth-audit" class="h6-button h6-button-primary" data-cta="home-hero-talk">
@@ -240,10 +244,10 @@ const credentials = [
         <div class="h6-head">
           <div>
             <span class="h6-eyebrow">When I’m useful</span>
-            <h2 class="h6-h2">You do not need more marketing activity.</h2>
+            <h2 class="h6-h2">This is usually where I come in.</h2>
           </div>
           <p class="h6-kicker">
-            You need a growth function that can make good decisions without everything routing back through the founder.
+            The company is moving, but growth still feels harder and less predictable than it should.
           </p>
         </div>
 
@@ -259,51 +263,20 @@ const credentials = [
 
         <div class="h6-problem-point">
           <span class="h6-point-mark" aria-hidden="true">✓</span>
-          <p><strong>That is the problem I fix.</strong> I do not add another campaign to the pile. I make the growth function capable of making the next good decision without you.</p>
+          <p><strong>I normally find one or two things that matter much more than everything else.</strong> We fix those first. If I don't think you need me, I'll tell you.</p>
         </div>
       </div>
     </section>
-
-    <!-- Method: simple sequence, not a complicated framework diagram. -->
-    <section class="h6-section h6-method" aria-label="How Daniel works">
-      <div class="h6-container reveal">
-        <div class="h6-head">
-          <div>
-            <span class="h6-eyebrow">How I work</span>
-            <h2 class="h6-h2">From founder-dependent to team-owned in four moves.</h2>
-          </div>
-          <p class="h6-kicker">
-            The work changes by company. The sequence does not: find the constraint, make the call, install the rhythm, transfer ownership.
-          </p>
-        </div>
-
-        <div class="h6-method-steps">
-          {methodSteps.map((item, index) => (
-            <article class="h6-method-step">
-              <span class="h6-card-n">0{index + 1}</span>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </article>
-          ))}
-        </div>
-
-        <div class="h6-method-footer">
-          <p>The goal is not to make me indispensable. It is to make the system work without me.</p>
-          <a href="/method/" class="h6-text-link" data-cta="home-method">See the full method</a>
-        </div>
-      </div>
-    </section>
-
     <!-- Proof: outcomes before service packaging. -->
     <section id="proof" class="h6-section h6-proof" aria-label="Proof and case studies">
       <div class="h6-container reveal">
         <div class="h6-head">
           <div>
             <span class="h6-eyebrow">Proof</span>
-            <h2 class="h6-h2">A few outcomes. Not a wall of logos.</h2>
+            <h2 class="h6-h2">I've dealt with this before.</h2>
           </div>
           <p class="h6-kicker">
-            Across {proofStats.adSpend} in managed spend, {proofStats.revenueImpact} in client revenue impact and {proofStats.startupsAdvised} startups advised, these are the kinds of numbers I care about.
+            A few results from the work, plus the wider numbers behind them.
           </p>
         </div>
 
@@ -326,6 +299,37 @@ const credentials = [
         <div class="h6-proof-actions">
           <a href="/case-studies/" class="h6-button h6-button-primary" data-cta="home-proof-cases">Read the case studies</a>
           <a href="/testimonials/" class="h6-text-link" data-cta="home-proof-testimonials">See client and mentor reviews</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Method: simple sequence, not a complicated framework diagram. -->
+    <section class="h6-section h6-method" aria-label="How Daniel works">
+      <div class="h6-container reveal">
+        <div class="h6-head">
+          <div>
+            <span class="h6-eyebrow">How I work</span>
+            <h2 class="h6-h2">Work out what's wrong. Fix it. Make it easier to run.</h2>
+          </div>
+          <p class="h6-kicker">
+            The details change by company. I start by finding the thing holding growth back, decide what to do about it, and make sure the team can keep going.
+          </p>
+        </div>
+
+        <div class="h6-method-steps">
+          {methodSteps.map((item, index) => (
+            <article class="h6-method-step">
+              <span class="h6-card-n">0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="h6-method-footer">
+          <p>I should become less useful over time. The team should be able to run this without me.</p>
+          <a href="/method/" class="h6-text-link" data-cta="home-method">See the full method</a>
         </div>
       </div>
     </section>
@@ -370,10 +374,10 @@ const credentials = [
         <div class="h6-head">
           <div>
             <span class="h6-eyebrow">Ways to work together</span>
-            <h2 class="h6-h2">Start small. Add depth only when it earns its place.</h2>
+            <h2 class="h6-h2">Start with the smallest thing that helps.</h2>
           </div>
           <p class="h6-kicker">
-            You do not need to decide on a retainer from a website. Start with the smallest useful intervention and move up only if the problem needs it.
+            If you're not sure what's wrong, start with the free call. If the problem is clear, we can decide whether you need a short project or someone inside the business.
           </p>
         </div>
 
