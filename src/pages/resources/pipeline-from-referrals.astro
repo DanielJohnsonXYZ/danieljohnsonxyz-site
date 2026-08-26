@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PainGuidePage from "../../components/PainGuidePage.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Resources", url: "/resources/" },
+  { name: "Pipeline from referrals", url: "/resources/pipeline-from-referrals/" }
+]);
+---
+
+<BaseLayout
+  title="When most of your pipeline comes from referrals | Daniel Johnson"
+  description="What to check when a B2B SaaS company has customers but most new pipeline still depends on referrals, founder network or luck."
+  keywords="B2B SaaS referral pipeline, founder led sales, inconsistent pipeline, SaaS demand generation"
+  path="/resources/pipeline-from-referrals/"
+  schema={schema}
+>
+  <PainGuidePage
+    eyebrow="Referral-led pipeline"
+    title="Most of your pipeline comes from referrals."
+    intro="Referrals are great. The problem starts when you can't create demand on purpose. When a quiet month arrives, the founder has to go back through the network and hope something turns up."
+    symptoms={[
+      "Your best customers came through people you already knew.",
+      "Pipeline looks healthy after an event, introduction or founder push, then drops again.",
+      "Marketing is active but it is hard to connect it to real opportunities.",
+      "The founder still has to create momentum whenever sales slows down."
+    ]}
+    diagnosis="Work out why the referrals convert before you try to replace them."
+    checks={[
+      { title: "What do good referrals have in common?", body: "Look at who introduced them, what problem they already knew they had, and what trust existed before the first call." },
+      { title: "What creates the buying moment?", body: "Funding, a new hire, a failed channel, a product launch, a board target. Find the trigger that turns a nice-to-have into a live problem." },
+      { title: "Can you find the same people without the introduction?", body: "Turn the referral pattern into a list of companies, roles and signals you can identify deliberately." },
+      { title: "Can the message carry some of the trust?", body: "A cold prospect needs more context than a referral. Your proof, point of view and offer have to do work the mutual contact used to do for you." }
+    ]}
+    nextSteps={[
+      "Write down the common pattern across your five best referred customers.",
+      "Pick one trigger you can find before someone enters your network.",
+      "Test one route to those buyers rather than launching three new channels.",
+      "Keep referrals. Build a second source of pipeline alongside them."
+    ]}
+    proof={{
+      metric: "200+",
+      title: "Startups advised",
+      body: "The same pattern comes up repeatedly in founder work: good products with real customers, but demand still depends too heavily on the founder's network."
+    }}
+    related={[
+      { href: "/method/", label: "How I work" },
+      { href: "/fractional-cmo/", label: "Fractional CMO" },
+      { href: "/growth-audit/", label: "20-minute Growth Audit" }
+    ]}
+  />
+</BaseLayout>
