@@ -27,7 +27,7 @@ export const siteConfig = {
   /** Single source for “start window” copy; update when calendars shift. */
   nextStartWindow: "Ask about the next available start window.",
   /** Shorter header button label (full offer copy stays on `bookingLabel`). */
-  navBookingLabel: "Talk to Daniel",
+  navBookingLabel: "Book free call",
   openToFullTime: true, // mentioned only in About FAQ
 
   email: "daniel@wescalestartups.com",
