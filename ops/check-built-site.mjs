@@ -83,7 +83,7 @@ for (const file of htmlFiles) {
       if (pageText.includes(stale)) failures.push(`${page}: stale homepage proof found, ${stale}`);
     }
 
-    for (const expected of ["4.94 / 5", "405", "Talk to Daniel"]) {
+    for (const expected of ["4.94 / 5", "405", "Book free 20-min call"]) {
       if (!pageText.includes(expected)) failures.push(`${page}: expected homepage proof/CTA missing, ${expected}`);
     }
   }
