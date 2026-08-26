@@ -200,7 +200,7 @@ export const ctas = {
     // Deliberately generic: the button names the action, and the hint carries
     // the specifics. "Book a 20-min Growth Audit" asked people to commit to a
     // named product before they knew what it was.
-    label: "Talk to Daniel",
+    label: "Book free 20-min call",
     href: siteConfig.bookingPageUrl,
     hint: "Free · 20 minutes · No pitch"
   },
