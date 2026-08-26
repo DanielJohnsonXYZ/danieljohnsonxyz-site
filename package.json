@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "node ops/normalize-site-source.mjs",
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
