@@ -4,56 +4,56 @@ import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { sortByFeaturedThenOrder } from "../lib/utils";
-import { siteConfig } from "../site";
 
 const schema = buildBreadcrumbSchema([
   { name: "Home", url: "/" },
-    { name: "Now", url: "/now/" }
+  { name: "Now", url: "/now/" }
 ]);
 
-const updatedOn = siteConfig.lastUpdated;
+const updatedOn = "26 August 2026";
 
 const workingOn = [
   {
-    title: "Active fractional CMO engagement: AI B2B SaaS, US-based, Series A",
-    detail: "Rebuilding the growth system around AI-native workflows. Rewriting the GTM stack, setting up weekly experiment cadence, and hiring the next growth hire."
+    title: "Fractional CMO work across AI-native B2B SaaS",
+    detail: "Positioning, GTM cadence, reporting, AI-native workflows, and moving growth decisions from founder-dependent activity into a repeatable operating system."
   },
   {
-    title: "Fractional CMO engagement: UK AI-native healthtech, pre-Series A",
-    detail: "Founder-led distribution, category positioning, and pipeline build for a UK-based AI healthcare product."
+    title: "Productised growth systems",
+    detail: "Sharpening the delivery system behind growth audits, strategy sprints, experimentation, and embedded fractional work so the output is useful after the engagement ends."
   },
   {
-    title: "Advisory days",
-    detail: "Half-day strategy sessions for post-PMF founders who want a set of eyes on the growth system, not a long-term engagement."
+    title: "Founder advisory",
+    detail: "Focused sessions on positioning, channel bets, hiring, measurement, and the growth decisions that are expensive to get wrong."
   }
 ];
 
 const writingFocus = [
-  "A long-form essay on what AI-native GTM actually changes in the growth stack (in draft).",
-  "Shorter case-study write-ups from the current engagements, published as they ship.",
-  "A new /fractional-cmo pillar page with the full operating model behind the engagements."
+  "AI-native GTM systems: where automation helps, where it creates noise, and where judgement still matters.",
+  "Founder-dependent growth: how to diagnose the real bottleneck before adding channels, tools, or headcount.",
+  "Case-study write-ups that show the before-and-after operating system, not just the headline metric."
 ];
 
 const speakingThisQuarter = [
-  "Accelerator cohort workshops on repeatable growth systems, with two dates confirmed.",
-  "One industry keynote in discussion for later in the year.",
-  "Ongoing mentoring through Google for Startups, Techstars, and GrowthMentor."
+  "Founder and accelerator workshops on repeatable growth systems and practical GTM decisions.",
+  "Podcast and media conversations on AI-native GTM, startup growth, and fractional leadership.",
+  "Ongoing mentoring through startup and founder communities."
 ];
 
 const notWorkingOn = [
-  "New long-term retainers until Q3: the current two engagements are deep and take the majority of my time.",
-  "One-off content or paid media audits: the work is most useful as part of a fractional CMO engagement.",
-  "Speaking slots longer than 90 minutes during April–June."
+  "Pre-PMF growth execution: customer research and product signal come first.",
+  "Channel-only retainers where there is no authority to fix positioning, funnel, measurement, or operating cadence.",
+  "Vanity-metric reporting or activity for activity's sake."
 ];
 
 const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(0, 3);
 ---
 
 <BaseLayout
-  description="What Daniel Johnson is working on right now: active client engagements, writing in progress, speaking commitments, and what he's saying no to."
+  description="What Daniel Johnson is working on now: fractional CMO work, AI-native GTM systems, founder advisory, writing, speaking, and current priorities."
   path="/now/"
   schema={schema}
   title="Now | Daniel Johnson"
+  lastUpdated={false}
 >
   <section class="hero-section section-space">
     <div class="shell">
@@ -63,8 +63,8 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
           What I'm working on right now.
         </h1>
         <p class="hero-subcopy text-xl leading-9 md:text-2xl">
-          A short monthly update on active client engagements, what I'm writing, where I'm speaking, and what I'm
-          saying no to. Inspired by <a class="underline" href="https://nownownow.com/about" rel="noopener">Derek Sivers' /now page idea</a>.
+          A current view of the client work, systems, writing, speaking, and priorities taking most of my attention.
+          Inspired by <a class="underline" href="https://nownownow.com/about" rel="noopener">Derek Sivers' /now page idea</a>.
         </p>
       </div>
     </div>
@@ -72,7 +72,7 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
 
   <section class="section-space">
     <div class="shell">
-      <SectionHeader eyebrow="Client work" title="The engagements taking most of my time this month." />
+      <SectionHeader eyebrow="Current work" title="Where most of my working time is going." />
       <div class="reveal mx-auto grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
         {workingOn.map((item) => (
           <article class="rounded-2xl border border-slate-200 bg-white p-6">
@@ -109,7 +109,7 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
               </li>
             ))}
           </ul>
-          <a class="button-link mt-6 inline-block" href="/speaking/">Book a session →</a>
+          <a class="button-link mt-6 inline-block" href="/speaking/">See speaking topics →</a>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
 
   <section class="section-space">
     <div class="shell">
-      <SectionHeader eyebrow="Saying no to" title="To protect the depth of the current work." />
+      <SectionHeader eyebrow="Saying no to" title="Work that does not fit the operating model." />
       <div class="reveal mx-auto max-w-3xl">
         <ul class="space-y-4 text-lg leading-8">
           {notWorkingOn.map((item) => (
@@ -152,13 +152,12 @@ const articles = sortByFeaturedThenOrder(await getCollection("articles")).slice(
   <section class="section-space bg-slate-900 text-white">
     <div class="shell">
       <div class="reveal mx-auto max-w-3xl space-y-6 text-center">
-        <h2 class="text-4xl font-extrabold tracking-[-0.04em] md:text-5xl">Want to work together?</h2>
+        <h2 class="text-4xl font-extrabold tracking-[-0.04em] md:text-5xl">Working on a similar growth problem?</h2>
         <p class="text-lg text-slate-200">
-          If the shape of what I'm working on matches something you need, get in touch. Monthly check-ins on this page
-          are the most current picture of my availability.
+          Start with the 20-minute Growth Audit. Bring the messy question, leave with a clearer read on the bottleneck and the next move.
         </p>
         <div class="flex flex-wrap justify-center gap-4 pt-2">
-          <a class="button-primary" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a growth call</a>
+          <a class="button-primary" href="/contact/#book-growth-audit">Talk to Daniel</a>
           <a class="button-link text-white" href="/fractional-cmo/">See the fractional CMO offer →</a>
         </div>
       </div>
