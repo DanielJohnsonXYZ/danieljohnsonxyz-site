@@ -63,6 +63,7 @@ const staleCopyChecks = [
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
   const page = `/${relative(distDir, file).replaceAll("\\", "/")}`;
+  const pageText = stripHtml(html);
 
   if (!/<title>[^<]+<\/title>/i.test(html)) failures.push(`${page}: missing <title>`);
   if (!/<meta\s+name=["']description["'][^>]+content=["'][^"']+/i.test(html) && !/<meta\s+content=["'][^"']+["'][^>]+name=["']description["']/i.test(html)) {
@@ -74,7 +75,17 @@ for (const file of htmlFiles) {
   if (!/<h1(?:\s|>)/i.test(html)) failures.push(`${page}: missing H1`);
 
   for (const stale of staleCopyChecks) {
-    if (stripHtml(html).includes(stale)) failures.push(`${page}: stale copy found, ${stale}`);
+    if (pageText.includes(stale)) failures.push(`${page}: stale copy found, ${stale}`);
+  }
+
+  if (page === "/index.html") {
+    for (const stale of ["4.97 / 5", "479+"]) {
+      if (pageText.includes(stale)) failures.push(`${page}: stale homepage proof found, ${stale}`);
+    }
+
+    for (const expected of ["4.94 / 5", "405", "Talk to Daniel"]) {
+      if (!pageText.includes(expected)) failures.push(`${page}: expected homepage proof/CTA missing, ${expected}`);
+    }
   }
 
   for (const match of html.matchAll(/\bhref=["']([^"']+)["']/gi)) {
