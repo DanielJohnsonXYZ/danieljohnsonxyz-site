@@ -66,6 +66,18 @@ function normalizeSiteCopy(input) {
     [
       /Fractional CMO\s+From £7\.5k\/mo\. Embedded senior GTM leadership\./g,
       "Fractional CMO From £5k/mo. Embedded senior GTM leadership."
+    ],
+    [/4\.97\/5 from 220 reviews · 479\+ mentor sessions/g, "4.94/5 from 225 reviews · 405 GrowthMentor sessions"],
+    [/from 220 reviews · 479\+ sessions/g, "from 225 reviews · 405 sessions"],
+    [/4\.97 \/ 5 · 479\+ sessions/g, "4.94 / 5 · 405 sessions"],
+    [/479\+ Mentor sessions/g, "405 GrowthMentor sessions"],
+    [/479\+ mentor sessions/g, "405 GrowthMentor sessions"],
+    [/4\.97 \/ 5/g, "4.94 / 5"],
+    [/4\.97\/5/g, "4.94/5"],
+    [/220 reviews/g, "225 reviews"],
+    [
+      /I've mentored 479\+ founders at a 4\.94 \/ 5 rating/g,
+      "I've completed 405 GrowthMentor sessions at a 4.94 / 5 rating"
     ]
   ];
 
