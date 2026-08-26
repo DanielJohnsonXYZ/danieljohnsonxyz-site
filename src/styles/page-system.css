@@ -336,8 +336,8 @@ h3[class*="text-3xl"] {
   color: #fff;
   --surface: rgba(255, 255, 255, 0.055);
   --surface-dim: rgba(255, 255, 255, 0.075);
-  --muted: rgba(255, 255, 255, 0.68);
-  --subtle: rgba(255, 255, 255, 0.58);
+  --muted: rgba(255, 255, 255, 0.76);
+  --subtle: rgba(255, 255, 255, 0.66);
   --line: var(--site-dark-line);
   --line-strong: rgba(255, 255, 255, 0.22);
 }
