@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { proofStats } from "../../site";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Resources", url: "/resources/" },
+  { name: "Fractional CMO board brief", url: "/resources/fractional-cmo-board-brief/" }
+]);
+
+const first90 = [
+  ["First 30 days", "Work out where growth is actually stuck, clean up the numbers, choose the first priorities and get the weekly decision process working."],
+  ["Days 31-60", "Fix the most important messaging, acquisition or conversion problem and make sure the team has clear owners."],
+  ["Days 61-90", "Keep what is working, stop what is not, document the decisions and decide what should move to an internal hire, agency or the existing team."]
+];
+
+const goodFit = [
+  "The product has real customers and repeat revenue.",
+  "Growth is inconsistent or too dependent on the founder.",
+  "There is a marketing or sales team, agency or contractors who need better direction.",
+  "You need someone senior now, but a full-time CMO hire is too early, too slow or badly defined."
+];
+
+const badFit = [
+  "The company is pre-revenue or still looking for product-market fit.",
+  "You already know exactly what needs doing and mainly need execution capacity.",
+  "Nobody is willing to stop low-value work or change ownership.",
+  "You need a full-time executive in every leadership and board conversation."
+];
+---
+
+<BaseLayout
+  title="Fractional CMO board brief | Daniel Johnson"
+  description="A short internal brief for founders, co-founders, CFOs and boards considering Daniel Johnson as a fractional CMO."
+  keywords="fractional CMO board brief, fractional CMO business case, fractional CMO proposal UK"
+  path="/resources/fractional-cmo-board-brief/"
+  schema={schema}
+>
+  <section class="hero-section section-space conversion-hero">
+    <div class="shell">
+      <div class="reveal mx-auto max-w-4xl space-y-6">
+        <span class="service-label">Internal buying brief</span>
+        <h1 class="text-5xl font-extrabold leading-[1.04] tracking-[-0.06em] text-balance md:text-7xl">
+          Thinking about bringing me in? Send this to your co-founder.
+        </h1>
+        <p class="hero-subcopy max-w-3xl text-lg leading-8 md:text-xl">
+          This is the short version of what a fractional CMO engagement with me is, what it costs, what happens in the first 90 days, and when I would tell you to choose something else.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-accent" href="/growth-audit/">Talk to me first</a>
+          <a class="button-secondary" href="/fractional-cmo/">See the full scope</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="The problem" title="The company has traction. Growth still needs too much founder input." />
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        <article class="card p-6">
+          <h2 class="text-xl font-bold">What I take on</h2>
+          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">Priorities, positioning, pipeline decisions, reporting, agency direction, experiment choices, hiring context and the weekly calls about what to keep, stop or change.</p>
+        </article>
+        <article class="card p-6">
+          <h2 class="text-xl font-bold">What stays with the founder</h2>
+          <p class="mt-3 text-base leading-7 text-[color:var(--muted)]">Company strategy, the decisions only the founder can make, senior customer relationships, fundraising and the calls where founder context is genuinely needed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="Commercials" title="What it costs." />
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <article class="card p-6">
+          <p class="card-label">Strategy Sprint</p>
+          <p class="mt-3 text-3xl font-extrabold">From £6k</p>
+          <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">2-4 weeks. Work out the problem, agree the 90-day plan and get the first important work live.</p>
+        </article>
+        <article class="card p-6">
+          <p class="card-label">Fractional CMO</p>
+          <p class="mt-3 text-3xl font-extrabold">From £5k/month</p>
+          <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">Usually one day a week. Three-month minimum.</p>
+        </article>
+        <article class="card p-6">
+          <p class="card-label">Fractional CMO Plus</p>
+          <p class="mt-3 text-3xl font-extrabold">From £7.5k/month</p>
+          <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">Closer to two days a week when the team needs more senior operating support.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section-space">
+    <div class="shell">
+      <SectionHeader eyebrow="First 90 days" title="What should be different by the end of it." />
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {first90.map(([title, body]) => (
+          <article class="card p-6 text-white">
+            <h2 class="text-xl font-bold">{title}</h2>
+            <p class="mt-3 text-base leading-7 text-white/72">{body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="shell grid gap-6 md:grid-cols-2">
+      <article class="card p-6 md:p-8">
+        <p class="card-label">Good fit</p>
+        <ul class="mt-4 space-y-3 text-base leading-7">
+          {goodFit.map((item) => <li class="fit-row fit-row-yes">{item}</li>)}
+        </ul>
+      </article>
+      <article class="card p-6 md:p-8">
+        <p class="card-label">Choose something else when</p>
+        <ul class="mt-4 space-y-3 text-base leading-7 text-[color:var(--muted)]">
+          {badFit.map((item) => <li class="fit-row fit-row-no">{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-space pt-0">
+    <div class="shell">
+      <SectionHeader eyebrow="Evidence" title="A few numbers behind the work." />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div class="card p-5"><strong class="text-2xl">{proofStats.revenueImpact}</strong><span class="mt-2 block text-sm text-[color:var(--muted)]">client revenue impact</span></div>
+        <div class="card p-5"><strong class="text-2xl">{proofStats.adSpend}</strong><span class="mt-2 block text-sm text-[color:var(--muted)]">ad spend managed</span></div>
+        <div class="card p-5"><strong class="text-2xl">{proofStats.startupsAdvised}</strong><span class="mt-2 block text-sm text-[color:var(--muted)]">startups advised</span></div>
+        <div class="card p-5"><strong class="text-2xl">{proofStats.mentorRating}/5</strong><span class="mt-2 block text-sm text-[color:var(--muted)]">GrowthMentor rating</span></div>
+        <div class="card p-5"><strong class="text-2xl">{proofStats.mentorSessions}</strong><span class="mt-2 block text-sm text-[color:var(--muted)]">mentor sessions</span></div>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a class="button-secondary" href="/case-studies/">Read case studies</a>
+        <a class="button-secondary" href="/testimonials/">Read testimonials</a>
+        <a class="button-secondary" href="/resources/compare-growth-options/">Compare other options</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-gradient section-space">
+    <div class="shell text-center">
+      <p class="eyebrow justify-center text-white/60">First step</p>
+      <h2 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-[-0.06em] text-white md:text-5xl">Start with the free 20-minute call.</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/72">I’ll tell you if I think fractional support is the wrong answer.</p>
+      <a class="button-accent mt-6 inline-flex" href="/growth-audit/">See the Growth Audit</a>
+    </div>
+  </section>
+</BaseLayout>
