@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PainGuidePage from "../../components/PainGuidePage.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Resources", url: "/resources/" },
+  { name: "Marketing isn't working", url: "/resources/marketing-not-working/" }
+]);
+---
+
+<BaseLayout
+  title="You've tried loads of marketing. What now? | Daniel Johnson"
+  description="A practical diagnostic for B2B SaaS teams running paid, content, outbound or partnerships without a reliable growth channel."
+  keywords="B2B SaaS marketing not working, SaaS growth channels, paid ads not working, SaaS growth strategy"
+  path="/resources/marketing-not-working/"
+  schema={schema}
+>
+  <PainGuidePage
+    eyebrow="Lots of activity. Not much confidence."
+    title="You've tried loads of marketing. Nothing feels reliable."
+    intro="Paid did something for a while. Content gets attention. Outbound books the odd call. Partnerships sound promising. The answer usually isn't to add another channel. First work out what the existing attempts have already taught you."
+    symptoms={[
+      "The team is running several channels but cannot say which one should get the next £10k.",
+      "A channel worked for a while and then stopped.",
+      "Reports are full of clicks, leads and activity but decisions are still based on gut feel.",
+      "Every new idea gets added because nobody is confident enough to stop old work."
+    ]}
+    diagnosis="Turn the last six months of activity into a small number of decisions."
+    checks={[
+      { title: "What was each channel supposed to prove?", body: "Write down the original job for paid, content, outbound and partnerships. If the answer is simply 'get growth', the test was too vague." },
+      { title: "Where did good customers actually come from?", body: "Follow qualified opportunities and customers back to source. Do not let raw leads or clicks decide the winner." },
+      { title: "Which problem is shared across channels?", body: "If paid, outbound and the website all struggle, the common problem may be the offer, audience or message rather than three bad channels." },
+      { title: "What can you stop for 30 days?", body: "Free up enough time and budget to run one proper test. Keeping everything alive makes it hard to learn anything." }
+    ]}
+    nextSteps={[
+      "Choose one customer segment and one growth question.",
+      "Pick the channel with the best evidence or the cheapest useful test.",
+      "Agree in advance what result means scale, change or stop.",
+      "Run fewer tests, write down what happened, then make a decision."
+    ]}
+    proof={{
+      metric: "35%",
+      title: "Lower CAC in eight weeks",
+      body: "In a fintech engagement, tighter segmentation, account structure and landing-page routing reduced CAC by 35%."
+    }}
+    related={[
+      { href: "/method/", label: "How I work" },
+      { href: "/growth-audit/", label: "20-minute Growth Audit" },
+      { href: "/case-studies/", label: "Case studies" }
+    ]}
+  />
+</BaseLayout>
