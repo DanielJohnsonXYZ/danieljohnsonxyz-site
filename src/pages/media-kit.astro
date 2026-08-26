@@ -40,7 +40,7 @@ const fastFacts = [
   { label: "Show", value: `Host of ${siteConfig.wssPodcastName} (${siteConfig.wssPodcastUrl})` },
   { label: "Focus", value: "Post-PMF AI & B2B SaaS startups, Seed–Series B" },
   { label: "Best topics", value: "AI-native GTM, founder-led growth, startup positioning, product-led growth, growth operating systems" },
-  { label: "Location", value: "UK-based, currently in Asia. Serving US, UK, Europe, APAC" },
+  { label: "Location", value: "UK-based, serving US, UK, Europe, and APAC" },
   { label: "Available for", value: "Expert quotes, podcast guest spots, panels, keynotes, workshops, newsletter interviews" },
   { label: "Start window", value: siteConfig.nextStartWindow.replace(/^Next start window:\s*/i, "") },
   {
@@ -58,7 +58,7 @@ const quickFacts = [
   { label: "Focus", value: "Post-PMF AI & B2B SaaS, Seed–Series B" },
   { label: "Geography", value: "UK-based, serving US, UK, Europe, APAC" },
   { label: "Typical engagement", value: "£5–7.5k/month, 3-month minimum" },
-  { label: "Track record", value: "20+ startups, £18M+ revenue generated" }
+  { label: "Track record", value: "20+ deep engagements, £18M+ revenue generated" }
 ];
 
 const affiliations = trustLogos.map((logo) => ({
@@ -467,29 +467,13 @@ const recentQuoteAngles = [
       btn.addEventListener("click", async () => {
         const text = btn.getAttribute("data-copy");
         if (!text) return;
-        const writeFallback = () => {
-          // execCommand fallback for older Safari / non-secure contexts
-          const ta = document.createElement("textarea");
-          ta.value = text;
-          ta.setAttribute("readonly", "");
-          ta.style.position = "fixed";
-          ta.style.opacity = "0";
-          document.body.appendChild(ta);
-          ta.select();
-          const ok = document.execCommand("copy");
-          document.body.removeChild(ta);
-          return ok;
-        };
         let copied = false;
         try {
+          if (!navigator.clipboard) throw new Error("Clipboard API unavailable");
           await navigator.clipboard.writeText(text);
           copied = true;
         } catch {
-          try {
-            copied = writeFallback();
-          } catch {
-            copied = false;
-          }
+          copied = false;
         }
         if (copied) {
           const original = btn.textContent;
