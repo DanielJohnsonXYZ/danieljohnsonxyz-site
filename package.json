@@ -8,7 +8,7 @@
     "start": "astro dev",
     "prebuild": "node ops/normalize-site-source.mjs",
     "build": "astro build",
-    "postbuild": "node ops/check-built-site.mjs",
+    "postbuild": "node ops/check-built-site.mjs && node ops/check-design-system.mjs",
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro"
