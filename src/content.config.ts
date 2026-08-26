@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 const articles = defineCollection({
@@ -26,7 +27,7 @@ const media = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    href: z.string().url(),
+    href: z.url(),
     source: z.string(),
     kind: z.enum(["Article", "Interview", "Profile", "Guide", "Course", "Speaking"]),
     yearLabel: z.string(),
@@ -45,7 +46,7 @@ const talks = defineCollection({
     summary: z.string(),
     yearLabel: z.string(),
     schemaType: z.enum(["ConferenceEvent", "EducationEvent", "Event"]),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(999)
   })
@@ -118,8 +119,8 @@ const testimonials = defineCollection({
     pageSection: z.enum(["fractional-cmo", "strategy-sprint", "speaking"]).default("strategy-sprint"),
     /** Optional editorial grouping for /testimonials (overrides default section label when set). */
     category: z.string().optional(),
-    linkedin: z.string().url().optional(),
-    logoUrl: z.string().url().optional(),
+    linkedin: z.url().optional(),
+    logoUrl: z.url().optional(),
     date: z.string().optional(),
     permission: z.enum(["public", "needs_permission", "anonymous"]).default("public"),
     featured: z.boolean().default(false),
