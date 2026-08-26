@@ -201,7 +201,7 @@ for (const phrase of forbiddenSiteCopy) {
 }
 
 const expectedSiteCopy = [
-  'navBookingLabel: "Talk to Daniel"',
+  'navBookingLabel: "Book free call"',
   'startupsAdvised: "200+"',
   'mentorSessions: "405"',
   'mentorRating: "4.94"',
