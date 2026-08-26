@@ -1,13 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CfEmailOff from "../components/CfEmailOff.astro";
+import FractionalCmoIntakeThenCalendly from "../components/FractionalCmoIntakeThenCalendly.astro";
 import { customerIoContact, siteConfig, socialLinks } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
 
 const title = "Contact";
 const description =
   "Get in touch with Daniel Johnson. Book a free 20-minute growth call, send a message, or email direct about fractional CMO, office hours, and speaking.";
-const calendlyEmbedUrl = `${siteConfig.bookingUrl}?hide_gdpr_banner=1`;
 const contactFormId = customerIoContact.formId;
 
 const breadcrumb = buildBreadcrumbSchema([
@@ -29,29 +29,14 @@ const breadcrumb = buildBreadcrumbSchema([
         <span class="eyebrow">Contact</span>
         <h1 class="mt-6 text-5xl font-extrabold tracking-[-0.06em] md:text-7xl">Let's talk.</h1>
         <p class="conversion-subcopy mt-5 text-lg leading-8 text-[color:var(--muted)]">
-          Grab a slot below for a free 20 minutes on your growth bottleneck. No pitch, no deck. If a calendar is the
-          wrong shape for what you need, <a class="underline underline-offset-4" href="#send-a-message">send a message
-          instead</a>.
+          Give me a minute of context first, then pick a time. It means we can use the 20 minutes properly. If a calendar is the
+          wrong shape for what you need, <a class="underline underline-offset-4" href="#send-a-message">send a message instead</a>.
         </p>
 
         <div class="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
-          <section
-            id="book-growth-audit"
-            class="contact-calendly-panel overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)]"
-            aria-label="Book a 20-minute Growth Audit"
-          >
-            <iframe
-              title="Book a 20-minute Growth Audit with Daniel Johnson"
-              src={calendlyEmbedUrl}
-              class="contact-calendly-iframe"
-              loading="lazy"
-            ></iframe>
-            <p class="border-t border-[color:var(--line)] px-4 py-3 text-xs leading-5 text-[color:var(--muted)]">
-              Calendar not loading? It needs cookies enabled for Calendly. Either accept cookies and refresh,
-              <a class="underline" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">open the booking page directly</a>,
-              or email <a class="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
-            </p>
-          </section>
+          <div id="book-growth-audit" class="contact-calendly-panel" aria-label="Book a 20-minute Growth Audit">
+            <FractionalCmoIntakeThenCalendly />
+          </div>
           <article class="card p-6">
             <p class="card-label">Email</p>
             <h2 class="mt-3 text-2xl font-bold tracking-[-0.04em]">Write direct</h2>
@@ -261,16 +246,8 @@ const breadcrumb = buildBreadcrumbSchema([
     scroll-margin-top: 7rem;
   }
 
-  .contact-calendly-iframe {
-    display: block;
-    width: 100%;
-    min-height: min(720px, calc(100vh - 7rem));
-    border: 0;
-  }
-
   @media (max-width: 47.9375rem) {
-    .contact-calendly-panel,
-    .contact-calendly-iframe {
+    .contact-calendly-panel {
       min-height: 680px;
     }
   }
