@@ -1,9 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AnswerEvidenceBlock from "../components/AnswerEvidenceBlock.astro";
 import FractionalCmoIntakeThenCalendly from "../components/FractionalCmoIntakeThenCalendly.astro";
-import RotatingTextBars from "../components/RotatingTextBars.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import {
   buildAggregateRatingSchema,
@@ -169,16 +167,16 @@ const schemas = [
         <div class="space-y-6">
           <span class="service-label">Primary Offer · Fractional CMO</span>
           <h1 class="text-5xl font-extrabold leading-[1.02] tracking-[-0.07em] text-balance md:text-7xl">
-            Senior growth leadership before growth becomes a founder bottleneck.
+            Growth is working. You still have to be involved in too much of it.
           </h1>
           <p class="hero-subcopy conversion-subcopy text-xl leading-9 md:text-2xl">
-            I embed with founder-led AI and B2B SaaS startups to build predictable pipeline, sharpen positioning, clean up reporting, and help the team decide what to scale, stop, or fix.
+            I work inside post-PMF AI and B2B SaaS teams when the company has customers but growth still needs too much founder input. I help the team get clearer on who you're selling to, where pipeline should come from, what the numbers are saying, and what to do next.
           </p>
 
           <!-- Booking trust copy surfaced EARLY so objections to "book a call" get answered before scroll. -->
           <div class="rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface-dim)] p-4 text-sm leading-6 text-[color:var(--muted)]">
             <strong class="block font-semibold text-[color:var(--ink)]">What happens on the first call</strong>
-            A 20-minute call, no pitch and no deck. We diagnose the bottleneck and decide together whether working together makes sense, or I'll point you to the right operator, agency, or mentor if it doesn't.
+            Give me the messy version for 20 minutes. We'll work out what looks most likely to be holding growth back. If I don't think you need me, I'll tell you.
           </div>
 
           <div class="cta-row pt-2">
@@ -189,20 +187,7 @@ const schemas = [
               Read FAQs first →
             </a>
           </div>
-          <AnswerEvidenceBlock
-            title="Direct answer + proof"
-            answer="A fractional CMO is highest leverage when the bottleneck is senior GTM judgement, not channel capacity."
-            evidence={[
-              "Founders usually arrive with active channels but no stable decision system.",
-              "Weekly ownership and reporting cadence convert activity into scale/stop/fix decisions.",
-              "Bridge model (fractional first, full-time later) reduces mis-hire risk."
-            ]}
-            provenance={[
-              "Source set: published case studies and recurring growth-audit diagnosis patterns.",
-              "Cross-reference: /resources/fractional-cmo-vs-agency/ and /resources/fractional-cmo-vs-full-time-cmo/."
-            ]}
-          />
-        </div>
+                  </div>
         <aside class="card p-6 md:p-8">
           <p class="card-label">You're a fit if…</p>
           <ul class="mt-5 scan-list">
@@ -230,8 +215,8 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="What I take off your plate"
-        title="Founder-bottleneck work that needs a senior owner rather than another pair of hands."
-        intro="You stay on strategy and the calls only you should take. I carry the operating load that keeps GTM from stalling: priorities, sequencing, reporting, and honest kill/scale decisions."
+        title="The bits that still keep coming back to you."
+        intro="I take on the growth decisions and follow-through that keep getting pushed back to the founder: priorities, reporting, messaging, channel choices, agencies and the weekly calls about what happens next."
       />
       <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {
@@ -252,20 +237,13 @@ const schemas = [
     <div class="shell">
       <SectionHeader
         eyebrow="The pain"
-        title="Your team is busy, but growth still doesn't feel repeatable."
-        intro="The problem is rarely effort. More often it's unclear priorities, weak signal, and too many growth calls living in the founder's head."
+        title="The team is busy. You're still not sure what will happen next month."
+        intro="Usually there is plenty happening already. The problem is working out what deserves attention, what should stop, and who can make those calls without waiting for you."
       />
       <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         {painPoints.map((item) => <article class="card p-5 text-sm font-semibold leading-6 tracking-[-0.02em]">{item}</article>)}
       </div>
-      <div class="mt-8">
-        <RotatingTextBars
-          rows={[
-            ["Founder bottleneck", "Pipeline drift", "Positioning fog", "Channel noise", "Slow decisions", "Weak signal"],
-            ["Constraint map", "Weekly rhythm", "Sharper ICP", "Campaign briefs", "Conversion fixes", "Board-ready reporting"]
-          ]}
-        />
-      </div>
+      
     </div>
   </section>
 
