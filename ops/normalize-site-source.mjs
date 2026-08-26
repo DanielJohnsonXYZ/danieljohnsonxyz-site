@@ -5,6 +5,7 @@ const layoutPath = new URL("../src/layouts/BaseLayout.astro", import.meta.url);
 const aboutPath = new URL("../src/pages/about.astro", import.meta.url);
 const faqPath = new URL("../src/pages/resources/faq.astro", import.meta.url);
 const mediaKitPath = new URL("../src/pages/media-kit.astro", import.meta.url);
+const contactPath = new URL("../src/pages/contact.astro", import.meta.url);
 
 async function replaceInFile(path, replacements) {
   let content = await readFile(path, "utf8");
@@ -115,6 +116,21 @@ const mediaKitResult = await replaceInFile(mediaKitPath, [
   }
 ]);
 
+const contactResult = await replaceInFile(contactPath, [
+  {
+    from: '<input type="hidden" name="source_type" value="contact_enquiry" />',
+    to: '<input type="hidden" name="source_type" value="contact-form" />'
+  },
+  {
+    from: "I reply personally. You'll also get a short follow-up series, unsubscribe in one click.",
+    to: "I reply personally. Your details are used to respond to this enquiry, not to subscribe you to Growth Notes."
+  },
+  {
+    from: 'source_type: String(fd.get("source_type") || "contact_enquiry"),',
+    to: 'source_type: String(fd.get("source_type") || "contact-form"),'
+  }
+]);
+
 const forbiddenSiteCopy = [
   "currently in Asia",
   "Next start window: June 2026.",
@@ -150,7 +166,9 @@ const stalePageChecks = [
   [aboutResult, "splitting time between the UK and Southeast Asia", "about"],
   [faqResult, "currently in Asia", "FAQ"],
   [faqResult, "between 1M and 10M ARR", "FAQ"],
-  [mediaKitResult, "currently in Asia", "media kit"]
+  [mediaKitResult, "currently in Asia", "media kit"],
+  [contactResult, "short follow-up series", "contact"],
+  [contactResult, 'value="contact_enquiry"', "contact"]
 ];
 
 for (const [result, phrase, label] of stalePageChecks) {
@@ -164,5 +182,5 @@ if (layoutResult.content.includes("  lastUpdated = siteConfig.lastUpdated,")) {
 }
 
 console.log(
-  `Normalized production source: ${siteResult.changed} site, ${layoutResult.changed} layout, ${aboutResult.changed} about, ${faqResult.changed} FAQ, ${mediaKitResult.changed} media-kit replacement(s).`
+  `Normalized production source: ${siteResult.changed} site, ${layoutResult.changed} layout, ${aboutResult.changed} about, ${faqResult.changed} FAQ, ${mediaKitResult.changed} media-kit, ${contactResult.changed} contact replacement(s).`
 );
