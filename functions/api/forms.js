@@ -49,8 +49,11 @@ const DEFAULT_ALLOWED_HOSTS = [
   "www.wescalestartups.com"
 ];
 
-/** Cloudflare Pages preview deployments for THIS project only. */
-const PREVIEW_SUFFIX = ".danieljohnsonxyz-site.pages.dev";
+/**
+ * This Cloudflare Pages project, and only this one. The apex serves the site
+ * and each preview deployment gets a subdomain of it, so both are allowed.
+ */
+const PREVIEW_HOST = "danieljohnsonxyz-site.pages.dev";
 
 /**
  * source_type drives Customer.io automation triggers, so it's an enum rather
@@ -92,8 +95,8 @@ function isAllowedOrigin(request, env) {
 
   // Previously this accepted any host ending in ".pages.dev", which is every
   // Cloudflare Pages site on the platform — a free, forgeable Origin. Scope
-  // it to this project's own preview subdomain.
-  return host.endsWith(PREVIEW_SUFFIX);
+  // it to this project: the apex, plus its per-deployment preview subdomains.
+  return host === PREVIEW_HOST || host.endsWith(`.${PREVIEW_HOST}`);
 }
 
 function json(status, body) {
