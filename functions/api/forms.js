@@ -11,12 +11,19 @@
  *   CUSTOMER_IO_REGION          — "eu" (default; shared WSS workspace) or "us"
  *   CUSTOMER_IO_FORM_ID         — default form id when body omits form_id
  *   FORMS_ALLOWED_ORIGINS       — optional, comma-separated extra hostnames
+ *                                 (use this for localhost during local dev)
  *
  * This endpoint was being scraped and used to inject contacts straight into
  * Customer.io: bots POST JSON here directly, never touching the HTML form, so
  * a hidden honeypot field alone doesn't see them. Requests must therefore
  * carry an Origin (or Referer) belonging to this site — browsers always send
  * one on a same-origin POST, and the bots don't.
+ *
+ * The origin check is a speed bump, not a wall: an Origin header can be
+ * forged by anything that isn't a browser. The control that actually holds
+ * is Cloudflare Turnstile (see functions/api/_form-guard.js in the
+ * wescalestartups-site repo for the reference implementation) or double
+ * opt-in in Customer.io. Neither is wired up here yet.
  */
 
 const MAX_ATTR = 1000;
@@ -28,6 +35,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * wescalestartups.com is included because it shares the Customer.io
  * workspace: if anything over there ever posts here, silently 403ing it would
  * be worse than allowing an origin Daniel already owns.
+ *
+ * localhost and 127.0.0.1 are deliberately NOT here. They were, and they gave
+ * any caller a valid Origin for free. Add them through FORMS_ALLOWED_ORIGINS
+ * on a preview environment if you need them for local work.
  */
 const DEFAULT_ALLOWED_HOSTS = [
   "danieljohnson.xyz",
@@ -35,10 +46,11 @@ const DEFAULT_ALLOWED_HOSTS = [
   "danieljohnsonx.xyz",
   "www.danieljohnsonx.xyz",
   "wescalestartups.com",
-  "www.wescalestartups.com",
-  "localhost",
-  "127.0.0.1"
+  "www.wescalestartups.com"
 ];
+
+/** Cloudflare Pages preview deployments for THIS project only. */
+const PREVIEW_SUFFIX = ".danieljohnsonxyz-site.pages.dev";
 
 /**
  * source_type drives Customer.io automation triggers, so it's an enum rather
@@ -77,8 +89,11 @@ function isAllowedOrigin(request, env) {
     .filter(Boolean);
 
   if (DEFAULT_ALLOWED_HOSTS.includes(host) || extra.includes(host)) return true;
-  // Cloudflare Pages preview deployments for this project.
-  return host.endsWith(".pages.dev");
+
+  // Previously this accepted any host ending in ".pages.dev", which is every
+  // Cloudflare Pages site on the platform — a free, forgeable Origin. Scope
+  // it to this project's own preview subdomain.
+  return host.endsWith(PREVIEW_SUFFIX);
 }
 
 function json(status, body) {
@@ -148,7 +163,7 @@ export async function onRequestPost(context) {
 
   // Honeypot: a hidden field real people never fill in. Bots that fill every
   // input get a 200 so they don't learn to retry, but nothing is forwarded.
-  if (clip(payload.company_website, 200)) {
+  if (clip(payload.company_website, 200) || clip(payload.website, 200)) {
     return json(200, { ok: true, form_id: "discarded" });
   }
 
