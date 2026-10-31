@@ -23,7 +23,6 @@ export const GET: APIRoute = async () => {
     "/resources/",
     "/resources/faq/",
     "/resources/glossary/",
-    "/resources/fractional-cmo-cost-uk/",
     "/resources/fractional-cmo-vs-agency/",
     "/resources/fractional-cmo-vs-full-time-cmo/",
     "/resources/compare-growth-options/",
