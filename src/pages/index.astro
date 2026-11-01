@@ -27,8 +27,8 @@ const homepageFaq = [
   },
   {
     question: "What does it cost?",
-    answer: "The 20-minute Growth Audit is free. Strategy Sprints start at £6k. Fractional CMO engagements typically start at £5k per month, usually for a three-month minimum, depending on days per week and how much operating support is needed.",
-    link: { href: "/resources/fractional-cmo-cost-uk/", label: "See UK pricing benchmarks" }
+    answer: "The 20-minute Growth Audit is free. Paid work is bought through We Scale Startups at its published prices: the 90-Day Growth Sprint is £8k–£12k, Fractional CMO is £5k–£8k per month (about one day a week), and Fractional CMO Plus is £7.5k–£10k per month (about two days a week), with a three-month minimum.",
+    link: { href: siteConfig.wssPricingUrl, label: "See pricing on wescalestartups.com" }
   }
 ];
 
@@ -47,15 +47,19 @@ const homeSchemas = [
         billingIncrement: "per call"
       },
       {
-        name: "Strategy Sprint",
-        description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
-        price: "6000",
+        name: "90-Day Growth Sprint",
+        description: "12 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.",
+        price: "8000",
+        maxPrice: "12000",
+        url: siteConfig.wssGrowthSprintUrl,
         billingIncrement: "per engagement"
       },
       {
         name: "Fractional CMO",
-        description: "Embedded senior growth ownership, usually one to two days a week.",
+        description: "Embedded senior growth ownership, about one day a week, 3-month minimum.",
         price: "5000",
+        maxPrice: "8000",
+        url: siteConfig.wssFractionalCmoUrl,
         billingIncrement: "per month"
       }
     ]
@@ -148,9 +152,9 @@ const workOptions = [
     cta: "See what the audit covers"
   },
   {
-    label: "Short project",
-    title: "Strategy Sprint",
-    price: "From £6k · 2–4 weeks",
+    label: "Fixed-scope project",
+    title: "90-Day Growth Sprint",
+    price: "£8k–£12k · 12 weeks",
     copy: "Diagnose, prioritise and ship the first critical artefacts: ICP, positioning, 90-day priorities, dashboard and first live test.",
     outcome: "A focused 90-day plan and a working growth rhythm.",
     href: "/strategy-sprint/",
@@ -159,7 +163,7 @@ const workOptions = [
   {
     label: "Core engagement",
     title: "Fractional CMO",
-    price: "From £5k/mo · 1–2 days a week",
+    price: "£5k–£8k/mo · about 1 day a week",
     copy: "Embedded senior ownership across positioning, pipeline, reporting, team and agencies. I build the function with you, then hand it over cleanly.",
     outcome: "A growth system your team can run without you becoming the bottleneck.",
     href: "/fractional-cmo/",
