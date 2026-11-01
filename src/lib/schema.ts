@@ -245,7 +245,16 @@ export function buildServiceSchema(opts: {
   name: string;
   description: string;
   url: string;
-  offers?: Array<{ name: string; description: string; price: string; priceCurrency?: string; billingIncrement?: string }>;
+  offers?: Array<{
+    name: string;
+    description: string;
+    price: string;
+    /** Upper bound when the published price is a range; `price` is the lower bound. */
+    maxPrice?: string;
+    priceCurrency?: string;
+    billingIncrement?: string;
+    url?: string;
+  }>;
   serviceType?: string;
 }) {
   const offers =
@@ -255,13 +264,16 @@ export function buildServiceSchema(opts: {
       description: offer.description,
       price: offer.price,
       priceCurrency: offer.priceCurrency ?? "GBP",
-      ...(offer.billingIncrement
+      ...(offer.url ? { url: offer.url } : {}),
+      ...(offer.billingIncrement || offer.maxPrice
         ? {
             priceSpecification: {
               "@type": "UnitPriceSpecification",
-              price: offer.price,
+              ...(offer.maxPrice
+                ? { minPrice: offer.price, maxPrice: offer.maxPrice }
+                : { price: offer.price }),
               priceCurrency: offer.priceCurrency ?? "GBP",
-              unitText: offer.billingIncrement
+              ...(offer.billingIncrement ? { unitText: offer.billingIncrement } : {})
             }
           }
         : {})

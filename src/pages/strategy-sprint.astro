@@ -9,20 +9,22 @@ const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Start here", url: "/start-here/" },
-    { name: "Strategy Sprint", url: "/strategy-sprint/" }
+    { name: "90-Day Growth Sprint", url: "/strategy-sprint/" }
   ]),
   buildFaqPageSchema([...strategySprintPage.faq]),
   buildServiceSchema({
-    name: "Strategy Sprint",
+    name: "90-Day Growth Sprint",
     description:
-      "A 2–4 week fixed-scope engagement to diagnose the bottleneck, set 90-day priorities, and ship the first artefacts. ICP, positioning, weekly dashboard, first acquisition or conversion test live.",
+      "A 12-week fixed-scope engagement to diagnose the bottleneck, set 90-day priorities, and ship the first artefacts. ICP, positioning, weekly dashboard, first acquisition or conversion test live.",
     url: absoluteUrl("/strategy-sprint/"),
-    serviceType: "Growth Strategy Sprint",
+    serviceType: "90-Day Growth Sprint",
     offers: [
       {
-        name: "Strategy Sprint",
-        description: "2–4 week fixed-scope engagement. Diagnosis, 90-day priorities, first artefacts shipped.",
-        price: "6000",
+        name: "90-Day Growth Sprint",
+        description: "12-week fixed-scope engagement. Diagnosis, 90-day priorities, first artefacts shipped.",
+        price: "8000",
+        maxPrice: "12000",
+        url: siteConfig.wssGrowthSprintUrl,
         billingIncrement: "per engagement"
       }
     ]
@@ -31,12 +33,12 @@ const schemas = [
 ---
 
 <BaseLayout
-  description="2–4 week Strategy Sprint with Daniel Johnson: diagnose, prioritise and ship artefacts, including ICP, positioning, a 90-day plan and the first live growth test (£6k)."
-  keywords="strategy sprint startup, fixed scope GTM, 90-day growth plan, ICP positioning sprint, £6k growth engagement"
+  description="12-week 90-Day Growth Sprint with Daniel Johnson: diagnose, prioritise and ship artefacts, including ICP, positioning, a 90-day plan and the first live growth test (£8k–£12k, bought through We Scale Startups)."
+  keywords="90-day growth sprint, fixed scope GTM, 90-day growth plan, ICP positioning sprint, growth sprint pricing"
   path="/strategy-sprint/"
   schema={schemas}
   stickyCta={false}
-  title="Strategy Sprint: 2–4 weeks, from £6k | Daniel Johnson"
+  title="90-Day Growth Sprint: 12 weeks, £8k–£12k | Daniel Johnson"
 >
   <section class="hero-section section-space">
     <div class="shell">
@@ -53,13 +55,13 @@ const schemas = [
             <span class="text-3xl font-extrabold tracking-[-0.06em]">{strategySprintPage.price}</span>
             <span class="text-sm text-[color:var(--muted)]">· {strategySprintPage.cadence}</span>
           </div>
-          <p class="max-w-xl text-sm leading-7 text-[color:var(--muted)]">That's the fixed price for the standard sprint. We agree the scope before we start, so you know what you're paying and what will be done.</p>
+          <p class="max-w-xl text-sm leading-7 text-[color:var(--muted)]">That's the published price range for the sprint, bought through <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4" href={siteConfig.wssGrowthSprintUrl} data-cta="sprint-hero-wss-pricing">We Scale Startups</a>. We agree the scope and price before we start, so you know what you're paying and what will be done.</p>
           <div class="flex flex-wrap items-center gap-3 pt-2">
             <a class="button-accent" href={ctas.primary.href} data-cta="sprint-hero-primary">
               {ctas.primary.label} →
             </a>
             <a class="button-link" href="#scope" data-cta="sprint-hero-scope">
-              See the week-by-week scope ↓
+              See the scope phase by phase ↓
             </a>
           </div>
         </div>
@@ -76,7 +78,7 @@ const schemas = [
   <section class="section-space pt-0" id="scope" aria-labelledby="scope-heading">
     <div class="shell">
       <SectionHeader
-        eyebrow="Week by week"
+        eyebrow="Phase by phase"
         title="Work out the problem, choose what matters, get the first work live."
         intro="The later work follows from what we find at the start. No generic plan dropped on you at the end."
       />
@@ -152,6 +154,9 @@ const schemas = [
         <div class="flex flex-wrap justify-center gap-3">
           <a class="button-accent" href={ctas.primary.href} data-cta="sprint-final-primary">
             {ctas.primary.label} →
+          </a>
+          <a class="button-link-invert" href={siteConfig.wssGrowthSprintUrl} data-cta="sprint-final-wss">
+            Buy the sprint at We Scale Startups →
           </a>
           <a class="button-link-invert" href="/fractional-cmo/" data-cta="sprint-final-fractional">
             Or jump straight to Fractional CMO →
