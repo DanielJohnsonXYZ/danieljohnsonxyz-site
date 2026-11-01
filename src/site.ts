@@ -46,6 +46,12 @@ export const siteConfig = {
   youtubeUploadsEmbed: "https://www.youtube.com/embed/9CR19_PiuGs?rel=0",
   companyUrl: "https://www.wescalestartups.com",
   companyName: "We Scale Startups",
+  /** Paid engagements are bought through We Scale Startups at its published prices. */
+  wssPricingUrl: "https://wescalestartups.com/pricing",
+  wssGrowthDiagnosisUrl: "https://wescalestartups.com/services/growth-diagnosis",
+  wssGrowthSprintUrl: "https://wescalestartups.com/services/90-day-growth-sprint",
+  wssAcquisitionSystemBuildUrl: "https://wescalestartups.com/services/acquisition-system-build",
+  wssFractionalCmoUrl: "https://wescalestartups.com/services/fractional-cmo",
   /** Founder WhatsApp community (Growing Pains) — same group linked from wescalestartups.com. */
   whatsappCommunityUrl: "https://chat.whatsapp.com/EcodIBMP93TCl82pTHjEbn?s=cl&p=i&ilr=4",
   whatsappCommunityLabel: "Join the WhatsApp group",
@@ -254,8 +260,8 @@ export const navigation = [
 /** Primary nav dropdown — productised services in ladder order (Diagnose → Plan → Build → Advise). */
 export const workWithMeNavItems = [
   { href: "/growth-audit/", label: "20-min Growth Audit", description: "Diagnose · Free. Bottleneck read in 20 minutes, no pitch." },
-  { href: "/strategy-sprint/", label: "Strategy Sprint", description: "Plan · From £6k. 2–4 weeks. Plan, artefacts, first wins." },
-  { href: "/fractional-cmo/", label: "Fractional CMO", description: "Build · From £5k/mo. Embedded senior GTM leadership." },
+  { href: "/strategy-sprint/", label: "90-Day Growth Sprint", description: "Plan · £8k–£12k. 12 weeks. Plan, artefacts, first wins." },
+  { href: "/fractional-cmo/", label: "Fractional CMO", description: "Build · £5k–£8k/mo. Embedded senior GTM leadership." },
   { href: "/founder-office-hours/", label: "Founder Office Hours", description: "Advise · Focused GTM decisions and second-brain sessions." },
   { href: "/speaking/", label: "Speaking & workshops", description: "Talks, workshops, and founder-cohort sessions." }
 ] as const;
@@ -283,7 +289,7 @@ export const footerNavigation = {
   workWithMe: [
     { href: "/work-with-me/", label: "All services" },
     { href: "/growth-audit/", label: "Growth Audit" },
-    { href: "/strategy-sprint/", label: "Strategy Sprint" },
+    { href: "/strategy-sprint/", label: "90-Day Growth Sprint" },
     { href: "/fractional-cmo/", label: "Fractional CMO" },
     { href: "/founder-office-hours/", label: "Founder Office Hours" },
     { href: "/speaking/", label: "Speaking / workshops" }
@@ -436,7 +442,7 @@ export const whyDaniel = [
   },
   {
     option: "Fractional CMO (Daniel's model)",
-    cost: "£5–7.5k/month, 3-month minimum",
+    cost: "£5k–£8k/month, 3-month minimum",
     owner: "Senior operator in the seat",
     problem: "Owns GTM priorities, reporting, and the team's weekly rhythm. Builds the system, then hands it off clean.",
     highlight: true
@@ -544,7 +550,7 @@ export const afterYouBookSteps = [
   },
   {
     title: "If useful, we scope what’s next.",
-    body: "Strategy Sprint, Fractional CMO, or something else entirely, including a clean “not a fit” redirect."
+    body: "90-Day Growth Sprint, Fractional CMO, or something else entirely, including a clean “not a fit” redirect."
   }
 ] as const;
 
@@ -624,7 +630,8 @@ export const speakingVideos = [
 
 // ──────────────────────────────────────────────────────────────────────────
 // Home-page service ladder — a CLEAN buying ladder, not a service-shape mix.
-// Audit (free entry) → Sprint (£6k, fixed scope) → Fractional CMO (embedded).
+// Audit (free entry) → 90-Day Growth Sprint (£8k–£12k, fixed scope) → Fractional CMO (embedded).
+// Paid prices mirror the We Scale Startups pricing page (wescalestartups.com/pricing).
 // Speaking and Office Hours move below the ladder as a "secondary" mention so
 // the home page reads like a buying journey, not a menu of unrelated services.
 // ──────────────────────────────────────────────────────────────────────────
@@ -645,22 +652,22 @@ export const homeServiceLadder = [
   },
   {
     tier: "Tier 2 · Plan",
-    heading: "Strategy Sprint",
-    price: "£6k fixed scope",
-    cadence: "2–4 week engagement",
+    heading: "90-Day Growth Sprint",
+    price: "£8k–£12k fixed scope",
+    cadence: "12-week engagement",
     body:
       "Work out what's holding growth back, choose the next 90 days of work, and get the first important pieces live.",
     bestFor:
       "Founders who need the plan, the operating rhythm, and the first wins before committing to ongoing work.",
     outcome: "A 90-day plan, clear owners, useful reporting and the first work live.",
     href: "/strategy-sprint/",
-    cta: "See Strategy Sprint scope",
+    cta: "See 90-Day Growth Sprint scope",
     primary: false
   },
   {
     tier: "Tier 3 · Embedded",
     heading: "Fractional CMO",
-    price: "From £5k/mo",
+    price: "£5k–£8k/mo",
     cadence: "3-month minimum",
     body:
       "Senior growth ownership 1–2 days a week. I help make the calls on priorities, reporting, messaging, channels, hiring and agencies, then move more of that into the team.",
@@ -694,7 +701,7 @@ const vsAgencyRows: VsAgencyRow[] = [
   { dimension: "Reporting", agency: "Activity dashboards (clicks, impressions)", fractional: "Pipeline, conversion, payback, what to scale/stop/fix", winner: "fractional" },
   { dimension: "Decision-making", agency: "Brand-safe best practice", fractional: "Opinionated, contextual to your company", winner: "fractional" },
   { dimension: "Speed", agency: "Slower: agreed scope, change orders", fractional: "Faster: embedded operator, no handoffs", winner: "fractional" },
-  { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£5–7.5k/month, 3-month minimum", winner: null },
+  { dimension: "Typical cost", agency: "£6–20k/month + retainer", fractional: "£5k–£8k/month, 3-month minimum", winner: null },
   { dimension: "When it's right", agency: "You already have a CMO and need execution capacity", fractional: "You don't yet have a CMO and growth needs senior judgement", winner: null }
 ];
 
@@ -722,7 +729,7 @@ export const vsAgency = {
     {
       question: "Is a fractional CMO more expensive than an agency?",
       answer:
-        "The monthly ranges overlap: £5–7.5k for a fractional CMO, £6–20k for a typical agency. But you're buying different things. The agency runs a channel; the fractional CMO runs the system. Most agency engagements still need someone senior to direct them, and that's the role the fractional CMO fills."
+        "The monthly ranges overlap: £5k–£8k for a fractional CMO, £6–20k for a typical agency. But you're buying different things. The agency runs a channel; the fractional CMO runs the system. Most agency engagements still need someone senior to direct them, and that's the role the fractional CMO fills."
     },
     {
       question: "How long does a fractional CMO engagement run?",
@@ -740,7 +747,7 @@ export const vsAgency = {
 export const vsFulltimeCMO = {
   title: "Fractional CMO vs. Full-time CMO",
   rows: [
-    { dimension: "All-in cost", fractional: "£5–7.5k/month (~£60–90k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs", winner: "fractional" },
+    { dimension: "All-in cost", fractional: "£5k–£8k/month (~£60k–£96k/year)", fulltime: "£120–180k base + 0.5–1.5% equity + on-costs", winner: "fractional" },
     { dimension: "Time to start", fractional: "Days", fulltime: "6 months to hire, 12 months to ramp", winner: "fractional" },
     { dimension: "Commitment", fractional: "3-month minimum, rolling thereafter", fulltime: "Permanent, 3-month notice on either side", winner: "fractional" },
     { dimension: "Risk if it doesn't fit", fractional: "Low: end the engagement, no severance", fulltime: "High: recruitment fee, equity dilution, 3-month notice", winner: "fractional" },
@@ -831,17 +838,17 @@ export const growthAuditPage = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// /strategy-sprint page data — £6k, 2–4 week fixed-scope engagement.
+// /strategy-sprint page data: 90-Day Growth Sprint, £8k–£12k, 12-week fixed scope (WSS published price).
 // Lower commitment than full Fractional CMO; higher than the audit.
 // ──────────────────────────────────────────────────────────────────────────
 export const strategySprintPage = {
-  price: "From £6,000",
-  cadence: "2–4 weeks · Fixed scope",
+  price: "£8k–£12k",
+  cadence: "12 weeks · Fixed scope",
   oneLiner:
     "Work out what's holding growth back, decide what the next 90 days should look like, and get the first important work live.",
   weeks: [
     {
-      week: "Week 1 — Diagnose",
+      week: "Phase 1: Diagnose",
       bullets: [
         "Audit ICP, pipeline, funnel, CRM, acquisition channels, positioning, and current reporting",
         "Interview founder, sales/customer team, and 3–5 customers",
@@ -849,7 +856,7 @@ export const strategySprintPage = {
       ]
     },
     {
-      week: "Week 2 — Prioritise",
+      week: "Phase 2: Prioritise",
       bullets: [
         "Agree the 90-day growth priorities: what to scale, stop, fix",
         "Decide the operating cadence: weekly meeting, dashboard, owner map",
@@ -857,7 +864,7 @@ export const strategySprintPage = {
       ]
     },
     {
-      week: "Weeks 3–4 — Ship",
+      week: "Phase 3: Ship",
       bullets: [
         "Ship the first artefacts: ICP doc, positioning lines, weekly dashboard, first campaign brief",
         "Run the first growth meeting with the team using the new rhythm",
@@ -877,7 +884,7 @@ export const strategySprintPage = {
     "Post-PMF founder-led teams who need the plan first",
     "Companies considering a CMO hire who want the role scoped before recruiting",
     "Teams emerging from a re-org, pivot, or funding round who need fresh GTM clarity",
-    "Founders who want senior judgement without a 3-month minimum"
+    "Founders who want senior judgement without an ongoing retainer"
   ],
   notFor: [
     "Pre-PMF teams: diagnosis can't fix product-market fit",
@@ -898,7 +905,7 @@ export const strategySprintPage = {
     {
       question: "What happens if we don't like the diagnosis?",
       answer:
-        "It's a working diagnosis, not a verdict. The week-2 prioritisation session is collaborative: your team's context shapes the priorities, and there's room to push back. If after the sprint you don't think it's useful, you don't pay for any further work."
+        "It's a working diagnosis, not a verdict. The prioritisation session is collaborative: your team's context shapes the priorities, and there's room to push back. If after the sprint you don't think it's useful, you don't pay for any further work."
     }
   ]
 } as const;
