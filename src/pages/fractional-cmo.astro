@@ -39,7 +39,7 @@ const deliverables = [
 
 const modes = [
   ["Embedded Fractional CMO", "1 to 2 days a week. When growth needs a senior owner now."],
-  ["Strategy Sprint", "Two to four weeks. When the team needs the plan, artefacts, and decision rules first."],
+  ["90-Day Growth Sprint", "Twelve weeks. When the team needs the plan, artefacts, and decision rules first."],
   ["Founder Office Hours", "A lower-ticket route for founders with one sharp GTM decision in front of them."]
 ];
 
@@ -66,22 +66,22 @@ const week = [
 
 const pricing = [
   {
-    name: "Strategy Sprint",
-    price: "From £6k",
-    cadence: "2–4 week engagement",
+    name: "90-Day Growth Sprint",
+    price: "£8k–£12k",
+    cadence: "12-week engagement",
     body: "Diagnose the bottleneck, set 90-day priorities, ship the first artefacts.",
     primary: false
   },
   {
     name: "Fractional CMO",
-    price: "From £5k",
+    price: "£5k–£8k",
     cadence: "/ month · 3-month minimum",
     body: "Embedded senior ownership 1 day a week. GTM priorities, reporting, weekly rhythm.",
     primary: true
   },
   {
     name: "Fractional CMO Plus",
-    price: "From £7.5k",
+    price: "£7.5k–£10k",
     cadence: "/ month · 3-month minimum",
     body: "Deeper operating support, agency management, and faster execution. Best when the team needs ~2 days a week of senior ownership.",
     primary: false
@@ -139,9 +139,9 @@ const schemas = [
     url: absoluteUrl("/fractional-cmo/"),
     serviceType: "Fractional CMO",
     offers: [
-      { name: "Strategy Sprint", description: "2–4 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.", price: "6000", billingIncrement: "per engagement" },
-      { name: "Fractional CMO", description: "3-month minimum. Embedded senior ownership 1 day a week.", price: "5000", billingIncrement: "per month" },
-      { name: "Fractional CMO Plus", description: "Deeper operating support, agency management, faster execution.", price: "7500", billingIncrement: "per month" }
+      { name: "90-Day Growth Sprint", description: "12 weeks. Diagnose the bottleneck, set 90-day priorities, ship first artefacts.", price: "8000", maxPrice: "12000", billingIncrement: "per engagement", url: siteConfig.wssGrowthSprintUrl },
+      { name: "Fractional CMO", description: "3-month minimum. Embedded senior ownership 1 day a week.", price: "5000", maxPrice: "8000", billingIncrement: "per month", url: siteConfig.wssFractionalCmoUrl },
+      { name: "Fractional CMO Plus", description: "Deeper operating support, agency management, faster execution. About 2 days a week.", price: "7500", maxPrice: "10000", billingIncrement: "per month", url: siteConfig.wssFractionalCmoUrl }
     ]
   }),
   buildWebPageSchema({
@@ -402,11 +402,15 @@ const schemas = [
       <SectionHeader
         eyebrow="Pricing"
         title="Clear starting points before scope gets specific."
-        intro="Three shapes. Pick the closest fit and we refine on the call. For UK benchmark framing and what moves price, see the dedicated cost page."
+        intro="Three shapes, at the prices published by We Scale Startups, where engagements are bought. Pick the closest fit and we refine on the call."
       />
       <p class="reveal mt-4 text-center text-sm leading-7 text-[color:var(--muted)]">
         <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href="/resources/fractional-cmo-cost-uk/" data-cta="fractional-pricing-cost-uk">
           Fractional CMO cost (UK): benchmarks & FAQ →
+        </a>
+        <span aria-hidden="true"> · </span>
+        <a class="font-semibold text-[color:var(--ink)] underline underline-offset-4 hover:text-[color:var(--accent)]" href={siteConfig.wssPricingUrl} data-cta="fractional-pricing-wss">
+          See pricing and buy at We Scale Startups →
         </a>
       </p>
 
@@ -517,7 +521,7 @@ const schemas = [
   <section class="section-space pt-0">
     <div class="shell">
       <SectionHeader
-        eyebrow="Strategy Sprint vs Fractional CMO"
+        eyebrow="90-Day Growth Sprint vs Fractional CMO"
         title="Same operator, different commitment shape."
         intro="Most founders either need a fixed-scope sprint first, or already know they need embedded ownership. Here's how the two compare at a glance."
       />
