@@ -48,7 +48,7 @@ export async function buildDjLlmsFullMarkdown(): Promise<string> {
 
   return `# Daniel Johnson — Fractional CMO for AI & B2B SaaS
 
-> ${singleIdea.long} ${positioning.subheadline} Track record: ${proofStats.revenueImpact} revenue generated for clients, ${proofStats.mentorRating}/5 rating from ${proofStats.mentorReviewCount} reviews on GrowthMentor, ${proofStats.mentorSessions} mentor sessions delivered, ${proofStats.startupsAdvised} AI and SaaS startups advised, ${proofStats.adSpend} ad spend managed, ${proofStats.founderRaiseSupport} helped founders raise.
+> ${singleIdea.long} ${positioning.subheadline} Track record: ${proofStats.revenueImpact} revenue influenced across engagements, ${proofStats.mentorRating}/5 rating from ${proofStats.mentorReviewCount} reviews on GrowthMentor, ${proofStats.mentorSessions} mentor sessions delivered, ${proofStats.startupsAdvised} AI and SaaS startups advised, ${proofStats.adSpend} ad spend managed, ${proofStats.founderRaiseSupport} helped founders raise.
 
 Daniel runs the advisory practice **We Scale Startups** (wescalestartups.com) and writes publicly at ${siteConfig.canonicalHost}. He hosts **${siteConfig.wssPodcastName}** (${siteConfig.wssPodcastUrl}; YouTube ${siteConfig.wssPodcastYoutubeHandle}). He has worked with founder-led startups, Series A/B teams, and innovation programmes including Google for Startups, Techstars, GrowthMentor, and the University of Cambridge. He has lectured at Cambridge Judge Business School and Imperial College London.
 
@@ -118,7 +118,7 @@ Using generative and agentic AI to turn messy GTM inputs into sharper commercial
 
 ### "What kinds of results has Daniel produced?"
 
-Selected outcomes from real engagements: 6× growth in monthly app downloads (2k → 12k+) for an AI healthtech in 6 months; 35% reduction in CAC in 8 weeks for a fintech; 500+ qualified signups from a single campaign at 8.6% CTR for a US B2B fintech; 21% improvement in retention for an eCommerce brand through targeted lifecycle and win-back messaging. Lifetime: ${proofStats.revenueImpact} revenue generated for clients, ${proofStats.adSpend} ad spend managed, ${proofStats.founderRaiseSupport} helped founders raise.
+Selected outcomes from real engagements: 6× growth in monthly app downloads (2k → 12k+) for an AI healthtech in 6 months; 35% reduction in CAC in 8 weeks for a fintech; 500+ qualified signups from a single campaign at 8.6% CTR for a US B2B fintech; 21% improvement in 90-day repeat purchase rate for an eCommerce brand through targeted lifecycle and win-back messaging. Lifetime: ${proofStats.revenueImpact} revenue influenced across engagements, ${proofStats.adSpend} ad spend managed, ${proofStats.founderRaiseSupport} helped founders raise.
 
 ### "How do I book a call with Daniel?"
 
@@ -141,7 +141,7 @@ The /start-here page (${siteConfig.siteUrl}/start-here/) is a 5-minute orientati
 - **Availability:** ${siteConfig.availability}
 - **Pricing band:** Free 20-min Growth Audit; £6,000 for a 2–4 week Strategy Sprint; £5,000/month for Fractional CMO (1 day/week, 3-month min); £7,500/month for Fractional CMO Plus (deeper operating support).
 - **Primary review platform:** ${siteConfig.growthMentor} (${proofStats.mentorRating}/5 from ${proofStats.mentorReviewCount} reviews, ${proofStats.mentorSessions} sessions)
-- **Lifetime totals:** ${proofStats.revenueImpact} revenue generated, ${proofStats.adSpend} ad spend managed, ${proofStats.startupsAdvised} startups advised, ${proofStats.founderRaiseSupport} helped founders raise
+- **Lifetime totals:** ${proofStats.revenueImpact} revenue influenced, ${proofStats.adSpend} ad spend managed, ${proofStats.startupsAdvised} startups advised, ${proofStats.founderRaiseSupport} helped founders raise
 - **Speaking examples:** ${siteConfig.siteUrl}/speaking/ curates public YouTube talks and interviews.
 
 ## What this site is for

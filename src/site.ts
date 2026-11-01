@@ -119,13 +119,13 @@ export const siteImages = {
 
 export const proofStats = {
   revenueImpact: "£18M+",
-  adSpend: "£6.8M+",
+  adSpend: "£6M+",
   startupsAdvised: "200+",
-  mentorSessions: "405",
+  mentorSessions: "400+",
   mentorRating: "4.94",
-  mentorReviewCount: "225",
+  mentorReviewCount: "220+",
   founderRaiseSupport: "£15M+",
-  founderExits: "Founder-side exit experience, including eQuoo (mental-health tech)"
+  founderExits: "Two founder-side exits across early ventures"
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -263,7 +263,7 @@ export const workWithMeNavItems = [
 /** Proof dropdown — evidence grouped in one place. */
 export const proofNavItems = [
   { href: "/case-studies/", label: "Case studies", description: "Before/after evidence with real numbers and attribution." },
-  { href: "/testimonials/", label: "Testimonials", description: "4.94/5 from 225 reviews · 405 GrowthMentor sessions." },
+  { href: "/testimonials/", label: "Testimonials", description: "4.94/5 from 220+ reviews · 400+ GrowthMentor sessions." },
   { href: "/proof/", label: "Proof in numbers", description: "The full metrics library, verifiable sources linked." },
   { href: "/media-appearances/", label: "Press & media", description: "Talks, mentoring affiliations, podcasts and citations." },
   { href: "/media-kit/", label: "Media kit", description: "Bios, headshots and talks for press and podcast hosts." }
@@ -474,10 +474,10 @@ export const trustAffiliations = [
 ] as const;
 
 // Headline metrics on the homepage. Order matters — leading proof first.
-// £18M+ revenue is now the lead metric: it's the most concrete dollar-tangible
+// £18M+ revenue is now the lead metric: it's the most concrete commercial
 // claim and what founders care about most. £6.8M+ ad spend moves to slot 4.
 export const proofBar = [
-  { value: proofStats.revenueImpact, label: "client revenue generated", source: "/case-studies/" },
+  { value: proofStats.revenueImpact, label: "client revenue influenced", source: "/case-studies/" },
   { value: `${proofStats.mentorRating} / 5`, label: `from ${proofStats.mentorReviewCount} reviews on GrowthMentor`, source: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section" },
   { value: proofStats.mentorSessions, label: "mentor sessions delivered", source: siteConfig.growthMentor },
   { value: proofStats.startupsAdvised, label: "AI & B2B SaaS startups advised", source: "/case-studies/" },

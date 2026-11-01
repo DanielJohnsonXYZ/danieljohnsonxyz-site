@@ -49,7 +49,7 @@ const siteResult = await replaceInFile(sitePath, [
   },
   {
     from: 'mentorSessions: "479+",',
-    to: 'mentorSessions: "405",'
+    to: 'mentorSessions: "400+",'
   },
   {
     from: 'mentorRating: "4.97",',
@@ -57,11 +57,11 @@ const siteResult = await replaceInFile(sitePath, [
   },
   {
     from: 'mentorReviewCount: "220",',
-    to: 'mentorReviewCount: "225",'
+    to: 'mentorReviewCount: "220+",'
   },
   {
     from: 'description: "4.97/5 from 220 reviews · 479+ mentor sessions."',
-    to: 'description: "4.94/5 from 225 reviews · 405 GrowthMentor sessions."'
+    to: 'description: "4.94/5 from 220+ reviews · 400+ GrowthMentor sessions."'
   },
   {
     from: 'message: "Fractional CMO engagements open for Q2 2026.",',
@@ -203,9 +203,9 @@ for (const phrase of forbiddenSiteCopy) {
 const expectedSiteCopy = [
   'navBookingLabel: "Book free call"',
   'startupsAdvised: "200+"',
-  'mentorSessions: "405"',
+  'mentorSessions: "400+"',
   'mentorRating: "4.94"',
-  'mentorReviewCount: "225"'
+  'mentorReviewCount: "220+"'
 ];
 
 for (const phrase of expectedSiteCopy) {
